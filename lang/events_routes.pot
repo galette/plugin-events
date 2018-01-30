@@ -1,0 +1,8 @@
+#: ../_routes.php:53
+msgid "/bookings"
+msgstr ""
+
+#: ../_routes.php:40
+msgid "/events"
+msgstr ""
+

@@ -1,0 +1,8 @@
+#: ../templates/default/menu.tpl:1 ../templates/default/menu.tpl:3
+msgid "Events"
+msgstr ""
+
+#: ../templates/default/menu.tpl:5
+msgid "Bookings"
+msgstr ""
+
