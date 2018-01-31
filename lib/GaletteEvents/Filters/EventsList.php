@@ -37,6 +37,7 @@ namespace GaletteEvents\Filters;
 
 use Analog\Analog;
 use Galette\Core\Pagination;
+use GaletteEvents\Repository\Events;
 
 /**
  * Events lists filters and paginator
@@ -53,10 +54,6 @@ use Galette\Core\Pagination;
 
 class EventsList extends Pagination
 {
-    const ORDERBY_DATE = 0;
-    const ORDERBY_NAME = 1;
-    const ORDERBY_TOWN = 2;
-
     //filters
     private $name_filter = null;
     private $start_date_filter = null;
@@ -93,7 +90,7 @@ class EventsList extends Pagination
      */
     protected function getDefaultOrder()
     {
-        return self::ORDERBY_DATE;
+        return Events::ORDERBY_DATE;
     }
 
     /**

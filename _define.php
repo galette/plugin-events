@@ -45,6 +45,7 @@ $this->register(
     '2018-01-15',           //Release date
     [   //Permissions needed
         'events_events'     => 'member',
-        'events_bookings'   => 'member'
+        'events_bookings'   => 'member',
+        'filter-eventslist' => 'member'
     ]
 );

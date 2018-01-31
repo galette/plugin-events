@@ -278,7 +278,25 @@ class Event
     }
 
     /**
-     * Get group creation date
+     * Get date
+     *
+     * @param string  $prop      Property to use
+     * @param boolean $formatted Return date formatted, raw if false
+     *
+     * @return string
+     */
+    private function getDate($prop, $formatted = true)
+    {
+        if ($formatted === true) {
+            $date = new \DateTime($this->$prop);
+            return $date->format(__("Y-m-d"));
+        } else {
+            return $this->$prop;
+        }
+    }
+
+    /**
+     * Get creation date
      *
      * @param boolean $formatted Return date formatted, raw if false
      *
@@ -286,12 +304,31 @@ class Event
      */
     public function getCreationDate($formatted = true)
     {
-        if ($formatted === true) {
-            $date = new \DateTime($this->creation_date);
-            return $date->format(__("Y-m-d"));
-        } else {
-            return $this->creation_date;
-        }
+        return $this->getDate('creation_date', $formatted);
+    }
+
+    /**
+     * Get begin date
+     *
+     * @param boolean $formatted Return date formatted, raw if false
+     *
+     * @return string
+     */
+    public function getBeginDate($formatted = true)
+    {
+        return $this->getDate('begin_date', $formatted);
+    }
+
+    /**
+     * Get end date
+     *
+     * @param boolean $formatted Return date formatted, raw if false
+     *
+     * @return string
+     */
+    public function getEndDate($formatted = true)
+    {
+        return $this->getDate('end_date', $formatted);
     }
 
     /**

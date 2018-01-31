@@ -42,6 +42,7 @@ use Galette\Core\Db;
 use Galette\Entity\Group;
 use Galette\Repository\Groups;
 use GaletteEvents\Event;
+use GaletteEvents\Filters\EventsList;
 
 /**
  * Events
@@ -58,17 +59,30 @@ class Events
 {
     private $zdb;
     private $login;
+    private $filters = false;
+    private $count;
+
+    const ORDERBY_DATE = 0;
+    const ORDERBY_NAME = 1;
+    const ORDERBY_TOWN = 2;
 
     /**
      * Constructor
      *
-     * @param Db    $zdb   Database instance
-     * @param Login $login Login instance
+     * @param Db         $zdb     Database instance
+     * @param Login      $login   Login instance
+     * @param EventsList $filters Filtering
      */
-    public function __construct(Db $zdb, Login $login)
+    public function __construct(Db $zdb, Login $login, $filters = null)
     {
         $this->zdb = $zdb;
         $this->login = $login;
+
+        if ($filters === null) {
+            $this->filters = new EventsList();
+        } else {
+            $this->filters = $filters;
+        }
     }
 
     /**
@@ -79,7 +93,7 @@ class Events
     public function getList()
     {
         try {
-            $select = $this->zdb->select(Event::TABLE, 'e');
+            $select = $this->zdb->select(EVENTS_PREFIX . Event::TABLE, 'e');
 
             if (!$this->login->isAdmin() && !$this->login->isStaff()) {
                 if ($this->login->isGroupManager()) {
@@ -90,7 +104,14 @@ class Events
                 $select->orWhere(Group::PK . ' IS NULL');
             }
 
+            //$this->buildWhereClause($select);
+            //$select->order($this->buildOrderClause($fields));
+
+            $this->proceedCount($select);
+
+            $this->filters->setLimits($select);
             $results = $this->zdb->execute($select);
+            $this->filters->query = $this->zdb->query_string;
 
             $events = [];
             foreach ($results as $row) {
@@ -104,6 +125,59 @@ class Events
                 'Cannot list events | ' . $e->getMessage(),
                 Analog::WARNING
             );
+            throw $e;
         }
+    }
+
+    /**
+     * Count events from the query
+     *
+     * @param Select $select Original select
+     *
+     * @return void
+     */
+    private function proceedCount($select)
+    {
+        try {
+            $countSelect = clone $select;
+            $countSelect->reset($countSelect::COLUMNS);
+            $countSelect->reset($countSelect::ORDER);
+            $countSelect->reset($countSelect::HAVING);
+            $countSelect->columns(
+                array(
+                    'count' => new Expression('count(DISTINCT e.' . Event::PK . ')')
+                )
+            );
+
+            $have = $select->having;
+            if ($have->count() > 0) {
+                foreach ($have->getPredicates() as $h) {
+                    $countSelect->where($h);
+                }
+            }
+
+            $results = $this->zdb->execute($countSelect);
+
+            $this->count = $results->current()->count;
+            if (isset($this->filters) && $this->count > 0) {
+                $this->filters->setCounter($this->count);
+            }
+        } catch (\Exception $e) {
+            Analog::log(
+                'Cannot count events | ' . $e->getMessage(),
+                Analog::WARNING
+            );
+            return false;
+        }
+    }
+
+    /**
+     * Get count for current query
+     *
+     * @return int
+     */
+    public function getCount()
+    {
+        return $this->count;
     }
 }
