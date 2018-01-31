@@ -46,6 +46,7 @@ $this->register(
     [   //Permissions needed
         'events_events'     => 'member',
         'events_bookings'   => 'member',
-        'filter-eventslist' => 'member'
+        'filter-eventslist' => 'member',
+        'events_event'      => 'groupmanager'
     ]
 );

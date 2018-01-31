@@ -35,7 +35,9 @@
  */
 
 use Analog\Analog;
+use Galette\Repository\Groups;
 use GaletteEvents\Filters\EventsList;
+use GaletteEvents\Event;
 use GaletteEvents\Repository\Events;
 
 //Constants and classes from plugin
@@ -77,6 +79,7 @@ $this->get(
         $filters->setSmartyPagination($this->router, $this->view->getSmarty(), false);
 
         $this->session->filter_events = $filters;
+
         // display page
         $this->view->render(
             $response,
@@ -121,6 +124,72 @@ $this->post(
             ->withHeader('Location', $this->router->pathFor('events_events'));
     }
 )->setName('filter-eventslist')->add($authenticate);
+
+$this->get(
+    __('/event', 'events_routes') . '/{action:' . __('edit', 'routes') . '|' . __('add', 'routes') . '}[/{id:\d+}]',
+    function ($request, $response, $args) use ($module, $module_id) {
+        $action = $args['action'];
+        $id = null;
+        if (isset($args['id'])) {
+            $id = $args['id'];
+        }
+
+        if ($action === __('edit', 'routes') && $id === null) {
+            throw new \RuntimeException(
+                _T("Event ID cannot ben null calling edit route!", "events")
+            );
+        } elseif ($action === __('add', 'routes') && $id !== null) {
+             return $response
+                ->withStatus(301)
+                ->withHeader('Location', $this->router->pathFor('event', ['action' => __('add', 'routes')]));
+        }
+        $route_params = ['action' => $args['action']];
+
+        if ($this->session->event !== null) {
+            $event = $this->session->event;
+            $this->session->event = null;
+        } else {
+            $event = new Event($this->zdb, $this->login);
+        }
+
+        if ($id !== null && $event->getId() != $id) {
+            $event->load($id);
+        }
+
+        // template variable declaration
+        $title = _T("Event");
+        if ($event->getId() != '') {
+            $title .= ' (' . _T("modification") . ')';
+        } else {
+            $title .= ' (' . _T("creation") . ')';
+        }
+
+        //Groups
+        $groups = new Groups($this->zdb, $this->login);
+        $groups_list = $groups->getList();
+
+        // display page
+        $this->view->render(
+            $response,
+            'file:[' . $module['route'] . ']event.tpl',
+            array_merge(
+                $route_params,
+                array(
+                    'autocomplete'      => true,
+                    'page_title'        => $title,
+                    'event'             => $event,
+                    'require_calendar'  => true,
+                    // pseudo random int
+                    'time'              => time(),
+                    'groups'            => $groups_list,
+                )
+            )
+        );
+        return $response;
+    }
+)->setName(
+    'events_event'
+)->add($authenticate);
 
 $this->get(
     __('/bookings', 'events_routes'),

@@ -37,7 +37,9 @@
 
 namespace GaletteEvents;
 
+use Galette\Core\Db;
 use Galette\Core\Login;
+use Galette\Entity\Group;
 use Analog\Analog;
 use Zend\Db\Sql\Expression;
 
@@ -73,19 +75,21 @@ class Event
     private $lodging = false;
     private $lodging_required = false;
     private $open = true;
-    private $id_group;
+    private $group;
 
     /**
      * Default constructor
      *
-     * @param Db                 $zdb  Database instance
-     * @param null|int|ResultSet $args Either a ResultSet row or its id for to load
-     *                                 a specific event, or null to just
-     *                                 instanciate object
+     * @param Db                 $zdb   Database instance
+     * @param Login              $login Login instance
+     * @param null|int|ResultSet $args  Either a ResultSet row or its id for to load
+     *                                  a specific event, or null to just
+     *                                  instanciate object
      */
-    public function __construct(Db $zdb, $args = null)
+    public function __construct(Db $zdb, Login $login, $args = null)
     {
         $this->zdb = $zdb;
+        $this->login = $login;
         if ($args == null || is_int($args)) {
             if (is_int($args) && $args > 0) {
                 $this->load($args);
@@ -111,6 +115,10 @@ class Event
         try {
             $select = $zdb->select($this->getTableName());
             $select->where(array(self::PK => $id));
+
+            if (!$login->isAdmin() && !$login->isStaff()) {
+                $select->where->in(Group::PK, $this->login->managed_groups);
+            }
 
             $results = $zdb->execute($select);
 
@@ -140,7 +148,19 @@ class Event
     {
         $this->id = $r->id_event;
         $this->name = $r->name;
+        $this->address = $r->address;
+        $this->zip = $r->zip;
+        $this->town = $r->town;
+        $this->country = $r->country;
+        $this->begin_date = $r->begin_date;
+        $this->end_date = $r->end_date;
         $this->creation_date = $r->creation_date;
+        $this->meal = $r->has_meal;
+        $this->meal_required = $r->is_meal_required;
+        $this->lodging = $r->has_lodging;
+        $this->lodging_required = $r->is_lodging_required;
+        $this->open = $r->is_open;
+        $this->group = $r->id_group;
     }
 
     /**
@@ -278,6 +298,56 @@ class Event
     }
 
     /**
+     * Get event address
+     *
+     * @return string
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * Get event zip
+     *
+     * @return string
+     */
+    public function getZip()
+    {
+        return $this->zip;
+    }
+
+    /**
+     * Get event town
+     *
+     * @return string
+     */
+    public function getTown()
+    {
+        return $this->town;
+    }
+
+    /**
+     * Get event country
+     *
+     * @return string
+     */
+    public function getCountry()
+    {
+        return $this->country;
+    }
+
+    /**
+     * Get event group
+     *
+     * @return integer
+     */
+    public function getGroup()
+    {
+        return $this->group;
+    }
+
+    /**
      * Get date
      *
      * @param string  $prop      Property to use
@@ -329,6 +399,73 @@ class Event
     public function getEndDate($formatted = true)
     {
         return $this->getDate('end_date', $formatted);
+    }
+
+    /**
+     * Does event includes a meal?
+     *
+     * @return boolean
+     */
+    public function hasMeal()
+    {
+        return $this->meal;
+    }
+
+    /**
+     * Is meal required?
+     *
+     * @return boolean
+     */
+    public function isMealRequired()
+    {
+        if ($this->hasMeal()) {
+            return $this->meal_required;
+        }
+        return false;
+    }
+
+    /**
+     * Does event includes a lodging?
+     *
+     * @return boolean
+     */
+    public function hasLodging()
+    {
+        return $this->lodging;
+    }
+
+    /**
+     * Is lodging required?
+     *
+     * @return boolean
+     */
+    public function isLodgingRequired()
+    {
+        if ($this->hasLodging()) {
+            return $this->lodging_required;
+        }
+        return false;
+    }
+
+    /**
+     * Is event open?
+     * Will return false once the begin date has been exceeded
+     *
+     * @return boolean
+     */
+    public function isOpen()
+    {
+        if ($this->open) {
+            try {
+                $date = new \DateTime($this->begin_date);
+                $now  = new \DateTime();
+                return $date > $now;
+            } catch (\Exception $e) {
+                //no begin date, or invalid date...
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
