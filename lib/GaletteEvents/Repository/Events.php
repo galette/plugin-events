@@ -122,7 +122,7 @@ class Events
             }
 
             //$this->buildWhereClause($select);
-            //$select->order($this->buildOrderClause($fields));
+            $select->order($this->buildOrderClause());
 
             $this->proceedCount($select);
 
@@ -144,6 +144,64 @@ class Events
             );
             throw $e;
         }
+    }
+
+    /**
+     * Is field allowed to order? it shoulsd be present in
+     * provided fields list (those that are SELECT'ed).
+     *
+     * @param string $field_name Field name to order by
+     * @param array  $fields     SELECTE'ed fields
+     *
+     * @return boolean
+     */
+    private function canOrderBy($field_name, $fields)
+    {
+        if (!is_array($fields)) {
+            return true;
+        } elseif (in_array($field_name, $fields)) {
+            return true;
+        } else {
+            Analog::log(
+                'Trying to order by ' . $field_name  . ' while it is not in ' .
+                'selected fields.',
+                Analog::WARNING
+            );
+            return false;
+        }
+    }
+
+    /**
+     * Builds the order clause
+     *
+     * @param array $fields Fields list to ensure ORDER clause
+     *                      references selected fields. Optionnal.
+     *
+     * @return string SQL ORDER clause
+     */
+    private function buildOrderClause($fields = null)
+    {
+        $order = array();
+
+        switch ($this->filters->orderby) {
+            case self::ORDERBY_DATE:
+                if ($this->canOrderBy('begin_date', $fields)) {
+                    $order[] = 'begin_date ' . $this->filters->getDirection();
+                }
+                break;
+            case self::ORDERBY_NAME:
+                if ($this->canOrderBy('name', $fields)) {
+                    $order[] = 'name ' . $this->filters->getDirection();
+                }
+                break;
+            case self::ORDERBY_TOWN:
+                if ($this->canOrderBy('town', $fields)) {
+                    $order[] = 'town ' . $this->filters->getDirection();
+                }
+                break;
+        }
+
+        return $order;
     }
 
     /**
