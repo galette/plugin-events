@@ -58,8 +58,11 @@
                             {/if}
                         </a>
                     </th>
-                    <th>{_T string="Open" domain="routes"}</th>
+                    <th>{_T string="Group" domain="events"}</th>
+                    <th>{_T string="Open" domain="events"}</th>
+{if $login->isAdmin() or $login->isStaff() or $login->isGroupManager()}
                     <th class="actions_row">{_T string="Actions"}</th>
+{/if}
                 </tr>
             </thead>
             <tbody>
@@ -74,6 +77,7 @@
                     </td>
                     <td class="{$rclass}" data-title="{_T string="Date" domain="events"}">{$event->getBeginDate()}</td>
                     <td class="{$rclass}" data-title="{_T string="Town" domain="events"}">{$event->getTown()}</td>
+                    <td class="{$rclass}" data-title="{_T string="Group" domain="events"}">{$event->getGroupName()}</td>
                     <td class="{$rclass}" data-title="{_T string="Open" domain="events"}">
                         {if $event->isOpen()}
                             <img src="{base_url}/{$template_subdir}images/icon-on.png" alt="{_T string="Open" domain="events"}" title="{_T string="Event is open" domain="events"}"/>
@@ -81,12 +85,14 @@
                             <img src="{base_url}/{$template_subdir}images/icon-off.png" alt="{_T string="Closed"}" title="{_T string="Event is closed" domain="events"}"/>
                         {/if}
                     </td>
+    {if $login->isAdmin() or $login->isStaff() or $login->isGroupManager()}
                     <td class="{$rclass} center nowrap actions_row">
                         <a href="{path_for name="events_event" data=["action" => {_T string="edit" domain="routes"}, "id" => $eid]}"><img src="{base_url}/{$template_subdir}images/icon-edit.png" alt="{_T string="[mod]"}" width="16" height="16" title="{_T string="%eventname: edit informations" pattern="/%eventname/" replace=$event->getName() domain="events"}"/></a>
-    {if $login->isAdmin() or $login->isStaff()}
+        {if $login->isAdmin() or $login->isStaff()}
                         <a class="delete" href="{path_for name="events_remove_event" data=["id" => $event->getId()]}"><img src="{base_url}/{$template_subdir}images/icon-trash.png" alt="{_T string="[del]"}" width="16" height="16" title="{_T string="%eventname: remove from database" pattern="/%eventname/" replace=$event->getName() domain="events"}"/></a>
-    {/if}
+        {/if}
                     </td>
+    {/if}
                 </tr>
     {/foreach}
 {else}

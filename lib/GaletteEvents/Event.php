@@ -348,6 +348,7 @@ class Event
             return true;
         }
     }
+
     /**
      * Store the grouevent
      *
@@ -376,7 +377,8 @@ class Event
                 'is_lodging_required'   => ($this->lodging_required ? $this->lodging_required :
                                                 ($this->zdb->isPostgres() ? 'false' : 0)),
                 'is_open'               => ($this->open ? $this->open :
-                                                ($this->zdb->isPostgres() ? 'false' : 0))
+                                                ($this->zdb->isPostgres() ? 'false' : 0)),
+                Group::PK               => ($this->group ? $this->group : new Expression('NULL'))
             );
 
             if (!isset($this->id) || $this->id == '') {
@@ -507,6 +509,21 @@ class Event
     public function getGroup()
     {
         return $this->group;
+    }
+
+    /**
+     * Get group name
+     *
+     * @return string
+     */
+    public function getGroupName()
+    {
+        $name = '-';
+        if ($this->group) {
+            $group = new Group((int)$this->group);
+            $name = $group->getFullName();
+        }
+        return $name;
     }
 
     /**

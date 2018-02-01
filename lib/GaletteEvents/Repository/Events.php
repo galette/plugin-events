@@ -37,6 +37,7 @@ namespace GaletteEvents\Repository;
 
 use Analog\Analog;
 use Zend\Db\Sql\Expression;
+use Zend\Db\Sql\Predicate\PredicateSet;
 use Galette\Core\Login;
 use Galette\Core\Db;
 use Galette\Entity\Group;
@@ -99,9 +100,9 @@ class Events
                 if ($this->login->isGroupManager()) {
                     $select->where->in(Group::PK, $this->login->managed_groups);
                 } else {
-                    $select->where->in(Group::PK, Groups::loadGroups($this->login->id));
+                    $select->where->in(Group::PK, Groups::loadGroups($this->login->id, false, false));
                 }
-                $select->orWhere(Group::PK . ' IS NULL');
+                $select->where(Group::PK . ' IS NULL', PredicateSet::OP_OR);
             }
 
             //$this->buildWhereClause($select);

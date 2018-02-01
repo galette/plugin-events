@@ -26,7 +26,7 @@
                 <p>
                     <label class="tooltip" for="group" title="{_T string="Restrict event to selected group (and its subgroups)." domain="events"}">{_T string="Limit to group" domain="events"}</label>
                     <span class="tip">{_T string="Restrict event to selected group (and its subgroups)." domain="events"}</span>
-                    <select name="group">
+                    <select name="group" id="group">
                         <option value="0">{_T string="Select a group"}</option>
     {foreach from=$groups item=group}
                         <option value="{$group->getId()}"{if $event->getGroup() eq $group->getId()} selected="selected"{/if}>{$group->getIndentName()}</option>
