@@ -652,7 +652,8 @@ class Event
             try {
                 $date = new \DateTime($this->begin_date);
                 $now  = new \DateTime();
-                return $date > $now;
+                $now->setTime(0, 0);
+                return $date >= $now;
             } catch (\Exception $e) {
                 //no begin date, or invalid date...
                 return true;
