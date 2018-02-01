@@ -153,7 +153,6 @@ class Events
             $this->filters->setLimits($select);
             $results = $this->zdb->execute($select);
             $this->filters->query = $this->zdb->query_string;
-            var_dump($this->zdb->query_string);
 
             $events = [];
             foreach ($results as $row) {
