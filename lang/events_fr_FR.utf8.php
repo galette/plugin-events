@@ -1,5 +1,5 @@
 <?php
-// This file was automatically generated on Thu Feb  1 07:18:12 2018 (GMT)
+// This file was automatically generated on Thu Feb  1 07:29:19 2018 (GMT)
 // Don't modify it by hand, rather use the target lang from the Makefile.
 
 
@@ -101,6 +101,9 @@ $lang['events']['No event has been found'] = 'Aucun évènement trouvé';
 
 // ../templates/default/event.tpl:42 
 $lang['events']['Meal'] = 'Repas';
+
+// ../templates/default/event.tpl:12 
+$lang['events']['(event will be considered as closed when begin date has been exceeded)'] = '(l\'évènement sera considéré comme clos lorsque la date de début sera dépassée)';
 
 // ../templates/default/event.tpl:7 
 $lang['events']['General informations'] = 'Informations générales';

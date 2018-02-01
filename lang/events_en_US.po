@@ -160,6 +160,10 @@ msgstr "Zip code"
 msgid "Events"
 msgstr "Events"
 
+#: ../templates/default/event.tpl:12
+msgid "(event will be considered as closed when begin date has been exceeded)"
+msgstr "(event will be considered as closed when begin date has been exceeded)"
+
 #: ../templates/default/event.tpl:75
 msgid "Country"
 msgstr "Country"

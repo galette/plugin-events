@@ -147,6 +147,10 @@ msgstr ""
 msgid "Events"
 msgstr ""
 
+#: ../templates/default/event.tpl:12
+msgid "(event will be considered as closed when begin date has been exceeded)"
+msgstr ""
+
 #: ../templates/default/event.tpl:75
 msgid "Country"
 msgstr ""

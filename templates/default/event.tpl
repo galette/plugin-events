@@ -9,7 +9,7 @@
                 <p>
                     <label for="open">{_T string="Is open" domain="events"}</label>
                     <input type="checkbox" name="open" id="open"{if $event->isOpen()} checked="checked"{/if}/>
-                    <span class="exemple">{_T string="(event will be considered as closed when begin date has been exceeded)"}</span>
+                    <span class="exemple">{_T string="(event will be considered as closed when begin date has been exceeded)" domain="events"}</span>
                 </p>
                 <p>
                     <label for="name">{_T string="Name" domain="events"}</label>
