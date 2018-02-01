@@ -1,12 +1,5 @@
 {extends file="page.tpl"}
 {block name="content"}
-        <form action="{path_for name="filter-eventslist"}" method="post" id="filtre">
-        <div id="listfilter">
-            <label for="filter_str">{_T string="Search:"}&nbsp;</label>
-            <input type="text" name="filter_str" id="filter_str" value="{$filters->filter_str}" type="search" placeholder="{_T string="Enter a value"}"/>&nbsp;
-            <input type="submit" class="inline" value="{_T string="Filter"}"/>
-            <input type="submit" name="clear_filter" class="inline" value="{_T string="Clear filter"}"/>
-        </div>
         <div class="infoline">
             {$nb_events} {if $nb_events != 1}{_T string="events" domain="events"}{else}{_T string="event" domain="events"}{/if}
             <div class="fright">
@@ -17,7 +10,6 @@
                 <noscript> <span><input type="submit" value="{_T string="Change"}" /></span></noscript>
             </div>
         </div>
-        </form>
         <table class="listing">
             <thead>
                 <tr>
@@ -104,6 +96,12 @@
 {/if}
             </tbody>
         </table>
+{if $nb_events gt 0}
+        <div class="center cright">
+            {_T string="Pages:"}<br/>
+            <ul class="pages">{$pagination}</ul>
+        </div>
+{/if}
 {/block}
 
 {block name="javascripts"}

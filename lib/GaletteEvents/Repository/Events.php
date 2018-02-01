@@ -102,23 +102,48 @@ class Events
             if (!$this->login->isAdmin() && !$this->login->isStaff()) {
                 if ($this->login->isGroupManager()) {
                     $groups = $this->login->managed_groups;
+                    $select->where(
+                        new PredicateSet(
+                            array(
+                                new Predicate\In(
+                                    Group::PK,
+                                    $this->login->managed_groups
+                                ),
+                                new PredicateSet(
+                                    array(
+                                        new Predicate\IsNull(Group::PK),
+                                        new Predicate\Operator(
+                                            'is_open',
+                                            '=',
+                                            true
+                                        ),
+                                        new Predicate\Operator(
+                                            'begin_date',
+                                            '>=',
+                                            date('Y-m-d')
+                                        )
+                                    )
+                                )
+                            ),
+                            PredicateSet::OP_OR
+                        )
+                    );
                 } else {
                     $select->where('is_open', true);
                     $select->where->greaterThanOrEqualTo('begin_date', date('Y-m-d'));
-                    $groups = Groups::loadGroups($this->login->id, false, false);
-                }
-                $select->where(
-                    new PredicateSet(
-                        array(
-                            new Predicate\In(
-                                Group::PK,
-                                $groups
+                    $select->where(
+                        new PredicateSet(
+                            array(
+                                new Predicate\In(
+                                    Group::PK,
+                                    Groups::loadGroups($this->login->id, false, false)
+                                ),
+                                new Predicate\IsNull(Group::PK)
                             ),
-                            new Predicate\IsNull(Group::PK)
-                        ),
-                        PredicateSet::OP_OR
-                    )
-                );
+                            PredicateSet::OP_OR
+                        )
+                    );
+                }
             }
 
             $select->order($this->buildOrderClause());
