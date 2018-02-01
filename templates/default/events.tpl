@@ -72,7 +72,7 @@
                     <td class="{$rclass} right" data-scope="id">{$ordre+1+($filters->current_page - 1)*$numrows}</td>
                     <td class="{$rclass} nowrap username_row" data-scope="row">
                         {assign var="eid" value=$event->getId()}
-        {if $login->isAdmin() or $login->isStaff() or $login->isGroupManager()}
+        {if $login->isAdmin() or $login->isStaff() or ($login->isGroupManager() and $event->getGroup()|in_array:$login->managed_groups )}
                         {*<input type="checkbox" name="event_sel[]" value="{$id}"/>*}
                         <a href="{path_for name="events_event" data=["action" => {_T string="edit" domain="routes"}, "id" => $eid]}">{$event->getName()}</a>
         {else}
@@ -89,7 +89,7 @@
                             <img src="{base_url}/{$template_subdir}images/icon-off.png" alt="{_T string="Closed"}" title="{_T string="Event is closed" domain="events"}"/>
                         {/if}
                     </td>
-    {if $login->isAdmin() or $login->isStaff() or $login->isGroupManager()}
+    {if $login->isAdmin() or $login->isStaff() or ($login->isGroupManager() and $event->getGroup()|in_array:$login->managed_groups )}
                     <td class="{$rclass} center nowrap actions_row">
                         <a href="{path_for name="events_event" data=["action" => {_T string="edit" domain="routes"}, "id" => $eid]}"><img src="{base_url}/{$template_subdir}images/icon-edit.png" alt="{_T string="[mod]"}" width="16" height="16" title="{_T string="%eventname: edit informations" pattern="/%eventname/" replace=$event->getName() domain="events"}"/></a>
         {if $login->isAdmin() or $login->isStaff()}
