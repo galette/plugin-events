@@ -60,6 +60,8 @@ class Event
     const PK = 'id_event';
 
     private $zdb;
+    private $login;
+    private $errors;
 
     private $id;
     private $name;
@@ -113,14 +115,14 @@ class Event
     public function load($id)
     {
         try {
-            $select = $zdb->select($this->getTableName());
+            $select = $this->zdb->select($this->getTableName());
             $select->where(array(self::PK => $id));
 
-            if (!$login->isAdmin() && !$login->isStaff()) {
+            if (!$this->login->isAdmin() && !$this->login->isStaff()) {
                 $select->where->in(Group::PK, $this->login->managed_groups);
             }
 
-            $results = $zdb->execute($select);
+            $results = $this->zdb->execute($select);
 
             if ($results->count() > 0) {
                 $this->loadFromRS($results->current());
@@ -133,6 +135,7 @@ class Event
                 'Cannot load event form id `' . $id . '` | ' . $e->getMessage(),
                 Analog::WARNING
             );
+            throw $e;
             return false;
         }
     }
@@ -204,6 +207,148 @@ class Event
     }
 
     /**
+     * Check posted values validity
+     *
+     * @param array $values All values to check, basically the $_POST array
+     *                      after sending the form
+     *
+     * @return true|array
+     */
+    public function check($values)
+    {
+        $this->errors = array();
+
+        if (!isset($values['begin_date']) || empty($values['begin_date'])) {
+            $this->errors[] = _T('Begin date is mandatory', 'events');
+        } else {
+            //handle dates
+            foreach (['begin_date', 'end_date'] as $datefield) {
+                if (isset($values[$datefield])) {
+                    $value = $values[$datefield];
+                    try {
+                        $d = \DateTime::createFromFormat(__("Y-m-d"), $value);
+                        if ($d === false) {
+                            //try with non localized date
+                            $d = \DateTime::createFromFormat("Y-m-d", $value);
+                            if ($d === false) {
+                                throw new \Exception('Incorrect format');
+                            }
+                        }
+                        $this->$datefield = $d->format('Y-m-d');
+                    } catch (\Exception $e) {
+                        Analog::log(
+                            'Wrong date format. field: ' . $datefield .
+                            ', value: ' . $value . ', expected fmt: ' .
+                            __("Y-m-d") . ' | ' . $e->getMessage(),
+                            Analog::INFO
+                        );
+                        if ($datefield == 'begin_date') {
+                            $label = _T('Begin date', 'events');
+                        } else {
+                            $label = _T('End date', 'events');
+                        }
+                        $this->errors[] = str_replace(
+                            array(
+                                '%date_format',
+                                '%field'
+                            ),
+                            array(
+                                __("Y-m-d"),
+                                $label
+                            ),
+                            _T("- Wrong date format (%date_format) for %field!")
+                        );
+                    }
+                }
+            }
+
+            if (!isset($values['end_date'])) {
+                $this->end_date = $this->begin_date;
+            } elseif (!count($this->errors)) {
+                $dend = new \DateTime($this->end_date);
+                $dbegin = new \DateTime($this->begin_date);
+                if ($dend < $dbegin) {
+                    $this->errors[] = _T('End date must be later or equal to begin date', 'events');
+                }
+            }
+        }
+
+        if (!isset($values['name']) || empty($values['name'])) {
+            $this->errors[] = _T('Name is mandatory', 'events');
+        } else {
+            $this->name = $values['name'];
+        }
+
+        if ($this->login->isAdmin() || $this->login->isStaff()) {
+            if (isset($values['group']) && !empty($values['group'])) {
+                $this->group = $values['group'];
+            }
+        } else {
+            if (!isset($values['group'])
+                || empty($values['group'])
+                || !in_array($values['group'], $this->login->managed_groups)
+            ) {
+                $this->errors[] = _T('Please select a group you own!', 'events');
+            } else {
+                $this->group = $values['group'];
+            }
+        }
+
+        if (!isset($values['town']) || empty($values['town'])) {
+            $this->errors[] = _T('Town is mandatory', 'events');
+        } else {
+            $this->town = $values['town'];
+        }
+
+        $otherfields = [
+            'address',
+            'zip',
+            'country',
+        ];
+        foreach ($otherfields as $otherfield) {
+            if (isset($values[$otherfield])) {
+                $this->$otherfield = $values[$otherfield];
+            }
+        }
+
+        if (isset($values['meal_required']) && !isset($values['meal'])) {
+            $this->errors[] = _T('Cannot set meal as mandatory if there is no meal :)', 'events');
+        } else {
+            if (isset($values['meal'])) {
+                $this->meal = true;
+            }
+            if (isset($values['meal_required'])) {
+                $this->meal_required = true;
+            }
+        }
+
+        if (isset($values['lodging_required']) && !isset($values['lodging'])) {
+            $this->errors[] = _T('Cannot set lodging as mandatory if there is no lodging :)', 'events');
+        } else {
+            if (isset($values['lodging'])) {
+                $this->lodging = true;
+            }
+            if (isset($values['lodging_required'])) {
+                $this->lodging_required = true;
+            }
+        }
+
+        if (count($this->errors) > 0) {
+            Analog::log(
+                'Some errors has been throwed attempting to edit/store an event' . "\n" .
+                print_r($this->errors, true),
+                Analog::ERROR
+            );
+            return $this->errors;
+        } else {
+            Analog::log(
+                'Event checked successfully.',
+                Analog::DEBUG
+            );
+            return true;
+        }
+    }
+    /**
      * Store the grouevent
      *
      * @return boolean
@@ -214,8 +359,24 @@ class Event
 
         try {
             $values = array(
-                self::PK    => $this->id,
-                'name'      => $this->name
+                self::PK                => $this->id,
+                'name'                  => $this->name,
+                'address'               => $this->address,
+                'zip'                   => $this->zip,
+                'town'                  => $this->town,
+                'country'               => ($this->country ? $this->country : new Expression('NULL')),
+                'begin_date'            => $this->begin_date,
+                'end_date'              => $this->end_date,
+                'has_meal'              => ($this->meal ? $this->meal :
+                                                ($this->zdb->isPostgres() ? 'false' : 0)),
+                'is_meal_required'      => ($this->meal_required ? $this->meal_required :
+                                                ($this->zdb->isPostgres() ? 'false' : 0)),
+                'has_lodging'           => ($this->lodging ? $this->lodging :
+                                                ($this->zdb->isPostgres() ? 'false' : 0)),
+                'is_lodging_required'   => ($this->lodging_required ? $this->lodging_required :
+                                                ($this->zdb->isPostgres() ? 'false' : 0)),
+                'is_open'               => ($this->open ? $this->open :
+                                                ($this->zdb->isPostgres() ? 'false' : 0))
             );
 
             if (!isset($this->id) || $this->id == '') {
@@ -273,6 +434,7 @@ class Event
                 $e->getTraceAsString(),
                 Analog::ERROR
             );
+            throw $e;
             return false;
         }
     }

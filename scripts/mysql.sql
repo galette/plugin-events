@@ -6,7 +6,7 @@ SET FOREIGN_KEY_CHECKS=0;
 
 DROP TABLE IF EXISTS galette_events_events;
 CREATE TABLE galette_events_events (
-  id_event int(10) NOT NULL,
+  id_event int(10) NOT NULL auto_increment,
   name varchar(150) NOT NULL,
   address varchar(150) NOT NULL default '',
   zip varchar(10) NOT NULL default '',

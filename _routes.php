@@ -191,6 +191,192 @@ $this->get(
     'events_event'
 )->add($authenticate);
 
+$this->post(
+    __('/event', 'events_routes') . __('/store', 'routes'),
+    function ($request, $response, $args) {
+        $post = $request->getParsedBody();
+        $event = new Event($this->zdb, $this->login);
+        if (isset($post['id']) && !empty($post['id'])) {
+            $event->load((int)$post['id']);
+        }
+
+        $success_detected = [];
+        $warning_detected = [];
+        $error_detected = [];
+
+        // Validation
+        $valid = $event->check($post);
+        if ($valid !== true) {
+            $error_detected = array_merge($error_detected, $valid);
+        }
+
+        if (count($error_detected) == 0) {
+            //all goes well, we can proceed
+
+            $new = false;
+            if ($event->getId() == '') {
+                $new = true;
+            }
+            $store = $event->store();
+            if ($store === true) {
+                //member has been stored :)
+                if ($new) {
+                    $success_detected[] = _T("New event has been successfully added.", "events");
+                } else {
+                    $success_detected[] = _T("Event has been modified.", "events");
+                }
+            } else {
+                //something went wrong :'(
+                $error_detected[] = _T("An error occured while storing the event.", "events");
+            }
+        }
+
+        if (count($error_detected) > 0) {
+            foreach ($error_detected as $error) {
+                $this->flash->addMessage(
+                    'error_detected',
+                    $error
+                );
+            }
+        }
+
+        if (count($warning_detected) > 0) {
+            foreach ($warning_detected as $warning) {
+                $this->flash->addMessage(
+                    'warning_detected',
+                    $warning
+                );
+            }
+        }
+        if (count($success_detected) > 0) {
+            foreach ($success_detected as $success) {
+                $this->flash->addMessage(
+                    'success_detected',
+                    $success
+                );
+            }
+        }
+
+        if (count($error_detected) == 0) {
+            $redirect_url = $this->router->pathFor('events_events');
+        } else {
+            //store entity in session
+            $this->session->event = $event;
+
+            if ($event->getId()) {
+                $rparams = [
+                    'id'        => $event->getId(),
+                    'action'    => __('edit', 'routes')
+                ];
+            } else {
+                $rparams = ['action' => __('add', 'routes')];
+            }
+            $redirect_url = $this->router->pathFor(
+                'events_event',
+                $rparams
+            );
+        }
+
+        return $response
+            ->withStatus(301)
+            ->withHeader('Location', $redirect_url);
+    }
+)->setName('events_storeevent')->add($authenticate);
+
+$this->get(
+    __('/event', 'events_routes') . __('/remove', 'routes') . '/{id:\d+}',
+    function ($request, $response, $args) {
+        $event = new Event($this->zdb, $this->login, (int)$args['id']);
+
+        $data = [
+            'id'            => $args['id'],
+            'redirect_uri'  => $this->router->pathFor('events_events')
+        ];
+
+        // display page
+        $this->view->render(
+            $response,
+            'confirm_removal.tpl',
+            array(
+                'type'          => _T("Event", "events"),
+                'mode'          => $request->isXhr() ? 'ajax' : '',
+                'page_title'    => sprintf(
+                    _T('Remove event %1$s'),
+                    $event->getName()
+                ),
+                'form_url'      => $this->router->pathFor(
+                    'events_do_remove_event',
+                    ['id' => $event->getId()]
+                ),
+                'cancel_uri'    => $this->router->pathFor('events_events'),
+                'data'          => $data
+            )
+        );
+        return $response;
+    }
+)->setName('events_remove_event')->add($authenticate);
+
+$this->post(
+    __('/evnt', 'events_routes') . __('/remove', 'routes') . '[/{id:\d+}]',
+    function ($request, $response) {
+        $post = $request->getParsedBody();
+        $ajax = isset($post['ajax']) && $post['ajax'] === 'true';
+        $success = false;
+
+        $uri = isset($post['redirect_uri']) ?
+            $post['redirect_uri'] :
+            $this->router->pathFor('slash');
+
+        if (!isset($post['confirm'])) {
+            $this->flash->addMessage(
+                'error_detected',
+                _T("Removal has not been confirmed!")
+            );
+        } else {
+            $event = new Event($this->zdb, $this->login, (int)$post['id']);
+            $del = $event->remove();
+
+            if ($del !== true) {
+                $error_detected = str_replace(
+                    '%name',
+                    $event->getName(),
+                    _T("An error occured trying to remove event %name :/", "events")
+                );
+
+                $this->flash->addMessage(
+                    'error_detected',
+                    $error_detected
+                );
+            } else {
+                $success_detected = str_replace(
+                    '%name',
+                    $event->getName(),
+                    _T("Event %name has been successfully deleted.", "events")
+                );
+
+                $this->flash->addMessage(
+                    'success_detected',
+                    $success_detected
+                );
+
+                $success = true;
+            }
+        }
+
+        if (!$ajax) {
+            return $response
+                ->withStatus(301)
+                ->withHeader('Location', $uri);
+        } else {
+            return $response->withJson(
+                [
+                    'success'   => $success
+                ]
+            );
+        }
+    }
+)->setName('events_do_remove_event')->add($authenticate);
+
 $this->get(
     __('/bookings', 'events_routes'),
     function ($request, $response) use ($module, $module_id) {

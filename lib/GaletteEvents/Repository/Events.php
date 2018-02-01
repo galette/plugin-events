@@ -115,7 +115,7 @@ class Events
 
             $events = [];
             foreach ($results as $row) {
-                $event = new Event($this->zdb, $row);
+                $event = new Event($this->zdb, $this->login, $row);
                 $events[] = $event;
             }
 

@@ -1,7 +1,7 @@
 {extends file="page.tpl"}
 
 {block name="content"}
-    <form action="{path_for name="events_event" data=["action" => $action, "id" => $event->getId()]}" method="post">
+    <form action="{path_for name="events_storeevent" data=["action" => $action, "id" => $event->getId()]}" method="post">
         <div class="bigtable">
             <fieldset class="galette_form" id="general">
                 <legend>{_T string="General informations" domain="events"}</legend>
@@ -81,7 +81,7 @@
         <div class="button-container">
             <input type="submit" value="{_T string="Save"}" />
             <input type="submit" name="cancel" value="{_T string="Cancel"}"/>
-            <input type="hidden" name="id" id="id" value="{$title->id}"/>
+            <input type="hidden" name="id" id="id" value="{$event->getId()}"/>
         </div>
      </form>
 {/block}

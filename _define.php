@@ -44,9 +44,12 @@ $this->register(
     'events',               //routing name and translation domain
     '2018-01-15',           //Release date
     [   //Permissions needed
-        'events_events'     => 'member',
-        'events_bookings'   => 'member',
-        'filter-eventslist' => 'member',
-        'events_event'      => 'groupmanager'
+        'events_events'             => 'member',
+        'events_bookings'           => 'member',
+        'filter-eventslist'         => 'member',
+        'events_event'              => 'groupmanager',
+        'events_storeevent'         => 'groupmanager',
+        'events_remove_event'       => 'staff',
+        'events_do_remove_event'    => 'staff'
     ]
 );
