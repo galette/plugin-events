@@ -37,7 +37,9 @@ namespace GaletteEvents\Repository;
 
 use Analog\Analog;
 use Zend\Db\Sql\Expression;
+use Zend\Db\Sql\Predicate;
 use Zend\Db\Sql\Predicate\PredicateSet;
+use Zend\Db\Sql\Predicate\Operator;
 use Galette\Core\Login;
 use Galette\Core\Db;
 use Galette\Entity\Group;
@@ -96,13 +98,27 @@ class Events
         try {
             $select = $this->zdb->select(EVENTS_PREFIX . Event::TABLE, 'e');
 
+            $groups = null;
             if (!$this->login->isAdmin() && !$this->login->isStaff()) {
                 if ($this->login->isGroupManager()) {
-                    $select->where->in(Group::PK, $this->login->managed_groups);
+                    $groups = $this->login->managed_groups;
                 } else {
-                    $select->where->in(Group::PK, Groups::loadGroups($this->login->id, false, false));
+                    $select->where('is_open', true);
+                    $select->where->greaterThanOrEqualTo('begin_date', date('Y-m-d'));
+                    $groups = Groups::loadGroups($this->login->id, false, false);
                 }
-                $select->where(Group::PK . ' IS NULL', PredicateSet::OP_OR);
+                $select->where(
+                    new PredicateSet(
+                        array(
+                            new Predicate\In(
+                                Group::PK,
+                                $groups
+                            ),
+                            new Predicate\IsNull(Group::PK)
+                        ),
+                        PredicateSet::OP_OR
+                    )
+                );
             }
 
             //$this->buildWhereClause($select);
