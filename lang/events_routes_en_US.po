@@ -11,10 +11,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.3\n"
 
-#: ../_routes.php:53
+#: ../_routes.php:417
 msgid "/bookings"
 msgstr "/bookings"
 
-#: ../_routes.php:40
+#: ../_routes.php:165 ../_routes.php:231 ../_routes.php:323 ../_routes.php:356
+msgid "/event"
+msgstr "/event"
+
+#: ../_routes.php:47 ../_routes.php:101
 msgid "/events"
 msgstr "/events"

@@ -11,10 +11,183 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.3\n"
 
+#: ../templates/default/menu.tpl:6
+msgid "Bookings"
+msgstr "Réservations"
+
+#: ../_routes.php:390
+msgid "Event %name has been successfully deleted."
+msgstr "L'évènement %name a été supprimé avec succès."
+
+#: ../templates/default/events.tpl:77 ../templates/default/events.tpl:79
+msgid "Open"
+msgstr "Ouvert"
+
+#: ../templates/default/event.tpl:27 ../templates/default/event.tpl:28
+msgid "Restrict event to selected group (and its subgroups)."
+msgstr "Restreindre l'évènement au groupe sélectionné (et ses sous groupes)."
+
+#: ../templates/default/event.tpl:60
+msgid "Location"
+msgstr "Localisation"
+
+#: ../templates/default/event.tpl:7
+msgid "General informations"
+msgstr "Informations générales"
+
+#: ../_routes.php:260
+msgid "New event has been successfully added."
+msgstr "Le nouvel évènement a été ajouté avec succès."
+
+#: ../_routes.php:175
+msgid "Event ID cannot ben null calling edit route!"
+msgstr "L'identifiant de l'évènement ne peut être vide pour la route d'édition !"
+
+#: ../templates/default/event.tpl:42
+msgid "Meal"
+msgstr "Repas"
+
+#: ../templates/default/event.tpl:27
+msgid "Limit to group"
+msgstr "Limiter au groupe"
+
+#: ../templates/default/event.tpl:63
+msgid "Address"
+msgstr "Adresse"
+
+#: ../templates/default/events.tpl:93
+msgid "No event has been found"
+msgstr "Aucun évènement trouvé"
+
+#: ../lib/GaletteEvents/Event.php:246 ../templates/default/event.tpl:19
+msgid "Begin date"
+msgstr "Date de début"
+
+#: ../templates/default/events.tpl:11
+msgid "event"
+msgstr "évènement"
+
+#: ../_routes.php:262
+msgid "Event has been modified."
+msgstr "L'évènement a été modifié"
+
+#: ../lib/GaletteEvents/Event.php:425
+msgid "Event updated"
+msgstr "Évènement mis à jour"
+
+#: ../lib/GaletteEvents/Event.php:248 ../templates/default/event.tpl:23
+msgid "End date"
+msgstr "Date de fin"
+
+#: ../lib/GaletteEvents/Event.php:326
+msgid "Cannot set lodging as mandatory if there is no lodging :)"
+msgstr "Impossible de rendre le logement obligatoire en l'absence de logement :)"
+
+#: ../templates/default/event.tpl:39
+msgid "Related activities"
+msgstr "Activités liées"
+
+#: ../templates/default/event.tpl:10
+msgid "Is open"
+msgstr "Est ouvert"
+
+#: ../lib/GaletteEvents/Event.php:407
+msgid "Fail to add new event."
+msgstr "Erreur à l'ajout du nouvel évènement."
+
+#: ../templates/default/menu.tpl:5
+msgid "New event"
+msgstr "Nouvel évènement"
+
+#: ../templates/default/events.tpl:11
+msgid "events"
+msgstr "évènements"
+
+#: ../templates/default/events.tpl:51 ../templates/default/events.tpl:76
+#: ../templates/default/event.tpl:71
+msgid "Town"
+msgstr "Ville"
+
+#: ../_routes.php:88
+msgid "Events management"
+msgstr "Gestion des évènement"
+
+#: ../templates/default/event.tpl:46
+msgid "Meal mandatory"
+msgstr "Repas obligatoire"
+
+#: ../templates/default/events.tpl:81
+msgid "Event is closed"
+msgstr "L'évènement est femré"
+
+#: ../lib/GaletteEvents/Event.php:298
+msgid "Town is mandatory"
+msgstr "La ville est requise"
+
+#: ../templates/default/events.tpl:79
+msgid "Event is open"
+msgstr "L'évènement est ouvert"
+
+#: ../templates/default/event.tpl:54
+msgid "Lodging mandatory"
+msgstr "Logement requis"
+
+#: ../_routes.php:337
+msgid "Event"
+msgstr "Évènement"
+
+#: ../_routes.php:266
+msgid "An error occured while storing the event."
+msgstr "Une erreur est survenue à l'enregistrement de l'évènement"
+
+#: ../lib/GaletteEvents/Event.php:277
+msgid "Name is mandatory"
+msgstr "Le nom est requis"
+
+#: ../templates/default/event.tpl:50
+msgid "Lodging"
+msgstr "Logement"
+
+#: ../templates/default/events.tpl:27 ../templates/default/event.tpl:15
+msgid "Name"
+msgstr "Nom"
+
+#: ../templates/default/event.tpl:67
+msgid "Zip code"
+msgstr "Code postal"
+
 #: ../templates/default/menu.tpl:1 ../templates/default/menu.tpl:3
 msgid "Events"
 msgstr "Évènements"
 
-#: ../templates/default/menu.tpl:5
-msgid "Bookings"
-msgstr "Réservations"
+#: ../templates/default/event.tpl:75
+msgid "Country"
+msgstr "Pays"
+
+#: ../lib/GaletteEvents/Event.php:402
+msgid "Event added"
+msgstr "Évènement ajouté"
+
+#: ../lib/GaletteEvents/Event.php:291
+msgid "Please select a group you own!"
+msgstr "Veuillez sélectionner un groupe que vous gérez"
+
+#: ../templates/default/events.tpl:39 ../templates/default/events.tpl:75
+msgid "Date"
+msgstr "Date"
+
+#: ../lib/GaletteEvents/Event.php:271
+msgid "End date must be later or equal to begin date"
+msgstr "La date de fin doit être ultérieure ou égale à la date de début"
+
+#: ../lib/GaletteEvents/Event.php:315
+msgid "Cannot set meal as mandatory if there is no meal :)"
+msgstr "Impossible de rendre le repas obligatoire en l'absence de repas :)"
+
+#: ../_routes.php:379
+msgid "An error occured trying to remove event %name :/"
+msgstr "Une erreur est survenue à la suppression de l'évènement %name :/"
+
+#: ../lib/GaletteEvents/Event.php:222
+msgid "Begin date is mandatory"
+msgstr "La date de début est requise"

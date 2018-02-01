@@ -317,7 +317,7 @@ $this->get(
 )->setName('events_remove_event')->add($authenticate);
 
 $this->post(
-    __('/evnt', 'events_routes') . __('/remove', 'routes') . '[/{id:\d+}]',
+    __('/event', 'events_routes') . __('/remove', 'routes') . '[/{id:\d+}]',
     function ($request, $response) {
         $post = $request->getParsedBody();
         $ajax = isset($post['ajax']) && $post['ajax'] === 'true';

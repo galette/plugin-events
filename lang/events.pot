@@ -1,8 +1,181 @@
+#: ../templates/default/menu.tpl:6
+msgid "Bookings"
+msgstr ""
+
+#: ../_routes.php:390
+msgid "Event %name has been successfully deleted."
+msgstr ""
+
+#: ../templates/default/events.tpl:77 ../templates/default/events.tpl:79
+msgid "Open"
+msgstr ""
+
+#: ../templates/default/event.tpl:27 ../templates/default/event.tpl:28
+msgid "Restrict event to selected group (and its subgroups)."
+msgstr ""
+
+#: ../templates/default/event.tpl:60
+msgid "Location"
+msgstr ""
+
+#: ../templates/default/event.tpl:7
+msgid "General informations"
+msgstr ""
+
+#: ../_routes.php:260
+msgid "New event has been successfully added."
+msgstr ""
+
+#: ../_routes.php:175
+msgid "Event ID cannot ben null calling edit route!"
+msgstr ""
+
+#: ../templates/default/event.tpl:42
+msgid "Meal"
+msgstr ""
+
+#: ../templates/default/event.tpl:27
+msgid "Limit to group"
+msgstr ""
+
+#: ../templates/default/event.tpl:63
+msgid "Address"
+msgstr ""
+
+#: ../templates/default/events.tpl:93
+msgid "No event has been found"
+msgstr ""
+
+#: ../lib/GaletteEvents/Event.php:246 ../templates/default/event.tpl:19
+msgid "Begin date"
+msgstr ""
+
+#: ../templates/default/events.tpl:11
+msgid "event"
+msgstr ""
+
+#: ../_routes.php:262
+msgid "Event has been modified."
+msgstr ""
+
+#: ../lib/GaletteEvents/Event.php:425
+msgid "Event updated"
+msgstr ""
+
+#: ../lib/GaletteEvents/Event.php:248 ../templates/default/event.tpl:23
+msgid "End date"
+msgstr ""
+
+#: ../lib/GaletteEvents/Event.php:326
+msgid "Cannot set lodging as mandatory if there is no lodging :)"
+msgstr ""
+
+#: ../templates/default/event.tpl:39
+msgid "Related activities"
+msgstr ""
+
+#: ../templates/default/event.tpl:10
+msgid "Is open"
+msgstr ""
+
+#: ../lib/GaletteEvents/Event.php:407
+msgid "Fail to add new event."
+msgstr ""
+
+#: ../templates/default/menu.tpl:5
+msgid "New event"
+msgstr ""
+
+#: ../templates/default/events.tpl:11
+msgid "events"
+msgstr ""
+
+#: ../templates/default/events.tpl:51 ../templates/default/events.tpl:76
+#: ../templates/default/event.tpl:71
+msgid "Town"
+msgstr ""
+
+#: ../_routes.php:88
+msgid "Events management"
+msgstr ""
+
+#: ../templates/default/event.tpl:46
+msgid "Meal mandatory"
+msgstr ""
+
+#: ../templates/default/events.tpl:81
+msgid "Event is closed"
+msgstr ""
+
+#: ../lib/GaletteEvents/Event.php:298
+msgid "Town is mandatory"
+msgstr ""
+
+#: ../templates/default/events.tpl:79
+msgid "Event is open"
+msgstr ""
+
+#: ../templates/default/event.tpl:54
+msgid "Lodging mandatory"
+msgstr ""
+
+#: ../_routes.php:337
+msgid "Event"
+msgstr ""
+
+#: ../_routes.php:266
+msgid "An error occured while storing the event."
+msgstr ""
+
+#: ../lib/GaletteEvents/Event.php:277
+msgid "Name is mandatory"
+msgstr ""
+
+#: ../templates/default/event.tpl:50
+msgid "Lodging"
+msgstr ""
+
+#: ../templates/default/events.tpl:27 ../templates/default/event.tpl:15
+msgid "Name"
+msgstr ""
+
+#: ../templates/default/event.tpl:67
+msgid "Zip code"
+msgstr ""
+
 #: ../templates/default/menu.tpl:1 ../templates/default/menu.tpl:3
 msgid "Events"
 msgstr ""
 
-#: ../templates/default/menu.tpl:5
-msgid "Bookings"
+#: ../templates/default/event.tpl:75
+msgid "Country"
+msgstr ""
+
+#: ../lib/GaletteEvents/Event.php:402
+msgid "Event added"
+msgstr ""
+
+#: ../lib/GaletteEvents/Event.php:291
+msgid "Please select a group you own!"
+msgstr ""
+
+#: ../templates/default/events.tpl:39 ../templates/default/events.tpl:75
+msgid "Date"
+msgstr ""
+
+#: ../lib/GaletteEvents/Event.php:271
+msgid "End date must be later or equal to begin date"
+msgstr ""
+
+#: ../lib/GaletteEvents/Event.php:315
+msgid "Cannot set meal as mandatory if there is no meal :)"
+msgstr ""
+
+#: ../_routes.php:379
+msgid "An error occured trying to remove event %name :/"
+msgstr ""
+
+#: ../lib/GaletteEvents/Event.php:222
+msgid "Begin date is mandatory"
 msgstr ""
 

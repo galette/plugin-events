@@ -8,7 +8,7 @@
             <input type="submit" name="clear_filter" class="inline" value="{_T string="Clear filter"}"/>
         </div>
         <div class="infoline">
-            {$nb_events} {if $nb_events != 1}{_T string="events" domain="events"}{else}{_T string="event" domain="event"}{/if}
+            {$nb_events} {if $nb_events != 1}{_T string="events" domain="events"}{else}{_T string="event" domain="events"}{/if}
             <div class="fright">
                 <label for="nbshow">{_T string="Records per page:"}</label>
                 <select name="nbshow" id="nbshow">
