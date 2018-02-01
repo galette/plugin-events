@@ -316,9 +316,13 @@ class Event
         } else {
             if (isset($values['meal'])) {
                 $this->meal = true;
+            } else {
+                $this->meal = false;
             }
             if (isset($values['meal_required'])) {
                 $this->meal_required = true;
+            } else {
+                $this->meal_required = false;
             }
         }
 
@@ -327,10 +331,20 @@ class Event
         } else {
             if (isset($values['lodging'])) {
                 $this->lodging = true;
+            } else {
+                $this->lodging = false;
             }
             if (isset($values['lodging_required'])) {
                 $this->lodging_required = true;
+            } else {
+                $this->lodging = false;
             }
+        }
+
+        if (isset($values['open'])) {
+            $this->open = true;
+        } else {
+            $this->open = false;
         }
 
         if (count($this->errors) > 0) {
