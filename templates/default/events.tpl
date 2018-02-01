@@ -72,8 +72,12 @@
                     <td class="{$rclass} right" data-scope="id">{$ordre+1+($filters->current_page - 1)*$numrows}</td>
                     <td class="{$rclass} nowrap username_row" data-scope="row">
                         {assign var="eid" value=$event->getId()}
+        {if $login->isAdmin() or $login->isStaff() or $login->isGroupManager()}
                         {*<input type="checkbox" name="event_sel[]" value="{$id}"/>*}
                         <a href="{path_for name="events_event" data=["action" => {_T string="edit" domain="routes"}, "id" => $eid]}">{$event->getName()}</a>
+        {else}
+                        {$event->getName()}
+        {/if}
                     </td>
                     <td class="{$rclass}" data-title="{_T string="Date" domain="events"}">{$event->getBeginDate()}</td>
                     <td class="{$rclass}" data-title="{_T string="Town" domain="events"}">{$event->getTown()}</td>
