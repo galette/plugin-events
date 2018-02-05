@@ -83,7 +83,7 @@ class BookingsList extends Pagination
      */
     protected function getDefaultOrder()
     {
-        return Bookings::ORDERBY_DATE;
+        return Bookings::ORDERBY_BOOKDATE;
     }
 
     /**
