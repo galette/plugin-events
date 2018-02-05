@@ -59,10 +59,8 @@
                     <label for="amount">{_T string="amount" domain="events"}</label>
                     <input type="text" name="amount" id="amount" value="{$booking->getAmount()}"/>
                 </p>
-                <p>
-                    <label for="payment_method">{_T string="Payment method" domain="events"}</label>
-                    <input type="text" name="payment_method" id="payment_method" value="{$booking->getPaymentMethod()}" />
-                </p>
+                {* payment type *}
+                {include file="forms_types/payment_types.tpl" current=$booking->getPaymentMethod() varname="payment_method"}
                 <p>
                     <label for="bank_name">{_T string="Bank name"}</label>
                     <input type="text" name="bank_name" id="bank_name" value="{$booking->getBankName()}" />

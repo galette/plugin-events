@@ -319,7 +319,7 @@ class Booking
                 'booking_date'      => $this->booking_date,
                 'is_paid'           => ($this->paid ? $this->paid :
                                             ($this->zdb->isPostgres() ? 'false' : 0)),
-                'payment_method'    => 1/*$this->payment_method*/,
+                'payment_method'    => $this->payment_method,
                 'payment_amount'    => $this->amount,
                 'bank_name'         => $this->bank_name,
                 'check_number'      => $this->check_number,
@@ -373,8 +373,7 @@ class Booking
                 //were nothing to change
                 if ($edit->count() > 0) {
                     $hist->add(
-                        _T("Booking updated", "events"),
-                        $this->name
+                        _T("Booking updated", "events")
                     );
                 }
                 return true;
