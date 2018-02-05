@@ -105,7 +105,7 @@
                             <img src="{base_url}/{$template_subdir}images/icon-off.png" alt="{_T string="Not paid"}" title="{_T string="Booking has not been paid" domain="events"}"/>
                         {/if}
                     </td>
-                    <td class="{$rclass}" data-title="{_T string="Atendees" domain="events"}">{$booking->getNumberPeople()}</td>
+                    <td class="{$rclass}" data-title="{_T string="Attendees" domain="events"}">{$booking->getNumberPeople()}</td>
                     <td class="{$rclass}" data-title="{_T string="Meal" domain="events"}">
                         {if $booking->hasMeal()}
                             <img src="{base_url}/{$template_subdir}images/icon-on.png" alt="{_T string="Has meal" domain="events"}"/>

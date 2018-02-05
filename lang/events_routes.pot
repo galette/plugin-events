@@ -1,13 +1,23 @@
-#: ../_routes.php:417
+#: ../_routes.php:446 ../_routes.php:521
+#: ../_routes.php:618 ../_routes.php:648
+msgid "/booking"
+msgstr ""
+
+#: ../_routes.php:385
 msgid "/bookings"
 msgstr ""
 
-#: ../_routes.php:165 ../_routes.php:231
-#: ../_routes.php:323 ../_routes.php:356
+#: ../_routes.php:133 ../_routes.php:199
+#: ../_routes.php:291 ../_routes.php:324
 msgid "/event"
 msgstr ""
 
-#: ../_routes.php:47 ../_routes.php:101
+#: ../_routes.php:51 ../_routes.php:105
 msgid "/events"
+msgstr ""
+
+#: ../_routes.php:385 ../_routes.php:415
+#: ../templates/default/bookings.tpl:6
+msgid "all"
 msgstr ""
 
