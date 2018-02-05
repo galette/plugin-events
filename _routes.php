@@ -37,8 +37,12 @@
 use Analog\Analog;
 use Galette\Repository\Groups;
 use GaletteEvents\Filters\EventsList;
+use GaletteEvents\Filters\BookingsList;
 use GaletteEvents\Event;
+use GaletteEvents\Booking;
 use GaletteEvents\Repository\Events;
+use GaletteEvents\Repository\Bookings;
+use Galette\Repository\Members;
 
 //Constants and classes from plugin
 require_once $module['root'] . '/_config.inc.php';
@@ -141,7 +145,7 @@ $this->get(
         } elseif ($action === __('add', 'routes') && $id !== null) {
              return $response
                 ->withStatus(301)
-                ->withHeader('Location', $this->router->pathFor('event', ['action' => __('add', 'routes')]));
+                ->withHeader('Location', $this->router->pathFor('events_event', ['action' => __('add', 'routes')]));
         }
         $route_params = ['action' => $args['action']];
 
@@ -378,14 +382,317 @@ $this->post(
 )->setName('events_do_remove_event')->add($authenticate);
 
 $this->get(
-    __('/bookings', 'events_routes'),
-    function ($request, $response) use ($module, $module_id) {
+    __('/bookings', 'events_routes') . '/{event:'. __('all', 'events_routes') . '|\d+}' .
+    '[/{option:' . __('page', 'routes') . '|' . __('order', 'routes') . '}/{value:\d+}]',
+    function ($request, $response, $args) use ($module, $module_id) {
+        $option = null;
+        if (isset($args['option'])) {
+            $option = $args['option'];
+        }
+        $value = null;
+        if (isset($args['value'])) {
+            $value = $args['value'];
+        }
+
+        if (isset($this->session->filter_bookings)) {
+            $filters = $this->session->filter_bookings;
+        } else {
+            $filters = new BookingsList();
+        }
+
+        if ($option !== null) {
+            switch ($option) {
+                case __('page', 'routes'):
+                    $filters->current_page = (int)$value;
+                    break;
+                case __('order', 'routes'):
+                    $filters->orderby = $value;
+                    break;
+            }
+        }
+
+        $event = null;
+        if ($args['event'] !== __('all', 'events_routes')) {
+            $filters->filter_event = (int)$args['event'];
+            $event = new Event($this->zdb, $this->login, (int)$args['event']);
+        }
+
+        $bookings = new Bookings($this->zdb, $this->login, $filters);
+
+        //assign pagination variables to the template and add pagination links
+        $filters->setSmartyPagination($this->router, $this->view->getSmarty(), false);
+
+        $this->session->filter_bookings = $filters;
+
         // display page
         $this->view->render(
             $response,
             'file:[' . $module['route'] . ']bookings.tpl',
-            []
+            [
+                'page_title'        => _T("Bookings management", "events"),
+                'bookings'          => $bookings->getList(),
+                'nb_bookings'       => $bookings->getCount(),
+                'event'             => $event,
+                'eventid'           => $args['event'],
+                'require_dialog'    => true,
+                'filters'           => $filters
+            ]
         );
         return $response;
     }
 )->setName('events_bookings');
+
+$this->get(
+    __('/booking', 'events_routes') . '/{action:' . __('edit', 'routes') . '|' . __('add', 'routes') .
+    '}[/{id:\d+}]',
+    function ($request, $response, $args) use ($module, $module_id) {
+        $action = $args['action'];
+        $get = $request->getQueryParams();
+
+        $id = null;
+        if (isset($args['id'])) {
+            $id = $args['id'];
+        }
+
+        if ($action === __('edit', 'routes') && $id === null) {
+            throw new \RuntimeException(
+                _T("Booking ID cannot ben null calling edit route!", "events")
+            );
+        } elseif ($action === __('add', 'routes') && $id !== null) {
+             return $response
+                ->withStatus(301)
+                ->withHeader('Location', $this->router->pathFor('events_bookings', ['action' => __('add', 'routes')]));
+        }
+        $route_params = ['action' => $args['action']];
+
+        if ($this->session->booking !== null) {
+            $booking = $this->session->booking;
+            $this->session->booking = null;
+        } else {
+            $booking = new Booking($this->zdb, $this->login);
+        }
+
+        if ($id !== null && $booking->getId() != $id) {
+            $booking->load($id);
+        }
+
+        // template variable declaration
+        $title = _T("Booking");
+        if ($booking->getId() != '') {
+            $title .= ' (' . _T("modification") . ')';
+        } else {
+            $title .= ' (' . _T("creation") . ')';
+        }
+
+        //Events
+        $events = new Events($this->zdb, $this->login);
+        if ($action === __('add', 'routes')) {
+            if (isset($get['event'])) {
+                $booking->setEvent((int)$get['event']);
+            }
+            if (!$this->login->isSuperAdmin()) {
+                $booking->setMember($this->login->id);
+            }
+        }
+
+        // display page
+        $this->view->render(
+            $response,
+            'file:[' . $module['route'] . ']booking.tpl',
+            array_merge(
+                $route_params,
+                array(
+                    'autocomplete'      => true,
+                    'page_title'        => $title,
+                    'booking'           => $booking,
+                    'events'            => $events->getList(),
+                    'require_dialog'    => true,
+                    'require_calendar'  => true,
+                    // pseudo random int
+                    'time'              => time()
+                )
+            )
+        );
+        return $response;
+    }
+)->setName('events_booking')->add($authenticate);
+
+$this->post(
+    __('/booking', 'events_routes') . __('/store', 'routes'),
+    function ($request, $response, $args) {
+        $post = $request->getParsedBody();
+        $booking = new Booking($this->zdb, $this->login);
+        if (isset($post['id']) && !empty($post['id'])) {
+            $booking->load((int)$post['id']);
+        }
+
+        $success_detected = [];
+        $warning_detected = [];
+        $error_detected = [];
+
+        // Validation
+        $valid = $booking->check($post);
+        if ($valid !== true) {
+            $error_detected = array_merge($error_detected, $valid);
+        }
+
+        if (count($error_detected) == 0) {
+            //all goes well, we can proceed
+
+            $new = false;
+            if ($booking->getId() == '') {
+                $new = true;
+            }
+            $store = $booking->store();
+            if ($store === true) {
+                //member has been stored :)
+                if ($new) {
+                    $success_detected[] = _T("New booking has been successfully added.", "events");
+                } else {
+                    $success_detected[] = _T("Booking has been modified.", "events");
+                }
+            } elseif ($store === false) {
+                //something went wrong :'(
+                $error_detected[] = _T("An error occured while storing the booking.", "events");
+            } else {
+                $error_detected[] = $store;
+            }
+        }
+
+        if (count($error_detected) > 0) {
+            foreach ($error_detected as $error) {
+                $this->flash->addMessage(
+                    'error_detected',
+                    $error
+                );
+            }
+        }
+
+        if (count($warning_detected) > 0) {
+            foreach ($warning_detected as $warning) {
+                $this->flash->addMessage(
+                    'warning_detected',
+                    $warning
+                );
+            }
+        }
+        if (count($success_detected) > 0) {
+            foreach ($success_detected as $success) {
+                $this->flash->addMessage(
+                    'success_detected',
+                    $success
+                );
+            }
+        }
+
+        if (count($error_detected) == 0) {
+            $redirect_url = $this->router->pathFor(
+                'events_bookings',
+                ['event' => $booking->getEventId()]
+            );
+        } else {
+            //store entity in session
+            $this->session->booking = $booking;
+
+            if ($booking->getId()) {
+                $rparams = [
+                    'id'        => $booking->getId(),
+                    'action'    => __('edit', 'routes')
+                ];
+            } else {
+                $rparams = ['action' => __('add', 'routes')];
+            }
+            $redirect_url = $this->router->pathFor(
+                'events_booking',
+                $rparams
+            );
+        }
+
+        return $response
+            ->withStatus(301)
+            ->withHeader('Location', $redirect_url);
+    }
+)->setName('events_storebooking')->add($authenticate);
+
+$this->get(
+    __('/booking', 'events_routes') . __('/remove', 'routes') . '/{id:\d+}',
+    function ($request, $response, $args) {
+        $booking = new Booking($this->zdb, $this->login, (int)$args['id']);
+
+        $data = [
+            'id'            => $args['id'],
+            'redirect_uri'  => $this->router->pathFor('events_bookings', ['event' => $booking->getEventId()])
+        ];
+
+        // display page
+        $this->view->render(
+            $response,
+            'confirm_removal.tpl',
+            array(
+                'type'          => _T("Booking", "events"),
+                'mode'          => $request->isXhr() ? 'ajax' : '',
+                'page_title'    => _T('Remove booking'),
+                'form_url'      => $this->router->pathFor(
+                    'events_do_remove_booking',
+                    ['id' => $booking->getId()]
+                ),
+                'cancel_uri'    => $this->router->pathFor('events_bookings', ['event' => $booking->getEventId()]),
+                'data'          => $data
+            )
+        );
+        return $response;
+    }
+)->setName('events_remove_booking')->add($authenticate);
+
+$this->post(
+    __('/booking', 'events_routes') . __('/remove', 'routes') . '[/{id:\d+}]',
+    function ($request, $response) {
+        $post = $request->getParsedBody();
+        $ajax = isset($post['ajax']) && $post['ajax'] === 'true';
+        $success = false;
+
+        $uri = isset($post['redirect_uri']) ?
+            $post['redirect_uri'] :
+            $this->router->pathFor('slash');
+
+        if (!isset($post['confirm'])) {
+            $this->flash->addMessage(
+                'error_detected',
+                _T("Removal has not been confirmed!")
+            );
+        } else {
+            $booking = new Booking($this->zdb, $this->login, (int)$post['id']);
+            $del = $booking->remove();
+
+            if ($del !== true) {
+                $error_detected = _T("An error occured trying to remove booking :/", "events");
+
+                $this->flash->addMessage(
+                    'error_detected',
+                    $error_detected
+                );
+            } else {
+                $success_detected = _T("Booking has been successfully deleted.", "events");
+
+                $this->flash->addMessage(
+                    'success_detected',
+                    $success_detected
+                );
+
+                $success = true;
+            }
+        }
+
+        if (!$ajax) {
+            return $response
+                ->withStatus(301)
+                ->withHeader('Location', $uri);
+        } else {
+            return $response->withJson(
+                [
+                    'success'   => $success
+                ]
+            );
+        }
+    }
+)->setName('events_do_remove_booking')->add($authenticate);

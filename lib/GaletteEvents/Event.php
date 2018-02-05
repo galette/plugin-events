@@ -28,11 +28,9 @@
  * @package   GaletteEvents
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2012-2014 The Galette Team
+ * @copyright 2018 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @version   SVN: $Id$
  * @link      http://galette.tuxfamily.org
- * @since     Available since 0.7dev - 2012-01-17
  */
 
 namespace GaletteEvents;
@@ -407,7 +405,7 @@ class Event
                 if ($add->count() > 0) {
                     if ($this->zdb->isPostgres()) {
                         $this->id = $this->zdb->driver->getLastGeneratedValue(
-                            PREFIX_DB . 'groups_id_seq'
+                            PREFIX_DB . EVENTS_PREFIX . Event::TABLE . '_id_seq'
                         );
                     } else {
                         $this->id = $this->zdb->driver->getLastGeneratedValue();

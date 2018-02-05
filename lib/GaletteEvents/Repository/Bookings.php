@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * Events
+ * Bookings
  *
  * PHP version 5
  *
@@ -44,37 +44,38 @@ use Galette\Core\Login;
 use Galette\Core\Db;
 use Galette\Entity\Group;
 use Galette\Repository\Groups;
-use GaletteEvents\Event;
-use GaletteEvents\Filters\EventsList;
+use GaletteEvents\Booking;
+use GaletteEvents\Filters\BookingsList;
 
 /**
- * Events
+ * Bookings
  *
  * @category  Repository
- * @name      Events
+ * @name      Bookings
  * @package   GaletteEvents
  * @author    Johan Cwiklinski <johan@x-tnd.be>
  * @copyright 2018 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  */
-class Events
+class Bookings
 {
     private $zdb;
     private $login;
     private $filters = false;
     private $count;
 
-    const ORDERBY_DATE = 0;
-    const ORDERBY_NAME = 1;
-    const ORDERBY_TOWN = 2;
+    const ORDERBY_EVENT = 0;
+    const ORDERBY_MEMBER = 1;
+    const ORDERBY_BOOKDATE = 2;
+    const ORDERBY_PAID = 3;
 
     /**
      * Constructor
      *
-     * @param Db         $zdb     Database instance
-     * @param Login      $login   Login instance
-     * @param EventsList $filters Filtering
+     * @param Db           $zdb     Database instance
+     * @param Login        $login   Login instance
+     * @param BookingsList $filters Filtering
      */
     public function __construct(Db $zdb, Login $login, $filters = null)
     {
@@ -82,26 +83,25 @@ class Events
         $this->login = $login;
 
         if ($filters === null) {
-            $this->filters = new EventsList();
+            $this->filters = new BookingsList();
         } else {
             $this->filters = $filters;
         }
     }
 
     /**
-     * Get events list
+     * Get booking list
      *
-     * @return GaletteEvents\Event[]
+     * @return GaletteEvents\Booking[]
      */
     public function getList()
     {
         try {
-            $select = $this->zdb->select(EVENTS_PREFIX . Event::TABLE, 'e');
+            $select = $this->zdb->select(EVENTS_PREFIX . Booking::TABLE, 'b');
 
-            $groups = null;
             if (!$this->login->isAdmin() && !$this->login->isStaff()) {
                 if ($this->login->isGroupManager()) {
-                    $groups = $this->login->managed_groups;
+                    /*$groups = $this->login->managed_groups;
                     $select->where(
                         new PredicateSet(
                             array(
@@ -127,9 +127,10 @@ class Events
                             ),
                             PredicateSet::OP_OR
                         )
-                    );
+                    );*/
                 } else {
-                    $select->where('is_open', true);
+                    $select->where(Adherent::PK, $this->login->id);
+                    /*$select->where('is_open', true);
                     $select->where->greaterThanOrEqualTo('begin_date', date('Y-m-d'));
                     $select->where(
                         new PredicateSet(
@@ -142,7 +143,7 @@ class Events
                             ),
                             PredicateSet::OP_OR
                         )
-                    );
+                    );*/
                 }
             }
 
@@ -154,16 +155,16 @@ class Events
             $results = $this->zdb->execute($select);
             $this->filters->query = $this->zdb->query_string;
 
-            $events = [];
+            $bookings = [];
             foreach ($results as $row) {
-                $event = new Event($this->zdb, $this->login, $row);
-                $events[] = $event;
+                $booking = new Booking($this->zdb, $this->login, $row);
+                $bookings[] = $booking;
             }
 
-            return $events;
+            return $bookings;
         } catch (\Exception $e) {
             Analog::log(
-                'Cannot list events | ' . $e->getMessage(),
+                'Cannot list bookings | ' . $e->getMessage(),
                 Analog::WARNING
             );
             throw $e;
@@ -208,12 +209,18 @@ class Events
         $order = array();
 
         switch ($this->filters->orderby) {
-            case self::ORDERBY_DATE:
-                if ($this->canOrderBy('begin_date', $fields)) {
-                    $order[] = 'begin_date ' . $this->filters->getDirection();
+            case self::ORDERBY_BOOKDATE:
+                if ($this->canOrderBy('booking_date', $fields)) {
+                    $order[] = 'booking_date ' . $this->filters->getDirection();
                 }
                 break;
-            case self::ORDERBY_NAME:
+            case self::ORDERBY_PAID:
+                if ($this->canOrderBy('id_paid', $fields)) {
+                    $order[] = 'is_paid ' . $this->filters->getDirection();
+                }
+                break;
+
+            /*case self::ORDERBY_NAME:
                 if ($this->canOrderBy('name', $fields)) {
                     $order[] = 'name ' . $this->filters->getDirection();
                 }
@@ -222,7 +229,7 @@ class Events
                 if ($this->canOrderBy('town', $fields)) {
                     $order[] = 'town ' . $this->filters->getDirection();
                 }
-                break;
+                break;*/
         }
 
         return $order;
@@ -244,7 +251,7 @@ class Events
             $countSelect->reset($countSelect::HAVING);
             $countSelect->columns(
                 array(
-                    'count' => new Expression('count(DISTINCT e.' . Event::PK . ')')
+                    'count' => new Expression('count(DISTINCT b.' . Booking::PK . ')')
                 )
             );
 
@@ -263,7 +270,7 @@ class Events
             }
         } catch (\Exception $e) {
             Analog::log(
-                'Cannot count events | ' . $e->getMessage(),
+                'Cannot count bookings | ' . $e->getMessage(),
                 Analog::WARNING
             );
             return false;

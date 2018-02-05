@@ -40,7 +40,7 @@ $this->register(
     'Events management',   //Short description
     'Johan Cwiklinski',     //Author
     '1.0-dev',              //Version
-    '0.9',                  //Galette compatible version
+    '0.9.1',                //Galette compatible version
     'events',               //routing name and translation domain
     '2018-01-15',           //Release date
     [   //Permissions needed
@@ -50,6 +50,10 @@ $this->register(
         'events_event'              => 'groupmanager',
         'events_storeevent'         => 'groupmanager',
         'events_remove_event'       => 'staff',
-        'events_do_remove_event'    => 'staff'
+        'events_do_remove_event'    => 'staff',
+        'events_booking'            => 'member',
+        'events_storebooking'       => 'member',
+        'events_remove_booking'     => 'staff',
+        'events_do_remove_booking'  => 'staff'
     ]
 );

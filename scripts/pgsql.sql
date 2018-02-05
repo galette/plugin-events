@@ -54,7 +54,9 @@ CREATE TABLE galette_events_bookings (
   bank_name character varying(100) default NULL,
   check_number character varying(50) default NULL,
   has_meal boolean default FALSE,
+  has_lodging boolean default FALSE,
   number_people smallint default NULL,
   creation_date date default '19010101' NOT NULL,
-  PRIMARY KEY (id_event,id_adh)
+  PRIMARY KEY (id_booking),
+  UNIQUE (id_event, id_adh)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
