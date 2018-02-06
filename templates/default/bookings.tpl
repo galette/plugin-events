@@ -155,7 +155,7 @@
     {/if}
                 </tr>
 {foreachelse}
-                <tr><td colspan="7" class="emptylist">{_T string="No booking has been found" domain="events"}</td></tr>
+                <tr><td colspan="9" class="emptylist">{_T string="No booking has been found" domain="events"}</td></tr>
 {/foreach}
             </tbody>
         </table>
