@@ -174,7 +174,7 @@ msgstr "La réservation n'a pas été payée"
 
 #: ../templates/default/booking.tpl:69
 msgid "Check number"
-msgstr "Numéro de chèqu"
+msgstr "Numéro de chèque"
 
 #: ../lib/GaletteEvents/Booking.php:383
 msgid "Booking updated"
@@ -243,6 +243,10 @@ msgstr "Évènement"
 #: ../_routes.php:234
 msgid "An error occured while storing the event."
 msgstr "Une erreur est survenue à l'enregistrement de l'évènement."
+
+#: ../templates/default/booking.tpl:65
+msgid "Bank name"
+msgstr "Nom de la banque"
 
 #: ../templates/default/bookings.tpl:15
 msgid "Paid bookings:"

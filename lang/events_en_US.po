@@ -240,6 +240,10 @@ msgstr "Event"
 msgid "An error occured while storing the event."
 msgstr "An error occured while storing the event."
 
+#: ../templates/default/booking.tpl:65
+msgid "Bank name"
+msgstr "Bank name"
+
 #: ../templates/default/bookings.tpl:15
 msgid "Paid bookings:"
 msgstr "Paid bookings:"

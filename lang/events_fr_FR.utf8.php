@@ -1,5 +1,5 @@
 <?php
-// This file was automatically generated on Tue Feb  6 14:32:10 2018 (GMT)
+// This file was automatically generated on Tue Feb  6 14:36:21 2018 (GMT)
 // Don't modify it by hand, rather use the target lang from the Makefile.
 
 
@@ -63,6 +63,9 @@ $lang['events']['Begin date'] = 'Date de début';
 // ../templates/default/bookings.tpl:95 ../templates/default/bookings.tpl:138 
 $lang['events']['Attendees'] = 'Participants';
 
+// ../templates/default/booking.tpl:65 
+$lang['events']['Bank name'] = 'Nom de la banque';
+
 // ../templates/default/event.tpl:60 
 $lang['events']['Location'] = 'Localisation';
 
@@ -88,7 +91,7 @@ $lang['events']['Booking has been successfully deleted.'] = 'La réservation a �
 $lang['events']['booking'] = 'réservation';
 
 // ../templates/default/booking.tpl:69 
-$lang['events']['Check number'] = 'Numéro de chèqu';
+$lang['events']['Check number'] = 'Numéro de chèque';
 
 // ../templates/default/events.tpl:45 ../templates/default/events.tpl:77 ../templates/default/event.tpl:71 
 $lang['events']['Town'] = 'Ville';

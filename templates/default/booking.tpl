@@ -62,7 +62,7 @@
                 {* payment type *}
                 {include file="forms_types/payment_types.tpl" current=$booking->getPaymentMethod() varname="payment_method"}
                 <p>
-                    <label for="bank_name">{_T string="Bank name"}</label>
+                    <label for="bank_name">{_T string="Bank name" domain="events"}</label>
                     <input type="text" name="bank_name" id="bank_name" value="{$booking->getBankName()}" />
                 </p>
                 <p>

@@ -1,5 +1,5 @@
 <?php
-// This file was automatically generated on Tue Feb  6 14:32:10 2018 (GMT)
+// This file was automatically generated on Tue Feb  6 14:36:21 2018 (GMT)
 // Don't modify it by hand, rather use the target lang from the Makefile.
 
 
@@ -62,6 +62,9 @@ $lang['events']['Begin date'] = 'Begin date';
 
 // ../templates/default/bookings.tpl:95 ../templates/default/bookings.tpl:138 
 $lang['events']['Attendees'] = 'Attendees';
+
+// ../templates/default/booking.tpl:65 
+$lang['events']['Bank name'] = 'Bank name';
 
 // ../templates/default/event.tpl:60 
 $lang['events']['Location'] = 'Location';
