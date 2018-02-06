@@ -384,7 +384,7 @@ class Booking
                 $e->getTraceAsString(),
                 Analog::ERROR
             );
-            if ($e->getCode() == 23000) {
+            if ($e->getCode() == 23000 || $this->zdb->isPostgres() && $e->getCode() == 23505) {
                 return str_replace(
                     [
                         '%member',
