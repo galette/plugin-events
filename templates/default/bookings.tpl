@@ -21,8 +21,8 @@
     {if $login->isAdmin() or $login->isStaff() or $login->isGroupManager()}
             <a id="clearfilter" href="{path_for name="events_bookings" data=["event" => {_T string="all" domain="events_routes" notrans="true"}]}" title="{_T string="Show all bookings" domain="events"}">{_T string="Show all bookings" domain="events"}</a>
     {/if}
-            <strong>{_T string="%event's bookings" pattern="/%event/" replace=$event->getName()}</strong>
-            (<a href="{path_for name="events_booking" data=["action" => {_T string="add" domain="routes"}]}?event={$event->getId()}">{_T string="Add a new booking"}</a>)
+            <strong>{_T string="%event's bookings" pattern="/%event/" replace=$event->getName() domain="events"}</strong>
+            (<a href="{path_for name="events_booking" data=["action" => {_T string="add" domain="routes"}]}?event={$event->getId()}">{_T string="Add a new booking" domain="events"}</a>)
 {/if}
 {if $nb_bookings gt 0}
             {$nb_bookings} {if $nb_bookings != 1}{_T string="bookings" domain="events"}{else}{_T string="booking" domain="events"}{/if}

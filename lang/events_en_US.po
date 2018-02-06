@@ -15,6 +15,10 @@ msgstr ""
 msgid "Booking has been paid"
 msgstr "Booking has been paid"
 
+#: ../templates/default/bookings.tpl:25
+msgid "Add a new booking"
+msgstr "Add a new booking"
+
 #: ../templates/default/event.tpl:27 ../templates/default/event.tpl:28
 msgid "Restrict event to selected group (and its subgroups)."
 msgstr "Restrict event to selected group (and its subgroups)."
