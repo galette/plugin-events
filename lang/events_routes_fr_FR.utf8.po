@@ -12,11 +12,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 2.0.3\n"
 
-#: ../_routes.php:446 ../_routes.php:521 ../_routes.php:618 ../_routes.php:648
+#: ../_routes.php:496 ../_routes.php:571 ../_routes.php:668 ../_routes.php:698
 msgid "/booking"
 msgstr "/reservation"
 
-#: ../_routes.php:385
+#: ../_routes.php:385 ../_routes.php:453
 msgid "/bookings"
 msgstr "/reservations"
 
@@ -28,6 +28,7 @@ msgstr "/evenement"
 msgid "/events"
 msgstr "/evenements"
 
-#: ../_routes.php:385 ../_routes.php:415 ../templates/default/bookings.tpl:6
+#: ../_routes.php:385 ../_routes.php:421 ../templates/default/menu.tpl:7
+#: ../templates/default/bookings.tpl:22
 msgid "all"
 msgstr "tous"
