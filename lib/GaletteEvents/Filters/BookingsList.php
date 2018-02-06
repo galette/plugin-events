@@ -109,8 +109,8 @@ class BookingsList extends Pagination
     {
         parent::reinit();
         $this->event_filter = __('all', 'events_routes');
-        $this->paid_filter = null;
-        $this->payment_type_filter = null;
+        $this->paid_filter = Bookings::FILTER_DC_PAID;
+        $this->payment_type_filter = -1;
     }
 
     /**

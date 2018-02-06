@@ -468,17 +468,17 @@ $this->post(
             if (isset($post['nbshow'])) {
                 $filters->show = $post['nbshow'];
             }
-        }
 
-        if (isset($post['paid_filter'])) {
-            if (is_numeric($post['paid_filter'])) {
-                $filters->paid_filter = $post['paid_filter'];
+            if (isset($post['paid_filter'])) {
+                if (is_numeric($post['paid_filter'])) {
+                    $filters->paid_filter = $post['paid_filter'];
+                }
             }
-        }
 
-        if (isset($post['payment_type_filter'])) {
-            if (is_numeric($post['payment_type_filter'])) {
-                $filters->payment_type_filter = $post['payment_type_filter'];
+            if (isset($post['payment_type_filter'])) {
+                if (is_numeric($post['payment_type_filter'])) {
+                    $filters->payment_type_filter = $post['payment_type_filter'];
+                }
             }
         }
 
