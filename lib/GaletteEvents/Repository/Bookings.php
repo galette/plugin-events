@@ -135,7 +135,7 @@ class Bookings
                         )
                     );*/
                 } else {
-                    $select->where(Adherent::PK, $this->login->id);
+                    $select->where('a.' . Adherent::PK . '=' . $this->login->id);
                     /*$select->where('is_open', true);
                     $select->where->greaterThanOrEqualTo('begin_date', date('Y-m-d'));
                     $select->where(
