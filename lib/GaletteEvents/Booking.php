@@ -227,7 +227,7 @@ class Booking
         if (isset($values['paid'])) {
             $this->paid = true;
         }
-        if (isset($values['amount'])) {
+        if (isset($values['amount']) && !empty($values['amount'])) {
             $this->amount = $values['amount'];
         }
 
