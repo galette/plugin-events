@@ -3,7 +3,12 @@
         <form action="{path_for name="filter-bookingslist"}" method="post" id="filtre">
         <div id="listfilter">
             {* payment type *}
-            {include file="forms_types/payment_types.tpl" current=$filters->payment_type_filter varname="payment_type_filter" classname=""}
+            {include file="forms_types/payment_types.tpl"
+                current=$filters->payment_type_filter
+                varname="payment_type_filter"
+                classname=""
+                empty=["value" => -1, "label" => {_T string="All" domain="events"}]
+            }
             <input type="submit" class="inline" value="{_T string="Filter"}"/>
             <input type="submit" name="clear_filter" class="inline" value="{_T string="Clear filter"}"/>
             <div/>

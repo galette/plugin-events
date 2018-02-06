@@ -270,7 +270,9 @@ class Bookings
                 );
             }
 
-            if ($this->filters->payment_type_filter != null) {
+            if ($this->filters->payment_type_filter !== null &&
+                (int)$this->filters->payment_type_filter >= 0
+            ) {
                 $select->where->equalTo(
                     'payment_method',
                     $this->filters->payment_type_filter

@@ -108,7 +108,7 @@ class BookingsList extends Pagination
     public function reinit()
     {
         parent::reinit();
-        $this->event_filter = null;
+        $this->event_filter = __('all', 'events_routes');
         $this->paid_filter = null;
         $this->payment_type_filter = null;
     }
