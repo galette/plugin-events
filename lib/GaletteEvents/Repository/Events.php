@@ -131,15 +131,19 @@ class Events
                 } else {
                     $select->where('is_open', true);
                     $select->where->greaterThanOrEqualTo('begin_date', date('Y-m-d'));
+
+                    $set = [new Predicate\IsNull(Group::PK)];
+                    $groups = Groups::loadGroups($this->login->id, false, false);
+                    if (count($groups)) {
+                        $set[] = new Predicate\In(
+                            Group::PK,
+                            $groups
+                        );
+                    }
+
                     $select->where(
                         new PredicateSet(
-                            array(
-                                new Predicate\In(
-                                    Group::PK,
-                                    Groups::loadGroups($this->login->id, false, false)
-                                ),
-                                new Predicate\IsNull(Group::PK)
-                            ),
+                            $set,
                             PredicateSet::OP_OR
                         )
                     );
