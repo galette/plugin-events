@@ -42,6 +42,7 @@ use Zend\Db\Sql\Predicate\PredicateSet;
 use Zend\Db\Sql\Predicate\Operator;
 use Galette\Core\Login;
 use Galette\Core\Db;
+use Galette\Entity\Adherent;
 use Galette\Entity\Group;
 use Galette\Repository\Groups;
 use GaletteEvents\Booking;
@@ -64,11 +65,16 @@ class Bookings
     private $login;
     private $filters = false;
     private $count;
+    private $sum;
 
     const ORDERBY_EVENT = 0;
     const ORDERBY_MEMBER = 1;
     const ORDERBY_BOOKDATE = 2;
     const ORDERBY_PAID = 3;
+
+    const FILTER_DC_PAID = 0;
+    const FILTER_PAID = 1;
+    const FILTER_NOT_PAID = 2;
 
     /**
      * Constructor
@@ -97,7 +103,7 @@ class Bookings
     public function getList()
     {
         try {
-            $select = $this->zdb->select(EVENTS_PREFIX . Booking::TABLE, 'b');
+            $select = $this->buildSelect(null, true);
 
             if (!$this->login->isAdmin() && !$this->login->isStaff()) {
                 if ($this->login->isGroupManager()) {
@@ -168,6 +174,129 @@ class Bookings
                 Analog::WARNING
             );
             throw $e;
+        }
+    }
+
+    /**
+     * Builds the SELECT statement
+     *
+     * @param array $fields fields list to retrieve
+     * @param bool  $count  true if we want to count members
+     *                      (not applicable from static calls), defaults to false
+     *
+     * @return string SELECT statement
+     */
+    private function buildSelect($fields, $count = false)
+    {
+        try {
+            $fieldsList = ( $fields != null )
+                            ? (( !is_array($fields) || count($fields) < 1 ) ? (array)'*'
+                            : implode(', ', $fields)) : (array)'*';
+
+            $select = $this->zdb->select(EVENTS_PREFIX . Booking::TABLE, 'b');
+            $select->columns($fieldsList);
+
+            $select->join(
+                array('a' => PREFIX_DB . Adherent::TABLE),
+                'b.' . Adherent::PK . '= a.' . Adherent::PK
+            );
+
+            $this->buildWhereClause($select);
+            $select->order(self::buildOrderClause());
+
+            $this->calculateSum($select);
+
+            if ($count) {
+                $this->proceedCount($select);
+            }
+
+            return $select;
+        } catch (\Exception $e) {
+            Analog::log(
+                'Cannot build SELECT clause for contributions | ' . $e->getMessage(),
+                Analog::WARNING
+            );
+            return false;
+        }
+    }
+
+    /**
+     * Calculate sum of all selected contributions
+     *
+     * @param Select $select Original select
+     *
+     * @return void
+     */
+    private function calculateSum($select)
+    {
+        try {
+            $sumSelect = clone $select;
+            $sumSelect->reset($sumSelect::COLUMNS);
+            $sumSelect->reset($sumSelect::JOINS);
+            $sumSelect->reset($sumSelect::ORDER);
+            $sumSelect->columns(
+                array(
+                    'sum' => new Expression('SUM(payment_amount)')
+                )
+            );
+
+            $results = $this->zdb->execute($sumSelect);
+            $result = $results->current();
+
+            $this->sum = round($result->sum, 2);
+        } catch (\Exception $e) {
+            Analog::log(
+                'Cannot calculate bookings sum | ' . $e->getMessage(),
+                Analog::WARNING
+            );
+            return false;
+        }
+    }
+
+    /**
+     * Builds where clause, for filtering on simple list mode
+     *
+     * @param Select $select Original select
+     *
+     * @return string SQL WHERE clause
+     */
+    private function buildWhereClause($select)
+    {
+        try {
+            if ($this->filters->paid_filter != null) {
+                $select->where->equalTo(
+                    'is_paid',
+                    $this->filters->paid_filter
+                );
+            }
+
+            if ($this->filters->payment_type_filter != null) {
+                $select->where->equalTo(
+                    'payment_method',
+                    $this->filters->payment_type_filter
+                );
+            }
+
+            /*if (!$this->login->isAdmin() && !$this->login->isStaff()) {
+                //non staff members can only view their own contributions
+                $select->where(
+                    array(
+                        'a.' . Adherent::PK => $this->login->id
+                    )
+                );
+            } elseif ($this->filters->filtre_cotis_adh != null) {
+                $select->where(
+                    'a.' . Adherent::PK . ' = ' . $this->filters->filtre_cotis_adh
+                );
+            }*/
+            /*if ($this->filters->filtre_transactions === true) {
+                $select->where('a.trans_id IS NULL');
+            }*/
+        } catch (\Exception $e) {
+            Analog::log(
+                __METHOD__ . ' | ' . $e->getMessage(),
+                Analog::WARNING
+            );
         }
     }
 
@@ -285,5 +414,15 @@ class Bookings
     public function getCount()
     {
         return $this->count;
+    }
+
+    /**
+     * Get sum
+     *
+     * @return double
+     */
+    public function getSum()
+    {
+        return $this->sum;
     }
 }

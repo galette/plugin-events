@@ -1,5 +1,21 @@
 {extends file="page.tpl"}
 {block name="content"}
+        <form action="{path_for name="filter-bookingslist"}" method="post" id="filtre">
+        <div id="listfilter">
+            {* payment type *}
+            {include file="forms_types/payment_types.tpl" current=$filters->payment_type_filter varname="payment_type_filter" classname=""}
+            <input type="submit" class="inline" value="{_T string="Filter"}"/>
+            <input type="submit" name="clear_filter" class="inline" value="{_T string="Clear filter"}"/>
+            <div/>
+                {_T string="Paid bookings:" domain="events"}
+                <input type="radio" name="paid_filter" id="filter_dc_paid" value="{GaletteEvents\Repository\Bookings::FILTER_DC_PAID}"{if $filters->paid_filter eq constant('GaletteEvents\Repository\Bookings::FILTER_DC_PAID')} checked="checked"{/if}>
+                <label for="filter_dc_paid" >{_T string="Don't care"}</label>
+                <input type="radio" name="paid_filter" id="filter_paid" value="{GaletteEvents\Repository\Bookings::FILTER_PAID}"{if $filters->paid_filter eq constant('GaletteEvents\Repository\Bookings::FILTER_PAID')} checked="checked"{/if}>
+                <label for="filter_paid" >{_T string="Paid" domain="events"}</label>
+                <input type="radio" name="paid_filter" id="filter_not_paid" value="{GaletteEvents\Repository\Bookings::FILTER_NOT_PAID}"{if $filters->paid_filter eq constant('GaletteEvents\Repository\Bookings::FILTER_NOT_PAID')} checked="checked"{/if}>
+                <label for="filter_not_paid" >{_T string="Not paid" domain="events"}</label>
+            </div>
+        </div>
         <div class="infoline">
 {if $event}
     {if $login->isAdmin() or $login->isStaff() or $login->isGroupManager()}
@@ -79,8 +95,17 @@
 {/if}
                 </tr>
             </thead>
+{if $nb_bookings != 0}
+            <tfoot>
+                <tr>
+                    <td class="right" colspan="8">
+                        {_T string="Found bookings total %f" pattern="/%f/" replace=$bookings->getSum()}
+                    </td>
+                </tr>
+            </tfoot>
+{/if}
             <tbody>
-{foreach from=$bookings item=booking key=ordre}
+{foreach from=$bookings->getList() item=booking key=ordre}
                 <tr>
                     <td class="{$rclass} right" data-scope="id">{$ordre+1+($filters->current_page - 1)*$numrows}</td>
                     <td class="{$rclass} nowrap username_row" data-scope="row">

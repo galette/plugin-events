@@ -382,7 +382,7 @@ $this->post(
 )->setName('events_do_remove_event')->add($authenticate);
 
 $this->get(
-    __('/bookings', 'events_routes') . '/{event:'. __('all', 'events_routes') . '|\d+}' .
+    __('/bookings', 'events_routes') . '/{event:guess|'. __('all', 'events_routes') . '|\d+}' .
     '[/{option:' . __('page', 'routes') . '|' . __('order', 'routes') . '}/{value:\d+}]',
     function ($request, $response, $args) use ($module, $module_id) {
         $option = null;
@@ -400,6 +400,12 @@ $this->get(
             $filters = new BookingsList();
         }
 
+        if ($args['event'] == 'guess') {
+            $args['event'] = $filters->event_filter;
+        } else {
+            $filters->event_filter = $args['event'];
+        }
+
         if ($option !== null) {
             switch ($option) {
                 case __('page', 'routes'):
@@ -413,7 +419,7 @@ $this->get(
 
         $event = null;
         if ($args['event'] !== __('all', 'events_routes')) {
-            $filters->filter_event = (int)$args['event'];
+            $filters->event_filter = (int)$args['event'];
             $event = new Event($this->zdb, $this->login, (int)$args['event']);
         }
 
@@ -430,10 +436,10 @@ $this->get(
             'file:[' . $module['route'] . ']bookings.tpl',
             [
                 'page_title'        => _T("Bookings management", "events"),
-                'bookings'          => $bookings->getList(),
+                'bookings'          => $bookings,
                 'nb_bookings'       => $bookings->getCount(),
                 'event'             => $event,
-                'eventid'           => $args['event'],
+                'eventid'           => $filters->event_filter,
                 'require_dialog'    => true,
                 'filters'           => $filters
             ]
@@ -441,6 +447,45 @@ $this->get(
         return $response;
     }
 )->setName('events_bookings');
+
+//bookings list filtering
+$this->post(
+    __('/bookings', 'events_routes') . __('/filter', 'routes'),
+    function ($request, $response) {
+        $post = $request->getParsedBody();
+        if (isset($this->session->filter_bookings)) {
+            $filters = $this->session->filter_bookings;
+        } else {
+            $filters = new BookingsList();
+        }
+
+        //reintialize filters
+        if (isset($post['clear_filter'])) {
+            $filters->reinit();
+        } else {
+            //number of rows to show
+            if (isset($post['nbshow'])) {
+                $filters->show = $post['nbshow'];
+            }
+        }
+
+        //account status to filter
+        if (isset($post['paid_filter'])) {
+            if (is_numeric($post['paid_filter'])) {
+                $filters->paid_filter = $post['paid_filter'];
+            }
+        }
+
+        $this->session->filter_bookings = $filters;
+
+        return $response
+            ->withStatus(301)
+            ->withHeader(
+                'Location',
+                $this->router->pathFor('events_bookings', ['event' => $filters->event_filter])
+            );
+    }
+)->setName('filter-bookingslist')->add($authenticate);
 
 $this->get(
     __('/booking', 'events_routes') . '/{action:' . __('edit', 'routes') . '|' . __('add', 'routes') .

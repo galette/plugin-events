@@ -56,6 +56,8 @@ class BookingsList extends Pagination
 {
     //filters
     private $event_filter;
+    private $paid_filter;
+    private $payment_type_filter;
     /*private $name_filter = null;
     private $start_date_filter = null;
     private $end_date_filter = null;
@@ -65,7 +67,9 @@ class BookingsList extends Pagination
     private $open_filter = null;*/
 
     protected $list_fields = array(
-        'event_filter'
+        'event_filter',
+        'paid_filter',
+        'payment_type_filter'
     );
 
     /**
@@ -105,6 +109,8 @@ class BookingsList extends Pagination
     {
         parent::reinit();
         $this->event_filter = null;
+        $this->paid_filter = null;
+        $this->payment_type_filter = null;
     }
 
     /**
