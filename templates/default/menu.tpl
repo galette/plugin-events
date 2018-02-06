@@ -5,4 +5,5 @@
             <li{if $cur_route eq "events_event"} class="selected"{/if}><a href="{path_for name="events_event" data=["action" => {_T string="add" domain="routes"}]}">{_T string="New event" domain="events"}</a></li>
 {/if}
             <li{if $cur_route eq "events_bookings"} class="selected"{/if}><a href="{path_for name="events_bookings" data=["event" => {_T string="all" domain="events_routes"}]}">{_T string="Bookings" domain="events"}</a></li>
+            <li{if $cur_route eq "events_booking"} class="selected"{/if}><a href="{path_for name="events_booking" data=["action" => {_T string="add" domain="routes"}]}">{_T string="New booking" domain="events"}</a></li>
         </ul>
