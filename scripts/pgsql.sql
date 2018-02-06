@@ -59,4 +59,4 @@ CREATE TABLE galette_events_bookings (
   creation_date date default '19010101' NOT NULL,
   PRIMARY KEY (id_booking),
   UNIQUE (id_event, id_adh)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+);
