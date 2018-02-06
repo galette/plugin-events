@@ -437,6 +437,7 @@ $this->get(
             [
                 'page_title'        => _T("Bookings management", "events"),
                 'bookings'          => $bookings,
+                'bookings_list'     => $bookings->getList(),
                 'nb_bookings'       => $bookings->getCount(),
                 'event'             => $event,
                 'eventid'           => $filters->event_filter,

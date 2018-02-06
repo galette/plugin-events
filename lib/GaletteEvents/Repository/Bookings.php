@@ -103,7 +103,7 @@ class Bookings
     public function getList()
     {
         try {
-            $select = $this->buildSelect(null, true);
+            $select = $this->buildSelect(null);
 
             if (!$this->login->isAdmin() && !$this->login->isStaff()) {
                 if ($this->login->isGroupManager()) {
@@ -263,15 +263,20 @@ class Bookings
     private function buildWhereClause($select)
     {
         try {
-            if ($this->filters->paid_filter != null) {
-                $select->where->equalTo(
-                    'is_paid',
-                    $this->filters->paid_filter
-                );
+            switch ($this->filters->paid_filter) {
+                case self::FILTER_PAID:
+                    $select->where('is_paid = true');
+                    break;
+                case self::FILTER_NOT_PAID:
+                    $select->where('is_paid = false');
+                    break;
+                case self::FILTER_DC_PAID:
+                    //nothing to do here.
+                    break;
             }
 
             if ($this->filters->payment_type_filter !== null &&
-                (int)$this->filters->payment_type_filter >= 0
+                (int)$this->filters->payment_type_filter != -1
             ) {
                 $select->where->equalTo(
                     'payment_method',
@@ -279,6 +284,7 @@ class Bookings
                 );
             }
 
+            /** TODO: limit access to group managers and members */
             /*if (!$this->login->isAdmin() && !$this->login->isStaff()) {
                 //non staff members can only view their own contributions
                 $select->where(

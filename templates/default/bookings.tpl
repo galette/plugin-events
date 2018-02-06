@@ -104,13 +104,13 @@
             <tfoot>
                 <tr>
                     <td class="right" colspan="8">
-                        {_T string="Found bookings total %f" pattern="/%f/" replace=$bookings->getSum()}
+                        {_T string="Found bookings total %f" pattern="/%f/" replace=$bookings->getSum() domain="events"}
                     </td>
                 </tr>
             </tfoot>
 {/if}
             <tbody>
-{foreach from=$bookings->getList() item=booking key=ordre}
+{foreach from=$bookings_list item=booking key=ordre}
                 <tr>
                     <td class="{$rclass} right" data-scope="id">{$ordre+1+($filters->current_page - 1)*$numrows}</td>
                     <td class="{$rclass} nowrap username_row" data-scope="row">
