@@ -1,3 +1,7 @@
+#: ../_routes.php:683
+msgid "Booking"
+msgstr ""
+
 #: ../templates/default/bookings.tpl:133
 msgid "Booking has been paid"
 msgstr ""
@@ -133,6 +137,10 @@ msgstr ""
 msgid "Zip code"
 msgstr ""
 
+#: ../templates/default/booking.tpl:29
+msgid "none"
+msgstr ""
+
 #: ../templates/default/event.tpl:12
 msgid "(event will be considered as closed when begin date has been exceeded)"
 msgstr ""
@@ -214,8 +222,8 @@ msgstr ""
 msgid "Meal mandatory"
 msgstr ""
 
-#: ../_routes.php:683
-msgid "Booking"
+#: ../templates/default/booking.tpl:16
+msgid "Select an event"
 msgstr ""
 
 #: ../_routes.php:305 ../templates/default/bookings.tpl:49

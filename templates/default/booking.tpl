@@ -13,7 +13,7 @@
                 <p>
                     <label for="event">{_T string="Event" domain="events"}</label>
                     <select name="event" id="event" required="required">
-                        <option value="0">{_T string="Select an event"}</option>
+                        <option value="0">{_T string="Select an event" domain="events"}</option>
     {foreach from=$events item=$event}
                         <option value="{$event->getId()}"{if $booking->getEventId() eq $event->getId()} selected="selected"{/if}>{$event->getName()}</option>
     {/foreach}
@@ -26,7 +26,7 @@
     {if $booking->getMemberId()}
                         {$booking->getMember()->sfullname}
     {else}
-                        {_T string="none"}
+                        {_T string="none" domain="events"}
     {/if}
                     </span>
     {if $login->isAdmin() or $login->isStaff() or $login->isGroupManager()}

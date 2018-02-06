@@ -11,6 +11,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.3\n"
 
+#: ../_routes.php:683
+msgid "Booking"
+msgstr "Booking"
+
 #: ../templates/default/bookings.tpl:133
 msgid "Booking has been paid"
 msgstr "Booking has been paid"
@@ -146,6 +150,10 @@ msgstr "[bookings]"
 msgid "Zip code"
 msgstr "Zip code"
 
+#: ../templates/default/booking.tpl:29
+msgid "none"
+msgstr "none"
+
 #: ../templates/default/event.tpl:12
 msgid "(event will be considered as closed when begin date has been exceeded)"
 msgstr "(event will be considered as closed when begin date has been exceeded)"
@@ -227,9 +235,9 @@ msgstr "Event %name has been successfully deleted."
 msgid "Meal mandatory"
 msgstr "Meal mandatory"
 
-#: ../_routes.php:683
-msgid "Booking"
-msgstr "Booking"
+#: ../templates/default/booking.tpl:16
+msgid "Select an event"
+msgstr "Select an event"
 
 #: ../_routes.php:305 ../templates/default/bookings.tpl:49
 #: ../templates/default/booking.tpl:14

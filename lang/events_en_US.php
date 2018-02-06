@@ -1,5 +1,5 @@
 <?php
-// This file was automatically generated on Tue Feb  6 14:36:21 2018 (GMT)
+// This file was automatically generated on Tue Feb  6 14:42:44 2018 (GMT)
 // Don't modify it by hand, rather use the target lang from the Makefile.
 
 
@@ -144,11 +144,14 @@ $lang['events']['Please specify amount if booking has been paid ;)'] = 'Please s
 // ../templates/default/events.tpl:55 ../templates/default/events.tpl:78 
 $lang['events']['Group'] = 'Group';
 
+// ../lib/GaletteEvents/Event.php:220 
+$lang['events']['Begin date is mandatory'] = 'Begin date is mandatory';
+
 // ../templates/default/menu.tpl:1 ../templates/default/menu.tpl:3 
 $lang['events']['Events'] = 'Events';
 
-// ../lib/GaletteEvents/Event.php:220 
-$lang['events']['Begin date is mandatory'] = 'Begin date is mandatory';
+// ../templates/default/booking.tpl:16 
+$lang['events']['Select an event'] = 'Select an event';
 
 // ../templates/default/bookings.tpl:19 ../templates/default/bookings.tpl:85 ../templates/default/bookings.tpl:131 ../templates/default/bookings.tpl:133 ../templates/default/booking.tpl:55 
 $lang['events']['Paid'] = 'Paid';
@@ -176,6 +179,9 @@ $lang['events']['Event is mandatory'] = 'Event is mandatory';
 
 // ../templates/default/event.tpl:7 
 $lang['events']['General informations'] = 'General informations';
+
+// ../templates/default/booking.tpl:29 
+$lang['events']['none'] = 'none';
 
 // ../templates/default/bookings.tpl:155 
 $lang['events']['Edit booking'] = 'Edit booking';
