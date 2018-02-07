@@ -57,6 +57,10 @@ class Event
     const TABLE = 'events';
     const PK = 'id_event';
 
+    const ACTIVITY_NO = 0;
+    const ACTIVITY_YES = 1;
+    const ACTIVITY_REQUIRED = 2;
+
     private $zdb;
     private $login;
     private $errors;
@@ -70,10 +74,9 @@ class Event
     private $begin_date;
     private $end_date;
     private $creation_date;
-    private $meal = false;
-    private $meal_required = false;
-    private $lodging = false;
-    private $lodging_required = false;
+    private $noon_meal = self::ACTIVITY_NO;
+    private $even_meal = self::ACTIVITY_NO;
+    private $lodging = self::ACTIVITY_NO;
     private $open = true;
     private $group;
 
@@ -156,10 +159,9 @@ class Event
         $this->begin_date = $r->begin_date;
         $this->end_date = $r->end_date;
         $this->creation_date = $r->creation_date;
-        $this->meal = $r->has_meal;
-        $this->meal_required = $r->is_meal_required;
-        $this->lodging = $r->has_lodging;
-        $this->lodging_required = $r->is_lodging_required;
+        $this->noon_meal = $r->noon_meal;
+        $this->even_meal = $r->even_meal;
+        $this->lodging = $r->lodging;
         $this->open = $r->is_open;
         $this->group = $r->id_group;
     }
@@ -309,34 +311,14 @@ class Event
             }
         }
 
-        if (isset($values['meal_required']) && !isset($values['meal'])) {
-            $this->errors[] = _T('Cannot set meal as mandatory if there is no meal :)', 'events');
-        } else {
-            if (isset($values['meal'])) {
-                $this->meal = true;
-            } else {
-                $this->meal = false;
-            }
-            if (isset($values['meal_required'])) {
-                $this->meal_required = true;
-            } else {
-                $this->meal_required = false;
-            }
+        if (isset($values['noon_meal'])) {
+            $this->noon_meal = $values['noon_meal'];
         }
-
-        if (isset($values['lodging_required']) && !isset($values['lodging'])) {
-            $this->errors[] = _T('Cannot set lodging as mandatory if there is no lodging :)', 'events');
-        } else {
-            if (isset($values['lodging'])) {
-                $this->lodging = true;
-            } else {
-                $this->lodging = false;
-            }
-            if (isset($values['lodging_required'])) {
-                $this->lodging_required = true;
-            } else {
-                $this->lodging = false;
-            }
+        if (isset($values['even_meal'])) {
+            $this->even_meal = $values['even_meal'];
+        }
+        if (isset($values['lodging'])) {
+            $this->lodging = $values['lodging'];
         }
 
         if (isset($values['open'])) {
@@ -380,14 +362,9 @@ class Event
                 'country'               => ($this->country ? $this->country : new Expression('NULL')),
                 'begin_date'            => $this->begin_date,
                 'end_date'              => $this->end_date,
-                'has_meal'              => ($this->meal ? $this->meal :
-                                                ($this->zdb->isPostgres() ? 'false' : 0)),
-                'is_meal_required'      => ($this->meal_required ? $this->meal_required :
-                                                ($this->zdb->isPostgres() ? 'false' : 0)),
-                'has_lodging'           => ($this->lodging ? $this->lodging :
-                                                ($this->zdb->isPostgres() ? 'false' : 0)),
-                'is_lodging_required'   => ($this->lodging_required ? $this->lodging_required :
-                                                ($this->zdb->isPostgres() ? 'false' : 0)),
+                'noon_meal'             => $this->noon_meal,
+                'even_meal'             => $this->even_meal,
+                'lodging'               => $this->lodging,
                 'is_open'               => ($this->open ? $this->open :
                                                 ($this->zdb->isPostgres() ? 'false' : 0)),
                 Group::PK               => ($this->group ? $this->group : new Expression('NULL'))
@@ -593,49 +570,33 @@ class Event
     }
 
     /**
-     * Does event includes a meal?
+     * Get noon meal
      *
-     * @return boolean
+     * @return integer @see Event::ACTIVITY_* constants
      */
-    public function hasMeal()
+    public function getNoonMeal()
     {
-        return $this->meal;
+        return $this->noon_meal;
     }
 
     /**
-     * Is meal required?
+     * Get even meal
      *
-     * @return boolean
+     * @return integer @see Event::ACTIVITY_* constants
      */
-    public function isMealRequired()
+    public function getEvenMeal()
     {
-        if ($this->hasMeal()) {
-            return $this->meal_required;
-        }
-        return false;
+        return $this->even_meal;
     }
 
     /**
      * Does event includes a lodging?
      *
-     * @return boolean
+     * @return integer @see self::ACTIVITY_* constants
      */
-    public function hasLodging()
+    public function getLodging()
     {
         return $this->lodging;
-    }
-
-    /**
-     * Is lodging required?
-     *
-     * @return boolean
-     */
-    public function isLodgingRequired()
-    {
-        if ($this->hasLodging()) {
-            return $this->lodging_required;
-        }
-        return false;
     }
 
     /**

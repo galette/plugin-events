@@ -21,10 +21,9 @@ CREATE TABLE galette_events_events (
   begin_date date default '19010101' NOT NULL,
   end_date date default '19010101' NOT NULL,
   creation_date date default '19010101' NOT NULL,
-  has_meal boolean default FALSE,
-  is_meal_required boolean default FALSE,
-  has_lodging boolean default FALSE,
-  is_lodging_required boolean default FALSE,
+  noon_meal smallint default '0' NOT NULL,
+  even_meal smallint default '0' NOT NULL,
+  lodging smallint default '0' NOT NULL,
   is_open boolean default TRUE,
   id_group integer REFERENCES galette_groups(id_group) ON DELETE RESTRICT ON UPDATE CASCADE default NULL,
   PRIMARY KEY (id_event)

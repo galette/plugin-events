@@ -39,20 +39,28 @@
                 <legend>{_T string="Related activities" domain="events"}</legend>
                 <div>
                 <p>
-                    <label for="meal">{_T string="Meal" domain="events"}</label>
-                    <input type="checkbox" name="meal" id="meal"{if $event->hasMeal()} checked="checked"{/if}/>
+                    <label for="noon_meal">{_T string="Noon meal" domain="events"}</label>
+                    <select name="noon_meal" id="noon_meal">
+                        <option value="{GaletteEvents\Event::ACTIVITY_YES}"{if $event->getNoonMeal() eq GaletteEvents\Event::ACTIVITY_YES} selected="selected"{/if}>{_T string="Yes"}</option>
+                        <option value="{GaletteEvents\Event::ACTIVITY_NO}"{if $event->getNoonMeal() eq GaletteEvents\Event::ACTIVITY_NO} selected="selected"{/if}>{_T string="No"}</option>
+                        <option value="{GaletteEvents\Event::ACTIVITY_REQUIRED}"{if $event->getNoonMeal() eq GaletteEvents\Event::ACTIVITY_REQUIRED} selected="selected"{/if}>{_T string="Required" domain="events"}</option>
+                    </select>
                 </p>
                 <p>
-                    <label for="meal_required">{_T string="Meal mandatory" domain="events"}</label>
-                    <input type="checkbox" name="meal_required" id="meal_required"{if $event->isMealRequired()} checked="checked"{/if}/>
+                    <label for="even_meal">{_T string="Even meal" domain="events"}</label>
+                    <select name="even_meal" id="even_meal">
+                        <option value="{GaletteEvents\Event::ACTIVITY_YES}"{if $event->getEvenMeal() eq GaletteEvents\Event::ACTIVITY_YES} selected="selected"{/if}>{_T string="Yes"}</option>
+                        <option value="{GaletteEvents\Event::ACTIVITY_NO}"{if $event->getEvenMeal() eq GaletteEvents\Event::ACTIVITY_NO} selected="selected"{/if}>{_T string="No"}</option>
+                        <option value="{GaletteEvents\Event::ACTIVITY_REQUIRED}"{if $event->getEvenMeal() eq GaletteEvents\Event::ACTIVITY_REQUIRED} selected="selected"{/if}>{_T string="Required" domain="events"}</option>
+                    </select>
                 </p>
                 <p>
                     <label for="lodging">{_T string="Lodging" domain="events"}</label>
-                    <input type="checkbox" name="lodging" id="lodging"{if $event->hasLodging()} checked="checked"{/if}/>
-                </p>
-                <p>
-                    <label for="lodging_required">{_T string="Lodging mandatory" domain="events"}</label>
-                    <input type="checkbox" name="lodging_required" id="lodging_required"{if $event->isLodgingRequired()} checked="checked"{/if}/>
+                    <select name="lodging" id="lodging">
+                        <option value="{GaletteEvents\Event::ACTIVITY_YES}"{if $event->getLodging() eq GaletteEvents\Event::ACTIVITY_YES} selected="selected"{/if}>{_T string="Yes"}</option>
+                        <option value="{GaletteEvents\Event::ACTIVITY_NO}"{if $event->getLodging() eq GaletteEvents\Event::ACTIVITY_NO} selected="selected"{/if}>{_T string="No"}</option>
+                        <option value="{GaletteEvents\Event::ACTIVITY_REQUIRED}"{if $event->getLodging() eq GaletteEvents\Event::ACTIVITY_REQUIRED} selected="selected"{/if}>{_T string="Required" domain="events"}</option>
+                    </select>
                 </p>
                 </div>
             </fieldset>
