@@ -430,6 +430,8 @@ $this->get(
 
         $this->session->filter_bookings = $filters;
 
+        $list = $bookings->getList();
+        $count = $bookings->getCount();
         // display page
         $this->view->render(
             $response,
@@ -437,8 +439,8 @@ $this->get(
             [
                 'page_title'        => _T("Bookings management", "events"),
                 'bookings'          => $bookings,
-                'bookings_list'     => $bookings->getList(),
-                'nb_bookings'       => $bookings->getCount(),
+                'bookings_list'     => $list,
+                'nb_bookings'       => $count,
                 'event'             => $event,
                 'eventid'           => $filters->event_filter,
                 'require_dialog'    => true,
