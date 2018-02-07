@@ -12,12 +12,17 @@
                 </p>
                 <p>
                     <label for="event">{_T string="Event" domain="events"}</label>
+{if $booking->getId()}
                     <select name="event" id="event" required="required">
                         <option value="0">{_T string="Select an event" domain="events"}</option>
     {foreach from=$events item=$event}
                         <option value="{$event->getId()}"{if $booking->getEventId() eq $event->getId()} selected="selected"{/if}>{$event->getName()}</option>
     {/foreach}
                     </select>
+{else}
+                    <input type="hidden" name="event" value="{$booking->getEventId()}"/>
+                    {$booking->getEvent()->getName()}
+{/if}
                 </p>
                 <p>
                     <span class="bline">{_T string="Member"}</span>
@@ -33,14 +38,12 @@
                     <a href="#" id="choose_member">{_T string="Choose member" domain="events"}</a>
     {/if}
                 </p>
+    {foreach from=$booking->getEvent()->getActivities() key=activity item=label}
                 <p>
-                    <label for="meal">{_T string="Meal" domain="events"}</label>
-                    <input type="checkbox" name="meal" id="meal"{if $booking->hasMeal() or $booking->getEvent()->isMealRequired()} checked="checked"{/if}{if !$booking->getEvent()->hasMeal()} disabled="disabled"{/if}{if $event->isMealRequired()} required="required"{/if}/>
+                    <label for="{$activity}">{$label}</label>
+                    <input type="checkbox" name="{$activity}" id="{$activity}"{if $booking->has($activity) or $booking->getEventId() and $booking->getEvent()->isActivityRequired($activity)} checked="checked"{/if}{if $booking->getEventId() and !$booking->getEvent()->hasActivity($activity)} disabled="disabled"{/if}{if $booking->getEventId() and $booking->getEvent()->isActivityRequired($activity)} required="required"{/if}/>
                 </p>
-                <p>
-                    <label for="lodging">{_T string="Lodging" domain="events"}</label>
-                    <input type="checkbox" name="lodging" id="lodging"{if $booking->hasLodging() or $booking->getEvent()->isLodgingRequired()} checked="checked"{/if}{if !$booking->getEvent()->hasLodging()} disabled="disabled"{/if}{if $event->isLodgingRequired()} required="required"{/if}/>
-                </p>
+    {/foreach}
                 <p>
                     <label for="number_people">{_T string="Number of persons" domain="events"}</label>
                     <input type="number" name="number_people" id="number_people" value="{$booking->getNumberPeople()}" />

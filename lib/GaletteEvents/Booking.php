@@ -70,9 +70,10 @@ class Booking
     private $amount;
     private $payment_method;
     private $bank_name;
-    private $check_number;
-    private $meal = false;
+    private $noon_meal = false;
+    private $even_meal = false;
     private $lodging = false;
+    private $check_number;
     private $number_people = 1;
 
     /**
@@ -144,7 +145,8 @@ class Booking
         $this->payment_method = $r->payment_method;
         $this->bank_name = $r->bank_name;
         $this->check_number = $r->check_number;
-        $this->meal = $r->has_meal;
+        $this->noon_meal = $r->noon_meal;
+        $this->even_meal = $r->even_meal;
         $this->lodging = $r->has_lodging;
         $this->number_people = $r->number_people;
     }
@@ -206,15 +208,19 @@ class Booking
         } else {
             $this->event = $values['event'];
             $event = $this->getEvent();
-            if ($event->isMealRequired() && (!isset($values['meal']) || empty($values['meal']))) {
-                $this->errors[] = _T('Meal is mandatory for this event!', 'events');
-            } else {
-                $this->meal = isset($values['meal']);
-            }
-            if ($event->isLodgingRequired() && (!isset($values['lodging']) || empty($values['lodging']))) {
-                $this->errors[] = _T('Lodging is mandatory for this event!', 'events');
-            } else {
-                $this->lodging = isset($values['lodging']);
+            $activities = $event->getActivities();
+            foreach ($activities as $activity => $label) {
+                if ($event->isActivityRequired($activity)
+                    && (!isset($values[$activity]) || empty($values[$activity]))
+                ) {
+                    $this->errors[] = str_replace(
+                        '%activity',
+                        $label,
+                        _T('%activity is mandatory for this event!', 'events')
+                    );
+                } else {
+                    $this->$activity = isset($values[$activity]);
+                }
             }
         }
 
@@ -323,7 +329,9 @@ class Booking
                 'payment_amount'    => $this->amount,
                 'bank_name'         => $this->bank_name,
                 'check_number'      => $this->check_number,
-                'has_meal'          => ($this->meal ? $this->meal :
+                'noon_meal'         => ($this->noon_meal ? $this->noon_meal :
+                                            ($this->zdb->isPostgres() ? 'false' : 0)),
+                'even_meal'         => ($this->even_meal ? $this->even_meal :
                                             ($this->zdb->isPostgres() ? 'false' : 0)),
                 'has_lodging'       => ($this->lodging ? $this->lodging :
                                             ($this->zdb->isPostgres() ? 'false' : 0)),
@@ -520,13 +528,23 @@ class Booking
     }
 
     /**
-     * Does booking includes meal?
+     * Does booking includes noon meal?
      *
      * @return boolean
      */
-    public function hasMeal()
+    public function hasNoonMeal()
     {
-        return $this->meal;
+        return $this->noon_meal;
+    }
+
+    /**
+     * Does booking includes even meal?
+     *
+     * @return boolean
+     */
+    public function hasEvenMeal()
+    {
+        return $this->even_meal;
     }
 
     /**
@@ -537,6 +555,18 @@ class Booking
     public function hasLodging()
     {
         return $this->lodging;
+    }
+
+    /**
+     * Bookins has activity
+     *
+     * @param string $activity Activity name
+     *
+     * @return boolean
+     */
+    public function has($activity)
+    {
+        return $this->$activity;
     }
 
     /**

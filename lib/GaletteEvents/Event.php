@@ -580,6 +580,30 @@ class Event
     }
 
     /**
+     * Is activity required
+     *
+     * @param string $name Activity name
+     *
+     * @return boolean
+     */
+    public function isActivityRequired($name)
+    {
+        return $this->$name == self::ACTIVITY_REQUIRED;
+    }
+
+    /**
+     * Does current event propose activity
+     *
+     * @param string $name Activity name
+     *
+     * @return boolean
+     */
+    public function hasActivity($name)
+    {
+        return $this->$name != self::ACTIVITY_NO;
+    }
+
+    /**
      * Get even meal
      *
      * @return integer @see Event::ACTIVITY_* constants
@@ -641,5 +665,19 @@ class Event
     protected function getTableName()
     {
         return EVENTS_PREFIX  . self::TABLE;
+    }
+
+    /**
+     * Get activities list
+     *
+     * @return array
+     */
+    public static function getActivities()
+    {
+        return [
+            'noon_meal' => _T('Noon meal', 'events'),
+            'even_meal' => _T('Even meal', 'events'),
+            'lodging'   => _T('Lodging', 'events')
+        ];
     }
 }

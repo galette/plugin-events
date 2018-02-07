@@ -93,8 +93,9 @@
                         </a>
                     </th>
                     <th class="left id_row">{_T string="Attendees" domain="events"}</th>
-                    <th class="left id_row">{_T string="Meal" domain="events"}</th>
-                    <th class="left id_row">{_T string="Lodging" domain="events"}</th>
+    {foreach from=\GaletteEvents\Event::getActivities() key=activity item=label}
+                    <th class="left id_row">{$label}</th>
+    {/foreach}
 {if $login->isAdmin() or $login->isStaff() or $login->isGroupManager()}
                     <th class="actions_row">{_T string="Actions"}</th>
 {/if}
@@ -136,20 +137,16 @@
                         {/if}
                     </td>
                     <td class="{$rclass}" data-title="{_T string="Attendees" domain="events"}">{$booking->getNumberPeople()}</td>
-                    <td class="{$rclass}" data-title="{_T string="Meal" domain="events"}">
-                        {if $booking->hasMeal()}
-                            <img src="{base_url}/{$template_subdir}images/icon-on.png" alt="{_T string="Has meal" domain="events"}"/>
+    {foreach from=$booking->getEvent()->getActivities() key=activity item=label}
+                    <td class="{$rclass}" data-title="$label">
+                        {if $booking->has($activity)}
+                            <img src="{base_url}/{$template_subdir}images/icon-on.png" alt="{_T string="Has %activity" pattern="/%activity/" replace=$activity domain="events"}"/>
                         {else}
-                            <img src="{base_url}/{$template_subdir}images/icon-off.png" alt="{_T string="No meal"}"/>
+                            <img src="{base_url}/{$template_subdir}images/icon-off.png" alt="{_T string="No %activity" pattern="/%activity/" replace=$activity domain="events"}"/>
                         {/if}
                     </td>
-                    <td class="{$rclass}" data-title="{_T string="Lodging" domain="events"}">
-                        {if $booking->hasLodging()}
-                            <img src="{base_url}/{$template_subdir}images/icon-on.png" alt="{_T string="Lodging" domain="events"}"/>
-                        {else}
-                            <img src="{base_url}/{$template_subdir}images/icon-off.png" alt="{_T string="No lodging"}"/>
-                        {/if}
-                    </td>
+
+    {/foreach}
     {if $login->isAdmin() or $login->isStaff() or ($login->isGroupManager() and $event->getGroup()|in_array:$login->managed_groups )}
                     <td class="{$rclass} center nowrap actions_row">
                         <a href="{path_for name="events_booking" data=["action" => {_T string="edit" domain="routes"}, "id" => $bid]}"><img src="{base_url}/{$template_subdir}images/icon-edit.png" alt="{_T string="[mod]"}" width="16" height="16" title="{_T string="Edit booking" domain="events"}"/></a>
