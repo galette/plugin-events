@@ -1,12 +1,12 @@
 <?php
-// This file was automatically generated on Tue Feb  6 14:32:10 2018 (GMT)
+// This file was automatically generated on Wed Feb  7 08:57:05 2018 (GMT)
 // Don't modify it by hand, rather use the target lang from the Makefile.
 
 
-// ../_routes.php:497 ../_routes.php:572 ../_routes.php:669 ../_routes.php:699 
+// ../_routes.php:499 ../_routes.php:574 ../_routes.php:671 ../_routes.php:701 
 $lang['events_routes']['/booking'] = '/reservation';
 
-// ../_routes.php:385 ../_routes.php:454 
+// ../_routes.php:385 ../_routes.php:456 
 $lang['events_routes']['/bookings'] = '/reservations';
 
 // ../_routes.php:133 ../_routes.php:199 ../_routes.php:291 ../_routes.php:324 

@@ -11,11 +11,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.3\n"
 
-#: ../_routes.php:683
+#: ../_routes.php:685
 msgid "Booking"
 msgstr "Réservation"
 
-#: ../templates/default/bookings.tpl:133
+#: ../templates/default/bookings.tpl:134
 msgid "Booking has been paid"
 msgstr "La réservation a été payée"
 
@@ -27,7 +27,11 @@ msgstr "Ajouter une nouvelle réservation"
 msgid "Restrict event to selected group (and its subgroups)."
 msgstr "Restreindre l'évènement au groupe sélectionné (et ses sous groupes)."
 
-#: ../lib/GaletteEvents/Booking.php:365
+#: ../lib/GaletteEvents/Event.php:679 ../templates/default/event.tpl:50
+msgid "Even meal"
+msgstr "Repas soir"
+
+#: ../lib/GaletteEvents/Booking.php:366
 msgid "Fail to add new booking."
 msgstr "Erreur à l'ajout de la nouvelle réservation."
 
@@ -35,15 +39,11 @@ msgstr "Erreur à l'ajout de la nouvelle réservation."
 msgid "Show all bookings"
 msgstr "Voir toutes les réservations"
 
-#: ../templates/default/bookings.tpl:141
-msgid "Has meal"
-msgstr "Avec repas"
-
-#: ../lib/GaletteEvents/Booking.php:360
+#: ../lib/GaletteEvents/Booking.php:361
 msgid "Booking added"
 msgstr "Réservation ajoutée"
 
-#: ../templates/default/bookings.tpl:73 ../templates/default/bookings.tpl:130
+#: ../templates/default/bookings.tpl:73 ../templates/default/bookings.tpl:131
 #: ../templates/default/booking.tpl:10
 msgid "Booking date"
 msgstr "Date de réservation"
@@ -52,13 +52,11 @@ msgstr "Date de réservation"
 msgid "Related activities"
 msgstr "Activités liées"
 
-#: ../templates/default/bookings.tpl:97 ../templates/default/bookings.tpl:146
-#: ../templates/default/bookings.tpl:148 ../templates/default/event.tpl:50
-#: ../templates/default/booking.tpl:41
+#: ../lib/GaletteEvents/Event.php:680 ../templates/default/event.tpl:58
 msgid "Lodging"
 msgstr "Logement"
 
-#: ../templates/default/bookings.tpl:95 ../templates/default/bookings.tpl:138
+#: ../templates/default/bookings.tpl:95 ../templates/default/bookings.tpl:139
 msgid "Attendees"
 msgstr "Participants"
 
@@ -66,19 +64,19 @@ msgstr "Participants"
 msgid "events"
 msgstr "évènements"
 
-#: ../lib/GaletteEvents/Booking.php:212
-msgid "Event is mandatory"
-msgstr "L'évènement est requis"
+#: ../templates/default/events.tpl:81
+msgid "Event is open"
+msgstr "L'évènement est ouvert"
 
-#: ../lib/GaletteEvents/Booking.php:242
+#: ../lib/GaletteEvents/Booking.php:241
 msgid "Please specify amount if booking has been paid ;)"
 msgstr "Veuillez spécifier un montant si la réservation a été payée ;)"
 
-#: ../templates/default/booking.tpl:162
+#: ../templates/default/booking.tpl:165
 msgid "Click to choose this member for current booking"
 msgstr "Cliquez pour choisir cet adhérent pour la réservation courante"
 
-#: ../lib/GaletteEvents/Event.php:275
+#: ../lib/GaletteEvents/Event.php:277
 msgid "Name is mandatory"
 msgstr "Le nom est requis"
 
@@ -86,11 +84,15 @@ msgstr "Le nom est requis"
 msgid "Name"
 msgstr "Nom"
 
-#: ../templates/default/event.tpl:75
+#: ../templates/default/event.tpl:83
 msgid "Country"
 msgstr "Pays"
 
-#: ../lib/GaletteEvents/Event.php:416
+#: ../lib/GaletteEvents/Event.php:678 ../templates/default/event.tpl:42
+msgid "Noon meal"
+msgstr "Repas midi"
+
+#: ../lib/GaletteEvents/Event.php:393
 msgid "Event added"
 msgstr "Évènement ajouté"
 
@@ -102,7 +104,7 @@ msgstr "Date"
 msgid "Events"
 msgstr "Évènements"
 
-#: ../templates/default/bookings.tpl:163
+#: ../templates/default/bookings.tpl:160
 msgid "No booking has been found"
 msgstr "Aucune réservation trouvée"
 
@@ -110,47 +112,47 @@ msgstr "Aucune réservation trouvée"
 msgid "Bookings"
 msgstr "Réservations"
 
-#: ../_routes.php:603
+#: ../_routes.php:605
 msgid "Booking has been modified."
 msgstr "La réservation a été modifiée."
+
+#: ../lib/GaletteEvents/Booking.php:219
+msgid "%activity is mandatory for this event!"
+msgstr "%activity est obligatoire pour cet évènement !"
 
 #: ../templates/default/events.tpl:98
 msgid "No event has been found"
 msgstr "Aucun évènement trouvé"
 
-#: ../lib/GaletteEvents/Booking.php:262
+#: ../lib/GaletteEvents/Booking.php:261
 msgid "Booking date is mandatory!"
 msgstr "La date de réservation est requise !"
 
-#: ../_routes.php:601
+#: ../_routes.php:603
 msgid "New booking has been successfully added."
 msgstr "La nouvelle réservation a été ajoutée avec succès."
 
-#: ../templates/default/booking.tpl:33
+#: ../templates/default/booking.tpl:38
 msgid "Choose member"
 msgstr "Choisissez un adhérent"
 
-#: ../lib/GaletteEvents/Event.php:269
+#: ../lib/GaletteEvents/Event.php:271
 msgid "End date must be later or equal to begin date"
 msgstr "La date de fin doit être ultérieure ou égale à la date de début"
 
-#: ../lib/GaletteEvents/Booking.php:404
+#: ../lib/GaletteEvents/Booking.php:405
 msgid "A booking already exists for %member in %event"
 msgstr "Une réservation existe déjà pour l'adhérent %member dans %event"
-
-#: ../templates/default/event.tpl:54
-msgid "Lodging mandatory"
-msgstr "Logement requis"
 
 #: ../templates/default/events.tpl:87
 msgid "[bookings]"
 msgstr "[reservations]"
 
-#: ../templates/default/event.tpl:67
+#: ../templates/default/event.tpl:75
 msgid "Zip code"
 msgstr "Code postal"
 
-#: ../templates/default/booking.tpl:29
+#: ../templates/default/booking.tpl:34
 msgid "none"
 msgstr "aucun"
 
@@ -160,35 +162,31 @@ msgstr ""
 "(l'évènement sera considéré comme clos lorsque la date de début sera "
 "dépassée)"
 
-#: ../templates/default/booking.tpl:59
+#: ../templates/default/booking.tpl:62
 msgid "amount"
 msgstr "montant"
 
-#: ../lib/GaletteEvents/Event.php:313
-msgid "Cannot set meal as mandatory if there is no meal :)"
-msgstr "Impossible de rendre le repas obligatoire en l'absence de repas :)"
-
-#: ../lib/GaletteEvents/Event.php:220
+#: ../lib/GaletteEvents/Event.php:222
 msgid "Begin date is mandatory"
 msgstr "La date de début est requise"
 
-#: ../_routes.php:438
+#: ../_routes.php:440
 msgid "Bookings management"
 msgstr "Gestion des réservations"
 
-#: ../templates/default/bookings.tpl:135
+#: ../templates/default/bookings.tpl:136
 msgid "Booking has not been paid"
 msgstr "La réservation n'a pas été payée"
 
-#: ../templates/default/booking.tpl:69
+#: ../templates/default/booking.tpl:72
 msgid "Check number"
 msgstr "Numéro de chèque"
 
-#: ../lib/GaletteEvents/Booking.php:383
+#: ../lib/GaletteEvents/Booking.php:384
 msgid "Booking updated"
 msgstr "Réservation mise à jour"
 
-#: ../templates/default/booking.tpl:52
+#: ../templates/default/booking.tpl:55
 msgid "Financial informations"
 msgstr "Informations financières"
 
@@ -196,7 +194,7 @@ msgstr "Informations financières"
 msgid "New event has been successfully added."
 msgstr "Le nouvel évènement a été ajouté avec succès."
 
-#: ../_routes.php:510
+#: ../_routes.php:512
 msgid "Booking ID cannot ben null calling edit route!"
 msgstr ""
 "L'identifiant de la réservation ne peut être vide pour la route d'édition !"
@@ -209,37 +207,23 @@ msgstr "réservation"
 msgid "event"
 msgstr "évènement"
 
-#: ../lib/GaletteEvents/Event.php:439
+#: ../lib/GaletteEvents/Event.php:416
 msgid "Event updated"
 msgstr "Évènement mis à jour"
 
-#: ../lib/GaletteEvents/Event.php:246 ../templates/default/event.tpl:23
+#: ../lib/GaletteEvents/Event.php:248 ../templates/default/event.tpl:23
 msgid "End date"
 msgstr "Date de fin"
-
-#: ../lib/GaletteEvents/Event.php:328
-msgid "Cannot set lodging as mandatory if there is no lodging :)"
-msgstr ""
-"Impossible de rendre le logement obligatoire en l'absence de logement :)"
 
 #: ../templates/default/menu.tpl:8
 msgid "New booking"
 msgstr "Nouvelle réservation"
 
-#: ../templates/default/bookings.tpl:96 ../templates/default/bookings.tpl:139
-#: ../templates/default/event.tpl:42 ../templates/default/booking.tpl:37
-msgid "Meal"
-msgstr "Repas"
-
 #: ../_routes.php:358
 msgid "Event %name has been successfully deleted."
 msgstr "L'évènement %name a été supprimé avec succès."
 
-#: ../templates/default/event.tpl:46
-msgid "Meal mandatory"
-msgstr "Repas obligatoire"
-
-#: ../templates/default/booking.tpl:16
+#: ../templates/default/booking.tpl:17
 msgid "Select an event"
 msgstr "Sélectionnez un évènement"
 
@@ -252,7 +236,7 @@ msgstr "Évènement"
 msgid "An error occured while storing the event."
 msgstr "Une erreur est survenue à l'enregistrement de l'évènement."
 
-#: ../templates/default/booking.tpl:65
+#: ../templates/default/booking.tpl:68
 msgid "Bank name"
 msgstr "Nom de la banque"
 
@@ -264,23 +248,24 @@ msgstr "Réservations payées :"
 msgid "New event"
 msgstr "Nouvel évènement"
 
-#: ../_routes.php:607
+#: ../_routes.php:609
 msgid "An error occured while storing the booking."
 msgstr "Une erreur est survenue à l'enregistrement de la réservation."
 
-#: ../lib/GaletteEvents/Booking.php:222
-msgid "Lodging is mandatory for this event!"
-msgstr "Le logement est requis pour cet évènement !"
+#: ../templates/default/event.tpl:46 ../templates/default/event.tpl:54
+#: ../templates/default/event.tpl:62
+msgid "Required"
+msgstr "Obligatoire"
 
-#: ../templates/default/bookings.tpl:155
+#: ../templates/default/bookings.tpl:152
 msgid "Edit booking"
 msgstr "Modifier la réservation"
 
-#: ../lib/GaletteEvents/Event.php:244 ../templates/default/event.tpl:19
+#: ../lib/GaletteEvents/Event.php:246 ../templates/default/event.tpl:19
 msgid "Begin date"
 msgstr "Date de début"
 
-#: ../lib/GaletteEvents/Event.php:289
+#: ../lib/GaletteEvents/Event.php:291
 msgid "Please select a group you own!"
 msgstr "Veuillez sélectionner un groupe que vous gérez !"
 
@@ -292,23 +277,19 @@ msgstr "Une erreur est survenue à la suppression de l'évènement %name :/"
 msgid "Booking informations"
 msgstr "Informations réservation"
 
-#: ../templates/default/event.tpl:63
+#: ../templates/default/event.tpl:71
 msgid "Address"
 msgstr "Adresse"
 
-#: ../_routes.php:719
+#: ../_routes.php:721
 msgid "An error occured trying to remove booking :/"
 msgstr "Une erreur est survenue à la suppression de la réservation :/"
-
-#: ../lib/GaletteEvents/Booking.php:217
-msgid "Meal is mandatory for this event!"
-msgstr "Le repas est requis pour cet évènement !"
 
 #: ../templates/default/bookings.tpl:10
 msgid "All"
 msgstr "Toutes"
 
-#: ../_routes.php:726
+#: ../_routes.php:728
 msgid "Booking has been successfully deleted."
 msgstr "La réservation a été supprimée avec succès."
 
@@ -321,7 +302,7 @@ msgid "Event ID cannot ben null calling edit route!"
 msgstr ""
 "L'identifiant de l'évènement ne peut être vide pour la route d'édition !"
 
-#: ../lib/GaletteEvents/Booking.php:289
+#: ../lib/GaletteEvents/Booking.php:288
 msgid "booking date"
 msgstr "date de réservation"
 
@@ -329,7 +310,7 @@ msgstr "date de réservation"
 msgid "Limit to group"
 msgstr "Limiter au groupe"
 
-#: ../lib/GaletteEvents/Booking.php:229
+#: ../lib/GaletteEvents/Booking.php:228
 msgid "Member is mandatory"
 msgstr "L'adhérent est requis"
 
@@ -350,16 +331,16 @@ msgstr "Ouvert"
 msgid "Is open"
 msgstr "Est ouvert"
 
-#: ../lib/GaletteEvents/Event.php:421
+#: ../lib/GaletteEvents/Event.php:398
 msgid "Fail to add new event."
 msgstr "Erreur à l'ajout du nouvel évènement."
 
-#: ../templates/default/event.tpl:60
+#: ../templates/default/event.tpl:68
 msgid "Location"
 msgstr "Localisation"
 
 #: ../templates/default/events.tpl:45 ../templates/default/events.tpl:77
-#: ../templates/default/event.tpl:71
+#: ../templates/default/event.tpl:79
 msgid "Town"
 msgstr "Ville"
 
@@ -367,7 +348,7 @@ msgstr "Ville"
 msgid "Events management"
 msgstr "Gestion des évènements"
 
-#: ../lib/GaletteEvents/Event.php:296
+#: ../lib/GaletteEvents/Event.php:298
 msgid "Town is mandatory"
 msgstr "La ville est requise"
 
@@ -379,7 +360,7 @@ msgstr "Non payée"
 msgid "Group"
 msgstr "Groupe"
 
-#: ../templates/default/bookings.tpl:157
+#: ../templates/default/bookings.tpl:154
 msgid "Remove from database"
 msgstr "Supprimer de la base de données"
 
@@ -387,19 +368,41 @@ msgstr "Supprimer de la base de données"
 msgid "bookings"
 msgstr "réservations"
 
-#: ../templates/default/booking.tpl:45
+#: ../templates/default/booking.tpl:48
 msgid "Number of persons"
 msgstr "Nombre de personnes"
 
 #: ../templates/default/bookings.tpl:19 ../templates/default/bookings.tpl:85
-#: ../templates/default/bookings.tpl:131 ../templates/default/bookings.tpl:133
-#: ../templates/default/booking.tpl:55
+#: ../templates/default/bookings.tpl:132 ../templates/default/bookings.tpl:134
+#: ../templates/default/booking.tpl:58
 msgid "Paid"
 msgstr "Payée"
 
-#: ../templates/default/events.tpl:81
-msgid "Event is open"
-msgstr "L'évènement est ouvert"
+#: ../lib/GaletteEvents/Booking.php:207
+msgid "Event is mandatory"
+msgstr "L'évènement est requis"
+
+#~ msgid "Has meal"
+#~ msgstr "Avec repas"
+
+#~ msgid "Lodging mandatory"
+#~ msgstr "Logement requis"
+
+#~ msgid "Cannot set meal as mandatory if there is no meal :)"
+#~ msgstr "Impossible de rendre le repas obligatoire en l'absence de repas :)"
+
+#~ msgid "Cannot set lodging as mandatory if there is no lodging :)"
+#~ msgstr ""
+#~ "Impossible de rendre le logement obligatoire en l'absence de logement :)"
+
+#~ msgid "Meal"
+#~ msgstr "Repas"
+
+#~ msgid "Meal mandatory"
+#~ msgstr "Repas obligatoire"
+
+#~ msgid "Lodging is mandatory for this event!"
+#~ msgstr "Le logement est requis pour cet évènement !"
 
 #~ msgid "Payment method"
 #~ msgstr "Méthode de paiement"

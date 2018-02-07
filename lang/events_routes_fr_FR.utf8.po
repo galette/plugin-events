@@ -12,11 +12,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 2.0.3\n"
 
-#: ../_routes.php:497 ../_routes.php:572 ../_routes.php:669 ../_routes.php:699
+#: ../_routes.php:499 ../_routes.php:574 ../_routes.php:671 ../_routes.php:701
 msgid "/booking"
 msgstr "/reservation"
 
-#: ../_routes.php:385 ../_routes.php:454
+#: ../_routes.php:385 ../_routes.php:456
 msgid "/bookings"
 msgstr "/reservations"
 
