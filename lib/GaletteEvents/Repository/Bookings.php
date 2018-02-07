@@ -286,6 +286,18 @@ class Bookings
 
             /** TODO: limit access to group managers and members */
             /*if (!$this->login->isAdmin() && !$this->login->isStaff()) {
+                $groups = Groups::loadGroups(
+                    $this->login->id,
+                    false,
+                    false
+                );
+
+                if ($this->login->isGroupManager() && count($this->login->managed_groups)) {
+                    $groups = array_merge($groups, $this->Login->managed_groups);
+                }
+                $select->where([Group::PK => $groups]);
+            }*/
+            /*if (!$this->login->isAdmin() && !$this->login->isStaff()) {
                 //non staff members can only view their own contributions
                 $select->where(
                     array(
