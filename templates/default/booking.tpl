@@ -12,7 +12,7 @@
                 </p>
                 <p>
                     <label for="event">{_T string="Event" domain="events"}</label>
-{if $booking->getId()}
+{if ($login->isAdmin() or $login->isStaff()) or !$booking->getId()}
                     <select name="event" id="event" required="required">
                         <option value="0">{_T string="Select an event" domain="events"}</option>
     {foreach from=$events item=$event}
