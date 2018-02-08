@@ -293,6 +293,29 @@ class Booking
             }
         }
 
+        if (count($this->errors) == 0) {
+            //check unicity
+            $select = $this->zdb->select($this->getTableName());
+            $select->where([
+                Event::PK       => $this->event,
+                Adherent::PK    => $this->member
+            ]);
+            $results = $this->zdb->execute($select);
+            if ($results->count()) {
+                $this->errors[] = str_replace(
+                    [
+                        '%member',
+                        '%event'
+                    ],
+                    [
+                        $this->getMember()->sfullname,
+                        $this->getEvent()->getName()
+                    ],
+                    _T('A booking already exists for %member in %event', 'events')
+                );
+            }
+        }
+
         if (count($this->errors) > 0) {
             Analog::log(
                 'Some errors has been throwed attempting to edit/store a booking' . "\n" .
@@ -393,19 +416,6 @@ class Booking
                 $e->getTraceAsString(),
                 Analog::ERROR
             );
-            if ($e->getCode() == 23000 || $this->zdb->isPostgres() && $e->getCode() == 23505) {
-                return str_replace(
-                    [
-                        '%member',
-                        '%event'
-                    ],
-                    [
-                        $this->getMember()->sfullname,
-                        $this->getEvent()->getName()
-                    ],
-                    _T('A booking already exists for %member in %event', 'events')
-                );
-            }
             throw $e;
             return false;
         }
