@@ -45,6 +45,7 @@ use Galette\Core\Db;
 use Galette\Entity\Adherent;
 use Galette\Entity\Group;
 use Galette\Repository\Groups;
+use GaletteEvents\Event;
 use GaletteEvents\Booking;
 use GaletteEvents\Filters\BookingsList;
 
@@ -200,6 +201,10 @@ class Bookings
                 array('a' => PREFIX_DB . Adherent::TABLE),
                 'b.' . Adherent::PK . '= a.' . Adherent::PK
             );
+            $select->join(
+                array('e' => PREFIX_DB . EVENTS_PREFIX . Event::TABLE),
+                'b.' . Event::PK . '= e.' . Event::PK
+            );
 
             $this->buildWhereClause($select);
             $select->order(self::buildOrderClause());
@@ -275,6 +280,12 @@ class Bookings
                     break;
             }
 
+            if ($this->filters->event_filter !== null
+                && $this->filters->event_filter != __('all', 'events_routes')
+            ) {
+                $select->where(['b.' . Event::PK => $this->filters->event_filter]);
+            }
+
             if ($this->filters->payment_type_filter !== null &&
                 (int)$this->filters->payment_type_filter != -1
             ) {
@@ -285,7 +296,7 @@ class Bookings
             }
 
             /** TODO: limit access to group managers and members */
-            /*if (!$this->login->isAdmin() && !$this->login->isStaff()) {
+            if (!$this->login->isAdmin() && !$this->login->isStaff()) {
                 $groups = Groups::loadGroups(
                     $this->login->id,
                     false,
@@ -293,10 +304,22 @@ class Bookings
                 );
 
                 if ($this->login->isGroupManager() && count($this->login->managed_groups)) {
-                    $groups = array_merge($groups, $this->Login->managed_groups);
+                    $groups = array_merge($groups, $this->login->managed_groups);
                 }
-                $select->where([Group::PK => $groups]);
-            }*/
+
+                $select->where(
+                    new PredicateSet(
+                        array(
+                            new Predicate\In(
+                                Group::PK,
+                                $groups
+                            ),
+                            new Predicate\IsNull(Group::PK)
+                        ),
+                        PredicateSet::OP_OR
+                    )
+                );
+            }
             /*if (!$this->login->isAdmin() && !$this->login->isStaff()) {
                 //non staff members can only view their own contributions
                 $select->where(

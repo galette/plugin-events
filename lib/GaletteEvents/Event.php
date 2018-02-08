@@ -38,8 +38,12 @@ namespace GaletteEvents;
 use Galette\Core\Db;
 use Galette\Core\Login;
 use Galette\Entity\Group;
+use Galette\Repository\Groups;
 use Analog\Analog;
 use Zend\Db\Sql\Expression;
+use Zend\Db\Sql\Predicate;
+use Zend\Db\Sql\Predicate\PredicateSet;
+use Zend\Db\Sql\Predicate\Operator;
 
 /**
  * Event entity
@@ -120,9 +124,29 @@ class Event
             $select->where(array(self::PK => $id));
 
             if (!$this->login->isAdmin() && !$this->login->isStaff()) {
-                $select->where->in(Group::PK, $this->login->managed_groups);
-            }
+                $groups = Groups::loadGroups(
+                    $this->login->id,
+                    false,
+                    false
+                );
 
+                if ($this->login->isGroupManager() && count($this->login->managed_groups)) {
+                    $groups = array_merge($groups, $this->login->managed_groups);
+                }
+
+                $select->where(
+                    new PredicateSet(
+                        array(
+                            new Predicate\In(
+                                Group::PK,
+                                $groups
+                            ),
+                            new Predicate\IsNull(Group::PK)
+                        ),
+                        PredicateSet::OP_OR
+                    )
+                );
+            }
             $results = $this->zdb->execute($select);
 
             if ($results->count() > 0) {
