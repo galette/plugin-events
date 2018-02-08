@@ -530,7 +530,7 @@ $this->get(
         }
 
         // template variable declaration
-        $title = _T("Booking");
+        $title = _T("Booking", "events");
         if ($booking->getId() != '') {
             $title .= ' (' . _T("modification") . ')';
         } else {
