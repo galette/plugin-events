@@ -39,6 +39,7 @@ use Galette\Core\Db;
 use Galette\Core\Login;
 use Galette\Entity\Group;
 use Galette\Entity\Adherent;
+use Galette\Entity\Contribution;
 use Analog\Analog;
 use Zend\Db\Sql\Expression;
 
@@ -68,7 +69,7 @@ class Booking
     private $date;
     private $paid;
     private $amount;
-    private $payment_method;
+    private $payment_method = Contribution::PAYMENT_OTHER;
     private $bank_name;
     private $noon_meal = false;
     private $even_meal = false;
