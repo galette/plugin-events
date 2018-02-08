@@ -104,7 +104,7 @@
 {if $nb_bookings != 0}
             <tfoot>
                 <tr>
-                    <td class="right" colspan="8">
+                    <td class="right" colspan="10">
                         {_T string="Found bookings total %f" pattern="/%f/" replace=$bookings->getSum() domain="events"}
                     </td>
                 </tr>
