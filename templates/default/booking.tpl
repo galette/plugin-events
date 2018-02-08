@@ -72,9 +72,9 @@
                     <label for="check_number">{_T string="Check number" domain="events"}</label>
                     <input type="text" name="check_number" id="check_number" value="{$booking->getCheckNumber()}" />
                 </p>
-    {/if}
                 </div>
             </fieldset>
+    {/if}
         </div>
         <div class="button-container">
             <input type="submit" value="{_T string="Save"}" />
