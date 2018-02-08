@@ -105,55 +105,6 @@ class Bookings
     {
         try {
             $select = $this->buildSelect(null);
-
-            if (!$this->login->isAdmin() && !$this->login->isStaff()) {
-                if ($this->login->isGroupManager()) {
-                    /*$groups = $this->login->managed_groups;
-                    $select->where(
-                        new PredicateSet(
-                            array(
-                                new Predicate\In(
-                                    Group::PK,
-                                    $this->login->managed_groups
-                                ),
-                                new PredicateSet(
-                                    array(
-                                        new Predicate\IsNull(Group::PK),
-                                        new Predicate\Operator(
-                                            'is_open',
-                                            '=',
-                                            true
-                                        ),
-                                        new Predicate\Operator(
-                                            'begin_date',
-                                            '>=',
-                                            date('Y-m-d')
-                                        )
-                                    )
-                                )
-                            ),
-                            PredicateSet::OP_OR
-                        )
-                    );*/
-                } else {
-                    $select->where('a.' . Adherent::PK . '=' . $this->login->id);
-                    /*$select->where('is_open', true);
-                    $select->where->greaterThanOrEqualTo('begin_date', date('Y-m-d'));
-                    $select->where(
-                        new PredicateSet(
-                            array(
-                                new Predicate\In(
-                                    Group::PK,
-                                    Groups::loadGroups($this->login->id, false, false)
-                                ),
-                                new Predicate\IsNull(Group::PK)
-                            ),
-                            PredicateSet::OP_OR
-                        )
-                    );*/
-                }
-            }
-
             $select->order($this->buildOrderClause());
 
             $this->proceedCount($select);
@@ -295,7 +246,6 @@ class Bookings
                 );
             }
 
-            /** TODO: limit access to group managers and members */
             if (!$this->login->isAdmin() && !$this->login->isStaff()) {
                 $groups = Groups::loadGroups(
                     $this->login->id,
@@ -319,22 +269,15 @@ class Bookings
                         PredicateSet::OP_OR
                     )
                 );
+
+                if (!$this->login->isGroupManager()) {
+                    $select->where(
+                        array(
+                            'a.' . Adherent::PK => $this->login->id
+                        )
+                    );
+                }
             }
-            /*if (!$this->login->isAdmin() && !$this->login->isStaff()) {
-                //non staff members can only view their own contributions
-                $select->where(
-                    array(
-                        'a.' . Adherent::PK => $this->login->id
-                    )
-                );
-            } elseif ($this->filters->filtre_cotis_adh != null) {
-                $select->where(
-                    'a.' . Adherent::PK . ' = ' . $this->filters->filtre_cotis_adh
-                );
-            }*/
-            /*if ($this->filters->filtre_transactions === true) {
-                $select->where('a.trans_id IS NULL');
-            }*/
         } catch (\Exception $e) {
             Analog::log(
                 __METHOD__ . ' | ' . $e->getMessage(),
@@ -381,6 +324,17 @@ class Bookings
         $order = array();
 
         switch ($this->filters->orderby) {
+            case self::ORDERBY_EVENT:
+                if ($this->canOrderBy(Event::PK, $fields)) {
+                    $order[] = 'e.name ' . $this->filters->getDirection();
+                }
+                break;
+            case self::ORDERBY_MEMBER:
+                if ($this->canOrderBy(Adherent::PK, $fields)) {
+                    $order[] = 'a.nom_adh ' . $this->filters->getDirection() .
+                                ', a.prenom_adh ' . $this->filters->getDirection();
+                }
+                break;
             case self::ORDERBY_BOOKDATE:
                 if ($this->canOrderBy('booking_date', $fields)) {
                     $order[] = 'booking_date ' . $this->filters->getDirection();
@@ -391,17 +345,6 @@ class Bookings
                     $order[] = 'is_paid ' . $this->filters->getDirection();
                 }
                 break;
-
-            /*case self::ORDERBY_NAME:
-                if ($this->canOrderBy('name', $fields)) {
-                    $order[] = 'name ' . $this->filters->getDirection();
-                }
-                break;
-            case self::ORDERBY_TOWN:
-                if ($this->canOrderBy('town', $fields)) {
-                    $order[] = 'town ' . $this->filters->getDirection();
-                }
-                break;*/
         }
 
         return $order;
