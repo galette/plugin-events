@@ -40,6 +40,8 @@
                 <noscript> <span><input type="submit" value="{_T string="Change"}" /></span></noscript>
             </div>
         </div>
+        </form>
+        <form action="{path_for name="batch-eventslist"}" method="post" id="listform">
         <table class="listing">
             <thead>
                 <tr>
@@ -117,7 +119,7 @@
                     <td class="{$rclass} nowrap username_row" data-scope="row">
                         {assign var="bid" value=$booking->getId()}
         {if $login->isAdmin() or $login->isStaff() or ($login->isGroupManager() and $booking->getEvent()->getGroup()|in_array:$login->managed_groups )}
-                        {*<input type="checkbox" name="event_sel[]" value="{$id}"/>*}
+                        <input type="checkbox" name="event_sel[]" value="{$id}"/>
                         <a href="{path_for name="events_event" data=["action" => {_T string="edit" domain="routes"}, "id" => $booking->getEventId()]}">{$booking->getEvent()->getName()}</a>
         {else}
                         {$booking->getEvent()->getName()}
@@ -166,13 +168,96 @@
             {_T string="Pages:"}<br/>
             <ul class="pages">{$pagination}</ul>
         </div>
+
+        <ul class="selection_menu">
+            <li>{_T string="For the selection:"}</li>
+    {if $login->isAdmin() or $login->isStaff()}
+        {if $pref_mail_method neq constant('Galette\Core\GaletteMail::METHOD_DISABLED')}
+            <li><input type="submit" id="sendmail" name="mailing" value="{_T string="Mail"}"/></li>
+        {/if}
+            <li><input type="submit" name="csv" value="{_T string="Export as CSV"}"/></li>
+    {/if}
+        </ul>
+        </form>
 {/if}
 {/block}
 
 {block name="javascripts"}
 <script type="text/javascript">
+{if $bookings_list|@count}
+        var _checkselection = function() {
+            var _checkeds = $('table.listing').find('input[type=checkbox]:checked').length;
+            if ( _checkeds == 0 ) {
+                var _el = $('<div id="pleaseselect" title="{_T string="No booking selected" escape="js" domain="events"}">{_T string="Please make sure to select at least one booking from the list to perform this action." escape="js" domain="events"}</div>');
+                _el.appendTo('body').dialog({
+                    modal: true,
+                    buttons: {
+                        Ok: function() {
+                            $(this).dialog( "close" );
+                        }
+                    },
+                    close: function(event, ui){
+                        _el.remove();
+                    }
+                });
+                return false;
+            }
+            return true;
+        }
+{/if}
     $(function() {
         {include file="js_removal.tpl"}
+{if $bookings_list|@count}
+            var _checklinks = '<div class="checkboxes"><span class="fleft"><a href="#" class="checkall">{_T string="(Un)Check all"}</a> | <a href="#" class="checkinvert">{_T string="Invert selection"}</a></span></div>';
+            $('.listing').before(_checklinks);
+            $('.listing tfoot td').prepend(_checklinks);
+            _bind_check('event_sel');
+            $('#nbshow').change(function() {
+                this.form.submit();
+            });
+            $('.selection_menu input[type="submit"], .selection_menu input[type="button"]').click(function(){
+
+                /*if ( this.id == 'delete' ) {
+                    //mass removal is handled from 2 steps removal
+                    return;
+                }*/
+
+                if (!_checkselection()) {
+                    return false;
+                } else {
+    {if $existing_mailing eq true}
+                    if (this.id == 'sendmail') {
+                        var _el = $('<div id="existing_mailing" title="{_T string="Existing mailing"}">{_T string="A mailing already exists. Do you want to create a new one or resume the existing?"}</div>');
+                        _el.appendTo('body').dialog({
+                            modal: true,
+                            hide: 'fold',
+                            width: '25em',
+                            height: 150,
+                            close: function(event, ui){
+                                _el.remove();
+                            },
+                            buttons: {
+                                '{_T string="Resume"}': function() {
+                                    $(this).dialog( "close" );
+                                    location.href = '{path_for name="mailing"}';
+                                },
+                                '{_T string="New"}': function() {
+                                    $(this).dialog( "close" );
+                                    //add required controls to the form, change its action URI, and send it.
+                                    var _form = $('#listform');
+                                    _form.append($('<input type="hidden" name="mailing_new" value="true"/>'));
+                                    _form.append($('<input type="hidden" name="mailing" value="true"/>'));
+                                    _form.submit();
+                                }
+                            }
+                        });
+                        return false;
+                    }
+    {/if}
+                    return true;
+                }
+            });
+{/if}
     });
 </script>
 {/block}

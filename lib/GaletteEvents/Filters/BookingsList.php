@@ -58,6 +58,9 @@ class BookingsList extends Pagination
     private $event_filter;
     private $paid_filter;
     private $payment_type_filter;
+
+    private $selected;
+
     /*private $name_filter = null;
     private $start_date_filter = null;
     private $end_date_filter = null;
@@ -69,7 +72,8 @@ class BookingsList extends Pagination
     protected $list_fields = array(
         'event_filter',
         'paid_filter',
-        'payment_type_filter'
+        'payment_type_filter',
+        'selected'
     );
 
     /**
@@ -111,6 +115,7 @@ class BookingsList extends Pagination
         $this->event_filter = __('all', 'events_routes');
         $this->paid_filter = Bookings::FILTER_DC_PAID;
         $this->payment_type_filter = -1;
+        $this->selected = [];
     }
 
     /**
@@ -158,7 +163,23 @@ class BookingsList extends Pagination
                 '[BookingsList] Setting property `' . $name . '`',
                 Analog::DEBUG
             );
-            $this->$name = $value;
+
+            switch ($name) {
+                case 'selected':
+                    if (is_array($value)) {
+                        $this->$name = $value;
+                    } elseif ($value !== null) {
+                        Analog::log(
+                            '[BookingsList] Value for property `' . $name .
+                            '` should be an array (' . gettype($value) . ' given)',
+                            Analog::WARNING
+                        );
+                    }
+                    break;
+                default:
+                    $this->$name = $value;
+                    break;
+            }
         }
     }
 

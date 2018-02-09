@@ -43,6 +43,7 @@ use GaletteEvents\Booking;
 use GaletteEvents\Repository\Events;
 use GaletteEvents\Repository\Bookings;
 use Galette\Repository\Members;
+use Galette\Filters\MembersList;
 
 //Constants and classes from plugin
 require_once $module['root'] . '/_config.inc.php';
@@ -749,3 +750,59 @@ $this->post(
         }
     }
 )->setName('events_do_remove_booking')->add($authenticate);
+
+//Batch actions on members list
+$this->post(
+    __('/bookings', 'events_routes') . __('/batch', 'routes'),
+    function ($request, $response) {
+        $post = $request->getParsedBody();
+
+        if (isset($post['event_sel'])) {
+            if (isset($this->session->filter_bookings)) {
+                $filters = $this->session->filter_bookings;
+            } else {
+                $filters = new BookingsList();
+            }
+
+            $filters->selected = $post['event_sel'];
+            $this->session->filter_bookings = $filters;
+
+            if (isset($post['mailing'])) {
+                $bookings = new Bookings($this->zdb, $this->login, $filters);
+                $members = [];
+                foreach ($bookings->getList() as $booking) {
+                    $members[] = $booking->getMemberId();
+                }
+                $mfilter = new MembersList();
+                $mfilter->selected = $members;
+                $this->session->filter_mailing = $mfilter;
+                $this->session->redirect_mailing = $this->router->pathFor(
+                    'events_bookings',
+                    [
+                        'event' => $filters->event_filter == null ?
+                            __('all', 'events_routes') :
+                            $filters->event_filter
+                    ]
+                );
+                return $response
+                    ->withStatus(301)
+                    ->withHeader('Location', $this->router->pathFor('mailing') . '?new=new');
+            }
+
+            if (isset($post['csv'])) {
+                return $response
+                    ->withStatus(301)
+                    ->withHeader('Location', $this->router->pathFor('csv-memberslist'));
+            }
+        } else {
+            $this->flash->addMessage(
+                'error_detected',
+                _T("No booking was selected, please check at least one.", "events")
+            );
+
+            return $response
+                ->withStatus(301)
+                ->withHeader('Location', $this->router->pathFor('members'));
+        }
+    }
+)->setName('batch-eventslist')->add($authenticate);
