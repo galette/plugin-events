@@ -76,6 +76,7 @@ class Booking
     private $lodging = false;
     private $check_number;
     private $number_people = 1;
+    private $comment = '';
 
     /**
      * Default constructor
@@ -150,6 +151,7 @@ class Booking
         $this->even_meal = $r->even_meal;
         $this->lodging = $r->has_lodging;
         $this->number_people = $r->number_people;
+        $this->comment = $r->comment;
     }
 
     /**
@@ -258,6 +260,10 @@ class Booking
             $this->number_people = $values['number_people'];
         }
 
+        if (isset($values['comment'])) {
+            $this->comment = $values['comment'];
+        }
+
         if (!isset($values['booking_date']) || empty($values['booking_date'])) {
             $this->errors[] = _T('Booking date is mandatory!', 'events');
         } else {
@@ -359,7 +365,8 @@ class Booking
                                             ($this->zdb->isPostgres() ? 'false' : 0)),
                 'has_lodging'       => ($this->lodging ? $this->lodging :
                                             ($this->zdb->isPostgres() ? 'false' : 0)),
-                'number_people'     => $this->number_people
+                'number_people'     => $this->number_people,
+                'comment'           => $this->comment
             );
 
             if (!isset($this->id) || $this->id == '') {

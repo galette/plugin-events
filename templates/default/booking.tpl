@@ -48,6 +48,10 @@
                     <label for="number_people">{_T string="Number of persons" domain="events"}</label>
                     <input type="number" name="number_people" id="number_people" value="{$booking->getNumberPeople()}" />
                 </p>
+                <p>
+                    <label for="comment">{_T string="Comment" domain="events"}</label>
+                    <textarea name="comment" id="comment">{$event->getComment()}</textarea>
+                </p>
                 </div>
             </fieldset>
     {if $login->isAdmin() or $login->isStaff()}

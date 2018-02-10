@@ -83,6 +83,7 @@ class Event
     private $lodging = self::ACTIVITY_NO;
     private $open = true;
     private $group;
+    private $comment = '';
 
     /**
      * Default constructor
@@ -188,6 +189,7 @@ class Event
         $this->lodging = $r->lodging;
         $this->open = $r->is_open;
         $this->group = $r->id_group;
+        $this->comment = $r->comment;
     }
 
     /**
@@ -328,6 +330,7 @@ class Event
             'address',
             'zip',
             'country',
+            'comment'
         ];
         foreach ($otherfields as $otherfield) {
             if (isset($values[$otherfield])) {
@@ -391,7 +394,8 @@ class Event
                 'lodging'               => $this->lodging,
                 'is_open'               => ($this->open ? $this->open :
                                                 ($this->zdb->isPostgres() ? 'false' : 0)),
-                Group::PK               => ($this->group ? $this->group : new Expression('NULL'))
+                Group::PK               => ($this->group ? $this->group : new Expression('NULL')),
+                'comment'               => $this->comment
             );
 
             if (!isset($this->id) || $this->id == '') {
@@ -703,5 +707,15 @@ class Event
             'even_meal' => _T('Even meal', 'events'),
             'lodging'   => _T('Lodging', 'events')
         ];
+    }
+
+    /**
+     * Get comment
+     *
+     * @return string
+     */
+    public function getComment()
+    {
+        return $this->comment;
     }
 }

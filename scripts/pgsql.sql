@@ -26,6 +26,7 @@ CREATE TABLE galette_events_events (
   lodging smallint default '0' NOT NULL,
   is_open boolean default TRUE,
   id_group integer REFERENCES galette_groups(id_group) ON DELETE RESTRICT ON UPDATE CASCADE default NULL,
+  comment text,
   PRIMARY KEY (id_event)
 );
 
@@ -57,6 +58,7 @@ CREATE TABLE galette_events_bookings (
   has_lodging boolean default FALSE,
   number_people smallint default NULL,
   creation_date date default '19010101' NOT NULL,
+  comment text,
   PRIMARY KEY (id_booking),
   UNIQUE (id_event, id_adh)
 );

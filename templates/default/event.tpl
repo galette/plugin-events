@@ -33,6 +33,10 @@
     {/foreach}
                     </select>
                 </p>
+                <p>
+                    <label for="comment">{_T string="Comment" domain="events"}</label>
+                    <textarea name="comment" id="comment">{$event->getComment()}</textarea>
+                </p>
                 </div>
             </fieldset>
             <fieldset class="galette_form" id="activities">

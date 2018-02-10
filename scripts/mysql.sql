@@ -20,6 +20,7 @@ CREATE TABLE galette_events_events (
   lodging tinyint(1) NOT NULL default 0,
   is_open tinyint(1) NOT NULL default 1,
   id_group int(10) default NULL,
+  comment text,
   PRIMARY KEY (id_event),
   FOREIGN KEY (id_group) REFERENCES galette_groups (id_group) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -44,6 +45,7 @@ CREATE TABLE galette_events_bookings (
   has_lodging tinyint(1) NOT NULL default 0,
   number_people int(4) default NULL,
   creation_date date NOT NULL default '1901-01-01',
+  comment text,
   PRIMARY KEY (id_booking),
   UNIQUE KEY (id_event, id_adh),
   FOREIGN KEY (id_event) REFERENCES galette_events_events (id_event) ON DELETE CASCADE ON UPDATE CASCADE,
