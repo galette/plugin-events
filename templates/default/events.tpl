@@ -54,9 +54,7 @@
                     </th>
                     <th>{_T string="Group" domain="events"}</th>
                     <th>{_T string="Open" domain="events"}</th>
-{if $login->isAdmin() or $login->isStaff() or $login->isGroupManager()}
                     <th class="actions_row">{_T string="Actions"}</th>
-{/if}
                 </tr>
             </thead>
             <tbody>
