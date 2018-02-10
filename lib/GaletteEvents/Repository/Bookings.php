@@ -280,13 +280,14 @@ class Bookings
             }
 
             if (count($this->filters->selected)) {
-                $select->where([Booking::PK => $this->filters-selected]);
+                $select->where([Booking::PK => $this->filters->selected]);
             }
         } catch (\Exception $e) {
             Analog::log(
                 __METHOD__ . ' | ' . $e->getMessage(),
                 Analog::WARNING
             );
+            throw $e;
         }
     }
 

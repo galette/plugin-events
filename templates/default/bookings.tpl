@@ -119,7 +119,7 @@
                     <td class="{$rclass} nowrap username_row" data-scope="row">
                         {assign var="bid" value=$booking->getId()}
         {if $login->isAdmin() or $login->isStaff() or ($login->isGroupManager() and $booking->getEvent()->getGroup()|in_array:$login->managed_groups )}
-                        <input type="checkbox" name="event_sel[]" value="{$id}"/>
+                        <input type="checkbox" name="event_sel[]" value="{$bid}"/>
                         <a href="{path_for name="events_event" data=["action" => {_T string="edit" domain="routes"}, "id" => $booking->getEventId()]}">{$booking->getEvent()->getName()}</a>
         {else}
                         {$booking->getEvent()->getName()}
