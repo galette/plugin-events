@@ -50,7 +50,7 @@
                 </p>
                 <p>
                     <label for="comment">{_T string="Comment" domain="events"}</label>
-                    <textarea name="comment" id="comment">{$event->getComment()}</textarea>
+                    <textarea name="comment" id="comment">{$booking->getComment()}</textarea>
                 </p>
                 </div>
             </fieldset>

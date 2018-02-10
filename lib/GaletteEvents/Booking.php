@@ -649,4 +649,14 @@ class Booking
     {
         return EVENTS_PREFIX  . self::TABLE;
     }
+
+    /**
+     * Get comment
+     *
+     * @return string
+     */
+    public function getComment()
+    {
+        return $this->comment;
+    }
 }
