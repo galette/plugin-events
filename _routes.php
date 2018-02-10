@@ -759,13 +759,13 @@ $this->post(
 
         if (isset($post['event_sel'])) {
             if (isset($this->session->filter_bookings)) {
-                $filters = $this->session->filter_bookings;
+                $filters = clone $this->session->filter_bookings;
             } else {
                 $filters = new BookingsList();
             }
 
+            //$this->session->filter_bookings = $filters;
             $filters->selected = $post['event_sel'];
-            $this->session->filter_bookings = $filters;
 
             if (isset($post['mailing'])) {
                 $bookings = new Bookings($this->zdb, $this->login, $filters);
