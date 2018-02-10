@@ -101,7 +101,7 @@
 {/if}
                 </tr>
             </thead>
-{if $nb_bookings != 0}
+{if $nb_bookings gt 0}
             <tfoot>
                 <tr>
                     <td class="right" colspan="10">
@@ -161,7 +161,7 @@
 {/foreach}
             </tbody>
         </table>
-{if $nb_events gt 0}
+{if $nb_bookings gt 0}
         <div class="center cright">
             {_T string="Pages:"}<br/>
             <ul class="pages">{$pagination}</ul>
