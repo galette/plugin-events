@@ -81,6 +81,22 @@ class Activities extends Repository
     {
         $this->zdb = $zdb;
         $this->login = $login;
+
+        $this->defaults = [
+            'noon_meal' => [
+                Activity::PK    => '1',
+                'name'          => _T('Noon meal', 'events')
+            ],
+            'even_meal' => [
+                Activity::PK    => '2',
+                'name'          => _T('Even meal', 'events')
+            ],
+            'lodging'   => [
+                Activity::PK    => '3',
+                'name'          => _T('Lodging', 'events')
+            ]
+        ];
+
         parent::__construct($zdb, $preferences, $login, 'Activity', 'GaletteEvents', EVENTS_PREFIX);
 
         if ($filters === null) {
@@ -245,7 +261,7 @@ class Activities extends Repository
                 $this->zdb->connection->beginTransaction();
 
                 //first, we drop all values
-                $delete = $this->zdb->delete($ent::TABLE);
+                $delete = $this->zdb->delete(EVENTS_PREFIX . $ent::TABLE);
                 $this->zdb->execute($delete);
                 $this->insert($ent::TABLE, $this->defaults);
 
@@ -271,17 +287,16 @@ class Activities extends Repository
         $insert = $this->zdb->insert(EVENTS_PREFIX . $table);
         $insert->values(
             array(
-                Activity::PK    => ':' . Activity::PK,
                 'name'          => ':name',
-                'creation_date' => ':creation_date',
-                'is_active'     => ':is_active',
-                'comment'       => ':comment'
+                'creation_date' => date('Y-m-d'),
+                'is_active'     => '1',
+                'comment'       => ''
             )
         );
         $stmt = $this->zdb->sql->prepareStatementForSqlObject($insert);
 
-        foreach ($values as $value) {
-            $stmt->execute($value);
+        foreach ($values as $name) {
+            $stmt->execute([':name' => $name]);
         }
     }
 }

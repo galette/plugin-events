@@ -841,6 +841,11 @@ $this->get(
         }
 
         $activities = new Activities($this->zdb, $this->login, $this->preferences, $filters);
+        $list = $activities->getList();
+        if (!count($list)) {
+            $activities->installInit();
+            $list = $activities->getList();
+        }
 
         //assign pagination variables to the template and add pagination links
         $filters->setSmartyPagination($this->router, $this->view->getSmarty(), false);
@@ -854,7 +859,7 @@ $this->get(
             array(
                 'page_title'            => _T("Activities management", "events"),
                 'require_dialog'        => true,
-                'activities'            => $activities->getList(),
+                'activities'            => $list,
                 'nb_activities'         => $activities->getCount(),
                 'filters'               => $filters
             )
@@ -862,3 +867,154 @@ $this->get(
         return $response;
     }
 )->setName('events_activities')->add($authenticate);
+$this->get(
+    __('/activity', 'events_routes') . '/{action:' . __('edit', 'routes') . '|' . __('add', 'routes') . '}[/{id:\d+}]',
+    function ($request, $response, $args) use ($module, $module_id) {
+        $action = $args['action'];
+        $id = null;
+        if (isset($args['id'])) {
+            $id = $args['id'];
+        }
+
+        if ($action === __('edit', 'routes') && $id === null) {
+            throw new \RuntimeException(
+                _T("Activity ID cannot ben null calling edit route!", "events")
+            );
+        } elseif ($action === __('add', 'routes') && $id !== null) {
+             return $response
+                ->withStatus(301)
+                ->withHeader('Location', $this->router->pathFor('events_activity', ['action' => __('add', 'routes')]));
+        }
+        $route_params = ['action' => $args['action']];
+
+        if ($this->session->activity !== null) {
+            $event = $this->session->activity;
+            $this->session->activity = null;
+        } else {
+            $activity = new Activity($this->zdb, $this->login);
+        }
+
+        if ($id !== null && $activity->getId() != $id) {
+            $activity->load($id);
+        }
+
+        // template variable declaration
+        $title = _T("Activity");
+        if ($activity->getId() != '') {
+            $title .= ' (' . _T("modification") . ')';
+        } else {
+            $title .= ' (' . _T("creation") . ')';
+        }
+
+        // display page
+        $this->view->render(
+            $response,
+            'file:[' . $module['route'] . ']activity.tpl',
+            array_merge(
+                $route_params,
+                array(
+                    'autocomplete'  => true,
+                    'page_title'    => $title,
+                    'activity'      => $activity,
+                    // pseudo random int
+                    'time'          => time()
+                )
+            )
+        );
+        return $response;
+    }
+)->setName(
+    'events_activity'
+)->add($authenticate);
+
+$this->post(
+    __('/activity', 'events_routes') . __('/store', 'routes'),
+    function ($request, $response, $args) {
+        $post = $request->getParsedBody();
+        $activity = new Activity($this->zdb, $this->login);
+        if (isset($post['id']) && !empty($post['id'])) {
+            $activity->load((int)$post['id']);
+        }
+
+        $success_detected = [];
+        $warning_detected = [];
+        $error_detected = [];
+
+        // Validation
+        $valid = $activity->check($post);
+        if ($valid !== true) {
+            $error_detected = array_merge($error_detected, $valid);
+        }
+
+        if (count($error_detected) == 0) {
+            //all goes well, we can proceed
+
+            $new = false;
+            if ($activity->getId() == '') {
+                $new = true;
+            }
+            $store = $activity->store();
+            if ($store === true) {
+                //member has been stored :)
+                if ($new) {
+                    $success_detected[] = _T("New activity has been successfully added.", "events");
+                } else {
+                    $success_detected[] = _T("Activity has been modified.", "events");
+                }
+            } else {
+                //something went wrong :'(
+                $error_detected[] = _T("An error occured while storing the activity.", "events");
+            }
+        }
+
+        if (count($error_detected) > 0) {
+            foreach ($error_detected as $error) {
+                $this->flash->addMessage(
+                    'error_detected',
+                    $error
+                );
+            }
+        }
+
+        if (count($warning_detected) > 0) {
+            foreach ($warning_detected as $warning) {
+                $this->flash->addMessage(
+                    'warning_detected',
+                    $warning
+                );
+            }
+        }
+        if (count($success_detected) > 0) {
+            foreach ($success_detected as $success) {
+                $this->flash->addMessage(
+                    'success_detected',
+                    $success
+                );
+            }
+        }
+
+        if (count($error_detected) == 0) {
+            $redirect_url = $this->router->pathFor('events_activities');
+        } else {
+            //store entity in session
+            $this->session->activity = $activity;
+
+            if ($activity->getId()) {
+                $rparams = [
+                    'id'        => $activity->getId(),
+                    'action'    => __('edit', 'routes')
+                ];
+            } else {
+                $rparams = ['action' => __('add', 'routes')];
+            }
+            $redirect_url = $this->router->pathFor(
+                'events_activity',
+                $rparams
+            );
+        }
+
+        return $response
+            ->withStatus(301)
+            ->withHeader('Location', $redirect_url);
+    }
+)->setName('events_storeactivity')->add($authenticate);

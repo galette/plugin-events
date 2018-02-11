@@ -89,12 +89,6 @@ class Activity
         $this->zdb = $zdb;
         $this->login = $login;
 
-        $this->defaults = [
-            'noon_meal' => _T('Noon meal', 'events'),
-            'even_meal' => _T('Even meal', 'events'),
-            'lodging'   => _T('Lodging', 'events')
-        ];
-
         if ($args == null || is_int($args)) {
             if (is_int($args) && $args > 0) {
                 $this->load($args);
@@ -147,9 +141,9 @@ class Activity
      */
     private function loadFromRS($r)
     {
-        $this->id = $r->id_event;
+        $this->id = $r->id_activity;
         $this->name = $r->name;
-        $this->active = $r->active;
+        $this->active = $r->is_active;
         $this->creation_date = $r->creation_date;
         $this->comment = $r->comment;
     }
