@@ -62,3 +62,25 @@ CREATE TABLE galette_events_bookings (
   PRIMARY KEY (id_booking),
   UNIQUE (id_event, id_adh)
 );
+
+--
+-- Table structure for table `galette_events_activities`
+--
+
+DROP SEQUENCE IF EXISTS galette_events_activities_id_seq;
+CREATE SEQUENCE galette_events_activities_id_seq
+    START 1
+    INCREMENT 1
+    MAXVALUE 2147483647
+    MINVALUE 1
+    CACHE 1;
+
+DROP TABLE IF EXISTS galette_events_activities CASCADE;
+CREATE TABLE galette_events_activities (
+  id_activity integer DEFAULT nextval('galette_events_activities_id_seq'::text) NOT NULL,
+  name character varying(150) NOT NULL,
+  is_active boolean default TRUE,
+  creation_date date default '19010101' NOT NULL,
+  comment text,
+  PRIMARY KEY (id_activity)
+);

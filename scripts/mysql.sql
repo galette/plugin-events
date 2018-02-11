@@ -52,4 +52,25 @@ CREATE TABLE galette_events_bookings (
   FOREIGN KEY (id_adh) REFERENCES galette_adherents (id_adh) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Table structure for table `galette_events_activities`
+--
+
+DROP TABLE IF EXISTS galette_events_activities;
+CREATE TABLE galette_events_activities (
+  id_activity int(10) NOT NULL auto_increment,
+  name varchar(150) NOT NULL,
+  is_active tinyint(1) NOT NULL default 1,
+  creation_date date NOT NULL default '1901-01-01',
+  comment text,
+  PRIMARY KEY (id_activity)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+DROP TABLE IF EXISTS galette_events_activitiesevents;
+CREATE TABLE galette_events_activitiesevents (
+  id_event int(10) NOT NULL,
+  id_activity int(10) NOT NULL,
+  PRIMARY KEY(id_event,id_activity)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 SET FOREIGN_KEY_CHECKS=1;

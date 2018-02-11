@@ -56,6 +56,7 @@ $this->register(
         'events_remove_booking'     => 'staff',
         'events_do_remove_booking'  => 'staff',
         'filter-bookingslist'       => 'member',
-        'batch-eventslist'          => 'groupmanager'
+        'batch-eventslist'          => 'groupmanager',
+        'events_activities'         => 'staff'
     ]
 );

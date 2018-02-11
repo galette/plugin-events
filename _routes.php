@@ -38,10 +38,13 @@ use Analog\Analog;
 use Galette\Repository\Groups;
 use GaletteEvents\Filters\EventsList;
 use GaletteEvents\Filters\BookingsList;
+use GaletteEvents\Filters\ActivitiesList;
 use GaletteEvents\Event;
 use GaletteEvents\Booking;
+use GaletteEvents\Activity;
 use GaletteEvents\Repository\Events;
 use GaletteEvents\Repository\Bookings;
+use GaletteEvents\Repository\Activities;
 use Galette\Repository\Members;
 use Galette\Filters\MembersList;
 
@@ -806,3 +809,56 @@ $this->post(
         }
     }
 )->setName('batch-eventslist')->add($authenticate);
+
+$this->get(
+    __('/activities', 'events_routes') . '[/{option:' . __('page', 'routes') . '|' .
+    __('order', 'routes') . '}/{value:\d+}]',
+    function ($request, $response, $args) use ($module, $module_id) {
+        $option = null;
+        if (isset($args['option'])) {
+            $option = $args['option'];
+        }
+        $value = null;
+        if (isset($args['value'])) {
+            $value = $args['value'];
+        }
+
+        if (isset($this->session->filter_activities)) {
+            $filters = $this->session->filter_activities;
+        } else {
+            $filters = new ActivitiesList();
+        }
+
+        if ($option !== null) {
+            switch ($option) {
+                case __('page', 'routes'):
+                    $filters->current_page = (int)$value;
+                    break;
+                case __('order', 'routes'):
+                    $filters->orderby = $value;
+                    break;
+            }
+        }
+
+        $activities = new Activities($this->zdb, $this->login, $this->preferences, $filters);
+
+        //assign pagination variables to the template and add pagination links
+        $filters->setSmartyPagination($this->router, $this->view->getSmarty(), false);
+
+        $this->session->filter_activities = $filters;
+
+        // display page
+        $this->view->render(
+            $response,
+            'file:[' . $module['route'] . ']activities.tpl',
+            array(
+                'page_title'            => _T("Activities management", "events"),
+                'require_dialog'        => true,
+                'activities'            => $activities->getList(),
+                'nb_activities'         => $activities->getCount(),
+                'filters'               => $filters
+            )
+        );
+        return $response;
+    }
+)->setName('events_activities')->add($authenticate);
