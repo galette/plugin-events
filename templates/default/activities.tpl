@@ -40,6 +40,7 @@
                             {/if}
                         </a>
                     </th>
+                    <th>{_T string="Events" domain="events"}</th>
                     <th>{_T string="Is active" domain="events"}</th>
                     <th class="actions_row">{_T string="Actions"}</th>
                 </tr>
@@ -54,6 +55,7 @@
                         <a href="{path_for name="events_activity" data=["action" => {_T string="edit" domain="routes"}, "id" => $aid]}">{$activity->getName()}</a>
                     </td>
                     <td class="{$rclass}" data-title="{_T string="Creation date" domain="events"}">{$activity->getCreationDate()}</td>
+                    <td class="{$rclass}" data-title="{_T string="Events" domain="events"}">{$activity->countEvents()}</td>
                     <td class="{$rclass} id_row" data-title="{_T string="Is active" domain="events"}">
                         {if $activity->isActive()}
                             <img src="{base_url}/{$template_subdir}images/icon-on.png" alt="{_T string="Active" domain="events"}"/>

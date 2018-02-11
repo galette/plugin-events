@@ -401,4 +401,24 @@ class Activity
     {
         return $this->comment;
     }
+
+    /**
+     * Count number of events using this Activity
+     *
+     * @return integer
+     */
+    public function countEvents()
+    {
+        $select = $this->zdb->select(EVENTS_PREFIX . 'activitiesevents');
+
+        $select->columns(
+            array(
+                'counter' => new Expression('COUNT(' . Event::PK . ')')
+            )
+        )->where([self::PK => $this->id]);
+        $results = $this->zdb->execute($select);
+        $result = $results->current();
+        $count = $result->counter;
+        return $count;
+    }
 }
