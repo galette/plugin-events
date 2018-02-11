@@ -59,6 +59,8 @@ $this->register(
         'batch-eventslist'          => 'groupmanager',
         'events_activities'         => 'staff',
         'events_activity'           => 'staff',
-        'events_storeactivity'      => 'staff'
+        'events_storeactivity'      => 'staff',
+        'events_remove_activity'    => 'staff',
+        'events_do_remove_activity' => 'staff'
     ]
 );

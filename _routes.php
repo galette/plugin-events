@@ -1018,3 +1018,97 @@ $this->post(
             ->withHeader('Location', $redirect_url);
     }
 )->setName('events_storeactivity')->add($authenticate);
+
+$this->get(
+    __('/activity', 'events_routes') . __('/remove', 'routes') . '/{id:\d+}',
+    function ($request, $response, $args) {
+        $activity = new Activity($this->zdb, $this->login, (int)$args['id']);
+
+        $data = [
+            'id'            => $args['id'],
+            'redirect_uri'  => $this->router->pathFor('events_activities')
+        ];
+
+        // display page
+        $this->view->render(
+            $response,
+            'confirm_removal.tpl',
+            array(
+                'type'          => _T("Activity", "events"),
+                'mode'          => $request->isXhr() ? 'ajax' : '',
+                'page_title'    => sprintf(
+                    _T('Remove activity %1$s'),
+                    $activity->getName()
+                ),
+                'form_url'      => $this->router->pathFor(
+                    'events_do_remove_activity',
+                    ['id' => $activity->getId()]
+                ),
+                'cancel_uri'    => $this->router->pathFor('events_activities'),
+                'data'          => $data
+            )
+        );
+        return $response;
+    }
+)->setName('events_remove_activity')->add($authenticate);
+
+$this->post(
+    __('/activity', 'events_routes') . __('/remove', 'routes') . '[/{id:\d+}]',
+    function ($request, $response) {
+        $post = $request->getParsedBody();
+        $ajax = isset($post['ajax']) && $post['ajax'] === 'true';
+        $success = false;
+
+        $uri = isset($post['redirect_uri']) ?
+            $post['redirect_uri'] :
+            $this->router->pathFor('slash');
+
+        if (!isset($post['confirm'])) {
+            $this->flash->addMessage(
+                'error_detected',
+                _T("Removal has not been confirmed!")
+            );
+        } else {
+            $activity = new Activity($this->zdb, $this->login, (int)$post['id']);
+            $del = $activity->remove();
+
+            if ($del !== true) {
+                $error_detected = str_replace(
+                    '%name',
+                    $activity->getName(),
+                    _T("An error occured trying to remove activity %name :/", "events")
+                );
+
+                $this->flash->addMessage(
+                    'error_detected',
+                    $error_detected
+                );
+            } else {
+                $success_detected = str_replace(
+                    '%name',
+                    $activity->getName(),
+                    _T("Activity %name has been successfully deleted.", "events")
+                );
+
+                $this->flash->addMessage(
+                    'success_detected',
+                    $success_detected
+                );
+
+                $success = true;
+            }
+        }
+
+        if (!$ajax) {
+            return $response
+                ->withStatus(301)
+                ->withHeader('Location', $uri);
+        } else {
+            return $response->withJson(
+                [
+                    'success'   => $success
+                ]
+            );
+        }
+    }
+)->setName('events_do_remove_activity')->add($authenticate);
