@@ -804,12 +804,16 @@ class Event
             null,
             $select::JOIN_LEFT
         );
-        $select->where(
-            'ace.' . Event::PK . ' != ' . $this->id .
-            ' OR ace.' . Event::PK . ' IS NULL'
-        );
 
+        $where = '';
+        if ($this->id) {
+            $where .= 'ace.' . Event::PK . ' != ' . $this->id . ' OR ';
+        }
+        $select->where(
+            $where . 'ace.' . Event::PK . ' IS NULL'
+        );
         $results = $this->zdb->execute($select);
+
         return $results;
     }
 
