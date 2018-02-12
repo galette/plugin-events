@@ -70,6 +70,7 @@ DROP TABLE IF EXISTS galette_events_activitiesevents;
 CREATE TABLE galette_events_activitiesevents (
   id_event int(10) NOT NULL,
   id_activity int(10) NOT NULL,
+  status tinyint(1) NOT NULL,
   PRIMARY KEY(id_event,id_activity)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 

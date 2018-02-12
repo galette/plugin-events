@@ -84,3 +84,11 @@ CREATE TABLE galette_events_activities (
   comment text,
   PRIMARY KEY (id_activity)
 );
+
+DROP TABLE IF EXISTS galette_events_activitiesevents CASCADE;
+CREATE TABLE galette_events_activitiesevents (
+  id_event integer NOT NULL,
+  id_activity integer NOT NULL,
+  status tinyint(1) NOT NULL,
+  PRIMARY KEY(id_event,id_activity)
+);

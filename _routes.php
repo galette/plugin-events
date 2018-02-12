@@ -211,6 +211,7 @@ $this->post(
         $success_detected = [];
         $warning_detected = [];
         $error_detected = [];
+        $goto_list = true;
 
         // Validation
         $valid = $event->check($post);
@@ -220,22 +221,28 @@ $this->post(
 
         if (count($error_detected) == 0) {
             //all goes well, we can proceed
-
             $new = false;
             if ($event->getId() == '') {
                 $new = true;
             }
-            $store = $event->store();
-            if ($store === true) {
-                //member has been stored :)
-                if ($new) {
-                    $success_detected[] = _T("New event has been successfully added.", "events");
-                } else {
-                    $success_detected[] = _T("Event has been modified.", "events");
-                }
+
+            if (isset($post['add_activity'])) {
+                $this->session->event = $event;
+                $success_detected[] = _T("Activity has been attached to event.", "events");
+                $goto_list = false;
             } else {
-                //something went wrong :'(
-                $error_detected[] = _T("An error occured while storing the event.", "events");
+                $store = $event->store();
+                if ($store === true) {
+                    //member has been stored :)
+                    if ($new) {
+                        $success_detected[] = _T("New event has been successfully added.", "events");
+                    } else {
+                        $success_detected[] = _T("Event has been modified.", "events");
+                    }
+                } else {
+                    //something went wrong :'(
+                    $error_detected[] = _T("An error occured while storing the event.", "events");
+                }
             }
         }
 
@@ -265,7 +272,7 @@ $this->post(
             }
         }
 
-        if (count($error_detected) == 0) {
+        if (count($error_detected) == 0 && $goto_list) {
             $redirect_url = $this->router->pathFor('events_events');
         } else {
             //store entity in session

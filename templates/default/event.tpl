@@ -40,32 +40,35 @@
                 </div>
             </fieldset>
             <fieldset class="galette_form" id="activities">
-                <legend>{_T string="Related activities" domain="events"}</legend>
+                <legend>{_T string="Activities" domain="events"}</legend>
                 <div>
+                <p class="right">
+    {assign var=availables value=$event->availableActivities()}
+    {if $availables|@count}
+                    <select name="attach_activity">
+                        <option value="">{_T string="Choose an activity to add" domain="events"}</option>
+        {foreach from=$availables item=activity}
+                        <option value="{$activity.id_activity}">{$activity.name}</option>
+        {/foreach}
+        </select>
+        <input type="submit" value="{_T string="Add"}" name="add_activity"/>
+    {/if}
+                </p>
+    {assign var=activities value=$event->getActivities()}
+    {if $activities|@count}
+        {foreach from=$activities item=item}
+            {assign var=activity value=$item.activity}
                 <p>
-                    <label for="noon_meal">{_T string="Noon meal" domain="events"}</label>
-                    <select name="noon_meal" id="noon_meal">
-                        <option value="{GaletteEvents\Event::ACTIVITY_YES}"{if $event->getNoonMeal() eq GaletteEvents\Event::ACTIVITY_YES} selected="selected"{/if}>{_T string="Yes"}</option>
-                        <option value="{GaletteEvents\Event::ACTIVITY_NO}"{if $event->getNoonMeal() eq GaletteEvents\Event::ACTIVITY_NO} selected="selected"{/if}>{_T string="No"}</option>
-                        <option value="{GaletteEvents\Event::ACTIVITY_REQUIRED}"{if $event->getNoonMeal() eq GaletteEvents\Event::ACTIVITY_REQUIRED} selected="selected"{/if}>{_T string="Required" domain="events"}</option>
+                    <input type="hidden" name="activities_ids[]" value="{$activity->getId()}"/>
+                    <label for="activities_status_{$activity->getId()}">{$activity->getName()}</label>
+                    <select name="activities_status[]" id="activities_status_{$activity->getId()}">
+                        <option value="{GaletteEvents\Activity::YES}"{if $item.status eq GaletteEvents\Activity::YES} selected="selected"{/if}>{_T string="Yes"}</option>
+                        <option value="{GaletteEvents\Activity::NO}"{if $item.status eq GaletteEvents\Activity::NO} selected="selected"{/if}>{_T string="No"}</option>
+                        <option value="{GaletteEvents\Activity::REQUIRED}"{if $item.status eq GaletteEvents\Activity::REQUIRED} selected="selected"{/if}>{_T string="Required" domain="events"}</option>
                     </select>
                 </p>
-                <p>
-                    <label for="even_meal">{_T string="Even meal" domain="events"}</label>
-                    <select name="even_meal" id="even_meal">
-                        <option value="{GaletteEvents\Event::ACTIVITY_YES}"{if $event->getEvenMeal() eq GaletteEvents\Event::ACTIVITY_YES} selected="selected"{/if}>{_T string="Yes"}</option>
-                        <option value="{GaletteEvents\Event::ACTIVITY_NO}"{if $event->getEvenMeal() eq GaletteEvents\Event::ACTIVITY_NO} selected="selected"{/if}>{_T string="No"}</option>
-                        <option value="{GaletteEvents\Event::ACTIVITY_REQUIRED}"{if $event->getEvenMeal() eq GaletteEvents\Event::ACTIVITY_REQUIRED} selected="selected"{/if}>{_T string="Required" domain="events"}</option>
-                    </select>
-                </p>
-                <p>
-                    <label for="lodging">{_T string="Lodging" domain="events"}</label>
-                    <select name="lodging" id="lodging">
-                        <option value="{GaletteEvents\Event::ACTIVITY_YES}"{if $event->getLodging() eq GaletteEvents\Event::ACTIVITY_YES} selected="selected"{/if}>{_T string="Yes"}</option>
-                        <option value="{GaletteEvents\Event::ACTIVITY_NO}"{if $event->getLodging() eq GaletteEvents\Event::ACTIVITY_NO} selected="selected"{/if}>{_T string="No"}</option>
-                        <option value="{GaletteEvents\Event::ACTIVITY_REQUIRED}"{if $event->getLodging() eq GaletteEvents\Event::ACTIVITY_REQUIRED} selected="selected"{/if}>{_T string="Required" domain="events"}</option>
-                    </select>
-                </p>
+        {/foreach}
+    {/if}
                 </div>
             </fieldset>
             <fieldset class="galette_form" id="location">
