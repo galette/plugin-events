@@ -230,7 +230,7 @@ $this->post(
                 $this->session->event = $event;
                 $success_detected[] = _T("Activity has been attached to event.", "events");
                 $goto_list = false;
-            } else {
+            } elseif (isset($post['save'])) {
                 $store = $event->store();
                 if ($store === true) {
                     //member has been stored :)
@@ -243,6 +243,10 @@ $this->post(
                     //something went wrong :'(
                     $error_detected[] = _T("An error occured while storing the event.", "events");
                 }
+            } else {
+                $this->session->event = $event;
+                $error_detected = [];
+                $goto_list = false;
             }
         }
 

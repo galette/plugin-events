@@ -74,4 +74,16 @@ CREATE TABLE galette_events_activitiesevents (
   PRIMARY KEY(id_event,id_activity)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+DROP TABLE IF EXISTS galette_events_activitiesbookings CASCADE;
+CREATE TABLE galette_events_activitiesbookings (
+  id_activitybooking int(10) NOT NULL auto_increment,
+  id_activity int(10) NOT NULL,
+  id_booking int(10) NOT NULL,
+  checked tinyint(1) default 0,
+  PRIMARY KEY (id_activitybooking),
+  UNIQUE KEY (id_activity, id_booking),
+  FOREIGN KEY (id_activity) REFERENCES galette_events_activities (id_activity) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (id_booking) REFERENCES galette_events_bookings (id_booking) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
 SET FOREIGN_KEY_CHECKS=1;

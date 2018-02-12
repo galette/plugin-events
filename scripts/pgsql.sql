@@ -53,9 +53,6 @@ CREATE TABLE galette_events_bookings (
   payment_method smallint default '0' NOT NULL,
   bank_name character varying(100) default NULL,
   check_number character varying(50) default NULL,
-  noon_meal boolean default FALSE,
-  even_meal boolean default FALSE,
-  has_lodging boolean default FALSE,
   number_people smallint default NULL,
   creation_date date default '19010101' NOT NULL,
   comment text,
@@ -91,4 +88,22 @@ CREATE TABLE galette_events_activitiesevents (
   id_activity integer NOT NULL,
   status tinyint(1) NOT NULL,
   PRIMARY KEY(id_event,id_activity)
+);
+
+DROP SEQUENCE IF EXISTS galette_events_activitiesbookings_id_seq;
+CREATE SEQUENCE galette_events_activitiesbookings_id_seq
+    START 1
+    INCREMENT 1
+    MAXVALUE 2147483647
+    MINVALUE 1
+    CACHE 1;
+
+DROP TABLE IF EXISTS galette_events_activitiesbookings CASCADE;
+CREATE TABLE galette_events_activitiesbookings (
+  id_activitybooking integer DEFAULT nextval('galette_events_activitiesbookings_id_seq'::text) NOT NULL,
+  id_activity integer REFERENCES galette_events_activities (id_activity) ON DELETE CASCADE ON UPDATE CASCADE,
+  id_booking integer REFERENCES galette_events_bookings (id_booking) ON DELETE CASCADE ON UPDATE CASCADE,
+  checked boolean default FALSE,
+  PRIMARY KEY (id_activitybooking),
+  UNIQUE (id_activity, id_booking)
 );

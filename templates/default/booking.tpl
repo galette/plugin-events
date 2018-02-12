@@ -38,12 +38,6 @@
                     <a href="#" id="choose_member">{_T string="Choose member" domain="events"}</a>
     {/if}
                 </p>
-    {foreach from=$booking->getEvent()->getActivities() key=activity item=label}
-                <p>
-                    <label for="{$activity}">{$label}</label>
-                    <input type="checkbox" name="{$activity}" id="{$activity}"{if $booking->has($activity) or $booking->getEventId() and $booking->getEvent()->isActivityRequired($activity)} checked="checked"{/if}{if $booking->getEventId() and !$booking->getEvent()->hasActivity($activity)} disabled="disabled"{/if}{if $booking->getEventId() and $booking->getEvent()->isActivityRequired($activity)} required="required"{/if}/>
-                </p>
-    {/foreach}
                 <p>
                     <label for="number_people">{_T string="Number of persons" domain="events"}</label>
                     <input type="number" name="number_people" id="number_people" value="{$booking->getNumberPeople()}" />
@@ -52,6 +46,19 @@
                     <label for="comment">{_T string="Comment" domain="events"}</label>
                     <textarea name="comment" id="comment">{$booking->getComment()}</textarea>
                 </p>
+                </div>
+            </fieldset>
+            <fieldset class="galette_form" id="activities">
+                <legend>{_T string="Activities" domain="events"}</legend>
+                <div>
+    {foreach from=$booking->getEvent()->getActivities() key=aid item=activity}
+                    <p>
+                        <label for="activity_{$aid}">{$activity.activity->getName()}</label>
+                        <input type="checkbox" name="activities[]" id="activity_{$aid}"{if $booking->has($aid) or $booking->getEventId() and $booking->getEvent()->isActivityRequired($aid)} checked="checked"{/if}{if $booking->getEventId() and !$booking->getEvent()->hasActivity($aid)} disabled="disabled"{/if}{if $booking->getEventId() and $booking->getEvent()->isActivityRequired($aid)} required="required"{/if}/>
+                    </p>
+    {foreachelse}
+                    <p>{_T string="No activity for selected event" domain="events"}</p>
+    {/foreach}
                 </div>
             </fieldset>
     {if $login->isAdmin() or $login->isStaff()}
@@ -81,7 +88,7 @@
     {/if}
         </div>
         <div class="button-container">
-            <input type="submit" value="{_T string="Save"}" />
+            <input type="submit" name="save" value="{_T string="Save"}" />
             <input type="submit" name="cancel" value="{_T string="Cancel"}"/>
             <input type="hidden" name="id" id="id" value="{$booking->getId()}"/>
         </div>
@@ -93,7 +100,7 @@
         $(function() {
             _collapsibleFieldsets();
             $.datepicker.setDefaults($.datepicker.regional['{$galette_lang}']);
-            $('#begin_date').datepicker({
+            $('#booking_date').datepicker({
                 changeMonth: true,
                 changeYear: true,
                 showOn: 'button',
@@ -101,20 +108,13 @@
                 buttonImageOnly: true,
                 minDate: '-0d',
                 buttonText: '{_T string="Select a date" escape="js"}',
-                onSelect: function(date) {
-                    $("#end_date").datepicker("option", "minDate", $('#begin_date').datepicker('getDate'));
-                }
             });
-            $('#end_date').datepicker({
-                changeMonth: true,
-                changeYear: true,
-                showOn: 'button',
-                buttonImage: '{base_url}/{$template_subdir}images/calendar.png',
-                buttonImageOnly: true,
-                buttonText: '{_T string="Select a date" escape="js"}',
-                minDate: $("#begin_date").datepicker("getDate")
-            });
+        });
 
+        $('#event').on('change', function() {
+            var _this = $(this);
+            var _val = _this.find('option:selected').val()
+            _this.parents('form').submit();
         });
 
 {if $login->isAdmin() or $login->isStaff() or $login->isGroupManager()}
@@ -191,17 +191,5 @@
             });
         }
  {/if}
-        /*$('#meal, #lodging').on('change', function() {
-            var _this = $(this);
-            if (!_this.is(':checked')) {
-                $('#' + _this.attr('id') + '_required').prop('checked', false);
-            }
-        });
-        $('#meal_required, #lodging_required').on('change', function() {
-            var _this = $(this);
-            if (_this.is(':checked')) {
-                $('#' + _this.attr('id').replace(/_required/, '')).prop('checked', true);
-            }
-        });*/
     </script>
 {/block}

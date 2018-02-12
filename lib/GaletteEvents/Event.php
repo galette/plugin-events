@@ -693,57 +693,27 @@ class Event
     }
 
     /**
-     * Get noon meal
-     *
-     * @return integer @see Event::ACTIVITY_* constants
-     */
-    public function getNoonMeal()
-    {
-        return $this->noon_meal;
-    }
-
-    /**
      * Is activity required
      *
-     * @param string $name Activity name
+     * @param integer $activity Activity ID
      *
      * @return boolean
      */
-    public function isActivityRequired($name)
+    public function isActivityRequired($activity)
     {
-        return $this->$name == self::ACTIVITY_REQUIRED;
+        return $this->activities[$activity]['status'] == Activity::REQUIRED;
     }
 
     /**
      * Does current event propose activity
      *
-     * @param string $name Activity name
+     * @param integer $activity Activity ID
      *
      * @return boolean
      */
-    public function hasActivity($name)
+    public function hasActivity($activity)
     {
-        return $this->$name != self::ACTIVITY_NO;
-    }
-
-    /**
-     * Get even meal
-     *
-     * @return integer @see Event::ACTIVITY_* constants
-     */
-    public function getEvenMeal()
-    {
-        return $this->even_meal;
-    }
-
-    /**
-     * Does event includes a lodging?
-     *
-     * @return integer @see self::ACTIVITY_* constants
-     */
-    public function getLodging()
-    {
-        return $this->lodging;
+        return $this->activities[$activity]['status'] != Activity::NO;
     }
 
     /**

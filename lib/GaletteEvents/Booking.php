@@ -71,12 +71,11 @@ class Booking
     private $amount;
     private $payment_method = Contribution::PAYMENT_OTHER;
     private $bank_name;
-    private $noon_meal = false;
-    private $even_meal = false;
-    private $lodging = false;
     private $check_number;
     private $number_people = 1;
     private $comment = '';
+
+    private $activities = [];
 
     /**
      * Default constructor
@@ -95,6 +94,7 @@ class Booking
             $this->load($args);
         } elseif (is_object($args)) {
             $this->loadFromRS($args);
+            $this->loadActivities();
         }
     }
 
@@ -115,6 +115,7 @@ class Booking
 
             if ($results->count() > 0) {
                 $this->loadFromRS($results->current());
+                $this->loadActivities();
                 return true;
             } else {
                 return false;
@@ -212,17 +213,21 @@ class Booking
             $this->event = $values['event'];
             $event = $this->getEvent();
             $activities = $event->getActivities();
-            foreach ($activities as $activity => $label) {
-                if ($event->isActivityRequired($activity)
-                    && (!isset($values[$activity]) || empty($values[$activity]))
+            foreach ($activities as $aid => $entry) {
+                if ($event->isActivityRequired($aid)
+                    && (!isset($values[$aid]) || empty($values[$aid]))
                 ) {
                     $this->errors[] = str_replace(
                         '%activity',
-                        $label,
+                        $entry['activity']->getName(),
                         _T('%activity is mandatory for this event!', 'events')
                     );
                 } else {
-                    $this->$activity = isset($values[$activity]);
+                    $act = [
+                        'activity'  => $entry['activity'],
+                        'checked'   => (isset($values[$aid]) && empty($values[$aid]))
+                    ];
+                    $this->activities[$aid] = $act;
                 }
             }
         }
@@ -546,48 +551,6 @@ class Booking
     }
 
     /**
-     * Does booking includes noon meal?
-     *
-     * @return boolean
-     */
-    public function hasNoonMeal()
-    {
-        return $this->noon_meal;
-    }
-
-    /**
-     * Does booking includes even meal?
-     *
-     * @return boolean
-     */
-    public function hasEvenMeal()
-    {
-        return $this->even_meal;
-    }
-
-    /**
-     * Does Bbooking includes a lodging?
-     *
-     * @return boolean
-     */
-    public function hasLodging()
-    {
-        return $this->lodging;
-    }
-
-    /**
-     * Bookins has activity
-     *
-     * @param string $activity Activity name
-     *
-     * @return boolean
-     */
-    public function has($activity)
-    {
-        return $this->$activity;
-    }
-
-    /**
      * Get number of persons
      *
      * @return integer
@@ -658,5 +621,49 @@ class Booking
     public function getComment()
     {
         return $this->comment;
+    }
+
+    /**
+     * Has Activity
+     *
+     * @param string $activity Activity
+     *
+     * @return boolean
+     */
+    public function has($activity)
+    {
+        return isset($this->activities[$activity]);
+    }
+
+    /**
+     * Load linked activities
+     *
+     * @return void
+     */
+    public function loadActivities()
+    {
+        $select = $this->zdb->select(EVENTS_PREFIX . 'activitiesbookings', 'acb');
+        $select->where([self::PK => $this->id]);
+        $results = $this->zdb->execute($select);
+        foreach ($results as $result) {
+            $this->activities[$result[Activity::PK]] = [
+                'activity'  => new Activity(
+                    $this->zdb,
+                    $this->login,
+                    (int)$result[Activity::PK]
+                ),
+                'checked'    => $result['checked']
+            ];
+        }
+    }
+
+    /**
+     * Get activities
+     *
+     * @return array
+     */
+    public function getActivities()
+    {
+        return $this->activities;
     }
 }
