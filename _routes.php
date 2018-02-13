@@ -243,11 +243,13 @@ $this->post(
                     //something went wrong :'(
                     $error_detected[] = _T("An error occured while storing the event.", "events");
                 }
-            } else {
-                $this->session->event = $event;
-                $error_detected = [];
-                $goto_list = false;
             }
+        }
+
+        if (!isset($post['save'])) {
+            $this->session->event = $event;
+            $error_detected = [];
+            $goto_list = false;
         }
 
         if (count($error_detected) > 0) {
@@ -597,6 +599,7 @@ $this->post(
         $success_detected = [];
         $warning_detected = [];
         $error_detected = [];
+        $goto_list = true;
 
         // Validation
         $valid = $booking->check($post);
@@ -627,6 +630,13 @@ $this->post(
             }
         }
 
+        if (!isset($post['save'])) {
+            $this->session->booking = $booking;
+            $error_detected = [];
+            $goto_list = false;
+        }
+
+
         if (count($error_detected) > 0) {
             foreach ($error_detected as $error) {
                 $this->flash->addMessage(
@@ -653,7 +663,7 @@ $this->post(
             }
         }
 
-        if (count($error_detected) == 0) {
+        if (count($error_detected) == 0 && $goto_list) {
             $redirect_url = $this->router->pathFor(
                 'events_bookings',
                 ['event' => $booking->getEventId()]
@@ -878,6 +888,36 @@ $this->get(
         return $response;
     }
 )->setName('events_activities')->add($authenticate);
+
+//events list filtering
+/*$this->post(
+    __('/events', 'events_routes') . __('/filter', 'routes'),
+    function ($request, $response) {
+        $post = $request->getParsedBody();
+        if (isset($this->session->filter_events)) {
+            $filters = $this->session->filter_events;
+        } else {
+            $filters = new EventsList();
+        }
+
+        //reintialize filters
+        if (isset($post['clear_filter'])) {
+            $filters->reinit();
+        } else {
+            //number of rows to show
+            if (isset($post['nbshow'])) {
+                $filters->show = $post['nbshow'];
+            }
+        }
+
+        $this->session->filter_events = $filters;
+
+        return $response
+            ->withStatus(301)
+            ->withHeader('Location', $this->router->pathFor('events_events'));
+    }
+)->setName('filter-eventslist')->add($authenticate);*/
+
 $this->get(
     __('/activity', 'events_routes') . '/{action:' . __('edit', 'routes') . '|' . __('add', 'routes') . '}[/{id:\d+}]',
     function ($request, $response, $args) use ($module, $module_id) {
