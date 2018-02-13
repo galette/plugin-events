@@ -94,7 +94,7 @@
             </fieldset>
         </div>
         <div class="button-container">
-            <input type="submit" value="{_T string="Save"}" />
+            <input type="submit" name="save" value="{_T string="Save"}" />
             <input type="submit" name="cancel" value="{_T string="Cancel"}"/>
             <input type="hidden" name="id" id="id" value="{$event->getId()}"/>
         </div>
