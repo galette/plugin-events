@@ -768,23 +768,16 @@ class Event
     public function availableActivities()
     {
         $select = $this->zdb->select(EVENTS_PREFIX . Activity::TABLE, 'ac');
-        $select->join(
-            array('ace' => PREFIX_DB . EVENTS_PREFIX . 'activitiesevents'),
-            'ace.' . Activity::PK . '= ac.' . Activity::PK,
-            null,
-            $select::JOIN_LEFT
-        );
-
-        $where = '';
-        if ($this->id) {
-            $where .= 'ace.' . Event::PK . ' != ' . $this->id . ' OR ';
-        }
-        $select->where(
-            $where . 'ace.' . Event::PK . ' IS NULL'
-        );
         $results = $this->zdb->execute($select);
 
-        return $results;
+        $activities;
+        foreach ($results as $result) {
+            if (!isset($this->activities[$result->{Activity::PK}])) {
+                $activities[] = $result;
+            }
+        }
+
+        return $activities;
     }
 
     /**
