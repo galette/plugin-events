@@ -44,6 +44,8 @@
                 <div>
                 <p class="right">
     {assign var=availables value=$event->availableActivities()}
+    {assign var=activities value=$event->getActivities()}
+
     {if $availables|@count}
                     <select name="attach_activity">
                         <option value="">{_T string="Choose an activity to add" domain="events"}</option>
@@ -53,8 +55,17 @@
         </select>
         <input type="submit" value="{_T string="Add"}" name="add_activity"/>
     {/if}
+    {if $activities|@count}
+                    <select name="detach_activity">
+                        <option value="">{_T string="Choose an activity to remove" domain="events"}</option>
+        {foreach from=$activities item=item}
+            {assign var=activity value=$item.activity}
+                        <option value="{$activity->getId()}">{$activity->getName()}</option>
+        {/foreach}
+        </select>
+        <input type="submit" class="button btnremove_small notext" value="" title="{_T string="Remove selected activity from event"}" name="remove_activity"/>
+    {/if}
                 </p>
-    {assign var=activities value=$event->getActivities()}
     {if $activities|@count}
         {foreach from=$activities item=item}
             {assign var=activity value=$item.activity}
@@ -128,19 +139,6 @@
                 minDate: $("#begin_date").datepicker("getDate")
             });
 
-        });
-
-        $('#meal, #lodging').on('change', function() {
-            var _this = $(this);
-            if (!_this.is(':checked')) {
-                $('#' + _this.attr('id') + '_required').prop('checked', false);
-            }
-        });
-        $('#meal_required, #lodging_required').on('change', function() {
-            var _this = $(this);
-            if (_this.is(':checked')) {
-                $('#' + _this.attr('id').replace(/_required/, '')).prop('checked', true);
-            }
         });
     </script>
 {/block}

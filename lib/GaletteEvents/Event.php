@@ -353,15 +353,15 @@ class Event
             ];
         }
 
-        /*if (isset($values['noon_meal'])) {
-            $this->noon_meal = $values['noon_meal'];
+        if (isset($values['remove_activity'])
+            && isset($values['detach_activity'])
+            && !empty($values['detach_activity'])
+        ) {
+            unset($this->activities[$values['detach_activity']]);
+            if (count($values['activities_ids'])) {
+                unset($values['activities_ids'][array_search($values['detach_activity'], $values['activities_ids'])]);
+            }
         }
-        if (isset($values['even_meal'])) {
-            $this->even_meal = $values['even_meal'];
-        }
-        if (isset($values['lodging'])) {
-            $this->lodging = $values['lodging'];
-        }*/
 
         if (isset($values['activities_ids'])) {
             foreach ($values['activities_ids'] as $row => $activity_id) {
@@ -516,28 +516,46 @@ class Event
 
             if (count($delete)) {
                 $stmt = $this->zdb->delete(EVENTS_PREFIX . 'activitiesevents', 'ace');
+                $count = 0;
                 foreach ($delete as $values) {
                     $stmt->where($values);
-                    $del = $this->zdb->execute($stmt);
+                    $this->zdb->execute($stmt);
+                    ++$count;
                 }
+                Analog::log(
+                    str_replace('%count', $count, '%count activities removed'),
+                    Analog::INFO
+                );
             }
 
             if (count($update)) {
                 $stmt = $this->zdb->update(EVENTS_PREFIX . 'activitiesevents', 'ace');
+                $count = 0;
                 foreach ($update as $values) {
                     $stmt
                         ->set($values)
                         ->where($key_values);
-                    $upd = $this->zdb->execute($stmt);
+                    $this->zdb->execute($stmt);
+                    ++$count;
                 }
+                Analog::log(
+                    str_replace('%count', $count, '%count activities updated'),
+                    Analog::INFO
+                );
             }
 
             if (count($insert)) {
                 $stmt = $this->zdb->insert(EVENTS_PREFIX . 'activitiesevents', 'ace');
+                $count = 0;
                 foreach ($insert as $values) {
                     $stmt->values(array_merge($key_values, $values));
-                    $add = $this->zdb->execute($stmt);
+                    $this->zdb->execute($stmt);
+                    ++$count;
                 }
+                Analog::log(
+                    str_replace('%count', $count, '%count activities added'),
+                    Analog::INFO
+                );
             }
 
             $this->zdb->connection->commit();
@@ -770,7 +788,7 @@ class Event
         $select = $this->zdb->select(EVENTS_PREFIX . Activity::TABLE, 'ac');
         $results = $this->zdb->execute($select);
 
-        $activities;
+        $activities = [];
         foreach ($results as $result) {
             if (!isset($this->activities[$result->{Activity::PK}])) {
                 $activities[] = $result;

@@ -226,11 +226,17 @@ $this->post(
                 $new = true;
             }
 
-            if (isset($post['add_activity'])) {
+            if (isset($post['add_activity']) || isset($post['remove_activity'])) {
                 $this->session->event = $event;
-                $success_detected[] = _T("Activity has been attached to event.", "events");
+                if (isset($post['add_activity'])) {
+                    $success_detected[] = _T("Activity has been attached to event.", "events");
+                    $warning_detected[] = _T('Do not forget to store the event', 'events');
+                } else {
+                    $success_detected[] = _T("Activity has been detached from event.", "events");
+                }
                 $goto_list = false;
-            } elseif (isset($post['save'])) {
+            }
+            if (isset($post['save']) || isset($post['remove_activity'])) {
                 $store = $event->store();
                 if ($store === true) {
                     //member has been stored :)
@@ -634,6 +640,7 @@ $this->post(
             $this->session->booking = $booking;
             $error_detected = [];
             $goto_list = false;
+            $warning_detected[] = _T('Do not forget to store the booking', 'events');
         }
 
 
