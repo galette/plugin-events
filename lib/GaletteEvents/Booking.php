@@ -148,9 +148,6 @@ class Booking
         $this->payment_method = $r->payment_method;
         $this->bank_name = $r->bank_name;
         $this->check_number = $r->check_number;
-        $this->noon_meal = $r->noon_meal;
-        $this->even_meal = $r->even_meal;
-        $this->lodging = $r->has_lodging;
         $this->number_people = $r->number_people;
         $this->comment = $r->comment;
     }
@@ -364,12 +361,6 @@ class Booking
                 'payment_amount'    => $this->amount,
                 'bank_name'         => $this->bank_name,
                 'check_number'      => $this->check_number,
-                'noon_meal'         => ($this->noon_meal ? $this->noon_meal :
-                                            ($this->zdb->isPostgres() ? 'false' : 0)),
-                'even_meal'         => ($this->even_meal ? $this->even_meal :
-                                            ($this->zdb->isPostgres() ? 'false' : 0)),
-                'has_lodging'       => ($this->lodging ? $this->lodging :
-                                            ($this->zdb->isPostgres() ? 'false' : 0)),
                 'number_people'     => $this->number_people,
                 'comment'           => $this->comment
             );
