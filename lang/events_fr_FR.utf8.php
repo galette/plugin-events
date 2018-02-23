@@ -1,5 +1,5 @@
 <?php
-// This file was automatically generated on Fri Feb 23 07:59:45 2018 (GMT)
+// This file was automatically generated on Fri Feb 23 08:31:49 2018 (GMT)
 // Don't modify it by hand, rather use the target lang from the Makefile.
 
 
@@ -78,7 +78,7 @@ $lang['events']['Booking has been paid'] = 'La réservation a été payée';
 // ../_routes.php:645 
 $lang['events']['Do not forget to store the booking'] = 'N\'oubliez pas d\'enregistrer la réservation';
 
-// ../_routes.php:330 ../templates/default/bookings.tpl:51 ../templates/default/booking.tpl:14 
+// ../_routes.php:170 ../_routes.php:330 ../templates/default/bookings.tpl:51 ../templates/default/booking.tpl:14 
 $lang['events']['Event'] = 'Évènement';
 
 // ../templates/default/booking.tpl:38 
@@ -183,6 +183,9 @@ $lang['events']['Activity has been modified.'] = 'L\'activité a été modifiée
 // ../_routes.php:149 
 $lang['events']['Event ID cannot ben null calling edit route!'] = 'L\'identifiant de l\'évènement ne peut être vide pour la route d\'édition !';
 
+// ../templates/default/event.tpl:66 
+$lang['events']['Remove selected activity from event'] = 'Retirer l\'activité sélectionnée de l\'évènement';
+
 // ../_routes.php:246 
 $lang['events']['New event has been successfully added.'] = 'Le nouvel évènement a été ajouté avec succès.';
 
@@ -270,6 +273,9 @@ $lang['events']['Paid bookings:'] = 'Réservations payées :';
 // ../templates/default/menu.tpl:5 
 $lang['events']['New event'] = 'Nouvel évènement';
 
+// ../templates/default/event.tpl:56 
+$lang['events']['Add selected activity to event'] = 'Ajouter l\'activité sélectionnée à l\'évènement';
+
 // ../_routes.php:383 
 $lang['events']['Event %name has been successfully deleted.'] = 'L\'évènement %name a été supprimé avec succès.';
 
@@ -333,7 +339,7 @@ $lang['events']['Event updated'] = 'Évènement mis à jour';
 // ../templates/default/events.tpl:79 
 $lang['events']['Event is open'] = 'L\'évènement est ouvert';
 
-// ../_routes.php:1206 
+// ../_routes.php:1071 ../_routes.php:1206 
 $lang['events']['Activity'] = 'Activité';
 
 // ../templates/default/event.tpl:12 

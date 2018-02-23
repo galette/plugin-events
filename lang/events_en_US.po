@@ -193,7 +193,7 @@ msgstr "Choose member"
 msgid "A booking already exists for %member in %event"
 msgstr "A booking already exists for %member in %event"
 
-#: ../_routes.php:1206
+#: ../_routes.php:1071 ../_routes.php:1206
 msgid "Activity"
 msgstr "Activity"
 
@@ -286,6 +286,10 @@ msgstr "End date"
 msgid "New booking"
 msgstr "New booking"
 
+#: ../templates/default/event.tpl:56
+msgid "Add selected activity to event"
+msgstr "Add selected activity to event"
+
 #: ../_routes.php:383
 msgid "Event %name has been successfully deleted."
 msgstr "Event %name has been successfully deleted."
@@ -294,7 +298,7 @@ msgstr "Event %name has been successfully deleted."
 msgid "Booking"
 msgstr "Booking"
 
-#: ../_routes.php:330 ../templates/default/bookings.tpl:51
+#: ../_routes.php:170 ../_routes.php:330 ../templates/default/bookings.tpl:51
 #: ../templates/default/booking.tpl:14
 msgid "Event"
 msgstr "Event"
@@ -458,6 +462,10 @@ msgstr "Events management"
 #: ../lib/GaletteEvents/Event.php:325
 msgid "Town is mandatory"
 msgstr "Town is mandatory"
+
+#: ../templates/default/event.tpl:66
+msgid "Remove selected activity from event"
+msgstr "Remove selected activity from event"
 
 #: ../templates/default/bookings.tpl:21
 msgid "Not paid"

@@ -1,5 +1,5 @@
 <?php
-// This file was automatically generated on Fri Feb 23 07:59:45 2018 (GMT)
+// This file was automatically generated on Fri Feb 23 08:31:48 2018 (GMT)
 // Don't modify it by hand, rather use the target lang from the Makefile.
 
 
@@ -78,7 +78,7 @@ $lang['events']['Booking has been paid'] = 'Booking has been paid';
 // ../_routes.php:645 
 $lang['events']['Do not forget to store the booking'] = 'Do not forget to store the booking';
 
-// ../_routes.php:330 ../templates/default/bookings.tpl:51 ../templates/default/booking.tpl:14 
+// ../_routes.php:170 ../_routes.php:330 ../templates/default/bookings.tpl:51 ../templates/default/booking.tpl:14 
 $lang['events']['Event'] = 'Event';
 
 // ../templates/default/booking.tpl:38 
@@ -183,6 +183,9 @@ $lang['events']['Activity has been modified.'] = 'Activity has been modified.';
 // ../_routes.php:149 
 $lang['events']['Event ID cannot ben null calling edit route!'] = 'Event ID cannot ben null calling edit route!';
 
+// ../templates/default/event.tpl:66 
+$lang['events']['Remove selected activity from event'] = 'Remove selected activity from event';
+
 // ../_routes.php:246 
 $lang['events']['New event has been successfully added.'] = 'New event has been successfully added.';
 
@@ -270,6 +273,9 @@ $lang['events']['Paid bookings:'] = 'Paid bookings:';
 // ../templates/default/menu.tpl:5 
 $lang['events']['New event'] = 'New event';
 
+// ../templates/default/event.tpl:56 
+$lang['events']['Add selected activity to event'] = 'Add selected activity to event';
+
 // ../_routes.php:383 
 $lang['events']['Event %name has been successfully deleted.'] = 'Event %name has been successfully deleted.';
 
@@ -333,7 +339,7 @@ $lang['events']['Event updated'] = 'Event updated';
 // ../templates/default/events.tpl:79 
 $lang['events']['Event is open'] = 'Event is open';
 
-// ../_routes.php:1206 
+// ../_routes.php:1071 ../_routes.php:1206 
 $lang['events']['Activity'] = 'Activity';
 
 // ../templates/default/event.tpl:12 

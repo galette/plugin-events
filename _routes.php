@@ -167,7 +167,7 @@ $this->get(
         }
 
         // template variable declaration
-        $title = _T("Event");
+        $title = _T("Event", "events");
         if ($event->getId() != '') {
             $title .= ' (' . _T("modification") . ')';
         } else {
@@ -1068,7 +1068,7 @@ $this->get(
         }
 
         // template variable declaration
-        $title = _T("Activity");
+        $title = _T("Activity", "events");
         if ($activity->getId() != '') {
             $title .= ' (' . _T("modification") . ')';
         } else {

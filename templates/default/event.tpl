@@ -53,7 +53,7 @@
                         <option value="{$activity.id_activity}">{$activity.name}</option>
         {/foreach}
         </select>
-        <input type="submit" value="{_T string="Add"}" name="add_activity"/>
+        <input type="submit" class="button btnadd_small notext" title="{_T string="Add selected activity to event" domain="events"}" value="" name="add_activity"/>
     {/if}
     {if $activities|@count}
                     <select name="detach_activity">
@@ -63,7 +63,7 @@
                         <option value="{$activity->getId()}">{$activity->getName()}</option>
         {/foreach}
         </select>
-        <input type="submit" class="button btnremove_small notext" value="" title="{_T string="Remove selected activity from event"}" name="remove_activity"/>
+        <input type="submit" class="button btnremove_small notext" value="" title="{_T string="Remove selected activity from event" domain="events"}" name="remove_activity"/>
     {/if}
                 </p>
     {if $activities|@count}
