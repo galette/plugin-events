@@ -395,7 +395,6 @@ class Booking
                         _T("Booking added", "events"),
                         $this->getEvent()->getName()
                     );
-                    return true;
                 } else {
                     $hist->add(_T("Fail to add new booking.", "events"));
                     throw new \Exception(
