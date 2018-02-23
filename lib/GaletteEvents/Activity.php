@@ -262,7 +262,7 @@ class Activity
                 if ($add->count() > 0) {
                     if ($this->zdb->isPostgres()) {
                         $this->id = $this->zdb->driver->getLastGeneratedValue(
-                            PREFIX_DB . getTableName() . '_id_seq'
+                            PREFIX_DB . $this->getTableName() . '_id_seq'
                         );
                     } else {
                         $this->id = $this->zdb->driver->getLastGeneratedValue();
