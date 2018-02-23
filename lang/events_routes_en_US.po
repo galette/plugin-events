@@ -11,24 +11,34 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.3\n"
 
-#: ../_routes.php:499 ../_routes.php:574 ../_routes.php:671 ../_routes.php:701
+#: ../_routes.php:524 ../_routes.php:599 ../_routes.php:705 ../_routes.php:735
 msgid "/booking"
 msgstr "/booking"
 
-#: ../_routes.php:385 ../_routes.php:456
+#: ../_routes.php:1040 ../_routes.php:1100 ../_routes.php:1192
+#: ../_routes.php:1225
+msgid "/activity"
+msgstr "/activity"
+
+#: ../_routes.php:410 ../_routes.php:481 ../_routes.php:789 ../_routes.php:898
 msgid "/bookings"
 msgstr "/bookings"
 
-#: ../_routes.php:133 ../_routes.php:199 ../_routes.php:291 ../_routes.php:324
-msgid "/event"
-msgstr "/event"
+#: ../_routes.php:953
+msgid "/activities"
+msgstr "/activities"
 
-#: ../_routes.php:51 ../_routes.php:105
-msgid "/events"
-msgstr "/events"
-
-#: ../_routes.php:385 ../_routes.php:421
-#: ../lib/GaletteEvents/Filters/BookingsList.php:111
+#: ../_routes.php:410 ../_routes.php:446 ../_routes.php:925
+#: ../lib/GaletteEvents/Filters/BookingsList.php:115
+#: ../lib/GaletteEvents/Repository/Bookings.php:239
 #: ../templates/default/menu.tpl:7 ../templates/default/bookings.tpl:27
 msgid "all"
 msgstr "all"
+
+#: ../_routes.php:139 ../_routes.php:205 ../_routes.php:316 ../_routes.php:349
+msgid "/event"
+msgstr "/event"
+
+#: ../_routes.php:57 ../_routes.php:111 ../_routes.php:789 ../_routes.php:1012
+msgid "/events"
+msgstr "/events"
