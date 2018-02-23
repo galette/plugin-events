@@ -356,7 +356,7 @@ class Booking
         global $hist;
 
         try {
-            $this->zdb->beginTransaction();
+            $this->zdb->connection->beginTransaction();
             $values = array(
                 self::PK            => $this->id,
                 Event::PK           => $this->event,
@@ -418,10 +418,99 @@ class Booking
                     );
                 }
             }
-            $this->zdb->commit();
+
+            //store booking activities
+            $void   = [];
+            $update = [];
+            $insert = [];
+            $delete = [];
+
+            foreach ($this->activities as $aid => $data) {
+                $activity = $data['activity'];
+                $checked = $data['checked'];
+                $key_values = [
+                    self::PK        => $this->id,
+                    $activity::PK   => $activity->getId()
+                ];
+
+                $select = $this->zdb->select(EVENTS_PREFIX . 'activitiesbookings', 'acb');
+                $select->where($key_values);
+                $results = $this->zdb->execute($select);
+
+                foreach ($results as $result) {
+                    $values = [
+                        Activity::PK    => $result[Activity::PK],
+                        self::PK        => $this->id,
+                        'checked'       => ($checked ? $checked :
+                                            ($this->zdb->isPostgres() ? 'false' : 0))
+                    ];
+                    if (!isset($this->activities[$result[Activity::PK]])) {
+                        $delete[$result[Activity::PK]] = $values;
+                    } elseif ($result['status'] != $this->activities[$result[Activity::PK]]['checked']) {
+                        $update[$result[Activity::PK]] = $values;
+                    } else {
+                        $void[$result[Activity::PK]] = $values;
+                    }
+                }
+
+                if (!isset($void[$aid]) && !isset($update[$aid]) && !isset($delete[$aid])) {
+                    $insert[$aid] = [
+                        Activity::PK    => $aid,
+                        self::PK        => $this->id,
+                        'checked'       => ($checked ? $checked :
+                                            ($this->zdb->isPostgres() ? 'false' : 0))
+                    ];
+                }
+            }
+
+            if (count($delete)) {
+                $stmt = $this->zdb->delete(EVENTS_PREFIX . 'activitiesbookings', 'acb');
+                $count = 0;
+                foreach ($delete as $values) {
+                    $stmt->where($values);
+                    $this->zdb->execute($stmt);
+                    ++$count;
+                }
+                Analog::log(
+                    str_replace('%count', $count, '%count activities removed'),
+                    Analog::INFO
+                );
+            }
+
+            if (count($update)) {
+                $stmt = $this->zdb->update(EVENTS_PREFIX . 'activitiesbookings', 'acb');
+                $count = 0;
+                foreach ($update as $values) {
+                    $stmt
+                        ->set($values)
+                        ->where($key_values);
+                    $this->zdb->execute($stmt);
+                    ++$count;
+                }
+                Analog::log(
+                    str_replace('%count', $count, '%count activities updated'),
+                    Analog::INFO
+                );
+            }
+
+            if (count($insert)) {
+                $stmt = $this->zdb->insert(EVENTS_PREFIX . 'activitiesbookings', 'acb');
+                $count = 0;
+                foreach ($insert as $values) {
+                    $stmt->values(array_merge($key_values, $values));
+                    $this->zdb->execute($stmt);
+                    ++$count;
+                }
+                Analog::log(
+                    str_replace('%count', $count, '%count activities added'),
+                    Analog::INFO
+                );
+            }
+
+            $this->zdb->connection->commit();
             return true;
         } catch (\Exception $e) {
-            $this->zdb->rollBack();
+            $this->zdb->connection->rollBack();
             Analog::log(
                 'Something went wrong :\'( | ' . $e->getMessage() . "\n" .
                 $e->getTraceAsString(),
