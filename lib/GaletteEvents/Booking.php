@@ -212,7 +212,7 @@ class Booking
             $activities = $event->getActivities();
             foreach ($activities as $aid => $entry) {
                 if ($event->isActivityRequired($aid)
-                    && (!isset($values[$aid]) || empty($values[$aid]))
+                    && (!isset($values['activities']) || !in_array($aid, $values['activities']))
                 ) {
                     $this->errors[] = str_replace(
                         '%activity',
@@ -222,7 +222,7 @@ class Booking
                 } else {
                     $act = [
                         'activity'  => $entry['activity'],
-                        'checked'   => (isset($values[$aid]) && empty($values[$aid]))
+                        'checked'   => (isset($values['activities']) && in_array($aid, $values['activities']))
                     ];
                     $this->activities[$aid] = $act;
                 }
@@ -308,6 +308,12 @@ class Booking
                 Event::PK       => $this->event,
                 Adherent::PK    => $this->member
             ]);
+            if ($this->id) {
+                $select->where->notEqualTo(
+                    self::PK,
+                    $this->id
+                );
+            }
             $results = $this->zdb->execute($select);
             if ($results->count()) {
                 $this->errors[] = str_replace(
@@ -350,6 +356,7 @@ class Booking
         global $hist;
 
         try {
+            $this->zdb->beginTransaction();
             $values = array(
                 self::PK            => $this->id,
                 Event::PK           => $this->event,
@@ -411,9 +418,11 @@ class Booking
                         _T("Booking updated", "events")
                     );
                 }
-                return true;
             }
+            $this->zdb->commit();
+            return true;
         } catch (\Exception $e) {
+            $this->zdb->rollBack();
             Analog::log(
                 'Something went wrong :\'( | ' . $e->getMessage() . "\n" .
                 $e->getTraceAsString(),

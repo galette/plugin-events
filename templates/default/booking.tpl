@@ -54,7 +54,15 @@
     {foreach from=$booking->getEvent()->getActivities() key=aid item=activity}
                     <p>
                         <label for="activity_{$aid}">{$activity.activity->getName()}</label>
-                        <input type="checkbox" name="activities[]" id="activity_{$aid}"{if $booking->has($aid) or $booking->getEventId() and $booking->getEvent()->isActivityRequired($aid)} checked="checked"{/if}{if $booking->getEventId() and !$booking->getEvent()->hasActivity($aid)} disabled="disabled"{/if}{if $booking->getEventId() and $booking->getEvent()->isActivityRequired($aid)} required="required"{/if}/>
+                        <input
+                            type="checkbox"
+                            name="activities[]"
+                            id="activity_{$aid}"
+                            value="{$aid}"
+                            {if $booking->has($aid)} checked="checked"{/if}
+                            {if $booking->getEventId() and !$booking->getEvent()->hasActivity($aid)} disabled="disabled"{/if}
+                            {if $booking->getEventId() and $booking->getEvent()->isActivityRequired($aid)} required="required"{/if}
+                        />
                     </p>
     {foreachelse}
                     <p>{_T string="No activity for selected event" domain="events"}</p>
@@ -70,7 +78,7 @@
                     <input type="checkbox" name="paid" id="paid"{if $booking->isPaid()} checked="checked"{/if}/>
                 </p>
                 <p>
-                    <label for="amount">{_T string="amount" domain="events"}</label>
+                    <label for="amount">{_T string="Amount" domain="events"}</label>
                     <input type="text" name="amount" id="amount" value="{$booking->getAmount()}"/>
                 </p>
                 {* payment type *}
