@@ -70,7 +70,7 @@
                 </tr>
     {/foreach}
 {else}
-                <tr><td colspan="4" class="emptylist">{_T string="No activity has been found" domain="events"}</td></tr>
+                <tr><td colspan="6" class="emptylist">{_T string="No activity has been found" domain="events"}</td></tr>
 {/if}
             </tbody>
         </table>
