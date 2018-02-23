@@ -99,9 +99,11 @@ class Bookings
     /**
      * Get booking list
      *
+     * @param boolean $full Export full list (no pagination), defaults to false
+     *
      * @return GaletteEvents\Booking[]
      */
-    public function getList()
+    public function getList($full = false)
     {
         try {
             $select = $this->buildSelect(null);
@@ -109,7 +111,9 @@ class Bookings
 
             $this->proceedCount($select);
 
-            $this->filters->setLimits($select);
+            if ($full !== true) {
+                $this->filters->setLimits($select);
+            }
             $results = $this->zdb->execute($select);
             $this->filters->query = $this->zdb->query_string;
 

@@ -47,6 +47,8 @@ use GaletteEvents\Repository\Bookings;
 use GaletteEvents\Repository\Activities;
 use Galette\Repository\Members;
 use Galette\Filters\MembersList;
+use Galette\IO\CsvOut;
+use Galette\IO\Csv;
 
 //Constants and classes from plugin
 require_once $module['root'] . '/_config.inc.php';
@@ -781,6 +783,115 @@ $this->post(
         }
     }
 )->setName('events_do_remove_booking')->add($authenticate);
+
+//booking CSV export
+$this->get(
+    __('/events', 'events_routes') . '/{id:\d+}'  . __('/export', 'routes') . __('/bookings', 'events_routes'),
+    function ($request, $response, $args) {
+        $csv = new CsvOut();
+
+        $event = new Event($this->zdb, $this->login, (int)$args['id']);
+
+        $filters = new BookingsList();
+        $filters->event_filter = $args['id'];
+        $bookings = new Bookings($this->zdb, $this->login, $filters);
+        $bookings_list = $bookings->getList();
+
+        $labels = [
+            _T('Name'),
+            _T('First name'),
+            _T('Address'),
+            _T('Address (continuation)'),
+            _T('Zip code', 'events'),
+            _T('City'),
+            _T('Phone'),
+            _T('GSM'),
+            _T('Email'),
+            _T('Number of persons', 'events'),
+        ];
+
+        $activities = $event->getActivities();
+        foreach ($activities as $activity) {
+            $labels[] = $activity['activity']->getName();
+        }
+
+        $labels = array_merge(
+            $labels,
+            [
+                _T('Amount', 'events'),
+                _T('Payment type'),
+                _T('Bank name', 'events'),
+                _T('Check number', 'events'),
+            ]
+        );
+
+        $list = [];
+        foreach ($bookings_list as $booking) {
+            $member = $booking->getMember();
+            $entry = [
+                $member->name,
+                $member->surname,
+                $member->address,
+                $member->address_continuation,
+                $member->zipcode,
+                $member->town,
+                $member->phone,
+                $member->gsm,
+                $member->email,
+                $booking->getNumberPeople()
+            ];
+
+            $bactivities = $booking->getActivities();
+            foreach (array_keys($activities) as $aid) {
+                $entry[] = isset($bactivities[$aid]) && $bactivities[$aid]['checked'] ? _T('Yes') : _T('No');
+            }
+
+            $entry = array_merge(
+                $entry,
+                [
+                    $booking->getAmount(),
+                    $booking->getPaymentMethodName(),
+                    $booking->getBankName(),
+                    $booking->getCheckNumber()
+                ]
+            );
+            $list[] = $entry;
+        }
+
+        $filename = 'bookingslist.csv';
+        $filepath = CsvOut::DEFAULT_DIRECTORY . $filename;
+        $fp = fopen($filepath, 'w');
+        if ($fp) {
+            $res = $csv->export(
+                $list,
+                Csv::DEFAULT_SEPARATOR,
+                Csv::DEFAULT_QUOTE,
+                $labels,
+                $fp
+            );
+            fclose($fp);
+            $written[] = array(
+                'name' => $filename,
+                'file' => $filepath
+            );
+        }
+
+        if (file_exists(CsvOut::DEFAULT_DIRECTORY . $filename)) {
+            header('Content-Type: text/csv');
+            header('Content-Disposition: attachment; filename="' . $filename . '";');
+            header('Pragma: no-cache');
+            echo readfile(CsvOut::DEFAULT_DIRECTORY . $filename);
+        } else {
+            Analog::log(
+                'A request has been made to get an exported file named `' .
+                $filename .'` that does not exists.',
+                Analog::WARNING
+            );
+            $notFound = $this->notFoundHandler;
+            return $notFound($request, $response);
+        }
+    }
+)->setName('events_booking_export')->add($authenticate);
 
 //Batch actions on members list
 $this->post(

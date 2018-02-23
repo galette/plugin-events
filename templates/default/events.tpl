@@ -82,6 +82,7 @@
                         {/if}
                     </td>
                     <td class="{$rclass} center nowrap actions_row">
+                        <a href="{path_for name="events_booking_export" data=["id" => $eid]}"><img src="{base_url}/{$template_subdir}images/printer.png" alt="{_T string="[bookings csv]" domain="events"}" width="16" height="16" title="{_T string="%eventname: export bookings as CSV" pattern="/%eventname/" replace=$event->getName() domain="events"}"/></a>
                         <a href="{path_for name="events_bookings" data=["event" => $eid]}"><img src="{base_url}/{$template_subdir}images/members-list.png" alt="{_T string="[bookings]" domain="events"}" width="16" height="16" title="{_T string="%eventname: show bookings" pattern="/%eventname/" replace=$event->getName() domain="events"}"/></a>
     {if $login->isAdmin() or $login->isStaff() or ($login->isGroupManager() and $event->getGroup()|in_array:$login->managed_groups )}
                         <a href="{path_for name="events_event" data=["action" => {_T string="edit" domain="routes"}, "id" => $eid]}"><img src="{base_url}/{$template_subdir}images/icon-edit.png" alt="{_T string="[mod]"}" width="16" height="16" title="{_T string="%eventname: edit informations" pattern="/%eventname/" replace=$event->getName() domain="events"}"/></a>

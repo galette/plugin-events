@@ -61,6 +61,7 @@ $this->register(
         'events_activity'           => 'staff',
         'events_storeactivity'      => 'staff',
         'events_remove_activity'    => 'staff',
-        'events_do_remove_activity' => 'staff'
+        'events_do_remove_activity' => 'staff',
+        'events_booking_export'     => 'staff'
     ]
 );

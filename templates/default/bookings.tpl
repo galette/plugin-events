@@ -158,11 +158,8 @@
 
         <ul class="selection_menu">
             <li>{_T string="For the selection:"}</li>
-    {if $login->isAdmin() or $login->isStaff()}
-        {if $pref_mail_method neq constant('Galette\Core\GaletteMail::METHOD_DISABLED')}
+    {if ($login->isAdmin() or $login->isStaff()) and $pref_mail_method neq constant('Galette\Core\GaletteMail::METHOD_DISABLED')}
             <li><input type="submit" id="sendmail" name="mailing" value="{_T string="Mail"}"/></li>
-        {/if}
-            <li><input type="submit" name="csv" value="{_T string="Export as CSV"}"/></li>
     {/if}
         </ul>
         </form>

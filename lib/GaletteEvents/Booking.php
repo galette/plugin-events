@@ -619,6 +619,38 @@ class Booking
     }
 
     /**
+     * Get payment method name
+     *
+     * @return string
+     */
+    public function getPaymentMethodName()
+    {
+        switch ($this->payment_method) {
+            case Contribution::PAYMENT_CASH:
+                return _T('Cash');
+                break;
+            case Contribution::PAYMENT_CREDITCARD:
+                return _T('Credit card');
+                break;
+            case Contribution::PAYMENT_CHECK:
+                return _T('Check');
+                break;
+            case Contribution::PAYMENT_TRANSFER:
+                return _T('Transfer');
+                break;
+            case Contribution::PAYMENT_PAYPAL:
+                return _T('Paypal');
+                break;
+            case Contribution::PAYMENT_OTHER:
+                return _T('Other');
+                break;
+            default:
+                return '';
+                break;
+        }
+    }
+
+    /**
      * Get bank name
      *
      * @return string
