@@ -2,6 +2,13 @@
 {block name="content"}
         <form action="{path_for name="filter-bookingslist"}" method="post" id="filtre">
         <div id="listfilter">
+            <label for="event_filter">{_T string="Event" domain="events"}</label>
+            <select name="event_filter" id="event_filter" required="required">
+                <option value="0">{_T string="Select..." domain="events"}</option>
+{foreach from=$events item=$event}
+                <option value="{$event->getId()}"{if $filters->event_filter eq $event->getId()} selected="selected"{/if}>{$event->getName()}</option>
+{/foreach}
+            </select>
             {* payment type *}
             {include file="forms_types/payment_types.tpl"
                 current=$filters->payment_type_filter

@@ -6,15 +6,15 @@ msgstr ""
 msgid "Do not forget to store the event"
 msgstr ""
 
-#: ../_routes.php:999
+#: ../_routes.php:1007
 msgid "Activities management"
 msgstr ""
 
-#: ../templates/default/bookings.tpl:133
+#: ../templates/default/bookings.tpl:140
 msgid "Booking has been paid"
 msgstr ""
 
-#: ../templates/default/bookings.tpl:30
+#: ../templates/default/bookings.tpl:37
 msgid "Add a new booking"
 msgstr ""
 
@@ -34,7 +34,7 @@ msgstr ""
 msgid "Fail to add new booking."
 msgstr ""
 
-#: ../templates/default/bookings.tpl:27 ../templates/default/bookings.tpl:27
+#: ../templates/default/bookings.tpl:34 ../templates/default/bookings.tpl:34
 msgid "Show all bookings"
 msgstr ""
 
@@ -42,7 +42,7 @@ msgstr ""
 msgid "Activity has been attached to event."
 msgstr ""
 
-#: ../templates/default/bookings.tpl:97 ../templates/default/bookings.tpl:138
+#: ../templates/default/bookings.tpl:104 ../templates/default/bookings.tpl:145
 msgid "Attendees"
 msgstr ""
 
@@ -50,7 +50,7 @@ msgstr ""
 msgid "Booking added"
 msgstr ""
 
-#: ../templates/default/bookings.tpl:75 ../templates/default/bookings.tpl:130
+#: ../templates/default/bookings.tpl:82 ../templates/default/bookings.tpl:137
 #: ../templates/default/booking.tpl:10
 msgid "Booking date"
 msgstr ""
@@ -128,7 +128,7 @@ msgstr ""
 msgid "End date must be later or equal to begin date"
 msgstr ""
 
-#: ../templates/default/bookings.tpl:149
+#: ../templates/default/bookings.tpl:156
 msgid "No booking has been found"
 msgstr ""
 
@@ -140,7 +140,7 @@ msgstr ""
 msgid "activities"
 msgstr ""
 
-#: ../_routes.php:631
+#: ../_routes.php:639
 msgid "Booking has been modified."
 msgstr ""
 
@@ -148,7 +148,7 @@ msgstr ""
 msgid "%activity is mandatory for this event!"
 msgstr ""
 
-#: ../templates/default/bookings.tpl:141
+#: ../templates/default/bookings.tpl:148
 msgid "Edit booking"
 msgstr ""
 
@@ -164,7 +164,7 @@ msgstr ""
 msgid "Activity has been detached from event."
 msgstr ""
 
-#: ../_routes.php:629
+#: ../_routes.php:637
 msgid "New booking has been successfully added."
 msgstr ""
 
@@ -176,11 +176,11 @@ msgstr ""
 msgid "A booking already exists for %member in %event"
 msgstr ""
 
-#: ../_routes.php:1071 ../_routes.php:1206
+#: ../_routes.php:1079 ../_routes.php:1214
 msgid "Activity"
 msgstr ""
 
-#: ../_routes.php:1248
+#: ../_routes.php:1256
 msgid "An error occured trying to remove activity %name :/"
 msgstr ""
 
@@ -188,7 +188,7 @@ msgstr ""
 msgid "[bookings]"
 msgstr ""
 
-#: ../_routes.php:805 ../templates/default/activity.tpl:60
+#: ../_routes.php:813 ../templates/default/activity.tpl:60
 #: ../templates/default/event.tpl:93
 msgid "Zip code"
 msgstr ""
@@ -205,11 +205,11 @@ msgstr ""
 msgid "Begin date is mandatory"
 msgstr ""
 
-#: ../_routes.php:465
+#: ../_routes.php:466
 msgid "Bookings management"
 msgstr ""
 
-#: ../_routes.php:1129
+#: ../_routes.php:1137
 msgid "New activity has been successfully added."
 msgstr ""
 
@@ -221,11 +221,11 @@ msgstr ""
 msgid "Choose an activity to add"
 msgstr ""
 
-#: ../templates/default/bookings.tpl:135
+#: ../templates/default/bookings.tpl:142
 msgid "Booking has not been paid"
 msgstr ""
 
-#: ../_routes.php:824 ../templates/default/booking.tpl:91
+#: ../_routes.php:832 ../templates/default/booking.tpl:91
 msgid "Check number"
 msgstr ""
 
@@ -245,11 +245,15 @@ msgstr ""
 msgid "Fail to add new activity."
 msgstr ""
 
-#: ../_routes.php:537
+#: ../_routes.php:545
 msgid "Booking ID cannot ben null calling edit route!"
 msgstr ""
 
-#: ../templates/default/bookings.tpl:33
+#: ../templates/default/bookings.tpl:7
+msgid "Select..."
+msgstr ""
+
+#: ../templates/default/bookings.tpl:40
 msgid "booking"
 msgstr ""
 
@@ -277,12 +281,13 @@ msgstr ""
 msgid "Event %name has been successfully deleted."
 msgstr ""
 
-#: ../_routes.php:558 ../_routes.php:719
+#: ../_routes.php:566 ../_routes.php:727
 msgid "Booking"
 msgstr ""
 
 #: ../_routes.php:170 ../_routes.php:330
-#: ../templates/default/bookings.tpl:51 ../templates/default/booking.tpl:14
+#: ../templates/default/bookings.tpl:5 ../templates/default/bookings.tpl:58
+#: ../templates/default/booking.tpl:14
 msgid "Event"
 msgstr ""
 
@@ -290,15 +295,15 @@ msgstr ""
 msgid "An error occured while storing the event."
 msgstr ""
 
-#: ../_routes.php:823 ../templates/default/booking.tpl:87
+#: ../_routes.php:831 ../templates/default/booking.tpl:87
 msgid "Bank name"
 msgstr ""
 
-#: ../_routes.php:942
+#: ../_routes.php:950
 msgid "No booking was selected, please check at least one."
 msgstr ""
 
-#: ../templates/default/bookings.tpl:15
+#: ../templates/default/bookings.tpl:22
 msgid "Paid bookings:"
 msgstr ""
 
@@ -306,7 +311,7 @@ msgstr ""
 msgid "New event"
 msgstr ""
 
-#: ../_routes.php:635
+#: ../_routes.php:643
 msgid "An error occured while storing the booking."
 msgstr ""
 
@@ -348,11 +353,11 @@ msgstr ""
 msgid "Choose an activity to remove"
 msgstr ""
 
-#: ../_routes.php:755
+#: ../_routes.php:763
 msgid "An error occured trying to remove booking :/"
 msgstr ""
 
-#: ../_routes.php:821 ../templates/default/booking.tpl:81
+#: ../_routes.php:829 ../templates/default/booking.tpl:81
 msgid "Amount"
 msgstr ""
 
@@ -360,11 +365,11 @@ msgstr ""
 msgid "New activity"
 msgstr ""
 
-#: ../templates/default/bookings.tpl:10
+#: ../templates/default/bookings.tpl:17
 msgid "All"
 msgstr ""
 
-#: ../_routes.php:762
+#: ../_routes.php:770
 msgid "Booking has been successfully deleted."
 msgstr ""
 
@@ -393,7 +398,7 @@ msgstr ""
 msgid "Address"
 msgstr ""
 
-#: ../_routes.php:645
+#: ../_routes.php:653
 msgid "Do not forget to store the booking"
 msgstr ""
 
@@ -428,7 +433,7 @@ msgstr ""
 msgid "Fail to add new event."
 msgstr ""
 
-#: ../_routes.php:1131
+#: ../_routes.php:1139
 msgid "Activity has been modified."
 msgstr ""
 
@@ -449,7 +454,7 @@ msgstr ""
 msgid "Remove selected activity from event"
 msgstr ""
 
-#: ../templates/default/bookings.tpl:21
+#: ../templates/default/bookings.tpl:28
 msgid "Not paid"
 msgstr ""
 
@@ -457,11 +462,11 @@ msgstr ""
 msgid "Group"
 msgstr ""
 
-#: ../templates/default/bookings.tpl:143
+#: ../templates/default/bookings.tpl:150
 msgid "Remove from database"
 msgstr ""
 
-#: ../templates/default/bookings.tpl:33
+#: ../templates/default/bookings.tpl:40
 msgid "bookings"
 msgstr ""
 
@@ -469,17 +474,17 @@ msgstr ""
 msgid "[bookings csv]"
 msgstr ""
 
-#: ../_routes.php:810 ../templates/default/booking.tpl:42
+#: ../_routes.php:818 ../templates/default/booking.tpl:42
 msgid "Number of persons"
 msgstr ""
 
-#: ../templates/default/bookings.tpl:19 ../templates/default/bookings.tpl:87
-#: ../templates/default/bookings.tpl:131 ../templates/default/bookings.tpl:133
+#: ../templates/default/bookings.tpl:26 ../templates/default/bookings.tpl:94
+#: ../templates/default/bookings.tpl:138 ../templates/default/bookings.tpl:140
 #: ../templates/default/booking.tpl:77
 msgid "Paid"
 msgstr ""
 
-#: ../_routes.php:1259
+#: ../_routes.php:1267
 msgid "Activity %name has been successfully deleted."
 msgstr ""
 
@@ -487,11 +492,11 @@ msgstr ""
 msgid "Event is mandatory"
 msgstr ""
 
-#: ../_routes.php:1050
+#: ../_routes.php:1058
 msgid "Activity ID cannot ben null calling edit route!"
 msgstr ""
 
-#: ../_routes.php:1135
+#: ../_routes.php:1143
 msgid "An error occured while storing the activity."
 msgstr ""
 

@@ -1,9 +1,9 @@
 <?php
-// This file was automatically generated on Fri Feb 23 08:31:48 2018 (GMT)
+// This file was automatically generated on Sat Feb 24 07:08:30 2018 (GMT)
 // Don't modify it by hand, rather use the target lang from the Makefile.
 
 
-// ../_routes.php:631 
+// ../_routes.php:639 
 $lang['events']['Booking has been modified.'] = 'Booking has been modified.';
 
 // ../lib/GaletteEvents/Event.php:304 ../lib/GaletteEvents/Activity.php:204 
@@ -12,7 +12,7 @@ $lang['events']['Name is mandatory'] = 'Name is mandatory';
 // ../lib/GaletteEvents/Activity.php:278 
 $lang['events']['Fail to add new activity.'] = 'Fail to add new activity.';
 
-// ../templates/default/bookings.tpl:33 
+// ../templates/default/bookings.tpl:40 
 $lang['events']['bookings'] = 'bookings';
 
 // ../lib/GaletteEvents/Booking.php:233 
@@ -48,7 +48,7 @@ $lang['events']['General informations'] = 'General informations';
 // ../templates/default/menu.tpl:11 
 $lang['events']['New activity'] = 'New activity';
 
-// ../_routes.php:821 ../templates/default/booking.tpl:81 
+// ../_routes.php:829 ../templates/default/booking.tpl:81 
 $lang['events']['Amount'] = 'Amount';
 
 // ../lib/GaletteEvents/Booking.php:297 
@@ -60,7 +60,7 @@ $lang['events']['End date must be later or equal to begin date'] = 'End date mus
 // ../templates/default/events.tpl:97 
 $lang['events']['No event has been found'] = 'No event has been found';
 
-// ../_routes.php:537 
+// ../_routes.php:545 
 $lang['events']['Booking ID cannot ben null calling edit route!'] = 'Booking ID cannot ben null calling edit route!';
 
 // ../lib/GaletteEvents/Booking.php:270 
@@ -69,16 +69,16 @@ $lang['events']['Booking date is mandatory!'] = 'Booking date is mandatory!';
 // ../templates/default/booking.tpl:74 
 $lang['events']['Financial informations'] = 'Financial informations';
 
-// ../_routes.php:1259 
+// ../_routes.php:1267 
 $lang['events']['Activity %name has been successfully deleted.'] = 'Activity %name has been successfully deleted.';
 
-// ../templates/default/bookings.tpl:133 
+// ../templates/default/bookings.tpl:140 
 $lang['events']['Booking has been paid'] = 'Booking has been paid';
 
-// ../_routes.php:645 
+// ../_routes.php:653 
 $lang['events']['Do not forget to store the booking'] = 'Do not forget to store the booking';
 
-// ../_routes.php:170 ../_routes.php:330 ../templates/default/bookings.tpl:51 ../templates/default/booking.tpl:14 
+// ../_routes.php:170 ../_routes.php:330 ../templates/default/bookings.tpl:5 ../templates/default/bookings.tpl:58 ../templates/default/booking.tpl:14 
 $lang['events']['Event'] = 'Event';
 
 // ../templates/default/booking.tpl:38 
@@ -87,19 +87,19 @@ $lang['events']['Choose member'] = 'Choose member';
 // ../lib/GaletteEvents/Event.php:273 ../templates/default/event.tpl:19 
 $lang['events']['Begin date'] = 'Begin date';
 
-// ../templates/default/bookings.tpl:97 ../templates/default/bookings.tpl:138 
+// ../templates/default/bookings.tpl:104 ../templates/default/bookings.tpl:145 
 $lang['events']['Attendees'] = 'Attendees';
 
-// ../_routes.php:942 
+// ../_routes.php:950 
 $lang['events']['No booking was selected, please check at least one.'] = 'No booking was selected, please check at least one.';
 
 // ../templates/default/activity.tpl:10 ../templates/default/activities.tpl:44 ../templates/default/activities.tpl:59 
 $lang['events']['Is active'] = 'Is active';
 
-// ../_routes.php:823 ../templates/default/booking.tpl:87 
+// ../_routes.php:831 ../templates/default/booking.tpl:87 
 $lang['events']['Bank name'] = 'Bank name';
 
-// ../_routes.php:1248 
+// ../_routes.php:1256 
 $lang['events']['An error occured trying to remove activity %name :/'] = 'An error occured trying to remove activity %name :/';
 
 // ../templates/default/activity.tpl:53 ../templates/default/event.tpl:86 
@@ -117,7 +117,7 @@ $lang['events']['event'] = 'event';
 // ../templates/default/menu.tpl:8 
 $lang['events']['New booking'] = 'New booking';
 
-// ../_routes.php:629 
+// ../_routes.php:637 
 $lang['events']['New booking has been successfully added.'] = 'New booking has been successfully added.';
 
 // ../_routes.php:98 
@@ -126,19 +126,19 @@ $lang['events']['Events management'] = 'Events management';
 // ../templates/default/events.tpl:85 
 $lang['events']['[bookings csv]'] = '[bookings csv]';
 
-// ../_routes.php:762 
+// ../_routes.php:770 
 $lang['events']['Booking has been successfully deleted.'] = 'Booking has been successfully deleted.';
 
-// ../templates/default/bookings.tpl:33 
+// ../templates/default/bookings.tpl:40 
 $lang['events']['booking'] = 'booking';
 
-// ../_routes.php:824 ../templates/default/booking.tpl:91 
+// ../_routes.php:832 ../templates/default/booking.tpl:91 
 $lang['events']['Check number'] = 'Check number';
 
 // ../templates/default/events.tpl:45 ../templates/default/events.tpl:75 ../templates/default/activity.tpl:64 ../templates/default/event.tpl:97 
 $lang['events']['Town'] = 'Town';
 
-// ../_routes.php:465 
+// ../_routes.php:466 
 $lang['events']['Bookings management'] = 'Bookings management';
 
 // ../_routes.php:248 
@@ -150,7 +150,7 @@ $lang['events']['Restrict event to selected group (and its subgroups).'] = 'Rest
 // ../_routes.php:252 
 $lang['events']['An error occured while storing the event.'] = 'An error occured while storing the event.';
 
-// ../_routes.php:805 ../templates/default/activity.tpl:60 ../templates/default/event.tpl:93 
+// ../_routes.php:813 ../templates/default/activity.tpl:60 ../templates/default/event.tpl:93 
 $lang['events']['Zip code'] = 'Zip code';
 
 // ../lib/GaletteEvents/Event.php:448 
@@ -168,7 +168,7 @@ $lang['events']['Fail to add new event.'] = 'Fail to add new event.';
 // ../lib/GaletteEvents/Booking.php:417 
 $lang['events']['Booking updated'] = 'Booking updated';
 
-// ../_routes.php:810 ../templates/default/booking.tpl:42 
+// ../_routes.php:818 ../templates/default/booking.tpl:42 
 $lang['events']['Number of persons'] = 'Number of persons';
 
 // ../templates/default/booking.tpl:177 
@@ -177,7 +177,7 @@ $lang['events']['Click to choose this member for current booking'] = 'Click to c
 // ../templates/default/event.tpl:60 
 $lang['events']['Choose an activity to remove'] = 'Choose an activity to remove';
 
-// ../_routes.php:1131 
+// ../_routes.php:1139 
 $lang['events']['Activity has been modified.'] = 'Activity has been modified.';
 
 // ../_routes.php:149 
@@ -204,19 +204,19 @@ $lang['events']['Events'] = 'Events';
 // ../templates/default/booking.tpl:68 
 $lang['events']['No activity for selected event'] = 'No activity for selected event';
 
-// ../_routes.php:1129 
+// ../_routes.php:1137 
 $lang['events']['New activity has been successfully added.'] = 'New activity has been successfully added.';
 
 // ../lib/GaletteEvents/Event.php:249 
 $lang['events']['Begin date is mandatory'] = 'Begin date is mandatory';
 
-// ../templates/default/bookings.tpl:19 ../templates/default/bookings.tpl:87 ../templates/default/bookings.tpl:131 ../templates/default/bookings.tpl:133 ../templates/default/booking.tpl:77 
+// ../templates/default/bookings.tpl:26 ../templates/default/bookings.tpl:94 ../templates/default/bookings.tpl:138 ../templates/default/bookings.tpl:140 ../templates/default/booking.tpl:77 
 $lang['events']['Paid'] = 'Paid';
 
-// ../_routes.php:635 
+// ../_routes.php:643 
 $lang['events']['An error occured while storing the booking.'] = 'An error occured while storing the booking.';
 
-// ../templates/default/bookings.tpl:75 ../templates/default/bookings.tpl:130 ../templates/default/booking.tpl:10 
+// ../templates/default/bookings.tpl:82 ../templates/default/bookings.tpl:137 ../templates/default/booking.tpl:10 
 $lang['events']['Booking date'] = 'Booking date';
 
 // ../templates/default/events.tpl:33 ../templates/default/events.tpl:74 
@@ -231,6 +231,9 @@ $lang['events']['Required'] = 'Required';
 // ../templates/default/activities.tpl:61 
 $lang['events']['Active'] = 'Active';
 
+// ../templates/default/bookings.tpl:7 
+$lang['events']['Select...'] = 'Select...';
+
 // ../templates/default/event.tpl:10 
 $lang['events']['Is open'] = 'Is open';
 
@@ -243,10 +246,10 @@ $lang['events']['End date'] = 'End date';
 // ../templates/default/booking.tpl:34 
 $lang['events']['none'] = 'none';
 
-// ../templates/default/bookings.tpl:141 
+// ../templates/default/bookings.tpl:148 
 $lang['events']['Edit booking'] = 'Edit booking';
 
-// ../templates/default/bookings.tpl:30 
+// ../templates/default/bookings.tpl:37 
 $lang['events']['Add a new booking'] = 'Add a new booking';
 
 // ../lib/GaletteEvents/Activity.php:296 
@@ -267,7 +270,7 @@ $lang['events']['Event is closed'] = 'Event is closed';
 // ../_routes.php:234 
 $lang['events']['Activity has been attached to event.'] = 'Activity has been attached to event.';
 
-// ../templates/default/bookings.tpl:15 
+// ../templates/default/bookings.tpl:22 
 $lang['events']['Paid bookings:'] = 'Paid bookings:';
 
 // ../templates/default/menu.tpl:5 
@@ -279,7 +282,7 @@ $lang['events']['Add selected activity to event'] = 'Add selected activity to ev
 // ../_routes.php:383 
 $lang['events']['Event %name has been successfully deleted.'] = 'Event %name has been successfully deleted.';
 
-// ../_routes.php:558 ../_routes.php:719 
+// ../_routes.php:566 ../_routes.php:727 
 $lang['events']['Booking'] = 'Booking';
 
 // ../lib/GaletteEvents/Activity.php:273 
@@ -288,25 +291,25 @@ $lang['events']['Activity added'] = 'Activity added';
 // ../templates/default/menu.tpl:10 ../templates/default/event.tpl:43 ../templates/default/booking.tpl:52 
 $lang['events']['Activities'] = 'Activities';
 
-// ../templates/default/bookings.tpl:143 
+// ../templates/default/bookings.tpl:150 
 $lang['events']['Remove from database'] = 'Remove from database';
 
 // ../_routes.php:372 
 $lang['events']['An error occured trying to remove event %name :/'] = 'An error occured trying to remove event %name :/';
 
-// ../_routes.php:1050 
+// ../_routes.php:1058 
 $lang['events']['Activity ID cannot ben null calling edit route!'] = 'Activity ID cannot ben null calling edit route!';
 
 // ../lib/GaletteEvents/Event.php:325 
 $lang['events']['Town is mandatory'] = 'Town is mandatory';
 
-// ../_routes.php:755 
+// ../_routes.php:763 
 $lang['events']['An error occured trying to remove booking :/'] = 'An error occured trying to remove booking :/';
 
 // ../templates/default/activity.tpl:56 ../templates/default/event.tpl:89 
 $lang['events']['Address'] = 'Address';
 
-// ../templates/default/bookings.tpl:27 
+// ../templates/default/bookings.tpl:34 
 $lang['events']['Show all bookings'] = 'Show all bookings';
 
 // ../templates/default/events.tpl:5 
@@ -315,7 +318,7 @@ $lang['events']['events'] = 'events';
 // ../templates/default/events.tpl:86 
 $lang['events']['[bookings]'] = '[bookings]';
 
-// ../_routes.php:1135 
+// ../_routes.php:1143 
 $lang['events']['An error occured while storing the activity.'] = 'An error occured while storing the activity.';
 
 // ../lib/GaletteEvents/Booking.php:328 
@@ -330,7 +333,7 @@ $lang['events']['Country'] = 'Country';
 // ../templates/default/activity.tpl:24 
 $lang['events']['Related activities'] = 'Related activities';
 
-// ../templates/default/bookings.tpl:135 
+// ../templates/default/bookings.tpl:142 
 $lang['events']['Booking has not been paid'] = 'Booking has not been paid';
 
 // ../lib/GaletteEvents/Event.php:470 
@@ -339,16 +342,16 @@ $lang['events']['Event updated'] = 'Event updated';
 // ../templates/default/events.tpl:79 
 $lang['events']['Event is open'] = 'Event is open';
 
-// ../_routes.php:1071 ../_routes.php:1206 
+// ../_routes.php:1079 ../_routes.php:1214 
 $lang['events']['Activity'] = 'Activity';
 
 // ../templates/default/event.tpl:12 
 $lang['events']['(event will be considered as closed when begin date has been exceeded)'] = '(event will be considered as closed when begin date has been exceeded)';
 
-// ../templates/default/bookings.tpl:21 
+// ../templates/default/bookings.tpl:28 
 $lang['events']['Not paid'] = 'Not paid';
 
-// ../templates/default/bookings.tpl:10 
+// ../templates/default/bookings.tpl:17 
 $lang['events']['All'] = 'All';
 
 // ../templates/default/activities.tpl:5 
@@ -357,12 +360,12 @@ $lang['events']['acivity'] = 'acivity';
 // ../templates/default/booking.tpl:7 
 $lang['events']['Booking informations'] = 'Booking informations';
 
-// ../templates/default/bookings.tpl:149 
+// ../templates/default/bookings.tpl:156 
 $lang['events']['No booking has been found'] = 'No booking has been found';
 
 // ../lib/GaletteEvents/Repository/Activities.php:96 ../templates/default/activity.tpl:43 
 $lang['events']['Lodging'] = 'Lodging';
 
-// ../_routes.php:999 
+// ../_routes.php:1007 
 $lang['events']['Activities management'] = 'Activities management';
 

@@ -455,6 +455,7 @@ $this->get(
 
         $this->session->filter_bookings = $filters;
 
+        $events = new Events($this->zdb, $this->login);
         $list = $bookings->getList();
         $count = $bookings->getCount();
         // display page
@@ -469,7 +470,8 @@ $this->get(
                 'event'             => $event,
                 'eventid'           => $filters->event_filter,
                 'require_dialog'    => true,
-                'filters'           => $filters
+                'filters'           => $filters,
+                'events'            => $events->getList()
             ]
         );
         return $response;
@@ -505,6 +507,12 @@ $this->post(
             if (isset($post['payment_type_filter'])) {
                 if (is_numeric($post['payment_type_filter'])) {
                     $filters->payment_type_filter = $post['payment_type_filter'];
+                }
+            }
+
+            if (isset($post['event_filter'])) {
+                if (is_numeric($post['event_filter'])) {
+                    $filters->event_filter = $post['event_filter'];
                 }
             }
         }
