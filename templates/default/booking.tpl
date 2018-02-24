@@ -133,7 +133,6 @@
                 type: "POST",
                 data: {
                     ajax: true,
-                    multiple: false,
                     from: 'single',
                     id: '{$booking->getmemberId()}'
                 },
