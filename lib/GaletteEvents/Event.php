@@ -309,6 +309,8 @@ class Event
         if ($this->login->isAdmin() || $this->login->isStaff()) {
             if (isset($values['group']) && !empty($values['group'])) {
                 $this->group = $values['group'];
+            } else {
+                $this->group = null;
             }
         } else {
             if (!isset($values['group'])
