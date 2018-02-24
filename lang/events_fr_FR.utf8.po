@@ -59,6 +59,10 @@ msgstr "L'activité a été attachée à l'évènement."
 msgid "Attendees"
 msgstr "Participants"
 
+#: ../templates/default/activities.tpl:68
+msgid "%activity: remove from database"
+msgstr "%activity : supprimer de la base de données"
+
 #: ../lib/GaletteEvents/Booking.php:395
 msgid "Booking added"
 msgstr "Réservation ajoutée"
@@ -98,7 +102,7 @@ msgstr "L'évènement est ouvert"
 msgid "Even meal"
 msgstr "Repas soir"
 
-#: ../templates/default/booking.tpl:177
+#: ../templates/default/booking.tpl:176
 msgid "Click to choose this member for current booking"
 msgstr "Cliquez pour choisir cet adhérent pour la réservation courante"
 
@@ -133,7 +137,7 @@ msgstr "Pays"
 msgid "Noon meal"
 msgstr "Repas midi"
 
-#: ../lib/GaletteEvents/Event.php:448
+#: ../lib/GaletteEvents/Event.php:450
 msgid "Event added"
 msgstr "Évènement ajouté"
 
@@ -149,6 +153,10 @@ msgstr "La date de fin doit être ultérieure ou égale à la date de début"
 msgid "No booking has been found"
 msgstr "Aucune réservation trouvée"
 
+#: ../templates/default/events.tpl:90
+msgid "%eventname: remove from database"
+msgstr "%eventname : supprimer de la base de données"
+
 #: ../templates/default/menu.tpl:7
 msgid "Bookings"
 msgstr "Réservations"
@@ -160,6 +168,14 @@ msgstr "activités"
 #: ../_routes.php:639
 msgid "Booking has been modified."
 msgstr "La réservation a été modifiée."
+
+#: ../templates/default/events.tpl:86
+msgid "%eventname: show bookings"
+msgstr "%eventname : voir les réservations"
+
+#: ../templates/default/events.tpl:85
+msgid "%eventname: export bookings as CSV"
+msgstr "%eventname: exporter les réservations en CSV"
 
 #: ../lib/GaletteEvents/Booking.php:220
 msgid "%activity is mandatory for this event!"
@@ -220,6 +236,10 @@ msgstr ""
 "(l'évènement sera considéré comme clos lorsque la date de début sera "
 "dépassée)"
 
+#: ../templates/default/bookings.tpl:114
+msgid "Found bookings total %f"
+msgstr "Total des réservations trouvées : %f"
+
 #: ../lib/GaletteEvents/Event.php:249
 msgid "Begin date is mandatory"
 msgstr "La date de début est requise"
@@ -239,6 +259,10 @@ msgstr "Active"
 #: ../templates/default/event.tpl:51
 msgid "Choose an activity to add"
 msgstr "Choisissez une activité à ajouter"
+
+#: ../templates/default/events.tpl:88
+msgid "%eventname: edit informations"
+msgstr "%eventname : modifier les informations"
 
 #: ../templates/default/bookings.tpl:142
 msgid "Booking has not been paid"
@@ -281,7 +305,7 @@ msgstr "réservation"
 msgid "event"
 msgstr "évènement"
 
-#: ../lib/GaletteEvents/Event.php:470
+#: ../lib/GaletteEvents/Event.php:472
 msgid "Event updated"
 msgstr "Évènement mis à jour"
 
@@ -300,6 +324,10 @@ msgstr "Ajouter l'activité sélectionnée à l'évènement"
 #: ../_routes.php:383
 msgid "Event %name has been successfully deleted."
 msgstr "L'évènement %name a été supprimé avec succès."
+
+#: ../templates/default/activities.tpl:67
+msgid "%activity: edit informations"
+msgstr "%activity : modifier les informations"
 
 #: ../_routes.php:566 ../_routes.php:727
 msgid "Booking"
@@ -334,6 +362,10 @@ msgstr "Nouvel évènement"
 msgid "An error occured while storing the booking."
 msgstr "Une erreur est survenue à l'enregistrement de la réservation."
 
+#: ../templates/default/bookings.tpl:36
+msgid "%event's bookings"
+msgstr "Réservations de %event"
+
 #: ../templates/default/activity.tpl:31 ../templates/default/activity.tpl:39
 #: ../templates/default/activity.tpl:47 ../templates/default/event.tpl:78
 msgid "Required"
@@ -353,7 +385,7 @@ msgstr "Évènements"
 msgid "Begin date"
 msgstr "Date de début"
 
-#: ../lib/GaletteEvents/Event.php:318
+#: ../lib/GaletteEvents/Event.php:320
 msgid "Please select a group you own!"
 msgstr "Veuillez sélectionner un groupe que vous gérez !"
 
@@ -450,7 +482,7 @@ msgstr "Ouvert"
 msgid "Is open"
 msgstr "Est ouvert"
 
-#: ../lib/GaletteEvents/Event.php:452
+#: ../lib/GaletteEvents/Event.php:454
 msgid "Fail to add new event."
 msgstr "Erreur à l'ajout du nouvel évènement."
 
@@ -467,7 +499,7 @@ msgstr "Ville"
 msgid "Events management"
 msgstr "Gestion des évènements"
 
-#: ../lib/GaletteEvents/Event.php:325
+#: ../lib/GaletteEvents/Event.php:327
 msgid "Town is mandatory"
 msgstr "La ville est requise"
 

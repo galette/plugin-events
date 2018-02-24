@@ -33,7 +33,7 @@
     {if $login->isAdmin() or $login->isStaff() or $login->isGroupManager()}
             <a id="clearfilter" href="{path_for name="events_bookings" data=["event" => {_T string="all" domain="events_routes" notrans="true"}]}" title="{_T string="Show all bookings" domain="events"}">{_T string="Show all bookings" domain="events"}</a>
     {/if}
-            <strong>{_T string="%event's bookings" pattern="/%event/" replace=$event->getName() domain="events"}</strong>
+            <strong>{_T string="%event's bookings" domain="events" pattern="/%event/" replace=$event->getName()}</strong>
             (<a href="{path_for name="events_booking" data=["action" => {_T string="add" domain="routes"}]}?event={$event->getId()}">{_T string="Add a new booking" domain="events"}</a>)
 {/if}
 {if $nb_bookings gt 0}
@@ -111,7 +111,7 @@
             <tfoot>
                 <tr>
                     <td class="right" colspan="10">
-                        {_T string="Found bookings total %f" pattern="/%f/" replace=$bookings->getSum() domain="events"}
+                        {_T string="Found bookings total %f" domain="events" pattern="/%f/" replace=$bookings->getSum()}
                     </td>
                 </tr>
             </tfoot>

@@ -1,5 +1,5 @@
 <?php
-// This file was automatically generated on Sat Feb 24 07:08:30 2018 (GMT)
+// This file was automatically generated on Sat Feb 24 14:48:12 2018 (GMT)
 // Don't modify it by hand, rather use the target lang from the Makefile.
 
 
@@ -8,6 +8,9 @@ $lang['events']['Booking has been modified.'] = 'La réservation a été modifi�
 
 // ../lib/GaletteEvents/Event.php:304 ../lib/GaletteEvents/Activity.php:204 
 $lang['events']['Name is mandatory'] = 'Le nom est requis';
+
+// ../templates/default/activities.tpl:68 
+$lang['events']['%activity: remove from database'] = '%activity : supprimer de la base de données';
 
 // ../lib/GaletteEvents/Activity.php:278 
 $lang['events']['Fail to add new activity.'] = 'Erreur à l\'ajout de la nouvelle activité.';
@@ -27,10 +30,13 @@ $lang['events']['Do not forget to store the event'] = 'N\'oubliez pas d\'enregis
 // ../lib/GaletteEvents/Booking.php:399 
 $lang['events']['Fail to add new booking.'] = 'Erreur à l\'ajout de la nouvelle réservation.';
 
+// ../templates/default/events.tpl:90 
+$lang['events']['%eventname: remove from database'] = '%eventname : supprimer de la base de données';
+
 // ../templates/default/event.tpl:51 
 $lang['events']['Choose an activity to add'] = 'Choisissez une activité à ajouter';
 
-// ../lib/GaletteEvents/Event.php:318 
+// ../lib/GaletteEvents/Event.php:320 
 $lang['events']['Please select a group you own!'] = 'Veuillez sélectionner un groupe que vous gérez !';
 
 // ../lib/GaletteEvents/Booking.php:395 
@@ -75,6 +81,9 @@ $lang['events']['Activity %name has been successfully deleted.'] = 'L\'activité
 // ../templates/default/bookings.tpl:140 
 $lang['events']['Booking has been paid'] = 'La réservation a été payée';
 
+// ../templates/default/events.tpl:88 
+$lang['events']['%eventname: edit informations'] = '%eventname : modifier les informations';
+
 // ../_routes.php:653 
 $lang['events']['Do not forget to store the booking'] = 'N\'oubliez pas d\'enregistrer la réservation';
 
@@ -108,8 +117,8 @@ $lang['events']['Location'] = 'Localisation';
 // ../templates/default/event.tpl:27 
 $lang['events']['Limit to group'] = 'Limiter au groupe';
 
-// ../templates/default/activities.tpl:73 
-$lang['events']['No activity has been found'] = 'Aucune activité trouvée';
+// ../lib/GaletteEvents/Booking.php:328 
+$lang['events']['A booking already exists for %member in %event'] = 'Une réservation existe déjà pour l\'adhérent %member dans %event';
 
 // ../templates/default/events.tpl:5 
 $lang['events']['event'] = 'évènement';
@@ -122,6 +131,9 @@ $lang['events']['New booking has been successfully added.'] = 'La nouvelle rése
 
 // ../_routes.php:98 
 $lang['events']['Events management'] = 'Gestion des évènements';
+
+// ../templates/default/events.tpl:85 
+$lang['events']['%eventname: export bookings as CSV'] = '%eventname: exporter les réservations en CSV';
 
 // ../templates/default/events.tpl:85 
 $lang['events']['[bookings csv]'] = '[reservations csv]';
@@ -153,7 +165,7 @@ $lang['events']['An error occured while storing the event.'] = 'Une erreur est s
 // ../_routes.php:813 ../templates/default/activity.tpl:60 ../templates/default/event.tpl:93 
 $lang['events']['Zip code'] = 'Code postal';
 
-// ../lib/GaletteEvents/Event.php:448 
+// ../lib/GaletteEvents/Event.php:450 
 $lang['events']['Event added'] = 'Évènement ajouté';
 
 // ../templates/default/booking.tpl:17 
@@ -162,7 +174,10 @@ $lang['events']['Select an event'] = 'Sélectionnez un évènement';
 // ../templates/default/activity.tpl:18 ../templates/default/event.tpl:37 ../templates/default/booking.tpl:46 
 $lang['events']['Comment'] = 'Commentaire';
 
-// ../lib/GaletteEvents/Event.php:452 
+// ../templates/default/activities.tpl:67 
+$lang['events']['%activity: edit informations'] = '%activity : modifier les informations';
+
+// ../lib/GaletteEvents/Event.php:454 
 $lang['events']['Fail to add new event.'] = 'Erreur à l\'ajout du nouvel évènement.';
 
 // ../lib/GaletteEvents/Booking.php:417 
@@ -171,7 +186,7 @@ $lang['events']['Booking updated'] = 'Réservation mise à jour';
 // ../_routes.php:818 ../templates/default/booking.tpl:42 
 $lang['events']['Number of persons'] = 'Nombre de personnes';
 
-// ../templates/default/booking.tpl:177 
+// ../templates/default/booking.tpl:176 
 $lang['events']['Click to choose this member for current booking'] = 'Cliquez pour choisir cet adhérent pour la réservation courante';
 
 // ../templates/default/event.tpl:60 
@@ -294,13 +309,19 @@ $lang['events']['Activities'] = 'Activités';
 // ../templates/default/bookings.tpl:150 
 $lang['events']['Remove from database'] = 'Supprimer de la base de données';
 
+// ../templates/default/events.tpl:86 
+$lang['events']['%eventname: show bookings'] = '%eventname : voir les réservations';
+
+// ../templates/default/bookings.tpl:114 
+$lang['events']['Found bookings total %f'] = 'Total des réservations trouvées : %f';
+
 // ../_routes.php:372 
 $lang['events']['An error occured trying to remove event %name :/'] = 'Une erreur est survenue à la suppression de l\'évènement %name :/';
 
 // ../_routes.php:1058 
 $lang['events']['Activity ID cannot ben null calling edit route!'] = 'L\'identifiant de l\'activité ne peut être vide pour la route d\'édition !';
 
-// ../lib/GaletteEvents/Event.php:325 
+// ../lib/GaletteEvents/Event.php:327 
 $lang['events']['Town is mandatory'] = 'La ville est requise';
 
 // ../_routes.php:763 
@@ -321,8 +342,8 @@ $lang['events']['[bookings]'] = '[reservations]';
 // ../_routes.php:1143 
 $lang['events']['An error occured while storing the activity.'] = 'Une erreur est survenue à l\'enregistrement de l\'activité.';
 
-// ../lib/GaletteEvents/Booking.php:328 
-$lang['events']['A booking already exists for %member in %event'] = 'Une réservation existe déjà pour l\'adhérent %member dans %event';
+// ../templates/default/activities.tpl:73 
+$lang['events']['No activity has been found'] = 'Aucune activité trouvée';
 
 // ../templates/default/events.tpl:21 ../templates/default/activity.tpl:14 ../templates/default/event.tpl:15 ../templates/default/activities.tpl:21 
 $lang['events']['Name'] = 'Nom';
@@ -336,7 +357,7 @@ $lang['events']['Related activities'] = 'Activités liées';
 // ../templates/default/bookings.tpl:142 
 $lang['events']['Booking has not been paid'] = 'La réservation n\'a pas été payée';
 
-// ../lib/GaletteEvents/Event.php:470 
+// ../lib/GaletteEvents/Event.php:472 
 $lang['events']['Event updated'] = 'Évènement mis à jour';
 
 // ../templates/default/events.tpl:79 
@@ -362,6 +383,9 @@ $lang['events']['Booking informations'] = 'Informations réservation';
 
 // ../templates/default/bookings.tpl:156 
 $lang['events']['No booking has been found'] = 'Aucune réservation trouvée';
+
+// ../templates/default/bookings.tpl:36 
+$lang['events']['%event\'s bookings'] = 'Réservations de %event';
 
 // ../lib/GaletteEvents/Repository/Activities.php:96 ../templates/default/activity.tpl:43 
 $lang['events']['Lodging'] = 'Logement';

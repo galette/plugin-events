@@ -64,8 +64,8 @@
                         {/if}
                     </td>
                     <td class="{$rclass} center nowrap actions_row">
-                        <a href="{path_for name="events_activity" data=["action" => {_T string="edit" domain="routes"}, "id" => $aid]}"><img src="{base_url}/{$template_subdir}images/icon-edit.png" alt="{_T string="[mod]"}" width="16" height="16" title="{_T string="%activity: edit informations" pattern="/%activity/" replace=$activity->getName() domain="events"}"/></a>
-                        <a class="delete" href="{path_for name="events_remove_activity" data=["id" => $activity->getId()]}"><img src="{base_url}/{$template_subdir}images/icon-trash.png" alt="{_T string="[del]"}" width="16" height="16" title="{_T string="%activity: remove from database" pattern="/%activity/" replace=$activity->getName() domain="events"}"/></a>
+                        <a href="{path_for name="events_activity" data=["action" => {_T string="edit" domain="routes"}, "id" => $aid]}"><img src="{base_url}/{$template_subdir}images/icon-edit.png" alt="{_T string="[mod]"}" width="16" height="16" title="{_T string="%activity: edit informations" domain="events" pattern="/%activity/" replace=$activity->getName()}"/></a>
+                        <a class="delete" href="{path_for name="events_remove_activity" data=["id" => $activity->getId()]}"><img src="{base_url}/{$template_subdir}images/icon-trash.png" alt="{_T string="[del]"}" width="16" height="16" title="{_T string="%activity: remove from database" domain="events" pattern="/%activity/" replace=$activity->getName()}"/></a>
                     </td>
                 </tr>
     {/foreach}
