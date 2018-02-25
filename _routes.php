@@ -49,6 +49,7 @@ use Galette\Repository\Members;
 use Galette\Filters\MembersList;
 use Galette\IO\CsvOut;
 use Galette\IO\Csv;
+use Galette\Entity\Adherent;
 
 //Constants and classes from plugin
 require_once $module['root'] . '/_config.inc.php';
@@ -576,7 +577,11 @@ $this->get(
             if (isset($get['event'])) {
                 $booking->setEvent((int)$get['event']);
             }
-            if (!$this->login->isSuperAdmin()) {
+            if (isset($_GET[Adherent::PK]) &&
+                ($this->login->isAdmin() || $this->login->isStaff() || $this->login->isGroupManager())
+            ) {
+                $booking->setMember((int)$_GET[Adherent::PK]);
+            } elseif (!$this->login->isSuperAdmin()) {
                 $booking->setMember($this->login->id);
             }
         }
