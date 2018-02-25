@@ -63,8 +63,8 @@ msgstr ""
 msgid "Related activities"
 msgstr ""
 
-#: ../lib/GaletteEvents/Repository/Activities.php:96 ../templates/default/activity.tpl:43
-msgid "Lodging"
+#: ../templates/default/menu.tpl:5
+msgid "New event"
 msgstr ""
 
 #: ../lib/GaletteEvents/Booking.php:233
@@ -196,7 +196,7 @@ msgstr ""
 msgid "Activity"
 msgstr ""
 
-#: ../_routes.php:1256
+#: ../_routes.php:1268
 msgid "An error occured trying to remove activity %name :/"
 msgstr ""
 
@@ -335,8 +335,8 @@ msgstr ""
 msgid "Paid bookings:"
 msgstr ""
 
-#: ../templates/default/menu.tpl:5
-msgid "New event"
+#: ../lib/GaletteEvents/Repository/Activities.php:96 ../templates/default/activity.tpl:43
+msgid "Lodging"
 msgstr ""
 
 #: ../_routes.php:643
@@ -486,6 +486,10 @@ msgstr ""
 msgid "Remove selected activity from event"
 msgstr ""
 
+#: ../_routes.php:1255
+msgid "Activity %name is referenced in %count events, it cannot be removed."
+msgstr ""
+
 #: ../templates/default/bookings.tpl:28
 msgid "Not paid"
 msgstr ""
@@ -516,7 +520,7 @@ msgstr ""
 msgid "Paid"
 msgstr ""
 
-#: ../_routes.php:1267
+#: ../_routes.php:1279
 msgid "Activity %name has been successfully deleted."
 msgstr ""
 

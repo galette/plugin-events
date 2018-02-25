@@ -76,10 +76,9 @@ msgstr "Date de réservation"
 msgid "Related activities"
 msgstr "Activités liées"
 
-#: ../lib/GaletteEvents/Repository/Activities.php:96
-#: ../templates/default/activity.tpl:43
-msgid "Lodging"
-msgstr "Logement"
+#: ../templates/default/menu.tpl:5
+msgid "New event"
+msgstr "Nouvel évènement"
 
 #: ../lib/GaletteEvents/Booking.php:233
 msgid "Member is mandatory"
@@ -213,7 +212,7 @@ msgstr "Une réservation existe déjà pour l'adhérent %member dans %event"
 msgid "Activity"
 msgstr "Activité"
 
-#: ../_routes.php:1256
+#: ../_routes.php:1268
 msgid "An error occured trying to remove activity %name :/"
 msgstr "Une erreur est survenue à la suppression de l'activité %name :/"
 
@@ -354,9 +353,10 @@ msgstr "Aucune réservation sélectionnée, vous devez en cocher au moins une."
 msgid "Paid bookings:"
 msgstr "Réservations payées :"
 
-#: ../templates/default/menu.tpl:5
-msgid "New event"
-msgstr "Nouvel évènement"
+#: ../lib/GaletteEvents/Repository/Activities.php:96
+#: ../templates/default/activity.tpl:43
+msgid "Lodging"
+msgstr "Logement"
 
 #: ../_routes.php:643
 msgid "An error occured while storing the booking."
@@ -507,6 +507,12 @@ msgstr "La ville est requise"
 msgid "Remove selected activity from event"
 msgstr "Retirer l'activité sélectionnée de l'évènement"
 
+#: ../_routes.php:1255
+msgid "Activity %name is referenced in %count events, it cannot be removed."
+msgstr ""
+"L'activité %name est référencée dans %count évènements, elle ne peut être "
+"supprimée."
+
 #: ../templates/default/bookings.tpl:28
 msgid "Not paid"
 msgstr "Non payée"
@@ -537,7 +543,7 @@ msgstr "Nombre de personnes"
 msgid "Paid"
 msgstr "Payée"
 
-#: ../_routes.php:1267
+#: ../_routes.php:1279
 msgid "Activity %name has been successfully deleted."
 msgstr "L'activité %name a été supprimée avec succès."
 

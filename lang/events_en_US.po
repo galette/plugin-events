@@ -76,10 +76,9 @@ msgstr "Booking date"
 msgid "Related activities"
 msgstr "Related activities"
 
-#: ../lib/GaletteEvents/Repository/Activities.php:96
-#: ../templates/default/activity.tpl:43
-msgid "Lodging"
-msgstr "Lodging"
+#: ../templates/default/menu.tpl:5
+msgid "New event"
+msgstr "New event"
 
 #: ../lib/GaletteEvents/Booking.php:233
 msgid "Member is mandatory"
@@ -213,7 +212,7 @@ msgstr "A booking already exists for %member in %event"
 msgid "Activity"
 msgstr "Activity"
 
-#: ../_routes.php:1256
+#: ../_routes.php:1268
 msgid "An error occured trying to remove activity %name :/"
 msgstr "An error occured trying to remove activity %name :/"
 
@@ -351,9 +350,10 @@ msgstr "No booking was selected, please check at least one."
 msgid "Paid bookings:"
 msgstr "Paid bookings:"
 
-#: ../templates/default/menu.tpl:5
-msgid "New event"
-msgstr "New event"
+#: ../lib/GaletteEvents/Repository/Activities.php:96
+#: ../templates/default/activity.tpl:43
+msgid "Lodging"
+msgstr "Lodging"
 
 #: ../_routes.php:643
 msgid "An error occured while storing the booking."
@@ -503,6 +503,10 @@ msgstr "Town is mandatory"
 msgid "Remove selected activity from event"
 msgstr "Remove selected activity from event"
 
+#: ../_routes.php:1255
+msgid "Activity %name is referenced in %count events, it cannot be removed."
+msgstr "Activity %name is referenced in %count events, it cannot be removed."
+
 #: ../templates/default/bookings.tpl:28
 msgid "Not paid"
 msgstr "Not paid"
@@ -533,7 +537,7 @@ msgstr "Number of persons"
 msgid "Paid"
 msgstr "Paid"
 
-#: ../_routes.php:1267
+#: ../_routes.php:1279
 msgid "Activity %name has been successfully deleted."
 msgstr "Activity %name has been successfully deleted."
 

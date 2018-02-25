@@ -1,5 +1,5 @@
 <?php
-// This file was automatically generated on Sat Feb 24 14:48:12 2018 (GMT)
+// This file was automatically generated on Sun Feb 25 09:07:25 2018 (GMT)
 // Don't modify it by hand, rather use the target lang from the Makefile.
 
 
@@ -75,7 +75,7 @@ $lang['events']['Booking date is mandatory!'] = 'Booking date is mandatory!';
 // ../templates/default/booking.tpl:74 
 $lang['events']['Financial informations'] = 'Financial informations';
 
-// ../_routes.php:1267 
+// ../_routes.php:1279 
 $lang['events']['Activity %name has been successfully deleted.'] = 'Activity %name has been successfully deleted.';
 
 // ../templates/default/bookings.tpl:140 
@@ -108,7 +108,7 @@ $lang['events']['Is active'] = 'Is active';
 // ../_routes.php:831 ../templates/default/booking.tpl:87 
 $lang['events']['Bank name'] = 'Bank name';
 
-// ../_routes.php:1256 
+// ../_routes.php:1268 
 $lang['events']['An error occured trying to remove activity %name :/'] = 'An error occured trying to remove activity %name :/';
 
 // ../templates/default/activity.tpl:53 ../templates/default/event.tpl:86 
@@ -155,6 +155,9 @@ $lang['events']['Bookings management'] = 'Bookings management';
 
 // ../_routes.php:248 
 $lang['events']['Event has been modified.'] = 'Event has been modified.';
+
+// ../_routes.php:1255 
+$lang['events']['Activity %name is referenced in %count events, it cannot be removed.'] = 'Activity %name is referenced in %count events, it cannot be removed.';
 
 // ../templates/default/event.tpl:27 ../templates/default/event.tpl:28 
 $lang['events']['Restrict event to selected group (and its subgroups).'] = 'Restrict event to selected group (and its subgroups).';

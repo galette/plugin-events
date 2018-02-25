@@ -1247,32 +1247,45 @@ $this->post(
             );
         } else {
             $activity = new Activity($this->zdb, $this->login, (int)$post['id']);
-            $del = $activity->remove();
-
-            if ($del !== true) {
+            $count_usage = $activity->countEvents();
+            if ($count_usage > 0) {
                 $error_detected = str_replace(
-                    '%name',
-                    $activity->getName(),
-                    _T("An error occured trying to remove activity %name :/", "events")
+                    ['%name', '%count'],
+                    [$activity->getName(), $count_usage],
+                    _T('Activity %name is referenced in %count events, it cannot be removed.', 'events')
                 );
-
                 $this->flash->addMessage(
                     'error_detected',
                     $error_detected
                 );
             } else {
-                $success_detected = str_replace(
-                    '%name',
-                    $activity->getName(),
-                    _T("Activity %name has been successfully deleted.", "events")
-                );
+                $del = $activity->remove();
 
-                $this->flash->addMessage(
-                    'success_detected',
-                    $success_detected
-                );
+                if ($del !== true) {
+                    $error_detected = str_replace(
+                        '%name',
+                        $activity->getName(),
+                        _T("An error occured trying to remove activity %name :/", "events")
+                    );
 
-                $success = true;
+                    $this->flash->addMessage(
+                        'error_detected',
+                        $error_detected
+                    );
+                } else {
+                    $success_detected = str_replace(
+                        '%name',
+                        $activity->getName(),
+                        _T("Activity %name has been successfully deleted.", "events")
+                    );
+
+                    $this->flash->addMessage(
+                        'success_detected',
+                        $success_detected
+                    );
+
+                    $success = true;
+                }
             }
         }
 
