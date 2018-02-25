@@ -81,8 +81,8 @@ CREATE TABLE galette_events_activities (
 
 DROP TABLE IF EXISTS galette_events_activitiesevents CASCADE;
 CREATE TABLE galette_events_activitiesevents (
-  id_event integer NOT NULL,
-  id_activity integer NOT NULL,
+  id_event integer REFERENCES galette_events_events (id_event) ON DELETE CASCADE ON UPDATE CASCADE,
+  id_activity integer REFERENCES galette_events_activities (id_activity) ON DELETE CASCADE ON UPDATE CASCADE,
   status smallint NOT NULL,
   PRIMARY KEY(id_event,id_activity)
 );

@@ -65,7 +65,9 @@ CREATE TABLE galette_events_activitiesevents (
   id_event int(10) NOT NULL,
   id_activity int(10) NOT NULL,
   status tinyint(1) NOT NULL,
-  PRIMARY KEY(id_event,id_activity)
+  PRIMARY KEY(id_event,id_activity),
+  FOREIGN KEY (id_event) REFERENCES galette_events_events (id_event) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (id_activity) REFERENCES galette_events_activities (id_activity) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 DROP TABLE IF EXISTS galette_events_activitiesbookings CASCADE;
