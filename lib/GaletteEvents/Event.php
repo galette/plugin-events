@@ -83,6 +83,7 @@ class Event
     private $comment = '';
 
     private $activities = [];
+    private $activities_removed = [];
 
     /**
      * Default constructor
@@ -360,6 +361,11 @@ class Event
             && !empty($values['detach_activity'])
         ) {
             unset($this->activities[$values['detach_activity']]);
+            $this->activities_removed[$values['detach_activity']] = [
+                self::PK        => $this->id,
+                Activity::PK    => $values['detach_activity']
+            ];
+
             if (count($values['activities_ids'])) {
                 unset($values['activities_ids'][array_search($values['detach_activity'], $values['activities_ids'])]);
             }
@@ -478,7 +484,7 @@ class Event
             $void   = [];
             $update = [];
             $insert = [];
-            $delete = [];
+            $delete = $this->activities_removed;
 
             foreach ($this->activities as $aid => $data) {
                 $activity = $data['activity'];
