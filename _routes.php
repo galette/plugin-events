@@ -617,6 +617,16 @@ $this->post(
             $booking->load((int)$post['id']);
         }
 
+        if (isset($post['cancel'])) {
+            $redirect_url = $this->router->pathFor(
+                'events_bookings',
+                ['event' => 'guess']
+            );
+            return $response
+                ->withStatus(301)
+                ->withHeader('Location', $redirect_url);
+        }
+
         $success_detected = [];
         $warning_detected = [];
         $error_detected = [];

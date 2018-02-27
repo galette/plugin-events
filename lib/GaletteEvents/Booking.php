@@ -438,18 +438,18 @@ class Booking
                 $results = $this->zdb->execute($select);
 
                 foreach ($results as $result) {
-                    $values = [
-                        Activity::PK    => $result[Activity::PK],
-                        self::PK        => $this->id,
-                        'checked'       => ($checked ? $checked :
-                                            ($this->zdb->isPostgres() ? 'false' : 0))
-                    ];
                     if (!isset($this->activities[$result[Activity::PK]])) {
-                        $delete[$result[Activity::PK]] = $values;
+                        $delete[$result[Activity::PK]] = [
+                            Activity::PK    => $result[Activity::PK],
+                            self::PK        => $this->id,
+                        ];
                     } elseif ($result['status'] != $this->activities[$result[Activity::PK]]['checked']) {
-                        $update[$result[Activity::PK]] = $values;
+                        $update[$result[Activity::PK]] = [
+                            'checked'   => ($checked ? $checked :
+                                            ($this->zdb->isPostgres() ? 'false' : 0))
+                        ];
                     } else {
-                        $void[$result[Activity::PK]] = $values;
+                        $void[$result[Activity::PK]] = true;
                     }
                 }
 
