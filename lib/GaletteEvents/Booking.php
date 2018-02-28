@@ -76,6 +76,7 @@ class Booking
     private $comment = '';
 
     private $activities = [];
+    private $activities_removed = [];
 
     /**
      * Default constructor
@@ -225,6 +226,15 @@ class Booking
                         'checked'   => (isset($values['activities']) && in_array($aid, $values['activities']))
                     ];
                     $this->activities[$aid] = $act;
+                }
+            }
+            foreach (array_keys($this->activities) as $aid) {
+                if (!isset($activities[$aid])) {
+                    $this->activities_removed[$aid] = [
+                        Activity::PK    => $aid,
+                        self::PK        => $this->id
+                    ];
+                    unset($this->activities[$aid]);
                 }
             }
         }
@@ -423,7 +433,7 @@ class Booking
             $void   = [];
             $update = [];
             $insert = [];
-            $delete = [];
+            $delete = $this->activities_removed;
 
             foreach ($this->activities as $aid => $data) {
                 $activity = $data['activity'];
@@ -443,7 +453,7 @@ class Booking
                             Activity::PK    => $result[Activity::PK],
                             self::PK        => $this->id,
                         ];
-                    } elseif ($result['status'] != $this->activities[$result[Activity::PK]]['checked']) {
+                    } elseif ($result['checked'] != $this->activities[$result[Activity::PK]]['checked']) {
                         $update[$result[Activity::PK]] = [
                             'checked'   => ($checked ? $checked :
                                             ($this->zdb->isPostgres() ? 'false' : 0))
@@ -752,7 +762,7 @@ class Booking
      */
     public function has($activity)
     {
-        return isset($this->activities[$activity]);
+        return isset($this->activities[$activity]) && $this->activities[$activity]['checked'];
     }
 
     /**
