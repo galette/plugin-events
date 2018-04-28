@@ -1,0 +1,45 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Galette Events plugin\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 2.0.3\n"
+
+#: ../_routes.php:532 ../_routes.php:607 ../_routes.php:713 ../_routes.php:743
+msgid "/booking"
+msgstr "/reservation"
+
+#: ../_routes.php:1048 ../_routes.php:1108 ../_routes.php:1200
+#: ../_routes.php:1233
+msgid "/activity"
+msgstr "/activite"
+
+#: ../_routes.php:410 ../_routes.php:483 ../_routes.php:797 ../_routes.php:906
+msgid "/bookings"
+msgstr "/reservations"
+
+#: ../_routes.php:961
+msgid "/activities"
+msgstr "/activites"
+
+#: ../_routes.php:410 ../_routes.php:446 ../_routes.php:933
+#: ../lib/GaletteEvents/Filters/BookingsList.php:115
+#: ../lib/GaletteEvents/Repository/Bookings.php:239
+#: ../templates/default/menu.tpl:7 ../templates/default/bookings.tpl:34
+msgid "all"
+msgstr "tous"
+
+#: ../_routes.php:139 ../_routes.php:205 ../_routes.php:316 ../_routes.php:349
+msgid "/event"
+msgstr "/evenement"
+
+#: ../_routes.php:57 ../_routes.php:111 ../_routes.php:797 ../_routes.php:1020
+msgid "/events"
+msgstr "/evenements"

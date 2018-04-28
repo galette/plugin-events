@@ -37,14 +37,31 @@
 
 $this->register(
     'Galette Events',       //Name
-    'Events management',   //Short description
+    'Events management',    //Short description
     'Johan Cwiklinski',     //Author
-    '1.0-dev',              //Version
-    '0.9',                  //Galette compatible version
+    '1.0.0',                //Version
+    '0.9.1',                //Galette compatible version
     'events',               //routing name and translation domain
-    '2018-01-15',           //Release date
+    '2018-04-28',           //Release date
     [   //Permissions needed
-        'events_events'     => 'member',
-        'events_bookings'   => 'member'
+        'events_events'             => 'member',
+        'events_bookings'           => 'member',
+        'filter-eventslist'         => 'member',
+        'events_event'              => 'groupmanager',
+        'events_storeevent'         => 'groupmanager',
+        'events_remove_event'       => 'staff',
+        'events_do_remove_event'    => 'staff',
+        'events_booking'            => 'member',
+        'events_storebooking'       => 'member',
+        'events_remove_booking'     => 'staff',
+        'events_do_remove_booking'  => 'staff',
+        'filter-bookingslist'       => 'member',
+        'batch-eventslist'          => 'groupmanager',
+        'events_activities'         => 'staff',
+        'events_activity'           => 'staff',
+        'events_storeactivity'      => 'staff',
+        'events_remove_activity'    => 'staff',
+        'events_do_remove_activity' => 'staff',
+        'events_booking_export'     => 'staff'
     ]
 );

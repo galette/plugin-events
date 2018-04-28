@@ -1,0 +1,1 @@
+            <a href="{path_for name="events_booking" data=["action" => {_T string="add" domain="routes"}]}?id_adh={$member->id}"><img src="{path_for name="plugin_res" data=["plugin" => $module_id, "path" => "images/booking_add_small.png"]}" alt="{_T string="New booking" domain="events"}" width="16" height="16"/></a>

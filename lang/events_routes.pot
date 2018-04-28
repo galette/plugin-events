@@ -1,0 +1,36 @@
+#: ../_routes.php:532 ../_routes.php:607
+#: ../_routes.php:713 ../_routes.php:743
+msgid "/booking"
+msgstr ""
+
+#: ../_routes.php:1048 ../_routes.php:1108
+#: ../_routes.php:1200 ../_routes.php:1233
+msgid "/activity"
+msgstr ""
+
+#: ../_routes.php:410 ../_routes.php:483
+#: ../_routes.php:797 ../_routes.php:906
+msgid "/bookings"
+msgstr ""
+
+#: ../_routes.php:961
+msgid "/activities"
+msgstr ""
+
+#: ../_routes.php:410 ../_routes.php:446
+#: ../_routes.php:933 ../lib/GaletteEvents/Filters/BookingsList.php:115
+#: ../lib/GaletteEvents/Repository/Bookings.php:239 ../templates/default/menu.tpl:7
+#: ../templates/default/bookings.tpl:34
+msgid "all"
+msgstr ""
+
+#: ../_routes.php:139 ../_routes.php:205
+#: ../_routes.php:316 ../_routes.php:349
+msgid "/event"
+msgstr ""
+
+#: ../_routes.php:57 ../_routes.php:111
+#: ../_routes.php:797 ../_routes.php:1020
+msgid "/events"
+msgstr ""
+
