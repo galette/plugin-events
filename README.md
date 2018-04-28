@@ -1,1 +1,1 @@
-A Galette plugin to manage events and bookings
+A [Galette](https://galette.eu) plugin to manage events and bookings
