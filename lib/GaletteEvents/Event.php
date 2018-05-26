@@ -136,15 +136,16 @@ class Event
                     $groups = array_merge($groups, $this->login->managed_groups);
                 }
 
+                $set = [new Predicate\IsNull(Group::PK)];
+                if (count($groups)) {
+                    $set[] = new Predicate\In(
+                        Group::PK,
+                        $groups
+                    );
+                }
                 $select->where(
                     new PredicateSet(
-                        array(
-                            new Predicate\In(
-                                Group::PK,
-                                $groups
-                            ),
-                            new Predicate\IsNull(Group::PK)
-                        ),
+                        $set,
                         PredicateSet::OP_OR
                     )
                 );

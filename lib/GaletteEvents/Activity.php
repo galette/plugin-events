@@ -41,9 +41,6 @@ use Galette\Entity\Group;
 use Galette\Repository\Groups;
 use Analog\Analog;
 use Zend\Db\Sql\Expression;
-use Zend\Db\Sql\Predicate;
-use Zend\Db\Sql\Predicate\PredicateSet;
-use Zend\Db\Sql\Predicate\Operator;
 
 /**
  * Activity entity

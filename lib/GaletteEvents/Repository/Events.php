@@ -102,29 +102,31 @@ class Events
             if (!$this->login->isAdmin() && !$this->login->isStaff()) {
                 if ($this->login->isGroupManager()) {
                     $groups = $this->login->managed_groups;
+                    $set = [new PredicateSet(
+                        array(
+                            new Predicate\IsNull(Group::PK),
+                            new Predicate\Operator(
+                                'is_open',
+                                '=',
+                                true
+                            ),
+                            new Predicate\Operator(
+                                'begin_date',
+                                '>=',
+                                date('Y-m-d')
+                            )
+                        )
+                    )];
+
+                    if (count($groups)) {
+                        $set[] = new Predicate\In(
+                            Group::PK,
+                            $groups
+                        );
+                    }
                     $select->where(
                         new PredicateSet(
-                            array(
-                                new Predicate\In(
-                                    Group::PK,
-                                    $this->login->managed_groups
-                                ),
-                                new PredicateSet(
-                                    array(
-                                        new Predicate\IsNull(Group::PK),
-                                        new Predicate\Operator(
-                                            'is_open',
-                                            '=',
-                                            true
-                                        ),
-                                        new Predicate\Operator(
-                                            'begin_date',
-                                            '>=',
-                                            date('Y-m-d')
-                                        )
-                                    )
-                                )
-                            ),
+                            $set,
                             PredicateSet::OP_OR
                         )
                     );
