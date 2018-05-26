@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2011-2014 The Galette Team
+ * Copyright © 2017-2018 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -25,24 +25,23 @@
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
  *
  * @category  Plugins
- * @package   GalettePaypal
+ * @package   GaletteEvents
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2011-2014 The Galette Team
+ * @copyright 2017-2018 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @version   SVN: $Id$
  * @link      http://galette.tuxfamily.org
- * @since     Available since 0.7dev - 2011-05-31
  */
 
 $this->register(
     'Galette Events',       //Name
     'Events management',    //Short description
     'Johan Cwiklinski',     //Author
-    '1.0.0',                //Version
+    '1.0.1',                //Version
     '0.9.1',                //Galette compatible version
     'events',               //routing name and translation domain
-    '2018-04-28',           //Release date
+    '2018-05-26',           //Release date
     [   //Permissions needed
         'events_events'             => 'member',
         'events_bookings'           => 'member',
