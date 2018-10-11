@@ -269,7 +269,11 @@ class Booking
         }
 
         if (isset($values['number_people'])) {
-            $this->number_people = $values['number_people'];
+            if ((int)$values['number_people'] > 0) {
+                $this->number_people = $values['number_people'];
+            } else {
+                $this->errors[] = _T('There must be at least one person', 'events');
+            }
         }
 
         if (isset($values['comment'])) {
