@@ -247,7 +247,10 @@ class Booking
 
         if (isset($values['paid'])) {
             $this->paid = true;
+        } else {
+            $this->paid = false;
         }
+
         if (isset($values['amount']) && !empty($values['amount'])) {
             $this->amount = $values['amount'];
         }
@@ -269,7 +272,11 @@ class Booking
         }
 
         if (isset($values['number_people'])) {
-            $this->number_people = $values['number_people'];
+            if ((int)$values['number_people'] > 0) {
+                $this->number_people = $values['number_people'];
+            } else {
+                $this->errors[] = _T('There must be at least one person', 'events');
+            }
         }
 
         if (isset($values['comment'])) {
@@ -474,11 +481,16 @@ class Booking
             }
 
             if (count($delete)) {
-                $stmt = $this->zdb->delete(EVENTS_PREFIX . 'activitiesbookings', 'acb');
+                $prepare = $this->zdb->delete(EVENTS_PREFIX . 'activitiesbookings', 'acb');
+                $prepare->where([
+                    self::PK        => $this->id,
+                    $activity::PK   => ':aid'
+                ]);
+                $stmt = $this->zdb->sql->prepareStatementForSqlObject($prepare);
+
                 $count = 0;
                 foreach ($delete as $values) {
-                    $stmt->where($values);
-                    $this->zdb->execute($stmt);
+                    $stmt->execute([':aid' => $value[$activity::PK]]);
                     ++$count;
                 }
                 Analog::log(
@@ -488,13 +500,21 @@ class Booking
             }
 
             if (count($update)) {
-                $stmt = $this->zdb->update(EVENTS_PREFIX . 'activitiesbookings', 'acb');
+                $prepare = $this->zdb->update(EVENTS_PREFIX . 'activitiesbookings', 'acb');
+                $prepare->set([
+                    'checked'       => ':checked'
+                ])->where([
+                    self::PK        => $this->id,
+                    $activity::PK   => ':aid'
+                ]);
+                $stmt = $this->zdb->sql->prepareStatementForSqlObject($prepare);
                 $count = 0;
-                foreach ($update as $values) {
-                    $stmt
-                        ->set($values)
-                        ->where($key_values);
-                    $this->zdb->execute($stmt);
+                foreach ($update as $aid => $values) {
+                    $params = [
+                        'where2'    => $aid,
+                        ':checked'  => $values['checked']
+                    ];
+                    $stmt->execute($params);
                     ++$count;
                 }
                 Analog::log(
@@ -504,11 +524,21 @@ class Booking
             }
 
             if (count($insert)) {
-                $stmt = $this->zdb->insert(EVENTS_PREFIX . 'activitiesbookings', 'acb');
+                $prepare = $this->zdb->insert(EVENTS_PREFIX . 'activitiesbookings', 'acb');
+                $prepare->values([
+                    self::PK        => ':id',
+                    $activity::PK   => ':aid',
+                    'checked'       => ':checked'
+                ]);
+                $stmt = $this->zdb->sql->prepareStatementForSqlObject($prepare);
                 $count = 0;
-                foreach ($insert as $values) {
-                    $stmt->values(array_merge($key_values, $values));
-                    $this->zdb->execute($stmt);
+                foreach ($insert as $aid => $values) {
+                    $params = [
+                        $this->id,
+                        $aid,
+                        $values['checked']
+                    ];
+                    $stmt->execute($params);
                     ++$count;
                 }
                 Analog::log(
