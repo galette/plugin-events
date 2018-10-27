@@ -818,7 +818,7 @@ $this->get(
         $filters = new BookingsList();
         $filters->event_filter = $args['id'];
         $bookings = new Bookings($this->zdb, $this->login, $filters);
-        $bookings_list = $bookings->getList();
+        $bookings_list = $bookings->getList(true);
 
         $labels = [
             _T('Name'),
