@@ -1,4 +1,9 @@
-* 2018-05-26
+* 2018-10-27 - 1.0.2
+- Storing activites on bookings was kind of broken
+- Fix bookings export
+- Check number of poeple for booking
+
+* 2018-05-26 - 1.0.1
 - Fix for members with no groups
 
 * 2018-04-28 - 1.0.0
