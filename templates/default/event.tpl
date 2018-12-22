@@ -53,7 +53,10 @@
                         <option value="{$activity.id_activity}">{$activity.name}</option>
         {/foreach}
         </select>
-        <input type="submit" class="button btnadd_small notext" title="{_T string="Add selected activity to event" domain="events"}" value="" name="add_activity"/>
+        <button type="submit" class="tooltip" name="add_activity">
+            <i class="fas fa-plus-circle"></i>
+            <span class="sr-only">{_T string="Add selected activity to event" domain="events"}"</span>
+        </button>
     {/if}
     {if $activities|@count}
                     <select name="detach_activity">
@@ -105,7 +108,9 @@
             </fieldset>
         </div>
         <div class="button-container">
-            <input type="submit" name="save" value="{_T string="Save"}" />
+            <button type="submit" name="save" class="action">
+                <i class="fas fa-save fa-fw"></i> {_T string="Save"}
+            </button>
             <input type="submit" name="cancel" value="{_T string="Cancel"}"/>
             <input type="hidden" name="id" id="id" value="{$event->getId()}"/>
         </div>
@@ -121,10 +126,8 @@
                 changeMonth: true,
                 changeYear: true,
                 showOn: 'button',
-                buttonImage: '{base_url}/{$template_subdir}images/calendar.png',
-                buttonImageOnly: true,
                 minDate: '-0d',
-                buttonText: '{_T string="Select a date" escape="js"}',
+                buttonText: '<i class="far fa-calendar-alt"></i> <span class="sr-only">{_T string="Select a date" escape="js"}</span>',
                 onSelect: function(date) {
                     $("#end_date").datepicker("option", "minDate", $('#begin_date').datepicker('getDate'));
                 }
@@ -133,9 +136,7 @@
                 changeMonth: true,
                 changeYear: true,
                 showOn: 'button',
-                buttonImage: '{base_url}/{$template_subdir}images/calendar.png',
-                buttonImageOnly: true,
-                buttonText: '{_T string="Select a date" escape="js"}',
+                buttonText: '<i class="far fa-calendar-alt"></i> <span class="sr-only">{_T string="Select a date" escape="js"}</span>',
                 minDate: $("#begin_date").datepicker("getDate")
             });
 

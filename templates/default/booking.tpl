@@ -99,7 +99,9 @@
     {/if}
         </div>
         <div class="button-container">
-            <input type="submit" name="save" value="{_T string="Save"}" />
+            <button type="submit" name="save" class="action">
+                <i class="fas fa-save fa-fw"></i> {_T string="Save"}
+            </button>
             <input type="submit" name="cancel" value="{_T string="Cancel"}"/>
             <input type="hidden" name="id" id="id" value="{$booking->getId()}"/>
         </div>
@@ -116,10 +118,8 @@
                 changeMonth: true,
                 changeYear: true,
                 showOn: 'button',
-                buttonImage: '{base_url}/{$template_subdir}images/calendar.png',
-                buttonImageOnly: true,
                 minDate: '-0d',
-                buttonText: '{_T string="Select a date" escape="js"}',
+                buttonText: '<i class="far fa-calendar-alt"></i> <span class="sr-only">{_T string="Select a date" escape="js"}</span>'
             });
         });
 

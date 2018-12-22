@@ -135,19 +135,28 @@
                         </a>
                     </td>
                     <td class="{$rclass}" data-title="{_T string="Booking date" domain="events"}">{$booking->getDate()}</td>
-                    <td class="{$rclass}" data-title="{_T string="Paid" domain="events"}">
+                    <td class="{$rclass} tooltip center {if $booking->isPaid()}use{else}delete{/if}" data-title="{_T string="Paid" domain="events"}">
+                        <i class="fas fa-money-bill-wave"></i>
+                        <span class="sr-only">
                         {if $booking->isPaid()}
-                            <img src="{base_url}/{$template_subdir}images/icon-on.png" alt="{_T string="Paid" domain="events"}" title="{_T string="Booking has been paid" domain="events"}"/>
+                            {_T string="Paid" domain="events"}
                         {else}
-                            <img src="{base_url}/{$template_subdir}images/icon-off.png" alt="{_T string="Not paid"}" title="{_T string="Booking has not been paid" domain="events"}"/>
+                            {_T string="Not paid" domain="events"}"
                         {/if}
+                        </span>
                     </td>
                     <td class="{$rclass}" data-title="{_T string="Attendees" domain="events"}">{$booking->getNumberPeople()}</td>
     {if $login->isAdmin() or $login->isStaff() or ($login->isGroupManager() and $booking->getEvent()->getGroup()|in_array:$login->managed_groups )}
                     <td class="{$rclass} center nowrap actions_row">
-                        <a href="{path_for name="events_booking" data=["action" => {_T string="edit" domain="routes"}, "id" => $bid]}"><img src="{base_url}/{$template_subdir}images/icon-edit.png" alt="{_T string="[mod]"}" width="16" height="16" title="{_T string="Edit booking" domain="events"}"/></a>
+                        <a href="{path_for name="events_booking" data=["action" => {_T string="edit" domain="routes"}, "id" => $bid]}" class="tooltip action">
+                            <i class="fas fa-edit fa-fw"></i>
+                            <span class="sr-only">{_T string="Edit booking" domain="events"}</span>
+                        </a>
         {if $login->isAdmin() or $login->isStaff()}
-                        <a class="delete" href="{path_for name="events_remove_booking" data=["id" => $bid]}"><img src="{base_url}/{$template_subdir}images/icon-trash.png" alt="{_T string="[del]"}" width="16" height="16" title="{_T string="Remove from database" domain="events"}"/></a>
+                        <a class="delete tooltip" href="{path_for name="events_remove_booking" data=["id" => $bid]}">
+                            <i class="fas fa-trash fa-fw"></i>
+                            <span class="sr-only">{_T string="Remove from database" domain="events"}</span>
+                        </a>
         {/if}
                     </td>
     {/if}
