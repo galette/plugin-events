@@ -99,10 +99,14 @@
     {/if}
         </div>
         <div class="button-container">
-            <button type="submit" name="save" class="action">
-                <i class="fas fa-save fa-fw"></i> {_T string="Save"}
+            <button type="submit" class="action">
+                <i class="fas fa-save fa-fw" aria-hidden="true"></i>
+                {_T string="Save"}
             </button>
-            <input type="submit" name="cancel" value="{_T string="Cancel"}"/>
+            <a href="{path_for name="events_activities"}" class="button">
+                <i class="fas fa-th-list fa-fw" aria-hidden="true"></i>
+                {_T string="Cancel"}
+            </a>
             <input type="hidden" name="id" id="id" value="{$booking->getId()}"/>
         </div>
      </form>
