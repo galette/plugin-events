@@ -25,17 +25,20 @@
 {/if}
                 </p>
                 <p>
-                    <span class="bline">{_T string="Member"}</span>
-                    <input type="hidden" name="member" id="member" value="{$booking->getMemberId()}"/>
-                    <span id="current_member">
-    {if $booking->getMemberId()}
-                        {$booking->getMember()->sfullname}
-    {else}
-                        {_T string="none" domain="events"}
-    {/if}
-                    </span>
+                    <label for="id_adh" class="bline" >{_T string="Member"}</label>
     {if $login->isAdmin() or $login->isStaff() or $login->isGroupManager()}
-                    <a href="#" id="choose_member">{_T string="Choose member" domain="events"}</a>
+                    <select name="member" id="id_adh" class="nochosen">
+        {if !$booking->getMemberId()}
+                        <option>{_T string="-- select a name --"}</option>
+        {/if}
+        {foreach $members.list as $k=>$v}
+                            <option value="{$k}"{if $transaction->member == $k} selected="selected"{/if}>{$v}</option>
+        {/foreach}
+                    </select>
+    {else}
+        {if !$booking->getMemberId()}
+            {$booking->getMember()->sfullname}
+        {/if}
     {/if}
                 </p>
                 <p>
@@ -96,8 +99,14 @@
     {/if}
         </div>
         <div class="button-container">
-            <input type="submit" name="save" value="{_T string="Save"}" />
-            <input type="submit" name="cancel" value="{_T string="Cancel"}"/>
+            <button type="submit" class="action">
+                <i class="fas fa-save fa-fw" aria-hidden="true"></i>
+                {_T string="Save"}
+            </button>
+            <a href="{path_for name="events_activities"}" class="button">
+                <i class="fas fa-th-list fa-fw" aria-hidden="true"></i>
+                {_T string="Cancel"}
+            </a>
             <input type="hidden" name="id" id="id" value="{$booking->getId()}"/>
         </div>
      </form>
@@ -105,6 +114,7 @@
 
 {block name="javascripts"}
     <script type="text/javascript">
+        {include file="js_chosen_adh.tpl"}
         $(function() {
             _collapsibleFieldsets();
             $.datepicker.setDefaults($.datepicker.regional['{$galette_lang}']);
@@ -112,10 +122,8 @@
                 changeMonth: true,
                 changeYear: true,
                 showOn: 'button',
-                buttonImage: '{base_url}/{$template_subdir}images/calendar.png',
-                buttonImageOnly: true,
                 minDate: '-0d',
-                buttonText: '{_T string="Select a date" escape="js"}',
+                buttonText: '<i class="far fa-calendar-alt"></i> <span class="sr-only">{_T string="Select a date" escape="js"}</span>'
             });
         });
 
@@ -124,79 +132,5 @@
             var _val = _this.find('option:selected').val()
             _this.parents('form').submit();
         });
-
-{if $login->isAdmin() or $login->isStaff() or $login->isGroupManager()}
-        {* Popup for member selection *}
-        $('#choose_member').click(function(){
-            $.ajax({
-                url: '{path_for name="ajaxMembers"}',
-                type: "POST",
-                data: {
-                    ajax: true,
-                    from: 'single',
-                    id: '{$booking->getmemberId()}'
-                },
-                {include file="js_loader.tpl"},
-                success: function(res){
-                    _members_dialog(res);
-                },
-                error: function() {
-                    alert("{_T string="An error occured displaying members interface :(" escape="js"}");
-                }
-            });
-            return false;
-        });
-
-        var _members_dialog = function(res){
-            var _el = $('<div id="members_list" title="{_T string="Members"}"> </div>');
-            _el.appendTo('#modifform').dialog({
-                modal: true,
-                hide: 'fold',
-                width: '60%',
-                height: 400,
-                close: function(event, ui){
-                    _el.remove();
-                }
-            });
-            _members_ajax_mapper(res);
-        }
-
-        var _members_ajax_mapper = function(res){
-            $('#members_list').append( res );
-            $('#members_list tbody').find('a').each(function() {
-                var _this = $(this);
-                $(this).click(function(){
-                    var _id = this.href.match(/.*\/(\d+)$/)[1];
-                    $('#member').attr('value', _id);
-                    console.log(_id);
-                    console.log(_this.html())
-                    $('#current_member').html(_this.html());
-                    $('#members_list').dialog('close');
-                    return false;
-                }).attr('title', '{_T string="Click to choose this member for current booking" domain="events"}');
-            });
-
-            //Remap links
-            $('#members_list .pages a').click(function(){
-                $.ajax({
-                    url: this.href,
-                    type: "POST",
-                    data: {
-                        ajax: true,
-                        multiple: false
-                    },
-                    {include file="js_loader.tpl"},
-                    success: function(res){
-                        $('#members_list').empty();
-                        _members_ajax_mapper(res);
-                    },
-                    error: function() {
-                        alert("{_T string="An error occured displaying members interface :(" escape="js"}");
-                    }
-                });
-                return false;
-            });
-        }
- {/if}
     </script>
 {/block}

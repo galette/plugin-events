@@ -9,23 +9,19 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.3\n"
+"X-Generator: Poedit 2.2\n"
 
-#: ../templates/default/booking.tpl:17
-msgid "Select an event"
-msgstr "Select an event"
+#: ../_routes.php:567 ../_routes.php:782
+msgid "Booking"
+msgstr "Booking"
 
-#: ../_routes.php:235
+#: ../_routes.php:236
 msgid "Do not forget to store the event"
 msgstr "Do not forget to store the event"
 
-#: ../_routes.php:1007
+#: ../_routes.php:1062
 msgid "Activities management"
 msgstr "Activities management"
-
-#: ../templates/default/bookings.tpl:140
-msgid "Booking has been paid"
-msgstr "Booking has been paid"
 
 #: ../templates/default/bookings.tpl:37
 msgid "Add a new booking"
@@ -39,11 +35,11 @@ msgstr "Restrict event to selected group (and its subgroups)."
 msgid "acivity"
 msgstr "acivity"
 
-#: ../lib/GaletteEvents/Booking.php:246
+#: ../lib/GaletteEvents/Booking.php:259
 msgid "Please specify amount if booking has been paid ;)"
 msgstr "Please specify amount if booking has been paid ;)"
 
-#: ../lib/GaletteEvents/Booking.php:399
+#: ../lib/GaletteEvents/Booking.php:416
 msgid "Fail to add new booking."
 msgstr "Fail to add new booking."
 
@@ -51,24 +47,24 @@ msgstr "Fail to add new booking."
 msgid "Show all bookings"
 msgstr "Show all bookings"
 
-#: ../_routes.php:234
+#: ../_routes.php:235
 msgid "Activity has been attached to event."
 msgstr "Activity has been attached to event."
 
-#: ../templates/default/bookings.tpl:104 ../templates/default/bookings.tpl:145
+#: ../templates/default/bookings.tpl:104 ../templates/default/bookings.tpl:148
 msgid "Attendees"
 msgstr "Attendees"
 
-#: ../templates/default/activities.tpl:68
+#: ../templates/default/activities.tpl:78
 msgid "%activity: remove from database"
 msgstr "%activity: remove from database"
 
-#: ../lib/GaletteEvents/Booking.php:395
+#: ../lib/GaletteEvents/Booking.php:412
 msgid "Booking added"
 msgstr "Booking added"
 
-#: ../templates/default/bookings.tpl:82 ../templates/default/bookings.tpl:137
-#: ../templates/default/booking.tpl:10
+#: ../templates/default/booking.tpl:10 ../templates/default/bookings.tpl:82
+#: ../templates/default/bookings.tpl:137
 msgid "Booking date"
 msgstr "Booking date"
 
@@ -80,7 +76,7 @@ msgstr "Related activities"
 msgid "New event"
 msgstr "New event"
 
-#: ../lib/GaletteEvents/Booking.php:233
+#: ../lib/GaletteEvents/Booking.php:243
 msgid "Member is mandatory"
 msgstr "Member is mandatory"
 
@@ -88,33 +84,29 @@ msgstr "Member is mandatory"
 msgid "events"
 msgstr "events"
 
-#: ../lib/GaletteEvents/Activity.php:296
+#: ../lib/GaletteEvents/Activity.php:293
 msgid "Activity updated"
 msgstr "Activity updated"
 
-#: ../templates/default/events.tpl:79
+#: ../templates/default/events.tpl:81
 msgid "Event is open"
 msgstr "Event is open"
 
-#: ../lib/GaletteEvents/Repository/Activities.php:92
+#: ../lib/GaletteEvents/Repository/Activities.php:89
 #: ../templates/default/activity.tpl:35
 msgid "Even meal"
 msgstr "Even meal"
 
-#: ../templates/default/booking.tpl:176
-msgid "Click to choose this member for current booking"
-msgstr "Click to choose this member for current booking"
-
-#: ../lib/GaletteEvents/Event.php:304 ../lib/GaletteEvents/Activity.php:204
+#: ../lib/GaletteEvents/Activity.php:201 ../lib/GaletteEvents/Event.php:306
 msgid "Name is mandatory"
 msgstr "Name is mandatory"
 
-#: ../templates/default/events.tpl:21 ../templates/default/activity.tpl:14
-#: ../templates/default/event.tpl:15 ../templates/default/activities.tpl:21
+#: ../templates/default/events.tpl:21 ../templates/default/activities.tpl:21
+#: ../templates/default/activity.tpl:14 ../templates/default/event.tpl:15
 msgid "Name"
 msgstr "Name"
 
-#: ../lib/GaletteEvents/Activity.php:273
+#: ../lib/GaletteEvents/Activity.php:270
 msgid "Activity added"
 msgstr "Activity added"
 
@@ -123,20 +115,20 @@ msgstr "Activity added"
 msgid "Creation date"
 msgstr "Creation date"
 
-#: ../templates/default/activities.tpl:73
+#: ../templates/default/activities.tpl:84
 msgid "No activity has been found"
 msgstr "No activity has been found"
 
-#: ../templates/default/activity.tpl:68 ../templates/default/event.tpl:101
+#: ../templates/default/activity.tpl:68 ../templates/default/event.tpl:104
 msgid "Country"
 msgstr "Country"
 
-#: ../lib/GaletteEvents/Repository/Activities.php:88
+#: ../lib/GaletteEvents/Repository/Activities.php:85
 #: ../templates/default/activity.tpl:27
 msgid "Noon meal"
 msgstr "Noon meal"
 
-#: ../lib/GaletteEvents/Event.php:450
+#: ../lib/GaletteEvents/Event.php:457
 msgid "Event added"
 msgstr "Event added"
 
@@ -144,15 +136,15 @@ msgstr "Event added"
 msgid "Date"
 msgstr "Date"
 
-#: ../lib/GaletteEvents/Event.php:298
+#: ../lib/GaletteEvents/Event.php:300
 msgid "End date must be later or equal to begin date"
 msgstr "End date must be later or equal to begin date"
 
-#: ../templates/default/bookings.tpl:156
+#: ../templates/default/bookings.tpl:165
 msgid "No booking has been found"
 msgstr "No booking has been found"
 
-#: ../templates/default/events.tpl:90
+#: ../templates/default/events.tpl:103
 msgid "%eventname: remove from database"
 msgstr "%eventname: remove from database"
 
@@ -164,70 +156,62 @@ msgstr "Bookings"
 msgid "activities"
 msgstr "activities"
 
-#: ../_routes.php:639
+#: ../_routes.php:694
 msgid "Booking has been modified."
 msgstr "Booking has been modified."
 
-#: ../templates/default/events.tpl:86
+#: ../templates/default/events.tpl:93
 msgid "%eventname: show bookings"
 msgstr "%eventname: show bookings"
 
-#: ../templates/default/events.tpl:85
+#: ../templates/default/events.tpl:89
 msgid "%eventname: export bookings as CSV"
 msgstr "%eventname: export bookings as CSV"
 
-#: ../lib/GaletteEvents/Booking.php:220
+#: ../lib/GaletteEvents/Booking.php:221
 msgid "%activity is mandatory for this event!"
 msgstr "%activity is mandatory for this event!"
 
-#: ../templates/default/bookings.tpl:148
+#: ../templates/default/bookings.tpl:153
 msgid "Edit booking"
 msgstr "Edit booking"
 
-#: ../templates/default/events.tpl:97
+#: ../templates/default/events.tpl:111
 msgid "No event has been found"
 msgstr "No event has been found"
 
-#: ../lib/GaletteEvents/Booking.php:270
+#: ../lib/GaletteEvents/Booking.php:287
 msgid "Booking date is mandatory!"
 msgstr "Booking date is mandatory!"
 
-#: ../_routes.php:237
+#: ../_routes.php:238
 msgid "Activity has been detached from event."
 msgstr "Activity has been detached from event."
 
-#: ../_routes.php:637
+#: ../_routes.php:692
 msgid "New booking has been successfully added."
 msgstr "New booking has been successfully added."
 
-#: ../templates/default/booking.tpl:38
-msgid "Choose member"
-msgstr "Choose member"
-
-#: ../lib/GaletteEvents/Booking.php:328
+#: ../lib/GaletteEvents/Booking.php:345
 msgid "A booking already exists for %member in %event"
 msgstr "A booking already exists for %member in %event"
 
-#: ../_routes.php:1079 ../_routes.php:1214
+#: ../_routes.php:1134 ../_routes.php:1269
 msgid "Activity"
 msgstr "Activity"
 
-#: ../_routes.php:1268
+#: ../_routes.php:1323
 msgid "An error occured trying to remove activity %name :/"
 msgstr "An error occured trying to remove activity %name :/"
 
-#: ../templates/default/events.tpl:86
-msgid "[bookings]"
-msgstr "[bookings]"
+#: ../templates/default/event.tpl:69
+msgid "Remove selected activity from event"
+msgstr "Remove selected activity from event"
 
-#: ../_routes.php:813 ../templates/default/activity.tpl:60
-#: ../templates/default/event.tpl:93
+#: ../_routes.php:868 ../templates/default/activity.tpl:60
+#: ../templates/default/event.tpl:96
 msgid "Zip code"
 msgstr "Zip code"
-
-#: ../templates/default/booking.tpl:34
-msgid "none"
-msgstr "none"
 
 #: ../templates/default/event.tpl:12
 msgid "(event will be considered as closed when begin date has been exceeded)"
@@ -237,19 +221,15 @@ msgstr "(event will be considered as closed when begin date has been exceeded)"
 msgid "Found bookings total %f"
 msgstr "Found bookings total %f"
 
-#: ../lib/GaletteEvents/Event.php:249
-msgid "Begin date is mandatory"
-msgstr "Begin date is mandatory"
-
-#: ../_routes.php:466
+#: ../_routes.php:467
 msgid "Bookings management"
 msgstr "Bookings management"
 
-#: ../_routes.php:1137
+#: ../_routes.php:1192
 msgid "New activity has been successfully added."
 msgstr "New activity has been successfully added."
 
-#: ../templates/default/activities.tpl:61
+#: ../templates/default/activities.tpl:63
 msgid "Active"
 msgstr "Active"
 
@@ -257,35 +237,31 @@ msgstr "Active"
 msgid "Choose an activity to add"
 msgstr "Choose an activity to add"
 
-#: ../templates/default/events.tpl:88
+#: ../templates/default/events.tpl:98
 msgid "%eventname: edit informations"
 msgstr "%eventname: edit informations"
 
-#: ../templates/default/bookings.tpl:142
-msgid "Booking has not been paid"
-msgstr "Booking has not been paid"
-
-#: ../_routes.php:832 ../templates/default/booking.tpl:91
+#: ../_routes.php:887 ../templates/default/booking.tpl:94
 msgid "Check number"
 msgstr "Check number"
 
-#: ../lib/GaletteEvents/Booking.php:417
+#: ../lib/GaletteEvents/Booking.php:434
 msgid "Booking updated"
 msgstr "Booking updated"
 
-#: ../templates/default/booking.tpl:74
+#: ../templates/default/booking.tpl:77
 msgid "Financial informations"
 msgstr "Financial informations"
 
-#: ../_routes.php:246
+#: ../_routes.php:247
 msgid "New event has been successfully added."
 msgstr "New event has been successfully added."
 
-#: ../lib/GaletteEvents/Activity.php:278
+#: ../lib/GaletteEvents/Activity.php:275
 msgid "Fail to add new activity."
 msgstr "Fail to add new activity."
 
-#: ../_routes.php:545
+#: ../_routes.php:546
 msgid "Booking ID cannot ben null calling edit route!"
 msgstr "Booking ID cannot ben null calling edit route!"
 
@@ -301,48 +277,49 @@ msgstr "booking"
 msgid "event"
 msgstr "event"
 
-#: ../lib/GaletteEvents/Event.php:472
+#: ../lib/GaletteEvents/Event.php:479
 msgid "Event updated"
 msgstr "Event updated"
 
-#: ../lib/GaletteEvents/Event.php:275 ../templates/default/event.tpl:23
+#: ../lib/GaletteEvents/Event.php:277 ../templates/default/event.tpl:23
 msgid "End date"
 msgstr "End date"
 
-#: ../templates/default/menu.tpl:8
+#: ../templates/default/adh_fiche_action.tpl:2
+#: ../templates/default/adh_actions.tpl:1 ../templates/default/menu.tpl:8
 msgid "New booking"
 msgstr "New booking"
 
-#: ../templates/default/event.tpl:56
+#: ../templates/default/event.tpl:58
 msgid "Add selected activity to event"
 msgstr "Add selected activity to event"
 
-#: ../_routes.php:383
+#: ../_routes.php:384
 msgid "Event %name has been successfully deleted."
 msgstr "Event %name has been successfully deleted."
 
-#: ../templates/default/activities.tpl:67
+#: ../templates/default/activities.tpl:71
 msgid "%activity: edit informations"
 msgstr "%activity: edit informations"
 
-#: ../_routes.php:566 ../_routes.php:727
-msgid "Booking"
-msgstr "Booking"
+#: ../lib/GaletteEvents/Booking.php:278
+msgid "There must be at least one person"
+msgstr "There must be at least one person"
 
-#: ../_routes.php:170 ../_routes.php:330 ../templates/default/bookings.tpl:5
-#: ../templates/default/bookings.tpl:58 ../templates/default/booking.tpl:14
+#: ../_routes.php:171 ../_routes.php:331 ../templates/default/booking.tpl:14
+#: ../templates/default/bookings.tpl:5 ../templates/default/bookings.tpl:58
 msgid "Event"
 msgstr "Event"
 
-#: ../_routes.php:252
+#: ../_routes.php:253
 msgid "An error occured while storing the event."
 msgstr "An error occured while storing the event."
 
-#: ../_routes.php:831 ../templates/default/booking.tpl:87
+#: ../_routes.php:886 ../templates/default/booking.tpl:90
 msgid "Bank name"
 msgstr "Bank name"
 
-#: ../_routes.php:950
+#: ../_routes.php:1005
 msgid "No booking was selected, please check at least one."
 msgstr "No booking was selected, please check at least one."
 
@@ -350,12 +327,12 @@ msgstr "No booking was selected, please check at least one."
 msgid "Paid bookings:"
 msgstr "Paid bookings:"
 
-#: ../lib/GaletteEvents/Repository/Activities.php:96
+#: ../lib/GaletteEvents/Repository/Activities.php:93
 #: ../templates/default/activity.tpl:43
 msgid "Lodging"
 msgstr "Lodging"
 
-#: ../_routes.php:643
+#: ../_routes.php:698
 msgid "An error occured while storing the booking."
 msgstr "An error occured while storing the booking."
 
@@ -364,11 +341,11 @@ msgid "%event's bookings"
 msgstr "%event's bookings"
 
 #: ../templates/default/activity.tpl:31 ../templates/default/activity.tpl:39
-#: ../templates/default/activity.tpl:47 ../templates/default/event.tpl:78
+#: ../templates/default/activity.tpl:47 ../templates/default/event.tpl:81
 msgid "Required"
 msgstr "Required"
 
-#: ../templates/default/booking.tpl:68
+#: ../templates/default/booking.tpl:71
 msgid "No activity for selected event"
 msgstr "No activity for selected event"
 
@@ -378,15 +355,15 @@ msgstr "No activity for selected event"
 msgid "Events"
 msgstr "Events"
 
-#: ../lib/GaletteEvents/Event.php:273 ../templates/default/event.tpl:19
+#: ../lib/GaletteEvents/Event.php:275 ../templates/default/event.tpl:19
 msgid "Begin date"
 msgstr "Begin date"
 
-#: ../lib/GaletteEvents/Event.php:320
+#: ../lib/GaletteEvents/Event.php:322
 msgid "Please select a group you own!"
 msgstr "Please select a group you own!"
 
-#: ../_routes.php:372
+#: ../_routes.php:373
 msgid "An error occured trying to remove event %name :/"
 msgstr "An error occured trying to remove event %name :/"
 
@@ -394,19 +371,19 @@ msgstr "An error occured trying to remove event %name :/"
 msgid "Booking informations"
 msgstr "Booking informations"
 
-#: ../templates/default/activity.tpl:53 ../templates/default/event.tpl:86
-msgid "Location"
-msgstr "Location"
+#: ../lib/GaletteEvents/Event.php:251
+msgid "Begin date is mandatory"
+msgstr "Begin date is mandatory"
 
-#: ../templates/default/event.tpl:60
+#: ../templates/default/event.tpl:63
 msgid "Choose an activity to remove"
 msgstr "Choose an activity to remove"
 
-#: ../_routes.php:763
+#: ../_routes.php:818
 msgid "An error occured trying to remove booking :/"
 msgstr "An error occured trying to remove booking :/"
 
-#: ../_routes.php:829 ../templates/default/booking.tpl:81
+#: ../_routes.php:884 ../templates/default/booking.tpl:84
 msgid "Amount"
 msgstr "Amount"
 
@@ -418,7 +395,7 @@ msgstr "New activity"
 msgid "All"
 msgstr "All"
 
-#: ../_routes.php:770
+#: ../_routes.php:825
 msgid "Booking has been successfully deleted."
 msgstr "Booking has been successfully deleted."
 
@@ -426,11 +403,11 @@ msgstr "Booking has been successfully deleted."
 msgid "General informations"
 msgstr "General informations"
 
-#: ../_routes.php:149
+#: ../_routes.php:150
 msgid "Event ID cannot ben null calling edit route!"
 msgstr "Event ID cannot ben null calling edit route!"
 
-#: ../lib/GaletteEvents/Booking.php:297
+#: ../lib/GaletteEvents/Booking.php:314
 msgid "booking date"
 msgstr "booking date"
 
@@ -438,39 +415,38 @@ msgstr "booking date"
 msgid "Limit to group"
 msgstr "Limit to group"
 
-#: ../templates/default/menu.tpl:10 ../templates/default/event.tpl:43
-#: ../templates/default/booking.tpl:52
+#: ../templates/default/booking.tpl:55 ../templates/default/menu.tpl:10
+#: ../templates/default/event.tpl:43
 msgid "Activities"
 msgstr "Activities"
 
-#: ../templates/default/activity.tpl:56 ../templates/default/event.tpl:89
+#: ../templates/default/activity.tpl:56 ../templates/default/event.tpl:92
 msgid "Address"
 msgstr "Address"
 
-#: ../_routes.php:653
+#: ../_routes.php:708
 msgid "Do not forget to store the booking"
 msgstr "Do not forget to store the booking"
 
-#: ../templates/default/activity.tpl:18 ../templates/default/event.tpl:37
-#: ../templates/default/booking.tpl:46
+#: ../templates/default/booking.tpl:49 ../templates/default/activity.tpl:18
+#: ../templates/default/event.tpl:37
 msgid "Comment"
 msgstr "Comment"
 
-#: ../templates/default/activity.tpl:10 ../templates/default/activities.tpl:44
-#: ../templates/default/activities.tpl:59
+#: ../templates/default/activities.tpl:44
+#: ../templates/default/activities.tpl:59 ../templates/default/activity.tpl:10
 msgid "Is active"
 msgstr "Is active"
 
-#: ../templates/default/events.tpl:81
+#: ../templates/default/events.tpl:83
 msgid "Event is closed"
 msgstr "Event is closed"
 
-#: ../_routes.php:248
+#: ../_routes.php:249
 msgid "Event has been modified."
 msgstr "Event has been modified."
 
 #: ../templates/default/events.tpl:56 ../templates/default/events.tpl:77
-#: ../templates/default/events.tpl:79
 msgid "Open"
 msgstr "Open"
 
@@ -478,36 +454,40 @@ msgstr "Open"
 msgid "Is open"
 msgstr "Is open"
 
-#: ../lib/GaletteEvents/Event.php:454
+#: ../lib/GaletteEvents/Event.php:461
 msgid "Fail to add new event."
 msgstr "Fail to add new event."
 
-#: ../_routes.php:1139
+#: ../_routes.php:1194
 msgid "Activity has been modified."
 msgstr "Activity has been modified."
 
+#: ../templates/default/activity.tpl:53 ../templates/default/event.tpl:89
+msgid "Location"
+msgstr "Location"
+
 #: ../templates/default/events.tpl:45 ../templates/default/events.tpl:75
-#: ../templates/default/activity.tpl:64 ../templates/default/event.tpl:97
+#: ../templates/default/activity.tpl:64 ../templates/default/event.tpl:100
 msgid "Town"
 msgstr "Town"
 
-#: ../_routes.php:98
+#: ../_routes.php:99
 msgid "Events management"
 msgstr "Events management"
 
-#: ../lib/GaletteEvents/Event.php:327
+#: ../lib/GaletteEvents/Event.php:329
 msgid "Town is mandatory"
 msgstr "Town is mandatory"
 
-#: ../templates/default/event.tpl:66
-msgid "Remove selected activity from event"
-msgstr "Remove selected activity from event"
+#: ../templates/default/activities.tpl:65
+msgid "Inactive"
+msgstr "Inactive"
 
-#: ../_routes.php:1255
+#: ../_routes.php:1310
 msgid "Activity %name is referenced in %count events, it cannot be removed."
 msgstr "Activity %name is referenced in %count events, it cannot be removed."
 
-#: ../templates/default/bookings.tpl:28
+#: ../templates/default/bookings.tpl:28 ../templates/default/bookings.tpl:144
 msgid "Not paid"
 msgstr "Not paid"
 
@@ -515,7 +495,7 @@ msgstr "Not paid"
 msgid "Group"
 msgstr "Group"
 
-#: ../templates/default/bookings.tpl:150
+#: ../templates/default/bookings.tpl:158
 msgid "Remove from database"
 msgstr "Remove from database"
 
@@ -523,35 +503,56 @@ msgstr "Remove from database"
 msgid "bookings"
 msgstr "bookings"
 
-#: ../templates/default/events.tpl:85
-msgid "[bookings csv]"
-msgstr "[bookings csv]"
-
-#: ../_routes.php:818 ../templates/default/booking.tpl:42
+#: ../_routes.php:873 ../templates/default/booking.tpl:45
 msgid "Number of persons"
 msgstr "Number of persons"
 
-#: ../templates/default/bookings.tpl:26 ../templates/default/bookings.tpl:94
-#: ../templates/default/bookings.tpl:138 ../templates/default/bookings.tpl:140
-#: ../templates/default/booking.tpl:77
+#: ../templates/default/booking.tpl:80 ../templates/default/bookings.tpl:26
+#: ../templates/default/bookings.tpl:94 ../templates/default/bookings.tpl:138
+#: ../templates/default/bookings.tpl:142
 msgid "Paid"
 msgstr "Paid"
 
-#: ../_routes.php:1279
+#: ../_routes.php:1334
 msgid "Activity %name has been successfully deleted."
 msgstr "Activity %name has been successfully deleted."
 
-#: ../lib/GaletteEvents/Booking.php:208
+#: ../lib/GaletteEvents/Booking.php:209
 msgid "Event is mandatory"
 msgstr "Event is mandatory"
 
-#: ../_routes.php:1058
+#: ../_routes.php:1113
 msgid "Activity ID cannot ben null calling edit route!"
 msgstr "Activity ID cannot ben null calling edit route!"
 
-#: ../_routes.php:1143
+#: ../templates/default/booking.tpl:17
+msgid "Select an event"
+msgstr "Select an event"
+
+#: ../_routes.php:1198
 msgid "An error occured while storing the activity."
 msgstr "An error occured while storing the activity."
+
+#~ msgid "Booking has been paid"
+#~ msgstr "Booking has been paid"
+
+#~ msgid "Click to choose this member for current booking"
+#~ msgstr "Click to choose this member for current booking"
+
+#~ msgid "Choose member"
+#~ msgstr "Choose member"
+
+#~ msgid "[bookings]"
+#~ msgstr "[bookings]"
+
+#~ msgid "none"
+#~ msgstr "none"
+
+#~ msgid "Booking has not been paid"
+#~ msgstr "Booking has not been paid"
+
+#~ msgid "[bookings csv]"
+#~ msgstr "[bookings csv]"
 
 #~ msgid "Has meal"
 #~ msgstr "Has meal"

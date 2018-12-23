@@ -74,20 +74,34 @@
                     <td class="{$rclass}" data-title="{_T string="Date" domain="events"}">{$event->getBeginDate()}</td>
                     <td class="{$rclass}" data-title="{_T string="Town" domain="events"}">{$event->getTown()}</td>
                     <td class="{$rclass}" data-title="{_T string="Group" domain="events"}">{$event->getGroupName()}</td>
-                    <td class="{$rclass}" data-title="{_T string="Open" domain="events"}">
+                    <td class="{$rclass} center id_row tooltip {if $event->isOpen()}use{else}delete{/if}" data-title="{_T string="Open" domain="events"}">
+                        <i class="fas fa-{if $event->isOpen()}unlock{else}lock{/if}"></i>
+                        <span class="sr-only">
                         {if $event->isOpen()}
-                            <img src="{base_url}/{$template_subdir}images/icon-on.png" alt="{_T string="Open" domain="events"}" title="{_T string="Event is open" domain="events"}"/>
+                            {_T string="Event is open" domain="events"}</span>
                         {else}
-                            <img src="{base_url}/{$template_subdir}images/icon-off.png" alt="{_T string="Closed"}" title="{_T string="Event is closed" domain="events"}"/>
+                            {_T string="Event is closed" domain="events"}
                         {/if}
                     </td>
                     <td class="{$rclass} center nowrap actions_row">
-                        <a href="{path_for name="events_booking_export" data=["id" => $eid]}"><img src="{base_url}/{$template_subdir}images/printer.png" alt="{_T string="[bookings csv]" domain="events"}" width="16" height="16" title="{_T string="%eventname: export bookings as CSV" domain="events" pattern="/%eventname/" replace=$event->getName()}"/></a>
-                        <a href="{path_for name="events_bookings" data=["event" => $eid]}"><img src="{base_url}/{$template_subdir}images/members-list.png" alt="{_T string="[bookings]" domain="events"}" width="16" height="16" title="{_T string="%eventname: show bookings" domain="events" pattern="/%eventname/" replace=$event->getName()}"/></a>
+                        <a href="{path_for name="events_booking_export" data=["id" => $eid]}" class="tooltip">
+                            <i class="fas fa-file-csv fa-fw"></i>
+                            <span class="sr-only">{_T string="%eventname: export bookings as CSV" domain="events" pattern="/%eventname/" replace=$event->getName()}</span>
+                        </a>
+                        <a href="{path_for name="events_bookings" data=["event" => $eid]}" class="tooltip">
+                            <i class="fas fa-eye fa-fw"></i>
+                            <span class="sr-only">{_T string="%eventname: show bookings" domain="events" pattern="/%eventname/" replace=$event->getName()}</span>
+                        </a>
     {if $login->isAdmin() or $login->isStaff() or ($login->isGroupManager() and $event->getGroup()|in_array:$login->managed_groups )}
-                        <a href="{path_for name="events_event" data=["action" => {_T string="edit" domain="routes"}, "id" => $eid]}"><img src="{base_url}/{$template_subdir}images/icon-edit.png" alt="{_T string="[mod]"}" width="16" height="16" title="{_T string="%eventname: edit informations" domain="events" pattern="/%eventname/" replace=$event->getName()}"/></a>
+                        <a href="{path_for name="events_event" data=["action" => {_T string="edit" domain="routes"}, "id" => $eid]}" class="tooltip action">
+                            <i class="fas fa-edit fa-fw"></i>
+                            <span class="sr-only">{_T string="%eventname: edit informations" domain="events" pattern="/%eventname/" replace=$event->getName()}</span>
+                        </a>
         {if $login->isAdmin() or $login->isStaff()}
-                        <a class="delete" href="{path_for name="events_remove_event" data=["id" => $event->getId()]}"><img src="{base_url}/{$template_subdir}images/icon-trash.png" alt="{_T string="[del]"}" width="16" height="16" title="{_T string="%eventname: remove from database" domain="events" pattern="/%eventname/" replace=$event->getName()}"/></a>
+                        <a class="delete tooltip" href="{path_for name="events_remove_event" data=["id" => $event->getId()]}">
+                            <i class="fas fa-trash fa-fw"></i>
+                            <span class="sr-only">{_T string="%eventname: remove from database" domain="events" pattern="/%eventname/" replace=$event->getName()}</span>
+                        </a>
         {/if}
     {/if}
                     </td>

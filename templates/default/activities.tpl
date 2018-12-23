@@ -56,16 +56,27 @@
                     </td>
                     <td class="{$rclass}" data-title="{_T string="Creation date" domain="events"}">{$activity->getCreationDate()}</td>
                     <td class="{$rclass}" data-title="{_T string="Events" domain="events"}">{$activity->countEvents()}</td>
-                    <td class="{$rclass} id_row" data-title="{_T string="Is active" domain="events"}">
+                    <td class="{$rclass} center id_row {if $activity->isActive()}use{else}delete{/if}" data-title="{_T string="Is active" domain="events"}">
+                        <i class="fas fa-toggle-{if $activity->isActive()}on{else}off{/if}"></i>
+                        <span class="sr-only">
                         {if $activity->isActive()}
-                            <img src="{base_url}/{$template_subdir}images/icon-on.png" alt="{_T string="Active" domain="events"}"/>
+                            {_T string="Active" domain="events"}
                         {else}
-                            <img src="{base_url}/{$template_subdir}images/icon-off.png" alt="{_T string="Inactive"}"/>
+                            {_T string="Inactive" domain="events"}
                         {/if}
                     </td>
                     <td class="{$rclass} center nowrap actions_row">
-                        <a href="{path_for name="events_activity" data=["action" => {_T string="edit" domain="routes"}, "id" => $aid]}"><img src="{base_url}/{$template_subdir}images/icon-edit.png" alt="{_T string="[mod]"}" width="16" height="16" title="{_T string="%activity: edit informations" domain="events" pattern="/%activity/" replace=$activity->getName()}"/></a>
-                        <a class="delete" href="{path_for name="events_remove_activity" data=["id" => $activity->getId()]}"><img src="{base_url}/{$template_subdir}images/icon-trash.png" alt="{_T string="[del]"}" width="16" height="16" title="{_T string="%activity: remove from database" domain="events" pattern="/%activity/" replace=$activity->getName()}"/></a>
+                        <a href="{path_for name="events_activity" data=["action" => {_T string="edit" domain="routes"}, "id" => $aid]}" class="tooltip action">
+                            <i class="fas fa-edit fa-fw"></i>
+                            <span class="sr-only">{_T string="%activity: edit informations" domain="events" pattern="/%activity/" replace=$activity->getName()}</span>
+                        </a>
+                        <a
+                            class="delete tooltip"
+                            href="{path_for name="events_remove_activity" data=["id" => $activity->getId()]}"
+                        >
+                            <i class="fas fa-trash fa-fw"></i>
+                            <span class="sr-only">{_T string="%activity: remove from database" domain="events" pattern="/%activity/" replace=$activity->getName()}</span>
+                        </a>
                     </td>
                 </tr>
     {/foreach}

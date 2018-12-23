@@ -72,8 +72,14 @@
             </fieldset>*}
         </div>
         <div class="button-container">
-            <input type="submit" value="{_T string="Save"}" />
-            <input type="submit" name="cancel" value="{_T string="Cancel"}"/>
+            <button type="submit" class="action">
+                <i class="fas fa-save fa-fw" aria-hidden="true"></i>
+                {_T string="Save"}
+            </button>
+            <a href="{path_for name="events_activities"}" class="button">
+                <i class="fas fa-th-list fa-fw" aria-hidden="true"></i>
+                {_T string="Cancel"}
+            </a>
             <input type="hidden" name="id" id="id" value="{$activity->getId()}"/>
         </div>
      </form>

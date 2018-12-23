@@ -39,7 +39,7 @@ use Galette\Core\Db;
 use Galette\Core\Login;
 use Galette\Entity\Group;
 use Galette\Entity\Adherent;
-use Galette\Entity\Contribution;
+use Galette\Entity\PaymentType;
 use Analog\Analog;
 use Zend\Db\Sql\Expression;
 
@@ -69,7 +69,7 @@ class Booking
     private $date;
     private $paid;
     private $amount;
-    private $payment_method = Contribution::PAYMENT_OTHER;
+    private $payment_method = PaymentType::OTHER;
     private $bank_name;
     private $check_number;
     private $number_people = 1;
@@ -665,29 +665,8 @@ class Booking
      */
     public function getPaymentMethodName()
     {
-        switch ($this->payment_method) {
-            case Contribution::PAYMENT_CASH:
-                return _T('Cash');
-                break;
-            case Contribution::PAYMENT_CREDITCARD:
-                return _T('Credit card');
-                break;
-            case Contribution::PAYMENT_CHECK:
-                return _T('Check');
-                break;
-            case Contribution::PAYMENT_TRANSFER:
-                return _T('Transfer');
-                break;
-            case Contribution::PAYMENT_PAYPAL:
-                return _T('Paypal');
-                break;
-            case Contribution::PAYMENT_OTHER:
-                return _T('Other');
-                break;
-            default:
-                return '';
-                break;
-        }
+        $pt = new PaymentType($this->zdb, $this->payment_method);
+        return $pt->name;
     }
 
     /**
