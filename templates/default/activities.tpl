@@ -17,7 +17,7 @@
                 <tr>
                     <th class="id_row">#</th>
                     <th class="left">
-                        <a href="{path_for name="events_activities" data=["option" => {_T string='order' domain="routes"}, "value" => "GaletteEvents\Repository\Activities::ORDERBY_NAME"|constant]}">
+                        <a href="{path_for name="events_activities" data=["option" => "order", "value" => "GaletteEvents\Repository\Activities::ORDERBY_NAME"|constant]}">
                             {_T string="Name" domain="events"}
                             {if $filters->orderby eq constant('GaletteEvents\Repository\Activities::ORDERBY_NAME')}
                                 {if $filters->ordered eq constant('GaletteEvents\Filters\ActivitiesList::ORDER_ASC')}
@@ -29,7 +29,7 @@
                         </a>
                     </th>
                     <th class="left date_row">
-                        <a href="{path_for name="events_activities" data=["option" => {_T string='order' domain="routes"}, "value" => "GaletteEvents\Repository\Activities::ORDERBY_DATE"|constant]}">
+                        <a href="{path_for name="events_activities" data=["option" => "order", "value" => "GaletteEvents\Repository\Activities::ORDERBY_DATE"|constant]}">
                             {_T string="Creation date" domain="events"}
                             {if $filters->orderby eq constant('GaletteEvents\Repository\Activities::ORDERBY_DATE')}
                                 {if $filters->ordered eq constant('GaletteEvents\Filters\ActivitiesList::ORDER_ASC')}
@@ -52,7 +52,7 @@
                     <td class="{$rclass} right" data-scope="id">{$ordre+1+($filters->current_page - 1)*$numrows}</td>
                     <td class="{$rclass} nowrap username_row" data-scope="row">
                         {assign var="aid" value=$activity->getId()}
-                        <a href="{path_for name="events_activity" data=["action" => {_T string="edit" domain="routes"}, "id" => $aid]}">{$activity->getName()}</a>
+                        <a href="{path_for name="events_activity" data=["action" => "edit", "id" => $aid]}">{$activity->getName()}</a>
                     </td>
                     <td class="{$rclass}" data-title="{_T string="Creation date" domain="events"}">{$activity->getCreationDate()}</td>
                     <td class="{$rclass}" data-title="{_T string="Events" domain="events"}">{$activity->countEvents()}</td>
@@ -66,7 +66,7 @@
                         {/if}
                     </td>
                     <td class="{$rclass} center nowrap actions_row">
-                        <a href="{path_for name="events_activity" data=["action" => {_T string="edit" domain="routes"}, "id" => $aid]}" class="tooltip action">
+                        <a href="{path_for name="events_activity" data=["action" => "edit", "id" => $aid]}" class="tooltip action">
                             <i class="fas fa-edit fa-fw"></i>
                             <span class="sr-only">{_T string="%activity: edit informations" domain="events" pattern="/%activity/" replace=$activity->getName()}</span>
                         </a>

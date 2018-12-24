@@ -55,8 +55,7 @@ use Galette\Entity\Adherent;
 require_once $module['root'] . '/_config.inc.php';
 
 $this->get(
-    __('/events', 'events_routes') . '[/{option:' . __('page', 'routes') . '|' .
-    __('order', 'routes') . '}/{value:\d+}]',
+    '/events[/{option:page|order}/{value:\d+}]',
     function ($request, $response, $args) use ($module, $module_id) {
         $option = null;
         if (isset($args['option'])) {
@@ -75,10 +74,10 @@ $this->get(
 
         if ($option !== null) {
             switch ($option) {
-                case __('page', 'routes'):
+                case 'page':
                     $filters->current_page = (int)$value;
                     break;
-                case __('order', 'routes'):
+                case 'order':
                     $filters->orderby = $value;
                     break;
             }
@@ -109,7 +108,7 @@ $this->get(
 
 //events list filtering
 $this->post(
-    __('/events', 'events_routes') . __('/filter', 'routes'),
+    '/events/filter',
     function ($request, $response) {
         $post = $request->getParsedBody();
         if (isset($this->session->filter_events)) {
@@ -137,7 +136,7 @@ $this->post(
 )->setName('filter-eventslist')->add($authenticate);
 
 $this->get(
-    __('/event', 'events_routes') . '/{action:' . __('edit', 'routes') . '|' . __('add', 'routes') . '}[/{id:\d+}]',
+    '/event/{action:edit|add}[/{id:\d+}]',
     function ($request, $response, $args) use ($module, $module_id) {
         $action = $args['action'];
         $id = null;
@@ -145,14 +144,14 @@ $this->get(
             $id = $args['id'];
         }
 
-        if ($action === __('edit', 'routes') && $id === null) {
+        if ($action === 'edit' && $id === null) {
             throw new \RuntimeException(
                 _T("Event ID cannot ben null calling edit route!", "events")
             );
-        } elseif ($action === __('add', 'routes') && $id !== null) {
+        } elseif ($action === 'add' && $id !== null) {
              return $response
                 ->withStatus(301)
-                ->withHeader('Location', $this->router->pathFor('events_event', ['action' => __('add', 'routes')]));
+                ->withHeader('Location', $this->router->pathFor('events_event', ['action' => 'add']));
         }
         $route_params = ['action' => $args['action']];
 
@@ -203,7 +202,7 @@ $this->get(
 )->add($authenticate);
 
 $this->post(
-    __('/event', 'events_routes') . __('/store', 'routes'),
+    '/event/store',
     function ($request, $response, $args) {
         $post = $request->getParsedBody();
         $event = new Event($this->zdb, $this->login);
@@ -296,10 +295,10 @@ $this->post(
             if ($event->getId()) {
                 $rparams = [
                     'id'        => $event->getId(),
-                    'action'    => __('edit', 'routes')
+                    'action'    => 'edit'
                 ];
             } else {
-                $rparams = ['action' => __('add', 'routes')];
+                $rparams = ['action' => 'add'];
             }
             $redirect_url = $this->router->pathFor(
                 'events_event',
@@ -314,7 +313,7 @@ $this->post(
 )->setName('events_storeevent')->add($authenticate);
 
 $this->get(
-    __('/event', 'events_routes') . __('/remove', 'routes') . '/{id:\d+}',
+    '/event/remove/{id:\d+}',
     function ($request, $response, $args) {
         $event = new Event($this->zdb, $this->login, (int)$args['id']);
 
@@ -347,7 +346,7 @@ $this->get(
 )->setName('events_remove_event')->add($authenticate);
 
 $this->post(
-    __('/event', 'events_routes') . __('/remove', 'routes') . '[/{id:\d+}]',
+    '/event/remove[/{id:\d+}]',
     function ($request, $response) {
         $post = $request->getParsedBody();
         $ajax = isset($post['ajax']) && $post['ajax'] === 'true';
@@ -408,8 +407,7 @@ $this->post(
 )->setName('events_do_remove_event')->add($authenticate);
 
 $this->get(
-    __('/bookings', 'events_routes') . '/{event:guess|'. __('all', 'events_routes') . '|\d+}' .
-    '[/{option:' . __('page', 'routes') . '|' . __('order', 'routes') . '}/{value:\d+}]',
+    '/bookings/{event:guess|'. 'all|\d+}[/{option:page|order}/{value:\d+}]',
     function ($request, $response, $args) use ($module, $module_id) {
         $option = null;
         if (isset($args['option'])) {
@@ -434,17 +432,17 @@ $this->get(
 
         if ($option !== null) {
             switch ($option) {
-                case __('page', 'routes'):
+                case 'page':
                     $filters->current_page = (int)$value;
                     break;
-                case __('order', 'routes'):
+                case 'order':
                     $filters->orderby = $value;
                     break;
             }
         }
 
         $event = null;
-        if ($args['event'] !== __('all', 'events_routes')) {
+        if ($args['event'] !== 'all') {
             $filters->event_filter = (int)$args['event'];
             $event = new Event($this->zdb, $this->login, (int)$args['event']);
         }
@@ -481,7 +479,7 @@ $this->get(
 
 //bookings list filtering
 $this->post(
-    __('/bookings', 'events_routes') . __('/filter', 'routes'),
+    '/bookings/filter',
     function ($request, $response) {
         $post = $request->getParsedBody();
         if (isset($this->session->filter_bookings)) {
@@ -530,8 +528,7 @@ $this->post(
 )->setName('filter-bookingslist')->add($authenticate);
 
 $this->get(
-    __('/booking', 'events_routes') . '/{action:' . __('edit', 'routes') . '|' . __('add', 'routes') .
-    '}[/{id:\d+}]',
+    '/booking/{action:edit|add}[/{id:\d+}]',
     function ($request, $response, $args) use ($module, $module_id) {
         $action = $args['action'];
         $get = $request->getQueryParams();
@@ -541,14 +538,14 @@ $this->get(
             $id = $args['id'];
         }
 
-        if ($action === __('edit', 'routes') && $id === null) {
+        if ($action === 'edit' && $id === null) {
             throw new \RuntimeException(
                 _T("Booking ID cannot ben null calling edit route!", "events")
             );
-        } elseif ($action === __('add', 'routes') && $id !== null) {
+        } elseif ($action === 'add' && $id !== null) {
              return $response
                 ->withStatus(301)
-                ->withHeader('Location', $this->router->pathFor('events_bookings', ['action' => __('add', 'routes')]));
+                ->withHeader('Location', $this->router->pathFor('events_bookings', ['action' => 'add']));
         }
         $route_params = ['action' => $args['action']];
 
@@ -573,7 +570,7 @@ $this->get(
 
         //Events
         $events = new Events($this->zdb, $this->login);
-        if ($action === __('add', 'routes')) {
+        if ($action === 'add') {
             if (isset($get['event'])) {
                 $booking->setEvent((int)$get['event']);
             }
@@ -649,7 +646,7 @@ $this->get(
 )->setName('events_booking')->add($authenticate);
 
 $this->post(
-    __('/booking', 'events_routes') . __('/store', 'routes'),
+    '/booking/store',
     function ($request, $response, $args) {
         $post = $request->getParsedBody();
         $booking = new Booking($this->zdb, $this->login);
@@ -747,10 +744,10 @@ $this->post(
             if ($booking->getId()) {
                 $rparams = [
                     'id'        => $booking->getId(),
-                    'action'    => __('edit', 'routes')
+                    'action'    => 'edit'
                 ];
             } else {
-                $rparams = ['action' => __('add', 'routes')];
+                $rparams = ['action' => 'add'];
             }
             $redirect_url = $this->router->pathFor(
                 'events_booking',
@@ -765,7 +762,7 @@ $this->post(
 )->setName('events_storebooking')->add($authenticate);
 
 $this->get(
-    __('/booking', 'events_routes') . __('/remove', 'routes') . '/{id:\d+}',
+    '/booking/remove/{id:\d+}',
     function ($request, $response, $args) {
         $booking = new Booking($this->zdb, $this->login, (int)$args['id']);
 
@@ -795,7 +792,7 @@ $this->get(
 )->setName('events_remove_booking')->add($authenticate);
 
 $this->post(
-    __('/booking', 'events_routes') . __('/remove', 'routes') . '[/{id:\d+}]',
+    '/booking/remove[/{id:\d+}]',
     function ($request, $response) {
         $post = $request->getParsedBody();
         $ajax = isset($post['ajax']) && $post['ajax'] === 'true';
@@ -849,7 +846,7 @@ $this->post(
 
 //booking CSV export
 $this->get(
-    __('/events', 'events_routes') . '/{id:\d+}'  . __('/export', 'routes') . __('/bookings', 'events_routes'),
+    '/events/{id:\d+}/export/bookings',
     function ($request, $response, $args) {
         $csv = new CsvOut();
 
@@ -958,7 +955,7 @@ $this->get(
 
 //Batch actions on members list
 $this->post(
-    __('/bookings', 'events_routes') . __('/batch', 'routes'),
+    '/bookings/batch',
     function ($request, $response) {
         $post = $request->getParsedBody();
 
@@ -985,7 +982,7 @@ $this->post(
                     'events_bookings',
                     [
                         'event' => $filters->event_filter == null ?
-                            __('all', 'events_routes') :
+                            'all' :
                             $filters->event_filter
                     ]
                 );
@@ -1013,8 +1010,7 @@ $this->post(
 )->setName('batch-eventslist')->add($authenticate);
 
 $this->get(
-    __('/activities', 'events_routes') . '[/{option:' . __('page', 'routes') . '|' .
-    __('order', 'routes') . '}/{value:\d+}]',
+    '/activities[/{option:page|order}/{value:\d+}]',
     function ($request, $response, $args) use ($module, $module_id) {
         $option = null;
         if (isset($args['option'])) {
@@ -1033,10 +1029,10 @@ $this->get(
 
         if ($option !== null) {
             switch ($option) {
-                case __('page', 'routes'):
+                case 'page':
                     $filters->current_page = (int)$value;
                     break;
-                case __('order', 'routes'):
+                case 'order':
                     $filters->orderby = $value;
                     break;
             }
@@ -1072,7 +1068,7 @@ $this->get(
 
 //events list filtering
 /*$this->post(
-    __('/events', 'events_routes') . __('/filter', 'routes'),
+    '/events/filter',
     function ($request, $response) {
         $post = $request->getParsedBody();
         if (isset($this->session->filter_events)) {
@@ -1100,7 +1096,7 @@ $this->get(
 )->setName('filter-eventslist')->add($authenticate);*/
 
 $this->get(
-    __('/activity', 'events_routes') . '/{action:' . __('edit', 'routes') . '|' . __('add', 'routes') . '}[/{id:\d+}]',
+    '/activity/{action:edit|add}[/{id:\d+}]',
     function ($request, $response, $args) use ($module, $module_id) {
         $action = $args['action'];
         $id = null;
@@ -1108,14 +1104,14 @@ $this->get(
             $id = $args['id'];
         }
 
-        if ($action === __('edit', 'routes') && $id === null) {
+        if ($action === 'edit' && $id === null) {
             throw new \RuntimeException(
                 _T("Activity ID cannot ben null calling edit route!", "events")
             );
-        } elseif ($action === __('add', 'routes') && $id !== null) {
+        } elseif ($action === 'add' && $id !== null) {
              return $response
                 ->withStatus(301)
-                ->withHeader('Location', $this->router->pathFor('events_activity', ['action' => __('add', 'routes')]));
+                ->withHeader('Location', $this->router->pathFor('events_activity', ['action' => 'add']));
         }
         $route_params = ['action' => $args['action']];
 
@@ -1160,7 +1156,7 @@ $this->get(
 )->add($authenticate);
 
 $this->post(
-    __('/activity', 'events_routes') . __('/store', 'routes'),
+    '/activity/store',
     function ($request, $response, $args) {
         $post = $request->getParsedBody();
         $activity = new Activity($this->zdb, $this->login);
@@ -1234,10 +1230,10 @@ $this->post(
             if ($activity->getId()) {
                 $rparams = [
                     'id'        => $activity->getId(),
-                    'action'    => __('edit', 'routes')
+                    'action'    => 'edit'
                 ];
             } else {
-                $rparams = ['action' => __('add', 'routes')];
+                $rparams = ['action' => 'add'];
             }
             $redirect_url = $this->router->pathFor(
                 'events_activity',
@@ -1252,7 +1248,7 @@ $this->post(
 )->setName('events_storeactivity')->add($authenticate);
 
 $this->get(
-    __('/activity', 'events_routes') . __('/remove', 'routes') . '/{id:\d+}',
+    '/activity/remove/{id:\d+}',
     function ($request, $response, $args) {
         $activity = new Activity($this->zdb, $this->login, (int)$args['id']);
 
@@ -1285,7 +1281,7 @@ $this->get(
 )->setName('events_remove_activity')->add($authenticate);
 
 $this->post(
-    __('/activity', 'events_routes') . __('/remove', 'routes') . '[/{id:\d+}]',
+    '/activity/remove[/{id:\d+}]',
     function ($request, $response) {
         $post = $request->getParsedBody();
         $ajax = isset($post['ajax']) && $post['ajax'] === 'true';
