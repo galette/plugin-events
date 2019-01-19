@@ -29,7 +29,7 @@
     {if $login->isAdmin() or $login->isStaff() or $login->isGroupManager()}
                     <select name="member" id="id_adh" class="nochosen">
         {if !$booking->getMemberId()}
-                        <option>{_T string="-- select a name --"}</option>
+                        <option value="0">{_T string="-- select a name --"}</option>
         {/if}
         {foreach $members.list as $k=>$v}
                             <option value="{$k}"{if $transaction->member == $k} selected="selected"{/if}>{$v}</option>
