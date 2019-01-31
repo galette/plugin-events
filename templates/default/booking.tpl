@@ -32,7 +32,7 @@
                         <option value="0">{_T string="-- select a name --"}</option>
         {/if}
         {foreach $members.list as $k=>$v}
-                            <option value="{$k}"{if $transaction->member == $k} selected="selected"{/if}>{$v}</option>
+                            <option value="{$k}"{if $booking->getMemberId() == $k} selected="selected"{/if}>{$v}</option>
         {/foreach}
                     </select>
     {else}
