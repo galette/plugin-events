@@ -615,10 +615,7 @@ $this->get(
         //check if current attached member is part of the list
         if (isset($booking) && $booking->getMemberId() > 0) {
             if (!isset($members[$booking->getMemberId()])) {
-                $members = array_merge(
-                    [$trans->member => Adherent::getSName($this->zdb, $trans->member, true)],
-                    $members
-                );
+                $members[$booking->getMemberId()] = Adherent::getSName($this->zdb, $booking->getMemberId(), true);
             }
         }
 

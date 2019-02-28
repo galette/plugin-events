@@ -66,7 +66,10 @@
                         <option value="{$activity->getId()}">{$activity->getName()}</option>
         {/foreach}
         </select>
-        <input type="submit" class="button btnremove_small notext" value="" title="{_T string="Remove selected activity from event" domain="events"}" name="remove_activity"/>
+        <button type="submit" class="button delete tooltip" name="remove_activity">
+            <i class="fas fa-trash"></i>
+            <span class="sr-only">{_T string="Remove selected activity from event" domain="events"}</span>
+        </button>
     {/if}
                 </p>
     {if $activities|@count}
