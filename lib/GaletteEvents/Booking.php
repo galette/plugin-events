@@ -672,7 +672,7 @@ class Booking
      */
     public function getPaymentMethodName()
     {
-        $pt = new PaymentType($this->zdb, $this->payment_method);
+        $pt = new PaymentType($this->zdb, (int)$this->payment_method);
         return $pt->name;
     }
 
