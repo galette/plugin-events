@@ -240,7 +240,14 @@ class Booking
         }
 
         if (!isset($values['member']) || empty($values['member'])) {
-            $this->errors[] = _T('Member is mandatory', 'events');
+            if ($this->login->isAdmin()
+                || $this->login->isStaff()
+                || $this->login->isGroupManager()
+            ) {
+                $this->errors[] = _T('Member is mandatory', 'events');
+            } else {
+                $this->member = $this->login->id;
+            }
         } else {
             $this->member = $values['member'];
         }

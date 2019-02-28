@@ -583,41 +583,49 @@ $this->get(
             }
         }
 
-        // members
-        $members = [];
-        $m = new Members();
-        $required_fields = array(
-            'id_adh',
-            'nom_adh',
-            'prenom_adh'
-        );
-        $list_members = $m->getList(false, $required_fields, true);
+        if ($this->login->isAdmin()
+            || $this->login->isStaff()
+            || $this->login->isGroupManager()
+        ) {
+            // members
+            $members = [];
+            $m = new Members();
+            $required_fields = array(
+                'id_adh',
+                'nom_adh',
+                'prenom_adh'
+            );
+            $list_members = $m->getList(false, $required_fields, true);
 
-        if (count($list_members) > 0) {
-            foreach ($list_members as $member) {
-                $pk = Adherent::PK;
-                $sname = mb_strtoupper($member->nom_adh, 'UTF-8') .
-                    ' ' . ucwords(mb_strtolower($member->prenom_adh, 'UTF-8')) .
-                    ' (' . $member->id_adh . ')';
-                $members[$member->$pk] = $sname;
+            if (count($list_members) > 0) {
+                foreach ($list_members as $member) {
+                    $pk = Adherent::PK;
+                    $sname = mb_strtoupper($member->nom_adh, 'UTF-8') .
+                        ' ' . ucwords(mb_strtolower($member->prenom_adh, 'UTF-8')) .
+                        ' (' . $member->id_adh . ')';
+                    $members[$member->$pk] = $sname;
+                }
             }
-        }
 
-        $route_params['members'] = [
-            'filters'   => $m->getFilters(),
-            'count'     => $m->getCount()
-        ];
-        $route_params['autocomplete'] = true;
+            $route_params['members'] = [
+                'filters'   => $m->getFilters(),
+                'count'     => $m->getCount()
+            ];
+            $route_params['autocomplete'] = true;
 
-        //check if current attached member is part of the list
-        if (isset($booking) && $booking->getMemberId() > 0) {
-            if (!isset($members[$booking->getMemberId()])) {
+            //check if current attached member is part of the list
+            if (isset($booking)
+                && $booking->getMemberId() > 0
+                && !isset($members[$booking->getMemberId()])
+            ) {
                 $members[$booking->getMemberId()] = Adherent::getSName($this->zdb, $booking->getMemberId(), true);
             }
-        }
 
-        if (count($members)) {
-            $route_params['members']['list'] = $members;
+            if (count($members)) {
+                $route_params['members']['list'] = $members;
+            }
+        } else {
+            $booking->setMember($this->login->id);
         }
 
         // display page

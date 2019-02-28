@@ -29,14 +29,14 @@
     {if $login->isAdmin() or $login->isStaff() or $login->isGroupManager()}
                     <select name="member" id="id_adh" class="nochosen">
         {if !$booking->getMemberId()}
-                        <option value="0">{_T string="-- select a name --"}</option>
+                        <option value="">{_T string="Search for name or ID and pick member"}</option>
         {/if}
         {foreach $members.list as $k=>$v}
                             <option value="{$k}"{if $booking->getMemberId() == $k} selected="selected"{/if}>{$v}</option>
         {/foreach}
                     </select>
     {else}
-        {if !$booking->getMemberId()}
+        {if $booking->getMemberId()}
             {$booking->getMember()->sfullname}
         {/if}
     {/if}
