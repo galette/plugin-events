@@ -99,7 +99,7 @@
     {/if}
         </div>
         <div class="button-container">
-            <button type="submit" class="action">
+            <button type="submit" class="action" name="save">
                 <i class="fas fa-save fa-fw" aria-hidden="true"></i>
                 {_T string="Save"}
             </button>
