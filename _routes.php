@@ -578,7 +578,11 @@ $this->get(
                 ($this->login->isAdmin() || $this->login->isStaff() || $this->login->isGroupManager())
             ) {
                 $booking->setMember((int)$_GET[Adherent::PK]);
-            } elseif (!$this->login->isSuperAdmin()) {
+            } elseif (!$this->login->isSuperAdmin()
+                && !$this->login->isAdmin()
+                && !$this->login->isStaff()
+                && !$this->login->isGroupManager()
+            ) {
                 $booking->setMember($this->login->id);
             }
         }
