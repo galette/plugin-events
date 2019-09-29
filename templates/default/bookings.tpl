@@ -135,7 +135,7 @@
                         </a>
                     </td>
                     <td class="{$rclass}" data-title="{_T string="Booking date" domain="events"}">{$booking->getDate()}</td>
-                    <td class="{$rclass} tooltip center {if $booking->isPaid()}use{else}delete{/if}" data-title="{_T string="Paid" domain="events"}">
+                    <td class="{$rclass} tooltip center {if $booking->isPaid()}use{else}{/if}" data-title="{_T string="Paid" domain="events"}">
                         <i class="fas fa-money-bill-wave"></i>
                         <span class="sr-only">
                         {if $booking->isPaid()}
