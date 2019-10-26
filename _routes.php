@@ -1374,3 +1374,71 @@ $this->post(
         }
     }
 )->setName('events_do_remove_activity')->add($authenticate);
+
+$this->get(
+    '/events/calendar[/{option:page|order}/{value:\d+}]',
+    function ($request, $response, $args) use ($module, $module_id) {
+        $option = null;
+        if (isset($args['option'])) {
+            $option = $args['option'];
+        }
+        $value = null;
+        if (isset($args['value'])) {
+            $value = $args['value'];
+        }
+
+        if (isset($this->session->filter_events)) {
+            $filters = $this->session->filter_events;
+        } else {
+            $filters = new EventsList();
+        }
+
+        if ($option !== null) {
+            switch ($option) {
+                case 'page':
+                    $filters->current_page = (int)$value;
+                    break;
+                case 'order':
+                    $filters->orderby = $value;
+                    break;
+            }
+        }
+
+        $events = new Events($this->zdb, $this->login, $filters);
+
+        //assign pagination variables to the template and add pagination links
+        $filters->setSmartyPagination($this->router, $this->view->getSmarty(), false);
+
+        $this->session->filter_events = $filters;
+
+        // display page
+        $this->view->render(
+            $response,
+            'file:[' . $module['route'] . ']calendar.tpl',
+            array(
+                'page_title'            => _T("Events calendar", "events"),
+                'require_dialog'        => true,
+                'events'                => $events->getList(),
+                'nb_events'             => $events->getCount(),
+                'filters'               => $filters,
+                'module_id'             => $module_id
+            )
+        );
+        return $response;
+    }
+)->setName('events_calendar')->add($authenticate);
+
+$this->get(
+    '/ajax/events/calendar',
+    function ($request, $response, $args) use ($module, $module_id) {
+        $get = $request->getQueryParams();
+        $filters = new EventsList();
+        $filters->calendar_filter = true;
+        $filters->start_date_filter = date(__("Y-m-d"), strtotime($get['start']));
+        $filters->end_date_filter = date(__("Y-m-d"), strtotime($get['end']));
+
+        $events = new Events($this->zdb, $this->login, $filters);
+
+        return $response->withJson($events->getList());
+    }
+)->setName('ajax-events_calendar')->add($authenticate);
