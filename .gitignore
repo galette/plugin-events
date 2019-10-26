@@ -1,1 +1,4 @@
 *.exvim*
+node_modules/
+webroot/js/libs/
+webroot/js/*bundle*
