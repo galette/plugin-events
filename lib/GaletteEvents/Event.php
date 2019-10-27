@@ -849,4 +849,26 @@ class Event
     {
         return $this->comment;
     }
+
+    /**
+     * Count atendees per event
+     *
+     * @return integer
+     */
+    public function countAttendees()
+    {
+        $select = $this->zdb->select(EVENTS_PREFIX . Booking::TABLE, 'b');
+        $select->columns(
+            array(
+                'count' => new Expression('count(DISTINCT b.' . Booking::PK . ')')
+            )
+        );
+        $select->where([
+            self::PK    => $this->id,
+            'is_paid'   => true
+        ]);
+        $results = $this->zdb->execute($select);
+
+        return $results->current()->count;
+    }
 }

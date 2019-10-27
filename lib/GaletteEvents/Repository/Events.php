@@ -164,15 +164,46 @@ class Events
 
             $events = [];
             foreach ($results as $row) {
+                $event = new Event($this->zdb, $this->login, $row);
                 if (!$this->filters->calendar_filter) {
-                    $event = new Event($this->zdb, $this->login, $row);
+                    $events[] = $event;
                 } else {
+                    //required entries for fullcalendar
                     $row['title'] = $row['name'];
                     $row['start'] = $row['begin_date'];
                     $row['end'] = $row['end_date'];
-                    $event = $row;
+
+                    //extended description
+                    $row['end_date_fmt'] = $event->getBeginDate();
+                    $row['begin_date_fmt'] = $event->getEndDate();
+                    $description = '<h4>' . _T('Event informations');
+                    $description .= '<a href="" id="event_link" title="' . _T('Show event form') .
+                        '"><i class="fas fa-external-link-alt"></i></a>';
+                    $description .= '</h4>';
+                    $description .= '<ul>';
+                    $description .= '<li><strong>' . _T("Start date:") . '</strong> ' . $event->getBeginDate() . '</li>';
+                    $description .= '<li><strong>' . _T("End date:") . '</strong> ' . $event->getEndDate() . '</li>';
+                    $description .= '<li><strong>' . _T("Location:") . '</strong> ' . $event->getTown() . '</li>';
+                    if ($comment = $event->getComment()) {
+                        $description .= '<li><strong>' . _T("Comment:") . '</strong> ' . $event->getComment() . '</li>';
+                    }
+                    $description .= '<li><strong>' . _T("Attendees:") . '</strong> ' . $event->countAttendees() . '</li>';
+                    $description .= '</ul>';
+
+                    $activities = $event->getActivities();
+                    if (count($activities)) {
+                        $description .= '<h4>' . _T('Activities')  . '</h4>';
+                        $description .= '<ul>';
+                        foreach ($activities as $activity) {
+                            $description.= '<li>' . $activity['activity']->getName()  . '</li>';
+                        }
+                        $description .= '</ul>';
+                    }
+
+                    $row['description'] = $description;
+
+                    $events[] = $row;
                 }
-                $events[] = $event;
             }
 
             return $events;
