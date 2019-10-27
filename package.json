@@ -8,6 +8,7 @@
   },
   "scripts": {
     "build": "webpack",
+    "build-dist": "webpack --mode=production",
     "watch": "webpack --watch",
     "clean": "rm -rf ./webroot/js/libs/"
   },
