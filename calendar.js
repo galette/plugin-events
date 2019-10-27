@@ -11,19 +11,19 @@ $(function() {
 
   var calendar = new Calendar(calendarEl, {
     plugins: [ interactionPlugin, dayGridPlugin, listPlugin ],
-    views: {
-      listDay: { buttonText: 'list day' },
-      listWeek: { buttonText: 'list week' },
-      listMonth: { buttonText: 'list month' },
-      dayGridMonth: { buttonText: 'month calendar' },
+    validRange: function(nowDate) {
+      return {
+        start: nowDate
+      };
     },
+    views: _fullcalendar_views,
     header: {
       left: 'title',
-      right: 'dayGridMonth ,listDay,listWeek,listMonth prevYear,prev,today,next,nextYear'
+      right: 'dayGridMonth,listDay,listWeek,listMonth prevYear,prev,today,next,nextYear'
     },
-    locale: initialLocaleCode,
+    locale: _fullcalendar_locale,
     weekNumbers: true,
-    events: 'https://fullCalendar.io/demo-events.json'
+    events: _calendar_dataurl
   });
 
   calendar.render();

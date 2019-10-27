@@ -156,13 +156,22 @@ class Events
 
             $this->proceedCount($select);
 
-            $this->filters->setLimits($select);
+            if (!$this->filters->calendar_filter) {
+                $this->filters->setLimits($select);
+            }
             $results = $this->zdb->execute($select);
             $this->filters->query = $this->zdb->query_string;
 
             $events = [];
             foreach ($results as $row) {
-                $event = new Event($this->zdb, $this->login, $row);
+                if (!$this->filters->calendar_filter) {
+                    $event = new Event($this->zdb, $this->login, $row);
+                } else {
+                    $row['title'] = $row['name'];
+                    $row['start'] = $row['begin_date'];
+                    $row['end'] = $row['end_date'];
+                    $event = $row;
+                }
                 $events[] = $event;
             }
 

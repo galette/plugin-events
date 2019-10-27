@@ -62,6 +62,7 @@ class EventsList extends Pagination
     private $meal_filter = null;
     private $lodging_filter = null;
     private $open_filter = null;
+    private $calendar_filter = false;
 
     protected $list_fields = array(
         'name_filter',
@@ -72,7 +73,8 @@ class EventsList extends Pagination
         'group_filter',
         'meal_filter',
         'lodging_filter',
-        'open_filter'
+        'open_filter',
+        'calendar_filter'
     );
 
     /**
@@ -118,6 +120,7 @@ class EventsList extends Pagination
         $this->meal_filter = null;
         $this->lodging_filter = null;
         $this->open_filter = null;
+        $this->calendar_filter = false;
     }
 
     /**
@@ -263,7 +266,7 @@ class EventsList extends Pagination
                         }
                     } catch (\Exception $e) {
                         Analog::log(
-                            'Wrong date format. field: ' . $key .
+                            'Wrong date format. field: ' . $name .
                             ', value: ' . $value . ', expected fmt: ' .
                             __("Y-m-d") . ' | ' . $e->getMessage(),
                             Analog::INFO
