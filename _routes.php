@@ -599,7 +599,7 @@ $this->get(
                 'nom_adh',
                 'prenom_adh'
             );
-            $list_members = $m->getList(false, $required_fields, true);
+            $list_members = $m->getList(false, $required_fields);
 
             if (count($list_members) > 0) {
                 foreach ($list_members as $member) {
