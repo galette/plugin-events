@@ -1,6 +1,6 @@
 INSTALLDIR = .
 LANGUAGES = en_US fr_FR.utf8
-DOMAINS = events events_routes
+DOMAINS = events
 MKLANG = ../../../lang/make_lang_l12n.py
 PHP_SOURCES = $(shell find ../ -maxdepth 1 -name \*.php) \
               $(shell find ../lib/GaletteEvents/ -name \*.php) \

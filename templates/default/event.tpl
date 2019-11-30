@@ -130,14 +130,14 @@
             $('#add_activity').on('click', function (event) {
                 if ($('#attach_activity').val() == '') {
                     event.preventDefault();
-                    alert('{_T string="Please choose an activity to add"|escape:js}');
+                    alert('{_T string="Please choose an activity to add" domain="events"|escape:js}');
                 }
             });
 
             $('#remove_activity').on('click', function (event) {
                 if ($('#detach_activity').val() == '') {
                     event.preventDefault();
-                    alert('{_T string="Please choose an activity to remove"|escape:js}');
+                    alert('{_T string="Please choose an activity to remove" domain="events"|escape:js}');
                 }
             });
 
