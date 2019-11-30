@@ -47,26 +47,26 @@
     {assign var=activities value=$event->getActivities()}
 
     {if $availables|@count}
-                    <select name="attach_activity">
+                    <select name="attach_activity" id="attach_activity">
                         <option value="">{_T string="Choose an activity to add" domain="events"}</option>
         {foreach from=$availables item=activity}
                         <option value="{$activity.id_activity}">{$activity.name}</option>
         {/foreach}
         </select>
-        <button type="submit" class="tooltip" name="add_activity">
+        <button type="submit" class="tooltip" name="add_activity" id="add_activity">
             <i class="fas fa-plus-circle"></i>
             <span class="sr-only">{_T string="Add selected activity to event" domain="events"}"</span>
         </button>
     {/if}
     {if $activities|@count}
-                    <select name="detach_activity">
+                    <select name="detach_activity" id="detach_activity">
                         <option value="">{_T string="Choose an activity to remove" domain="events"}</option>
         {foreach from=$activities item=item}
             {assign var=activity value=$item.activity}
                         <option value="{$activity->getId()}">{$activity->getName()}</option>
         {/foreach}
         </select>
-        <button type="submit" class="button delete tooltip" name="remove_activity">
+        <button type="submit" class="button delete tooltip" name="remove_activity" id="remove_activity">
             <i class="fas fa-trash"></i>
             <span class="sr-only">{_T string="Remove selected activity from event" domain="events"}</span>
         </button>
@@ -127,6 +127,20 @@
 {block name="javascripts"}
     <script type="text/javascript">
         $(function() {
+            $('#add_activity').on('click', function (event) {
+                if ($('#attach_activity').val() == '') {
+                    event.preventDefault();
+                    alert('{_T string="Please choose an activity to add"|escape:js}');
+                }
+            });
+
+            $('#remove_activity').on('click', function (event) {
+                if ($('#detach_activity').val() == '') {
+                    event.preventDefault();
+                    alert('{_T string="Please choose an activity to remove"|escape:js}');
+                }
+            });
+
             _collapsibleFieldsets();
             $.datepicker.setDefaults($.datepicker.regional['{$galette_lang}']);
             $('#begin_date').datepicker({
