@@ -13,11 +13,6 @@ $(function() {
 
   var calendar = new Calendar(calendarEl, {
     plugins: [ interactionPlugin, dayGridPlugin, listPlugin ],
-    validRange: function(nowDate) {
-      return {
-        start: nowDate
-      };
-    },
     views: _fullcalendar_views,
     header: {
       left: 'title',
