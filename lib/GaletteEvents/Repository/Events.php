@@ -176,23 +176,22 @@ class Events
                     //extended description
                     $row['end_date_fmt'] = $event->getBeginDate();
                     $row['begin_date_fmt'] = $event->getEndDate();
-                    $description = '<h4>' . _T('Event informations');
-                    $description .= '<a href="" id="event_link" title="' . _T('Show event form') .
-                        '"><i class="fas fa-external-link-alt"></i></a>';
-                    $description .= '</h4>';
+                    $description = '<h4><a href="" id="event_link">' . _T('Event informations', 'events');
+                    $description .= '&nbsp;<i class="fas fa-eye"></i></a></h4>';
                     $description .= '<ul>';
-                    $description .= '<li><strong>' . _T("Start date:") . '</strong> ' . $event->getBeginDate() . '</li>';
-                    $description .= '<li><strong>' . _T("End date:") . '</strong> ' . $event->getEndDate() . '</li>';
-                    $description .= '<li><strong>' . _T("Location:") . '</strong> ' . $event->getTown() . '</li>';
+                    $pattern = '<li><strong>%1$s</strong> %2$s</li>';
+                    $description .= sprintf($pattern, _T("Start date:", "events"), $event->getBeginDate());
+                    $description .= sprintf($pattern, _T("End date:", "events"), $event->getEndDate());
+                    $description .= sprintf($pattern, _T("Location:", "events"), $event->getTown());
                     if ($comment = $event->getComment()) {
-                        $description .= '<li><strong>' . _T("Comment:") . '</strong> ' . $event->getComment() . '</li>';
+                        $description .= sprintf($pattern, _T("Comment:", "events"), $comment);
                     }
-                    $description .= '<li><strong>' . _T("Attendees:") . '</strong> ' . $event->countAttendees() . '</li>';
+                    $description .= sprintf($pattern, _T("Attendees:", "events"), $event->countAttendees());
                     $description .= '</ul>';
 
                     $activities = $event->getActivities();
                     if (count($activities)) {
-                        $description .= '<h4>' . _T('Activities')  . '</h4>';
+                        $description .= '<h4>' . _T('Activities', 'events')  . '</h4>';
                         $description .= '<ul>';
                         foreach ($activities as $activity) {
                             $description.= '<li>' . $activity['activity']->getName()  . '</li>';

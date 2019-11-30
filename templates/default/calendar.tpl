@@ -8,11 +8,11 @@
     var _calendar_dataurl = '{path_for name="ajax-events_calendar"}';
     var _calendar_event_url = '{path_for name="events_event" data=["action" => "edit", "id" => "PLACEBO"]}';
     var _fullcalendar_views = {
-      listDay: { buttonText: '{_T string='Daily list' escape="js"}' },
-      listWeek: { buttonText: '{_T string="Weekly list" escape="js"}' },
-      listMonth: { buttonText: '{_T string='Monthly list' escape="js"}' },
-      dayGridMonth: { buttonText: '{_T string='Month calendar' escape="js"}' },
-      today: { buttonText: '{_T string="Today"}' }
+      listDay: { buttonText: '{_T string="Daily list" domain="events" escape="js"}' },
+      listWeek: { buttonText: '{_T string="Weekly list" domain="events" escape="js"}' },
+      listMonth: { buttonText: '{_T string="Monthly list" domain="events" escape="js"}' },
+      dayGridMonth: { buttonText: '{_T string="Month calendar" domain="events" escape="js"}' },
+      today: { buttonText: '{_T string="Today" domain="events" escape="js"}' }
     }
     var _fullcalendar_locale = '{$galette_lang}';
     $(function() {

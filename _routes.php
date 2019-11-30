@@ -330,7 +330,7 @@ $this->get(
                 'type'          => _T("Event", "events"),
                 'mode'          => $request->isXhr() ? 'ajax' : '',
                 'page_title'    => sprintf(
-                    _T('Remove event %1$s'),
+                    _T('Remove event %1$s', 'events'),
                     $event->getName()
                 ),
                 'form_url'      => $this->router->pathFor(
@@ -787,7 +787,7 @@ $this->get(
             array(
                 'type'          => _T("Booking", "events"),
                 'mode'          => $request->isXhr() ? 'ajax' : '',
-                'page_title'    => _T('Remove booking'),
+                'page_title'    => _T('Remove booking', 'events'),
                 'form_url'      => $this->router->pathFor(
                     'events_do_remove_booking',
                     ['id' => $booking->getId()]
@@ -1286,7 +1286,7 @@ $this->get(
                 'type'          => _T("Activity", "events"),
                 'mode'          => $request->isXhr() ? 'ajax' : '',
                 'page_title'    => sprintf(
-                    _T('Remove activity %1$s'),
+                    _T('Remove activity %1$s', 'events'),
                     $activity->getName()
                 ),
                 'form_url'      => $this->router->pathFor(
