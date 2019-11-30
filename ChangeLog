@@ -1,5 +1,11 @@
-* 2019-10-29
+* 2019-11-30 - 1.2.0
 - Add calendar view
+- Drop routes translations
+- Fix booking creation from member
+- Fix payment method in CSV export
+- Fix booking storage
+- Fix extra content in CSV exports
+- Do not display menu for visitors
 
 * 2019-02-28 - 1.1.2
 - Fix sevral issues with new members selection
