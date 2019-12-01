@@ -41,7 +41,7 @@ $this->register(
     '1.2.0',                //Version
     '0.9.3',                //Galette compatible version
     'events',               //routing name and translation domain
-    '2019-10-27',           //Release date
+    '2019-12-01',           //Release date
     [   //Permissions needed
         'events_events'             => 'member',
         'events_bookings'           => 'member',
