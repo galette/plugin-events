@@ -31,10 +31,10 @@
         <div class="infoline">
 {if $event}
     {if $login->isAdmin() or $login->isStaff() or $login->isGroupManager()}
-            <a id="clearfilter" href="{path_for name="events_bookings" data=["event" => {_T string="all" domain="events_routes" notrans="true"}]}" title="{_T string="Show all bookings" domain="events"}">{_T string="Show all bookings" domain="events"}</a>
+            <a id="clearfilter" href="{path_for name="events_bookings" data=["event" => "all"]}" title="{_T string="Show all bookings" domain="events"}">{_T string="Show all bookings" domain="events"}</a>
     {/if}
             <strong>{_T string="%event's bookings" domain="events" pattern="/%event/" replace=$event->getName()}</strong>
-            (<a href="{path_for name="events_booking" data=["action" => {_T string="add" domain="routes"}]}?event={$event->getId()}">{_T string="Add a new booking" domain="events"}</a>)
+            (<a href="{path_for name="events_booking" data=["action" => "add"]}?event={$event->getId()}">{_T string="Add a new booking" domain="events"}</a>)
 {/if}
 {if $nb_bookings gt 0}
             {$nb_bookings} {if $nb_bookings != 1}{_T string="bookings" domain="events"}{else}{_T string="booking" domain="events"}{/if}
@@ -54,7 +54,7 @@
                 <tr>
                     <th class="id_row">#</th>
                     <th class="left">
-                        <a href="{path_for name="events_bookings" data=["option" => {_T string="order" domain="routes"}, "event" => $eventid, "value" => "GaletteEvents\Repository\Bookings::ORDERBY_EVENT"|constant]}">
+                        <a href="{path_for name="events_bookings" data=["option" => "order", "event" => $eventid, "value" => "GaletteEvents\Repository\Bookings::ORDERBY_EVENT"|constant]}">
                             {_T string="Event" domain="events"}
                             {if $filters->orderby eq constant('GaletteEvents\Repository\Bookings::ORDERBY_EVENT')}
                                 {if $filters->ordered eq constant('GaletteEvents\Filters\BookingsList::ORDER_ASC')}
@@ -66,7 +66,7 @@
                         </a>
                     </th>
                     <th class="left">
-                        <a href="{path_for name="events_bookings" data=["option" => {_T string="order" domain="routes"}, "event" => $eventid, "value" => "GaletteEvents\Repository\Bookings::ORDERBY_MEMBER"|constant]}">
+                        <a href="{path_for name="events_bookings" data=["option" => "order", "event" => $eventid, "value" => "GaletteEvents\Repository\Bookings::ORDERBY_MEMBER"|constant]}">
                             {_T string="Member"}
                             {if $filters->orderby eq constant('GaletteEvents\Repository\Bookings::ORDERBY_MEMBER')}
                                 {if $filters->ordered eq constant('GaletteEvents\Filters\BookingsList::ORDER_ASC')}
@@ -78,7 +78,7 @@
                         </a>
                     </th>
                     <th class="left date_row">
-                        <a href="{path_for name="events_bookings" data=["option" => {_T string="order" domain="routes"}, "event" => $eventid, "value" => "GaletteEvents\Repository\Bookings::ORDERBY_BOOKDATE"|constant]}">
+                        <a href="{path_for name="events_bookings" data=["option" => "order", "event" => $eventid, "value" => "GaletteEvents\Repository\Bookings::ORDERBY_BOOKDATE"|constant]}">
                             {_T string="Booking date" domain="events"}
                             {if $filters->orderby eq constant('GaletteEvents\Repository\Bookings::ORDERBY_BOOKDATE')}
                                 {if $filters->ordered eq constant('GaletteEvents\Filters\BookingsList::ORDER_ASC')}
@@ -90,7 +90,7 @@
                         </a>
                     </th>
                     <th class="left id_row">
-                        <a href="{path_for name="events_bookings" data=["option" => {_T string="order" domain="routes"}, "event" => $eventid, "value" => "GaletteEvents\Repository\Bookings::ORDERBY_PAID"|constant]}">
+                        <a href="{path_for name="events_bookings" data=["option" => "order", "event" => $eventid, "value" => "GaletteEvents\Repository\Bookings::ORDERBY_PAID"|constant]}">
                             {_T string="Paid" domain="events"}
                             {if $filters->orderby eq constant('GaletteEvents\Repository\Bookings::ORDERBY_PAID')}
                                 {if $filters->ordered eq constant('GaletteEvents\Filters\BookingsList::ORDER_ASC')}
@@ -124,7 +124,7 @@
                         {assign var="bid" value=$booking->getId()}
         {if $login->isAdmin() or $login->isStaff() or ($login->isGroupManager() and $booking->getEvent()->getGroup()|in_array:$login->managed_groups )}
                         <input type="checkbox" name="event_sel[]" value="{$bid}"/>
-                        <a href="{path_for name="events_event" data=["action" => {_T string="edit" domain="routes"}, "id" => $booking->getEventId()]}">{$booking->getEvent()->getName()}</a>
+                        <a href="{path_for name="events_event" data=["action" => "edit", "id" => $booking->getEventId()]}">{$booking->getEvent()->getName()}</a>
         {else}
                         {$booking->getEvent()->getName()}
         {/if}
@@ -135,7 +135,7 @@
                         </a>
                     </td>
                     <td class="{$rclass}" data-title="{_T string="Booking date" domain="events"}">{$booking->getDate()}</td>
-                    <td class="{$rclass} tooltip center {if $booking->isPaid()}use{else}delete{/if}" data-title="{_T string="Paid" domain="events"}">
+                    <td class="{$rclass} tooltip center {if $booking->isPaid()}use{else}{/if}" data-title="{_T string="Paid" domain="events"}">
                         <i class="fas fa-money-bill-wave"></i>
                         <span class="sr-only">
                         {if $booking->isPaid()}
@@ -148,7 +148,7 @@
                     <td class="{$rclass}" data-title="{_T string="Attendees" domain="events"}">{$booking->getNumberPeople()}</td>
     {if $login->isAdmin() or $login->isStaff() or ($login->isGroupManager() and $booking->getEvent()->getGroup()|in_array:$login->managed_groups )}
                     <td class="{$rclass} center nowrap actions_row">
-                        <a href="{path_for name="events_booking" data=["action" => {_T string="edit" domain="routes"}, "id" => $bid]}" class="tooltip action">
+                        <a href="{path_for name="events_booking" data=["action" => "edit", "id" => $bid]}" class="tooltip action">
                             <i class="fas fa-edit fa-fw"></i>
                             <span class="sr-only">{_T string="Edit booking" domain="events"}</span>
                         </a>

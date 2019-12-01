@@ -55,8 +55,7 @@ use Galette\Entity\Adherent;
 require_once $module['root'] . '/_config.inc.php';
 
 $this->get(
-    __('/events', 'events_routes') . '[/{option:' . __('page', 'routes') . '|' .
-    __('order', 'routes') . '}/{value:\d+}]',
+    '/events[/{option:page|order}/{value:\d+}]',
     function ($request, $response, $args) use ($module, $module_id) {
         $option = null;
         if (isset($args['option'])) {
@@ -75,10 +74,10 @@ $this->get(
 
         if ($option !== null) {
             switch ($option) {
-                case __('page', 'routes'):
+                case 'page':
                     $filters->current_page = (int)$value;
                     break;
-                case __('order', 'routes'):
+                case 'order':
                     $filters->orderby = $value;
                     break;
             }
@@ -109,7 +108,7 @@ $this->get(
 
 //events list filtering
 $this->post(
-    __('/events', 'events_routes') . __('/filter', 'routes'),
+    '/events/filter',
     function ($request, $response) {
         $post = $request->getParsedBody();
         if (isset($this->session->filter_events)) {
@@ -137,7 +136,7 @@ $this->post(
 )->setName('filter-eventslist')->add($authenticate);
 
 $this->get(
-    __('/event', 'events_routes') . '/{action:' . __('edit', 'routes') . '|' . __('add', 'routes') . '}[/{id:\d+}]',
+    '/event/{action:edit|add}[/{id:\d+}]',
     function ($request, $response, $args) use ($module, $module_id) {
         $action = $args['action'];
         $id = null;
@@ -145,14 +144,14 @@ $this->get(
             $id = $args['id'];
         }
 
-        if ($action === __('edit', 'routes') && $id === null) {
+        if ($action === 'edit' && $id === null) {
             throw new \RuntimeException(
                 _T("Event ID cannot ben null calling edit route!", "events")
             );
-        } elseif ($action === __('add', 'routes') && $id !== null) {
+        } elseif ($action === 'add' && $id !== null) {
              return $response
                 ->withStatus(301)
-                ->withHeader('Location', $this->router->pathFor('events_event', ['action' => __('add', 'routes')]));
+                ->withHeader('Location', $this->router->pathFor('events_event', ['action' => 'add']));
         }
         $route_params = ['action' => $args['action']];
 
@@ -203,7 +202,7 @@ $this->get(
 )->add($authenticate);
 
 $this->post(
-    __('/event', 'events_routes') . __('/store', 'routes'),
+    '/event/store',
     function ($request, $response, $args) {
         $post = $request->getParsedBody();
         $event = new Event($this->zdb, $this->login);
@@ -296,10 +295,10 @@ $this->post(
             if ($event->getId()) {
                 $rparams = [
                     'id'        => $event->getId(),
-                    'action'    => __('edit', 'routes')
+                    'action'    => 'edit'
                 ];
             } else {
-                $rparams = ['action' => __('add', 'routes')];
+                $rparams = ['action' => 'add'];
             }
             $redirect_url = $this->router->pathFor(
                 'events_event',
@@ -314,7 +313,7 @@ $this->post(
 )->setName('events_storeevent')->add($authenticate);
 
 $this->get(
-    __('/event', 'events_routes') . __('/remove', 'routes') . '/{id:\d+}',
+    '/event/remove/{id:\d+}',
     function ($request, $response, $args) {
         $event = new Event($this->zdb, $this->login, (int)$args['id']);
 
@@ -331,7 +330,7 @@ $this->get(
                 'type'          => _T("Event", "events"),
                 'mode'          => $request->isXhr() ? 'ajax' : '',
                 'page_title'    => sprintf(
-                    _T('Remove event %1$s'),
+                    _T('Remove event %1$s', 'events'),
                     $event->getName()
                 ),
                 'form_url'      => $this->router->pathFor(
@@ -347,7 +346,7 @@ $this->get(
 )->setName('events_remove_event')->add($authenticate);
 
 $this->post(
-    __('/event', 'events_routes') . __('/remove', 'routes') . '[/{id:\d+}]',
+    '/event/remove[/{id:\d+}]',
     function ($request, $response) {
         $post = $request->getParsedBody();
         $ajax = isset($post['ajax']) && $post['ajax'] === 'true';
@@ -408,8 +407,7 @@ $this->post(
 )->setName('events_do_remove_event')->add($authenticate);
 
 $this->get(
-    __('/bookings', 'events_routes') . '/{event:guess|'. __('all', 'events_routes') . '|\d+}' .
-    '[/{option:' . __('page', 'routes') . '|' . __('order', 'routes') . '}/{value:\d+}]',
+    '/bookings/{event:guess|'. 'all|\d+}[/{option:page|order}/{value:\d+}]',
     function ($request, $response, $args) use ($module, $module_id) {
         $option = null;
         if (isset($args['option'])) {
@@ -434,17 +432,17 @@ $this->get(
 
         if ($option !== null) {
             switch ($option) {
-                case __('page', 'routes'):
+                case 'page':
                     $filters->current_page = (int)$value;
                     break;
-                case __('order', 'routes'):
+                case 'order':
                     $filters->orderby = $value;
                     break;
             }
         }
 
         $event = null;
-        if ($args['event'] !== __('all', 'events_routes')) {
+        if ($args['event'] !== 'all') {
             $filters->event_filter = (int)$args['event'];
             $event = new Event($this->zdb, $this->login, (int)$args['event']);
         }
@@ -481,7 +479,7 @@ $this->get(
 
 //bookings list filtering
 $this->post(
-    __('/bookings', 'events_routes') . __('/filter', 'routes'),
+    '/bookings/filter',
     function ($request, $response) {
         $post = $request->getParsedBody();
         if (isset($this->session->filter_bookings)) {
@@ -530,8 +528,7 @@ $this->post(
 )->setName('filter-bookingslist')->add($authenticate);
 
 $this->get(
-    __('/booking', 'events_routes') . '/{action:' . __('edit', 'routes') . '|' . __('add', 'routes') .
-    '}[/{id:\d+}]',
+    '/booking/{action:edit|add}[/{id:\d+}]',
     function ($request, $response, $args) use ($module, $module_id) {
         $action = $args['action'];
         $get = $request->getQueryParams();
@@ -541,14 +538,14 @@ $this->get(
             $id = $args['id'];
         }
 
-        if ($action === __('edit', 'routes') && $id === null) {
+        if ($action === 'edit' && $id === null) {
             throw new \RuntimeException(
                 _T("Booking ID cannot ben null calling edit route!", "events")
             );
-        } elseif ($action === __('add', 'routes') && $id !== null) {
+        } elseif ($action === 'add' && $id !== null) {
              return $response
                 ->withStatus(301)
-                ->withHeader('Location', $this->router->pathFor('events_bookings', ['action' => __('add', 'routes')]));
+                ->withHeader('Location', $this->router->pathFor('events_bookings', ['action' => 'add']));
         }
         $route_params = ['action' => $args['action']];
 
@@ -573,7 +570,7 @@ $this->get(
 
         //Events
         $events = new Events($this->zdb, $this->login);
-        if ($action === __('add', 'routes')) {
+        if ($action === 'add') {
             if (isset($get['event'])) {
                 $booking->setEvent((int)$get['event']);
             }
@@ -581,46 +578,58 @@ $this->get(
                 ($this->login->isAdmin() || $this->login->isStaff() || $this->login->isGroupManager())
             ) {
                 $booking->setMember((int)$_GET[Adherent::PK]);
-            } elseif (!$this->login->isSuperAdmin()) {
+            } elseif (!$this->login->isSuperAdmin()
+                && !$this->login->isAdmin()
+                && !$this->login->isStaff()
+                && !$this->login->isGroupManager()
+            ) {
                 $booking->setMember($this->login->id);
             }
         }
 
-        // members
-        $members = [];
-        $m = new Members();
-        $required_fields = array(
-            'id_adh',
-            'nom_adh',
-            'prenom_adh'
-        );
-        $list_members = $m->getList(false, $required_fields, true);
+        if ($this->login->isAdmin()
+            || $this->login->isStaff()
+            || $this->login->isGroupManager()
+        ) {
+            // members
+            $members = [];
+            $m = new Members();
+            $required_fields = array(
+                'id_adh',
+                'nom_adh',
+                'prenom_adh'
+            );
+            $list_members = $m->getList(false, $required_fields);
 
-        if (count($list_members) > 0) {
-            foreach ($list_members as $member) {
-                $pk = Adherent::PK;
-                $sname = mb_strtoupper($member->nom_adh, 'UTF-8') .
-                    ' ' . ucwords(mb_strtolower($member->prenom_adh, 'UTF-8')) .
-                    ' (' . $member->id_adh . ')';
-                $members[$member->$pk] = $sname;
+            if (count($list_members) > 0) {
+                foreach ($list_members as $member) {
+                    $pk = Adherent::PK;
+                    $sname = mb_strtoupper($member->nom_adh, 'UTF-8') .
+                        ' ' . ucwords(mb_strtolower($member->prenom_adh, 'UTF-8')) .
+                        ' (' . $member->id_adh . ')';
+                    $members[$member->$pk] = $sname;
+                }
             }
-        }
 
-        $route_params['members'] = [
-            'filters'   => $m->getFilters(),
-            'count'     => $m->getCount()
-        ];
-        $route_params['autocomplete'] = true;
+            $route_params['members'] = [
+                'filters'   => $m->getFilters(),
+                'count'     => $m->getCount()
+            ];
+            $route_params['autocomplete'] = true;
 
-        //check if current attached member is part of the list
-        if (isset($booking) && $booking->getMemberId() > 0) {
-            if (!isset($members[$booking->getMemberId()])) {
+            //check if current attached member is part of the list
+            if (isset($booking)
+                && $booking->getMemberId() > 0
+                && !isset($members[$booking->getMemberId()])
+            ) {
                 $members[$booking->getMemberId()] = Adherent::getSName($this->zdb, $booking->getMemberId(), true);
             }
-        }
 
-        if (count($members)) {
-            $route_params['members']['list'] = $members;
+            if (count($members)) {
+                $route_params['members']['list'] = $members;
+            }
+        } else {
+            $booking->setMember($this->login->id);
         }
 
         // display page
@@ -646,7 +655,7 @@ $this->get(
 )->setName('events_booking')->add($authenticate);
 
 $this->post(
-    __('/booking', 'events_routes') . __('/store', 'routes'),
+    '/booking/store',
     function ($request, $response, $args) {
         $post = $request->getParsedBody();
         $booking = new Booking($this->zdb, $this->login);
@@ -744,10 +753,10 @@ $this->post(
             if ($booking->getId()) {
                 $rparams = [
                     'id'        => $booking->getId(),
-                    'action'    => __('edit', 'routes')
+                    'action'    => 'edit'
                 ];
             } else {
-                $rparams = ['action' => __('add', 'routes')];
+                $rparams = ['action' => 'add'];
             }
             $redirect_url = $this->router->pathFor(
                 'events_booking',
@@ -762,7 +771,7 @@ $this->post(
 )->setName('events_storebooking')->add($authenticate);
 
 $this->get(
-    __('/booking', 'events_routes') . __('/remove', 'routes') . '/{id:\d+}',
+    '/booking/remove/{id:\d+}',
     function ($request, $response, $args) {
         $booking = new Booking($this->zdb, $this->login, (int)$args['id']);
 
@@ -778,7 +787,7 @@ $this->get(
             array(
                 'type'          => _T("Booking", "events"),
                 'mode'          => $request->isXhr() ? 'ajax' : '',
-                'page_title'    => _T('Remove booking'),
+                'page_title'    => _T('Remove booking', 'events'),
                 'form_url'      => $this->router->pathFor(
                     'events_do_remove_booking',
                     ['id' => $booking->getId()]
@@ -792,7 +801,7 @@ $this->get(
 )->setName('events_remove_booking')->add($authenticate);
 
 $this->post(
-    __('/booking', 'events_routes') . __('/remove', 'routes') . '[/{id:\d+}]',
+    '/booking/remove[/{id:\d+}]',
     function ($request, $response) {
         $post = $request->getParsedBody();
         $ajax = isset($post['ajax']) && $post['ajax'] === 'true';
@@ -846,7 +855,7 @@ $this->post(
 
 //booking CSV export
 $this->get(
-    __('/events', 'events_routes') . '/{id:\d+}'  . __('/export', 'routes') . __('/bookings', 'events_routes'),
+    '/events/{id:\d+}/export/bookings',
     function ($request, $response, $args) {
         $csv = new CsvOut();
 
@@ -936,11 +945,23 @@ $this->get(
             );
         }
 
-        if (file_exists(CsvOut::DEFAULT_DIRECTORY . $filename)) {
-            header('Content-Type: text/csv');
-            header('Content-Disposition: attachment; filename="' . $filename . '";');
-            header('Pragma: no-cache');
-            echo readfile(CsvOut::DEFAULT_DIRECTORY . $filename);
+        $filepath = CsvOut::DEFAULT_DIRECTORY . $filename;
+        if (file_exists($filepath)) {
+            $response = $this->response->withHeader('Content-Description', 'File Transfer')
+                ->withHeader('Content-Type', 'text/csv')
+                ->withHeader('Content-Disposition', 'attachment;filename="' . $filename . '"')
+                ->withHeader('Pragma', 'no-cache')
+                ->withHeader('Content-Transfer-Encoding', 'binary')
+                ->withHeader('Expires', '0')
+                ->withHeader('Cache-Control', 'must-revalidate')
+                ->withHeader('Pragma', 'public')
+                ->withHeader('Content-Length', filesize($filepath));
+
+            $stream = fopen('php://memory', 'r+');
+            fwrite($stream, file_get_contents($filepath));
+            rewind($stream);
+
+            return $response->withBody(new \Slim\Http\Stream($stream));
         } else {
             Analog::log(
                 'A request has been made to get an exported file named `' .
@@ -955,7 +976,7 @@ $this->get(
 
 //Batch actions on members list
 $this->post(
-    __('/bookings', 'events_routes') . __('/batch', 'routes'),
+    '/bookings/batch',
     function ($request, $response) {
         $post = $request->getParsedBody();
 
@@ -982,7 +1003,7 @@ $this->post(
                     'events_bookings',
                     [
                         'event' => $filters->event_filter == null ?
-                            __('all', 'events_routes') :
+                            'all' :
                             $filters->event_filter
                     ]
                 );
@@ -1010,8 +1031,7 @@ $this->post(
 )->setName('batch-eventslist')->add($authenticate);
 
 $this->get(
-    __('/activities', 'events_routes') . '[/{option:' . __('page', 'routes') . '|' .
-    __('order', 'routes') . '}/{value:\d+}]',
+    '/activities[/{option:page|order}/{value:\d+}]',
     function ($request, $response, $args) use ($module, $module_id) {
         $option = null;
         if (isset($args['option'])) {
@@ -1030,10 +1050,10 @@ $this->get(
 
         if ($option !== null) {
             switch ($option) {
-                case __('page', 'routes'):
+                case 'page':
                     $filters->current_page = (int)$value;
                     break;
-                case __('order', 'routes'):
+                case 'order':
                     $filters->orderby = $value;
                     break;
             }
@@ -1069,7 +1089,7 @@ $this->get(
 
 //events list filtering
 /*$this->post(
-    __('/events', 'events_routes') . __('/filter', 'routes'),
+    '/events/filter',
     function ($request, $response) {
         $post = $request->getParsedBody();
         if (isset($this->session->filter_events)) {
@@ -1097,7 +1117,7 @@ $this->get(
 )->setName('filter-eventslist')->add($authenticate);*/
 
 $this->get(
-    __('/activity', 'events_routes') . '/{action:' . __('edit', 'routes') . '|' . __('add', 'routes') . '}[/{id:\d+}]',
+    '/activity/{action:edit|add}[/{id:\d+}]',
     function ($request, $response, $args) use ($module, $module_id) {
         $action = $args['action'];
         $id = null;
@@ -1105,14 +1125,14 @@ $this->get(
             $id = $args['id'];
         }
 
-        if ($action === __('edit', 'routes') && $id === null) {
+        if ($action === 'edit' && $id === null) {
             throw new \RuntimeException(
                 _T("Activity ID cannot ben null calling edit route!", "events")
             );
-        } elseif ($action === __('add', 'routes') && $id !== null) {
+        } elseif ($action === 'add' && $id !== null) {
              return $response
                 ->withStatus(301)
-                ->withHeader('Location', $this->router->pathFor('events_activity', ['action' => __('add', 'routes')]));
+                ->withHeader('Location', $this->router->pathFor('events_activity', ['action' => 'add']));
         }
         $route_params = ['action' => $args['action']];
 
@@ -1157,7 +1177,7 @@ $this->get(
 )->add($authenticate);
 
 $this->post(
-    __('/activity', 'events_routes') . __('/store', 'routes'),
+    '/activity/store',
     function ($request, $response, $args) {
         $post = $request->getParsedBody();
         $activity = new Activity($this->zdb, $this->login);
@@ -1231,10 +1251,10 @@ $this->post(
             if ($activity->getId()) {
                 $rparams = [
                     'id'        => $activity->getId(),
-                    'action'    => __('edit', 'routes')
+                    'action'    => 'edit'
                 ];
             } else {
-                $rparams = ['action' => __('add', 'routes')];
+                $rparams = ['action' => 'add'];
             }
             $redirect_url = $this->router->pathFor(
                 'events_activity',
@@ -1249,7 +1269,7 @@ $this->post(
 )->setName('events_storeactivity')->add($authenticate);
 
 $this->get(
-    __('/activity', 'events_routes') . __('/remove', 'routes') . '/{id:\d+}',
+    '/activity/remove/{id:\d+}',
     function ($request, $response, $args) {
         $activity = new Activity($this->zdb, $this->login, (int)$args['id']);
 
@@ -1266,7 +1286,7 @@ $this->get(
                 'type'          => _T("Activity", "events"),
                 'mode'          => $request->isXhr() ? 'ajax' : '',
                 'page_title'    => sprintf(
-                    _T('Remove activity %1$s'),
+                    _T('Remove activity %1$s', 'events'),
                     $activity->getName()
                 ),
                 'form_url'      => $this->router->pathFor(
@@ -1282,7 +1302,7 @@ $this->get(
 )->setName('events_remove_activity')->add($authenticate);
 
 $this->post(
-    __('/activity', 'events_routes') . __('/remove', 'routes') . '[/{id:\d+}]',
+    '/activity/remove[/{id:\d+}]',
     function ($request, $response) {
         $post = $request->getParsedBody();
         $ajax = isset($post['ajax']) && $post['ajax'] === 'true';
@@ -1354,3 +1374,71 @@ $this->post(
         }
     }
 )->setName('events_do_remove_activity')->add($authenticate);
+
+$this->get(
+    '/events/calendar[/{option:page|order}/{value:\d+}]',
+    function ($request, $response, $args) use ($module, $module_id) {
+        $option = null;
+        if (isset($args['option'])) {
+            $option = $args['option'];
+        }
+        $value = null;
+        if (isset($args['value'])) {
+            $value = $args['value'];
+        }
+
+        if (isset($this->session->filter_events)) {
+            $filters = $this->session->filter_events;
+        } else {
+            $filters = new EventsList();
+        }
+
+        if ($option !== null) {
+            switch ($option) {
+                case 'page':
+                    $filters->current_page = (int)$value;
+                    break;
+                case 'order':
+                    $filters->orderby = $value;
+                    break;
+            }
+        }
+
+        $events = new Events($this->zdb, $this->login, $filters);
+
+        //assign pagination variables to the template and add pagination links
+        $filters->setSmartyPagination($this->router, $this->view->getSmarty(), false);
+
+        $this->session->filter_events = $filters;
+
+        // display page
+        $this->view->render(
+            $response,
+            'file:[' . $module['route'] . ']calendar.tpl',
+            array(
+                'page_title'            => _T("Events calendar", "events"),
+                'require_dialog'        => true,
+                'events'                => $events->getList(),
+                'nb_events'             => $events->getCount(),
+                'filters'               => $filters,
+                'module_id'             => $module_id
+            )
+        );
+        return $response;
+    }
+)->setName('events_calendar')->add($authenticate);
+
+$this->get(
+    '/ajax/events/calendar',
+    function ($request, $response, $args) use ($module, $module_id) {
+        $get = $request->getQueryParams();
+        $filters = new EventsList();
+        $filters->calendar_filter = true;
+        $filters->start_date_filter = date(__("Y-m-d"), strtotime($get['start']));
+        $filters->end_date_filter = date(__("Y-m-d"), strtotime($get['end']));
+
+        $events = new Events($this->zdb, $this->login, $filters);
+
+        return $response->withJson($events->getList());
+    }
+)->setName('ajax-events_calendar')->add($authenticate);

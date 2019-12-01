@@ -156,14 +156,53 @@ class Events
 
             $this->proceedCount($select);
 
-            $this->filters->setLimits($select);
+            if (!$this->filters->calendar_filter) {
+                $this->filters->setLimits($select);
+            }
             $results = $this->zdb->execute($select);
             $this->filters->query = $this->zdb->query_string;
 
             $events = [];
             foreach ($results as $row) {
                 $event = new Event($this->zdb, $this->login, $row);
-                $events[] = $event;
+                if (!$this->filters->calendar_filter) {
+                    $events[] = $event;
+                } else {
+                    //required entries for fullcalendar
+                    $row['title'] = $row['name'];
+                    $row['start'] = $row['begin_date'];
+                    $row['end'] = $row['end_date'];
+
+                    //extended description
+                    $row['end_date_fmt'] = $event->getBeginDate();
+                    $row['begin_date_fmt'] = $event->getEndDate();
+                    $description = '<h4><a href="" id="event_link">' . _T('Event informations', 'events');
+                    $description .= '&nbsp;<i class="fas fa-eye"></i></a></h4>';
+                    $description .= '<ul>';
+                    $pattern = '<li><strong>%1$s</strong> %2$s</li>';
+                    $description .= sprintf($pattern, _T("Start date:", "events"), $event->getBeginDate());
+                    $description .= sprintf($pattern, _T("End date:", "events"), $event->getEndDate());
+                    $description .= sprintf($pattern, _T("Location:", "events"), $event->getTown());
+                    if ($comment = $event->getComment()) {
+                        $description .= sprintf($pattern, _T("Comment:", "events"), $comment);
+                    }
+                    $description .= sprintf($pattern, _T("Attendees:", "events"), $event->countAttendees());
+                    $description .= '</ul>';
+
+                    $activities = $event->getActivities();
+                    if (count($activities)) {
+                        $description .= '<h4>' . _T('Activities', 'events')  . '</h4>';
+                        $description .= '<ul>';
+                        foreach ($activities as $activity) {
+                            $description.= '<li>' . $activity['activity']->getName()  . '</li>';
+                        }
+                        $description .= '</ul>';
+                    }
+
+                    $row['description'] = $description;
+
+                    $events[] = $row;
+                }
             }
 
             return $events;

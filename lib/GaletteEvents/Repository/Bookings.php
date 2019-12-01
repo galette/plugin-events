@@ -236,7 +236,7 @@ class Bookings
             }
 
             if ($this->filters->event_filter !== null
-                && $this->filters->event_filter != __('all', 'events_routes')
+                && $this->filters->event_filter != 'all'
             ) {
                 $select->where(['b.' . Event::PK => $this->filters->event_filter]);
             }
