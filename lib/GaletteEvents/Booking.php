@@ -41,7 +41,7 @@ use Galette\Entity\Group;
 use Galette\Entity\Adherent;
 use Galette\Entity\PaymentType;
 use Analog\Analog;
-use Zend\Db\Sql\Expression;
+use Laminas\Db\Sql\Expression;
 
 /**
  * Booking entity
