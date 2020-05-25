@@ -905,6 +905,19 @@ $this->get(
             ]
         );
 
+        //prepare labels to work with external soft: requires no accent and MAJ
+        foreach ($labels as &$label) {
+            $string = htmlentities($label, ENT_NOQUOTES, 'utf-8');
+            $string = preg_replace(
+                '#&([A-za-z])(?:acute|cedil|caron|circ|grave|orn|ring|slash|th|tilde|uml);#',
+                '\1',
+                $string
+            );
+            $string = preg_replace('#&([A-za-z]{2})(?:lig);#', '\1', $string);
+            $string = preg_replace('#&[^;]+;#', '', $string);
+            $label = strtoupper($string);
+        }
+
         $list = [];
         foreach ($bookings_list as $booking) {
             $member = $booking->getMember();
