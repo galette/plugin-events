@@ -187,9 +187,6 @@ class Event
         $this->begin_date = $r->begin_date;
         $this->end_date = $r->end_date;
         $this->creation_date = $r->creation_date;
-        $this->noon_meal = $r->noon_meal;
-        $this->even_meal = $r->even_meal;
-        $this->lodging = $r->lodging;
         $this->open = $r->is_open;
         $this->group = $r->id_group;
         $this->comment = $r->comment;

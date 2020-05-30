@@ -1411,6 +1411,14 @@ $this->get(
 
         $this->session->filter_events = $filters;
 
+        //check if JS has been generated
+        if (!file_exists(__DIR__ . '/webroot/js/calendar.bundle.js')) {
+            $this->flash->addMessageNow(
+                'error_detected',
+                _T('Javascript libraries has not been built!', 'events')
+            );
+        }
+
         // display page
         $this->view->render(
             $response,
