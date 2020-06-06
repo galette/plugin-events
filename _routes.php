@@ -447,6 +447,10 @@ $this->get(
             $event = new Event($this->zdb, $this->login, (int)$args['event']);
         }
 
+        //Groups
+        $groups = new Groups($this->zdb, $this->login);
+        $groups_list = $groups->getList();
+
         $bookings = new Bookings($this->zdb, $this->login, $filters);
 
         //assign pagination variables to the template and add pagination links
@@ -470,7 +474,8 @@ $this->get(
                 'eventid'           => $filters->event_filter,
                 'require_dialog'    => true,
                 'filters'           => $filters,
-                'events'            => $events->getList()
+                'events'            => $events->getList(),
+                'groups'            => $groups_list
             ]
         );
         return $response;

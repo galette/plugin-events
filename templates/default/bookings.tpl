@@ -17,6 +17,14 @@
                 label={_T string="Payment type"}
                 empty=["value" => -1, "label" => {_T string="All payment types" domain="events"}]
             }
+
+            <label for="group" title="{_T string="Group" domain="events"}">{_T string="Group" domain="events"}</label>
+            <select name="group" id="group">
+                <option value="0">{_T string="Select a group"}</option>
+{foreach from=$groups item=group}
+                <option value="{$group->getId()}"{if $filters->group_filter eq $group->getId()} selected="selected"{/if}>{$group->getIndentName()}</option>
+{/foreach}
+            </select>
             <input type="submit" class="inline" value="{_T string="Filter"}"/>
             <input type="submit" name="clear_filter" class="inline" value="{_T string="Clear filter"}"/>
             <div>
