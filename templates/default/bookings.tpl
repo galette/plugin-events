@@ -1,6 +1,6 @@
 {extends file="page.tpl"}
 {block name="content"}
-        <form action="{path_for name="filter-bookingslist"}" method="post" id="filtre">
+        <form action="{path_for name="filter-bookingslist" data=["event" => $filters->event_filter]}" method="post" id="filtre">
         <div id="listfilter">
             <label for="event_filter">{_T string="Event" domain="events"}</label>
             <select name="event_filter" id="event_filter" required="required">
@@ -18,8 +18,8 @@
                 empty=["value" => -1, "label" => {_T string="All payment types" domain="events"}]
             }
 
-            <label for="group" title="{_T string="Group" domain="events"}">{_T string="Group" domain="events"}</label>
-            <select name="group" id="group">
+            <label for="group_filter" title="{_T string="Group" domain="events"}">{_T string="Group" domain="events"}</label>
+            <select name="group_filter" id="group_filter">
                 <option value="0">{_T string="Select a group"}</option>
 {foreach from=$groups item=group}
                 <option value="{$group->getId()}"{if $filters->group_filter eq $group->getId()} selected="selected"{/if}>{$group->getIndentName()}</option>

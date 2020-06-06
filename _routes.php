@@ -407,7 +407,7 @@ $this->post(
 )->setName('events_do_remove_event')->add($authenticate);
 
 $this->get(
-    '/bookings/{event:guess|'. 'all|\d+}[/{option:page|order}/{value:\d+}]',
+    '/bookings/{event:guess|all|\d+}[/{option:page|order}/{value:\d+}]',
     function ($request, $response, $args) use ($module, $module_id) {
         $option = null;
         if (isset($args['option'])) {
@@ -484,8 +484,8 @@ $this->get(
 
 //bookings list filtering
 $this->post(
-    '/bookings/filter',
-    function ($request, $response) {
+    '/bookings/filter/{event:guess|all|\d+}',
+    function ($request, $response, $args) {
         $post = $request->getParsedBody();
         if (isset($this->session->filter_bookings)) {
             $filters = $this->session->filter_bookings;
@@ -519,6 +519,12 @@ $this->post(
                     $filters->event_filter = $post['event_filter'];
                 }
             }
+
+            if (isset($post['group_filter'])) {
+                if (is_numeric($post['group_filter'])) {
+                    $filters->group_filter = $post['group_filter'];
+                }
+            }
         }
 
         $this->session->filter_bookings = $filters;
@@ -527,7 +533,7 @@ $this->post(
             ->withStatus(301)
             ->withHeader(
                 'Location',
-                $this->router->pathFor('events_bookings', ['event' => $filters->event_filter])
+                $this->router->pathFor('events_bookings', $args)
             );
     }
 )->setName('filter-bookingslist')->add($authenticate);

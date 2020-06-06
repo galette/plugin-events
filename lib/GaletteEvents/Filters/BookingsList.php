@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2018 The Galette Team
+ * Copyright © 2018-2020 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package   GaletteEvents
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018 The Galette Team
+ * @copyright 2018-2020 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  */
@@ -47,7 +47,7 @@ use GaletteEvents\Repository\Bookings;
  * @package   GaletteEvents
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018 The Galette Team
+ * @copyright 2018-2020 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  */
@@ -58,22 +58,16 @@ class BookingsList extends Pagination
     private $event_filter;
     private $paid_filter;
     private $payment_type_filter;
+    private $group_filter;
 
     private $selected;
-
-    /*private $name_filter = null;
-    private $start_date_filter = null;
-    private $end_date_filter = null;
-    private $group_filter = 0;
-    private $meal_filter = null;
-    private $lodging_filter = null;
-    private $open_filter = null;*/
 
     protected $list_fields = array(
         'event_filter',
         'paid_filter',
         'payment_type_filter',
-        'selected'
+        'selected',
+        'group_filter'
     );
 
     /**
@@ -116,6 +110,7 @@ class BookingsList extends Pagination
         $this->paid_filter = Bookings::FILTER_DC_PAID;
         $this->payment_type_filter = -1;
         $this->selected = [];
+        $this->group_filter = null;
     }
 
     /**

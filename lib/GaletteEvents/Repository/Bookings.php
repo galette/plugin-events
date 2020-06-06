@@ -250,6 +250,12 @@ class Bookings
                 );
             }
 
+            if ($this->filters->group_filter !== null
+                && $this->filters->group_filter != 'all'
+            ) {
+                $select->where(['e.' . Group::PK => $this->filters->group_filter]);
+            }
+
             if (!$this->login->isAdmin() && !$this->login->isStaff()) {
                 $groups = Groups::loadGroups(
                     $this->login->id,
