@@ -14,11 +14,12 @@
                 current=$filters->payment_type_filter
                 varname="payment_type_filter"
                 classname=""
-                empty=["value" => -1, "label" => {_T string="All" domain="events"}]
+                label={_T string="Payment type"}
+                empty=["value" => -1, "label" => {_T string="All payment types" domain="events"}]
             }
             <input type="submit" class="inline" value="{_T string="Filter"}"/>
             <input type="submit" name="clear_filter" class="inline" value="{_T string="Clear filter"}"/>
-            <div/>
+            <div>
                 {_T string="Paid bookings:" domain="events"}
                 <input type="radio" name="paid_filter" id="filter_dc_paid" value="{GaletteEvents\Repository\Bookings::FILTER_DC_PAID}"{if $filters->paid_filter eq constant('GaletteEvents\Repository\Bookings::FILTER_DC_PAID')} checked="checked"{/if}>
                 <label for="filter_dc_paid" >{_T string="Don't care"}</label>
