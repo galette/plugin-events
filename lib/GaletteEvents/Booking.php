@@ -812,4 +812,18 @@ class Booking
     {
         return $this->activities;
     }
+
+    /**
+     * Get row class related to current fee status
+     *
+     * @param boolean $public we want the class for public pages
+     *
+     * @return string the class to apply
+     */
+    public function getRowClass($public = false)
+    {
+        $strclass = 'event-' .
+            ($this->isPaid() ? 'paid' : 'notpaid');
+        return $strclass;
+    }
 }

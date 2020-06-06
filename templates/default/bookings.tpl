@@ -127,6 +127,7 @@
 {/if}
             <tbody>
 {foreach from=$bookings_list item=booking key=ordre}
+    {assign var=rclass value=$booking->getRowClass()}
                 <tr>
                     <td class="{$rclass} right" data-scope="id">{$ordre+1+($filters->current_page - 1)*$numrows}</td>
                     <td class="{$rclass} nowrap username_row" data-scope="row">

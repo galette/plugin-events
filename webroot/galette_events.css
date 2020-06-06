@@ -13,3 +13,13 @@
     background-image: url(images/booking_add.png), url("../../../../themes/default/jquery-ui/images/ui-bg_glass_75_ffb619_1x400.png");
 }
 
+.event-notpaid {
+    background-color: #FFDDDD!important;
+    vertical-align: top;
+}
+
+.event-paid {
+    background-color: #DDFFDD!important;
+    vertical-align: top;
+}
+
