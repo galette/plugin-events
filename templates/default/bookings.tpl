@@ -184,8 +184,19 @@
 
         <ul class="selection_menu">
             <li>{_T string="For the selection:"}</li>
-    {if ($login->isAdmin() or $login->isStaff()) and $pref_mail_method neq constant('Galette\Core\GaletteMail::METHOD_DISABLED')}
-            <li><input type="submit" id="sendmail" name="mailing" value="{_T string="Mail"}"/></li>
+    {if $login->isAdmin() or $login->isStaff()}
+        {if $pref_mail_method neq constant('Galette\Core\GaletteMail::METHOD_DISABLED')}
+            <li>
+                <button type="submit" id="sendmail" name="mailing">
+                    <i class="fas fa-mail-bulk fa-fw"></i> {_T string="Mail"}
+                </button>
+            </li>
+        {/if}
+            <li>
+                <button type="submit" id="csv" name="csv">
+                    <i class="fas fa-file-csv fa-fw"></i> {_T string="Export as CSV"}
+                </button>
+            </li>
     {/if}
         </ul>
         </form>

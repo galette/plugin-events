@@ -1001,14 +1001,15 @@ $this->post(
             //$this->session->filter_bookings = $filters;
             $filters->selected = $post['event_sel'];
 
+            $bookings = new Bookings($this->zdb, $this->login, $filters);
+            $members = [];
+            foreach ($bookings->getList() as $booking) {
+                $members[] = $booking->getMemberId();
+            }
+            $mfilter = new MembersList();
+            $mfilter->selected = $members;
+
             if (isset($post['mailing'])) {
-                $bookings = new Bookings($this->zdb, $this->login, $filters);
-                $members = [];
-                foreach ($bookings->getList() as $booking) {
-                    $members[] = $booking->getMemberId();
-                }
-                $mfilter = new MembersList();
-                $mfilter->selected = $members;
                 $this->session->filter_mailing = $mfilter;
                 $this->session->redirect_mailing = $this->router->pathFor(
                     'events_bookings',
@@ -1024,9 +1025,20 @@ $this->post(
             }
 
             if (isset($post['csv'])) {
+                $session_var = 'plugin-events-bookings';
+                $this->session->$session_var = $mfilter;
+                return $response
+                    ->withStatus(307)
+                    ->withHeader(
+                        'Location',
+                        $this->router->pathFor('csv-memberslist') . '?session_var=' . $session_var
+                    );
+            }
+
+            if (isset($post['labels'])) {
                 return $response
                     ->withStatus(301)
-                    ->withHeader('Location', $this->router->pathFor('csv-memberslist'));
+                    ->withHeader('Location', $this->router->pathFor('pdf-members-labels'));
             }
         } else {
             $this->flash->addMessage(
