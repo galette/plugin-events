@@ -206,7 +206,7 @@
             </li>
             <li>
                 <button type="submit" id="csvbooking" name="csvbooking" title="{_T string="Export selected reservations as CSV" domain="events"}">
-                    <i class="fas fa-file-csv fa-fw"></i> {_T string="Bookins as CSV" domain="events"}
+                    <i class="fas fa-file-csv fa-fw"></i> {_T string="Bookings as CSV" domain="events"}
                 </button>
             </li>
     {/if}
