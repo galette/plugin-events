@@ -381,9 +381,21 @@ class Bookings
             $countSelect->reset($countSelect::COLUMNS);
             $countSelect->reset($countSelect::ORDER);
             $countSelect->reset($countSelect::HAVING);
+            $joins = $countSelect->joins;
+            $countSelect->reset($countSelect::JOINS);
+            foreach ($joins as $join) {
+                $countSelect->join(
+                    $join['name'],
+                    $join['on'],
+                    [],
+                    $join['type']
+                );
+                unset($join['columns']);
+            }
+
             $countSelect->columns(
                 array(
-                    'count' => new Expression('count(b.' . Booking::PK . ')')
+                    'count' => new Expression('count(DISTINCT b.' . Booking::PK . ')')
                 )
             );
 
