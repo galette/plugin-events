@@ -180,7 +180,7 @@ class Activities extends Repository
             $countSelect->reset($countSelect::HAVING);
             $countSelect->columns(
                 array(
-                    'count' => new Expression('count(DISTINCT ac.' . Activity::PK . ')')
+                    'count' => new Expression('count(ac.' . Activity::PK . ')')
                 )
             );
 

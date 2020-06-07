@@ -383,7 +383,7 @@ class Bookings
             $countSelect->reset($countSelect::HAVING);
             $countSelect->columns(
                 array(
-                    'count' => new Expression('count(DISTINCT b.' . Booking::PK . ')')
+                    'count' => new Expression('count(b.' . Booking::PK . ')')
                 )
             );
 
