@@ -84,7 +84,7 @@
                         {/if}
                     </td>
                     <td class="{$rclass} center nowrap actions_row">
-                        <a href="{path_for name="events_booking_export" data=["id" => $eid]}" class="tooltip">
+                        <a href="{path_for name="event_bookings_export" data=["id" => $eid]}" class="tooltip">
                             <i class="fas fa-file-csv fa-fw"></i>
                             <span class="sr-only">{_T string="%eventname: export bookings as CSV" domain="events" pattern="/%eventname/" replace=$event->getName()}</span>
                         </a>

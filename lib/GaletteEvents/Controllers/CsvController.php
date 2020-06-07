@@ -85,7 +85,6 @@ class CsvController extends \Galette\Controllers\CsvController
         $get = $request->getQueryParams();
         $csv = new CsvOut();
 
-        $event = new Event($this->zdb, $this->login, (int)$args['id']);
 
         $session_var = $post['session_var'] ?? $get['session_var'] ?? 'filter_bookings';
         if (isset($this->session->$session_var)) {
@@ -114,20 +113,24 @@ class CsvController extends \Galette\Controllers\CsvController
             _T('Number of persons', 'events'),
         ];
 
-        $activities = $event->getActivities();
-        foreach ($activities as $activity) {
-            $labels[] = $activity['activity']->getName();
-        }
+        //activities are onl:y available for one event
+        if (isset($args['id'])) {
+            $event = new Event($this->zdb, $this->login, (int)$args['id']);
+            $activities = $event->getActivities();
+            foreach ($activities as $activity) {
+                $labels[] = $activity['activity']->getName();
+            }
 
-        $labels = array_merge(
-            $labels,
-            [
-                _T('Amount', 'events'),
-                _T('Payment type'),
-                _T('Bank name', 'events'),
-                _T('Check number', 'events'),
-            ]
-        );
+            $labels = array_merge(
+                $labels,
+                [
+                    _T('Amount', 'events'),
+                    _T('Payment type'),
+                    _T('Bank name', 'events'),
+                    _T('Check number', 'events'),
+                ]
+            );
+        }
 
         //prepare labels to work with external soft: requires no accent and MAJ
         foreach ($labels as &$label) {
@@ -158,20 +161,23 @@ class CsvController extends \Galette\Controllers\CsvController
                 $booking->getNumberPeople()
             ];
 
-            $bactivities = $booking->getActivities();
-            foreach (array_keys($activities) as $aid) {
-                $entry[] = isset($bactivities[$aid]) && $bactivities[$aid]['checked'] ? _T('Yes') : _T('No');
+            if (isset($args['id'])) {
+                $bactivities = $booking->getActivities();
+                foreach (array_keys($activities) as $aid) {
+                    $entry[] = isset($bactivities[$aid]) && $bactivities[$aid]['checked'] ? _T('Yes') : _T('No');
+                }
+
+                $entry = array_merge(
+                    $entry,
+                    [
+                        $booking->getAmount(),
+                        $booking->getPaymentMethodName(),
+                        $booking->getBankName(),
+                        $booking->getCheckNumber()
+                    ]
+                );
             }
 
-            $entry = array_merge(
-                $entry,
-                [
-                    $booking->getAmount(),
-                    $booking->getPaymentMethodName(),
-                    $booking->getBankName(),
-                    $booking->getCheckNumber()
-                ]
-            );
             $list[] = $entry;
         }
 

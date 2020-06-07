@@ -865,10 +865,16 @@ $this->post(
 )->setName('events_do_remove_booking')->add($authenticate);
 
 //booking CSV export
-$this->get(
+$this->post(
     '/events/{id:\d+}/export/bookings',
     GaletteEvents\Controllers\CsvController::class . ':bookingsExport'
-)->setName('events_booking_export')->add($authenticate);
+)->setName('event_bookings_export')->add($authenticate);
+
+$this->post(
+    '/events/export/bookings',
+    GaletteEvents\Controllers\CsvController::class . ':bookingsExport'
+)->setName('events_bookings_export')->add($authenticate);
+
 
 //Batch actions on members list
 $this->post(
@@ -910,13 +916,24 @@ $this->post(
             }
 
             if (isset($post['csv'])) {
-                $session_var = 'plugin-events-bookings';
+                $session_var = 'plugin-events-members';
                 $this->session->$session_var = $mfilter;
                 return $response
                     ->withStatus(307)
                     ->withHeader(
                         'Location',
                         $this->router->pathFor('csv-memberslist') . '?session_var=' . $session_var
+                    );
+            }
+
+            if (isset($post['csvbooking'])) {
+                $session_var = 'plugin-events-bookings';
+                $this->session->$session_var = $filters;
+                return $response
+                    ->withStatus(307)
+                    ->withHeader(
+                        'Location',
+                        $this->router->pathFor('events_bookings_export') . '?session_var=' . $session_var
                     );
             }
 

@@ -200,8 +200,13 @@
             </li>
         {/if}
             <li>
-                <button type="submit" id="csv" name="csv">
-                    <i class="fas fa-file-csv fa-fw"></i> {_T string="Export as CSV"}
+                <button type="submit" id="csv" name="csv" title="{_T string="Export selected reservation members as CSV" domain="events"}">
+                    <i class="fas fa-file-csv fa-fw"></i> {_T string="Members as CSV" domain="events"}
+                </button>
+            </li>
+            <li>
+                <button type="submit" id="csvbooking" name="csvbooking" title="{_T string="Export selected reservations as CSV" domain="events"}">
+                    <i class="fas fa-file-csv fa-fw"></i> {_T string="Bookins as CSV" domain="events"}
                 </button>
             </li>
     {/if}
@@ -248,12 +253,12 @@
             $('#nbshow').change(function() {
                 this.form.submit();
             });
-            $('.selection_menu input[type="submit"], .selection_menu input[type="button"]').click(function(){
+            $('.selection_menu *[type="submit"], .selection_menu *[type="button"]').click(function(){
 
-                /*if ( this.id == 'delete' ) {
+                if ( this.id == 'delete' ) {
                     //mass removal is handled from 2 steps removal
                     return;
-                }*/
+                }
 
                 if (!_checkselection()) {
                     return false;
