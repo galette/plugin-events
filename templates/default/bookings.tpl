@@ -198,6 +198,11 @@
                 </button>
             </li>
     {/if}
+            <li>
+                <button type="submit" id="labels" name="labels">
+                    <i class="far fa-address-card fa-fw"></i> {_T string="Generate labels"}
+                </button>
+            </li>
         </ul>
         </form>
 {/if}

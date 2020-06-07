@@ -1036,9 +1036,14 @@ $this->post(
             }
 
             if (isset($post['labels'])) {
+                $session_var = 'plugin-events-labels';
+                $this->session->$session_var = $mfilter;
                 return $response
-                    ->withStatus(301)
-                    ->withHeader('Location', $this->router->pathFor('pdf-members-labels'));
+                    ->withStatus(307)
+                    ->withHeader(
+                        'Location',
+                        $this->router->pathFor('pdf-members-labels') . '?session_var=' . $session_var
+                    );
             }
         } else {
             $this->flash->addMessage(
