@@ -289,7 +289,7 @@ class Events
             $countSelect->reset($countSelect::HAVING);
             $countSelect->columns(
                 array(
-                    'count' => new Expression('count(DISTINCT e.' . Event::PK . ')')
+                    'count' => new Expression('count(e.' . Event::PK . ')')
                 )
             );
 
