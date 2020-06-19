@@ -20,9 +20,8 @@ msgstr ""
 msgid "Event ID cannot ben null calling edit route!"
 msgstr ""
 
-#: ../_routes.php:170 ../_routes.php:330
-#: ../templates/default/booking.tpl:14 ../templates/default/bookings.tpl:5
-#: ../templates/default/bookings.tpl:74
+#: ../_routes.php:170 ../_routes.php:330 ../templates/default/booking.tpl:14
+#: ../templates/default/bookings.tpl:5 ../templates/default/bookings.tpl:74
 msgid "Event"
 msgstr ""
 
@@ -198,24 +197,28 @@ msgstr ""
 msgid "Booking updated"
 msgstr ""
 
-#: ../lib/GaletteEvents/Controllers/CsvController.php:108 ../templates/default/activity.tpl:60
-#: ../templates/default/event.tpl:99
+#: ../lib/GaletteEvents/Controllers/CsvController.php:108
+#: ../templates/default/activity.tpl:60 ../templates/default/event.tpl:99
 msgid "Zip code"
 msgstr ""
 
-#: ../lib/GaletteEvents/Controllers/CsvController.php:114 ../templates/default/booking.tpl:45
+#: ../lib/GaletteEvents/Controllers/CsvController.php:114
+#: ../templates/default/booking.tpl:45
 msgid "Number of persons"
 msgstr ""
 
-#: ../lib/GaletteEvents/Controllers/CsvController.php:129 ../templates/default/booking.tpl:84
+#: ../lib/GaletteEvents/Controllers/CsvController.php:129
+#: ../templates/default/booking.tpl:84
 msgid "Amount"
 msgstr ""
 
-#: ../lib/GaletteEvents/Controllers/CsvController.php:131 ../templates/default/booking.tpl:90
+#: ../lib/GaletteEvents/Controllers/CsvController.php:131
+#: ../templates/default/booking.tpl:90
 msgid "Bank name"
 msgstr ""
 
-#: ../lib/GaletteEvents/Controllers/CsvController.php:132 ../templates/default/booking.tpl:94
+#: ../lib/GaletteEvents/Controllers/CsvController.php:132
+#: ../templates/default/booking.tpl:94
 msgid "Check number"
 msgstr ""
 
@@ -243,20 +246,24 @@ msgstr ""
 msgid "Attendees:"
 msgstr ""
 
-#: ../lib/GaletteEvents/Repository/Events.php:194 ../templates/default/menu.tpl:12
-#: ../templates/default/booking.tpl:55 ../templates/default/event.tpl:43
+#: ../lib/GaletteEvents/Repository/Events.php:194
+#: ../templates/default/menu.tpl:12 ../templates/default/booking.tpl:55
+#: ../templates/default/event.tpl:43
 msgid "Activities"
 msgstr ""
 
-#: ../lib/GaletteEvents/Repository/Activities.php:85 ../templates/default/activity.tpl:27
+#: ../lib/GaletteEvents/Repository/Activities.php:85
+#: ../templates/default/activity.tpl:27
 msgid "Noon meal"
 msgstr ""
 
-#: ../lib/GaletteEvents/Repository/Activities.php:89 ../templates/default/activity.tpl:35
+#: ../lib/GaletteEvents/Repository/Activities.php:89
+#: ../templates/default/activity.tpl:35
 msgid "Even meal"
 msgstr ""
 
-#: ../lib/GaletteEvents/Repository/Activities.php:93 ../templates/default/activity.tpl:43
+#: ../lib/GaletteEvents/Repository/Activities.php:93
+#: ../templates/default/activity.tpl:43
 msgid "Lodging"
 msgstr ""
 
@@ -333,7 +340,8 @@ msgid "Today"
 msgstr ""
 
 #: ../templates/default/menu.tpl:2 ../templates/default/menu.tpl:4
-#: ../templates/default/activities.tpl:43 ../templates/default/activities.tpl:58
+#: ../templates/default/activities.tpl:43
+#: ../templates/default/activities.tpl:58
 msgid "Events"
 msgstr ""
 
@@ -402,12 +410,13 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: ../templates/default/activities.tpl:33 ../templates/default/activities.tpl:57
+#: ../templates/default/activities.tpl:33
+#: ../templates/default/activities.tpl:57
 msgid "Creation date"
 msgstr ""
 
-#: ../templates/default/activities.tpl:44 ../templates/default/activities.tpl:59
-#: ../templates/default/activity.tpl:10
+#: ../templates/default/activities.tpl:44
+#: ../templates/default/activities.tpl:59 ../templates/default/activity.tpl:10
 msgid "Is active"
 msgstr ""
 
@@ -431,7 +440,7 @@ msgstr ""
 msgid "No activity has been found"
 msgstr ""
 
-#: ../templates/default/adh_actions.tpl:1 ../templates/default/adh_actions.tpl:1
+#: ../templates/default/adh_actions.tpl:1
 msgid "New event booking"
 msgstr ""
 
@@ -473,8 +482,8 @@ msgstr ""
 msgid "All payment types"
 msgstr ""
 
-#: ../templates/default/bookings.tpl:21 ../templates/default/bookings.tpl:21
-#: ../templates/default/events.tpl:55 ../templates/default/events.tpl:76
+#: ../templates/default/bookings.tpl:21 ../templates/default/events.tpl:55
+#: ../templates/default/events.tpl:76
 msgid "Group"
 msgstr ""
 
