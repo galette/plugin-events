@@ -1,16 +1,19 @@
+# Johan Cwiklinski <trasher@x-tnd.be>, 2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: trasher@x-tnd.be\n"
 "POT-Creation-Date: 2020-06-19 05:48+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2020-06-20 09:16+0000\n"
+"Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/galette/"
+"events-plugin/it/>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 3.0.0\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.1.1\n"
 
 #: ../_routes.php:98
 msgid "Events management"
@@ -408,7 +411,7 @@ msgstr ""
 #: ../templates/default/activities.tpl:21 ../templates/default/activity.tpl:14
 #: ../templates/default/events.tpl:21 ../templates/default/event.tpl:15
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
 #: ../templates/default/activities.tpl:33
 #: ../templates/default/activities.tpl:57
@@ -422,11 +425,11 @@ msgstr ""
 
 #: ../templates/default/activities.tpl:63
 msgid "Active"
-msgstr ""
+msgstr "Attivo"
 
 #: ../templates/default/activities.tpl:65
 msgid "Inactive"
-msgstr ""
+msgstr "Inattivo"
 
 #: ../templates/default/activities.tpl:71
 msgid "%activity: edit informations"
@@ -455,7 +458,7 @@ msgstr ""
 #: ../templates/default/activity.tpl:31 ../templates/default/activity.tpl:39
 #: ../templates/default/activity.tpl:47 ../templates/default/event.tpl:84
 msgid "Required"
-msgstr ""
+msgstr "Richiesta"
 
 #: ../templates/default/activity.tpl:53 ../templates/default/event.tpl:92
 msgid "Location"
