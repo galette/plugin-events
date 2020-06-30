@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2020-06-29 16:06+0200\n"
-"PO-Revision-Date: 2020-06-30 05:34+0000\n"
+"PO-Revision-Date: 2020-06-30 21:03+0000\n"
 "Last-Translator: Quentin PAGÈS <quentinantonin@free.fr>\n"
 "Language-Team: Occitan <https://hosted.weblate.org/projects/galette/"
 "events-plugin/oc/>\n"
@@ -404,7 +404,7 @@ msgstr ""
 #: ../templates/default/activities.tpl:21 ../templates/default/activity.tpl:14
 #: ../templates/default/events.tpl:21 ../templates/default/event.tpl:15
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #: ../templates/default/activities.tpl:33 ../templates/default/activities.tpl:57
 msgid "Creation date"
