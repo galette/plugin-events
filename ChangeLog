@@ -1,3 +1,15 @@
+* 2020-07-003 - 1.3.0
+- Galette 0.9.4 compatible
+- Add translations in available core languages (see https://hosted.weblate.org/projects/galette)
+- Rely on fontawesome for icons
+- Filter bookings on group
+- Export bookings as CSV
+- Exports bookings members as CSV
+- Generate labels from bookings list
+- Remove accents and set uppercase produced CSV headers
+- Add group to CSV exports
+- Fixes on postgresql
+
 * 2019-12-01 - 1.2.0
 - Add calendar view
 - Drop routes translations
