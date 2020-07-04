@@ -149,7 +149,7 @@ $this->get(
                 _T("Event ID cannot ben null calling edit route!", "events")
             );
         } elseif ($action === 'add' && $id !== null) {
-             return $response
+            return $response
                 ->withStatus(301)
                 ->withHeader('Location', $this->router->pathFor('events_event', ['action' => 'add']));
         }
@@ -554,7 +554,7 @@ $this->get(
                 _T("Booking ID cannot ben null calling edit route!", "events")
             );
         } elseif ($action === 'add' && $id !== null) {
-             return $response
+            return $response
                 ->withStatus(301)
                 ->withHeader('Location', $this->router->pathFor('events_bookings', ['action' => 'add']));
         }
@@ -1064,7 +1064,7 @@ $this->get(
                 _T("Activity ID cannot ben null calling edit route!", "events")
             );
         } elseif ($action === 'add' && $id !== null) {
-             return $response
+            return $response
                 ->withStatus(301)
                 ->withHeader('Location', $this->router->pathFor('events_activity', ['action' => 'add']));
         }
