@@ -149,7 +149,7 @@ $this->get(
                 _T("Event ID cannot ben null calling edit route!", "events")
             );
         } elseif ($action === 'add' && $id !== null) {
-             return $response
+            return $response
                 ->withStatus(301)
                 ->withHeader('Location', $this->router->pathFor('events_event', ['action' => 'add']));
         }
@@ -407,7 +407,7 @@ $this->post(
 )->setName('events_do_remove_event')->add($authenticate);
 
 $this->get(
-    '/bookings/{event:guess|'. 'all|\d+}[/{option:page|order}/{value:\d+}]',
+    '/bookings/{event:guess|all|\d+}[/{option:page|order}/{value:\d+}]',
     function ($request, $response, $args) use ($module, $module_id) {
         $option = null;
         if (isset($args['option'])) {
@@ -447,6 +447,10 @@ $this->get(
             $event = new Event($this->zdb, $this->login, (int)$args['event']);
         }
 
+        //Groups
+        $groups = new Groups($this->zdb, $this->login);
+        $groups_list = $groups->getList();
+
         $bookings = new Bookings($this->zdb, $this->login, $filters);
 
         //assign pagination variables to the template and add pagination links
@@ -470,7 +474,8 @@ $this->get(
                 'eventid'           => $filters->event_filter,
                 'require_dialog'    => true,
                 'filters'           => $filters,
-                'events'            => $events->getList()
+                'events'            => $events->getList(),
+                'groups'            => $groups_list
             ]
         );
         return $response;
@@ -479,8 +484,8 @@ $this->get(
 
 //bookings list filtering
 $this->post(
-    '/bookings/filter',
-    function ($request, $response) {
+    '/bookings/filter/{event:guess|all|\d+}',
+    function ($request, $response, $args) {
         $post = $request->getParsedBody();
         if (isset($this->session->filter_bookings)) {
             $filters = $this->session->filter_bookings;
@@ -514,6 +519,12 @@ $this->post(
                     $filters->event_filter = $post['event_filter'];
                 }
             }
+
+            if (isset($post['group_filter'])) {
+                if (is_numeric($post['group_filter'])) {
+                    $filters->group_filter = $post['group_filter'];
+                }
+            }
         }
 
         $this->session->filter_bookings = $filters;
@@ -522,7 +533,7 @@ $this->post(
             ->withStatus(301)
             ->withHeader(
                 'Location',
-                $this->router->pathFor('events_bookings', ['event' => $filters->event_filter])
+                $this->router->pathFor('events_bookings', $args)
             );
     }
 )->setName('filter-bookingslist')->add($authenticate);
@@ -543,7 +554,7 @@ $this->get(
                 _T("Booking ID cannot ben null calling edit route!", "events")
             );
         } elseif ($action === 'add' && $id !== null) {
-             return $response
+            return $response
                 ->withStatus(301)
                 ->withHeader('Location', $this->router->pathFor('events_bookings', ['action' => 'add']));
         }
@@ -574,11 +585,13 @@ $this->get(
             if (isset($get['event'])) {
                 $booking->setEvent((int)$get['event']);
             }
-            if (isset($_GET[Adherent::PK]) &&
+            if (
+                isset($_GET[Adherent::PK]) &&
                 ($this->login->isAdmin() || $this->login->isStaff() || $this->login->isGroupManager())
             ) {
                 $booking->setMember((int)$_GET[Adherent::PK]);
-            } elseif (!$this->login->isSuperAdmin()
+            } elseif (
+                !$this->login->isSuperAdmin()
                 && !$this->login->isAdmin()
                 && !$this->login->isStaff()
                 && !$this->login->isGroupManager()
@@ -587,7 +600,8 @@ $this->get(
             }
         }
 
-        if ($this->login->isAdmin()
+        if (
+            $this->login->isAdmin()
             || $this->login->isStaff()
             || $this->login->isGroupManager()
         ) {
@@ -618,7 +632,8 @@ $this->get(
             $route_params['autocomplete'] = true;
 
             //check if current attached member is part of the list
-            if (isset($booking)
+            if (
+                isset($booking)
                 && $booking->getMemberId() > 0
                 && !isset($members[$booking->getMemberId()])
             ) {
@@ -854,125 +869,16 @@ $this->post(
 )->setName('events_do_remove_booking')->add($authenticate);
 
 //booking CSV export
-$this->get(
+$this->post(
     '/events/{id:\d+}/export/bookings',
-    function ($request, $response, $args) {
-        $csv = new CsvOut();
+    GaletteEvents\Controllers\CsvController::class . ':bookingsExport'
+)->setName('event_bookings_export')->add($authenticate);
 
-        $event = new Event($this->zdb, $this->login, (int)$args['id']);
+$this->post(
+    '/events/export/bookings',
+    GaletteEvents\Controllers\CsvController::class . ':bookingsExport'
+)->setName('events_bookings_export')->add($authenticate);
 
-        $filters = new BookingsList();
-        $filters->event_filter = $args['id'];
-        $bookings = new Bookings($this->zdb, $this->login, $filters);
-        $bookings_list = $bookings->getList(true);
-
-        $labels = [
-            _T('Name'),
-            _T('First name'),
-            _T('Address'),
-            _T('Address (continuation)'),
-            _T('Zip code', 'events'),
-            _T('City'),
-            _T('Phone'),
-            _T('GSM'),
-            _T('Email'),
-            _T('Number of persons', 'events'),
-        ];
-
-        $activities = $event->getActivities();
-        foreach ($activities as $activity) {
-            $labels[] = $activity['activity']->getName();
-        }
-
-        $labels = array_merge(
-            $labels,
-            [
-                _T('Amount', 'events'),
-                _T('Payment type'),
-                _T('Bank name', 'events'),
-                _T('Check number', 'events'),
-            ]
-        );
-
-        $list = [];
-        foreach ($bookings_list as $booking) {
-            $member = $booking->getMember();
-            $entry = [
-                $member->name,
-                $member->surname,
-                $member->address,
-                $member->address_continuation,
-                $member->zipcode,
-                $member->town,
-                $member->phone,
-                $member->gsm,
-                $member->email,
-                $booking->getNumberPeople()
-            ];
-
-            $bactivities = $booking->getActivities();
-            foreach (array_keys($activities) as $aid) {
-                $entry[] = isset($bactivities[$aid]) && $bactivities[$aid]['checked'] ? _T('Yes') : _T('No');
-            }
-
-            $entry = array_merge(
-                $entry,
-                [
-                    $booking->getAmount(),
-                    $booking->getPaymentMethodName(),
-                    $booking->getBankName(),
-                    $booking->getCheckNumber()
-                ]
-            );
-            $list[] = $entry;
-        }
-
-        $filename = 'bookingslist.csv';
-        $filepath = CsvOut::DEFAULT_DIRECTORY . $filename;
-        $fp = fopen($filepath, 'w');
-        if ($fp) {
-            $res = $csv->export(
-                $list,
-                Csv::DEFAULT_SEPARATOR,
-                Csv::DEFAULT_QUOTE,
-                $labels,
-                $fp
-            );
-            fclose($fp);
-            $written[] = array(
-                'name' => $filename,
-                'file' => $filepath
-            );
-        }
-
-        $filepath = CsvOut::DEFAULT_DIRECTORY . $filename;
-        if (file_exists($filepath)) {
-            $response = $this->response->withHeader('Content-Description', 'File Transfer')
-                ->withHeader('Content-Type', 'text/csv')
-                ->withHeader('Content-Disposition', 'attachment;filename="' . $filename . '"')
-                ->withHeader('Pragma', 'no-cache')
-                ->withHeader('Content-Transfer-Encoding', 'binary')
-                ->withHeader('Expires', '0')
-                ->withHeader('Cache-Control', 'must-revalidate')
-                ->withHeader('Pragma', 'public')
-                ->withHeader('Content-Length', filesize($filepath));
-
-            $stream = fopen('php://memory', 'r+');
-            fwrite($stream, file_get_contents($filepath));
-            rewind($stream);
-
-            return $response->withBody(new \Slim\Http\Stream($stream));
-        } else {
-            Analog::log(
-                'A request has been made to get an exported file named `' .
-                $filename .'` that does not exists.',
-                Analog::WARNING
-            );
-            $notFound = $this->notFoundHandler;
-            return $notFound($request, $response);
-        }
-    }
-)->setName('events_booking_export')->add($authenticate);
 
 //Batch actions on members list
 $this->post(
@@ -990,14 +896,15 @@ $this->post(
             //$this->session->filter_bookings = $filters;
             $filters->selected = $post['event_sel'];
 
+            $bookings = new Bookings($this->zdb, $this->login, $filters);
+            $members = [];
+            foreach ($bookings->getList() as $booking) {
+                $members[] = $booking->getMemberId();
+            }
+            $mfilter = new MembersList();
+            $mfilter->selected = $members;
+
             if (isset($post['mailing'])) {
-                $bookings = new Bookings($this->zdb, $this->login, $filters);
-                $members = [];
-                foreach ($bookings->getList() as $booking) {
-                    $members[] = $booking->getMemberId();
-                }
-                $mfilter = new MembersList();
-                $mfilter->selected = $members;
                 $this->session->filter_mailing = $mfilter;
                 $this->session->redirect_mailing = $this->router->pathFor(
                     'events_bookings',
@@ -1013,9 +920,36 @@ $this->post(
             }
 
             if (isset($post['csv'])) {
+                $session_var = 'plugin-events-members';
+                $this->session->$session_var = $mfilter;
                 return $response
-                    ->withStatus(301)
-                    ->withHeader('Location', $this->router->pathFor('csv-memberslist'));
+                    ->withStatus(307)
+                    ->withHeader(
+                        'Location',
+                        $this->router->pathFor('csv-memberslist') . '?session_var=' . $session_var
+                    );
+            }
+
+            if (isset($post['csvbooking'])) {
+                $session_var = 'plugin-events-bookings';
+                $this->session->$session_var = $filters;
+                return $response
+                    ->withStatus(307)
+                    ->withHeader(
+                        'Location',
+                        $this->router->pathFor('events_bookings_export') . '?session_var=' . $session_var
+                    );
+            }
+
+            if (isset($post['labels'])) {
+                $session_var = 'plugin-events-labels';
+                $this->session->$session_var = $mfilter;
+                return $response
+                    ->withStatus(307)
+                    ->withHeader(
+                        'Location',
+                        $this->router->pathFor('pdf-members-labels') . '?session_var=' . $session_var
+                    );
             }
         } else {
             $this->flash->addMessage(
@@ -1130,7 +1064,7 @@ $this->get(
                 _T("Activity ID cannot ben null calling edit route!", "events")
             );
         } elseif ($action === 'add' && $id !== null) {
-             return $response
+            return $response
                 ->withStatus(301)
                 ->withHeader('Location', $this->router->pathFor('events_activity', ['action' => 'add']));
         }
@@ -1410,6 +1344,14 @@ $this->get(
         $filters->setSmartyPagination($this->router, $this->view->getSmarty(), false);
 
         $this->session->filter_events = $filters;
+
+        //check if JS has been generated
+        if (!file_exists(__DIR__ . '/webroot/js/calendar.bundle.js')) {
+            $this->flash->addMessageNow(
+                'error_detected',
+                _T('Javascript libraries has not been built!', 'events')
+            );
+        }
 
         // display page
         $this->view->render(

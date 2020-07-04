@@ -36,10 +36,10 @@
 namespace GaletteEvents\Repository;
 
 use Analog\Analog;
-use Zend\Db\Sql\Expression;
-use Zend\Db\Sql\Predicate;
-use Zend\Db\Sql\Predicate\PredicateSet;
-use Zend\Db\Sql\Predicate\Operator;
+use Laminas\Db\Sql\Expression;
+use Laminas\Db\Sql\Predicate;
+use Laminas\Db\Sql\Predicate\PredicateSet;
+use Laminas\Db\Sql\Predicate\Operator;
 use Galette\Core\Login;
 use Galette\Core\Db;
 use Galette\Entity\Adherent;
@@ -235,19 +235,28 @@ class Bookings
                     break;
             }
 
-            if ($this->filters->event_filter !== null
+            if (
+                $this->filters->event_filter !== null
                 && $this->filters->event_filter != 'all'
             ) {
                 $select->where(['b.' . Event::PK => $this->filters->event_filter]);
             }
 
-            if ($this->filters->payment_type_filter !== null &&
+            if (
+                $this->filters->payment_type_filter !== null &&
                 (int)$this->filters->payment_type_filter != -1
             ) {
                 $select->where->equalTo(
                     'payment_method',
                     $this->filters->payment_type_filter
                 );
+            }
+
+            if (
+                $this->filters->group_filter !== null
+                && $this->filters->group_filter != 'all'
+            ) {
+                $select->where(['e.' . Group::PK => $this->filters->group_filter]);
             }
 
             if (!$this->login->isAdmin() && !$this->login->isStaff()) {
@@ -375,6 +384,18 @@ class Bookings
             $countSelect->reset($countSelect::COLUMNS);
             $countSelect->reset($countSelect::ORDER);
             $countSelect->reset($countSelect::HAVING);
+            $joins = $countSelect->joins;
+            $countSelect->reset($countSelect::JOINS);
+            foreach ($joins as $join) {
+                $countSelect->join(
+                    $join['name'],
+                    $join['on'],
+                    [],
+                    $join['type']
+                );
+                unset($join['columns']);
+            }
+
             $countSelect->columns(
                 array(
                     'count' => new Expression('count(DISTINCT b.' . Booking::PK . ')')

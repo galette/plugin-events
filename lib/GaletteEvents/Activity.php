@@ -40,7 +40,7 @@ use Galette\Core\Login;
 use Galette\Entity\Group;
 use Galette\Repository\Groups;
 use Analog\Analog;
-use Zend\Db\Sql\Expression;
+use Laminas\Db\Sql\Expression;
 
 /**
  * Activity entity

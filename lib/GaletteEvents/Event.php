@@ -40,10 +40,10 @@ use Galette\Core\Login;
 use Galette\Entity\Group;
 use Galette\Repository\Groups;
 use Analog\Analog;
-use Zend\Db\Sql\Expression;
-use Zend\Db\Sql\Predicate;
-use Zend\Db\Sql\Predicate\PredicateSet;
-use Zend\Db\Sql\Predicate\Operator;
+use Laminas\Db\Sql\Expression;
+use Laminas\Db\Sql\Predicate;
+use Laminas\Db\Sql\Predicate\PredicateSet;
+use Laminas\Db\Sql\Predicate\Operator;
 
 /**
  * Event entity
@@ -187,9 +187,6 @@ class Event
         $this->begin_date = $r->begin_date;
         $this->end_date = $r->end_date;
         $this->creation_date = $r->creation_date;
-        $this->noon_meal = $r->noon_meal;
-        $this->even_meal = $r->even_meal;
-        $this->lodging = $r->lodging;
         $this->open = $r->is_open;
         $this->group = $r->id_group;
         $this->comment = $r->comment;
@@ -315,7 +312,8 @@ class Event
                 $this->group = null;
             }
         } else {
-            if (!isset($values['group'])
+            if (
+                !isset($values['group'])
                 || empty($values['group'])
                 || !in_array($values['group'], $this->login->managed_groups)
             ) {
@@ -343,7 +341,8 @@ class Event
             }
         }
 
-        if (isset($values['add_activity'])
+        if (
+            isset($values['add_activity'])
             && isset($values['attach_activity'])
             && !empty($values['attach_activity'])
         ) {
@@ -357,7 +356,8 @@ class Event
             ];
         }
 
-        if (isset($values['remove_activity'])
+        if (
+            isset($values['remove_activity'])
             && isset($values['detach_activity'])
             && !empty($values['detach_activity'])
         ) {

@@ -1,416 +1,352 @@
+# Johan Cwiklinski <trasher@x-tnd.be>, 2020.
+# Fredericos Tezorc <fredericos.tezorc@gmail.com>, 2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: Galette Events plugin\n"
+"Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"PO-Revision-Date: 2020-06-29 15:15+0000\n"
+"Last-Translator: Fredericos Tezorc <fredericos.tezorc@gmail.com>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/galette/"
+"events-plugin/fr/>\n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.4\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.2-dev\n"
 
-#: ../templates/default/menu.tpl:5
-msgid "Calendar"
-msgstr "Calendrier"
+#: ../_routes.php:98
+msgid "Events management"
+msgstr "Gestion des évènements"
 
-#: ../templates/default/calendar.tpl:12
-msgid "Weekly list"
-msgstr "Liste hebdomadaire"
+#: ../_routes.php:149
+msgid "Event ID cannot ben null calling edit route!"
+msgstr ""
+"L'identifiant de l'évènement ne peut être vide pour la route d'édition !"
 
-#: ../_routes.php:564 ../_routes.php:788
-msgid "Booking"
-msgstr "Réservation"
-
-#: ../_routes.php:235
-msgid "Do not forget to store the event"
-msgstr "N'oubliez pas d'enregistrer l'évènement"
-
-#: ../_routes.php:1079
-msgid "Activities management"
-msgstr "Gestion des activités"
-
-#: ../templates/default/bookings.tpl:37
-msgid "Add a new booking"
-msgstr "Ajouter une nouvelle réservation"
-
-#: ../templates/default/event.tpl:27 ../templates/default/event.tpl:28
-msgid "Restrict event to selected group (and its subgroups)."
-msgstr "Restreindre l'évènement au groupe sélectionné (et ses sous groupes)."
-
-#: ../templates/default/activities.tpl:5
-msgid "acivity"
-msgstr "activité"
-
-#: ../lib/GaletteEvents/Booking.php:266
-msgid "Please specify amount if booking has been paid ;)"
-msgstr "Veuillez spécifier un montant si la réservation a été payée ;)"
-
-#: ../lib/GaletteEvents/Booking.php:423
-msgid "Fail to add new booking."
-msgstr "Erreur à l'ajout de la nouvelle réservation."
-
-#: ../templates/default/bookings.tpl:34
-msgid "Show all bookings"
-msgstr "Voir toutes les réservations"
+#: ../_routes.php:170 ../_routes.php:330 ../templates/default/booking.tpl:14
+#: ../templates/default/bookings.tpl:5 ../templates/default/bookings.tpl:74
+msgid "Event"
+msgstr "Évènement"
 
 #: ../_routes.php:234
 msgid "Activity has been attached to event."
 msgstr "L'activité a été attachée à l'évènement."
 
-#: ../templates/default/bookings.tpl:104 ../templates/default/bookings.tpl:148
-msgid "Attendees"
-msgstr "Participants"
+#: ../_routes.php:235
+msgid "Do not forget to store the event"
+msgstr "N'oubliez pas d'enregistrer l'évènement"
 
-#: ../templates/default/activities.tpl:78
-msgid "%activity: remove from database"
-msgstr "%activity : supprimer de la base de données"
+#: ../_routes.php:237
+msgid "Activity has been detached from event."
+msgstr "L'activité a été détachée de l'évènement."
 
-#: ../lib/GaletteEvents/Booking.php:419
-msgid "Booking added"
-msgstr "Réservation ajoutée"
+#: ../_routes.php:246
+msgid "New event has been successfully added."
+msgstr "Le nouvel évènement a été ajouté avec succès."
 
-#: ../templates/default/booking.tpl:10 ../templates/default/bookings.tpl:82
-#: ../templates/default/bookings.tpl:137
-msgid "Booking date"
-msgstr "Date de réservation"
+#: ../_routes.php:248
+msgid "Event has been modified."
+msgstr "L'évènement a été modifié."
 
-#: ../templates/default/bookings.tpl:22
-msgid "Paid bookings:"
-msgstr "Réservations payées :"
+#: ../_routes.php:252
+msgid "An error occured while storing the event."
+msgstr "Une erreur est survenue à l'enregistrement de l'évènement."
 
-#: ../templates/default/activity.tpl:24
-msgid "Related activities"
-msgstr "Activités liées"
+#: ../_routes.php:333
+msgid "Remove event %1$s"
+msgstr "Supprimer l'évènement %1$s"
 
-#: ../lib/GaletteEvents/Repository/Activities.php:93
-#: ../templates/default/activity.tpl:43
-msgid "Lodging"
-msgstr "Logement"
+#: ../_routes.php:372
+msgid "An error occured trying to remove event %name :/"
+msgstr "Une erreur est survenue à la suppression de l'évènement %name :/"
 
-#: ../lib/GaletteEvents/Booking.php:247
-msgid "Member is mandatory"
-msgstr "L'adhérent est requis"
+#: ../_routes.php:383
+msgid "Event %name has been successfully deleted."
+msgstr "L'évènement %name a été supprimé avec succès."
 
-#: ../templates/default/events.tpl:5
-msgid "events"
-msgstr "évènements"
+#: ../_routes.php:469
+msgid "Bookings management"
+msgstr "Gestion des réservations"
 
-#: ../lib/GaletteEvents/Activity.php:293
-msgid "Activity updated"
-msgstr "Activité mise à jour"
+#: ../_routes.php:554
+msgid "Booking ID cannot ben null calling edit route!"
+msgstr ""
+"L'identifiant de la réservation ne peut être vide pour la route d'édition !"
+
+#: ../_routes.php:575 ../_routes.php:799
+msgid "Booking"
+msgstr "Réservation"
+
+#: ../_routes.php:709
+msgid "New booking has been successfully added."
+msgstr "La nouvelle réservation a été ajoutée avec succès."
+
+#: ../_routes.php:711
+msgid "Booking has been modified."
+msgstr "La réservation a été modifiée."
+
+#: ../_routes.php:715
+msgid "An error occured while storing the booking."
+msgstr "Une erreur est survenue à l'enregistrement de la réservation."
+
+#: ../_routes.php:725
+msgid "Do not forget to store the booking"
+msgstr "N'oubliez pas d'enregistrer la réservation"
+
+#: ../_routes.php:801
+msgid "Remove booking"
+msgstr "Supprimer la réservation"
+
+#: ../_routes.php:835
+msgid "An error occured trying to remove booking :/"
+msgstr "Une erreur est survenue à la suppression de la réservation :/"
+
+#: ../_routes.php:842
+msgid "Booking has been successfully deleted."
+msgstr "La réservation a été supprimée avec succès."
+
+#: ../_routes.php:953
+msgid "No booking was selected, please check at least one."
+msgstr "Aucune réservation sélectionnée, vous devez en cocher au moins une."
+
+#: ../_routes.php:1009
+msgid "Activities management"
+msgstr "Gestion des activités"
+
+#: ../_routes.php:1060
+msgid "Activity ID cannot ben null calling edit route!"
+msgstr ""
+"L'identifiant de l'activité ne peut être vide pour la route d'édition !"
+
+#: ../_routes.php:1081 ../_routes.php:1216
+msgid "Activity"
+msgstr "Activité"
+
+#: ../_routes.php:1139
+msgid "New activity has been successfully added."
+msgstr "La nouvelle activité a été ajoutée avec succès."
+
+#: ../_routes.php:1141
+msgid "Activity has been modified."
+msgstr "L'activité a été modifiée."
+
+#: ../_routes.php:1145
+msgid "An error occured while storing the activity."
+msgstr "Une erreur est survenue à l'enregistrement de l'activité."
+
+#: ../_routes.php:1219
+msgid "Remove activity %1$s"
+msgstr "Supprimer l'activité %1$s"
+
+#: ../_routes.php:1257
+msgid "Activity %name is referenced in %count events, it cannot be removed."
+msgstr ""
+"L'activité %name est référencée dans %count évènements, elle ne peut être "
+"supprimée."
+
+#: ../_routes.php:1270
+msgid "An error occured trying to remove activity %name :/"
+msgstr "Une erreur est survenue à la suppression de l'activité %name :/"
+
+#: ../_routes.php:1281
+msgid "Activity %name has been successfully deleted."
+msgstr "L'activité %name a été supprimée avec succès."
+
+#: ../_routes.php:1348
+msgid "Javascript libraries has not been built!"
+msgstr "Les bibliothèques Javascript n'ont pas été construites !"
+
+#: ../_routes.php:1357
+msgid "Events calendar"
+msgstr "Calendrier des évènements"
 
 #: ../lib/GaletteEvents/Booking.php:209
 msgid "Event is mandatory"
 msgstr "L'évènement est requis"
 
-#: ../lib/GaletteEvents/Repository/Activities.php:89
-#: ../templates/default/activity.tpl:35
-msgid "Even meal"
-msgstr "Repas soir"
+#: ../lib/GaletteEvents/Booking.php:221
+msgid "%activity is mandatory for this event!"
+msgstr "%activity est obligatoire pour cet évènement !"
 
-#: ../lib/GaletteEvents/Activity.php:201 ../lib/GaletteEvents/Event.php:306
-msgid "Name is mandatory"
-msgstr "Le nom est requis"
+#: ../lib/GaletteEvents/Booking.php:247
+msgid "Member is mandatory"
+msgstr "L'adhérent est requis"
 
-#: ../templates/default/events.tpl:21 ../templates/default/activities.tpl:21
-#: ../templates/default/activity.tpl:14 ../templates/default/event.tpl:15
-msgid "Name"
-msgstr "Nom"
+#: ../lib/GaletteEvents/Booking.php:266
+msgid "Please specify amount if booking has been paid ;)"
+msgstr "Veuillez spécifier un montant si la réservation a été payée ;)"
 
-#: ../lib/GaletteEvents/Activity.php:270
-msgid "Activity added"
-msgstr "Activité ajoutée"
+#: ../lib/GaletteEvents/Booking.php:285
+msgid "There must be at least one person"
+msgstr "Il doit y avoir au moins une personne"
 
-#: ../templates/default/activities.tpl:33
-#: ../templates/default/activities.tpl:57
-msgid "Creation date"
-msgstr "Date de création"
+#: ../lib/GaletteEvents/Booking.php:294
+msgid "Booking date is mandatory!"
+msgstr "La date de réservation est requise !"
 
-#: ../templates/default/activities.tpl:84
-msgid "No activity has been found"
-msgstr "Aucune activité trouvée"
+#: ../lib/GaletteEvents/Booking.php:321
+msgid "booking date"
+msgstr "date de réservation"
+
+#: ../lib/GaletteEvents/Booking.php:352
+msgid "A booking already exists for %member in %event"
+msgstr "Une réservation existe déjà pour l'adhérent %member dans %event"
+
+#: ../lib/GaletteEvents/Booking.php:419
+msgid "Booking added"
+msgstr "Réservation ajoutée"
+
+#: ../lib/GaletteEvents/Booking.php:423
+msgid "Fail to add new booking."
+msgstr "Erreur à l'ajout de la nouvelle réservation."
+
+#: ../lib/GaletteEvents/Booking.php:441
+msgid "Booking updated"
+msgstr "Réservation mise à jour"
+
+#: ../lib/GaletteEvents/Controllers/CsvController.php:108
+#: ../templates/default/activity.tpl:60 ../templates/default/event.tpl:99
+msgid "Zip code"
+msgstr "Code postal"
+
+#: ../lib/GaletteEvents/Controllers/CsvController.php:114
+#: ../templates/default/booking.tpl:45
+msgid "Number of persons"
+msgstr "Nombre de personnes"
+
+#: ../lib/GaletteEvents/Controllers/CsvController.php:129
+#: ../templates/default/booking.tpl:84
+msgid "Amount"
+msgstr "Montant"
+
+#: ../lib/GaletteEvents/Controllers/CsvController.php:131
+#: ../templates/default/booking.tpl:90
+msgid "Bank name"
+msgstr "Nom de la banque"
+
+#: ../lib/GaletteEvents/Controllers/CsvController.php:132
+#: ../templates/default/booking.tpl:94
+msgid "Check number"
+msgstr "Numéro de chèque"
+
+#: ../lib/GaletteEvents/Repository/Events.php:179
+msgid "Event informations"
+msgstr "Informations de l'évènement"
 
 #: ../lib/GaletteEvents/Repository/Events.php:183
 msgid "Start date:"
 msgstr "Date de début :"
 
-#: ../templates/default/activity.tpl:68 ../templates/default/event.tpl:107
-msgid "Country"
-msgstr "Pays"
+#: ../lib/GaletteEvents/Repository/Events.php:184
+msgid "End date:"
+msgstr "Date de fin :"
+
+#: ../lib/GaletteEvents/Repository/Events.php:185
+msgid "Location:"
+msgstr "Localisation :"
+
+#: ../lib/GaletteEvents/Repository/Events.php:187
+msgid "Comment:"
+msgstr "Commentaire :"
+
+#: ../lib/GaletteEvents/Repository/Events.php:189
+msgid "Attendees:"
+msgstr "Participants :"
+
+#: ../lib/GaletteEvents/Repository/Events.php:194
+#: ../templates/default/menu.tpl:12 ../templates/default/booking.tpl:55
+#: ../templates/default/event.tpl:43
+msgid "Activities"
+msgstr "Activités"
 
 #: ../lib/GaletteEvents/Repository/Activities.php:85
 #: ../templates/default/activity.tpl:27
 msgid "Noon meal"
 msgstr "Repas midi"
 
-#: ../lib/GaletteEvents/Event.php:457
-msgid "Event added"
-msgstr "Évènement ajouté"
+#: ../lib/GaletteEvents/Repository/Activities.php:89
+#: ../templates/default/activity.tpl:35
+msgid "Even meal"
+msgstr "Repas soir"
 
-#: ../templates/default/events.tpl:33 ../templates/default/events.tpl:74
-msgid "Date"
-msgstr "Date"
+#: ../lib/GaletteEvents/Repository/Activities.php:93
+#: ../templates/default/activity.tpl:43
+msgid "Lodging"
+msgstr "Logement"
 
-#: ../lib/GaletteEvents/Event.php:300
+#: ../lib/GaletteEvents/Event.php:248
+msgid "Begin date is mandatory"
+msgstr "La date de début est requise"
+
+#: ../lib/GaletteEvents/Event.php:272 ../templates/default/event.tpl:19
+msgid "Begin date"
+msgstr "Date de début"
+
+#: ../lib/GaletteEvents/Event.php:274 ../templates/default/event.tpl:23
+msgid "End date"
+msgstr "Date de fin"
+
+#: ../lib/GaletteEvents/Event.php:297
 msgid "End date must be later or equal to begin date"
 msgstr "La date de fin doit être ultérieure ou égale à la date de début"
 
-#: ../lib/GaletteEvents/Repository/Events.php:185
-msgid "Location:"
-msgstr "Localisation :"
+#: ../lib/GaletteEvents/Event.php:303 ../lib/GaletteEvents/Activity.php:201
+msgid "Name is mandatory"
+msgstr "Le nom est requis"
 
-#: ../templates/default/bookings.tpl:165
-msgid "No booking has been found"
-msgstr "Aucune réservation trouvée"
+#: ../lib/GaletteEvents/Event.php:319
+msgid "Please select a group you own!"
+msgstr "Veuillez sélectionner un groupe que vous gérez !"
 
-#: ../templates/default/events.tpl:103
-msgid "%eventname: remove from database"
-msgstr "%eventname : supprimer de la base de données"
+#: ../lib/GaletteEvents/Event.php:326
+msgid "Town is mandatory"
+msgstr "La ville est requise"
 
-#: ../templates/default/menu.tpl:9
-msgid "Bookings"
-msgstr "Réservations"
+#: ../lib/GaletteEvents/Event.php:454
+msgid "Event added"
+msgstr "Évènement ajouté"
 
-#: ../templates/default/activities.tpl:5
-msgid "activities"
-msgstr "activités"
+#: ../lib/GaletteEvents/Event.php:458
+msgid "Fail to add new event."
+msgstr "Erreur à l'ajout du nouvel évènement."
 
-#: ../lib/GaletteEvents/Repository/Events.php:179
-msgid "Event informations"
-msgstr "Informations de l'évènement"
+#: ../lib/GaletteEvents/Event.php:476
+msgid "Event updated"
+msgstr "Évènement mis à jour"
 
-#: ../_routes.php:700
-msgid "Booking has been modified."
-msgstr "La réservation a été modifiée."
-
-#: ../templates/default/events.tpl:93
-msgid "%eventname: show bookings"
-msgstr "%eventname : voir les réservations"
-
-#: ../templates/default/events.tpl:89
-msgid "%eventname: export bookings as CSV"
-msgstr "%eventname: exporter les réservations en CSV"
-
-#: ../lib/GaletteEvents/Booking.php:221
-msgid "%activity is mandatory for this event!"
-msgstr "%activity est obligatoire pour cet évènement !"
-
-#: ../templates/default/bookings.tpl:153
-msgid "Edit booking"
-msgstr "Modifier la réservation"
-
-#: ../templates/default/events.tpl:111
-msgid "No event has been found"
-msgstr "Aucun évènement trouvé"
-
-#: ../lib/GaletteEvents/Booking.php:294
-msgid "Booking date is mandatory!"
-msgstr "La date de réservation est requise !"
-
-#: ../templates/default/calendar.tpl:15
-msgid "Today"
-msgstr "Aujourd'hui"
-
-#: ../templates/default/event.tpl:140
-msgid "Please choose an activity to remove"
-msgstr "Veuillez choisir une activité à supprimer"
-
-#: ../_routes.php:237
-msgid "Activity has been detached from event."
-msgstr "L'activité a été détachée de l'évènement."
-
-#: ../templates/default/calendar.tpl:13
-msgid "Monthly list"
-msgstr "Liste mensuelle"
-
-#: ../_routes.php:698
-msgid "New booking has been successfully added."
-msgstr "La nouvelle réservation a été ajoutée avec succès."
-
-#: ../lib/GaletteEvents/Booking.php:352
-msgid "A booking already exists for %member in %event"
-msgstr "Une réservation existe déjà pour l'adhérent %member dans %event"
-
-#: ../_routes.php:1151 ../_routes.php:1286
-msgid "Activity"
-msgstr "Activité"
-
-#: ../_routes.php:1340
-msgid "An error occured trying to remove activity %name :/"
-msgstr "Une erreur est survenue à la suppression de l'activité %name :/"
-
-#: ../templates/default/event.tpl:71
-msgid "Remove selected activity from event"
-msgstr "Retirer l'activité sélectionnée de l'évènement"
-
-#: ../_routes.php:874 ../templates/default/activity.tpl:60
-#: ../templates/default/event.tpl:99
-msgid "Zip code"
-msgstr "Code postal"
-
-#: ../templates/default/event.tpl:12
-msgid "(event will be considered as closed when begin date has been exceeded)"
-msgstr ""
-"(l'évènement sera considéré comme clos lorsque la date de début sera "
-"dépassée)"
-
-#: ../templates/default/bookings.tpl:114
-msgid "Found bookings total %f"
-msgstr "Total des réservations trouvées : %f"
-
-#: ../_routes.php:465
-msgid "Bookings management"
-msgstr "Gestion des réservations"
-
-#: ../_routes.php:1209
-msgid "New activity has been successfully added."
-msgstr "La nouvelle activité a été ajoutée avec succès."
-
-#: ../templates/default/event.tpl:133
-msgid "Please choose an activity to add"
-msgstr "Veuillez choisir une activité à ajouter"
-
-#: ../templates/default/activities.tpl:63
-msgid "Active"
-msgstr "Active"
-
-#: ../lib/GaletteEvents/Repository/Events.php:187
-msgid "Comment:"
-msgstr "Commentaire :"
-
-#: ../templates/default/event.tpl:51
-msgid "Choose an activity to add"
-msgstr "Choisissez une activité à ajouter"
-
-#: ../templates/default/events.tpl:98
-msgid "%eventname: edit informations"
-msgstr "%eventname : modifier les informations"
-
-#: ../_routes.php:893 ../templates/default/booking.tpl:94
-msgid "Check number"
-msgstr "Numéro de chèque"
-
-#: ../lib/GaletteEvents/Booking.php:441
-msgid "Booking updated"
-msgstr "Réservation mise à jour"
-
-#: ../templates/default/booking.tpl:77
-msgid "Financial informations"
-msgstr "Informations financières"
-
-#: ../_routes.php:246
-msgid "New event has been successfully added."
-msgstr "Le nouvel évènement a été ajouté avec succès."
+#: ../lib/GaletteEvents/Activity.php:270
+msgid "Activity added"
+msgstr "Activité ajoutée"
 
 #: ../lib/GaletteEvents/Activity.php:275
 msgid "Fail to add new activity."
 msgstr "Erreur à l'ajout de la nouvelle activité."
 
-#: ../_routes.php:543
-msgid "Booking ID cannot ben null calling edit route!"
-msgstr ""
-"L'identifiant de la réservation ne peut être vide pour la route d'édition !"
-
-#: ../_routes.php:333
-msgid "Remove event %1$s"
-msgstr "Supprimer l'évènement %1$s"
-
-#: ../templates/default/bookings.tpl:7
-msgid "Select..."
-msgstr "Choisissez..."
-
-#: ../templates/default/bookings.tpl:40
-msgid "booking"
-msgstr "réservation"
-
-#: ../templates/default/events.tpl:5
-msgid "event"
-msgstr "évènement"
-
-#: ../lib/GaletteEvents/Event.php:479
-msgid "Event updated"
-msgstr "Évènement mis à jour"
-
-#: ../lib/GaletteEvents/Event.php:277 ../templates/default/event.tpl:23
-msgid "End date"
-msgstr "Date de fin"
-
-#: ../_routes.php:790
-msgid "Remove booking"
-msgstr "Supprimer la réservation"
-
-#: ../templates/default/adh_fiche_action.tpl:2
-#: ../templates/default/adh_actions.tpl:1 ../templates/default/menu.tpl:10
-msgid "New booking"
-msgstr "Nouvelle réservation"
-
-#: ../templates/default/event.tpl:58
-msgid "Add selected activity to event"
-msgstr "Ajouter l'activité sélectionnée à l'évènement"
-
-#: ../_routes.php:383
-msgid "Event %name has been successfully deleted."
-msgstr "L'évènement %name a été supprimé avec succès."
+#: ../lib/GaletteEvents/Activity.php:293
+msgid "Activity updated"
+msgstr "Activité mise à jour"
 
 #: ../templates/default/calendar.tpl:11
 msgid "Daily list"
 msgstr "Liste quotidienne"
 
-#: ../templates/default/activities.tpl:71
-msgid "%activity: edit informations"
-msgstr "%activity : modifier les informations"
+#: ../templates/default/calendar.tpl:12
+msgid "Weekly list"
+msgstr "Liste hebdomadaire"
 
-#: ../lib/GaletteEvents/Booking.php:285
-msgid "There must be at least one person"
-msgstr "Il doit y avoir au moins une personne"
+#: ../templates/default/calendar.tpl:13
+msgid "Monthly list"
+msgstr "Liste mensuelle"
 
-#: ../_routes.php:170 ../_routes.php:330 ../templates/default/booking.tpl:14
-#: ../templates/default/bookings.tpl:5 ../templates/default/bookings.tpl:58
-msgid "Event"
-msgstr "Évènement"
+#: ../templates/default/calendar.tpl:14
+msgid "Month calendar"
+msgstr "Calendrier mensuel"
 
-#: ../_routes.php:252
-msgid "An error occured while storing the event."
-msgstr "Une erreur est survenue à l'enregistrement de l'évènement."
-
-#: ../_routes.php:892 ../templates/default/booking.tpl:90
-msgid "Bank name"
-msgstr "Nom de la banque"
-
-#: ../_routes.php:1023
-msgid "No booking was selected, please check at least one."
-msgstr "Aucune réservation sélectionnée, vous devez en cocher au moins une."
-
-#: ../_routes.php:1419
-msgid "Events calendar"
-msgstr "Calendrier des évènements"
-
-#: ../templates/default/menu.tpl:7
-msgid "New event"
-msgstr "Nouvel évènement"
-
-#: ../_routes.php:704
-msgid "An error occured while storing the booking."
-msgstr "Une erreur est survenue à l'enregistrement de la réservation."
-
-#: ../lib/GaletteEvents/Repository/Events.php:184
-msgid "End date:"
-msgstr "Date de fin :"
-
-#: ../templates/default/bookings.tpl:36
-msgid "%event's bookings"
-msgstr "Réservations de %event"
-
-#: ../templates/default/activity.tpl:31 ../templates/default/activity.tpl:39
-#: ../templates/default/activity.tpl:47 ../templates/default/event.tpl:84
-msgid "Required"
-msgstr "Obligatoire"
-
-#: ../templates/default/booking.tpl:71
-msgid "No activity for selected event"
-msgstr "Aucune activité pour l'évènement sélectioné"
+#: ../templates/default/calendar.tpl:15
+msgid "Today"
+msgstr "Aujourd'hui"
 
 #: ../templates/default/menu.tpl:2 ../templates/default/menu.tpl:4
 #: ../templates/default/activities.tpl:43
@@ -418,200 +354,336 @@ msgstr "Aucune activité pour l'évènement sélectioné"
 msgid "Events"
 msgstr "Évènements"
 
-#: ../templates/default/calendar.tpl:14
-msgid "Month calendar"
-msgstr "Calendrier mensuel"
+#: ../templates/default/menu.tpl:5
+msgid "Calendar"
+msgstr "Calendrier"
 
-#: ../lib/GaletteEvents/Event.php:275 ../templates/default/event.tpl:19
-msgid "Begin date"
-msgstr "Date de début"
+#: ../templates/default/menu.tpl:7
+msgid "New event"
+msgstr "Nouvel évènement"
 
-#: ../lib/GaletteEvents/Event.php:322
-msgid "Please select a group you own!"
-msgstr "Veuillez sélectionner un groupe que vous gérez !"
+#: ../templates/default/menu.tpl:9
+msgid "Bookings"
+msgstr "Réservations"
 
-#: ../_routes.php:372
-msgid "An error occured trying to remove event %name :/"
-msgstr "Une erreur est survenue à la suppression de l'évènement %name :/"
-
-#: ../templates/default/booking.tpl:7
-msgid "Booking informations"
-msgstr "Informations réservation"
-
-#: ../lib/GaletteEvents/Event.php:251
-msgid "Begin date is mandatory"
-msgstr "La date de début est requise"
-
-#: ../templates/default/event.tpl:63
-msgid "Choose an activity to remove"
-msgstr "Choisissez une activité à supprimer"
-
-#: ../_routes.php:824
-msgid "An error occured trying to remove booking :/"
-msgstr "Une erreur est survenue à la suppression de la réservation :/"
-
-#: ../_routes.php:890 ../templates/default/booking.tpl:84
-msgid "Amount"
-msgstr "Montant"
+#: ../templates/default/menu.tpl:10 ../templates/default/adh_fiche_action.tpl:2
+msgid "New booking"
+msgstr "Nouvelle réservation"
 
 #: ../templates/default/menu.tpl:13
 msgid "New activity"
 msgstr "Nouvelle activité"
 
-#: ../templates/default/bookings.tpl:17
-msgid "All"
-msgstr "Toutes"
+#: ../templates/default/booking.tpl:7
+msgid "Booking informations"
+msgstr "Informations réservation"
 
-#: ../_routes.php:831
-msgid "Booking has been successfully deleted."
-msgstr "La réservation a été supprimée avec succès."
+#: ../templates/default/booking.tpl:10 ../templates/default/bookings.tpl:98
+#: ../templates/default/bookings.tpl:154
+msgid "Booking date"
+msgstr "Date de réservation"
 
-#: ../templates/default/activity.tpl:7 ../templates/default/event.tpl:7
-msgid "General informations"
-msgstr "Informations générales"
-
-#: ../_routes.php:149
-msgid "Event ID cannot ben null calling edit route!"
-msgstr ""
-"L'identifiant de l'évènement ne peut être vide pour la route d'édition !"
-
-#: ../lib/GaletteEvents/Booking.php:321
-msgid "booking date"
-msgstr "date de réservation"
-
-#: ../templates/default/event.tpl:27
-msgid "Limit to group"
-msgstr "Limiter au groupe"
-
-#: ../lib/GaletteEvents/Repository/Events.php:194
-#: ../templates/default/booking.tpl:55 ../templates/default/menu.tpl:12
-#: ../templates/default/event.tpl:43
-msgid "Activities"
-msgstr "Activités"
-
-#: ../templates/default/activity.tpl:56 ../templates/default/event.tpl:95
-msgid "Address"
-msgstr "Adresse"
-
-#: ../_routes.php:714
-msgid "Do not forget to store the booking"
-msgstr "N'oubliez pas d'enregistrer la réservation"
+#: ../templates/default/booking.tpl:17
+msgid "Select an event"
+msgstr "Sélectionnez un évènement"
 
 #: ../templates/default/booking.tpl:49 ../templates/default/activity.tpl:18
 #: ../templates/default/event.tpl:37
 msgid "Comment"
 msgstr "Commentaire"
 
+#: ../templates/default/booking.tpl:71
+msgid "No activity for selected event"
+msgstr "Aucune activité pour l'évènement sélectioné"
+
+#: ../templates/default/booking.tpl:77
+msgid "Financial informations"
+msgstr "Informations financières"
+
+#: ../templates/default/booking.tpl:80 ../templates/default/bookings.tpl:35
+#: ../templates/default/bookings.tpl:110 ../templates/default/bookings.tpl:155
+#: ../templates/default/bookings.tpl:159
+msgid "Paid"
+msgstr "Payée"
+
+#: ../templates/default/activities.tpl:5
+msgid "activities"
+msgstr "activités"
+
+#: ../templates/default/activities.tpl:5
+msgid "acivity"
+msgstr "activité"
+
+#: ../templates/default/activities.tpl:21 ../templates/default/activity.tpl:14
+#: ../templates/default/events.tpl:21 ../templates/default/event.tpl:15
+msgid "Name"
+msgstr "Nom"
+
+#: ../templates/default/activities.tpl:33
+#: ../templates/default/activities.tpl:57
+msgid "Creation date"
+msgstr "Date de création"
+
 #: ../templates/default/activities.tpl:44
 #: ../templates/default/activities.tpl:59 ../templates/default/activity.tpl:10
 msgid "Is active"
 msgstr "Est active"
 
-#: ../templates/default/events.tpl:83
-msgid "Event is closed"
-msgstr "L'évènement est fermé"
+#: ../templates/default/activities.tpl:63
+msgid "Active"
+msgstr "Active"
 
-#: ../_routes.php:248
-msgid "Event has been modified."
-msgstr "L'évènement a été modifié."
+#: ../templates/default/activities.tpl:65
+msgid "Inactive"
+msgstr "Inactif"
 
-#: ../templates/default/events.tpl:56 ../templates/default/events.tpl:77
-msgid "Open"
-msgstr "Ouvert"
+#: ../templates/default/activities.tpl:71
+msgid "%activity: edit informations"
+msgstr "%activity : modifier les informations"
 
-#: ../templates/default/event.tpl:10
-msgid "Is open"
-msgstr "Est ouvert"
+#: ../templates/default/activities.tpl:78
+msgid "%activity: remove from database"
+msgstr "%activity : supprimer de la base de données"
 
-#: ../lib/GaletteEvents/Event.php:461
-msgid "Fail to add new event."
-msgstr "Erreur à l'ajout du nouvel évènement."
+#: ../templates/default/activities.tpl:84
+msgid "No activity has been found"
+msgstr "Aucune activité trouvée"
 
-#: ../_routes.php:1211
-msgid "Activity has been modified."
-msgstr "L'activité a été modifiée."
+#: ../templates/default/adh_actions.tpl:1
+msgid "New event booking"
+msgstr "Nouvelle réservation d'évènement"
+
+#: ../templates/default/activity.tpl:7 ../templates/default/event.tpl:7
+msgid "General informations"
+msgstr "Informations générales"
+
+#: ../templates/default/activity.tpl:24
+msgid "Related activities"
+msgstr "Activités liées"
+
+#: ../templates/default/activity.tpl:31 ../templates/default/activity.tpl:39
+#: ../templates/default/activity.tpl:47 ../templates/default/event.tpl:84
+msgid "Required"
+msgstr "Obligatoire"
 
 #: ../templates/default/activity.tpl:53 ../templates/default/event.tpl:92
 msgid "Location"
 msgstr "Localisation"
 
-#: ../templates/default/events.tpl:45 ../templates/default/events.tpl:75
-#: ../templates/default/activity.tpl:64 ../templates/default/event.tpl:103
+#: ../templates/default/activity.tpl:56 ../templates/default/event.tpl:95
+msgid "Address"
+msgstr "Adresse"
+
+#: ../templates/default/activity.tpl:64 ../templates/default/events.tpl:45
+#: ../templates/default/events.tpl:75 ../templates/default/event.tpl:103
 msgid "Town"
 msgstr "Ville"
 
-#: ../_routes.php:98
-msgid "Events management"
-msgstr "Gestion des évènements"
+#: ../templates/default/activity.tpl:68 ../templates/default/event.tpl:107
+msgid "Country"
+msgstr "Pays"
 
-#: ../lib/GaletteEvents/Event.php:329
-msgid "Town is mandatory"
-msgstr "La ville est requise"
+#: ../templates/default/bookings.tpl:7
+msgid "Select..."
+msgstr "Choisissez..."
 
-#: ../templates/default/activities.tpl:65
-msgid "Inactive"
-msgstr "Inactve"
+#: ../templates/default/bookings.tpl:18
+msgid "All payment types"
+msgstr "Toutes les méthodes de paiement"
 
-#: ../_routes.php:1327
-msgid "Activity %name is referenced in %count events, it cannot be removed."
-msgstr ""
-"L'activité %name est référencée dans %count évènements, elle ne peut être "
-"supprimée."
-
-#: ../templates/default/bookings.tpl:28 ../templates/default/bookings.tpl:144
-msgid "Not paid"
-msgstr "Non payée"
-
-#: ../templates/default/events.tpl:55 ../templates/default/events.tpl:76
+#: ../templates/default/bookings.tpl:21 ../templates/default/events.tpl:55
+#: ../templates/default/events.tpl:76
 msgid "Group"
 msgstr "Groupe"
 
-#: ../templates/default/bookings.tpl:158
-msgid "Remove from database"
-msgstr "Supprimer de la base de données"
+#: ../templates/default/bookings.tpl:31
+msgid "Paid bookings:"
+msgstr "Réservations payées :"
 
-#: ../templates/default/bookings.tpl:40
+#: ../templates/default/bookings.tpl:37 ../templates/default/bookings.tpl:161
+msgid "Not paid"
+msgstr "Non payée"
+
+#: ../templates/default/bookings.tpl:48
+msgid "Show all bookings"
+msgstr "Voir toutes les réservations"
+
+#: ../templates/default/bookings.tpl:51
+msgid "%event's bookings"
+msgstr "Réservations de %event"
+
+#: ../templates/default/bookings.tpl:52
+msgid "Add a new booking"
+msgstr "Ajouter une nouvelle réservation"
+
+#: ../templates/default/bookings.tpl:56
 msgid "bookings"
 msgstr "réservations"
 
-#: ../_routes.php:879 ../templates/default/booking.tpl:45
-msgid "Number of persons"
-msgstr "Nombre de personnes"
+#: ../templates/default/bookings.tpl:56
+msgid "booking"
+msgstr "réservation"
 
-#: ../templates/default/booking.tpl:80 ../templates/default/bookings.tpl:26
-#: ../templates/default/bookings.tpl:94 ../templates/default/bookings.tpl:138
-#: ../templates/default/bookings.tpl:142
-msgid "Paid"
-msgstr "Payée"
+#: ../templates/default/bookings.tpl:120 ../templates/default/bookings.tpl:165
+msgid "Attendees"
+msgstr "Participants"
 
-#: ../_routes.php:1289
-msgid "Remove activity %1$s"
-msgstr "Supprimer l'activité %1$s"
+#: ../templates/default/bookings.tpl:130
+msgid "Found bookings total %f"
+msgstr "Total des réservations trouvées : %f"
 
-#: ../_routes.php:1351
-msgid "Activity %name has been successfully deleted."
-msgstr "L'activité %name a été supprimée avec succès."
+#: ../templates/default/bookings.tpl:170
+msgid "Edit booking"
+msgstr "Modifier la réservation"
+
+#: ../templates/default/bookings.tpl:175
+msgid "Remove from database"
+msgstr "Supprimer de la base de données"
+
+#: ../templates/default/bookings.tpl:182
+msgid "No booking has been found"
+msgstr "Aucune réservation trouvée"
+
+#: ../templates/default/bookings.tpl:203
+msgid "Export selected reservation members as CSV"
+msgstr "Exporter les réservations sélectionnées en CSV"
+
+#: ../templates/default/bookings.tpl:204
+msgid "Members as CSV"
+msgstr "Adhérents en CSV"
+
+#: ../templates/default/bookings.tpl:208
+msgid "Export selected reservations as CSV"
+msgstr "Export des réservations sélectionnées en CSV"
+
+#: ../templates/default/bookings.tpl:209
+msgid "Bookings as CSV"
+msgstr "Réservations en CSV"
+
+#: ../templates/default/events.tpl:5
+msgid "events"
+msgstr "évènements"
+
+#: ../templates/default/events.tpl:5
+msgid "event"
+msgstr "évènement"
+
+#: ../templates/default/events.tpl:33 ../templates/default/events.tpl:74
+msgid "Date"
+msgstr "Date"
+
+#: ../templates/default/events.tpl:56 ../templates/default/events.tpl:77
+msgid "Open"
+msgstr "Ouvert"
 
 #: ../templates/default/events.tpl:81
 msgid "Event is open"
 msgstr "L'évènement est ouvert"
 
-#: ../_routes.php:1215
-msgid "An error occured while storing the activity."
-msgstr "Une erreur est survenue à l'enregistrement de l'activité."
+#: ../templates/default/events.tpl:83
+msgid "Event is closed"
+msgstr "L'évènement est fermé"
 
-#: ../_routes.php:1130
-msgid "Activity ID cannot ben null calling edit route!"
+#: ../templates/default/events.tpl:89
+msgid "%eventname: export bookings as CSV"
+msgstr "%eventname : exporter les réservations en CSV"
+
+#: ../templates/default/events.tpl:93
+msgid "%eventname: show bookings"
+msgstr "%eventname : voir les réservations"
+
+#: ../templates/default/events.tpl:98
+msgid "%eventname: edit informations"
+msgstr "%eventname : modifier les informations"
+
+#: ../templates/default/events.tpl:103
+msgid "%eventname: remove from database"
+msgstr "%eventname : supprimer de la base de données"
+
+#: ../templates/default/events.tpl:111
+msgid "No event has been found"
+msgstr "Aucun évènement trouvé"
+
+#: ../templates/default/event.tpl:10
+msgid "Is open"
+msgstr "Est ouvert"
+
+#: ../templates/default/event.tpl:12
+msgid "(event will be considered as closed when begin date has been exceeded)"
 msgstr ""
-"L'identifiant de l'activité ne peut être vide pour la route d'édition !"
+"(l'évènement sera considéré comme clos lorsque la date de début sera "
+"dépassée)"
 
-#: ../templates/default/booking.tpl:17
-msgid "Select an event"
-msgstr "Sélectionnez un évènement"
+#: ../templates/default/event.tpl:27 ../templates/default/event.tpl:28
+msgid "Restrict event to selected group (and its subgroups)."
+msgstr "Restreindre l'évènement au groupe sélectionné (et ses sous groupes)."
 
-#: ../lib/GaletteEvents/Repository/Events.php:189
-msgid "Attendees:"
-msgstr "Participants :"
+#: ../templates/default/event.tpl:27
+msgid "Limit to group"
+msgstr "Limiter au groupe"
+
+#: ../templates/default/event.tpl:51
+msgid "Choose an activity to add"
+msgstr "Choisissez une activité à ajouter"
+
+#: ../templates/default/event.tpl:58
+msgid "Add selected activity to event"
+msgstr "Ajouter l'activité sélectionnée à l'évènement"
+
+#: ../templates/default/event.tpl:63
+msgid "Choose an activity to remove"
+msgstr "Choisissez une activité à supprimer"
+
+#: ../templates/default/event.tpl:71
+msgid "Remove selected activity from event"
+msgstr "Retirer l'activité sélectionnée de l'évènement"
+
+#: ../templates/default/event.tpl:133
+msgid "Please choose an activity to add"
+msgstr "Veuillez choisir une activité à ajouter"
+
+#: ../templates/default/event.tpl:140
+msgid "Please choose an activity to remove"
+msgstr "Veuillez choisir une activité à supprimer"
+
+#~ msgid "All"
+#~ msgstr "Toutes"
+
+#, fuzzy
+#~ msgid "modification"
+#~ msgstr "Localisation"
+
+#, fuzzy
+#~ msgid "creation"
+#~ msgstr "Localisation"
+
+#, fuzzy
+#~ msgid "Removal has not been confirmed!"
+#~ msgstr "La réservation n'a pas été payée"
+
+#, fuzzy
+#~ msgid "start date filter"
+#~ msgstr "Date de début :"
+
+#, fuzzy
+#~ msgid "end date filter"
+#~ msgstr "Date de fin"
+
+#, fuzzy
+#~ msgid "Select a date"
+#~ msgstr "Sélectionnez un évènement"
+
+#, fuzzy
+#~ msgid "Actions"
+#~ msgstr "Localisation"
+
+#, fuzzy
+#~ msgid "No booking selected"
+#~ msgstr "Aucune réservation trouvée"
+
+#, fuzzy
+#~ msgid "Select a group"
+#~ msgstr "Sélectionnez un évènement"
 
 #~ msgid "Show event form"
 #~ msgstr "Afficher le formulaire de l'évènement"
@@ -630,9 +702,6 @@ msgstr "Participants :"
 
 #~ msgid "none"
 #~ msgstr "aucun"
-
-#~ msgid "Booking has not been paid"
-#~ msgstr "La réservation n'a pas été payée"
 
 #~ msgid "[bookings csv]"
 #~ msgstr "[reservations csv]"
@@ -658,6 +727,3 @@ msgstr "Participants :"
 
 #~ msgid "Lodging is mandatory for this event!"
 #~ msgstr "Le logement est requis pour cet évènement !"
-
-#~ msgid "Payment method"
-#~ msgstr "Méthode de paiement"

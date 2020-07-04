@@ -41,7 +41,7 @@ use Galette\Entity\Group;
 use Galette\Entity\Adherent;
 use Galette\Entity\PaymentType;
 use Analog\Analog;
-use Zend\Db\Sql\Expression;
+use Laminas\Db\Sql\Expression;
 
 /**
  * Booking entity
@@ -212,7 +212,8 @@ class Booking
             $event = $this->getEvent();
             $activities = $event->getActivities();
             foreach ($activities as $aid => $entry) {
-                if ($event->isActivityRequired($aid)
+                if (
+                    $event->isActivityRequired($aid)
                     && (!isset($values['activities']) || !in_array($aid, $values['activities']))
                 ) {
                     $this->errors[] = str_replace(
@@ -240,7 +241,8 @@ class Booking
         }
 
         if (!isset($values['member']) || empty($values['member'])) {
-            if ($this->login->isAdmin()
+            if (
+                $this->login->isAdmin()
                 || $this->login->isStaff()
                 || $this->login->isGroupManager()
             ) {
@@ -811,5 +813,19 @@ class Booking
     public function getActivities()
     {
         return $this->activities;
+    }
+
+    /**
+     * Get row class related to current fee status
+     *
+     * @param boolean $public we want the class for public pages
+     *
+     * @return string the class to apply
+     */
+    public function getRowClass($public = false)
+    {
+        $strclass = 'event-' .
+            ($this->isPaid() ? 'paid' : 'notpaid');
+        return $strclass;
     }
 }

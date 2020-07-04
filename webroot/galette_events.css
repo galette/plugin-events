@@ -1,15 +1,10 @@
-#btn_plugins_events {
-    padding-top:30px!important;
-    padding-left: 0!important;
-    display: block;
-    background-position: 50% 5px, 50% 50%!important;
-    background-repeat: no-repeat, repeat!important;
+.event-notpaid {
+    background-color: #FFDDDD!important;
+    vertical-align: top;
 }
 
-#btn_plugins_events {
-    background-image:url(images/booking_add.png), url("../../../../themes/default/jquery-ui/images/ui-bg_glass_75_e6e6e6_1x400.png");
-}
-#btn_plugins_events.ui-state-hover {
-    background-image: url(images/booking_add.png), url("../../../../themes/default/jquery-ui/images/ui-bg_glass_75_ffb619_1x400.png");
+.event-paid {
+    background-color: #DDFFDD!important;
+    vertical-align: top;
 }
 

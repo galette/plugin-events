@@ -1,6 +1,6 @@
 {extends file="page.tpl"}
 {block name="content"}
-        <form action="{path_for name="filter-bookingslist"}" method="post" id="filtre">
+        <form action="{path_for name="filter-bookingslist" data=["event" => $filters->event_filter]}" method="post" id="filtre">
         <div id="listfilter">
             <label for="event_filter">{_T string="Event" domain="events"}</label>
             <select name="event_filter" id="event_filter" required="required">
@@ -14,11 +14,20 @@
                 current=$filters->payment_type_filter
                 varname="payment_type_filter"
                 classname=""
-                empty=["value" => -1, "label" => {_T string="All" domain="events"}]
+                label={_T string="Payment type"}
+                empty=["value" => -1, "label" => {_T string="All payment types" domain="events"}]
             }
+
+            <label for="group_filter" title="{_T string="Group" domain="events"}">{_T string="Group" domain="events"}</label>
+            <select name="group_filter" id="group_filter">
+                <option value="0">{_T string="Select a group"}</option>
+{foreach from=$groups item=group}
+                <option value="{$group->getId()}"{if $filters->group_filter eq $group->getId()} selected="selected"{/if}>{$group->getIndentName()}</option>
+{/foreach}
+            </select>
             <input type="submit" class="inline" value="{_T string="Filter"}"/>
             <input type="submit" name="clear_filter" class="inline" value="{_T string="Clear filter"}"/>
-            <div/>
+            <div>
                 {_T string="Paid bookings:" domain="events"}
                 <input type="radio" name="paid_filter" id="filter_dc_paid" value="{GaletteEvents\Repository\Bookings::FILTER_DC_PAID}"{if $filters->paid_filter eq constant('GaletteEvents\Repository\Bookings::FILTER_DC_PAID')} checked="checked"{/if}>
                 <label for="filter_dc_paid" >{_T string="Don't care"}</label>
@@ -31,10 +40,17 @@
         <div class="infoline">
 {if $event}
     {if $login->isAdmin() or $login->isStaff() or $login->isGroupManager()}
-            <a id="clearfilter" href="{path_for name="events_bookings" data=["event" => "all"]}" title="{_T string="Show all bookings" domain="events"}">{_T string="Show all bookings" domain="events"}</a>
+            <a
+                href="{path_for name="events_bookings" data=["event" => "all"]}"
+                class="tooltip"
+            >
+                <i class="fas fa-eraser"></i>
+                <span class="sr-only">{_T string="Show all bookings" domain="events"}</span>
+            </a>
     {/if}
             <strong>{_T string="%event's bookings" domain="events" pattern="/%event/" replace=$event->getName()}</strong>
             (<a href="{path_for name="events_booking" data=["action" => "add"]}?event={$event->getId()}">{_T string="Add a new booking" domain="events"}</a>)
+            -
 {/if}
 {if $nb_bookings gt 0}
             {$nb_bookings} {if $nb_bookings != 1}{_T string="bookings" domain="events"}{else}{_T string="booking" domain="events"}{/if}
@@ -118,6 +134,7 @@
 {/if}
             <tbody>
 {foreach from=$bookings_list item=booking key=ordre}
+    {assign var=rclass value=$booking->getRowClass()}
                 <tr>
                     <td class="{$rclass} right" data-scope="id">{$ordre+1+($filters->current_page - 1)*$numrows}</td>
                     <td class="{$rclass} nowrap username_row" data-scope="row">
@@ -174,9 +191,30 @@
 
         <ul class="selection_menu">
             <li>{_T string="For the selection:"}</li>
-    {if ($login->isAdmin() or $login->isStaff()) and $pref_mail_method neq constant('Galette\Core\GaletteMail::METHOD_DISABLED')}
-            <li><input type="submit" id="sendmail" name="mailing" value="{_T string="Mail"}"/></li>
+    {if $login->isAdmin() or $login->isStaff()}
+        {if $pref_mail_method neq constant('Galette\Core\GaletteMail::METHOD_DISABLED')}
+            <li>
+                <button type="submit" id="sendmail" name="mailing">
+                    <i class="fas fa-mail-bulk fa-fw"></i> {_T string="Mail"}
+                </button>
+            </li>
+        {/if}
+            <li>
+                <button type="submit" id="csv" name="csv" title="{_T string="Export selected reservation members as CSV" domain="events"}">
+                    <i class="fas fa-file-csv fa-fw"></i> {_T string="Members as CSV" domain="events"}
+                </button>
+            </li>
+            <li>
+                <button type="submit" id="csvbooking" name="csvbooking" title="{_T string="Export selected reservations as CSV" domain="events"}">
+                    <i class="fas fa-file-csv fa-fw"></i> {_T string="Bookings as CSV" domain="events"}
+                </button>
+            </li>
     {/if}
+            <li>
+                <button type="submit" id="labels" name="labels">
+                    <i class="far fa-address-card fa-fw"></i> {_T string="Generate labels"}
+                </button>
+            </li>
         </ul>
         </form>
 {/if}
@@ -215,12 +253,12 @@
             $('#nbshow').change(function() {
                 this.form.submit();
             });
-            $('.selection_menu input[type="submit"], .selection_menu input[type="button"]').click(function(){
+            $('.selection_menu *[type="submit"], .selection_menu *[type="button"]').click(function(){
 
-                /*if ( this.id == 'delete' ) {
+                if ( this.id == 'delete' ) {
                     //mass removal is handled from 2 steps removal
                     return;
-                }*/
+                }
 
                 if (!_checkselection()) {
                     return false;

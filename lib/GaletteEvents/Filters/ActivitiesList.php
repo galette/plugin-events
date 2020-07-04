@@ -124,7 +124,7 @@ class ActivitiesList extends Pagination
                 return $this->$name;
             } else {
                 Analog::log(
-                    '[ActivitiesList] Unable to get proprety `' .$name . '`',
+                    '[ActivitiesList] Unable to get proprety `' . $name . '`',
                     Analog::WARNING
                 );
             }

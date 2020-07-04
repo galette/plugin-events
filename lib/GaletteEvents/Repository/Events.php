@@ -36,10 +36,10 @@
 namespace GaletteEvents\Repository;
 
 use Analog\Analog;
-use Zend\Db\Sql\Expression;
-use Zend\Db\Sql\Predicate;
-use Zend\Db\Sql\Predicate\PredicateSet;
-use Zend\Db\Sql\Predicate\Operator;
+use Laminas\Db\Sql\Expression;
+use Laminas\Db\Sql\Predicate;
+use Laminas\Db\Sql\Predicate\PredicateSet;
+use Laminas\Db\Sql\Predicate\Operator;
 use Galette\Core\Login;
 use Galette\Core\Db;
 use Galette\Entity\Group;
@@ -194,7 +194,7 @@ class Events
                         $description .= '<h4>' . _T('Activities', 'events')  . '</h4>';
                         $description .= '<ul>';
                         foreach ($activities as $activity) {
-                            $description.= '<li>' . $activity['activity']->getName()  . '</li>';
+                            $description .= '<li>' . $activity['activity']->getName()  . '</li>';
                         }
                         $description .= '</ul>';
                     }
@@ -287,6 +287,18 @@ class Events
             $countSelect->reset($countSelect::COLUMNS);
             $countSelect->reset($countSelect::ORDER);
             $countSelect->reset($countSelect::HAVING);
+            $joins = $countSelect->joins;
+            $countSelect->reset($countSelect::JOINS);
+            foreach ($joins as $join) {
+                $countSelect->join(
+                    $join['name'],
+                    $join['on'],
+                    [],
+                    $join['type']
+                );
+                unset($join['columns']);
+            }
+
             $countSelect->columns(
                 array(
                     'count' => new Expression('count(DISTINCT e.' . Event::PK . ')')
