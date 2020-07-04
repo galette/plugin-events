@@ -39,7 +39,6 @@ use Analog\Analog;
 use Galette\Repository\Repository;
 use GaletteEvents\Activity;
 use Galette\Core\Preferences;
-
 use Laminas\Db\Sql\Expression;
 use Galette\Core\Login;
 use Galette\Core\Db;

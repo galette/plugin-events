@@ -235,13 +235,15 @@ class Bookings
                     break;
             }
 
-            if ($this->filters->event_filter !== null
+            if (
+                $this->filters->event_filter !== null
                 && $this->filters->event_filter != 'all'
             ) {
                 $select->where(['b.' . Event::PK => $this->filters->event_filter]);
             }
 
-            if ($this->filters->payment_type_filter !== null &&
+            if (
+                $this->filters->payment_type_filter !== null &&
                 (int)$this->filters->payment_type_filter != -1
             ) {
                 $select->where->equalTo(
@@ -250,7 +252,8 @@ class Bookings
                 );
             }
 
-            if ($this->filters->group_filter !== null
+            if (
+                $this->filters->group_filter !== null
                 && $this->filters->group_filter != 'all'
             ) {
                 $select->where(['e.' . Group::PK => $this->filters->group_filter]);

@@ -134,7 +134,7 @@ class BookingsList extends Pagination
                 return $this->$name;
             } else {
                 Analog::log(
-                    '[BookingsList] Unable to get proprety `' .$name . '`',
+                    '[BookingsList] Unable to get proprety `' . $name . '`',
                     Analog::WARNING
                 );
             }

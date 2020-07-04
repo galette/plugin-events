@@ -212,7 +212,8 @@ class Booking
             $event = $this->getEvent();
             $activities = $event->getActivities();
             foreach ($activities as $aid => $entry) {
-                if ($event->isActivityRequired($aid)
+                if (
+                    $event->isActivityRequired($aid)
                     && (!isset($values['activities']) || !in_array($aid, $values['activities']))
                 ) {
                     $this->errors[] = str_replace(
@@ -240,7 +241,8 @@ class Booking
         }
 
         if (!isset($values['member']) || empty($values['member'])) {
-            if ($this->login->isAdmin()
+            if (
+                $this->login->isAdmin()
                 || $this->login->isStaff()
                 || $this->login->isGroupManager()
             ) {

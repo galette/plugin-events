@@ -37,14 +37,12 @@ namespace GaletteEvents\Controllers;
 
 use Slim\Http\Request;
 use Slim\Http\Response;
-
 use Galette\Entity\Adherent;
 use Galette\Filters\MembersList;
 use Galette\IO\Csv;
 use Galette\IO\CsvOut;
 use Galette\Repository\Groups;
 use Galette\Repository\Members;
-
 use GaletteEvents\Activity;
 use GaletteEvents\Booking;
 use GaletteEvents\Event;
@@ -54,7 +52,6 @@ use GaletteEvents\Filters\EventsList;
 use GaletteEvents\Repository\Activities;
 use GaletteEvents\Repository\Bookings;
 use GaletteEvents\Repository\Events;
-
 use Analog\Analog;
 
 /**
@@ -79,7 +76,7 @@ class CsvController extends \Galette\Controllers\CsvController
      *
      * @return Response
      */
-    public function bookingsExport(Request $request, Response $response, array $args = []) :Response
+    public function bookingsExport(Request $request, Response $response, array $args = []): Response
     {
         $post = $request->getParsedBody();
         $get = $request->getQueryParams();

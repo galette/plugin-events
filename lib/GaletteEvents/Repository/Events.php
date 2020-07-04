@@ -194,7 +194,7 @@ class Events
                         $description .= '<h4>' . _T('Activities', 'events')  . '</h4>';
                         $description .= '<ul>';
                         foreach ($activities as $activity) {
-                            $description.= '<li>' . $activity['activity']->getName()  . '</li>';
+                            $description .= '<li>' . $activity['activity']->getName()  . '</li>';
                         }
                         $description .= '</ul>';
                     }

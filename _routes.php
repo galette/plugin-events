@@ -585,11 +585,13 @@ $this->get(
             if (isset($get['event'])) {
                 $booking->setEvent((int)$get['event']);
             }
-            if (isset($_GET[Adherent::PK]) &&
+            if (
+                isset($_GET[Adherent::PK]) &&
                 ($this->login->isAdmin() || $this->login->isStaff() || $this->login->isGroupManager())
             ) {
                 $booking->setMember((int)$_GET[Adherent::PK]);
-            } elseif (!$this->login->isSuperAdmin()
+            } elseif (
+                !$this->login->isSuperAdmin()
                 && !$this->login->isAdmin()
                 && !$this->login->isStaff()
                 && !$this->login->isGroupManager()
@@ -598,7 +600,8 @@ $this->get(
             }
         }
 
-        if ($this->login->isAdmin()
+        if (
+            $this->login->isAdmin()
             || $this->login->isStaff()
             || $this->login->isGroupManager()
         ) {
@@ -629,7 +632,8 @@ $this->get(
             $route_params['autocomplete'] = true;
 
             //check if current attached member is part of the list
-            if (isset($booking)
+            if (
+                isset($booking)
                 && $booking->getMemberId() > 0
                 && !isset($members[$booking->getMemberId()])
             ) {

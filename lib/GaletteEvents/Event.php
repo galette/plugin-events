@@ -312,7 +312,8 @@ class Event
                 $this->group = null;
             }
         } else {
-            if (!isset($values['group'])
+            if (
+                !isset($values['group'])
                 || empty($values['group'])
                 || !in_array($values['group'], $this->login->managed_groups)
             ) {
@@ -340,7 +341,8 @@ class Event
             }
         }
 
-        if (isset($values['add_activity'])
+        if (
+            isset($values['add_activity'])
             && isset($values['attach_activity'])
             && !empty($values['attach_activity'])
         ) {
@@ -354,7 +356,8 @@ class Event
             ];
         }
 
-        if (isset($values['remove_activity'])
+        if (
+            isset($values['remove_activity'])
             && isset($values['detach_activity'])
             && !empty($values['detach_activity'])
         ) {

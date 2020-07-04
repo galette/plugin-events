@@ -170,7 +170,7 @@ class EventsList extends Pagination
                 }
             } else {
                 Analog::log(
-                    '[EventsList] Unable to get proprety `' .$name . '`',
+                    '[EventsList] Unable to get proprety `' . $name . '`',
                     Analog::WARNING
                 );
             }
