@@ -5,8 +5,8 @@ msgstr ""
 "Project-Id-Version: Galette Events plugin\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2020-06-29 15:15+0000\n"
-"Last-Translator: Fredericos Tezorc <fredericos.tezorc@gmail.com>\n"
+"PO-Revision-Date: 2020-07-04 13:11+0000\n"
+"Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/galette/"
 "events-plugin/fr/>\n"
 "Language: fr_FR\n"
@@ -468,7 +468,7 @@ msgstr "Obligatoire"
 
 #: ../templates/default/activity.tpl:53 ../templates/default/event.tpl:92
 msgid "Location"
-msgstr "Localisation"
+msgstr "Emplacement"
 
 #: ../templates/default/activity.tpl:56 ../templates/default/event.tpl:95
 msgid "Address"
