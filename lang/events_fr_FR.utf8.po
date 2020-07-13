@@ -7,8 +7,8 @@ msgstr ""
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2020-07-04 13:11+0000\n"
 "Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
-"Language-Team: French <https://hosted.weblate.org/projects/galette/"
-"events-plugin/fr/>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/galette/events-"
+"plugin/fr/>\n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -75,90 +75,90 @@ msgid "Booking ID cannot ben null calling edit route!"
 msgstr ""
 "L'identifiant de la réservation ne peut être vide pour la route d'édition !"
 
-#: ../_routes.php:575 ../_routes.php:799
+#: ../_routes.php:575 ../_routes.php:803
 msgid "Booking"
 msgstr "Réservation"
 
-#: ../_routes.php:709
+#: ../_routes.php:713
 msgid "New booking has been successfully added."
 msgstr "La nouvelle réservation a été ajoutée avec succès."
 
-#: ../_routes.php:711
+#: ../_routes.php:715
 msgid "Booking has been modified."
 msgstr "La réservation a été modifiée."
 
-#: ../_routes.php:715
+#: ../_routes.php:719
 msgid "An error occured while storing the booking."
 msgstr "Une erreur est survenue à l'enregistrement de la réservation."
 
-#: ../_routes.php:725
+#: ../_routes.php:729
 msgid "Do not forget to store the booking"
 msgstr "N'oubliez pas d'enregistrer la réservation"
 
-#: ../_routes.php:801
+#: ../_routes.php:805
 msgid "Remove booking"
 msgstr "Supprimer la réservation"
 
-#: ../_routes.php:835
+#: ../_routes.php:839
 msgid "An error occured trying to remove booking :/"
 msgstr "Une erreur est survenue à la suppression de la réservation :/"
 
-#: ../_routes.php:842
+#: ../_routes.php:846
 msgid "Booking has been successfully deleted."
 msgstr "La réservation a été supprimée avec succès."
 
-#: ../_routes.php:953
+#: ../_routes.php:958
 msgid "No booking was selected, please check at least one."
 msgstr "Aucune réservation sélectionnée, vous devez en cocher au moins une."
 
-#: ../_routes.php:1009
+#: ../_routes.php:1014
 msgid "Activities management"
 msgstr "Gestion des activités"
 
-#: ../_routes.php:1060
+#: ../_routes.php:1065
 msgid "Activity ID cannot ben null calling edit route!"
 msgstr ""
 "L'identifiant de l'activité ne peut être vide pour la route d'édition !"
 
-#: ../_routes.php:1081 ../_routes.php:1216
+#: ../_routes.php:1086 ../_routes.php:1221
 msgid "Activity"
 msgstr "Activité"
 
-#: ../_routes.php:1139
+#: ../_routes.php:1144
 msgid "New activity has been successfully added."
 msgstr "La nouvelle activité a été ajoutée avec succès."
 
-#: ../_routes.php:1141
+#: ../_routes.php:1146
 msgid "Activity has been modified."
 msgstr "L'activité a été modifiée."
 
-#: ../_routes.php:1145
+#: ../_routes.php:1150
 msgid "An error occured while storing the activity."
 msgstr "Une erreur est survenue à l'enregistrement de l'activité."
 
-#: ../_routes.php:1219
+#: ../_routes.php:1224
 msgid "Remove activity %1$s"
 msgstr "Supprimer l'activité %1$s"
 
-#: ../_routes.php:1257
+#: ../_routes.php:1262
 msgid "Activity %name is referenced in %count events, it cannot be removed."
 msgstr ""
 "L'activité %name est référencée dans %count évènements, elle ne peut être "
 "supprimée."
 
-#: ../_routes.php:1270
+#: ../_routes.php:1275
 msgid "An error occured trying to remove activity %name :/"
 msgstr "Une erreur est survenue à la suppression de l'activité %name :/"
 
-#: ../_routes.php:1281
+#: ../_routes.php:1286
 msgid "Activity %name has been successfully deleted."
 msgstr "L'activité %name a été supprimée avec succès."
 
-#: ../_routes.php:1348
+#: ../_routes.php:1353
 msgid "Javascript libraries has not been built!"
 msgstr "Les bibliothèques Javascript n'ont pas été construites !"
 
-#: ../_routes.php:1357
+#: ../_routes.php:1362
 msgid "Events calendar"
 msgstr "Calendrier des évènements"
 
@@ -166,70 +166,76 @@ msgstr "Calendrier des évènements"
 msgid "Event is mandatory"
 msgstr "L'évènement est requis"
 
-#: ../lib/GaletteEvents/Booking.php:221
+#: ../lib/GaletteEvents/Booking.php:222
 msgid "%activity is mandatory for this event!"
 msgstr "%activity est obligatoire pour cet évènement !"
 
-#: ../lib/GaletteEvents/Booking.php:247
+#: ../lib/GaletteEvents/Booking.php:249
 msgid "Member is mandatory"
 msgstr "L'adhérent est requis"
 
-#: ../lib/GaletteEvents/Booking.php:266
+#: ../lib/GaletteEvents/Booking.php:268
 msgid "Please specify amount if booking has been paid ;)"
 msgstr "Veuillez spécifier un montant si la réservation a été payée ;)"
 
-#: ../lib/GaletteEvents/Booking.php:285
+#: ../lib/GaletteEvents/Booking.php:287
 msgid "There must be at least one person"
 msgstr "Il doit y avoir au moins une personne"
 
-#: ../lib/GaletteEvents/Booking.php:294
+#: ../lib/GaletteEvents/Booking.php:296
 msgid "Booking date is mandatory!"
 msgstr "La date de réservation est requise !"
 
-#: ../lib/GaletteEvents/Booking.php:321
+#: ../lib/GaletteEvents/Booking.php:323
 msgid "booking date"
 msgstr "date de réservation"
 
-#: ../lib/GaletteEvents/Booking.php:352
+#: ../lib/GaletteEvents/Booking.php:354
 msgid "A booking already exists for %member in %event"
 msgstr "Une réservation existe déjà pour l'adhérent %member dans %event"
 
-#: ../lib/GaletteEvents/Booking.php:419
+#: ../lib/GaletteEvents/Booking.php:421
 msgid "Booking added"
 msgstr "Réservation ajoutée"
 
-#: ../lib/GaletteEvents/Booking.php:423
+#: ../lib/GaletteEvents/Booking.php:425
 msgid "Fail to add new booking."
 msgstr "Erreur à l'ajout de la nouvelle réservation."
 
-#: ../lib/GaletteEvents/Booking.php:441
+#: ../lib/GaletteEvents/Booking.php:443
 msgid "Booking updated"
 msgstr "Réservation mise à jour"
 
-#: ../lib/GaletteEvents/Controllers/CsvController.php:108
+#: ../lib/GaletteEvents/Controllers/CsvController.php:105
 #: ../templates/default/activity.tpl:60 ../templates/default/event.tpl:99
 msgid "Zip code"
 msgstr "Code postal"
 
-#: ../lib/GaletteEvents/Controllers/CsvController.php:114
+#: ../lib/GaletteEvents/Controllers/CsvController.php:111
 #: ../templates/default/booking.tpl:45
 msgid "Number of persons"
 msgstr "Nombre de personnes"
 
-#: ../lib/GaletteEvents/Controllers/CsvController.php:129
+#: ../lib/GaletteEvents/Controllers/CsvController.php:126
 #: ../templates/default/booking.tpl:84
 msgid "Amount"
 msgstr "Montant"
 
-#: ../lib/GaletteEvents/Controllers/CsvController.php:131
+#: ../lib/GaletteEvents/Controllers/CsvController.php:128
 #: ../templates/default/booking.tpl:90
 msgid "Bank name"
 msgstr "Nom de la banque"
 
-#: ../lib/GaletteEvents/Controllers/CsvController.php:132
+#: ../lib/GaletteEvents/Controllers/CsvController.php:129
 #: ../templates/default/booking.tpl:94
 msgid "Check number"
 msgstr "Numéro de chèque"
+
+#: ../lib/GaletteEvents/Controllers/CsvController.php:184
+#, fuzzy
+#| msgid "bookings"
+msgid "bookingslist"
+msgstr "réservations"
 
 #: ../lib/GaletteEvents/Repository/Events.php:179
 msgid "Event informations"
@@ -261,17 +267,17 @@ msgstr "Participants :"
 msgid "Activities"
 msgstr "Activités"
 
-#: ../lib/GaletteEvents/Repository/Activities.php:85
+#: ../lib/GaletteEvents/Repository/Activities.php:84
 #: ../templates/default/activity.tpl:27
 msgid "Noon meal"
 msgstr "Repas midi"
 
-#: ../lib/GaletteEvents/Repository/Activities.php:89
+#: ../lib/GaletteEvents/Repository/Activities.php:88
 #: ../templates/default/activity.tpl:35
 msgid "Even meal"
 msgstr "Repas soir"
 
-#: ../lib/GaletteEvents/Repository/Activities.php:93
+#: ../lib/GaletteEvents/Repository/Activities.php:92
 #: ../templates/default/activity.tpl:43
 msgid "Lodging"
 msgstr "Logement"
@@ -296,23 +302,23 @@ msgstr "La date de fin doit être ultérieure ou égale à la date de début"
 msgid "Name is mandatory"
 msgstr "Le nom est requis"
 
-#: ../lib/GaletteEvents/Event.php:319
+#: ../lib/GaletteEvents/Event.php:320
 msgid "Please select a group you own!"
 msgstr "Veuillez sélectionner un groupe que vous gérez !"
 
-#: ../lib/GaletteEvents/Event.php:326
+#: ../lib/GaletteEvents/Event.php:327
 msgid "Town is mandatory"
 msgstr "La ville est requise"
 
-#: ../lib/GaletteEvents/Event.php:454
+#: ../lib/GaletteEvents/Event.php:457
 msgid "Event added"
 msgstr "Évènement ajouté"
 
-#: ../lib/GaletteEvents/Event.php:458
+#: ../lib/GaletteEvents/Event.php:461
 msgid "Fail to add new event."
 msgstr "Erreur à l'ajout du nouvel évènement."
 
-#: ../lib/GaletteEvents/Event.php:476
+#: ../lib/GaletteEvents/Event.php:479
 msgid "Event updated"
 msgstr "Évènement mis à jour"
 
