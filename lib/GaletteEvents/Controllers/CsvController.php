@@ -180,7 +180,8 @@ class CsvController extends \Galette\Controllers\CsvController
             $list[] = $entry;
         }
 
-        $filename = 'bookingslist.csv';
+        //TRANS: this is a filename: all lowercase, no special character, no space.
+        $filename = _T('bookingslist', 'events') . '.csv';
         $filepath = CsvOut::DEFAULT_DIRECTORY . $filename;
         $fp = fopen($filepath, 'w');
         if ($fp) {
