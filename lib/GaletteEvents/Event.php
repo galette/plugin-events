@@ -58,12 +58,12 @@ use Laminas\Db\Sql\Predicate\Operator;
  */
 class Event
 {
-    const TABLE = 'events';
-    const PK = 'id_event';
+    public const TABLE = 'events';
+    public const PK = 'id_event';
 
-    const ACTIVITY_NO = 0;
-    const ACTIVITY_YES = 1;
-    const ACTIVITY_REQUIRED = 2;
+    public const ACTIVITY_NO = 0;
+    public const ACTIVITY_YES = 1;
+    public const ACTIVITY_REQUIRED = 2;
 
     private $zdb;
     private $login;

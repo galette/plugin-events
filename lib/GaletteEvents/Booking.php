@@ -56,8 +56,8 @@ use Laminas\Db\Sql\Expression;
  */
 class Booking
 {
-    const TABLE = 'bookings';
-    const PK = 'id_booking';
+    public const TABLE = 'bookings';
+    public const PK = 'id_booking';
 
     private $zdb;
     private $login;

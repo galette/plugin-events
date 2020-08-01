@@ -65,9 +65,9 @@ class Events
     private $filters = false;
     private $count;
 
-    const ORDERBY_DATE = 0;
-    const ORDERBY_NAME = 1;
-    const ORDERBY_TOWN = 2;
+    public const ORDERBY_DATE = 0;
+    public const ORDERBY_NAME = 1;
+    public const ORDERBY_TOWN = 2;
 
     /**
      * Constructor
