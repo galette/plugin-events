@@ -1,12 +1,13 @@
 # Johan Cwiklinski <trasher@x-tnd.be>, 2020.
 # Fredericos Tezorc <fredericos.tezorc@gmail.com>, 2020.
+# Nathan <bonnemainsnathan@gmail.com>, 2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: Galette Events plugin\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2020-07-13 07:38+0000\n"
-"Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
+"PO-Revision-Date: 2020-09-16 10:36+0000\n"
+"Last-Translator: Nathan <bonnemainsnathan@gmail.com>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/galette/"
 "events-plugin/fr/>\n"
 "Language: fr_FR\n"
@@ -14,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.2-dev\n"
+"X-Generator: Weblate 4.3-dev\n"
 
 #: ../_routes.php:98
 msgid "Events management"
@@ -431,11 +432,11 @@ msgstr "Date de création"
 #: ../templates/default/activities.tpl:44
 #: ../templates/default/activities.tpl:59 ../templates/default/activity.tpl:10
 msgid "Is active"
-msgstr "Est active"
+msgstr "Est actif"
 
 #: ../templates/default/activities.tpl:63
 msgid "Active"
-msgstr "Active"
+msgstr "Actif"
 
 #: ../templates/default/activities.tpl:65
 msgid "Inactive"
