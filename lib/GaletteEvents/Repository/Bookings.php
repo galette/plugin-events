@@ -192,7 +192,18 @@ class Bookings
         try {
             $sumSelect = clone $select;
             $sumSelect->reset($sumSelect::COLUMNS);
+            $joins = $sumSelect->joins;
             $sumSelect->reset($sumSelect::JOINS);
+            foreach ($joins as $join) {
+                $sumSelect->join(
+                    $join['name'],
+                    $join['on'],
+                    [],
+                    $join['type']
+                );
+                unset($join['columns']);
+            }
+
             $sumSelect->reset($sumSelect::ORDER);
             $sumSelect->columns(
                 array(
@@ -255,6 +266,7 @@ class Bookings
             if (
                 $this->filters->group_filter !== null
                 && $this->filters->group_filter != 'all'
+                && $this->filters->group_filter != 0
             ) {
                 $select->where(['e.' . Group::PK => $this->filters->group_filter]);
             }
