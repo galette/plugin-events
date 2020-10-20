@@ -409,25 +409,15 @@ $this->post(
 $this->get(
     '/bookings/{event:guess|all|\d+}[/{option:page|order}/{value:\d+}]',
     function ($request, $response, $args) use ($module, $module_id) {
-        $option = null;
-        if (isset($args['option'])) {
-            $option = $args['option'];
-        }
-        $value = null;
-        if (isset($args['value'])) {
-            $value = $args['value'];
-        }
+        $option = $args['option'] ?? null;
+        $value = $args['value'] ?? null;
+        $linked_event = $args['event'];
+        $filters = $this->session->filter_bookings ?? new BookingsList();
 
-        if (isset($this->session->filter_bookings)) {
-            $filters = $this->session->filter_bookings;
+        if ($linked_event == 'guess') {
+            $linked_event = $filters->event_filter;
         } else {
-            $filters = new BookingsList();
-        }
-
-        if ($args['event'] == 'guess') {
-            $args['event'] = $filters->event_filter;
-        } else {
-            $filters->event_filter = $args['event'];
+            $linked_event = $args['event'];
         }
 
         if ($option !== null) {
@@ -442,9 +432,9 @@ $this->get(
         }
 
         $event = null;
-        if ($args['event'] !== 'all') {
-            $filters->event_filter = (int)$args['event'];
-            $event = new Event($this->zdb, $this->login, (int)$args['event']);
+        if ($linked_event !== 'all') {
+            $filters->event_filter = (int)$linked_event;
+            $event = new Event($this->zdb, $this->login, (int)$linked_event);
         }
 
         //Groups
@@ -471,7 +461,7 @@ $this->get(
                 'bookings_list'     => $list,
                 'nb_bookings'       => $count,
                 'event'             => $event,
-                'eventid'           => $filters->event_filter,
+                'eventid'           => $linked_event,
                 'require_dialog'    => true,
                 'filters'           => $filters,
                 'events'            => $events->getList(),
@@ -881,7 +871,7 @@ $this->post(
 )->setName('events_bookings_export')->add($authenticate);
 
 
-//Batch actions on members list
+//Batch actions on bookings list
 $this->post(
     '/bookings/batch',
     function ($request, $response) {

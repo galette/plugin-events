@@ -1,6 +1,6 @@
 {extends file="page.tpl"}
 {block name="content"}
-        <form action="{path_for name="filter-bookingslist" data=["event" => $filters->event_filter]}" method="post" id="filtre">
+        <form action="{path_for name="filter-bookingslist" data=["event" => $eventid]}" method="post" id="filtre">
         <div id="listfilter">
             <label for="event_filter">{_T string="Event" domain="events"}</label>
             <select name="event_filter" id="event_filter" required="required">
