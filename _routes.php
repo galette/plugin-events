@@ -895,7 +895,7 @@ $this->post(
             $mfilter->selected = $members;
 
             if (isset($post['mailing'])) {
-                $this->session->filter_mailing = $mfilter;
+                $this->session->filter_members = $mfilter;
                 $this->session->redirect_mailing = $this->router->pathFor(
                     'events_bookings',
                     [
