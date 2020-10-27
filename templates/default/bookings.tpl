@@ -41,7 +41,7 @@
 {if $event}
     {if $login->isAdmin() or $login->isStaff() or $login->isGroupManager()}
             <a
-                href="{path_for name="events_bookings" data=["event" => "all"]}"
+                href="{path_for name="events_bookings" data=["event" => "all", "option" => "clear_filter", "value" => true]}"
                 class="tooltip"
             >
                 <i class="fas fa-eraser"></i>
