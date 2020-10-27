@@ -1016,35 +1016,6 @@ $this->get(
     }
 )->setName('events_activities')->add($authenticate);
 
-//events list filtering
-/*$this->post(
-    '/events/filter',
-    function ($request, $response) {
-        $post = $request->getParsedBody();
-        if (isset($this->session->filter_events)) {
-            $filters = $this->session->filter_events;
-        } else {
-            $filters = new EventsList();
-        }
-
-        //reintialize filters
-        if (isset($post['clear_filter'])) {
-            $filters->reinit();
-        } else {
-            //number of rows to show
-            if (isset($post['nbshow'])) {
-                $filters->show = $post['nbshow'];
-            }
-        }
-
-        $this->session->filter_events = $filters;
-
-        return $response
-            ->withStatus(301)
-            ->withHeader('Location', $this->router->pathFor('events_events'));
-    }
-)->setName('filter-eventslist')->add($authenticate);*/
-
 $this->get(
     '/activity/{action:edit|add}[/{id:\d+}]',
     function ($request, $response, $args) use ($module, $module_id) {
