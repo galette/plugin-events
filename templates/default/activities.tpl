@@ -49,14 +49,14 @@
 {if $activities|@count}
     {foreach from=$activities item=activity key=ordre}
                 <tr>
-                    <td class="{$rclass} right" data-scope="id">{$ordre+1+($filters->current_page - 1)*$numrows}</td>
-                    <td class="{$rclass} nowrap username_row" data-scope="row">
+                    <td class="right" data-scope="id">{$ordre+1+($filters->current_page - 1)*$numrows}</td>
+                    <td class="nowrap username_row" data-scope="row">
                         {assign var="aid" value=$activity->getId()}
                         <a href="{path_for name="events_activity" data=["action" => "edit", "id" => $aid]}">{$activity->getName()}</a>
                     </td>
-                    <td class="{$rclass}" data-title="{_T string="Creation date" domain="events"}">{$activity->getCreationDate()}</td>
-                    <td class="{$rclass}" data-title="{_T string="Events" domain="events"}">{$activity->countEvents()}</td>
-                    <td class="{$rclass} center id_row {if $activity->isActive()}use{else}delete{/if}" data-title="{_T string="Is active" domain="events"}">
+                    <td data-title="{_T string="Creation date" domain="events"}">{$activity->getCreationDate()}</td>
+                    <td data-title="{_T string="Events" domain="events"}">{$activity->countEvents()}</td>
+                    <td class="center id_row {if $activity->isActive()}use{else}delete{/if}" data-title="{_T string="Is active" domain="events"}">
                         <i class="fas fa-toggle-{if $activity->isActive()}on{else}off{/if}"></i>
                         <span class="sr-only">
                         {if $activity->isActive()}
@@ -65,7 +65,7 @@
                             {_T string="Inactive" domain="events"}
                         {/if}
                     </td>
-                    <td class="{$rclass} center nowrap actions_row">
+                    <td class="center nowrap actions_row">
                         <a href="{path_for name="events_activity" data=["action" => "edit", "id" => $aid]}" class="tooltip action">
                             <i class="fas fa-edit fa-fw"></i>
                             <span class="sr-only">{_T string="%activity: edit informations" domain="events" pattern="/%activity/" replace=$activity->getName()}</span>
