@@ -407,7 +407,7 @@ $this->post(
 )->setName('events_do_remove_event')->add($authenticate);
 
 $this->get(
-    '/bookings/{event:guess|all|\d+}[/{option:page|order}/{value:\d+}]',
+    '/bookings/{event:guess|all|\d+}[/{option:page|order|clear_filter}/{value:\d+}]',
     function ($request, $response, $args) use ($module, $module_id) {
         $option = $args['option'] ?? null;
         $value = $args['value'] ?? null;
@@ -427,6 +427,9 @@ $this->get(
                     break;
                 case 'order':
                     $filters->orderby = $value;
+                    break;
+                case 'clear_filter':
+                    $filters->reinit();
                     break;
             }
         }
@@ -486,6 +489,7 @@ $this->post(
         //reintialize filters
         if (isset($post['clear_filter'])) {
             $filters->reinit();
+            $args['event'] = 'all';
         } else {
             //number of rows to show
             if (isset($post['nbshow'])) {
