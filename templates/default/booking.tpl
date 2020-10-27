@@ -103,7 +103,7 @@
                 <i class="fas fa-save fa-fw" aria-hidden="true"></i>
                 {_T string="Save"}
             </button>
-            <a href="{path_for name="events_activities"}" class="button">
+            <a href="{path_for name="events_bookings" data=["event" => "all"]}" class="button">
                 <i class="fas fa-th-list fa-fw" aria-hidden="true"></i>
                 {_T string="Cancel"}
             </a>
