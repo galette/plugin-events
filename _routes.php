@@ -1287,11 +1287,12 @@ $this->get(
             $value = $args['value'];
         }
 
-        if (isset($this->session->filter_events)) {
-            $filters = $this->session->filter_events;
+        if (isset($this->session->filter_events_calendar)) {
+            $filters = $this->session->filter_events_calendar;
         } else {
             $filters = new EventsList();
         }
+        $filters->calendar_filter = true;
 
         if ($option !== null) {
             switch ($option) {
@@ -1309,7 +1310,7 @@ $this->get(
         //assign pagination variables to the template and add pagination links
         $filters->setSmartyPagination($this->router, $this->view->getSmarty(), false);
 
-        $this->session->filter_events = $filters;
+        $this->session->filter_events_calendar = $filters;
 
         //check if JS has been generated
         if (!file_exists(__DIR__ . '/webroot/js/calendar.bundle.js')) {
@@ -1340,7 +1341,7 @@ $this->get(
     '/ajax/events/calendar',
     function ($request, $response, $args) use ($module, $module_id) {
         $get = $request->getQueryParams();
-        $filters = new EventsList();
+        $filters = $this->session->filter_events_calendar ?? new EventsList();
         $filters->calendar_filter = true;
         $filters->start_date_filter = date(__("Y-m-d"), strtotime($get['start']));
         $filters->end_date_filter = date(__("Y-m-d"), strtotime($get['end']));

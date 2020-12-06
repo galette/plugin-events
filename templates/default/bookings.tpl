@@ -163,12 +163,14 @@
                         </span>
                     </td>
                     <td class="{$rclass}" data-title="{_T string="Attendees" domain="events"}">{$booking->getNumberPeople()}</td>
-    {if $login->isAdmin() or $login->isStaff() or ($login->isGroupManager() and $booking->getEvent()->getGroup()|in_array:$login->managed_groups )}
+    {if $login->isAdmin() or $login->isStaff() or $login->isGroupManager()}
                     <td class="{$rclass} center nowrap actions_row">
+        {if $login->isAdmin() or $login->isStaff() or ($login->isGroupManager() and $booking->getEvent()->getGroup()|in_array:$login->managed_groups )}
                         <a href="{path_for name="events_booking" data=["action" => "edit", "id" => $bid]}" class="tooltip action">
                             <i class="fas fa-edit fa-fw"></i>
                             <span class="sr-only">{_T string="Edit booking" domain="events"}</span>
                         </a>
+        {/if}
         {if $login->isAdmin() or $login->isStaff()}
                         <a class="delete tooltip" href="{path_for name="events_remove_booking" data=["id" => $bid]}">
                             <i class="fas fa-trash fa-fw"></i>

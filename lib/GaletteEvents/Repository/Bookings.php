@@ -282,7 +282,22 @@ class Bookings
                     $groups = array_merge($groups, $this->login->managed_groups);
                 }
 
-                $set = [new Predicate\IsNull(Group::PK)];
+                $set = [new PredicateSet(
+                    array(
+                        new Predicate\IsNull(Group::PK),
+                        new Predicate\Operator(
+                            'is_open',
+                            '=',
+                            true
+                        ),
+                        new Predicate\Operator(
+                            'begin_date',
+                            '>=',
+                            date('Y-m-d')
+                        )
+                    )
+                )];
+
                 if (count($groups)) {
                     $set[] = new Predicate\In(
                         Group::PK,
