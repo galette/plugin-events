@@ -863,7 +863,8 @@ $this->post(
 )->setName('events_do_remove_booking')->add($authenticate);
 
 //booking CSV export
-$this->post(
+$this->map(
+    ['GET', 'POST'],
     '/events/{id:\d+}/export/bookings',
     GaletteEvents\Controllers\CsvController::class . ':bookingsExport'
 )->setName('event_bookings_export')->add($authenticate);
