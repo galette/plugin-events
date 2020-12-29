@@ -1,16 +1,19 @@
+# Pol Casares Civit <pol.casares@e-campus.uab.cat>, 2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2020-06-19 05:48+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2020-12-30 17:29+0000\n"
+"Last-Translator: Pol Casares Civit <pol.casares@e-campus.uab.cat>\n"
+"Language-Team: Catalan <https://hosted.weblate.org/projects/galette/"
+"events-plugin/ca/>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 3.0.0\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.4.1-dev\n"
 
 #: ../_routes.php:98
 msgid "Events management"
@@ -244,7 +247,7 @@ msgstr ""
 
 #: ../lib/GaletteEvents/Repository/Events.php:187
 msgid "Comment:"
-msgstr ""
+msgstr "Comentari:"
 
 #: ../lib/GaletteEvents/Repository/Events.php:189
 msgid "Attendees:"
@@ -385,7 +388,7 @@ msgstr ""
 #: ../templates/default/booking.tpl:49 ../templates/default/activity.tpl:18
 #: ../templates/default/event.tpl:37
 msgid "Comment"
-msgstr ""
+msgstr "Comentari"
 
 #: ../templates/default/booking.tpl:71
 msgid "No activity for selected event"
