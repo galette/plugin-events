@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2020-06-19 05:48+0200\n"
-"PO-Revision-Date: 2021-03-04 16:50+0000\n"
+"PO-Revision-Date: 2021-04-28 06:06+0000\n"
 "Last-Translator: Tymofij Lytvynenko <till.svit@gmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/galette/"
 "events-plugin/uk/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.5.1-dev\n"
+"X-Generator: Weblate 4.7-dev\n"
 
 #: ../_routes.php:98
 msgid "Events management"
@@ -259,7 +259,7 @@ msgstr ""
 #: ../templates/default/menu.tpl:12 ../templates/default/booking.tpl:55
 #: ../templates/default/event.tpl:43
 msgid "Activities"
-msgstr ""
+msgstr "Діяльність"
 
 #: ../lib/GaletteEvents/Repository/Activities.php:84
 #: ../templates/default/activity.tpl:27
@@ -352,7 +352,7 @@ msgstr ""
 #: ../templates/default/activities.tpl:43
 #: ../templates/default/activities.tpl:58
 msgid "Events"
-msgstr ""
+msgstr "Events"
 
 #: ../templates/default/menu.tpl:5
 msgid "Calendar"
@@ -364,7 +364,7 @@ msgstr ""
 
 #: ../templates/default/menu.tpl:9
 msgid "Bookings"
-msgstr ""
+msgstr "Бронювання"
 
 #: ../templates/default/menu.tpl:10 ../templates/default/adh_fiche_action.tpl:2
 msgid "New booking"
