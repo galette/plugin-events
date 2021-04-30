@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2020-06-19 05:48+0200\n"
-"PO-Revision-Date: 2021-04-28 06:06+0000\n"
+"PO-Revision-Date: 2021-05-01 19:31+0000\n"
 "Last-Translator: Tymofij Lytvynenko <till.svit@gmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/galette/"
 "events-plugin/uk/>\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: ../_routes.php:98
 msgid "Events management"
-msgstr ""
+msgstr "Управління подіями"
 
 #: ../_routes.php:149
 msgid "Event ID cannot ben null calling edit route!"
@@ -259,7 +259,7 @@ msgstr ""
 #: ../templates/default/menu.tpl:12 ../templates/default/booking.tpl:55
 #: ../templates/default/event.tpl:43
 msgid "Activities"
-msgstr "Діяльність"
+msgstr "Діяльності"
 
 #: ../lib/GaletteEvents/Repository/Activities.php:84
 #: ../templates/default/activity.tpl:27
@@ -282,11 +282,11 @@ msgstr ""
 
 #: ../lib/GaletteEvents/Event.php:272 ../templates/default/event.tpl:19
 msgid "Begin date"
-msgstr ""
+msgstr "Дата початку"
 
 #: ../lib/GaletteEvents/Event.php:274 ../templates/default/event.tpl:23
 msgid "End date"
-msgstr ""
+msgstr "Дата завершення"
 
 #: ../lib/GaletteEvents/Event.php:297
 msgid "End date must be later or equal to begin date"
@@ -390,7 +390,7 @@ msgstr ""
 #: ../templates/default/booking.tpl:49 ../templates/default/activity.tpl:18
 #: ../templates/default/event.tpl:37
 msgid "Comment"
-msgstr ""
+msgstr "Коментар"
 
 #: ../templates/default/booking.tpl:71
 msgid "No activity for selected event"
@@ -417,12 +417,12 @@ msgstr ""
 #: ../templates/default/activities.tpl:21 ../templates/default/activity.tpl:14
 #: ../templates/default/events.tpl:21 ../templates/default/event.tpl:15
 msgid "Name"
-msgstr ""
+msgstr "Ім'я"
 
 #: ../templates/default/activities.tpl:33
 #: ../templates/default/activities.tpl:57
 msgid "Creation date"
-msgstr ""
+msgstr "Дата створення"
 
 #: ../templates/default/activities.tpl:44
 #: ../templates/default/activities.tpl:59 ../templates/default/activity.tpl:10
@@ -431,7 +431,7 @@ msgstr ""
 
 #: ../templates/default/activities.tpl:63
 msgid "Active"
-msgstr ""
+msgstr "Діяльний"
 
 #: ../templates/default/activities.tpl:65
 msgid "Inactive"
@@ -464,7 +464,7 @@ msgstr ""
 #: ../templates/default/activity.tpl:31 ../templates/default/activity.tpl:39
 #: ../templates/default/activity.tpl:47 ../templates/default/event.tpl:84
 msgid "Required"
-msgstr ""
+msgstr "Потрібно"
 
 #: ../templates/default/activity.tpl:53 ../templates/default/event.tpl:92
 msgid "Location"
@@ -472,16 +472,16 @@ msgstr ""
 
 #: ../templates/default/activity.tpl:56 ../templates/default/event.tpl:95
 msgid "Address"
-msgstr ""
+msgstr "Адреса"
 
 #: ../templates/default/activity.tpl:64 ../templates/default/events.tpl:45
 #: ../templates/default/events.tpl:75 ../templates/default/event.tpl:103
 msgid "Town"
-msgstr ""
+msgstr "Місто"
 
 #: ../templates/default/activity.tpl:68 ../templates/default/event.tpl:107
 msgid "Country"
-msgstr ""
+msgstr "Країна"
 
 #: ../templates/default/bookings.tpl:7
 msgid "Select..."
@@ -570,7 +570,7 @@ msgstr ""
 
 #: ../templates/default/events.tpl:33 ../templates/default/events.tpl:74
 msgid "Date"
-msgstr ""
+msgstr "Дата"
 
 #: ../templates/default/events.tpl:56 ../templates/default/events.tpl:77
 msgid "Open"
