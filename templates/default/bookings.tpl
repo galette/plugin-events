@@ -1,6 +1,6 @@
 {extends file="page.tpl"}
 {block name="content"}
-        <form action="{path_for name="filter-bookingslist" data=["event" => $filters->event_filter]}" method="post" id="filtre">
+        <form action="{path_for name="filter-bookingslist" data=["event" => $eventid]}" method="post" id="filtre">
         <div id="listfilter">
             <label for="event_filter">{_T string="Event" domain="events"}</label>
             <select name="event_filter" id="event_filter" required="required">
@@ -41,7 +41,7 @@
 {if $event}
     {if $login->isAdmin() or $login->isStaff() or $login->isGroupManager()}
             <a
-                href="{path_for name="events_bookings" data=["event" => "all"]}"
+                href="{path_for name="events_bookings" data=["event" => "all", "option" => "clear_filter", "value" => true]}"
                 class="tooltip"
             >
                 <i class="fas fa-eraser"></i>
@@ -163,12 +163,14 @@
                         </span>
                     </td>
                     <td class="{$rclass}" data-title="{_T string="Attendees" domain="events"}">{$booking->getNumberPeople()}</td>
-    {if $login->isAdmin() or $login->isStaff() or ($login->isGroupManager() and $booking->getEvent()->getGroup()|in_array:$login->managed_groups )}
+    {if $login->isAdmin() or $login->isStaff() or $login->isGroupManager()}
                     <td class="{$rclass} center nowrap actions_row">
+        {if $login->isAdmin() or $login->isStaff() or ($login->isGroupManager() and $booking->getEvent()->getGroup()|in_array:$login->managed_groups )}
                         <a href="{path_for name="events_booking" data=["action" => "edit", "id" => $bid]}" class="tooltip action">
                             <i class="fas fa-edit fa-fw"></i>
                             <span class="sr-only">{_T string="Edit booking" domain="events"}</span>
                         </a>
+        {/if}
         {if $login->isAdmin() or $login->isStaff()}
                         <a class="delete tooltip" href="{path_for name="events_remove_booking" data=["id" => $bid]}">
                             <i class="fas fa-trash fa-fw"></i>

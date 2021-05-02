@@ -153,8 +153,22 @@ class Event
             $results = $this->zdb->execute($select);
 
             if ($results->count() > 0) {
-                $this->loadFromRS($results->current());
-                $this->loadActivities();
+                $result = $results->current();
+                if (
+                    $this->login->isAdmin()
+                    || $this->login->isStaff()
+                    || $this->login->isGroupManager()
+                    && in_array($result->id_group, $this->login->managed_groups)
+                ) {
+                    $this->loadFromRS($results->current());
+                    $this->loadActivities();
+                } else {
+                    Analog::log(
+                        'Cannot load event form id `' . $id . '` | Not enough rights',
+                        Analog::WARNING
+                    );
+                    return false;
+                }
                 return true;
             } else {
                 return false;
