@@ -61,8 +61,8 @@
 {if $events|@count}
     {foreach from=$events item=event key=ordre}
                 <tr>
-                    <td class="{$rclass} right" data-scope="id">{$ordre+1+($filters->current_page - 1)*$numrows}</td>
-                    <td class="{$rclass} nowrap username_row" data-scope="row">
+                    <td class="right" data-scope="id">{$ordre+1+($filters->current_page - 1)*$numrows}</td>
+                    <td class="nowrap username_row" data-scope="row">
                         {assign var="eid" value=$event->getId()}
         {if $login->isAdmin() or $login->isStaff() or ($login->isGroupManager() and $event->getGroup()|in_array:$login->managed_groups )}
                         {*<input type="checkbox" name="event_sel[]" value="{$id}"/>*}
@@ -71,10 +71,10 @@
                         {$event->getName()}
         {/if}
                     </td>
-                    <td class="{$rclass}" data-title="{_T string="Date" domain="events"}">{$event->getBeginDate()}</td>
-                    <td class="{$rclass}" data-title="{_T string="Town" domain="events"}">{$event->getTown()}</td>
-                    <td class="{$rclass}" data-title="{_T string="Group" domain="events"}">{$event->getGroupName()}</td>
-                    <td class="{$rclass} center id_row tooltip {if $event->isOpen()}use{else}delete{/if}" data-title="{_T string="Open" domain="events"}">
+                    <td data-title="{_T string="Date" domain="events"}">{$event->getBeginDate()}</td>
+                    <td data-title="{_T string="Town" domain="events"}">{$event->getTown()}</td>
+                    <td data-title="{_T string="Group" domain="events"}">{$event->getGroupName()}</td>
+                    <td class="center id_row tooltip {if $event->isOpen()}use{else}delete{/if}" data-title="{_T string="Open" domain="events"}">
                         <i class="fas fa-{if $event->isOpen()}unlock{else}lock{/if}"></i>
                         <span class="sr-only">
                         {if $event->isOpen()}
@@ -83,7 +83,7 @@
                             {_T string="Event is closed" domain="events"}
                         {/if}
                     </td>
-                    <td class="{$rclass} center nowrap actions_row">
+                    <td class="center nowrap actions_row">
                         <a href="{path_for name="event_bookings_export" data=["id" => $eid]}" class="tooltip">
                             <i class="fas fa-file-csv fa-fw"></i>
                             <span class="sr-only">{_T string="%eventname: export bookings as CSV" domain="events" pattern="/%eventname/" replace=$event->getName()}</span>

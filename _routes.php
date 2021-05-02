@@ -407,27 +407,17 @@ $this->post(
 )->setName('events_do_remove_event')->add($authenticate);
 
 $this->get(
-    '/bookings/{event:guess|all|\d+}[/{option:page|order}/{value:\d+}]',
+    '/bookings/{event:guess|all|\d+}[/{option:page|order|clear_filter}/{value:\d+}]',
     function ($request, $response, $args) use ($module, $module_id) {
-        $option = null;
-        if (isset($args['option'])) {
-            $option = $args['option'];
-        }
-        $value = null;
-        if (isset($args['value'])) {
-            $value = $args['value'];
-        }
+        $option = $args['option'] ?? null;
+        $value = $args['value'] ?? null;
+        $linked_event = $args['event'];
+        $filters = $this->session->filter_bookings ?? new BookingsList();
 
-        if (isset($this->session->filter_bookings)) {
-            $filters = $this->session->filter_bookings;
+        if ($linked_event == 'guess') {
+            $linked_event = $filters->event_filter;
         } else {
-            $filters = new BookingsList();
-        }
-
-        if ($args['event'] == 'guess') {
-            $args['event'] = $filters->event_filter;
-        } else {
-            $filters->event_filter = $args['event'];
+            $linked_event = $args['event'];
         }
 
         if ($option !== null) {
@@ -438,13 +428,16 @@ $this->get(
                 case 'order':
                     $filters->orderby = $value;
                     break;
+                case 'clear_filter':
+                    $filters->reinit();
+                    break;
             }
         }
 
         $event = null;
-        if ($args['event'] !== 'all') {
-            $filters->event_filter = (int)$args['event'];
-            $event = new Event($this->zdb, $this->login, (int)$args['event']);
+        if ($linked_event !== 'all') {
+            $filters->event_filter = (int)$linked_event;
+            $event = new Event($this->zdb, $this->login, (int)$linked_event);
         }
 
         //Groups
@@ -471,7 +464,7 @@ $this->get(
                 'bookings_list'     => $list,
                 'nb_bookings'       => $count,
                 'event'             => $event,
-                'eventid'           => $filters->event_filter,
+                'eventid'           => $linked_event,
                 'require_dialog'    => true,
                 'filters'           => $filters,
                 'events'            => $events->getList(),
@@ -496,6 +489,7 @@ $this->post(
         //reintialize filters
         if (isset($post['clear_filter'])) {
             $filters->reinit();
+            $args['event'] = 'all';
         } else {
             //number of rows to show
             if (isset($post['nbshow'])) {
@@ -869,7 +863,8 @@ $this->post(
 )->setName('events_do_remove_booking')->add($authenticate);
 
 //booking CSV export
-$this->post(
+$this->map(
+    ['GET', 'POST'],
     '/events/{id:\d+}/export/bookings',
     GaletteEvents\Controllers\CsvController::class . ':bookingsExport'
 )->setName('event_bookings_export')->add($authenticate);
@@ -880,7 +875,7 @@ $this->post(
 )->setName('events_bookings_export')->add($authenticate);
 
 
-//Batch actions on members list
+//Batch actions on bookings list
 $this->post(
     '/bookings/batch',
     function ($request, $response) {
@@ -905,7 +900,7 @@ $this->post(
             $mfilter->selected = $members;
 
             if (isset($post['mailing'])) {
-                $this->session->filter_mailing = $mfilter;
+                $this->session->filter_members = $mfilter;
                 $this->session->redirect_mailing = $this->router->pathFor(
                     'events_bookings',
                     [
@@ -1020,35 +1015,6 @@ $this->get(
         return $response;
     }
 )->setName('events_activities')->add($authenticate);
-
-//events list filtering
-/*$this->post(
-    '/events/filter',
-    function ($request, $response) {
-        $post = $request->getParsedBody();
-        if (isset($this->session->filter_events)) {
-            $filters = $this->session->filter_events;
-        } else {
-            $filters = new EventsList();
-        }
-
-        //reintialize filters
-        if (isset($post['clear_filter'])) {
-            $filters->reinit();
-        } else {
-            //number of rows to show
-            if (isset($post['nbshow'])) {
-                $filters->show = $post['nbshow'];
-            }
-        }
-
-        $this->session->filter_events = $filters;
-
-        return $response
-            ->withStatus(301)
-            ->withHeader('Location', $this->router->pathFor('events_events'));
-    }
-)->setName('filter-eventslist')->add($authenticate);*/
 
 $this->get(
     '/activity/{action:edit|add}[/{id:\d+}]',
@@ -1321,11 +1287,12 @@ $this->get(
             $value = $args['value'];
         }
 
-        if (isset($this->session->filter_events)) {
-            $filters = $this->session->filter_events;
+        if (isset($this->session->filter_events_calendar)) {
+            $filters = $this->session->filter_events_calendar;
         } else {
             $filters = new EventsList();
         }
+        $filters->calendar_filter = true;
 
         if ($option !== null) {
             switch ($option) {
@@ -1343,7 +1310,7 @@ $this->get(
         //assign pagination variables to the template and add pagination links
         $filters->setSmartyPagination($this->router, $this->view->getSmarty(), false);
 
-        $this->session->filter_events = $filters;
+        $this->session->filter_events_calendar = $filters;
 
         //check if JS has been generated
         if (!file_exists(__DIR__ . '/webroot/js/calendar.bundle.js')) {
@@ -1374,7 +1341,7 @@ $this->get(
     '/ajax/events/calendar',
     function ($request, $response, $args) use ($module, $module_id) {
         $get = $request->getQueryParams();
-        $filters = new EventsList();
+        $filters = $this->session->filter_events_calendar ?? new EventsList();
         $filters->calendar_filter = true;
         $filters->start_date_filter = date(__("Y-m-d"), strtotime($get['start']));
         $filters->end_date_filter = date(__("Y-m-d"), strtotime($get['end']));

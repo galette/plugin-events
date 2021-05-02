@@ -68,14 +68,14 @@ class Bookings
     private $count;
     private $sum;
 
-    const ORDERBY_EVENT = 0;
-    const ORDERBY_MEMBER = 1;
-    const ORDERBY_BOOKDATE = 2;
-    const ORDERBY_PAID = 3;
+    public const ORDERBY_EVENT = 0;
+    public const ORDERBY_MEMBER = 1;
+    public const ORDERBY_BOOKDATE = 2;
+    public const ORDERBY_PAID = 3;
 
-    const FILTER_DC_PAID = 0;
-    const FILTER_PAID = 1;
-    const FILTER_NOT_PAID = 2;
+    public const FILTER_DC_PAID = 0;
+    public const FILTER_PAID = 1;
+    public const FILTER_NOT_PAID = 2;
 
     /**
      * Constructor
@@ -192,7 +192,18 @@ class Bookings
         try {
             $sumSelect = clone $select;
             $sumSelect->reset($sumSelect::COLUMNS);
+            $joins = $sumSelect->joins;
             $sumSelect->reset($sumSelect::JOINS);
+            foreach ($joins as $join) {
+                $sumSelect->join(
+                    $join['name'],
+                    $join['on'],
+                    [],
+                    $join['type']
+                );
+                unset($join['columns']);
+            }
+
             $sumSelect->reset($sumSelect::ORDER);
             $sumSelect->columns(
                 array(
@@ -255,6 +266,7 @@ class Bookings
             if (
                 $this->filters->group_filter !== null
                 && $this->filters->group_filter != 'all'
+                && $this->filters->group_filter != 0
             ) {
                 $select->where(['e.' . Group::PK => $this->filters->group_filter]);
             }
@@ -270,7 +282,22 @@ class Bookings
                     $groups = array_merge($groups, $this->login->managed_groups);
                 }
 
-                $set = [new Predicate\IsNull(Group::PK)];
+                $set = [new PredicateSet(
+                    array(
+                        new Predicate\IsNull(Group::PK),
+                        new Predicate\Operator(
+                            'is_open',
+                            '=',
+                            true
+                        ),
+                        new Predicate\Operator(
+                            'begin_date',
+                            '>=',
+                            date('Y-m-d')
+                        )
+                    )
+                )];
+
                 if (count($groups)) {
                     $set[] = new Predicate\In(
                         Group::PK,

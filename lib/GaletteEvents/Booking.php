@@ -56,8 +56,8 @@ use Laminas\Db\Sql\Expression;
  */
 class Booking
 {
-    const TABLE = 'bookings';
-    const PK = 'id_booking';
+    public const TABLE = 'bookings';
+    public const PK = 'id_booking';
 
     private $zdb;
     private $login;
@@ -675,7 +675,7 @@ class Booking
     public function getPaymentMethodName()
     {
         $pt = new PaymentType($this->zdb, (int)$this->payment_method);
-        return $pt->name;
+        return $pt->getname();
     }
 
     /**
