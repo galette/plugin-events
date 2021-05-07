@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2020-06-19 05:48+0200\n"
-"PO-Revision-Date: 2021-05-01 19:31+0000\n"
+"PO-Revision-Date: 2021-05-08 20:32+0000\n"
 "Last-Translator: Tymofij Lytvynenko <till.svit@gmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/galette/"
 "events-plugin/uk/>\n"
@@ -23,20 +23,20 @@ msgstr "Управління подіями"
 
 #: ../_routes.php:149
 msgid "Event ID cannot ben null calling edit route!"
-msgstr ""
+msgstr "ID події не може призвести до нульового виклику редагування маршруту!"
 
 #: ../_routes.php:170 ../_routes.php:330 ../templates/default/booking.tpl:14
 #: ../templates/default/bookings.tpl:5 ../templates/default/bookings.tpl:74
 msgid "Event"
-msgstr ""
+msgstr "Подія"
 
 #: ../_routes.php:234
 msgid "Activity has been attached to event."
-msgstr ""
+msgstr "Діяльність долучена до події."
 
 #: ../_routes.php:235
 msgid "Do not forget to store the event"
-msgstr ""
+msgstr "Не забудьте зберегти подію"
 
 #: ../_routes.php:237
 msgid "Activity has been detached from event."
