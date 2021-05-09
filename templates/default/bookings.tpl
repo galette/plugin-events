@@ -141,7 +141,7 @@
                         {assign var="bid" value=$booking->getId()}
         {if $login->isAdmin() or $login->isStaff() or ($login->isGroupManager() and $booking->getEvent()->getGroup()|in_array:$login->managed_groups )}
                         <input type="checkbox" name="event_sel[]" value="{$bid}"/>
-                        <a href="{path_for name="events_event" data=["action" => "edit", "id" => $booking->getEventId()]}">{$booking->getEvent()->getName()}</a>
+                        <a href="{path_for name="events_event_edit" data=["id" => $booking->getEventId()]}">{$booking->getEvent()->getName()}</a>
         {else}
                         {$booking->getEvent()->getName()}
         {/if}

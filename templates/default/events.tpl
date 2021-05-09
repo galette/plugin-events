@@ -66,7 +66,7 @@
                         {assign var="eid" value=$event->getId()}
         {if $login->isAdmin() or $login->isStaff() or ($login->isGroupManager() and $event->getGroup()|in_array:$login->managed_groups )}
                         {*<input type="checkbox" name="event_sel[]" value="{$id}"/>*}
-                        <a href="{path_for name="events_event" data=["action" => "edit", "id" => $eid]}">{$event->getName()}</a>
+                        <a href="{path_for name="events_event_edit" data=["id" => $eid]}">{$event->getName()}</a>
         {else}
                         {$event->getName()}
         {/if}
@@ -93,7 +93,7 @@
                             <span class="sr-only">{_T string="%eventname: show bookings" domain="events" pattern="/%eventname/" replace=$event->getName()}</span>
                         </a>
     {if $login->isAdmin() or $login->isStaff() or ($login->isGroupManager() and $event->getGroup()|in_array:$login->managed_groups )}
-                        <a href="{path_for name="events_event" data=["action" => "edit", "id" => $eid]}" class="tooltip action">
+                        <a href="{path_for name="events_event_edit" data=["id" => $eid]}" class="tooltip action">
                             <i class="fas fa-edit fa-fw"></i>
                             <span class="sr-only">{_T string="%eventname: edit informations" domain="events" pattern="/%eventname/" replace=$event->getName()}</span>
                         </a>
