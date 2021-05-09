@@ -47,6 +47,7 @@ use Galette\Repository\Members;
 use Galette\Filters\MembersList;
 use Galette\Entity\Adherent;
 use GaletteEvents\Controllers\Crud\EventsController;
+use GaletteEvents\Controllers\Crud\ActivitiesController;
 
 //Constants and classes from plugin
 require_once $module['root'] . '/_config.inc.php';
@@ -650,318 +651,41 @@ $this->post(
 
 $this->get(
     '/activities[/{option:page|order}/{value:\d+}]',
-    function ($request, $response, $args) use ($module, $module_id) {
-        $option = null;
-        if (isset($args['option'])) {
-            $option = $args['option'];
-        }
-        $value = null;
-        if (isset($args['value'])) {
-            $value = $args['value'];
-        }
-
-        if (isset($this->session->filter_activities)) {
-            $filters = $this->session->filter_activities;
-        } else {
-            $filters = new ActivitiesList();
-        }
-
-        if ($option !== null) {
-            switch ($option) {
-                case 'page':
-                    $filters->current_page = (int)$value;
-                    break;
-                case 'order':
-                    $filters->orderby = $value;
-                    break;
-            }
-        }
-
-        $activities = new Activities($this->zdb, $this->login, $this->preferences, $filters);
-        $list = $activities->getList();
-        if (!count($list)) {
-            $activities->installInit();
-            $list = $activities->getList();
-        }
-
-        //assign pagination variables to the template and add pagination links
-        $filters->setSmartyPagination($this->router, $this->view->getSmarty(), false);
-
-        $this->session->filter_activities = $filters;
-
-        // display page
-        $this->view->render(
-            $response,
-            'file:[' . $module['route'] . ']activities.tpl',
-            array(
-                'page_title'            => _T("Activities management", "events"),
-                'require_dialog'        => true,
-                'activities'            => $list,
-                'nb_activities'         => $activities->getCount(),
-                'filters'               => $filters
-            )
-        );
-        return $response;
-    }
+    [ActivitiesController::class, 'list']
 )->setName('events_activities')->add($authenticate);
 
 $this->get(
-    '/activity/{action:edit|add}[/{id:\d+}]',
-    function ($request, $response, $args) use ($module, $module_id) {
-        $action = $args['action'];
-        $id = null;
-        if (isset($args['id'])) {
-            $id = $args['id'];
-        }
-
-        if ($action === 'edit' && $id === null) {
-            throw new \RuntimeException(
-                _T("Activity ID cannot ben null calling edit route!", "events")
-            );
-        } elseif ($action === 'add' && $id !== null) {
-            return $response
-                ->withStatus(301)
-                ->withHeader('Location', $this->router->pathFor('events_activity', ['action' => 'add']));
-        }
-        $route_params = ['action' => $args['action']];
-
-        if ($this->session->activity !== null) {
-            $event = $this->session->activity;
-            $this->session->activity = null;
-        } else {
-            $activity = new Activity($this->zdb, $this->login);
-        }
-
-        if ($id !== null && $activity->getId() != $id) {
-            $activity->load($id);
-        }
-
-        // template variable declaration
-        $title = _T("Activity", "events");
-        if ($activity->getId() != '') {
-            $title .= ' (' . _T("modification") . ')';
-        } else {
-            $title .= ' (' . _T("creation") . ')';
-        }
-
-        // display page
-        $this->view->render(
-            $response,
-            'file:[' . $module['route'] . ']activity.tpl',
-            array_merge(
-                $route_params,
-                array(
-                    'autocomplete'  => true,
-                    'page_title'    => $title,
-                    'activity'      => $activity,
-                    // pseudo random int
-                    'time'          => time()
-                )
-            )
-        );
-        return $response;
-    }
+    '/activity/add',
+    [ActivitiesController::class, 'add']
 )->setName(
-    'events_activity'
+    'events_activity_add'
+)->add($authenticate);
+
+$this->get(
+    '/activity/edit/{id:\d+}',
+    [ActivitiesController::class, 'edit']
+)->setName(
+    'events_activity_edit'
 )->add($authenticate);
 
 $this->post(
+    '/activity/add',
+    [ActivitiesController::class, 'doAdd']
+)->setName('events_storeactivity_add');
+
+$this->post(
     '/activity/store',
-    function ($request, $response, $args) {
-        $post = $request->getParsedBody();
-        $activity = new Activity($this->zdb, $this->login);
-        if (isset($post['id']) && !empty($post['id'])) {
-            $activity->load((int)$post['id']);
-        }
-
-        $success_detected = [];
-        $warning_detected = [];
-        $error_detected = [];
-
-        // Validation
-        $valid = $activity->check($post);
-        if ($valid !== true) {
-            $error_detected = array_merge($error_detected, $valid);
-        }
-
-        if (count($error_detected) == 0) {
-            //all goes well, we can proceed
-
-            $new = false;
-            if ($activity->getId() == '') {
-                $new = true;
-            }
-            $store = $activity->store();
-            if ($store === true) {
-                //member has been stored :)
-                if ($new) {
-                    $success_detected[] = _T("New activity has been successfully added.", "events");
-                } else {
-                    $success_detected[] = _T("Activity has been modified.", "events");
-                }
-            } else {
-                //something went wrong :'(
-                $error_detected[] = _T("An error occured while storing the activity.", "events");
-            }
-        }
-
-        if (count($error_detected) > 0) {
-            foreach ($error_detected as $error) {
-                $this->flash->addMessage(
-                    'error_detected',
-                    $error
-                );
-            }
-        }
-
-        if (count($warning_detected) > 0) {
-            foreach ($warning_detected as $warning) {
-                $this->flash->addMessage(
-                    'warning_detected',
-                    $warning
-                );
-            }
-        }
-        if (count($success_detected) > 0) {
-            foreach ($success_detected as $success) {
-                $this->flash->addMessage(
-                    'success_detected',
-                    $success
-                );
-            }
-        }
-
-        if (count($error_detected) == 0) {
-            $redirect_url = $this->router->pathFor('events_activities');
-        } else {
-            //store entity in session
-            $this->session->activity = $activity;
-
-            if ($activity->getId()) {
-                $rparams = [
-                    'id'        => $activity->getId(),
-                    'action'    => 'edit'
-                ];
-            } else {
-                $rparams = ['action' => 'add'];
-            }
-            $redirect_url = $this->router->pathFor(
-                'events_activity',
-                $rparams
-            );
-        }
-
-        return $response
-            ->withStatus(301)
-            ->withHeader('Location', $redirect_url);
-    }
-)->setName('events_storeactivity')->add($authenticate);
+    [ActivitiesController::class, 'doEdit']
+)->setName('events_storeactivity_edit')->add($authenticate);
 
 $this->get(
     '/activity/remove/{id:\d+}',
-    function ($request, $response, $args) {
-        $activity = new Activity($this->zdb, $this->login, (int)$args['id']);
-
-        $data = [
-            'id'            => $args['id'],
-            'redirect_uri'  => $this->router->pathFor('events_activities')
-        ];
-
-        // display page
-        $this->view->render(
-            $response,
-            'confirm_removal.tpl',
-            array(
-                'type'          => _T("Activity", "events"),
-                'mode'          => $request->isXhr() ? 'ajax' : '',
-                'page_title'    => sprintf(
-                    _T('Remove activity %1$s', 'events'),
-                    $activity->getName()
-                ),
-                'form_url'      => $this->router->pathFor(
-                    'events_do_remove_activity',
-                    ['id' => $activity->getId()]
-                ),
-                'cancel_uri'    => $this->router->pathFor('events_activities'),
-                'data'          => $data
-            )
-        );
-        return $response;
-    }
+    [ActivitiesController::class, 'confirmDelete']
 )->setName('events_remove_activity')->add($authenticate);
 
 $this->post(
     '/activity/remove[/{id:\d+}]',
-    function ($request, $response) {
-        $post = $request->getParsedBody();
-        $ajax = isset($post['ajax']) && $post['ajax'] === 'true';
-        $success = false;
-
-        $uri = isset($post['redirect_uri']) ?
-            $post['redirect_uri'] :
-            $this->router->pathFor('slash');
-
-        if (!isset($post['confirm'])) {
-            $this->flash->addMessage(
-                'error_detected',
-                _T("Removal has not been confirmed!")
-            );
-        } else {
-            $activity = new Activity($this->zdb, $this->login, (int)$post['id']);
-            $count_usage = $activity->countEvents();
-            if ($count_usage > 0) {
-                $error_detected = str_replace(
-                    ['%name', '%count'],
-                    [$activity->getName(), $count_usage],
-                    _T('Activity %name is referenced in %count events, it cannot be removed.', 'events')
-                );
-                $this->flash->addMessage(
-                    'error_detected',
-                    $error_detected
-                );
-            } else {
-                $del = $activity->remove();
-
-                if ($del !== true) {
-                    $error_detected = str_replace(
-                        '%name',
-                        $activity->getName(),
-                        _T("An error occured trying to remove activity %name :/", "events")
-                    );
-
-                    $this->flash->addMessage(
-                        'error_detected',
-                        $error_detected
-                    );
-                } else {
-                    $success_detected = str_replace(
-                        '%name',
-                        $activity->getName(),
-                        _T("Activity %name has been successfully deleted.", "events")
-                    );
-
-                    $this->flash->addMessage(
-                        'success_detected',
-                        $success_detected
-                    );
-
-                    $success = true;
-                }
-            }
-        }
-
-        if (!$ajax) {
-            return $response
-                ->withStatus(301)
-                ->withHeader('Location', $uri);
-        } else {
-            return $response->withJson(
-                [
-                    'success'   => $success
-                ]
-            );
-        }
-    }
+    [ActivitiesController::class, 'delete']
 )->setName('events_do_remove_activity')->add($authenticate);
 
 $this->get(
