@@ -6,8 +6,8 @@
     {if $login->isAdmin() or $login->isStaff() or $login->isGroupManager()}
             <li{if $cur_route eq "events_event_add"} class="selected"{/if}><a href="{path_for name="events_event_add" data=["action" => "add"]}">{_T string="New event" domain="events"}</a></li>
     {/if}
-            <li{if $cur_route eq "events_bookings"} class="selected"{/if}><a href="{path_for name="events_bookings" data=["event" => "all"]}">{_T string="Bookings" domain="events"}</a></li>
-            <li{if $cur_route eq "events_booking"} class="selected"{/if}><a href="{path_for name="events_booking" data=["action" => "add"]}">{_T string="New booking" domain="events"}</a></li>
+            <li{if $cur_route eq "events_bookings" or $cur_route eq "events_booking_edit"} class="selected"{/if}><a href="{path_for name="events_bookings" data=["event" => "all"]}">{_T string="Bookings" domain="events"}</a></li>
+            <li{if $cur_route eq "events_booking_add"} class="selected"{/if}><a href="{path_for name="events_booking_add"}">{_T string="New booking" domain="events"}</a></li>
     {if $login->isAdmin() or $login->isStaff()}
             <li{if $cur_route eq "events_activities" or $cur_route eq "events_activity_edit"} class="selected"{/if}><a href="{path_for name="events_activities"}">{_T string="Activities" domain="events"}</a></li>
             <li{if $cur_route eq "events_activity_add"} class="selected"{/if}><a href="{path_for name="events_activity_add"}">{_T string="New activity" domain="events"}</a></li>

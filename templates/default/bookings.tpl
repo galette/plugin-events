@@ -49,7 +49,7 @@
             </a>
     {/if}
             <strong>{_T string="%event's bookings" domain="events" pattern="/%event/" replace=$event->getName()}</strong>
-            (<a href="{path_for name="events_booking" data=["action" => "add"]}?event={$event->getId()}">{_T string="Add a new booking" domain="events"}</a>)
+            (<a href="{path_for name="events_booking_add"}?event={$event->getId()}">{_T string="Add a new booking" domain="events"}</a>)
             -
 {/if}
 {if $nb_bookings gt 0}
@@ -166,7 +166,7 @@
     {if $login->isAdmin() or $login->isStaff() or $login->isGroupManager()}
                     <td class="{$rclass} center nowrap actions_row">
         {if $login->isAdmin() or $login->isStaff() or ($login->isGroupManager() and $booking->getEvent()->getGroup()|in_array:$login->managed_groups )}
-                        <a href="{path_for name="events_booking" data=["action" => "edit", "id" => $bid]}" class="tooltip action">
+                        <a href="{path_for name="events_booking_edit" data=["id" => $bid]}" class="tooltip action">
                             <i class="fas fa-edit fa-fw"></i>
                             <span class="sr-only">{_T string="Edit booking" domain="events"}</span>
                         </a>

@@ -35,7 +35,6 @@
  */
 
 use Galette\Repository\Groups;
-use GaletteEvents\Filters\EventsList;
 use GaletteEvents\Filters\BookingsList;
 use GaletteEvents\Filters\ActivitiesList;
 use GaletteEvents\Event;
@@ -48,6 +47,7 @@ use Galette\Filters\MembersList;
 use Galette\Entity\Adherent;
 use GaletteEvents\Controllers\Crud\EventsController;
 use GaletteEvents\Controllers\Crud\ActivitiesController;
+use GaletteEvents\Controllers\Crud\BookingsController;
 
 //Constants and classes from plugin
 require_once $module['root'] . '/_config.inc.php';
@@ -99,458 +99,43 @@ $this->post(
 
 $this->get(
     '/bookings/{event:guess|all|\d+}[/{option:page|order|clear_filter}/{value:\d+}]',
-    function ($request, $response, $args) use ($module, $module_id) {
-        $option = $args['option'] ?? null;
-        $value = $args['value'] ?? null;
-        $linked_event = $args['event'];
-        $filters = $this->session->filter_bookings ?? new BookingsList();
-
-        if ($linked_event == 'guess') {
-            $linked_event = $filters->event_filter;
-        } else {
-            $linked_event = $args['event'];
-        }
-
-        if ($option !== null) {
-            switch ($option) {
-                case 'page':
-                    $filters->current_page = (int)$value;
-                    break;
-                case 'order':
-                    $filters->orderby = $value;
-                    break;
-                case 'clear_filter':
-                    $filters->reinit();
-                    break;
-            }
-        }
-
-        $event = null;
-        if ($linked_event !== 'all') {
-            $filters->event_filter = (int)$linked_event;
-            $event = new Event($this->zdb, $this->login, (int)$linked_event);
-        }
-
-        //Groups
-        $groups = new Groups($this->zdb, $this->login);
-        $groups_list = $groups->getList();
-
-        $bookings = new Bookings($this->zdb, $this->login, $filters);
-
-        //assign pagination variables to the template and add pagination links
-        $filters->setSmartyPagination($this->router, $this->view->getSmarty(), false);
-
-        $this->session->filter_bookings = $filters;
-
-        $events = new Events($this->zdb, $this->login);
-        $list = $bookings->getList();
-        $count = $bookings->getCount();
-        // display page
-        $this->view->render(
-            $response,
-            'file:[' . $module['route'] . ']bookings.tpl',
-            [
-                'page_title'        => _T("Bookings management", "events"),
-                'bookings'          => $bookings,
-                'bookings_list'     => $list,
-                'nb_bookings'       => $count,
-                'event'             => $event,
-                'eventid'           => $linked_event,
-                'require_dialog'    => true,
-                'filters'           => $filters,
-                'events'            => $events->getList(),
-                'groups'            => $groups_list
-            ]
-        );
-        return $response;
-    }
+    [BookingsController::class, 'listBookings']
 )->setName('events_bookings');
 
 //bookings list filtering
 $this->post(
     '/bookings/filter/{event:guess|all|\d+}',
-    function ($request, $response, $args) {
-        $post = $request->getParsedBody();
-        if (isset($this->session->filter_bookings)) {
-            $filters = $this->session->filter_bookings;
-        } else {
-            $filters = new BookingsList();
-        }
-
-        //reintialize filters
-        if (isset($post['clear_filter'])) {
-            $filters->reinit();
-            $args['event'] = 'all';
-        } else {
-            //number of rows to show
-            if (isset($post['nbshow'])) {
-                $filters->show = $post['nbshow'];
-            }
-
-            if (isset($post['paid_filter'])) {
-                if (is_numeric($post['paid_filter'])) {
-                    $filters->paid_filter = $post['paid_filter'];
-                }
-            }
-
-            if (isset($post['payment_type_filter'])) {
-                if (is_numeric($post['payment_type_filter'])) {
-                    $filters->payment_type_filter = $post['payment_type_filter'];
-                }
-            }
-
-            if (isset($post['event_filter'])) {
-                if (is_numeric($post['event_filter'])) {
-                    $filters->event_filter = $post['event_filter'];
-                }
-            }
-
-            if (isset($post['group_filter'])) {
-                if (is_numeric($post['group_filter'])) {
-                    $filters->group_filter = $post['group_filter'];
-                }
-            }
-        }
-
-        $this->session->filter_bookings = $filters;
-
-        return $response
-            ->withStatus(301)
-            ->withHeader(
-                'Location',
-                $this->router->pathFor('events_bookings', $args)
-            );
-    }
+    [BookingsController::class, 'filterBookings']
 )->setName('filter-bookingslist')->add($authenticate);
 
 $this->get(
-    '/booking/{action:edit|add}[/{id:\d+}]',
-    function ($request, $response, $args) use ($module, $module_id) {
-        $action = $args['action'];
-        $get = $request->getQueryParams();
+    '/booking/add',
+    [BookingsController::class, 'add']
+)->setName('events_booking_add')->add($authenticate);
 
-        $id = null;
-        if (isset($args['id'])) {
-            $id = $args['id'];
-        }
-
-        if ($action === 'edit' && $id === null) {
-            throw new \RuntimeException(
-                _T("Booking ID cannot ben null calling edit route!", "events")
-            );
-        } elseif ($action === 'add' && $id !== null) {
-            return $response
-                ->withStatus(301)
-                ->withHeader('Location', $this->router->pathFor('events_bookings', ['action' => 'add']));
-        }
-        $route_params = ['action' => $args['action']];
-
-        if ($this->session->booking !== null) {
-            $booking = $this->session->booking;
-            $this->session->booking = null;
-        } else {
-            $booking = new Booking($this->zdb, $this->login);
-        }
-
-        if ($id !== null && $booking->getId() != $id) {
-            $booking->load($id);
-        }
-
-        // template variable declaration
-        $title = _T("Booking", "events");
-        if ($booking->getId() != '') {
-            $title .= ' (' . _T("modification") . ')';
-        } else {
-            $title .= ' (' . _T("creation") . ')';
-        }
-
-        //Events
-        $events = new Events($this->zdb, $this->login);
-        if ($action === 'add') {
-            if (isset($get['event'])) {
-                $booking->setEvent((int)$get['event']);
-            }
-            if (
-                isset($_GET[Adherent::PK]) &&
-                ($this->login->isAdmin() || $this->login->isStaff() || $this->login->isGroupManager())
-            ) {
-                $booking->setMember((int)$_GET[Adherent::PK]);
-            } elseif (
-                !$this->login->isSuperAdmin()
-                && !$this->login->isAdmin()
-                && !$this->login->isStaff()
-                && !$this->login->isGroupManager()
-            ) {
-                $booking->setMember($this->login->id);
-            }
-        }
-
-        if (
-            $this->login->isAdmin()
-            || $this->login->isStaff()
-            || $this->login->isGroupManager()
-        ) {
-            // members
-            $members = [];
-            $m = new Members();
-            $required_fields = array(
-                'id_adh',
-                'nom_adh',
-                'prenom_adh'
-            );
-            $list_members = $m->getList(false, $required_fields);
-
-            if (count($list_members) > 0) {
-                foreach ($list_members as $member) {
-                    $pk = Adherent::PK;
-                    $sname = mb_strtoupper($member->nom_adh, 'UTF-8') .
-                        ' ' . ucwords(mb_strtolower($member->prenom_adh, 'UTF-8')) .
-                        ' (' . $member->id_adh . ')';
-                    $members[$member->$pk] = $sname;
-                }
-            }
-
-            $route_params['members'] = [
-                'filters'   => $m->getFilters(),
-                'count'     => $m->getCount()
-            ];
-            $route_params['autocomplete'] = true;
-
-            //check if current attached member is part of the list
-            if (
-                isset($booking)
-                && $booking->getMemberId() > 0
-                && !isset($members[$booking->getMemberId()])
-            ) {
-                $members[$booking->getMemberId()] = Adherent::getSName($this->zdb, $booking->getMemberId(), true);
-            }
-
-            if (count($members)) {
-                $route_params['members']['list'] = $members;
-            }
-        } else {
-            $booking->setMember($this->login->id);
-        }
-
-        // display page
-        $this->view->render(
-            $response,
-            'file:[' . $module['route'] . ']booking.tpl',
-            array_merge(
-                $route_params,
-                array(
-                    'autocomplete'      => true,
-                    'page_title'        => $title,
-                    'booking'           => $booking,
-                    'events'            => $events->getList(),
-                    'require_dialog'    => true,
-                    'require_calendar'  => true,
-                    // pseudo random int
-                    'time'              => time()
-                )
-            )
-        );
-        return $response;
-    }
-)->setName('events_booking')->add($authenticate);
+$this->get(
+    '/booking/edit/{id:\d+}',
+    [BookingsController::class, 'edit']
+)->setName('events_booking_edit')->add($authenticate);
 
 $this->post(
-    '/booking/store',
-    function ($request, $response, $args) {
-        $post = $request->getParsedBody();
-        $booking = new Booking($this->zdb, $this->login);
-        if (isset($post['id']) && !empty($post['id'])) {
-            $booking->load((int)$post['id']);
-        }
+    '/booking/add',
+    [BookingsController::class, 'doAdd']
+)->setName('events_storebooking_add')->add($authenticate);
 
-        if (isset($post['cancel'])) {
-            $redirect_url = $this->router->pathFor(
-                'events_bookings',
-                ['event' => 'guess']
-            );
-            return $response
-                ->withStatus(301)
-                ->withHeader('Location', $redirect_url);
-        }
-
-        $success_detected = [];
-        $warning_detected = [];
-        $error_detected = [];
-        $goto_list = true;
-
-        // Validation
-        $valid = $booking->check($post);
-        if ($valid !== true) {
-            $error_detected = array_merge($error_detected, $valid);
-        }
-
-        if (count($error_detected) == 0) {
-            //all goes well, we can proceed
-
-            $new = false;
-            if ($booking->getId() == '') {
-                $new = true;
-            }
-            $store = $booking->store();
-            if ($store === true) {
-                //member has been stored :)
-                if ($new) {
-                    $success_detected[] = _T("New booking has been successfully added.", "events");
-                } else {
-                    $success_detected[] = _T("Booking has been modified.", "events");
-                }
-            } elseif ($store === false) {
-                //something went wrong :'(
-                $error_detected[] = _T("An error occured while storing the booking.", "events");
-            } else {
-                $error_detected[] = $store;
-            }
-        }
-
-        if (!isset($post['save'])) {
-            $this->session->booking = $booking;
-            $error_detected = [];
-            $goto_list = false;
-            $warning_detected[] = _T('Do not forget to store the booking', 'events');
-        }
-
-
-        if (count($error_detected) > 0) {
-            foreach ($error_detected as $error) {
-                $this->flash->addMessage(
-                    'error_detected',
-                    $error
-                );
-            }
-        }
-
-        if (count($warning_detected) > 0) {
-            foreach ($warning_detected as $warning) {
-                $this->flash->addMessage(
-                    'warning_detected',
-                    $warning
-                );
-            }
-        }
-        if (count($success_detected) > 0) {
-            foreach ($success_detected as $success) {
-                $this->flash->addMessage(
-                    'success_detected',
-                    $success
-                );
-            }
-        }
-
-        if (count($error_detected) == 0 && $goto_list) {
-            $redirect_url = $this->router->pathFor(
-                'events_bookings',
-                ['event' => $booking->getEventId()]
-            );
-        } else {
-            //store entity in session
-            $this->session->booking = $booking;
-
-            if ($booking->getId()) {
-                $rparams = [
-                    'id'        => $booking->getId(),
-                    'action'    => 'edit'
-                ];
-            } else {
-                $rparams = ['action' => 'add'];
-            }
-            $redirect_url = $this->router->pathFor(
-                'events_booking',
-                $rparams
-            );
-        }
-
-        return $response
-            ->withStatus(301)
-            ->withHeader('Location', $redirect_url);
-    }
-)->setName('events_storebooking')->add($authenticate);
+$this->post(
+    '/booking/edit/{id:\d+}',
+    [BookingsController::class, 'doEdit']
+)->setName('events_storebooking_edit')->add($authenticate);
 
 $this->get(
     '/booking/remove/{id:\d+}',
-    function ($request, $response, $args) {
-        $booking = new Booking($this->zdb, $this->login, (int)$args['id']);
-
-        $data = [
-            'id'            => $args['id'],
-            'redirect_uri'  => $this->router->pathFor('events_bookings', ['event' => $booking->getEventId()])
-        ];
-
-        // display page
-        $this->view->render(
-            $response,
-            'confirm_removal.tpl',
-            array(
-                'type'          => _T("Booking", "events"),
-                'mode'          => $request->isXhr() ? 'ajax' : '',
-                'page_title'    => _T('Remove booking', 'events'),
-                'form_url'      => $this->router->pathFor(
-                    'events_do_remove_booking',
-                    ['id' => $booking->getId()]
-                ),
-                'cancel_uri'    => $this->router->pathFor('events_bookings', ['event' => $booking->getEventId()]),
-                'data'          => $data
-            )
-        );
-        return $response;
-    }
+    [BookingsController::class, 'confirmDelete']
 )->setName('events_remove_booking')->add($authenticate);
 
 $this->post(
     '/booking/remove[/{id:\d+}]',
-    function ($request, $response) {
-        $post = $request->getParsedBody();
-        $ajax = isset($post['ajax']) && $post['ajax'] === 'true';
-        $success = false;
-
-        $uri = isset($post['redirect_uri']) ?
-            $post['redirect_uri'] :
-            $this->router->pathFor('slash');
-
-        if (!isset($post['confirm'])) {
-            $this->flash->addMessage(
-                'error_detected',
-                _T("Removal has not been confirmed!")
-            );
-        } else {
-            $booking = new Booking($this->zdb, $this->login, (int)$post['id']);
-            $del = $booking->remove();
-
-            if ($del !== true) {
-                $error_detected = _T("An error occured trying to remove booking :/", "events");
-
-                $this->flash->addMessage(
-                    'error_detected',
-                    $error_detected
-                );
-            } else {
-                $success_detected = _T("Booking has been successfully deleted.", "events");
-
-                $this->flash->addMessage(
-                    'success_detected',
-                    $success_detected
-                );
-
-                $success = true;
-            }
-        }
-
-        if (!$ajax) {
-            return $response
-                ->withStatus(301)
-                ->withHeader('Location', $uri);
-        } else {
-            return $response->withJson(
-                [
-                    'success'   => $success
-                ]
-            );
-        }
-    }
+    [BookingsController::class, 'confirmDelete']
 )->setName('events_do_remove_booking')->add($authenticate);
 
 //booking CSV export
@@ -568,85 +153,7 @@ $this->post(
 //Batch actions on bookings list
 $this->post(
     '/bookings/batch',
-    function ($request, $response) {
-        $post = $request->getParsedBody();
-
-        if (isset($post['event_sel'])) {
-            if (isset($this->session->filter_bookings)) {
-                $filters = clone $this->session->filter_bookings;
-            } else {
-                $filters = new BookingsList();
-            }
-
-            //$this->session->filter_bookings = $filters;
-            $filters->selected = $post['event_sel'];
-
-            $bookings = new Bookings($this->zdb, $this->login, $filters);
-            $members = [];
-            foreach ($bookings->getList() as $booking) {
-                $members[] = $booking->getMemberId();
-            }
-            $mfilter = new MembersList();
-            $mfilter->selected = $members;
-
-            if (isset($post['mailing'])) {
-                $this->session->filter_members = $mfilter;
-                $this->session->redirect_mailing = $this->router->pathFor(
-                    'events_bookings',
-                    [
-                        'event' => $filters->event_filter == null ?
-                            'all' :
-                            $filters->event_filter
-                    ]
-                );
-                return $response
-                    ->withStatus(301)
-                    ->withHeader('Location', $this->router->pathFor('mailing') . '?new=new');
-            }
-
-            if (isset($post['csv'])) {
-                $session_var = 'plugin-events-members';
-                $this->session->$session_var = $mfilter;
-                return $response
-                    ->withStatus(307)
-                    ->withHeader(
-                        'Location',
-                        $this->router->pathFor('csv-memberslist') . '?session_var=' . $session_var
-                    );
-            }
-
-            if (isset($post['csvbooking'])) {
-                $session_var = 'plugin-events-bookings';
-                $this->session->$session_var = $filters;
-                return $response
-                    ->withStatus(307)
-                    ->withHeader(
-                        'Location',
-                        $this->router->pathFor('events_bookings_export') . '?session_var=' . $session_var
-                    );
-            }
-
-            if (isset($post['labels'])) {
-                $session_var = 'plugin-events-labels';
-                $this->session->$session_var = $mfilter;
-                return $response
-                    ->withStatus(307)
-                    ->withHeader(
-                        'Location',
-                        $this->router->pathFor('pdf-members-labels') . '?session_var=' . $session_var
-                    );
-            }
-        } else {
-            $this->flash->addMessage(
-                'error_detected',
-                _T("No booking was selected, please check at least one.", "events")
-            );
-
-            return $response
-                ->withStatus(301)
-                ->withHeader('Location', $this->router->pathFor('members'));
-        }
-    }
+    [BookingsController::class, 'handleBatch']
 )->setName('batch-eventslist')->add($authenticate);
 
 $this->get(
