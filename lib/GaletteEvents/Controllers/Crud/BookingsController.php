@@ -666,7 +666,7 @@ class BookingsController extends AbstractPluginController
     protected function doDelete(array $args, array $post): bool
     {
         $booking = new Booking($this->zdb, $this->login, (int)$post['id']);
-        $del = $booking->remove();
+        return $booking->remove();
     }
 
     // /CRUD - Delete
