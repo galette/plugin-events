@@ -1,13 +1,14 @@
 # Johan Cwiklinski <trasher@x-tnd.be>, 2020.
 # Peter Waldert <peter@waldert.at>, 2020.
 # Manuel Zeschko <moebyus@pm.me>, 2021.
+# Gjelbrim Haskaj <ghaskaj@aol.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2020-06-19 05:47+0200\n"
-"PO-Revision-Date: 2021-01-06 16:29+0000\n"
-"Last-Translator: Manuel Zeschko <moebyus@pm.me>\n"
+"PO-Revision-Date: 2021-06-08 17:33+0000\n"
+"Last-Translator: Gjelbrim Haskaj <ghaskaj@aol.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/galette/"
 "events-plugin/de/>\n"
 "Language: de_DE\n"
@@ -15,11 +16,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.4.1-dev\n"
+"X-Generator: Weblate 4.7-dev\n"
 
 #: ../_routes.php:98
 msgid "Events management"
-msgstr ""
+msgstr "Eventmanagement"
 
 #: ../_routes.php:149
 msgid "Event ID cannot ben null calling edit route!"
