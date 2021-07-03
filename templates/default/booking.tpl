@@ -1,7 +1,7 @@
 {extends file="page.tpl"}
 
 {block name="content"}
-    <form action="{path_for name="events_storebooking" data=["action" => $action, "id" => $booking->getId()]}" method="post" id="modifform">
+    <form action="{if $booking->getId()}{path_for name="events_storebooking_edit" data=["id" => $booking->getId()]}{else}{path_for name="events_storebooking_add"}{/if}" method="post" id="modifform">
         <div class="bigtable">
             <fieldset class="galette_form" id="general">
                 <legend>{_T string="Booking informations" domain="events"}</legend>

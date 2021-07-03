@@ -1,19 +1,23 @@
 # Johan Cwiklinski <trasher@x-tnd.be>, 2020.
+# badlop <badlop@process-one.net>, 2021.
+# Berto Te <Bertote@3fpj.com>, 2021.
+# Toni Martínez <yagstyle@gmail.com>, 2021.
+# felipe <felipecandia@live.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: trasher@x-tnd.be\n"
+"Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2020-06-19 05:48+0200\n"
-"PO-Revision-Date: 2020-06-20 09:16+0000\n"
-"Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
-"Language-Team: Spanish <https://hosted.weblate.org/projects/galette/events-"
-"plugin/es/>\n"
+"PO-Revision-Date: 2021-06-15 16:33+0000\n"
+"Last-Translator: felipe <felipecandia@live.com>\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/galette/"
+"events-plugin/es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.1.1\n"
+"X-Generator: Weblate 4.7-dev\n"
 
 #: ../_routes.php:98
 msgid "Events management"
@@ -150,7 +154,7 @@ msgstr ""
 
 #: ../_routes.php:1353
 msgid "Javascript libraries has not been built!"
-msgstr ""
+msgstr "No se han construido las librerías Javascript!"
 
 #: ../_routes.php:1362
 msgid "Events calendar"
@@ -257,7 +261,7 @@ msgstr ""
 #: ../templates/default/menu.tpl:12 ../templates/default/booking.tpl:55
 #: ../templates/default/event.tpl:43
 msgid "Activities"
-msgstr ""
+msgstr "Actividades"
 
 #: ../lib/GaletteEvents/Repository/Activities.php:84
 #: ../templates/default/activity.tpl:27
@@ -350,7 +354,7 @@ msgstr ""
 #: ../templates/default/activities.tpl:43
 #: ../templates/default/activities.tpl:58
 msgid "Events"
-msgstr ""
+msgstr "Eventos"
 
 #: ../templates/default/menu.tpl:5
 msgid "Calendar"
@@ -362,7 +366,7 @@ msgstr ""
 
 #: ../templates/default/menu.tpl:9
 msgid "Bookings"
-msgstr ""
+msgstr "Reservas"
 
 #: ../templates/default/menu.tpl:10 ../templates/default/adh_fiche_action.tpl:2
 msgid "New booking"
@@ -388,7 +392,7 @@ msgstr ""
 #: ../templates/default/booking.tpl:49 ../templates/default/activity.tpl:18
 #: ../templates/default/event.tpl:37
 msgid "Comment"
-msgstr ""
+msgstr "Comentario"
 
 #: ../templates/default/booking.tpl:71
 msgid "No activity for selected event"
@@ -415,7 +419,7 @@ msgstr ""
 #: ../templates/default/activities.tpl:21 ../templates/default/activity.tpl:14
 #: ../templates/default/events.tpl:21 ../templates/default/event.tpl:15
 msgid "Name"
-msgstr ""
+msgstr "Nombre"
 
 #: ../templates/default/activities.tpl:33
 #: ../templates/default/activities.tpl:57
@@ -475,11 +479,11 @@ msgstr "Dirección"
 #: ../templates/default/activity.tpl:64 ../templates/default/events.tpl:45
 #: ../templates/default/events.tpl:75 ../templates/default/event.tpl:103
 msgid "Town"
-msgstr ""
+msgstr "Ciudad"
 
 #: ../templates/default/activity.tpl:68 ../templates/default/event.tpl:107
 msgid "Country"
-msgstr ""
+msgstr "País"
 
 #: ../templates/default/bookings.tpl:7
 msgid "Select..."

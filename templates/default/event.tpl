@@ -1,7 +1,7 @@
 {extends file="page.tpl"}
 
 {block name="content"}
-    <form action="{path_for name="events_storeevent" data=["action" => $action, "id" => $event->getId()]}" method="post">
+    <form action="{if $event->getId()}{path_for name="events_storeevent_edit" data=["id" => $event->getId()]}{else}{path_for name="events_storeevent_add"}{/if}" method="post">
         <div class="bigtable">
             <fieldset class="galette_form" id="general">
                 <legend>{_T string="General informations" domain="events"}</legend>
@@ -115,7 +115,7 @@
                 <i class="fas fa-save fa-fw" aria-hidden="true"></i>
                 {_T string="Save"}
             </button>
-            <a href="{path_for name="events_activities"}" class="button">
+            <a href="{path_for name="events_events"}" class="button">
                 <i class="fas fa-th-list fa-fw" aria-hidden="true"></i>
                 {_T string="Cancel"}
             </a>

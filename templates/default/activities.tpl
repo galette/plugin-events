@@ -52,7 +52,7 @@
                     <td class="right" data-scope="id">{$ordre+1+($filters->current_page - 1)*$numrows}</td>
                     <td class="nowrap username_row" data-scope="row">
                         {assign var="aid" value=$activity->getId()}
-                        <a href="{path_for name="events_activity" data=["action" => "edit", "id" => $aid]}">{$activity->getName()}</a>
+                        <a href="{path_for name="events_activity_edit" data=["id" => $aid]}">{$activity->getName()}</a>
                     </td>
                     <td data-title="{_T string="Creation date" domain="events"}">{$activity->getCreationDate()}</td>
                     <td data-title="{_T string="Events" domain="events"}">{$activity->countEvents()}</td>
@@ -66,7 +66,7 @@
                         {/if}
                     </td>
                     <td class="center nowrap actions_row">
-                        <a href="{path_for name="events_activity" data=["action" => "edit", "id" => $aid]}" class="tooltip action">
+                        <a href="{path_for name="events_activity_edit" data=["id" => $aid]}" class="tooltip action">
                             <i class="fas fa-edit fa-fw"></i>
                             <span class="sr-only">{_T string="%activity: edit informations" domain="events" pattern="/%activity/" replace=$activity->getName()}</span>
                         </a>

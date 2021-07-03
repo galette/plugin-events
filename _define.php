@@ -38,27 +38,33 @@ $this->register(
     'Galette Events',       //Name
     'Events management',    //Short description
     'Johan Cwiklinski',     //Author
-    '1.3.0',                //Version
-    '0.9.4',                //Galette compatible version
+    '1.4.0',                //Version
+    '0.9.5',                //Galette compatible version
     'events',               //routing name and translation domain
-    '2020-07-03',           //Release date
+    '2021-07-03',           //Release date
     [   //Permissions needed
         'events_events'             => 'member',
         'events_bookings'           => 'member',
         'filter-eventslist'         => 'member',
-        'events_event'              => 'groupmanager',
-        'events_storeevent'         => 'groupmanager',
+        'events_event_add'          => 'groupmanager',
+        'events_event_edit'         => 'groupmanager',
+        'events_storeevent_add'     => 'groupmanager',
+        'events_storeevent_edit'    => 'groupmanager',
         'events_remove_event'       => 'staff',
         'events_do_remove_event'    => 'staff',
-        'events_booking'            => 'member',
-        'events_storebooking'       => 'member',
+        'events_booking_add'        => 'member',
+        'events_booking_edit'       => 'member',
+        'events_storebooking_add'   => 'member',
+        'events_storebooking_edit'  => 'member',
         'events_remove_booking'     => 'staff',
         'events_do_remove_booking'  => 'staff',
         'filter-bookingslist'       => 'member',
         'batch-eventslist'          => 'groupmanager',
         'events_activities'         => 'staff',
-        'events_activity'           => 'staff',
-        'events_storeactivity'      => 'staff',
+        'events_activity_add'       => 'staff',
+        'events_activity_edit'      => 'staff',
+        'events_storeactivity_add'  => 'staff',
+        'events_storeactivity_edit' => 'staff',
         'events_remove_activity'    => 'staff',
         'events_do_remove_activity' => 'staff',
         'event_bookings_export'     => 'staff',

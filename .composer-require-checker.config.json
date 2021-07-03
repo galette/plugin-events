@@ -73,12 +73,19 @@
     "XHProfRuns_Default",
     "xhprof_disable",
     "xhprof_enable",
+    "GALETTE_XHPROF_PATH",
     "XHPROF_PATH",
     "XHPROF_URL",
     "XHPROF_FLAGS_CPU",
     "XHPROF_FLAGS_MEMORY",
     "XHPROF_FLAGS_NO_BUILTINS",
-    "XHPROF_HOST"
+    "XHPROF_HOST",
+
+    "// DI functions",
+    "DI\\autowire",
+    "DI\\Container",
+    "DI\\ContainerBuilder",
+    "DI\\Bridge\\Slim\\App"
   ],
   "scan-files": [
     "*.php",
