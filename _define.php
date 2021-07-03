@@ -38,10 +38,10 @@ $this->register(
     'Galette Events',       //Name
     'Events management',    //Short description
     'Johan Cwiklinski',     //Author
-    '1.3.0',                //Version
+    '1.4.0',                //Version
     '0.9.5',                //Galette compatible version
     'events',               //routing name and translation domain
-    '2020-07-03',           //Release date
+    '2021-07-03',           //Release date
     [   //Permissions needed
         'events_events'             => 'member',
         'events_bookings'           => 'member',
