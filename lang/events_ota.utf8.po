@@ -1,53 +1,46 @@
-# Johan Cwiklinski <trasher@x-tnd.be>, 2020.
-# Peter Waldert <peter@waldert.at>, 2020.
-# Manuel Zeschko <moebyus@pm.me>, 2021.
-# Gjelbrim Haskaj <ghaskaj@aol.com>, 2021.
-# TwoB00m <qwertze@gmx.at>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: translations@galette.eu\n"
-"POT-Creation-Date: 2020-06-19 05:47+0200\n"
-"PO-Revision-Date: 2021-09-28 16:03+0000\n"
-"Last-Translator: TwoB00m <qwertze@gmx.at>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/galette/"
-"events-plugin/de/>\n"
-"Language: de_DE\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-07-17 10:05+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: ota\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.9-dev\n"
+"X-Generator: Translate Toolkit 3.3.6\n"
 
 #: ../_routes.php:98
 msgid "Events management"
-msgstr "Eventmanagement"
+msgstr ""
 
 #: ../_routes.php:149
 msgid "Event ID cannot ben null calling edit route!"
-msgstr "Die Event ID darf nicht null sein!"
+msgstr ""
 
-#: ../_routes.php:170 ../_routes.php:330 ../templates/default/booking.tpl:14
-#: ../templates/default/bookings.tpl:5 ../templates/default/bookings.tpl:74
+#: ../_routes.php:170 ../_routes.php:330
+#: ../templates/default/booking.tpl:14 ../templates/default/bookings.tpl:5
+#: ../templates/default/bookings.tpl:74
 msgid "Event"
-msgstr "Ereignis"
+msgstr ""
 
 #: ../_routes.php:234
 msgid "Activity has been attached to event."
-msgstr "Die Aktivität wurde dem Ereignis zugeordnet."
+msgstr ""
 
 #: ../_routes.php:235
 msgid "Do not forget to store the event"
-msgstr "Vergessen Sie nicht, das Ereignis zu speichern"
+msgstr ""
 
 #: ../_routes.php:237
 msgid "Activity has been detached from event."
 msgstr ""
 
 #: ../_routes.php:246
-#, fuzzy
 msgid "New event has been successfully added."
-msgstr "Neues Ereignis wurde erfolgreich hinzugefügt."
+msgstr ""
 
 #: ../_routes.php:248
 msgid "Event has been modified."
@@ -155,7 +148,7 @@ msgstr ""
 
 #: ../_routes.php:1353
 msgid "Javascript libraries has not been built!"
-msgstr "Die Javascript-Bibliotheken wurden noch nicht kompiliert!"
+msgstr ""
 
 #: ../_routes.php:1362
 msgid "Events calendar"
@@ -205,28 +198,24 @@ msgstr ""
 msgid "Booking updated"
 msgstr ""
 
-#: ../lib/GaletteEvents/Controllers/CsvController.php:105
-#: ../templates/default/activity.tpl:60 ../templates/default/event.tpl:99
+#: ../lib/GaletteEvents/Controllers/CsvController.php:105 ../templates/default/activity.tpl:60
+#: ../templates/default/event.tpl:99
 msgid "Zip code"
 msgstr ""
 
-#: ../lib/GaletteEvents/Controllers/CsvController.php:111
-#: ../templates/default/booking.tpl:45
+#: ../lib/GaletteEvents/Controllers/CsvController.php:111 ../templates/default/booking.tpl:45
 msgid "Number of persons"
 msgstr ""
 
-#: ../lib/GaletteEvents/Controllers/CsvController.php:126
-#: ../templates/default/booking.tpl:84
+#: ../lib/GaletteEvents/Controllers/CsvController.php:126 ../templates/default/booking.tpl:84
 msgid "Amount"
-msgstr "Betrag"
+msgstr ""
 
-#: ../lib/GaletteEvents/Controllers/CsvController.php:128
-#: ../templates/default/booking.tpl:90
+#: ../lib/GaletteEvents/Controllers/CsvController.php:128 ../templates/default/booking.tpl:90
 msgid "Bank name"
 msgstr ""
 
-#: ../lib/GaletteEvents/Controllers/CsvController.php:129
-#: ../templates/default/booking.tpl:94
+#: ../lib/GaletteEvents/Controllers/CsvController.php:129 ../templates/default/booking.tpl:94
 msgid "Check number"
 msgstr ""
 
@@ -258,24 +247,20 @@ msgstr ""
 msgid "Attendees:"
 msgstr ""
 
-#: ../lib/GaletteEvents/Repository/Events.php:194
-#: ../templates/default/menu.tpl:12 ../templates/default/booking.tpl:55
-#: ../templates/default/event.tpl:43
+#: ../lib/GaletteEvents/Repository/Events.php:194 ../templates/default/menu.tpl:12
+#: ../templates/default/booking.tpl:55 ../templates/default/event.tpl:43
 msgid "Activities"
-msgstr "Aktivitäten"
+msgstr ""
 
-#: ../lib/GaletteEvents/Repository/Activities.php:84
-#: ../templates/default/activity.tpl:27
+#: ../lib/GaletteEvents/Repository/Activities.php:84 ../templates/default/activity.tpl:27
 msgid "Noon meal"
 msgstr ""
 
-#: ../lib/GaletteEvents/Repository/Activities.php:88
-#: ../templates/default/activity.tpl:35
+#: ../lib/GaletteEvents/Repository/Activities.php:88 ../templates/default/activity.tpl:35
 msgid "Even meal"
 msgstr ""
 
-#: ../lib/GaletteEvents/Repository/Activities.php:92
-#: ../templates/default/activity.tpl:43
+#: ../lib/GaletteEvents/Repository/Activities.php:92 ../templates/default/activity.tpl:43
 msgid "Lodging"
 msgstr ""
 
@@ -285,11 +270,11 @@ msgstr ""
 
 #: ../lib/GaletteEvents/Event.php:272 ../templates/default/event.tpl:19
 msgid "Begin date"
-msgstr "Anfangsdatum"
+msgstr ""
 
 #: ../lib/GaletteEvents/Event.php:274 ../templates/default/event.tpl:23
 msgid "End date"
-msgstr "Enddatum"
+msgstr ""
 
 #: ../lib/GaletteEvents/Event.php:297
 msgid "End date must be later or equal to begin date"
@@ -352,8 +337,7 @@ msgid "Today"
 msgstr ""
 
 #: ../templates/default/menu.tpl:2 ../templates/default/menu.tpl:4
-#: ../templates/default/activities.tpl:43
-#: ../templates/default/activities.tpl:58
+#: ../templates/default/activities.tpl:43 ../templates/default/activities.tpl:58
 msgid "Events"
 msgstr ""
 
@@ -393,7 +377,7 @@ msgstr ""
 #: ../templates/default/booking.tpl:49 ../templates/default/activity.tpl:18
 #: ../templates/default/event.tpl:37
 msgid "Comment"
-msgstr "Kommentar"
+msgstr ""
 
 #: ../templates/default/booking.tpl:71
 msgid "No activity for selected event"
@@ -420,25 +404,24 @@ msgstr ""
 #: ../templates/default/activities.tpl:21 ../templates/default/activity.tpl:14
 #: ../templates/default/events.tpl:21 ../templates/default/event.tpl:15
 msgid "Name"
-msgstr "Name"
+msgstr ""
 
-#: ../templates/default/activities.tpl:33
-#: ../templates/default/activities.tpl:57
+#: ../templates/default/activities.tpl:33 ../templates/default/activities.tpl:57
 msgid "Creation date"
-msgstr "Erstelldatum"
+msgstr ""
 
-#: ../templates/default/activities.tpl:44
-#: ../templates/default/activities.tpl:59 ../templates/default/activity.tpl:10
+#: ../templates/default/activities.tpl:44 ../templates/default/activities.tpl:59
+#: ../templates/default/activity.tpl:10
 msgid "Is active"
 msgstr ""
 
 #: ../templates/default/activities.tpl:63
 msgid "Active"
-msgstr "Aktive"
+msgstr ""
 
 #: ../templates/default/activities.tpl:65
 msgid "Inactive"
-msgstr "Inaktiv"
+msgstr ""
 
 #: ../templates/default/activities.tpl:71
 msgid "%activity: edit informations"
@@ -452,7 +435,7 @@ msgstr ""
 msgid "No activity has been found"
 msgstr ""
 
-#: ../templates/default/adh_actions.tpl:1
+#: ../templates/default/adh_actions.tpl:1 ../templates/default/adh_actions.tpl:1
 msgid "New event booking"
 msgstr ""
 
@@ -467,7 +450,7 @@ msgstr ""
 #: ../templates/default/activity.tpl:31 ../templates/default/activity.tpl:39
 #: ../templates/default/activity.tpl:47 ../templates/default/event.tpl:84
 msgid "Required"
-msgstr "Benötigt"
+msgstr ""
 
 #: ../templates/default/activity.tpl:53 ../templates/default/event.tpl:92
 msgid "Location"
@@ -475,16 +458,16 @@ msgstr ""
 
 #: ../templates/default/activity.tpl:56 ../templates/default/event.tpl:95
 msgid "Address"
-msgstr "Adresse"
+msgstr ""
 
 #: ../templates/default/activity.tpl:64 ../templates/default/events.tpl:45
 #: ../templates/default/events.tpl:75 ../templates/default/event.tpl:103
 msgid "Town"
-msgstr "Stadt"
+msgstr ""
 
 #: ../templates/default/activity.tpl:68 ../templates/default/event.tpl:107
 msgid "Country"
-msgstr "Land"
+msgstr ""
 
 #: ../templates/default/bookings.tpl:7
 msgid "Select..."
@@ -494,8 +477,8 @@ msgstr ""
 msgid "All payment types"
 msgstr ""
 
-#: ../templates/default/bookings.tpl:21 ../templates/default/events.tpl:55
-#: ../templates/default/events.tpl:76
+#: ../templates/default/bookings.tpl:21 ../templates/default/bookings.tpl:21
+#: ../templates/default/events.tpl:55 ../templates/default/events.tpl:76
 msgid "Group"
 msgstr ""
 
@@ -573,7 +556,7 @@ msgstr ""
 
 #: ../templates/default/events.tpl:33 ../templates/default/events.tpl:74
 msgid "Date"
-msgstr "Datum"
+msgstr ""
 
 #: ../templates/default/events.tpl:56 ../templates/default/events.tpl:77
 msgid "Open"

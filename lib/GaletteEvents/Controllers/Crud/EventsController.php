@@ -194,7 +194,7 @@ class EventsController extends AbstractPluginController
         $this->session->filter_events_calendar = $filters;
 
         //check if JS has been generated
-        if (!file_exists(__DIR__ . '/webroot/js/calendar.bundle.js')) {
+        if (!file_exists(__DIR__ . '/../../../../webroot/js/calendar.bundle.js')) {
             $this->flash->addMessageNow(
                 'error_detected',
                 _T('Javascript libraries has not been built!', 'events')

@@ -85,7 +85,10 @@
     "DI\\autowire",
     "DI\\Container",
     "DI\\ContainerBuilder",
-    "DI\\Bridge\\Slim\\App"
+    "DI\\Bridge\\Slim\\App",
+
+    "//PHP8 functions",
+    "str_contains"
   ],
   "scan-files": [
     "*.php",
