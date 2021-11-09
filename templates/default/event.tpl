@@ -120,6 +120,7 @@
                 {_T string="Cancel"}
             </a>
             <input type="hidden" name="id" id="id" value="{$event->getId()}"/>
+            {include file="forms_types/csrf.tpl"}
         </div>
      </form>
 {/block}
