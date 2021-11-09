@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2018 The Galette Team
+ * Copyright © 2018-2021 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package   GaletteEvents
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018 The Galette Team
+ * @copyright 2018-2021 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  */
@@ -52,7 +52,7 @@ use Laminas\Db\Sql\Predicate\Operator;
  * @name      Event
  * @package   GaletteEvents
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018 The Galette Team
+ * @copyright 2018-2021 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  */
@@ -222,9 +222,7 @@ class Event
             }
 
             $delete = $this->zdb->delete($this->getTableName());
-            $delete->where(
-                self::PK . ' = ' . $this->id
-            );
+            $delete->where([self::PK => $this->id]);
             $this->zdb->execute($delete);
 
             //commit all changes
@@ -482,7 +480,7 @@ class Event
                 $update = $this->zdb->update($this->getTableName());
                 $update
                     ->set($values)
-                    ->where(self::PK . '=' . $this->id);
+                    ->where([self::PK => $this->id]);
 
                 $edit = $this->zdb->execute($update);
 
