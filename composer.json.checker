@@ -3,8 +3,7 @@
         "psr-4": {
             "Galette\\": "galette-core/galette/lib/Galette",
             "GaletteEvents\\": "lib/GaletteEvents"
-        },
-        "files": ["galette-core/galette/includes/i18n.inc.php"]
+        }
     },
     "require": {
         "php": ">=7.3",
