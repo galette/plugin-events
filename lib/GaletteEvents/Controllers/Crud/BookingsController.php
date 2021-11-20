@@ -587,15 +587,17 @@ class BookingsController extends AbstractPluginController
             $this->session->booking = $booking;
 
             if ($booking->getId()) {
+                $route = 'events_booking_edit';
                 $rparams = [
                     'id'        => $booking->getId(),
                     'action'    => 'edit'
                 ];
             } else {
+                $route = 'events_booking_add';
                 $rparams = ['action' => 'add'];
             }
             $redirect_url = $this->router->pathFor(
-                'events_booking',
+                $route,
                 $rparams
             );
         }
