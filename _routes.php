@@ -135,7 +135,7 @@ $this->get(
 
 $this->post(
     '/booking/remove[/{id:\d+}]',
-    [BookingsController::class, 'confirmDelete']
+    [BookingsController::class, 'delete']
 )->setName('events_do_remove_booking')->add($authenticate);
 
 //booking CSV export

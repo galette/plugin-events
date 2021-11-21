@@ -619,7 +619,7 @@ class BookingsController extends AbstractPluginController
      */
     public function redirectUri(array $args): string
     {
-        return $this->router->pathFor('events_bookings');
+        return $this->router->pathFor('events_bookings', ['event' => 'all'] + $args);
     }
 
     /**

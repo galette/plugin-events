@@ -269,7 +269,7 @@
                 } else {
     {if $existing_mailing eq true}
                     if (this.id == 'sendmail') {
-                        var _el = $('<div id="existing_mailing" title="{_T string="Existing mailing"}">{_T string="A mailing already exists. Do you want to create a new one or resume the existing?"}</div>');
+                        var _el = $('<div id="existing_mailing" title="{_T string="Existing mailing" escape="js"}">{_T string="A mailing already exists. Do you want to create a new one or resume the existing?" escape="js"}</div>');
                         _el.appendTo('body').dialog({
                             modal: true,
                             hide: 'fold',
