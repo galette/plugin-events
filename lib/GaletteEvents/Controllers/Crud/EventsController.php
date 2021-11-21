@@ -485,8 +485,8 @@ class EventsController extends AbstractPluginController
     {
         $event = new Event($this->zdb, $this->login, (int)$args['id']);
         return sprintf(
-            //TRANS: first parameter is the model name
-            _T('Remove event "%1$s"', 'events'),
+            //TRANS: first parameter is the event name
+            _T('Remove event \'%1$s\'"', 'events'),
             $event->getName()
         );
     }
