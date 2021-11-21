@@ -1,20 +1,20 @@
-# Johan Cwiklinski <trasher@x-tnd.be>, 2020.
+# Johan Cwiklinski <trasher@x-tnd.be>, 2020, 2021.
 # Fredericos Tezorc <fredericos.tezorc@gmail.com>, 2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: Galette Events plugin\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2021-11-21 19:06+0100\n"
-"PO-Revision-Date: 2020-07-13 07:38+0000\n"
+"PO-Revision-Date: 2021-11-21 18:11+0000\n"
 "Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
-"Language-Team: French <https://hosted.weblate.org/projects/galette/events-"
-"plugin/fr/>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/galette/"
+"events-plugin/fr/>\n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.2-dev\n"
+"X-Generator: Weblate 4.10-dev\n"
 
 #: ../lib/GaletteEvents/Booking.php:207
 msgid "Event is mandatory"
@@ -81,8 +81,6 @@ msgid "Booking has been modified."
 msgstr "La réservation a été modifiée."
 
 #: ../lib/GaletteEvents/Controllers/Crud/BookingsController.php:541
-#, fuzzy
-#| msgid "An error occured while storing the booking."
 msgid "An error occurred while storing the booking."
 msgstr "Une erreur est survenue à l'enregistrement de la réservation."
 
@@ -92,10 +90,9 @@ msgstr "N'oubliez pas d'enregistrer la réservation"
 
 #. TRANS: first parameter is the member name, second the event name.
 #: ../lib/GaletteEvents/Controllers/Crud/BookingsController.php:654
-#, fuzzy, php-format
-#| msgid "Remove booking"
+#, php-format
 msgid "Remove booking for %1$s on %2$s"
-msgstr "Supprimer la réservation"
+msgstr "Supprimer la réservation pour %1$s sur %2$s"
 
 #: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:144
 msgid "Activities management"
@@ -164,10 +161,9 @@ msgstr "Une erreur est survenue à l'enregistrement de l'évènement."
 
 #. TRANS: first parameter is the event name
 #: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:489
-#, fuzzy, php-format
-#| msgid "Remove event %1$s"
+#, php-format
 msgid "Remove event '%1$s'\""
-msgstr "Supprimer l'évènement %1$s"
+msgstr "Supprimer l'évènement «%1$s»"
 
 #: ../lib/GaletteEvents/Controllers/CsvController.php:105
 msgid "Zip code"
@@ -495,15 +491,16 @@ msgid "Bookings as CSV"
 msgstr "Réservations en CSV"
 
 #: ../templates/default/bookings.tpl:233
-#, fuzzy
 msgid "No booking selected"
-msgstr "Aucune réservation trouvée"
+msgstr "Aucune réservation sélectionnée"
 
 #: ../templates/default/bookings.tpl:233
 msgid ""
 "Please make sure to select at least one booking from the list to perform "
 "this action."
 msgstr ""
+"Veillez à sélectionner au moins une réservation dans la liste pour effectuer "
+"cette action."
 
 #: ../templates/default/events.tpl:5
 msgid "events"
