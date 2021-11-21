@@ -179,7 +179,6 @@ class Event
                 Analog::WARNING
             );
             throw $e;
-            return false;
         }
     }
 

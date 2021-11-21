@@ -131,6 +131,7 @@
         $('#event').on('change', function() {
             var _this = $(this);
             var _val = _this.find('option:selected').val()
+            _this.parents('form').find('input[name=save]').remove();
             _this.parents('form').submit();
         });
     </script>

@@ -521,7 +521,7 @@ class BookingsController extends AbstractPluginController
             $error_detected = array_merge($error_detected, $valid);
         }
 
-        if (count($error_detected) == 0) {
+        if (count($error_detected) == 0 && isset($post['save'])) {
             //all goes well, we can proceed
 
             $new = false;
@@ -538,7 +538,7 @@ class BookingsController extends AbstractPluginController
                 }
             } elseif ($store === false) {
                 //something went wrong :'(
-                $error_detected[] = _T("An error occured while storing the booking.", "events");
+                $error_detected[] = _T("An error occurred while storing the booking.", "events");
             } else {
                 $error_detected[] = $store;
             }
