@@ -132,8 +132,8 @@ class Event
                     false
                 );
 
-                if ($this->login->isGroupManager() && count($this->login->managed_groups)) {
-                    $groups = array_merge($groups, $this->login->managed_groups);
+                if ($this->login->isGroupManager()) {
+                    $groups = array_merge($groups, $this->login->getManagedGroups());
                 }
 
                 $set = [new Predicate\IsNull(Group::PK)];
@@ -153,22 +153,8 @@ class Event
             $results = $this->zdb->execute($select);
 
             if ($results->count() > 0) {
-                $result = $results->current();
-                if (
-                    $this->login->isAdmin()
-                    || $this->login->isStaff()
-                    || $this->login->isGroupManager()
-                    && in_array($result->id_group, $this->login->managed_groups)
-                ) {
-                    $this->loadFromRS($results->current());
-                    $this->loadActivities();
-                } else {
-                    Analog::log(
-                        'Cannot load event form id `' . $id . '` | Not enough rights',
-                        Analog::WARNING
-                    );
-                    return false;
-                }
+                $this->loadFromRS($results->current());
+                $this->loadActivities();
                 return true;
             } else {
                 return false;
