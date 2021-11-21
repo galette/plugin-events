@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-21 13:48+0100\n"
+"POT-Creation-Date: 2021-11-21 19:06+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -40,6 +40,10 @@ msgstr "There must be at least one person"
 #: ../lib/GaletteEvents/Booking.php:294
 msgid "Booking date is mandatory!"
 msgstr "Booking date is mandatory!"
+
+#: ../lib/GaletteEvents/Booking.php:321
+msgid "booking date"
+msgstr "booking date"
 
 #: ../lib/GaletteEvents/Booking.php:352
 msgid "A booking already exists for %member in %event"
@@ -279,6 +283,26 @@ msgstr "Fail to add new activity."
 msgid "Activity updated"
 msgstr "Activity updated"
 
+#: ../templates/default/calendar.tpl:11
+msgid "Daily list"
+msgstr "Daily list"
+
+#: ../templates/default/calendar.tpl:12
+msgid "Weekly list"
+msgstr "Weekly list"
+
+#: ../templates/default/calendar.tpl:13
+msgid "Monthly list"
+msgstr "Monthly list"
+
+#: ../templates/default/calendar.tpl:14
+msgid "Month calendar"
+msgstr "Month calendar"
+
+#: ../templates/default/calendar.tpl:15
+msgid "Today"
+msgstr "Today"
+
 #: ../templates/default/menu.tpl:2 ../templates/default/menu.tpl:4
 #: ../templates/default/activities.tpl:43
 #: ../templates/default/activities.tpl:58
@@ -368,6 +392,14 @@ msgstr "Active"
 msgid "Inactive"
 msgstr "Inactive"
 
+#: ../templates/default/activities.tpl:71
+msgid "%activity: edit informations"
+msgstr "%activity: edit informations"
+
+#: ../templates/default/activities.tpl:78
+msgid "%activity: remove from database"
+msgstr "%activity: remove from database"
+
 #: ../templates/default/activities.tpl:84
 msgid "No activity has been found"
 msgstr "No activity has been found"
@@ -405,6 +437,11 @@ msgstr "Not paid"
 msgid "Show all bookings"
 msgstr "Show all bookings"
 
+#: ../templates/default/bookings.tpl:51
+#, php-format
+msgid "%event's bookings"
+msgstr "%event's bookings"
+
 #: ../templates/default/bookings.tpl:52
 msgid "Add a new booking"
 msgstr "Add a new booking"
@@ -420,6 +457,11 @@ msgstr "booking"
 #: ../templates/default/bookings.tpl:121 ../templates/default/bookings.tpl:166
 msgid "Attendees"
 msgstr "Attendees"
+
+#: ../templates/default/bookings.tpl:131
+#, php-format
+msgid "Found bookings total %f"
+msgstr "Found bookings total %f"
 
 #: ../templates/default/bookings.tpl:172
 msgid "Edit booking"
@@ -449,6 +491,18 @@ msgstr "Export selected reservations as CSV"
 msgid "Bookings as CSV"
 msgstr "Bookings as CSV"
 
+#: ../templates/default/bookings.tpl:233
+msgid "No booking selected"
+msgstr "No booking selected"
+
+#: ../templates/default/bookings.tpl:233
+msgid ""
+"Please make sure to select at least one booking from the list to perform "
+"this action."
+msgstr ""
+"Please make sure to select at least one booking from the list to perform "
+"this action."
+
 #: ../templates/default/events.tpl:5
 msgid "events"
 msgstr "events"
@@ -477,6 +531,26 @@ msgstr "Event is open"
 #: ../templates/default/events.tpl:83
 msgid "Event is closed"
 msgstr "Event is closed"
+
+#: ../templates/default/events.tpl:89
+#, php-format
+msgid "%eventname: export bookings as CSV"
+msgstr "%eventname: export bookings as CSV"
+
+#: ../templates/default/events.tpl:93
+#, php-format
+msgid "%eventname: show bookings"
+msgstr "%eventname: show bookings"
+
+#: ../templates/default/events.tpl:98
+#, php-format
+msgid "%eventname: edit informations"
+msgstr "%eventname: edit informations"
+
+#: ../templates/default/events.tpl:103
+#, php-format
+msgid "%eventname: remove from database"
+msgstr "%eventname: remove from database"
 
 #: ../templates/default/events.tpl:111
 msgid "No event has been found"

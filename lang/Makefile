@@ -40,7 +40,7 @@ mo :
 	done
 
 extract : ${PHP_SOURCES} Makefile
-	xgettext ${PHP_SOURCES} --keyword=_T:1,2t --keyword=__1,2t --keyword=_Tn:1,2,4t --keyword=_Tx:1c,2,3t --keyword=_Tnx:1c,2,3,5t -L PHP --from-code=UTF-8 --add-comments=TRANS --force-po -o events_php.pot;
+	xgettext ${PHP_SOURCES} --keyword=_T:1,2t --keyword=__:1,2t --keyword=_Tn:1,2,4t --keyword=_Tx:1c,2,3t --keyword=_Tnx:1c,2,3,5t -L PHP --from-code=UTF-8 --add-comments=TRANS --force-po -o events_php.pot;
 	../../../vendor/bin/smarty-xgettext --domain events -o events_tpl.pot ../templates/default/; \
 	msgcat -o events.pot --use-first events_php.pot events_tpl.pot; \
 	rm events_php.pot events_tpl.pot; \
