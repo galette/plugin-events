@@ -38,12 +38,8 @@ namespace GaletteEvents;
 use Galette\Core\Db;
 use Galette\Core\Login;
 use Galette\Entity\Group;
-use Galette\Repository\Groups;
 use Analog\Analog;
 use Laminas\Db\Sql\Expression;
-use Laminas\Db\Sql\Predicate;
-use Laminas\Db\Sql\Predicate\PredicateSet;
-use Laminas\Db\Sql\Predicate\Operator;
 
 /**
  * Event entity
@@ -125,31 +121,6 @@ class Event
             $select = $this->zdb->select($this->getTableName());
             $select->where(array(self::PK => $id));
 
-            if (!$this->login->isAdmin() && !$this->login->isStaff()) {
-                $groups = Groups::loadGroups(
-                    $this->login->id,
-                    false,
-                    false
-                );
-
-                if ($this->login->isGroupManager()) {
-                    $groups = array_merge($groups, $this->login->getManagedGroups());
-                }
-
-                $set = [new Predicate\IsNull(Group::PK)];
-                if (count($groups)) {
-                    $set[] = new Predicate\In(
-                        Group::PK,
-                        $groups
-                    );
-                }
-                $select->where(
-                    new PredicateSet(
-                        $set,
-                        PredicateSet::OP_OR
-                    )
-                );
-            }
             $results = $this->zdb->execute($select);
 
             if ($results->count() > 0) {
@@ -867,5 +838,42 @@ class Event
         $results = $this->zdb->execute($select);
 
         return $results->current()->count;
+    }
+
+    /**
+     * Can member edit event
+     *
+     * @param Login $login Login instance
+     *
+     * @return bool
+     */
+    public function canEdit(Login $login): bool
+    {
+        if ($login->isAdmin() || $login->isStaff()) {
+            return true;
+        }
+
+        if (!$login->isGroupManager()) {
+            return false;
+        }
+
+        if ($this->group) {
+            $groups = $this->login->getManagedGroups();
+            return (in_array($this->group, $groups));
+        }
+
+        return false;
+    }
+
+    /**
+     * Can memebr create an event
+     *
+     * @param Login $login Login instance
+     *
+     * @return bool
+     */
+    public function canCreate(Login $login): bool
+    {
+        return ($login->isAdmin() || $login->isStaff() || $login->isGroupManager());
     }
 }
