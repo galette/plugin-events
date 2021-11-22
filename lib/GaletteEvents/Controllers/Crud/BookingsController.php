@@ -420,24 +420,8 @@ class BookingsController extends AbstractPluginController
             || $this->login->isGroupManager()
         ) {
             // members
-            $members = [];
             $m = new Members();
-            $required_fields = array(
-                'id_adh',
-                'nom_adh',
-                'prenom_adh'
-            );
-            $list_members = $m->getList(false, $required_fields);
-
-            if (count($list_members) > 0) {
-                foreach ($list_members as $member) {
-                    $pk = Adherent::PK;
-                    $sname = mb_strtoupper($member->nom_adh, 'UTF-8') .
-                        ' ' . ucwords(mb_strtolower($member->prenom_adh, 'UTF-8')) .
-                        ' (' . $member->id_adh . ')';
-                    $members[$member->$pk] = $sname;
-                }
-            }
+            $members = $m->getSelectizedMembers($this->zdb, $this->login);
 
             $route_params['members'] = [
                 'filters'   => $m->getFilters(),
