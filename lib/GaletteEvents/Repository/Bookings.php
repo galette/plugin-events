@@ -305,20 +305,26 @@ class Bookings
                     );
                 }
 
-                $select->where(
-                    new PredicateSet(
-                        $set,
-                        PredicateSet::OP_OR
-                    )
-                );
-
                 if (!$this->login->isGroupManager()) {
                     $select->where(
                         array(
                             'a.' . Adherent::PK => $this->login->id
                         )
                     );
+                } else {
+                    $set[] = new Predicate\Operator(
+                        'a.' . Adherent::PK,
+                        '=',
+                        $this->login->id
+                    );
                 }
+
+                $select->where(
+                    new PredicateSet(
+                        $set,
+                        PredicateSet::OP_OR
+                    )
+                );
             }
 
             if (count($this->filters->selected)) {
