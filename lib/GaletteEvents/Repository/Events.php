@@ -216,7 +216,7 @@ class Events
     }
 
     /**
-     * Is field allowed to order? it shoulsd be present in
+     * Is field allowed to order? it should be present in
      * provided fields list (those that are SELECT'ed).
      *
      * @param string $field_name Field name to order by

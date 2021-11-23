@@ -305,13 +305,7 @@ class Bookings
                     );
                 }
 
-                if (!$this->login->isGroupManager()) {
-                    $select->where(
-                        array(
-                            'a.' . Adherent::PK => $this->login->id
-                        )
-                    );
-                } else {
+                if (!$this->login->isSuperAdmin()) {
                     $set[] = new Predicate\Operator(
                         'a.' . Adherent::PK,
                         '=',
