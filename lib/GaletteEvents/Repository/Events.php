@@ -36,6 +36,8 @@
 namespace GaletteEvents\Repository;
 
 use Analog\Analog;
+use Galette\Entity\Adherent;
+use GaletteEvents\Booking;
 use Laminas\Db\Sql\Expression;
 use Laminas\Db\Sql\Predicate;
 use Laminas\Db\Sql\Predicate\PredicateSet;
@@ -93,10 +95,17 @@ class Events
      *
      * @return GaletteEvents\Event[]
      */
-    public function getList()
+    public function getList($onlyevents = false)
     {
         try {
             $select = $this->zdb->select(EVENTS_PREFIX . Event::TABLE, 'e');
+
+            $select->join(
+                array('b' => PREFIX_DB . EVENTS_PREFIX . Booking::TABLE),
+                'e.' . Event::PK . '=b.' . Event::PK,
+                array(),
+                $select::JOIN_LEFT
+            );
 
             $groups = null;
             if (!$this->login->isAdmin() && !$this->login->isStaff()) {
@@ -124,6 +133,16 @@ class Events
                             $groups
                         );
                     }
+
+                    if ($onlyevents === false) {
+                        //get events member has booking on
+                        $set[] = new Predicate\Operator(
+                            'b.' . Adherent::PK,
+                            '=',
+                            $this->login->id
+                        );
+                    }
+
                     $select->where(
                         new PredicateSet(
                             $set,
@@ -143,6 +162,16 @@ class Events
                         );
                     }
 
+                    if ($onlyevents === false) {
+                        //get events member has booking on
+
+                        $set[] = new Predicate\Operator(
+                            'b.' . Adherent::PK,
+                            '=',
+                            $this->login->id
+                        );
+                    }
+
                     $select->where(
                         new PredicateSet(
                             $set,
@@ -152,6 +181,7 @@ class Events
                 }
             }
 
+            $select->group(['e.' . Event::PK]);
             $select->order($this->buildOrderClause());
 
             $this->proceedCount($select);
@@ -176,8 +206,15 @@ class Events
                     //extended description
                     $row['end_date_fmt'] = $event->getBeginDate();
                     $row['begin_date_fmt'] = $event->getEndDate();
-                    $description = '<h4><a href="" id="event_link">' . _T('Event informations', 'events');
-                    $description .= '&nbsp;<i class="fas fa-eye"></i></a></h4>';
+                    $description = '<h4>';
+                    if ($event->canEdit($this->login)) {
+                        $description .= '<a href="" id="event_link">';
+                    }
+                    $description.= _T('Event information', 'events');
+                    if ($event->canEdit($this->login)) {
+                        $description .= '&nbsp;<i class="fas fa-eye"></i></a>';
+                    }
+                    $description .= '</h4>';
                     $description .= '<ul>';
                     $pattern = '<li><strong>%1$s</strong> %2$s</li>';
                     $description .= sprintf($pattern, _T("Start date:", "events"), $event->getBeginDate());

@@ -455,7 +455,7 @@ class BookingsController extends AbstractPluginController
                     'autocomplete'      => true,
                     'page_title'        => $title,
                     'booking'           => $booking,
-                    'events'            => $events->getList(),
+                    'events'            => $events->getList(true),
                     'require_dialog'    => true,
                     'require_calendar'  => true,
                     // pseudo random int
