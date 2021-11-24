@@ -828,7 +828,7 @@ class Event
         $select = $this->zdb->select(EVENTS_PREFIX . Booking::TABLE, 'b');
         $select->columns(
             array(
-                'count' => new Expression('count(DISTINCT b.' . Booking::PK . ')')
+                'count' => new Expression('SUM(b.number_people)')
             )
         );
         $select->where([
