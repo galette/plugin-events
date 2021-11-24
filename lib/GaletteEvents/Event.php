@@ -828,16 +828,19 @@ class Event
         $select = $this->zdb->select(EVENTS_PREFIX . Booking::TABLE, 'b');
         $select->columns(
             array(
-                'count' => new Expression('SUM(b.number_people)')
+                'count' => new Expression('SUM(b.number_people)'),
+                'is_paid'
             )
         );
         $select->where([
             self::PK    => $this->id,
-            'is_paid'   => true
         ]);
+
+        $select->group('is_paid');
+
         $results = $this->zdb->execute($select);
 
-        return $results->current()->count;
+        return $results;
     }
 
     /**

@@ -223,7 +223,28 @@ class Events
                     if ($comment = $event->getComment()) {
                         $description .= sprintf($pattern, _T("Comment:", "events"), $comment);
                     }
-                    $description .= sprintf($pattern, _T("Attendees:", "events"), $event->countAttendees());
+
+                    $attendees = $event->countAttendees();
+                    $total_attendees = 0;
+                    $paid_attendees = 0;
+                    foreach ($attendees as $attendee) {
+                        $total_attendees += $attendee->count;
+                        if ($attendee['is_paid']) {
+                            $paid_attendees += $attendee->count;
+                        }
+                    }
+
+                    $attendees_str = $total_attendees;
+                    if ($total_attendees) {
+                        $attendees_str .= ' (' . sprintf(_T('%1$s paid', 'events'), $paid_attendees) . ')';
+                    }
+
+                    $description .= sprintf(
+                        $pattern,
+                        _T("Attendees:", "events"),
+                        $attendees_str
+                    );
+
                     $description .= '</ul>';
 
                     $activities = $event->getActivities();
