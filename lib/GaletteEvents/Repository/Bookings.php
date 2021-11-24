@@ -311,6 +311,10 @@ class Bookings
                         '=',
                         $this->login->id
                     );
+
+                    if (!$this->login->isGroupManager()) {
+                        $select->where(['a.' . Adherent::PK => $this->login->id]);
+                    }
                 }
 
                 $select->where(
