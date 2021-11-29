@@ -93,6 +93,8 @@ class Events
     /**
      * Get events list
      *
+     * @param bool $onlyevents get events member has booking on
+     *
      * @return GaletteEvents\Event[]
      */
     public function getList($onlyevents = false)
@@ -210,7 +212,7 @@ class Events
                     if ($event->canEdit($this->login)) {
                         $description .= '<a href="" id="event_link">';
                     }
-                    $description.= _T('Event information', 'events');
+                    $description .= _T('Event information', 'events');
                     if ($event->canEdit($this->login)) {
                         $description .= '&nbsp;<i class="fas fa-eye"></i></a>';
                     }
