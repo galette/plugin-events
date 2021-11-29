@@ -39,7 +39,6 @@
         </div>
         <div class="infoline">
 {if $event}
-    {if $login->isAdmin() or $login->isStaff() or $login->isGroupManager()}
             <a
                 href="{path_for name="events_bookings" data=["event" => "all", "option" => "clear_filter", "value" => true]}"
                 class="tooltip"
@@ -47,10 +46,11 @@
                 <i class="fas fa-eraser"></i>
                 <span class="sr-only">{_T string="Show all bookings" domain="events"}</span>
             </a>
-    {/if}
             <strong>{_T string="%event's bookings" domain="events" pattern="/%event/" replace=$event->getName()}</strong>
+    {if $login->isAdmin() or $login->isStaff() or $login->isGroupManager()}
             (<a href="{path_for name="events_booking_add"}?event={$event->getId()}">{_T string="Add a new booking" domain="events"}</a>)
-            -
+    {/if}
+    -
 {/if}
 {if $nb_bookings gt 0}
             {$nb_bookings} {if $nb_bookings != 1}{_T string="bookings" domain="events"}{else}{_T string="booking" domain="events"}{/if}
@@ -61,6 +61,7 @@
                     {html_options options=$nbshow_options selected=$numrows}
                 </select>
                 <noscript> <span><input type="submit" value="{_T string="Change"}" /></span></noscript>
+                {include file="forms_types/csrf.tpl"}
             </div>
         </div>
         </form>
@@ -218,6 +219,7 @@
                 </button>
             </li>
         </ul>
+        {include file="forms_types/csrf.tpl"}
         </form>
 {/if}
 {/block}
@@ -267,7 +269,7 @@
                 } else {
     {if $existing_mailing eq true}
                     if (this.id == 'sendmail') {
-                        var _el = $('<div id="existing_mailing" title="{_T string="Existing mailing"}">{_T string="A mailing already exists. Do you want to create a new one or resume the existing?"}</div>');
+                        var _el = $('<div id="existing_mailing" title="{_T string="Existing mailing" escape="js"}">{_T string="A mailing already exists. Do you want to create a new one or resume the existing?" escape="js"}</div>');
                         _el.appendTo('body').dialog({
                             modal: true,
                             hide: 'fold',

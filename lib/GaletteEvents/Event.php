@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2018 The Galette Team
+ * Copyright © 2018-2021 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package   GaletteEvents
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018 The Galette Team
+ * @copyright 2018-2021 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  */
@@ -38,12 +38,8 @@ namespace GaletteEvents;
 use Galette\Core\Db;
 use Galette\Core\Login;
 use Galette\Entity\Group;
-use Galette\Repository\Groups;
 use Analog\Analog;
 use Laminas\Db\Sql\Expression;
-use Laminas\Db\Sql\Predicate;
-use Laminas\Db\Sql\Predicate\PredicateSet;
-use Laminas\Db\Sql\Predicate\Operator;
 
 /**
  * Event entity
@@ -52,7 +48,7 @@ use Laminas\Db\Sql\Predicate\Operator;
  * @name      Event
  * @package   GaletteEvents
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018 The Galette Team
+ * @copyright 2018-2021 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  */
@@ -125,50 +121,11 @@ class Event
             $select = $this->zdb->select($this->getTableName());
             $select->where(array(self::PK => $id));
 
-            if (!$this->login->isAdmin() && !$this->login->isStaff()) {
-                $groups = Groups::loadGroups(
-                    $this->login->id,
-                    false,
-                    false
-                );
-
-                if ($this->login->isGroupManager() && count($this->login->managed_groups)) {
-                    $groups = array_merge($groups, $this->login->managed_groups);
-                }
-
-                $set = [new Predicate\IsNull(Group::PK)];
-                if (count($groups)) {
-                    $set[] = new Predicate\In(
-                        Group::PK,
-                        $groups
-                    );
-                }
-                $select->where(
-                    new PredicateSet(
-                        $set,
-                        PredicateSet::OP_OR
-                    )
-                );
-            }
             $results = $this->zdb->execute($select);
 
             if ($results->count() > 0) {
-                $result = $results->current();
-                if (
-                    $this->login->isAdmin()
-                    || $this->login->isStaff()
-                    || $this->login->isGroupManager()
-                    && in_array($result->id_group, $this->login->managed_groups)
-                ) {
-                    $this->loadFromRS($results->current());
-                    $this->loadActivities();
-                } else {
-                    Analog::log(
-                        'Cannot load event form id `' . $id . '` | Not enough rights',
-                        Analog::WARNING
-                    );
-                    return false;
-                }
+                $this->loadFromRS($results->current());
+                $this->loadActivities();
                 return true;
             } else {
                 return false;
@@ -179,7 +136,6 @@ class Event
                 Analog::WARNING
             );
             throw $e;
-            return false;
         }
     }
 
@@ -222,9 +178,7 @@ class Event
             }
 
             $delete = $this->zdb->delete($this->getTableName());
-            $delete->where(
-                self::PK . ' = ' . $this->id
-            );
+            $delete->where([self::PK => $this->id]);
             $this->zdb->execute($delete);
 
             //commit all changes
@@ -482,7 +436,7 @@ class Event
                 $update = $this->zdb->update($this->getTableName());
                 $update
                     ->set($values)
-                    ->where(self::PK . '=' . $this->id);
+                    ->where([self::PK => $this->id]);
 
                 $edit = $this->zdb->execute($update);
 
@@ -874,15 +828,55 @@ class Event
         $select = $this->zdb->select(EVENTS_PREFIX . Booking::TABLE, 'b');
         $select->columns(
             array(
-                'count' => new Expression('count(DISTINCT b.' . Booking::PK . ')')
+                'count' => new Expression('SUM(b.number_people)'),
+                'is_paid'
             )
         );
         $select->where([
             self::PK    => $this->id,
-            'is_paid'   => true
         ]);
+
+        $select->group('is_paid');
+
         $results = $this->zdb->execute($select);
 
-        return $results->current()->count;
+        return $results;
+    }
+
+    /**
+     * Can member edit event
+     *
+     * @param Login $login Login instance
+     *
+     * @return bool
+     */
+    public function canEdit(Login $login): bool
+    {
+        if ($login->isAdmin() || $login->isStaff()) {
+            return true;
+        }
+
+        if (!$login->isGroupManager()) {
+            return false;
+        }
+
+        if ($this->group) {
+            $groups = $this->login->getManagedGroups();
+            return (in_array($this->group, $groups));
+        }
+
+        return false;
+    }
+
+    /**
+     * Can memebr create an event
+     *
+     * @param Login $login Login instance
+     *
+     * @return bool
+     */
+    public function canCreate(Login $login): bool
+    {
+        return ($login->isAdmin() || $login->isStaff() || $login->isGroupManager());
     }
 }

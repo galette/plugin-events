@@ -84,10 +84,12 @@
                         {/if}
                     </td>
                     <td class="center nowrap actions_row">
+    {if $login->isAdmin() or $login->isStaff() or ($login->isGroupManager() and $event->getGroup()|in_array:$login->managed_groups )}
                         <a href="{path_for name="event_bookings_export" data=["id" => $eid]}" class="tooltip">
                             <i class="fas fa-file-csv fa-fw"></i>
                             <span class="sr-only">{_T string="%eventname: export bookings as CSV" domain="events" pattern="/%eventname/" replace=$event->getName()}</span>
                         </a>
+    {/if}
                         <a href="{path_for name="events_bookings" data=["event" => $eid]}" class="tooltip">
                             <i class="fas fa-eye fa-fw"></i>
                             <span class="sr-only">{_T string="%eventname: show bookings" domain="events" pattern="/%eventname/" replace=$event->getName()}</span>

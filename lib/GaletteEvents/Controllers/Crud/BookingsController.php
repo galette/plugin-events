@@ -420,24 +420,8 @@ class BookingsController extends AbstractPluginController
             || $this->login->isGroupManager()
         ) {
             // members
-            $members = [];
             $m = new Members();
-            $required_fields = array(
-                'id_adh',
-                'nom_adh',
-                'prenom_adh'
-            );
-            $list_members = $m->getList(false, $required_fields);
-
-            if (count($list_members) > 0) {
-                foreach ($list_members as $member) {
-                    $pk = Adherent::PK;
-                    $sname = mb_strtoupper($member->nom_adh, 'UTF-8') .
-                        ' ' . ucwords(mb_strtolower($member->prenom_adh, 'UTF-8')) .
-                        ' (' . $member->id_adh . ')';
-                    $members[$member->$pk] = $sname;
-                }
-            }
+            $members = $m->getSelectizedMembers($this->zdb, $this->login);
 
             $route_params['members'] = [
                 'filters'   => $m->getFilters(),
@@ -471,7 +455,7 @@ class BookingsController extends AbstractPluginController
                     'autocomplete'      => true,
                     'page_title'        => $title,
                     'booking'           => $booking,
-                    'events'            => $events->getList(),
+                    'events'            => $events->getList(true),
                     'require_dialog'    => true,
                     'require_calendar'  => true,
                     // pseudo random int
@@ -521,7 +505,7 @@ class BookingsController extends AbstractPluginController
             $error_detected = array_merge($error_detected, $valid);
         }
 
-        if (count($error_detected) == 0) {
+        if (count($error_detected) == 0 && isset($post['save'])) {
             //all goes well, we can proceed
 
             $new = false;
@@ -538,7 +522,7 @@ class BookingsController extends AbstractPluginController
                 }
             } elseif ($store === false) {
                 //something went wrong :'(
-                $error_detected[] = _T("An error occured while storing the booking.", "events");
+                $error_detected[] = _T("An error occurred while storing the booking.", "events");
             } else {
                 $error_detected[] = $store;
             }
@@ -587,15 +571,17 @@ class BookingsController extends AbstractPluginController
             $this->session->booking = $booking;
 
             if ($booking->getId()) {
+                $route = 'events_booking_edit';
                 $rparams = [
                     'id'        => $booking->getId(),
                     'action'    => 'edit'
                 ];
             } else {
+                $route = 'events_booking_add';
                 $rparams = ['action' => 'add'];
             }
             $redirect_url = $this->router->pathFor(
-                'events_booking',
+                $route,
                 $rparams
             );
         }
@@ -617,7 +603,7 @@ class BookingsController extends AbstractPluginController
      */
     public function redirectUri(array $args): string
     {
-        return $this->router->pathFor('events_bookings');
+        return $this->router->pathFor('events_bookings', ['event' => 'all'] + $args);
     }
 
     /**

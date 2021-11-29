@@ -45,6 +45,11 @@
     "GALETTE_VERSION",
     "GALETTE_X_FORWARDED_FOR_INDEX",
     "_CURRENT_THEME_PATH",
+    "_T",
+    "__",
+    "_Tn",
+    "_Tx",
+    "_Tnx",
 
     "// Galette db constants (not detected as they are dynamically declared)",
     "HOST_DB",
@@ -65,9 +70,6 @@
     "isValidWebUrl",
     "remove_remarks",
     "split_sql_file",
-    "_T",
-    "__",
-
 
     "// XHProf PECL extension",
     "XHProfRuns_Default",
@@ -85,10 +87,7 @@
     "DI\\autowire",
     "DI\\Container",
     "DI\\ContainerBuilder",
-    "DI\\Bridge\\Slim\\App",
-
-    "//PHP8 functions",
-    "str_contains"
+    "DI\\Bridge\\Slim\\App"
   ],
   "scan-files": [
     "*.php",

@@ -36,6 +36,7 @@
 
 namespace GaletteEvents\Controllers\Crud;
 
+use Analog\Analog;
 use Galette\Repository\Groups;
 use Galette\Controllers\Crud\AbstractPluginController;
 use GaletteEvents\Filters\EventsList;
@@ -295,9 +296,25 @@ class EventsController extends AbstractPluginController
         } else {
             $event = new Event($this->zdb, $this->login);
         }
+        $can = $event->canCreate($this->login);
 
         if ($id !== null && $event->getId() != $id) {
             $event->load($id);
+            $can = $event->canEdit($this->login);
+        }
+
+        //check if logged-in user can edit event
+        if (!$can) {
+            $redirect_url = $this->router->pathFor('events_events');
+            Analog::log(
+                sprintf(
+                    'Member %1$s cannot edit event %2$s',
+                    $this->login->id,
+                    $event->getId()
+                )
+            );
+            return $response
+                ->withHeader('Location', $redirect_url);
         }
 
         // template variable declaration
@@ -343,8 +360,24 @@ class EventsController extends AbstractPluginController
     {
         $post = $request->getParsedBody();
         $event = new Event($this->zdb, $this->login);
+        $can = $event->canCreate($this->login);
         if (isset($post['id']) && !empty($post['id'])) {
             $event->load((int)$post['id']);
+            $can = $event->canEdit($this->login);
+        }
+
+        //check if logged-in user can edit event
+        if (!$can) {
+            $redirect_url = $this->router->pathFor('events_events');
+            Analog::log(
+                sprintf(
+                    'Member %1$s cannot edit event %2$s',
+                    $this->login->id,
+                    $event->getId()
+                )
+            );
+            return $response
+                ->withHeader('Location', $redirect_url);
         }
 
         $success_detected = [];
@@ -485,8 +518,8 @@ class EventsController extends AbstractPluginController
     {
         $event = new Event($this->zdb, $this->login, (int)$args['id']);
         return sprintf(
-            //TRANS: first parameter is the model name
-            _T('Remove event "%1$s"', 'events'),
+            //TRANS: first parameter is the event name
+            _T('Remove event \'%1$s\'"', 'events'),
             $event->getName()
         );
     }

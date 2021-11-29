@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2018 The Galette Team
+ * Copyright © 2018-2021 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package   GaletteEvents
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018 The Galette Team
+ * @copyright 2018-2021 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  */
@@ -50,7 +50,7 @@ use Laminas\Db\Sql\Expression;
  * @name      Event
  * @package   GaletteEvents
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018 The Galette Team
+ * @copyright 2018-2021 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  */
@@ -169,9 +169,7 @@ class Booking
             }
 
             $delete = $this->zdb->delete($this->getTableName());
-            $delete->where(
-                self::PK . ' = ' . $this->id
-            );
+            $delete->where([self::PK => $this->id]);
             $this->zdb->execute($delete);
 
             //commit all changes
@@ -205,6 +203,7 @@ class Booking
     {
         $this->errors = array();
 
+        //event and activities
         if (!isset($values['event']) || empty($values['event'])) {
             $this->errors[] = _T('Event is mandatory', 'events');
         } else {
@@ -240,6 +239,36 @@ class Booking
             }
         }
 
+        //financial information
+        if ($this->login->isAdmin() || $this->login->isStaff()) {
+            if (isset($values['paid'])) {
+                $this->paid = true;
+            } else {
+                $this->paid = false;
+            }
+
+            if (isset($values['amount']) && !empty($values['amount'])) {
+                $this->amount = $values['amount'];
+            }
+
+            if ($this->paid && !$this->amount) {
+                $this->errors[] = _T('Please specify amount if booking has been paid ;)', 'events');
+            }
+
+            if (isset($values['payment_method'])) {
+                $this->payment_method = $values['payment_method'];
+            }
+
+            if (isset($values['bank_name'])) {
+                $this->bank_name = $values['bank_name'];
+            }
+
+            if (isset($values['check_number'])) {
+                $this->check_number = $values['check_number'];
+            }
+        }
+
+        //booking information
         if (!isset($values['member']) || empty($values['member'])) {
             if (
                 $this->login->isAdmin()
@@ -252,32 +281,6 @@ class Booking
             }
         } else {
             $this->member = $values['member'];
-        }
-
-        if (isset($values['paid'])) {
-            $this->paid = true;
-        } else {
-            $this->paid = false;
-        }
-
-        if (isset($values['amount']) && !empty($values['amount'])) {
-            $this->amount = $values['amount'];
-        }
-
-        if ($this->paid && !$this->amount) {
-            $this->errors[] = _T('Please specify amount if booking has been paid ;)', 'events');
-        }
-
-        if (isset($values['payment_method'])) {
-            $this->payment_method = $values['payment_method'];
-        }
-
-        if (isset($values['bank_name'])) {
-            $this->bank_name = $values['bank_name'];
-        }
-
-        if (isset($values['check_number'])) {
-            $this->check_number = $values['check_number'];
         }
 
         if (isset($values['number_people'])) {
@@ -328,7 +331,7 @@ class Booking
         }
 
         if (count($this->errors) == 0) {
-            //check unicity
+            //check uniqueness
             $select = $this->zdb->select($this->getTableName());
             $select->where([
                 Event::PK       => $this->event,
@@ -358,7 +361,7 @@ class Booking
 
         if (count($this->errors) > 0) {
             Analog::log(
-                'Some errors has been throwed attempting to edit/store a booking' . "\n" .
+                'Some errors has been threw attempting to edit/store a booking' . "\n" .
                 print_r($this->errors, true),
                 Analog::ERROR
             );
@@ -432,7 +435,7 @@ class Booking
                 $update = $this->zdb->update($this->getTableName());
                 $update
                     ->set($values)
-                    ->where(self::PK . '=' . $this->id);
+                    ->where([self::PK => $this->id]);
 
                 $edit = $this->zdb->execute($update);
 
