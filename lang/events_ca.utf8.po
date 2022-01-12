@@ -1,19 +1,20 @@
 # Pol Casares Civit <pol.casares@e-campus.uab.cat>, 2020.
+# Queralt Garrigos <garrigosqueralt@gmail.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2021-11-23 23:26+0100\n"
-"PO-Revision-Date: 2020-12-30 17:29+0000\n"
-"Last-Translator: Pol Casares Civit <pol.casares@e-campus.uab.cat>\n"
-"Language-Team: Catalan <https://hosted.weblate.org/projects/galette/events-"
-"plugin/ca/>\n"
+"PO-Revision-Date: 2022-01-13 09:53+0000\n"
+"Last-Translator: Queralt Garrigos <garrigosqueralt@gmail.com>\n"
+"Language-Team: Catalan <https://hosted.weblate.org/projects/galette/"
+"events-plugin/ca/>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.4.1-dev\n"
+"X-Generator: Weblate 4.10.1\n"
 
 #: ../lib/GaletteEvents/Booking.php:208
 msgid "Event is mandatory"
@@ -215,7 +216,7 @@ msgstr ""
 
 #: ../lib/GaletteEvents/Repository/Events.php:231
 msgid "Activities"
-msgstr ""
+msgstr "Activitats"
 
 #: ../lib/GaletteEvents/Repository/Activities.php:84
 msgid "Noon meal"
