@@ -4,13 +4,14 @@
 # Toni Martínez <yagstyle@gmail.com>, 2021.
 # felipe <felipecandia@live.com>, 2021.
 # Germe the fur star <FOSSgerme.deb@tuta.io>, 2021.
+# Cow <javier.fserrador@gmail.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2021-11-23 23:26+0100\n"
-"PO-Revision-Date: 2021-12-03 01:51+0000\n"
-"Last-Translator: Germe the fur star <FOSSgerme.deb@tuta.io>\n"
+"PO-Revision-Date: 2022-05-14 17:13+0000\n"
+"Last-Translator: Cow <javier.fserrador@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/galette/"
 "events-plugin/es/>\n"
 "Language: es\n"
@@ -18,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.10-dev\n"
+"X-Generator: Weblate 4.13-dev\n"
 
 #: ../lib/GaletteEvents/Booking.php:208
 msgid "Event is mandatory"
@@ -385,7 +386,7 @@ msgstr "Fecha de creación"
 #: ../templates/default/activities.tpl:44
 #: ../templates/default/activities.tpl:59 ../templates/default/activity.tpl:10
 msgid "Is active"
-msgstr ""
+msgstr "Está activo"
 
 #: ../templates/default/activities.tpl:63
 msgid "Active"
@@ -595,7 +596,7 @@ msgstr ""
 
 #: ../templates/default/event.tpl:92
 msgid "Location"
-msgstr ""
+msgstr "Lugar"
 
 #: ../templates/default/event.tpl:95
 msgid "Address"
