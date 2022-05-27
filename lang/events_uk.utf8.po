@@ -1,12 +1,13 @@
 # Johan Cwiklinski <trasher@x-tnd.be>, 2020, 2021.
 # Tymofij Lytvynenko <till.svit@gmail.com>, 2021.
+# Artem <artem@molotov.work>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2021-11-23 23:26+0100\n"
-"PO-Revision-Date: 2021-11-23 22:29+0000\n"
-"Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
+"PO-Revision-Date: 2022-05-28 09:20+0000\n"
+"Last-Translator: Artem <artem@molotov.work>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/galette/"
 "events-plugin/uk/>\n"
 "Language: uk\n"
@@ -15,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.10-dev\n"
+"X-Generator: Weblate 4.13-dev\n"
 
 #: ../lib/GaletteEvents/Booking.php:208
 msgid "Event is mandatory"
@@ -91,10 +92,9 @@ msgstr "Не забудьте зберегти бронювання"
 
 #. TRANS: first parameter is the member name, second the event name.
 #: ../lib/GaletteEvents/Controllers/Crud/BookingsController.php:638
-#, fuzzy, php-format
-#| msgid "Remove booking"
+#, php-format
 msgid "Remove booking for %1$s on %2$s"
-msgstr "Вилучити бронювання"
+msgstr "Вилучити бронювання для %1$s на %2$s"
 
 #: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:144
 msgid "Activities management"
@@ -493,16 +493,16 @@ msgid "Bookings as CSV"
 msgstr "Бронювання як CSV"
 
 #: ../templates/default/bookings.tpl:233
-#, fuzzy
-#| msgid "No booking has been found"
 msgid "No booking selected"
-msgstr "Бронювання не знайдено"
+msgstr "Бронювання не вибрано"
 
 #: ../templates/default/bookings.tpl:233
 msgid ""
 "Please make sure to select at least one booking from the list to perform "
 "this action."
 msgstr ""
+"Будь ласка, не забудьте вибрати хоча б одне бронювання зі списку, щоб "
+"виконати цю дію."
 
 #: ../templates/default/events.tpl:5
 msgid "events"
