@@ -132,7 +132,7 @@ class ActivitiesController extends AbstractPluginController
         }
 
         //assign pagination variables to the template and add pagination links
-        $filters->setSmartyPagination($this->router, $this->view->getSmarty(), false);
+        $filters->setViewPagination($this->router, $this->view, false);
 
         $this->session->filter_activities = $filters;
 

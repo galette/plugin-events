@@ -164,7 +164,7 @@ class BookingsController extends AbstractPluginController
         $bookings = new Bookings($this->zdb, $this->login, $filters);
 
         //assign pagination variables to the template and add pagination links
-        $filters->setSmartyPagination($this->router, $this->view->getSmarty(), false);
+        $filters->setViewPagination($this->router, $this->view, false);
 
         $this->session->filter_bookings = $filters;
 
@@ -421,7 +421,7 @@ class BookingsController extends AbstractPluginController
         ) {
             // members
             $m = new Members();
-            $members = $m->getSelectizedMembers($this->zdb, $this->login);
+            $members = $m->getDropdownMembers($this->zdb, $this->login);
 
             $route_params['members'] = [
                 'filters'   => $m->getFilters(),

@@ -129,7 +129,7 @@ class EventsController extends AbstractPluginController
         $events = new Events($this->zdb, $this->login, $filters);
 
         //assign pagination variables to the template and add pagination links
-        $filters->setSmartyPagination($this->router, $this->view->getSmarty(), false);
+        $filters->setViewPagination($this->router, $this->view, false);
 
         $this->session->filter_events = $filters;
 
@@ -190,7 +190,7 @@ class EventsController extends AbstractPluginController
         $events = new Events($this->zdb, $this->login, $filters);
 
         //assign pagination variables to the template and add pagination links
-        $filters->setSmartyPagination($this->router, $this->view->getSmarty(), false);
+        $filters->setViewPagination($this->router, $this->view, false);
 
         $this->session->filter_events_calendar = $filters;
 
