@@ -1,0 +1,125 @@
+{% extends 'elements/list.html.twig' %}
+{% import "macros.twig" as macros %}
+
+{% set nb = nb_events %}
+
+{% set form = {
+    'order': {
+        'name': 'events_events'
+    }
+} %}
+
+{% block infoline %}
+    {% set infoline = {
+        'label': _Tn("%count event", "%count events", nb, "events")|replace({"%count": nb}),
+    } %}
+    {{ parent() }}
+{% endblock %}
+
+{% block header %}
+    {% set columns = [
+        {'label': '#'},
+        {'label': _T("Name", "events"), order: constant('GaletteEvents\\Repository\\Events::ORDERBY_NAME')},
+        {'label': _T("Date", "events"), order: constant('GaletteEvents\\Repository\\Events::ORDERBY_DATE')},
+        {'label': _T("Town", "events"), order: constant('GaletteEvents\\Repository\\Events::ORDERBY_TOWN')},
+        {'label': _T("Group", "events")},
+        {'label': _T("Open", "events")},
+    ] %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    {% if events|length %}
+        {% for ordre, event in events %}
+    <tr>
+        <td class="right" data-scope="id">
+            {{ ordre + 1 + (filters.current_page - 1) * numrows }}
+        </td>
+        <td class="nowrap username_row" data-scope="row">
+            {% set eid = event.getId() %}
+            {% if login.isAdmin() or login.isStaff() or (login.isGroupManager() and event.getGroup() in login.managed_groups) %}
+                {#<input type="checkbox" name="event_sel[]" value="{$id}"/>#}
+                <a href="{{ path_for("events_event_edit", {"id": eid}) }}">{{ event.getName() }}</a>
+            {% else %}
+                {{ event.getName() }}
+            {% endif %}
+        </td>
+        <td data-title="{{ _T("Date", "events") }}">{{ event.getBeginDate() }}</td>
+        <td data-title="{{ _T("Town", "events") }}">{{ event.getTown() }}</td>
+        <td data-title="{{ _T("Group", "events") }}">{{ event.getGroupName() }}</td>
+        <td class="center id_row tooltip {% if event.isOpen() %}use{% else %}delete{% endif %}" data-title="{{ _T("Open", "events") }}">
+            <i class="lock{% if event.isOpen() %}open{% endif %} icon"></i>
+            <span class="sr-only">
+                {% if event.isOpen() %}
+                    {{ _T("Event is open", "events") }}
+                {% else %}
+                    {{ _T("Event is closed", "events") }}
+                {% endif %}
+            </span>
+        </td>
+        <td class="center nowrap actions_row">
+            {% if login.isAdmin() or login.isStaff() or (login.isGroupManager() and event.getGroup() in login.managed_groups) %}
+                {% set actions = [
+                    {
+                        'label': _T("%eventname: export bookings as CSV", "events")|replace({"%eventname": event.getName()}),
+                        'route': {
+                        'name': 'event_bookings_export',
+                            'args': {'id': eid}
+                        },
+                        'icon': 'file excel grey'
+                    },
+
+                ] %}
+            {% endif %}
+
+            {% set actions = (actions ?? [])|merge([
+                {
+                    'label': _T("%eventname: show bookings", "events")|replace({"%eventname": event.getName()}),
+                    'route': {
+                    'name': 'events_bookings',
+                        'args': {'event': eid}
+                    },
+                    'icon': 'eye grey'
+                }
+            ]) %}
+
+            {% if login.isAdmin() or login.isStaff() or (login.isGroupManager() and event.getGroup() in login.managed_groups) %}
+                {% set actions = actions|merge([
+                    {
+                        'label': _T("%eventname: edit informations", "events")|replace({"%eventname": event.getName()}),
+                        'route': {
+                        'name': 'events_event_edit',
+                            'args': {'id': eid}
+                        },
+                        'icon': 'edit'
+                    }
+                ]) %}
+            {% endif %}
+
+            {% if login.isAdmin() or login.isStaff() %}
+                {% set actions = actions|merge([
+                    {
+                        'label': _T("%eventname: remove from database", "events")|replace({"%eventname": event.getName()}),
+                        'route': {
+                        'name': 'events_remove_event',
+                        'args': {'id': eid}
+                    },
+                        'icon': 'trash red',
+                        'extra_class': 'delete'
+                    }
+                ]) %}
+            {% endif %}
+
+            {% for action in actions %}
+                {{ macros.drawListAction(action.label, action.route, action.icon, action.extra_class|default('')) }}
+            {% endfor %}
+        </td>
+    </tr>
+        {% endfor %}
+    {% else %}
+        <tr>
+            <td colspan="7" class="emptylist">{{ _T("No event has been found", "events") }}</td>
+        </tr>
+    {% endif %}
+
+{% endblock %}

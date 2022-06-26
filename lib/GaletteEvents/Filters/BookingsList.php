@@ -194,12 +194,12 @@ class BookingsList extends Pagination
             'event'     => 'all'
         ];
 
-        if ($this->view->getTemplateVars('cur_subroute')) {
-            $args['type'] = $this->view->getTemplateVars('cur_subroute');
+        if ($this->view->getEnvironment()->getGlobals()['cur_subroute']) {
+            $args['type'] = $this->view->getEnvironment()->getGlobals()['cur_subroute'];
         }
 
         $href = $this->router->pathFor(
-            $this->view->getTemplateVars('cur_route'),
+            $this->view->getEnvironment()->getGlobals()['cur_route'],
             $args
         );
         return $href;

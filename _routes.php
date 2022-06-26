@@ -109,7 +109,7 @@ $this->post(
 )->setName('filter-bookingslist')->add($authenticate);
 
 $this->get(
-    '/booking/add',
+    '/booking/add[/{id_adh:\d+}]',
     [BookingsController::class, 'add']
 )->setName('events_booking_add')->add($authenticate);
 

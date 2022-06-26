@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2021 The Galette Team
+ * Copyright © 2021-2022 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package   GaletteEvents
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2021 The Galette Team
+ * @copyright 2021-2022 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     2021-05-09
@@ -56,7 +56,7 @@ use Slim\Http\Response;
  * @name      BookingsController
  * @package   GaletteEvents
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2021 The Galette Team
+ * @copyright 2021-2022 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     2021-05-09
@@ -174,7 +174,7 @@ class BookingsController extends AbstractPluginController
         // display page
         $this->view->render(
             $response,
-            'file:[' . $this->getModuleRoute() . ']bookings.tpl',
+            $this->getTemplate('bookings'),
             [
                 'page_title'        => _T("Bookings management", "events"),
                 'bookings'          => $bookings,
@@ -366,10 +366,11 @@ class BookingsController extends AbstractPluginController
      * @param Response $response PSR Response
      * @param int|null $id       Model id
      * @param string   $action   Action
+     * @apram int|null $id_adh   Member ID (for add)
      *
      * @return Response
      */
-    public function edit(Request $request, Response $response, int $id = null, $action = 'edit'): Response
+    public function edit(Request $request, Response $response, int $id = null, $action = 'edit', int $id_adh = null): Response
     {
         $get = $request->getQueryParams();
         $route_params = [];
@@ -400,10 +401,10 @@ class BookingsController extends AbstractPluginController
                 $booking->setEvent((int)$get['event']);
             }
             if (
-                isset($_GET[Adherent::PK]) &&
+                $id_adh !== null &&
                 ($this->login->isAdmin() || $this->login->isStaff() || $this->login->isGroupManager())
             ) {
-                $booking->setMember((int)$_GET[Adherent::PK]);
+                $booking->setMember($id_adh);
             } elseif (
                 !$this->login->isSuperAdmin()
                 && !$this->login->isAdmin()
@@ -448,7 +449,7 @@ class BookingsController extends AbstractPluginController
         // display page
         $this->view->render(
             $response,
-            'file:[' . $this->getModuleRoute() . ']booking.tpl',
+            $this->getTemplate('booking'),
             array_merge(
                 $route_params,
                 array(

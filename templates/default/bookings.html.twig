@@ -1,0 +1,233 @@
+{% extends 'elements/list.html.twig' %}
+{% import "macros.twig" as macros %}
+
+{% set nb = nb_bookings %}
+
+{% set form = {
+    'route': {
+        'name': 'batch-eventslist'
+    },
+    'order': {
+        'name': 'events_bookings',
+        'args': {
+            'event': eventid
+        }
+    }
+} %}
+
+{% block infoline %}
+    {% set infoline = {
+        'label': _Tn("%count booking", "%count bookings", nb, "events")|replace({"%count": nb}),
+    } %}
+    {{ parent() }}
+{% endblock %}
+
+{% block infoline_actions %}
+    {% if event %}
+        <a
+            href="{{ path_for("events_bookings", {"event": "all", "option": "clear_filter", "value": true}) }}"
+            class="ui labeled icon button"
+        >
+            <i class="eraser red icon"></i>
+            {{ _T("Show all bookings", "events") }}
+        </a>
+        <strong>{{ _T("%event's bookings", "events")|replace({'%event': event.getName()}) }}</strong>
+        {%if login.isAdmin() or login.isStaff() or login.isGroupManager() %}
+            (<a href="{{ path_for("events_booking_add")}}?event={{ event.getId() }}">{{ _T("Add a new booking", "events") }}</a>)
+        {% endif %}
+    {% endif %}
+{% endblock %}
+
+{% block header %}
+    {% set columns = [
+        {'label': '#'},
+        {'label': _T("Event", "events"), order: constant('GaletteEvents\\Repository\\Bookings::ORDERBY_EVENT')},
+        {'label': _T("Member"), order: constant('GaletteEvents\\Repository\\Bookings::ORDERBY_MEMBER')},
+        {'label': _T("Booking date", "events"), order: constant('GaletteEvents\\Repository\\Bookings::ORDERBY_BOOKDATE')},
+        {'label': _T("Paid", "events"), order: constant('GaletteEvents\\Repository\\Bookings::ORDERBY_PAID')},
+        {'label': _T("Attendees", "events")},
+    ] %}
+    {{ parent() }}
+{% endblock %}
+
+{% block search %}
+    <form action="{{ path_for("filter-bookingslist", {"event": eventid}) }}" method="post" id="filtre" class="ui form">
+    <div class="ui segment">
+        <div class="ui three fields">
+            <div class="field">
+                <label for="event_filter">{{ _T("Event", "events") }}</label>
+                <select name="event_filter" id="event_filter" required="required">
+                    <option value="0">{{ _T("Select...", "events") }}</option>
+    {% for event in events %}
+                    <option value="{{ event.getId() }}"{% if filters.event_filter == event.getId() %} selected="selected"{% endif %}>{{ event.getName() }}</option>
+    {% endfor %}
+                </select>
+            </div>
+            <div class="field">
+                {# payment type #}
+                {% include "components/forms/payment_types.html.twig" with {
+                    current: filters.payment_type_filter,
+                    varname: "payment_type_filter",
+                    empty: {"value": -1, "label": _T("All payment types", "events")}
+                } %}
+            </div>
+            <div class="field">
+                <label for="group_filter" title="{{ _T("Group", "events") }}">{{ _T("Group", "events") }}</label>
+                <select name="group_filter" id="group_filter">
+                    <option value="0">{{ _T("Select a group") }}</option>
+        {% for group in groups %}
+                    <option value="{{ group.getId() }}"{% if filters.group_filter == group.getId() %} selected="selected"{% endif %}>{{ group.getIndentName()|raw }}</option>
+        {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="two fields">
+            <div class="field">
+                <div class="inline fields">
+                    <label for="email_filter">{{ _T("Paid bookings:", "events") }}</label>
+                    <div class="field inline">
+                        <div class="ui radio checkbox">
+                            <input type="radio" name="paid_filter" id="filter_dc_paid" value="{{ constant('GaletteEvents\\Repository\\Bookings::FILTER_DC_PAID')}}"{% if filters.paid_filter == constant('GaletteEvents\\Repository\\Bookings::FILTER_DC_PAID') %} checked="checked"{% endif %}>
+                            <label for="filter_dc_paid" >{{ _T("Don't care") }}</label>
+                        </div>
+                    </div>
+                    <div class="field inline">
+                        <div class="ui radio checkbox">
+                            <input type="radio" name="paid_filter" id="filter_paid" value="{{ constant('GaletteEvents\\Repository\\Bookings::FILTER_PAID') }}"{% if filters.paid_filter == constant('GaletteEvents\\Repository\\Bookings::FILTER_PAID') %} checked="checked"{% endif %}>
+                            <label for="filter_paid" >{{ _T("Paid", "events") }}</label>
+                        </div>
+                    </div>
+                    <div class="field inline">
+                        <div class="ui radio checkbox">
+                            <input type="radio" name="paid_filter" id="filter_not_paid" value="{{ constant('GaletteEvents\\Repository\\Bookings::FILTER_NOT_PAID') }}"{% if filters.paid_filter == constant('GaletteEvents\\Repository\\Bookings::FILTER_NOT_PAID') %} checked="checked"{% endif %}>
+                            <label for="filter_not_paid" >{{ _T("Not paid", "events") }}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ui right aligned basic fitted segment field flexend">
+                <button type="submit"  class="tooltip action ui labeled icon primary button" title="{{ _T('Apply filters') }}" name="filter">
+                    <i class="search icon"></i>
+                    {{ _T('Filter') }}
+                </button>
+                <button type="submit" name="clear_filter" class="ui labeled icon button" title="{{ _T('Reset all filters to defaults') }}">
+                    <i class="trash alt red icon" aria-hidden="true"></i>
+                    {{ _T('Clear filter') }}
+                </button>
+            </div>
+        </div>
+    </div>
+    </form>
+{% endblock %}
+
+{% block footer %}
+    {% if nb > 0 %}
+    <tr>
+        <td class="right" colspan="10">
+            {{ _T("Found bookings total %f", "events")|replace({'%f': bookings.getSum()}) }}
+        </td>
+    </tr>
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    {% for ordre, booking in bookings_list %}
+        {% set rclass = booking.getRowClass() %}
+                <tr>
+                    <td class="{{ rclass }} right" data-scope="id">{{ ordre + 1 + (filters.current_page - 1) * numrows }}</td>
+                    <td class="{{ rclass }} nowrap username_row" data-scope="row">
+                        {% set bid = booking.getId() %}
+        {% if login.isAdmin() or login.isStaff() or (login.isGroupManager() and booking.getEvent().getGroup() in login.managed_groups) %}
+                        <input type="checkbox" name="entries_sel[]" value="{{ bid }}"/>
+                        <a href="{{ path_for("events_event_edit", {"id": booking.getEventId()}) }}">{{ booking.getEvent().getName()}}</a>
+        {% else %}
+                        {{ booking.getEvent().getName() }}
+        {% endif %}
+                    </td>
+                    <td class="{{ rclass }}" data-title="{{ _T("Member") }}">
+                        <a href="{{ path_for("member", {"id": booking.getMemberId()}) }}">
+                            {{ booking.getMember().sfullname }}
+                        </a>
+                    </td>
+                    <td class="{{ rclass }}" data-title="{{ _T("Booking date", "events") }}">{{ booking.getDate() }}</td>
+                    <td class="{{ rclass }} tooltip center {% if not booking.isPaid() %}red{% endif %}" data-title="{{ _T("Paid", "events") }}">
+                        <i class="money bill wave icon"></i>
+                        <span class="sr-only">
+                        {% if booking.isPaid() %}
+                            {{ _T("Paid", "events") }}
+                        {% else %}
+                            {{ _T("Not paid", "events") }}"
+                        {% endif %}
+                        </span>
+                    </td>
+                    <td class="{{ rclass }}" data-title="{{ _T("Attendees", "events") }}">{{ booking.getNumberPeople() }}</td>
+    {% if login.isAdmin() or login.isStaff() or login.isGroupManager() %}
+                    <td class="{{ rclass }} center nowrap actions_row">
+        {% if login.isAdmin() or login.isStaff() or (login.isGroupManager() and booking.getEvent().getGroup() in login.managed_groups )%}
+                        <a href="{{ path_for("events_booking_edit", {"id": bid}) }}" class="tooltip action">
+                            <i class="edit icon"></i>
+                            <span class="sr-only">{{ _T("Edit booking", "events") }}</span>
+                        </a>
+        {% endif %}
+        {% if login.isAdmin() or login.isStaff()%}
+                        <a class="delete tooltip" href="{{ path_for("events_remove_booking", {"id": bid}) }}">
+                            <i class="trash red icon"></i>
+                            <span class="sr-only">{{ _T("Remove from database", "events") }}</span>
+                        </a>
+        {% endif %}
+                    </td>
+    {% endif %}
+                </tr>
+    {% else %}
+                <tr><td colspan="9" class="emptylist">{{ _T("No booking has been found", "events") }}</td></tr>
+    {% endfor %}
+{% endblock %}
+
+{% if nb > 0 %}
+    {% set batch = {
+        'route': {
+            'name': 'batch-vehicleslist'
+        },
+        'modal': {
+            'title': _T("No booking selected", "events"),
+            'content': _T("Please make sure to select at least one booking from the list to perform this action.", "events")
+        }
+    } %}
+
+    {% if login.isAdmin() or login.isStaff() %}
+        {% if preferences.pref_mail_method != constant('Galette\\Core\\GaletteMail::METHOD_DISABLED') %}
+            {%  set batch_actions = [
+                {
+                    'name': 'mailing',
+                    'id': 'sendmail',
+                    'label': _T("Mail"),
+                    'icon': 'mail bulk'
+                }
+            ] %}
+        {% endif %}
+
+        {%  set batch_actions = (batch_actions ?? [])|merge([
+            {
+                'name': 'csv',
+                'label': _T("Members as CSV", "events"),
+                'title': _T("Export selected reservation members as CSV", "events"),
+                'icon': 'file excel'
+            },
+            {
+                'name': 'csvbooking',
+                'label': _T("Bookings as CSV", "events"),
+                'title': _T("Export selected reservation as CSV", "events"),
+                'icon': 'file excel'
+            }
+        ]) %}
+    {% endif %}
+
+    {% set batch_actions = batch_actions|merge([
+        {
+            'name': 'labels',
+            'label': _T("Generate labels"),
+            'icon': 'id badge outline'
+        }
+    ]) %}
+{% endif %}

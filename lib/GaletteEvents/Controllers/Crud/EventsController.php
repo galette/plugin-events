@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2021 The Galette Team
+ * Copyright © 2021-2022 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package   GaletteEvents
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2021 The Galette Team
+ * @copyright 2021-2022 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     2021-05-09
@@ -52,7 +52,7 @@ use Slim\Http\Response;
  * @name      EventsController
  * @package   GaletteEvents
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2021 The Galette Team
+ * @copyright 2021-2022 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     2021-05-09
@@ -136,7 +136,7 @@ class EventsController extends AbstractPluginController
         // display page
         $this->view->render(
             $response,
-            'file:[' . $this->getModuleRoute() . ']events.tpl',
+            $this->getTemplate('events'),
             array(
                 'page_title'            => _T("Events management", "events"),
                 'require_dialog'        => true,
@@ -205,7 +205,7 @@ class EventsController extends AbstractPluginController
         // display page
         $this->view->render(
             $response,
-            'file:[' . $this->getModuleRoute() . ']calendar.tpl',
+            $this->getTemplate('calendar'),
             array(
                 'page_title'            => _T("Events calendar", "events"),
                 'require_dialog'        => true,
@@ -332,7 +332,7 @@ class EventsController extends AbstractPluginController
         // display page
         $this->view->render(
             $response,
-            'file:[' . $this->getModuleRoute() . ']event.tpl',
+            $this->getTemplate('event'),
             array(
                 'autocomplete'      => true,
                 'page_title'        => $title,
