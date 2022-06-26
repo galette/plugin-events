@@ -279,7 +279,7 @@ class BookingsController extends AbstractPluginController
     {
         $post = $request->getParsedBody();
 
-        if (isset($post['event_sel'])) {
+        if (isset($post['entries_sel'])) {
             if (isset($this->session->filter_bookings)) {
                 $filters = clone $this->session->filter_bookings;
             } else {
@@ -287,7 +287,7 @@ class BookingsController extends AbstractPluginController
             }
 
             //$this->session->filter_bookings = $filters;
-            $filters->selected = $post['event_sel'];
+            $filters->selected = $post['entries_sel'];
 
             $bookings = new Bookings($this->zdb, $this->login, $filters);
             $members = [];

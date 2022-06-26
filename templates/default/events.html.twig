@@ -38,7 +38,7 @@
         <td class="nowrap username_row" data-scope="row">
             {% set eid = event.getId() %}
             {% if login.isAdmin() or login.isStaff() or (login.isGroupManager() and event.getGroup() in login.managed_groups) %}
-                {#<input type="checkbox" name="event_sel[]" value="{$id}"/>#}
+                {#<input type="checkbox" name="entries_sel[]" value="{$id}"/>#}
                 <a href="{{ path_for("events_event_edit", {"id": eid}) }}">{{ event.getName() }}</a>
             {% else %}
                 {{ event.getName() }}
