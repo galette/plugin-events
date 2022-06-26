@@ -366,7 +366,7 @@ class BookingsController extends AbstractPluginController
      * @param Response $response PSR Response
      * @param int|null $id       Model id
      * @param string   $action   Action
-     * @apram int|null $id_adh   Member ID (for add)
+     * @param int|null $id_adh   Member ID (for add)
      *
      * @return Response
      */
