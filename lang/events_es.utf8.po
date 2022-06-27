@@ -5,13 +5,14 @@
 # felipe <felipecandia@live.com>, 2021.
 # Germe the fur star <FOSSgerme.deb@tuta.io>, 2021.
 # Cow <javier.fserrador@gmail.com>, 2022.
+# Javier <javier.fserrador@gmail.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2021-11-23 23:26+0100\n"
-"PO-Revision-Date: 2022-05-17 18:14+0000\n"
-"Last-Translator: Cow <javier.fserrador@gmail.com>\n"
+"PO-Revision-Date: 2022-06-28 10:21+0000\n"
+"Last-Translator: Javier <javier.fserrador@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/galette/"
 "events-plugin/es/>\n"
 "Language: es\n"
@@ -19,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.13-dev\n"
+"X-Generator: Weblate 4.13.1-dev\n"
 
 #: ../lib/GaletteEvents/Booking.php:208
 msgid "Event is mandatory"
@@ -130,7 +131,7 @@ msgstr "Gestión de eventos"
 
 #: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:201
 msgid "Javascript libraries has not been built!"
-msgstr "Las bibliotecas Javascript no se han compilado."
+msgstr "Las bibliotecas Javascript no se han compiladas."
 
 #: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:210
 msgid "Events calendar"
@@ -257,7 +258,7 @@ msgstr "Nombre es obligatorio"
 
 #: ../lib/GaletteEvents/Event.php:288
 msgid "Please select a group you own!"
-msgstr "Seleccione un grupo para su propiedad."
+msgstr "Seleccione un grupo para su propiedad"
 
 #: ../lib/GaletteEvents/Event.php:295
 msgid "Town is mandatory"
