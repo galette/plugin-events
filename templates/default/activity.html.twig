@@ -1,0 +1,60 @@
+{% extends "page.html.twig" %}
+
+{% block content %}
+    <form action="{% if activity.getId() %}{{ path_for("events_storeactivity_edit", {"id": activity.getId()}) }}{% else %}{{ path_for("events_storeactivity_add") }}{% endif %}" method="post" class="ui form">
+        <div class="ui styled fluid accordion field">
+            <div class="active title">
+                <i class="icon dropdown"></i>
+                {{ _T("General informations", "events") }}
+            </div>
+            <div class="active content">
+                {% include "components/forms/checkbox.html.twig" with {
+                    id: 'active',
+                    value: activity.isActive(),
+                    label: _T("Is active", "events"),
+                    checked: activity.isActive()
+                } %}
+
+                {% include "components/forms/text.html.twig" with {
+                    id: 'name',
+                    value: activity.getName(),
+                    label: _T("Name", "events"),
+                } %}
+
+                {% include "components/forms/textarea.html.twig" with {
+                    id: 'comment',
+                    value: activity.getComment(),
+                    label: _T("Comment", "events"),
+                } %}
+            </div>
+        </div>
+
+        <div class="ui basic center aligned fitted segment">
+            <button type="submit" name="valid" class="action ui labeled icon primary button">
+                <i class="save icon"></i> {{ _T("Save") }}
+            </button>
+            <input type="hidden" name="id" id="id" value="{{ activity.getId() }}"/>
+            {% include "components/forms/csrf.html.twig" %}
+        </div>
+     </form>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(function() {
+            $('#meal, #lodging').on('change', function() {
+                var _this = $(this);
+                if (!_this.is(':checked')) {
+                    $('#' + _this.attr('id') + '_required').prop('checked', false);
+                }
+            });
+            $('#meal_required, #lodging_required').on('change', function() {
+                var _this = $(this);
+                if (_this.is(':checked')) {
+                    $('#' + _this.attr('id').replace(/_required/, '')).prop('checked', true);
+                }
+            });
+        });
+    </script>
+{% endblock %}
