@@ -69,11 +69,6 @@
 
                 ] %}
 
-                {% if login.isAdmin() or login.isStaff() %}
-                    {% set actions = actions|merge([
-                    ]) %}
-                {% endif %}
-
                 {% for action in actions %}
                     {{ macros.drawListAction(action.label, action.route, action.icon, action.extra_class|default('')) }}
                 {% endfor %}
