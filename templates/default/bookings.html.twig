@@ -23,19 +23,14 @@
 {% endblock %}
 
 {% block infoline_actions %}
-    {% if event %}
-        <a
-            href="{{ path_for("events_bookings", {"event": "all", "option": "clear_filter", "value": true}) }}"
-            class="ui labeled icon button"
-        >
-            <i class="eraser red icon"></i>
-            {{ _T("Show all bookings", "events") }}
-        </a>
-        <strong>{{ _T("%event's bookings", "events")|replace({'%event': event.getName()}) }}</strong>
-        {%if login.isAdmin() or login.isStaff() or login.isGroupManager() %}
-            (<a href="{{ path_for("events_booking_add")}}?event={{ event.getId() }}">{{ _T("Add a new booking", "events") }}</a>)
-        {% endif %}
-    {% endif %}
+    <a
+            class="button"
+            href="{{ path_for("events_booking_add") }}{% if event %}?event={{ event.getId() }}{% endif %}"
+    >
+        <i class="ui plus circle icon" aria-hidden="true"></i>
+        {{ _T('New booking', 'events') }}
+        {% if event %} ({{ _T('current event', 'events') }}){% endif %}
+    </a>
 {% endblock %}
 
 {% block header %}
@@ -117,6 +112,7 @@
                 </button>
             </div>
         </div>
+        {% include "components/forms/csrf.html.twig" %}
     </div>
     </form>
 {% endblock %}

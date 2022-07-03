@@ -16,6 +16,18 @@
     {{ parent() }}
 {% endblock %}
 
+{% block infoline_actions %}
+    {% if login.isAdmin() or login.isStaff() %}
+    <a
+            class="button"
+            href="{{ path_for("events_activity_add") }}"
+    >
+        <i class="ui plus circle icon" aria-hidden="true"></i>
+        {{ _T('New activity', 'events') }}
+    </a>
+    {% endif %}
+{% endblock %}
+
 {% block header %}
     {% set columns = [
         {'label': '#'},

@@ -76,6 +76,7 @@ class PluginGaletteEvents extends GalettePlugin
                         'title' => _T('Events', 'events'),
                         'route' => [
                             'name' => 'events_events',
+                            'aliases' => ['events_event_add', 'events_event_edit']
                         ]
                     ],
                     [
@@ -89,24 +90,6 @@ class PluginGaletteEvents extends GalettePlugin
             ];
         }
 
-        if ($login->isAdmin() || $login->isStaff() || $login->isGroupManager()) {
-            $menus['plugin_events']['items'] = array_merge(
-                $menus['plugin_events']['items'],
-                [
-                    [
-                        'label' => _T('New event', 'events'),
-                        'title' => _T('New event', 'events'),
-                        'route' => [
-                            'name' => 'events_event_add',
-                            'args' => [
-                                'action' => 'add'
-                            ]
-                        ]
-                    ],
-                ]
-            );
-        }
-
         $menus['plugin_events']['items'] = array_merge(
             $menus['plugin_events']['items'],
             [
@@ -117,16 +100,10 @@ class PluginGaletteEvents extends GalettePlugin
                         'name' => 'events_bookings',
                         'args' => [
                             'event' => 'all'
-                        ]
+                        ],
+                        'aliases' => ['events_booking_add', 'events_booking_edit']
                     ]
-                ],
-                [
-                    'label' => _T('New booking', 'events'),
-                    'title' => _T('New booking', 'events'),
-                    'route' => [
-                        'name' => 'events_booking_add'
-                    ]
-                ],
+                ]
             ]
         );
 
@@ -138,16 +115,10 @@ class PluginGaletteEvents extends GalettePlugin
                         'label' => _T('Activities', 'events'),
                         'title' => _T('Activities', 'events'),
                         'route' => [
-                            'name' => 'events_activities'
+                            'name' => 'events_activities',
+                            'aliases' => ['events_activity_add', 'events_activity_edit']
                         ]
-                    ],
-                    [
-                        'label' => _T('New activity', 'events'),
-                        'title' => _T('New activity', 'events'),
-                        'route' => [
-                            'name' => 'events_activity_add'
-                        ]
-                    ],
+                    ]
                 ]
             );
         }
