@@ -41,7 +41,7 @@
 
 {% block body %}
     {% for ordre, activity in activities %}
-        <tr>
+        <tr class="{{ loop.index is odd ? 'odd' : 'even' }}">
             <td class="right" data-scope="id">{{ ordre + 1 + (filters.current_page - 1) * numrows }}</td>
             <td class="nowrap username_row" data-scope="row">
                 {% set aid = activity.getId() %}
