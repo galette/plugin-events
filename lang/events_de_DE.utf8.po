@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-04 08:27+0200\n"
+"POT-Creation-Date: 2022-07-04 08:44+0200\n"
 "PO-Revision-Date: 2022-06-01 08:12+0000\n"
 "Last-Translator: Der_Unterhaendler <Lukas.Engelschalk@gmx.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/galette/events-"
@@ -450,7 +450,7 @@ msgid "Bookings as CSV"
 msgstr ""
 
 #: ../tempcache/bookings.html.twig:65
-msgid "Export selected reservation as CSV"
+msgid "Export selected reservations as CSV"
 msgstr ""
 
 #: ../tempcache/bookings.html.twig:81
