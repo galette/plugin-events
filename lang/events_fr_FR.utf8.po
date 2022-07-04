@@ -3,12 +3,12 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Galette Events plugin\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2022-07-04 08:44+0200\n"
-"PO-Revision-Date: 2022-07-04 06:45+0000\n"
+"PO-Revision-Date: 2022-07-04 06:48+0000\n"
 "Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
-"Language-Team: French <https://hosted.weblate.org/projects/galette/events-"
-"plugin/fr/>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/galette/"
+"events-plugin/fr/>\n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -434,28 +434,23 @@ msgid "Bookings as CSV"
 msgstr "Réservations en CSV"
 
 #: ../tempcache/bookings.html.twig:65
-#, fuzzy
-#| msgid "Export selected reservations as CSV"
 msgid "Export selected reservations as CSV"
 msgstr "Export des réservations sélectionnées en CSV"
 
 #: ../tempcache/bookings.html.twig:81
-#, fuzzy, php-format
-#| msgid "%event's bookings"
+#, php-format
 msgid "%count booking"
 msgid_plural "%count bookings"
-msgstr[0] "Réservations de %event"
-msgstr[1] "Réservations de %event"
+msgstr[0] "%count réservation"
+msgstr[1] "%count réservations"
 
 #: ../tempcache/bookings.html.twig:109
 msgid "New booking"
 msgstr "Nouvelle réservation"
 
 #: ../tempcache/bookings.html.twig:115
-#, fuzzy
-#| msgid "New event"
 msgid "current event"
-msgstr "Nouvel évènement"
+msgstr "évènement courant"
 
 #: ../tempcache/bookings.html.twig:129 ../tempcache/bookings.html.twig:443
 msgid "Attendees"
@@ -500,12 +495,11 @@ msgid "No booking has been found"
 msgstr "Aucune réservation trouvée"
 
 #: ../tempcache/activities.html.twig:61
-#, fuzzy, php-format
-#| msgid "New activity"
+#, php-format
 msgid "%count activity"
 msgid_plural "%count activities"
-msgstr[0] "Nouvelle activité"
-msgstr[1] "Nouvelle activité"
+msgstr[0] "%count activité"
+msgstr[1] "%count activités"
 
 #: ../tempcache/activities.html.twig:88
 msgid "New activity"
@@ -544,8 +538,8 @@ msgstr "Aucune activité trouvée"
 #, php-format
 msgid "%count event"
 msgid_plural "%count events"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%count évènement"
+msgstr[1] "%count évènements"
 
 #: ../tempcache/events.html.twig:88
 msgid "New event"
