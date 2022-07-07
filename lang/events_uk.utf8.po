@@ -6,8 +6,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2022-07-04 08:44+0200\n"
-"PO-Revision-Date: 2022-07-04 06:48+0000\n"
-"Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
+"PO-Revision-Date: 2022-07-08 12:19+0000\n"
+"Last-Translator: Artem <artem@molotov.work>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/galette/"
 "events-plugin/uk/>\n"
 "Language: uk\n"
@@ -440,13 +440,12 @@ msgid "Export selected reservations as CSV"
 msgstr "Експортувати вибрані бронювання як CSV"
 
 #: ../tempcache/bookings.html.twig:81
-#, fuzzy, php-format
-#| msgid "%event's bookings"
+#, php-format
 msgid "%count booking"
 msgid_plural "%count bookings"
-msgstr[0] "Бронювання події %event"
-msgstr[1] "Бронювання події %event"
-msgstr[2] "Бронювання події %event"
+msgstr[0] "%count бронювання"
+msgstr[1] "%count бронювання"
+msgstr[2] "%count бронювань"
 
 #: ../tempcache/bookings.html.twig:109
 msgid "New booking"
@@ -501,13 +500,12 @@ msgid "No booking has been found"
 msgstr "Бронювання не знайдено"
 
 #: ../tempcache/activities.html.twig:61
-#, fuzzy, php-format
-#| msgid "New activity"
+#, php-format
 msgid "%count activity"
 msgid_plural "%count activities"
-msgstr[0] "Нова діяльність"
-msgstr[1] "Нова діяльність"
-msgstr[2] "Нова діяльність"
+msgstr[0] "%count діяльність"
+msgstr[1] "%count діяльности"
+msgstr[2] "%count діяльностей"
 
 #: ../tempcache/activities.html.twig:88
 msgid "New activity"
