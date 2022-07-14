@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2022-07-04 08:44+0200\n"
-"PO-Revision-Date: 2022-07-04 06:48+0000\n"
+"PO-Revision-Date: 2022-07-14 06:40+0000\n"
 "Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/galette/"
 "events-plugin/es/>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.13.1-dev\n"
+"X-Generator: Weblate 4.14-dev\n"
 
 #: ../lib/GaletteEvents/Booking.php:208
 msgid "Event is mandatory"
@@ -28,7 +28,7 @@ msgstr "Evento es obligatorio"
 
 #: ../lib/GaletteEvents/Booking.php:221
 msgid "%activity is mandatory for this event!"
-msgstr "%activity es obligatorio para este evento."
+msgstr "¡ %activity es obligatorio para este evento !"
 
 #: ../lib/GaletteEvents/Booking.php:255
 msgid "Please specify amount if booking has been paid ;)"
@@ -44,7 +44,7 @@ msgstr "Al menos debe haber una persona"
 
 #: ../lib/GaletteEvents/Booking.php:299
 msgid "Booking date is mandatory!"
-msgstr "La fecha de reserva es obligatoria."
+msgstr "¡ La fecha de reserva es obligatoria !"
 
 #: ../lib/GaletteEvents/Booking.php:326
 msgid "booking date"
@@ -131,7 +131,7 @@ msgstr "Gestión de eventos"
 
 #: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:201
 msgid "Javascript libraries has not been built!"
-msgstr "Las bibliotecas Javascript no se han compiladas."
+msgstr "¡ Las bibliotecas Javascript no se han compiladas !"
 
 #: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:210
 msgid "Events calendar"
