@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2022-07-04 08:44+0200\n"
-"PO-Revision-Date: 2022-07-08 12:19+0000\n"
+"PO-Revision-Date: 2022-07-26 00:55+0000\n"
 "Last-Translator: Artem <artem@molotov.work>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/galette/"
 "events-plugin/uk/>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.13.1-dev\n"
+"X-Generator: Weblate 4.14-dev\n"
 
 #: ../lib/GaletteEvents/Booking.php:208
 msgid "Event is mandatory"
@@ -222,7 +222,7 @@ msgstr "Коментар:"
 #: ../lib/GaletteEvents/Repository/Events.php:241
 #, php-format
 msgid "%1$s paid"
-msgstr ""
+msgstr "%1$s оплачено"
 
 #: ../lib/GaletteEvents/Repository/Events.php:246
 msgid "Attendees:"
@@ -452,10 +452,8 @@ msgid "New booking"
 msgstr "Нове бронювання"
 
 #: ../tempcache/bookings.html.twig:115
-#, fuzzy
-#| msgid "New event"
 msgid "current event"
-msgstr "Нова подія"
+msgstr "поточна подія"
 
 #: ../tempcache/bookings.html.twig:129 ../tempcache/bookings.html.twig:443
 msgid "Attendees"
@@ -544,9 +542,9 @@ msgstr "Жодної діяльності не знайдено"
 #, php-format
 msgid "%count event"
 msgid_plural "%count events"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%count подія"
+msgstr[1] "%count події"
+msgstr[2] "%count подій"
 
 #: ../tempcache/events.html.twig:88
 msgid "New event"
