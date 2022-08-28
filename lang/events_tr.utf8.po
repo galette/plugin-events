@@ -1,16 +1,19 @@
+# Boran Roni <boranroniurtekin@gmail.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2022-07-04 08:44+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2022-08-29 18:17+0000\n"
+"Last-Translator: Boran Roni <boranroniurtekin@gmail.com>\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/galette/"
+"events-plugin/tr/>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 3.3.6\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.14.1-dev\n"
 
 #: ../lib/GaletteEvents/Booking.php:208
 msgid "Event is mandatory"
@@ -121,7 +124,7 @@ msgstr ""
 
 #: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:201
 msgid "Javascript libraries has not been built!"
-msgstr ""
+msgstr "Javascript kitaplıkları oluşturulmadı!"
 
 #: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:210
 msgid "Events calendar"
