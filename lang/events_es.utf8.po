@@ -6,13 +6,14 @@
 # Germe the fur star <FOSSgerme.deb@tuta.io>, 2021.
 # Cow <javier.fserrador@gmail.com>, 2022.
 # Javier <javier.fserrador@gmail.com>, 2022.
+# gallegonovato <fran-carro@hotmail.es>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2022-07-04 08:44+0200\n"
-"PO-Revision-Date: 2022-07-14 06:40+0000\n"
-"Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
+"PO-Revision-Date: 2022-10-17 00:56+0000\n"
+"Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/galette/"
 "events-plugin/es/>\n"
 "Language: es\n"
@@ -20,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.14-dev\n"
+"X-Generator: Weblate 4.15-dev\n"
 
 #: ../lib/GaletteEvents/Booking.php:208
 msgid "Event is mandatory"
@@ -176,7 +177,7 @@ msgstr "Eliminar evento «%1$s»"
 #: ../lib/GaletteEvents/Controllers/CsvController.php:105
 #: ../tempcache/event.html.twig:310
 msgid "Zip code"
-msgstr "C. P."
+msgstr "Código postal"
 
 #: ../lib/GaletteEvents/Controllers/CsvController.php:111
 #: ../tempcache/booking.html.twig:174
@@ -226,7 +227,7 @@ msgstr "Comentario:"
 #: ../lib/GaletteEvents/Repository/Events.php:241
 #, php-format
 msgid "%1$s paid"
-msgstr ""
+msgstr "%1$s pagado"
 
 #: ../lib/GaletteEvents/Repository/Events.php:246
 msgid "Attendees:"
@@ -273,7 +274,7 @@ msgstr "Nombre es obligatorio"
 
 #: ../lib/GaletteEvents/Event.php:288
 msgid "Please select a group you own!"
-msgstr "Seleccione un grupo para su propiedad"
+msgstr "¡Selecciona un grupo de tu propiedad!"
 
 #: ../lib/GaletteEvents/Event.php:295
 msgid "Town is mandatory"
@@ -447,18 +448,16 @@ msgstr "Exportar reservas seleccionadas como CSV"
 #, php-format
 msgid "%count booking"
 msgid_plural "%count bookings"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%contar reserva"
+msgstr[1] "%contar reservas"
 
 #: ../tempcache/bookings.html.twig:109
 msgid "New booking"
 msgstr "Crear reserva"
 
 #: ../tempcache/bookings.html.twig:115
-#, fuzzy
-#| msgid "New event"
 msgid "current event"
-msgstr "Crear evento"
+msgstr "evento actual"
 
 #: ../tempcache/bookings.html.twig:129 ../tempcache/bookings.html.twig:443
 msgid "Attendees"
@@ -503,12 +502,11 @@ msgid "No booking has been found"
 msgstr "No se ha encontrado ninguna reserva"
 
 #: ../tempcache/activities.html.twig:61
-#, fuzzy, php-format
-#| msgid "New activity"
+#, php-format
 msgid "%count activity"
 msgid_plural "%count activities"
-msgstr[0] "Crear actividad"
-msgstr[1] "Crear actividad"
+msgstr[0] "%contsar la actividad"
+msgstr[1] "%contar las actividades"
 
 #: ../tempcache/activities.html.twig:88
 msgid "New activity"
@@ -547,8 +545,8 @@ msgstr "No se ha encontrado ninguna actividad"
 #, php-format
 msgid "%count event"
 msgid_plural "%count events"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%contar evento"
+msgstr[1] "%contar eventos"
 
 #: ../tempcache/events.html.twig:88
 msgid "New event"
