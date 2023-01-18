@@ -75,6 +75,6 @@ jobs:
           vendor/bin/composer-require-checker check --config-file=.composer-require-checker.config.json
         if: ${{ matrix.php-versions!= '7.2' && matrix.php-versions!= '7.3' }}
 
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v3
       - run: npm install
       - run: npm run-script build
