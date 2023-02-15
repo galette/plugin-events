@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2018-2021 The Galette Team
+ * Copyright © 2018-2023 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package   GaletteEvents
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018-2021 The Galette Team
+ * @copyright 2018-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  */
@@ -50,7 +50,7 @@ use Laminas\Db\Sql\Expression;
  * @name      Event
  * @package   GaletteEvents
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018-2021 The Galette Team
+ * @copyright 2018-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  */
@@ -66,7 +66,7 @@ class Booking
     private $id;
     private $event;
     private $member;
-    private $date;
+    private $date = '';
     private $paid;
     private $amount;
     private $payment_method = PaymentType::OTHER;
@@ -308,7 +308,7 @@ class Booking
                         throw new \Exception('Incorrect format');
                     }
                 }
-                $this->booking_date = $d->format('Y-m-d');
+                $this->date = $d->format('Y-m-d');
             } catch (\Exception $e) {
                 Analog::log(
                     'Wrong date format. field: booking_date' .
@@ -390,7 +390,7 @@ class Booking
                 self::PK            => $this->id,
                 Event::PK           => $this->event,
                 Adherent::PK        => $this->member,
-                'booking_date'      => $this->booking_date,
+                'booking_date'      => $this->date,
                 'is_paid'           => ($this->paid ? $this->paid :
                                             ($this->zdb->isPostgres() ? 'false' : 0)),
                 'payment_method'    => $this->payment_method,
