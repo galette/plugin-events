@@ -25,7 +25,7 @@
 {% block infoline_actions %}
     <a
             class="button"
-            href="{{ path_for("events_booking_add") }}{% if event %}?event={{ event.getId() }}{% endif %}"
+            href="{{ url_for("events_booking_add") }}{% if event %}?event={{ event.getId() }}{% endif %}"
     >
         <i class="ui plus circle icon" aria-hidden="true"></i>
         {{ _T('New booking', 'events') }}
@@ -46,7 +46,7 @@
 {% endblock %}
 
 {% block search %}
-    <form action="{{ path_for("filter-bookingslist", {"event": eventid}) }}" method="post" id="filtre" class="ui form">
+    <form action="{{ url_for("filter-bookingslist", {"event": eventid}) }}" method="post" id="filtre" class="ui form">
     <div class="ui segment">
         <div class="ui three fields">
             <div class="field">
@@ -136,13 +136,13 @@
                         {% set bid = booking.getId() %}
         {% if login.isAdmin() or login.isStaff() or (login.isGroupManager() and booking.getEvent().getGroup() in login.managed_groups) %}
                         <input type="checkbox" name="entries_sel[]" value="{{ bid }}"/>
-                        <a href="{{ path_for("events_event_edit", {"id": booking.getEventId()}) }}">{{ booking.getEvent().getName()}}</a>
+                        <a href="{{ url_for("events_event_edit", {"id": booking.getEventId()}) }}">{{ booking.getEvent().getName()}}</a>
         {% else %}
                         {{ booking.getEvent().getName() }}
         {% endif %}
                     </td>
                     <td class="{{ rclass }}" data-title="{{ _T("Member") }}">
-                        <a href="{{ path_for("member", {"id": booking.getMemberId()}) }}">
+                        <a href="{{ url_for("member", {"id": booking.getMemberId()}) }}">
                             {{ booking.getMember().sfullname }}
                         </a>
                     </td>
@@ -161,13 +161,13 @@
     {% if login.isAdmin() or login.isStaff() or login.isGroupManager() %}
                     <td class="{{ rclass }} center nowrap actions_row">
         {% if login.isAdmin() or login.isStaff() or (login.isGroupManager() and booking.getEvent().getGroup() in login.managed_groups )%}
-                        <a href="{{ path_for("events_booking_edit", {"id": bid}) }}" class="tooltip action">
+                        <a href="{{ url_for("events_booking_edit", {"id": bid}) }}" class="tooltip action">
                             <i class="edit icon"></i>
                             <span class="sr-only">{{ _T("Edit booking", "events") }}</span>
                         </a>
         {% endif %}
         {% if login.isAdmin() or login.isStaff()%}
-                        <a class="delete tooltip" href="{{ path_for("events_remove_booking", {"id": bid}) }}">
+                        <a class="delete tooltip" href="{{ url_for("events_remove_booking", {"id": bid}) }}">
                             <i class="trash red icon"></i>
                             <span class="sr-only">{{ _T("Remove from database", "events") }}</span>
                         </a>
@@ -181,15 +181,15 @@
 {% endblock %}
 
 {% if nb > 0 %}
-    {% set batch = {
+    {#% set batch = {
         'route': {
-            'name': 'batch-vehicleslist'
+            'name': 'batch-bookinglist'
         },
         'modal': {
             'title': _T("No booking selected", "events"),
             'content': _T("Please make sure to select at least one booking from the list to perform this action.", "events")
         }
-    } %}
+    } %#}
 
     {% if login.isAdmin() or login.isStaff() %}
         {% if preferences.pref_mail_method != constant('Galette\\Core\\GaletteMail::METHOD_DISABLED') %}

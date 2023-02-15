@@ -20,7 +20,7 @@
     {% if login.isAdmin() or login.isStaff() %}
     <a
             class="button"
-            href="{{ path_for("events_activity_add") }}"
+            href="{{ url_for("events_activity_add") }}"
     >
         <i class="ui plus circle icon" aria-hidden="true"></i>
         {{ _T('New activity', 'events') }}
@@ -45,7 +45,7 @@
             <td class="right" data-scope="id">{{ ordre + 1 + (filters.current_page - 1) * numrows }}</td>
             <td class="nowrap username_row" data-scope="row">
                 {% set aid = activity.getId() %}
-                <a href="{{ path_for("events_activity_edit", {"id": aid}) }}">{{ activity.getName() }}</a>
+                <a href="{{ url_for("events_activity_edit", {"id": aid}) }}">{{ activity.getName() }}</a>
             </td>
             <td data-title="{{ _T("Creation date", "events") }}">{{ activity.getCreationDate() }}</td>
             <td data-title="{{ _T("Events", "events") }}">{{ activity.countEvents() }}</td>

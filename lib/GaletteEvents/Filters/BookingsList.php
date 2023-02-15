@@ -198,7 +198,7 @@ class BookingsList extends Pagination
             $args['type'] = $this->view->getEnvironment()->getGlobals()['cur_subroute'];
         }
 
-        $href = $this->router->pathFor(
+        $href = $this->routeparser->urlFor(
             $this->view->getEnvironment()->getGlobals()['cur_route'],
             $args
         );

@@ -1,7 +1,7 @@
 {% extends "page.html.twig" %}
 
 {% block content %}
-    <form class="ui form" action="{% if booking.getId() %}{{ path_for("events_storebooking_edit", {"id": booking.getId()}) }}{% else %}{{ path_for("events_storebooking_add") }}{% endif %}" method="post" id="modifform" enctype="multipart/form-data">
+    <form class="ui form" action="{% if booking.getId() %}{{ url_for("events_storebooking_edit", {"id": booking.getId()}) }}{% else %}{{ url_for("events_storebooking_add") }}{% endif %}" method="post" id="modifform" enctype="multipart/form-data">
         <div class="ui styled fluid accordion field">
             <div class="active title">
                 <i class="icon dropdown"></i>

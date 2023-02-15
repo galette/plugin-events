@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2021-2022 The Galette Team
+ * Copyright © 2021-2023 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package   GaletteEvents
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2021-2022 The Galette Team
+ * @copyright 2021-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     2021-05-09
@@ -46,8 +46,9 @@ use GaletteEvents\Booking;
 use GaletteEvents\Event;
 use GaletteEvents\Repository\Bookings;
 use GaletteEvents\Repository\Events;
-use Slim\Http\Request;
-use Slim\Http\Response;
+use Slim\Psr7\Request;
+use Slim\Psr7\Response;
+use DI\Attribute\Inject;
 
 /**
  * Bookings controller
@@ -56,7 +57,7 @@ use Slim\Http\Response;
  * @name      BookingsController
  * @package   GaletteEvents
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2021-2022 The Galette Team
+ * @copyright 2021-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     2021-05-09
@@ -65,9 +66,9 @@ use Slim\Http\Response;
 class BookingsController extends AbstractPluginController
 {
     /**
-     * @Inject("Plugin Galette Events")
-     * @var integer
+     * @var array
      */
+    #[Inject("Plugin Galette Events")]
     protected $module_info;
 
     // CRUD - Create
@@ -164,7 +165,7 @@ class BookingsController extends AbstractPluginController
         $bookings = new Bookings($this->zdb, $this->login, $filters);
 
         //assign pagination variables to the template and add pagination links
-        $filters->setViewPagination($this->router, $this->view, false);
+        $filters->setViewPagination($this->routeparser, $this->view, false);
 
         $this->session->filter_bookings = $filters;
 
@@ -263,7 +264,7 @@ class BookingsController extends AbstractPluginController
             ->withStatus(301)
             ->withHeader(
                 'Location',
-                $this->router->pathFor('events_bookings', ['event' => $event])
+                $this->routeparser->urlFor('events_bookings', ['event' => $event])
             );
     }
 
@@ -299,7 +300,7 @@ class BookingsController extends AbstractPluginController
 
             if (isset($post['mailing'])) {
                 $this->session->filter_members = $mfilter;
-                $this->session->redirect_mailing = $this->router->pathFor(
+                $this->session->redirect_mailing = $this->routeparser->urlFor(
                     'events_bookings',
                     [
                         'event' => $filters->event_filter == null ?
@@ -309,7 +310,7 @@ class BookingsController extends AbstractPluginController
                 );
                 return $response
                     ->withStatus(301)
-                    ->withHeader('Location', $this->router->pathFor('mailing') . '?new=new');
+                    ->withHeader('Location', $this->routeparser->urlFor('mailing') . '?new=new');
             }
 
             if (isset($post['csv'])) {
@@ -319,7 +320,7 @@ class BookingsController extends AbstractPluginController
                     ->withStatus(307)
                     ->withHeader(
                         'Location',
-                        $this->router->pathFor('csv-memberslist') . '?session_var=' . $session_var
+                        $this->routeparser->urlFor('csv-memberslist') . '?session_var=' . $session_var
                     );
             }
 
@@ -330,7 +331,7 @@ class BookingsController extends AbstractPluginController
                     ->withStatus(307)
                     ->withHeader(
                         'Location',
-                        $this->router->pathFor('events_bookings_export') . '?session_var=' . $session_var
+                        $this->routeparser->urlFor('events_bookings_export') . '?session_var=' . $session_var
                     );
             }
 
@@ -341,7 +342,7 @@ class BookingsController extends AbstractPluginController
                     ->withStatus(307)
                     ->withHeader(
                         'Location',
-                        $this->router->pathFor('pdf-members-labels') . '?session_var=' . $session_var
+                        $this->routeparser->urlFor('pdf-members-labels') . '?session_var=' . $session_var
                     );
             }
         } else {
@@ -352,7 +353,7 @@ class BookingsController extends AbstractPluginController
 
             return $response
                 ->withStatus(301)
-                ->withHeader('Location', $this->router->pathFor('members'));
+                ->withHeader('Location', $this->routeparser->urlFor('members'));
         }
     }
 
@@ -486,7 +487,7 @@ class BookingsController extends AbstractPluginController
         }
 
         if (isset($post['cancel'])) {
-            $redirect_url = $this->router->pathFor(
+            $redirect_url = $this->routeparser->urlFor(
                 'events_bookings',
                 ['event' => 'guess']
             );
@@ -563,7 +564,7 @@ class BookingsController extends AbstractPluginController
         }
 
         if (count($error_detected) == 0 && $goto_list) {
-            $redirect_url = $this->router->pathFor(
+            $redirect_url = $this->routeparser->urlFor(
                 'events_bookings',
                 ['event' => $booking->getEventId()]
             );
@@ -581,7 +582,7 @@ class BookingsController extends AbstractPluginController
                 $route = 'events_booking_add';
                 $rparams = ['action' => 'add'];
             }
-            $redirect_url = $this->router->pathFor(
+            $redirect_url = $this->routeparser->urlFor(
                 $route,
                 $rparams
             );
@@ -604,7 +605,7 @@ class BookingsController extends AbstractPluginController
      */
     public function redirectUri(array $args): string
     {
-        return $this->router->pathFor('events_bookings', ['event' => 'all'] + $args);
+        return $this->routeparser->urlFor('events_bookings', ['event' => 'all'] + $args);
     }
 
     /**
@@ -616,7 +617,7 @@ class BookingsController extends AbstractPluginController
      */
     public function formUri(array $args): string
     {
-        return $this->router->pathFor(
+        return $this->routeparser->urlFor(
             'events_do_remove_booking',
             $args
         );

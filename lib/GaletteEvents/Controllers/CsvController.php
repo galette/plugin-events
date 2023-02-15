@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2020-2021 The Galette Team
+ * Copyright © 2020-2023 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,31 +28,20 @@
  * @package   GaletteEvents
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2020-2021 The Galette Team
+ * @copyright 2020-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  */
 
 namespace GaletteEvents\Controllers;
 
-use Slim\Http\Request;
-use Slim\Http\Response;
-use Galette\Entity\Adherent;
-use Galette\Filters\MembersList;
+use Slim\Psr7\Request;
+use Slim\Psr7\Response;
 use Galette\IO\Csv;
 use Galette\IO\CsvOut;
-use Galette\Repository\Groups;
-use Galette\Repository\Members;
-use GaletteEvents\Activity;
-use GaletteEvents\Booking;
 use GaletteEvents\Event;
-use GaletteEvents\Filters\ActivitiesList;
 use GaletteEvents\Filters\BookingsList;
-use GaletteEvents\Filters\EventsList;
-use GaletteEvents\Repository\Activities;
 use GaletteEvents\Repository\Bookings;
-use GaletteEvents\Repository\Events;
-use Analog\Analog;
 
 /**
  * CSV controller for events plugin
@@ -61,7 +50,7 @@ use Analog\Analog;
  * @name      CsvController
  * @package   GaletteEvents
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2020-2021 The Galette Team
+ * @copyright 2020-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  */

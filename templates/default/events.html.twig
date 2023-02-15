@@ -20,7 +20,7 @@
     {% if login.isAdmin() or login.isStaff() or login.isGroupManager() %}
         <a
             class="button"
-            href="{{ path_for("events_event_add") }}"
+            href="{{ url_for("events_event_add") }}"
         >
             <i class="ui plus circle icon" aria-hidden="true"></i>
             {{ _T('New event', 'events') }}
@@ -51,7 +51,7 @@
             {% set eid = event.getId() %}
             {% if login.isAdmin() or login.isStaff() or (login.isGroupManager() and event.getGroup() in login.managed_groups) %}
                 {#<input type="checkbox" name="entries_sel[]" value="{$id}"/>#}
-                <a href="{{ path_for("events_event_edit", {"id": eid}) }}">{{ event.getName() }}</a>
+                <a href="{{ url_for("events_event_edit", {"id": eid}) }}">{{ event.getName() }}</a>
             {% else %}
                 {{ event.getName() }}
             {% endif %}

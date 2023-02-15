@@ -6,8 +6,8 @@
 
 {% block javascripts %}
 <script type="text/javascript">
-    var _calendar_dataurl = '{{ path_for("ajax-events_calendar") }}';
-    var _calendar_event_url = '{{ path_for("events_event_edit", {"id": "PLACEBO"}) }}';
+    var _calendar_dataurl = '{{ url_for("ajax-events_calendar") }}';
+    var _calendar_event_url = '{{ url_for("events_event_edit", {"id": "PLACEBO"}) }}';
     var _fullcalendar_views = {
       listDay: { buttonText: '{{ _T("Daily list", "events")|e('js') }}' },
       listWeek: { buttonText: '{{ _T("Weekly list", "events")|e('js') }}' },
@@ -20,5 +20,5 @@
         {% include "elements/js/removal.js.twig" %}
     });
 </script>
-<script type="text/javascript" src="{{ path_for("plugin_res", {"plugin": module_id, "path": "js/calendar.bundle.js"}) }}"></script>
+<script type="text/javascript" src="{{ url_for("plugin_res", {"plugin": module_id, "path": "js/calendar.bundle.js"}) }}"></script>
 {% endblock %}
