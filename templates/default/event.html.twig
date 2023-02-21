@@ -76,7 +76,7 @@
                         </select>
                         <button type="submit" name="add_activity" id="add_activity" class="action ui icon button tooltip">
                             <i class="add icon"></i>
-                            <span class="sr-only">{{ _T("Add selected activity to event", "events") }}"</span>
+                            <span class="displaynone">{{ _T("Add selected activity to event", "events") }}"</span>
                         </button>
     {% endif %}
     {% if activities|length %}
@@ -89,7 +89,7 @@
                         </select>
                         <button type="submit" name="remove_activity" id="remove_activity" class="action ui icon button tooltip">
                             <i class="delete red icon"></i>
-                            <span class="sr-only">{{ _T("Remove selected activity from event", "events") }}</span>
+                            <span class="displaynone">{{ _T("Remove selected activity from event", "events") }}</span>
                         </button>
     {% endif %}
                     </p>
@@ -177,7 +177,7 @@
                 changeYear: true,
                 showOn: 'button',
                 minDate: '-0d',
-                buttonText: '<i class="far fa-calendar-alt"></i> <span class="sr-only">{_T string="Select a date" escape="js"}</span>',
+                buttonText: '<i class="far fa-calendar-alt"></i> <span class="displaynone">{_T string="Select a date" escape="js"}</span>',
                 onSelect: function(date) {
                     $("#end_date").datepicker("option", "minDate", $('#begin_date').datepicker('getDate'));
                 }
@@ -186,7 +186,7 @@
                 changeMonth: true,
                 changeYear: true,
                 showOn: 'button',
-                buttonText: '<i class="far fa-calendar-alt"></i> <span class="sr-only">{_T string="Select a date" escape="js"}</span>',
+                buttonText: '<i class="far fa-calendar-alt"></i> <span class="displaynone">{_T string="Select a date" escape="js"}</span>',
                 minDate: $("#begin_date").datepicker("getDate")
             });#}
 
