@@ -161,15 +161,6 @@ class EventsController extends AbstractPluginController
      */
     public function calendar(Request $request, Response $response, $option = null, $value = null): Response
     {
-        $option = null;
-        if (isset($args['option'])) {
-            $option = $args['option'];
-        }
-        $value = null;
-        if (isset($args['value'])) {
-            $value = $args['value'];
-        }
-
         if (isset($this->session->filter_events_calendar)) {
             $filters = $this->session->filter_events_calendar;
         } else {

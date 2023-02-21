@@ -4,7 +4,7 @@
 
     "ctype", "date", "fileinfo", "filter", "iconv", "json", "pcre", "reflection", "session", "simplexml", "spl", "xml",
 
-    "curl", "gd", "intl", "mbstring", "mysqli", "zlib", "pdo", "pgsql", "gettext", "yaml",
+    "curl", "gd", "intl", "mbstring", "mysqli", "zlib", "pdo", "pgsql", "gettext",
 
     "exif", "pcntl"
   ],
@@ -44,6 +44,8 @@
     "GALETTE_X_FORWARDED_FOR_INDEX",
     "_CURRENT_THEME_PATH",
     "GALETTE_URI",
+    "GALETTE_DISPLAY_VERSION",
+    "GALETTE_PHP_MIN",
     "_T",
     "__",
     "_Tn",
@@ -91,7 +93,11 @@
     "// Should not error (not used) but...",
     "mt_rand",
     "rand",
-    "random_int"
+    "random_int",
+
+
+    "// Not detected, do not know why.",
+    "Psr\\Http\\Server\\RequestHandlerInterface"
   ],
   "scan-files": [
     "*.php",

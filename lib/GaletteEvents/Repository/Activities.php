@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2018 The Galette Team
+ * Copyright © 2018-2023 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package   GaletteEvents
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018 The Galette Team
+ * @copyright 2018-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  */
@@ -46,6 +46,8 @@ use Galette\Entity\Group;
 use Galette\Repository\Groups;
 use GaletteEvents\Event;
 use GaletteEvents\Filters\EventsList;
+use Laminas\Db\Sql\Select;
+use Throwable;
 
 /**
  * Events
@@ -54,7 +56,7 @@ use GaletteEvents\Filters\EventsList;
  * @name      Events
  * @package   GaletteEvents
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018 The Galette Team
+ * @copyright 2018-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  */
@@ -105,7 +107,7 @@ class Activities extends Repository
     /**
      * Get activities list
      *
-     * @return GaletteEvents\Event[]
+     * @return array
      */
     public function getList()
     {
@@ -139,9 +141,9 @@ class Activities extends Repository
      * Builds the order clause
      *
      * @param array $fields Fields list to ensure ORDER clause
-     *                      references selected fields. Optionnal.
+     *                      references selected fields. Optional.
      *
-     * @return string SQL ORDER clause
+     * @return array SQL ORDER clauses
      */
     private function buildOrderClause($fields = null)
     {
@@ -213,7 +215,7 @@ class Activities extends Repository
                 'Cannot count activities | ' . $e->getMessage(),
                 Analog::WARNING
             );
-            return false;
+            throw $e;
         }
     }
 
@@ -278,7 +280,7 @@ class Activities extends Repository
             }
         } catch (\Exception $e) {
             $this->zdb->connection->rollBack();
-            return $e;
+            throw $e;
         }
     }
 
@@ -306,5 +308,59 @@ class Activities extends Repository
         foreach ($values as $name) {
             $stmt->execute([':name' => $name]);
         }
+    }
+
+    /**
+     * Checks for missing activities in the database
+     *
+     * @return bool
+     */
+    private function checkUpdate()
+    {
+        try {
+            $ent = $this->entity;
+            $select = $this->zdb->select($ent::TABLE);
+            $dblist = $this->zdb->execute($select);
+
+            $list = [];
+            foreach ($dblist as $dbentry) {
+                $list[] = $dbentry;
+            }
+
+            $missing = array();
+            foreach ($this->defaults as $default) {
+                $exists = false;
+                foreach ($list as $activity) {
+                    if (
+                        $activity->name == $default['name']
+                    ) {
+                        $exists = true;
+                        continue;
+                    }
+                }
+
+                if ($exists === false) {
+                    //text does not exists in database, insert it.
+                    $missing[] = $default;
+                }
+            }
+
+            if (count($missing) > 0) {
+                $this->insert($ent::TABLE, $missing);
+
+                Analog::log(
+                    'Missing activities were successfully stored into database.',
+                    Analog::INFO
+                );
+                return true;
+            }
+        } catch (Throwable $e) {
+            Analog::log(
+                'An error occurred checking missing activities.' . $e->getMessage(),
+                Analog::WARNING
+            );
+            throw $e;
+        }
+        return false;
     }
 }

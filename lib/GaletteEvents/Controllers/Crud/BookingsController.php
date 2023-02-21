@@ -115,6 +115,7 @@ class BookingsController extends AbstractPluginController
     public function list(Request $request, Response $response, $option = null, $value = null): Response
     {
         //just for inheritance. see listBookings which signature changes.
+        return $response;
     }
 
     /**
@@ -203,6 +204,7 @@ class BookingsController extends AbstractPluginController
     public function filter(Request $request, Response $response): Response
     {
         //just for inheritance. see filterBookings which signature changes.
+        return $response;
     }
 
     /**
@@ -345,16 +347,21 @@ class BookingsController extends AbstractPluginController
                         $this->routeparser->urlFor('pdf-members-labels') . '?session_var=' . $session_var
                     );
             }
+
+            $this->flash->addMessage(
+                'error_detected',
+                _T("No action was matching.", "events")
+            );
         } else {
             $this->flash->addMessage(
                 'error_detected',
                 _T("No booking was selected, please check at least one.", "events")
             );
-
-            return $response
-                ->withStatus(301)
-                ->withHeader('Location', $this->routeparser->urlFor('members'));
         }
+
+        return $response
+            ->withStatus(301)
+            ->withHeader('Location', $this->routeparser->urlFor('events_events'));
     }
 
     // /CRUD - Read

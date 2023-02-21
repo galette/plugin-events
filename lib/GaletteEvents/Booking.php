@@ -35,13 +35,12 @@
 
 namespace GaletteEvents;
 
+use ArrayObject;
 use Galette\Core\Db;
 use Galette\Core\Login;
-use Galette\Entity\Group;
 use Galette\Entity\Adherent;
 use Galette\Entity\PaymentType;
 use Analog\Analog;
-use Laminas\Db\Sql\Expression;
 
 /**
  * Booking entity
@@ -77,15 +76,16 @@ class Booking
 
     private $activities = [];
     private $activities_removed = [];
+    private $creation_date;
 
     /**
      * Default constructor
      *
-     * @param Db                 $zdb   Database instance
-     * @param Login              $login Login instance
-     * @param null|int|ResultSet $args  Either a ResultSet row or its id for to load
-     *                                  a specific event, or null to just
-     *                                  instanciate object
+     * @param Db                   $zdb   Database instance
+     * @param Login                $login Login instance
+     * @param null|int|ArrayObject $args  Either a ResultSet row or its id for to load
+     *                                    a specific event, or null to just
+     *                                    instanciate object
      */
     public function __construct(Db $zdb, Login $login, $args = null)
     {
@@ -134,7 +134,7 @@ class Booking
     /**
      * Populate object from a resultset row
      *
-     * @param ResultSet $r the resultset row
+     * @param ArrayObject $r the resultset row
      *
      * @return void
      */
@@ -183,8 +183,8 @@ class Booking
                 $this->zdb->connection->rollBack();
             }
             Analog::log(
-                'Unable to delete booking ' . $this->name .
-                ' (' . $this->id  . ') |' . $e->getMessage(),
+                'Unable to delete booking ' .
+                ' (' . $this->id . ') |' . $e->getMessage(),
                 Analog::ERROR
             );
             return false;
@@ -496,13 +496,13 @@ class Booking
                 $prepare = $this->zdb->delete(EVENTS_PREFIX . 'activitiesbookings', 'acb');
                 $prepare->where([
                     self::PK        => $this->id,
-                    $activity::PK   => ':aid'
+                    Activity::PK    => ':aid'
                 ]);
                 $stmt = $this->zdb->sql->prepareStatementForSqlObject($prepare);
 
                 $count = 0;
                 foreach ($delete as $values) {
-                    $stmt->execute([':aid' => $value[$activity::PK]]);
+                    $stmt->execute([':aid' => $values[Activity::PK]]);
                     ++$count;
                 }
                 Analog::log(
@@ -517,7 +517,7 @@ class Booking
                     'checked'       => ':checked'
                 ])->where([
                     self::PK        => $this->id,
-                    $activity::PK   => ':aid'
+                    Activity::PK    => ':aid'
                 ]);
                 $stmt = $this->zdb->sql->prepareStatementForSqlObject($prepare);
                 $count = 0;
@@ -539,7 +539,7 @@ class Booking
                 $prepare = $this->zdb->insert(EVENTS_PREFIX . 'activitiesbookings', 'acb');
                 $prepare->values([
                     self::PK        => ':id',
-                    $activity::PK   => ':aid',
+                    Activity::PK    => ':aid',
                     'checked'       => ':checked'
                 ]);
                 $stmt = $this->zdb->sql->prepareStatementForSqlObject($prepare);
@@ -761,7 +761,7 @@ class Booking
      */
     protected function getTableName()
     {
-        return EVENTS_PREFIX  . self::TABLE;
+        return EVENTS_PREFIX . self::TABLE;
     }
 
     /**

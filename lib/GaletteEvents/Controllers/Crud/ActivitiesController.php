@@ -60,7 +60,7 @@ use DI\Attribute\Inject;
 class ActivitiesController extends AbstractPluginController
 {
     /**
-     * @var integer
+     * @var array
      */
     #[Inject("Plugin Galette Events")]
     protected $module_info;
@@ -163,6 +163,7 @@ class ActivitiesController extends AbstractPluginController
     public function filter(Request $request, Response $response): Response
     {
         //no filter
+        return $response;
     }
 
     // /CRUD - Read
@@ -181,7 +182,7 @@ class ActivitiesController extends AbstractPluginController
     public function edit(Request $request, Response $response, int $id = null, $action = 'edit'): Response
     {
         if ($this->session->activity !== null) {
-            $event = $this->session->activity;
+            $activity = $this->session->activity;
             $this->session->activity = null;
         } else {
             $activity = new Activity($this->zdb, $this->login);
