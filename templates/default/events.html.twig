@@ -19,10 +19,10 @@
 {% block infoline_actions %}
     {% if login.isAdmin() or login.isStaff() or login.isGroupManager() %}
         <a
-            class="button"
+            class="ui tiny labeled icon button"
             href="{{ url_for("events_event_add") }}"
         >
-            <i class="ui plus circle icon" aria-hidden="true"></i>
+            <i class="plus circle green icon" aria-hidden="true"></i>
             {{ _T('New event', 'events') }}
         </a>
     {% endif %}
