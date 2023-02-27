@@ -50,6 +50,8 @@ use GaletteEvents\Repository\Events;
  * @copyright 2018-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
+ *
+ * @property string $query
  */
 
 class EventsList extends Pagination
@@ -63,6 +65,7 @@ class EventsList extends Pagination
     private $lodging_filter = null;
     private $open_filter = null;
     private $calendar_filter = false;
+    private string $query;
 
     protected $list_fields = array(
         'name_filter',
