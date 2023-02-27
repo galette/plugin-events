@@ -215,7 +215,7 @@ class Bookings
             $results = $this->zdb->execute($sumSelect);
             $result = $results->current();
 
-            $this->sum = round($result->sum, 2);
+            $this->sum = round($result->sum ?? 0, 2);
         } catch (\Exception $e) {
             Analog::log(
                 'Cannot calculate bookings sum | ' . $e->getMessage(),

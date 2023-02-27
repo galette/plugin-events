@@ -306,7 +306,7 @@ class Activities extends Repository
         $stmt = $this->zdb->sql->prepareStatementForSqlObject($insert);
 
         foreach ($values as $name) {
-            $stmt->execute([':name' => $name]);
+            $stmt->execute([':name' => $name['name']]);
         }
     }
 
@@ -315,11 +315,11 @@ class Activities extends Repository
      *
      * @return bool
      */
-    private function checkUpdate()
+    protected function checkUpdate()
     {
         try {
             $ent = $this->entity;
-            $select = $this->zdb->select($ent::TABLE);
+            $select = $this->zdb->select(EVENTS_PREFIX . $ent::TABLE);
             $dblist = $this->zdb->execute($select);
 
             $list = [];

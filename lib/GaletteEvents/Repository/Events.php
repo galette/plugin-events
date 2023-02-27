@@ -375,10 +375,12 @@ class Events
 
             $results = $this->zdb->execute($countSelect);
 
-            //@phpstan-ignore-next-line
-            $this->count = $results->current()->count;
-            if (isset($this->filters) && $this->count > 0) {
-                $this->filters->setCounter($this->count);
+            if ($result = $results->current()) {
+                //@phpstan-ignore-next-line
+                $this->count = $result->count;
+                if (isset($this->filters) && $this->count > 0) {
+                    $this->filters->setCounter($this->count);
+                }
             }
         } catch (\Exception $e) {
             Analog::log(
