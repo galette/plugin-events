@@ -60,6 +60,8 @@ use Laminas\Db\Sql\Select;
  * @copyright 2018-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
+ *
+ * @property string $query
  */
 class Bookings
 {
@@ -68,6 +70,7 @@ class Bookings
     private $filters = false;
     private $count;
     private $sum;
+    private string $query;
 
     public const ORDERBY_EVENT = 0;
     public const ORDERBY_MEMBER = 1;
