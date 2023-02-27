@@ -50,6 +50,8 @@ use GaletteEvents\Repository\Activities;
  * @copyright 2018-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
+ *
+ * @property string $query
  */
 
 class ActivitiesList extends Pagination
@@ -57,6 +59,7 @@ class ActivitiesList extends Pagination
     //filters
     private $name_filter = null;
     private $active_filter = null;
+    private string $query;
 
     protected $list_fields = array(
         'name_filter',

@@ -50,6 +50,8 @@ use GaletteEvents\Repository\Bookings;
  * @copyright 2018-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
+ *
+ * @property string $query
  */
 
 class BookingsList extends Pagination
@@ -61,6 +63,7 @@ class BookingsList extends Pagination
     private $group_filter;
 
     private $selected;
+    private string $query;
 
     protected $list_fields = array(
         'event_filter',
