@@ -47,7 +47,7 @@
 
 {% block search %}
     <form action="{{ url_for("filter-bookingslist", {"event": eventid}) }}" method="post" id="filtre" class="ui form">
-    <div class="ui segment">
+    <div class="ui secondary yellow segment">
         <div class="ui three fields">
             <div class="field">
                 <label for="event_filter">{{ _T("Event", "events") }}</label>
