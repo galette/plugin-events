@@ -144,7 +144,7 @@
         </div>
 
         <div class="ui basic center aligned fitted segment">
-            <button type="submit" name="valid" class="action ui labeled icon primary button">
+            <button type="submit" name="save" class="action ui labeled icon primary button">
                 <i class="save icon"></i> {{ _T("Save") }}
             </button>
             <input type="hidden" name="id" id="id" value="{{ event.getId() }}"/>
@@ -159,37 +159,16 @@
             $('#add_activity').on('click', function (event) {
                 if ($('#attach_activity').val() == '') {
                     event.preventDefault();
-                    alert('{_T string="Please choose an activity to add" domain="events"|escape:javascript}');
+                    alert('{{ _T("Please choose an activity to add", "events")|e('js') }}');
                 }
             });
 
             $('#remove_activity').on('click', function (event) {
                 if ($('#detach_activity').val() == '') {
                     event.preventDefault();
-                    alert('{_T string="Please choose an activity to remove" domain="events"|escape:javascript}');
+                    alert('{{ _T("Please choose an activity to remove", "events")|e('js') }}');
                 }
             });
-
-            {#_collapsibleFieldsets();
-            $.datepicker.setDefaults($.datepicker.regional['{$galette_lang}']);
-            $('#begin_date').datepicker({
-                changeMonth: true,
-                changeYear: true,
-                showOn: 'button',
-                minDate: '-0d',
-                buttonText: '<i class="far fa-calendar-alt"></i> <span class="displaynone">{_T string="Select a date" escape="js"}</span>',
-                onSelect: function(date) {
-                    $("#end_date").datepicker("option", "minDate", $('#begin_date').datepicker('getDate'));
-                }
-            });
-            $('#end_date').datepicker({
-                changeMonth: true,
-                changeYear: true,
-                showOn: 'button',
-                buttonText: '<i class="far fa-calendar-alt"></i> <span class="displaynone">{_T string="Select a date" escape="js"}</span>',
-                minDate: $("#begin_date").datepicker("getDate")
-            });#}
-
         });
     </script>
 {% endblock %}
