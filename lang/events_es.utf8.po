@@ -10,12 +10,12 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: translations@galette.eu\n"
-"POT-Creation-Date: 2022-07-04 08:44+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-12 09:50+0100\n"
 "PO-Revision-Date: 2022-10-17 00:56+0000\n"
 "Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
-"Language-Team: Spanish <https://hosted.weblate.org/projects/galette/"
-"events-plugin/es/>\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/galette/events-"
+"plugin/es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -67,262 +67,266 @@ msgstr "Error al agrega una reserva nueva."
 msgid "Booking updated"
 msgstr "Reserva actualizada"
 
-#: ../lib/GaletteEvents/Controllers/Crud/BookingsController.php:179
+#: ../lib/GaletteEvents/Controllers/Crud/BookingsController.php:181
 msgid "Bookings management"
 msgstr "Gestión de reserva"
 
-#: ../lib/GaletteEvents/Controllers/Crud/BookingsController.php:350
+#: ../lib/GaletteEvents/Controllers/Crud/BookingsController.php:353
+msgid "No action was matching."
+msgstr ""
+
+#: ../lib/GaletteEvents/Controllers/Crud/BookingsController.php:358
 msgid "No booking was selected, please check at least one."
 msgstr "Ninguna reserva fue seleccionada, marque al menos una."
 
-#: ../lib/GaletteEvents/Controllers/Crud/BookingsController.php:390
+#: ../lib/GaletteEvents/Controllers/Crud/BookingsController.php:398
 msgid "Booking"
 msgstr "Reserva"
 
-#: ../lib/GaletteEvents/Controllers/Crud/BookingsController.php:520
+#: ../lib/GaletteEvents/Controllers/Crud/BookingsController.php:528
 msgid "New booking has been successfully added."
 msgstr "La reserva nueva ha sido agregada correctamente."
 
-#: ../lib/GaletteEvents/Controllers/Crud/BookingsController.php:522
+#: ../lib/GaletteEvents/Controllers/Crud/BookingsController.php:530
 msgid "Booking has been modified."
 msgstr "La reserva ha sido modificada."
 
-#: ../lib/GaletteEvents/Controllers/Crud/BookingsController.php:526
+#: ../lib/GaletteEvents/Controllers/Crud/BookingsController.php:534
 msgid "An error occurred while storing the booking."
 msgstr "Ha ocurrido un error al almacenar la reserva."
 
-#: ../lib/GaletteEvents/Controllers/Crud/BookingsController.php:536
+#: ../lib/GaletteEvents/Controllers/Crud/BookingsController.php:544
 msgid "Do not forget to store the booking"
 msgstr "No olvide almacenar la reserva"
 
 #. TRANS: first parameter is the member name, second the event name.
-#: ../lib/GaletteEvents/Controllers/Crud/BookingsController.php:639
+#: ../lib/GaletteEvents/Controllers/Crud/BookingsController.php:647
 #, php-format
 msgid "Remove booking for %1$s on %2$s"
 msgstr "Anular reserva para %1$s en %2$s"
 
-#: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:144
+#: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:145
 msgid "Activities management"
 msgstr "Gestión de actividades"
 
-#: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:194
+#: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:196
 msgid "Activity"
 msgstr "Actividad"
 
-#: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:255
+#: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:257
 msgid "New activity has been successfully added."
 msgstr "Ha sido agregada correctamente una actividad nueva."
 
-#: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:257
+#: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:259
 msgid "Activity has been modified."
 msgstr "Ha sido modificada la actividad."
 
-#: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:261
+#: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:263
 msgid "An error occured while storing the activity."
 msgstr "Ha ocurrido un error mientras almacenaba la actividad."
 
-#: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:353
+#: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:355
 #, php-format
 msgid "Remove activity %1$s"
 msgstr "Eliminar actividad %1$s"
 
-#: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:141
+#: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:142
 msgid "Events management"
 msgstr "Gestión de eventos"
 
-#: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:201
+#: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:193
 msgid "Javascript libraries has not been built!"
 msgstr "¡ Las bibliotecas Javascript no se han compiladas !"
 
-#: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:210
+#: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:202
 msgid "Events calendar"
 msgstr "Calendario de eventos"
 
-#: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:321
+#: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:313
 #: ../tempcache/booking.html.twig:99 ../tempcache/booking.html.twig:107
-#: ../tempcache/bookings.html.twig:129 ../tempcache/bookings.html.twig:150
+#: ../tempcache/bookings.html.twig:127 ../tempcache/bookings.html.twig:148
 msgid "Event"
 msgstr "Evento"
 
-#: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:404
+#: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:396
 msgid "Activity has been attached to event."
 msgstr "La actividad ha sido adjuntada al evento."
 
-#: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:405
+#: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:397
 msgid "Do not forget to store the event"
 msgstr "No olvide almacenar el evento"
 
-#: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:407
+#: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:399
 msgid "Activity has been detached from event."
 msgstr "La actividad ha sido liberada del evento."
 
-#: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:416
+#: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:408
 msgid "New event has been successfully added."
 msgstr "Se ha agregado correctamente un evento nuevo."
 
-#: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:418
+#: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:410
 msgid "Event has been modified."
 msgstr "Evento ha sido modificado."
 
-#: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:422
+#: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:414
 msgid "An error occured while storing the event."
 msgstr "Ha ocurrido un error al almacenar el evento."
 
 #. TRANS: first parameter is the event name
-#: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:522
+#: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:514
 #, php-format
 msgid "Remove event '%1$s'\""
 msgstr "Eliminar evento «%1$s»"
 
-#: ../lib/GaletteEvents/Controllers/CsvController.php:105
+#: ../lib/GaletteEvents/Controllers/CsvController.php:94
 #: ../tempcache/event.html.twig:310
 msgid "Zip code"
 msgstr "Código postal"
 
-#: ../lib/GaletteEvents/Controllers/CsvController.php:111
+#: ../lib/GaletteEvents/Controllers/CsvController.php:100
 #: ../tempcache/booking.html.twig:174
 msgid "Number of persons"
 msgstr "Número de personas"
 
-#: ../lib/GaletteEvents/Controllers/CsvController.php:126
+#: ../lib/GaletteEvents/Controllers/CsvController.php:115
 #: ../tempcache/booking.html.twig:271
 msgid "Amount"
 msgstr "Monto"
 
-#: ../lib/GaletteEvents/Controllers/CsvController.php:128
+#: ../lib/GaletteEvents/Controllers/CsvController.php:117
 #: ../tempcache/booking.html.twig:283
 msgid "Bank name"
 msgstr "Nombre bancario"
 
-#: ../lib/GaletteEvents/Controllers/CsvController.php:129
+#: ../lib/GaletteEvents/Controllers/CsvController.php:118
 #: ../tempcache/booking.html.twig:289
 msgid "Check number"
 msgstr "Número comprobante"
 
 #. TRANS: this is a filename: all lowercase, no special character, no space.
-#: ../lib/GaletteEvents/Controllers/CsvController.php:184
+#: ../lib/GaletteEvents/Controllers/CsvController.php:173
 msgid "bookingslist"
 msgstr "listado de reservas"
 
-#: ../lib/GaletteEvents/Repository/Events.php:215
+#: ../lib/GaletteEvents/Repository/Events.php:216
 msgid "Event information"
 msgstr "Información de evento"
 
-#: ../lib/GaletteEvents/Repository/Events.php:222
+#: ../lib/GaletteEvents/Repository/Events.php:223
 msgid "Start date:"
 msgstr "Fecha de inicio:"
 
-#: ../lib/GaletteEvents/Repository/Events.php:223
+#: ../lib/GaletteEvents/Repository/Events.php:224
 msgid "End date:"
 msgstr "Fecha de finalización:"
 
-#: ../lib/GaletteEvents/Repository/Events.php:224
+#: ../lib/GaletteEvents/Repository/Events.php:225
 msgid "Location:"
 msgstr "Ubicación:"
 
-#: ../lib/GaletteEvents/Repository/Events.php:226
+#: ../lib/GaletteEvents/Repository/Events.php:227
 msgid "Comment:"
 msgstr "Comentario:"
 
-#: ../lib/GaletteEvents/Repository/Events.php:241
+#: ../lib/GaletteEvents/Repository/Events.php:242
 #, php-format
 msgid "%1$s paid"
 msgstr "%1$s pagado"
 
-#: ../lib/GaletteEvents/Repository/Events.php:246
+#: ../lib/GaletteEvents/Repository/Events.php:247
 msgid "Attendees:"
 msgstr "Asistentes:"
 
-#: ../lib/GaletteEvents/Repository/Events.php:254
-#: ../lib/GaletteEvents/PluginGaletteEvents.php:115
+#: ../lib/GaletteEvents/Repository/Events.php:255
 #: ../lib/GaletteEvents/PluginGaletteEvents.php:116
+#: ../lib/GaletteEvents/PluginGaletteEvents.php:117
 #: ../tempcache/event.html.twig:131 ../tempcache/booking.html.twig:190
 msgid "Activities"
 msgstr "Actividades"
 
-#: ../lib/GaletteEvents/Repository/Activities.php:84
+#: ../lib/GaletteEvents/Repository/Activities.php:86
 msgid "Noon meal"
 msgstr "Almuerzo"
 
-#: ../lib/GaletteEvents/Repository/Activities.php:88
+#: ../lib/GaletteEvents/Repository/Activities.php:90
 msgid "Even meal"
 msgstr "Comida"
 
-#: ../lib/GaletteEvents/Repository/Activities.php:92
+#: ../lib/GaletteEvents/Repository/Activities.php:94
 msgid "Lodging"
 msgstr "Alojamiento"
 
-#: ../lib/GaletteEvents/Event.php:216
+#: ../lib/GaletteEvents/Event.php:217
 msgid "Begin date is mandatory"
 msgstr "Fecha de inicio obligatoria"
 
-#: ../lib/GaletteEvents/Event.php:240 ../tempcache/event.html.twig:83
+#: ../lib/GaletteEvents/Event.php:241 ../tempcache/event.html.twig:83
 msgid "Begin date"
 msgstr "Fecha de inicio"
 
-#: ../lib/GaletteEvents/Event.php:242 ../tempcache/event.html.twig:89
+#: ../lib/GaletteEvents/Event.php:243 ../tempcache/event.html.twig:89
 msgid "End date"
 msgstr "Fecha de finalización"
 
-#: ../lib/GaletteEvents/Event.php:265
+#: ../lib/GaletteEvents/Event.php:266
 msgid "End date must be later or equal to begin date"
 msgstr "La fecha debe ser posterior o igual a la fecha de inicio"
 
-#: ../lib/GaletteEvents/Event.php:271 ../lib/GaletteEvents/Activity.php:199
+#: ../lib/GaletteEvents/Event.php:272 ../lib/GaletteEvents/Activity.php:194
 msgid "Name is mandatory"
 msgstr "Nombre es obligatorio"
 
-#: ../lib/GaletteEvents/Event.php:288
+#: ../lib/GaletteEvents/Event.php:289
 msgid "Please select a group you own!"
 msgstr "¡Selecciona un grupo de tu propiedad!"
 
-#: ../lib/GaletteEvents/Event.php:295
+#: ../lib/GaletteEvents/Event.php:296
 msgid "Town is mandatory"
 msgstr "Ciudad es obligatoria"
 
-#: ../lib/GaletteEvents/Event.php:425
+#: ../lib/GaletteEvents/Event.php:426
 msgid "Event added"
 msgstr "Evento agregado"
 
-#: ../lib/GaletteEvents/Event.php:429
+#: ../lib/GaletteEvents/Event.php:430
 msgid "Fail to add new event."
 msgstr "Error al agregar evento nuevo."
 
-#: ../lib/GaletteEvents/Event.php:447
+#: ../lib/GaletteEvents/Event.php:448
 msgid "Event updated"
 msgstr "Evento actualizado"
 
-#: ../lib/GaletteEvents/PluginGaletteEvents.php:71
-#: ../lib/GaletteEvents/PluginGaletteEvents.php:75
+#: ../lib/GaletteEvents/PluginGaletteEvents.php:72
 #: ../lib/GaletteEvents/PluginGaletteEvents.php:76
+#: ../lib/GaletteEvents/PluginGaletteEvents.php:77
 #: ../tempcache/activities.html.twig:101 ../tempcache/activities.html.twig:159
 msgid "Events"
 msgstr "Eventos"
 
-#: ../lib/GaletteEvents/PluginGaletteEvents.php:83
 #: ../lib/GaletteEvents/PluginGaletteEvents.php:84
+#: ../lib/GaletteEvents/PluginGaletteEvents.php:85
 msgid "Calendar"
 msgstr "Calendario"
 
-#: ../lib/GaletteEvents/PluginGaletteEvents.php:97
 #: ../lib/GaletteEvents/PluginGaletteEvents.php:98
+#: ../lib/GaletteEvents/PluginGaletteEvents.php:99
 msgid "Bookings"
 msgstr "Reservas"
 
-#: ../lib/GaletteEvents/PluginGaletteEvents.php:160
 #: ../lib/GaletteEvents/PluginGaletteEvents.php:161
+#: ../lib/GaletteEvents/PluginGaletteEvents.php:162
 msgid "New event booking"
 msgstr "Crear reserva de evento"
 
-#: ../lib/GaletteEvents/Activity.php:268
+#: ../lib/GaletteEvents/Activity.php:263
 msgid "Activity added"
 msgstr "Actividad agregada"
 
-#: ../lib/GaletteEvents/Activity.php:273
+#: ../lib/GaletteEvents/Activity.php:268
 msgid "Fail to add new activity."
 msgstr "Error al agregar actividad nueva."
 
-#: ../lib/GaletteEvents/Activity.php:291
+#: ../lib/GaletteEvents/Activity.php:286
 msgid "Activity updated"
 msgstr "Actividad actualizada"
 
@@ -389,12 +393,24 @@ msgstr "Pueblo"
 msgid "Country"
 msgstr "País"
 
+#: ../tempcache/event.html.twig:359
+#, fuzzy
+#| msgid "Choose an activity to add"
+msgid "Please choose an activity to add"
+msgstr "Elija una actividad para agregarla"
+
+#: ../tempcache/event.html.twig:369
+#, fuzzy
+#| msgid "Choose an activity to remove"
+msgid "Please choose an activity to remove"
+msgstr "Elija una actividad a retirar"
+
 #: ../tempcache/booking.html.twig:63
 msgid "Booking informations"
 msgstr "Información de reserva"
 
-#: ../tempcache/booking.html.twig:70 ../tempcache/bookings.html.twig:129
-#: ../tempcache/bookings.html.twig:405
+#: ../tempcache/booking.html.twig:70 ../tempcache/bookings.html.twig:127
+#: ../tempcache/bookings.html.twig:403
 msgid "Booking date"
 msgstr "Fecha de reserva"
 
@@ -410,94 +426,82 @@ msgstr "Ninguna actividad para evento seleccionado"
 msgid "Financial informations"
 msgstr "Informaciones financieras"
 
-#: ../tempcache/booking.html.twig:264 ../tempcache/bookings.html.twig:129
-#: ../tempcache/bookings.html.twig:259 ../tempcache/bookings.html.twig:417
-#: ../tempcache/bookings.html.twig:426
+#: ../tempcache/booking.html.twig:264 ../tempcache/bookings.html.twig:127
+#: ../tempcache/bookings.html.twig:257 ../tempcache/bookings.html.twig:415
+#: ../tempcache/bookings.html.twig:424
 msgid "Paid"
 msgstr "Remunerado"
 
-#: ../tempcache/bookings.html.twig:56
-msgid "No booking selected"
-msgstr "Ninguna reserva seleccionada"
-
-#: ../tempcache/bookings.html.twig:56
-msgid ""
-"Please make sure to select at least one booking from the list to perform "
-"this action."
-msgstr ""
-"Asegure seleccionar el menos una reserva desde el listado para realizar esta "
-"operación."
-
-#: ../tempcache/bookings.html.twig:65
+#: ../tempcache/bookings.html.twig:63
 msgid "Members as CSV"
 msgstr "Miembros como *.csv"
 
-#: ../tempcache/bookings.html.twig:65
+#: ../tempcache/bookings.html.twig:63
 msgid "Export selected reservation members as CSV"
 msgstr "Exportar miembros de reserva seleccionados como *.csv"
 
-#: ../tempcache/bookings.html.twig:65
+#: ../tempcache/bookings.html.twig:63
 msgid "Bookings as CSV"
 msgstr "Reservas como *.csv"
 
-#: ../tempcache/bookings.html.twig:65
+#: ../tempcache/bookings.html.twig:63
 msgid "Export selected reservations as CSV"
 msgstr "Exportar reservas seleccionadas como CSV"
 
-#: ../tempcache/bookings.html.twig:81
+#: ../tempcache/bookings.html.twig:79
 #, php-format
 msgid "%count booking"
 msgid_plural "%count bookings"
 msgstr[0] "%contar reserva"
 msgstr[1] "%contar reservas"
 
-#: ../tempcache/bookings.html.twig:109
+#: ../tempcache/bookings.html.twig:107
 msgid "New booking"
 msgstr "Crear reserva"
 
-#: ../tempcache/bookings.html.twig:115
+#: ../tempcache/bookings.html.twig:113
 msgid "current event"
 msgstr "evento actual"
 
-#: ../tempcache/bookings.html.twig:129 ../tempcache/bookings.html.twig:443
+#: ../tempcache/bookings.html.twig:127 ../tempcache/bookings.html.twig:441
 msgid "Attendees"
 msgstr "Participantes"
 
-#: ../tempcache/bookings.html.twig:155
+#: ../tempcache/bookings.html.twig:153
 msgid "Select..."
 msgstr "Selección..."
 
-#: ../tempcache/bookings.html.twig:185
+#: ../tempcache/bookings.html.twig:183
 msgid "All payment types"
 msgstr "Todos los tipos de abonación"
 
-#: ../tempcache/bookings.html.twig:191 ../tempcache/bookings.html.twig:193
+#: ../tempcache/bookings.html.twig:189 ../tempcache/bookings.html.twig:191
 #: ../tempcache/events.html.twig:101 ../tempcache/events.html.twig:183
 msgid "Group"
 msgstr "Grupo"
 
-#: ../tempcache/bookings.html.twig:229
+#: ../tempcache/bookings.html.twig:227
 msgid "Paid bookings:"
 msgstr "Reserva abonada:"
 
-#: ../tempcache/bookings.html.twig:275 ../tempcache/bookings.html.twig:432
+#: ../tempcache/bookings.html.twig:273 ../tempcache/bookings.html.twig:430
 msgid "Not paid"
 msgstr "No renumerado"
 
-#: ../tempcache/bookings.html.twig:326
+#: ../tempcache/bookings.html.twig:324
 #, php-format
 msgid "Found bookings total %f"
 msgstr "Se encontraron un total de %f reservas"
 
-#: ../tempcache/bookings.html.twig:464
+#: ../tempcache/bookings.html.twig:462
 msgid "Edit booking"
 msgstr "Editar reserva"
 
-#: ../tempcache/bookings.html.twig:479
+#: ../tempcache/bookings.html.twig:477
 msgid "Remove from database"
 msgstr "Eliminar de la base de datos"
 
-#: ../tempcache/bookings.html.twig:496
+#: ../tempcache/bookings.html.twig:494
 msgid "No booking has been found"
 msgstr "No se ha encontrado ninguna reserva"
 
@@ -611,6 +615,16 @@ msgstr "Calendario mensual"
 #: ../tempcache/calendar.html.twig:88
 msgid "Today"
 msgstr "Hoy"
+
+#~ msgid "No booking selected"
+#~ msgstr "Ninguna reserva seleccionada"
+
+#~ msgid ""
+#~ "Please make sure to select at least one booking from the list to perform "
+#~ "this action."
+#~ msgstr ""
+#~ "Asegure seleccionar el menos una reserva desde el listado para realizar "
+#~ "esta operación."
 
 #~ msgid "activities"
 #~ msgstr "actividades"
