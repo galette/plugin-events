@@ -43,7 +43,7 @@
                     {% endfor %}
 
                     {% include "components/forms/select.html.twig" with {
-                        id: 'event',
+                        id: 'member',
                         value: booking.getMemberId(),
                         values: member_list_values,
                         label: _T("Member"),
@@ -52,7 +52,7 @@
                 {% elseif booking.getMemberId() %}
                     <div class="inline field">
                         <label class="required">{{ _T("Member") }}</label>
-                        <input type="hidden" name="event" value="{{ booking.getMemberId() }}"/>
+                        <input type="hidden" name="member" value="{{ booking.getMemberId() }}"/>
                         {{ booking.getMember().sfullname }}
                     </div>
                 {% endif %}
@@ -134,7 +134,7 @@
         </div>
     {% endif %}
         <div class="ui basic center aligned fitted segment">
-            <button type="submit" name="valid" class="action ui labeled icon primary button">
+            <button type="submit" name="save" class="action ui labeled icon primary button">
                 <i class="save icon"></i> {{ _T("Save") }}
             </button>
             <input type="hidden" name="id" id="id" value="{{ booking.getId() }}"/>
