@@ -219,7 +219,7 @@
         ]) %}
     {% endif %}
 
-    {% set batch_actions = batch_actions|merge([
+    {% set batch_actions = (batch_actions ?? [])|merge([
         {
             'name': 'labels',
             'label': _T("Generate labels"),
