@@ -25,34 +25,22 @@ $(function() {
     events: _calendar_dataurl,
     selectable: true,
     eventClick: function(info) {
-      console.log(info);
-      console.log(calendar.getDate());
       var _infos = JSON.parse(JSON.stringify(info.event.extendedProps));
       _infos.url = _calendar_event_url.replace('PLACEBO', _infos.id_event)
-      var _elt = $('<div id="event_info" title="' + _infos.name + ' (' + _infos.begin_date_fmt + ' - ' + _infos.end_date_fmt + ')">' + _infos.description + '</div>');
-      _elt.appendTo('body').dialog({
-        modal: true,
-        width: '30%',
-        minWidth: 300,
-        buttons: {
-          Ok: function() {
-            $(this).dialog( "close" );
-          }
-        },
-        close: function(event, ui){
-          _elt.remove();
+
+      var _elt = $('<div class="ui modal"><div class="header">' + _infos.name + ' (' + _infos.begin_date_fmt + ' - ' + _infos.end_date_fmt + ')</div><div class="content">' + _infos.description + '</div></div>');
+      _elt.appendTo('body');
+      _elt.modal({
+        onVisible: function() {
+          $('#event_link').attr('href', _infos.url);
         }
-      });
-      $('#event_link').attr('href', _infos.url);
+      }).modal('show');
     },
     eventRender: function(info) {
       if (_events.indexOf(info.event.extendedProps.id_event) == -1) {
         var _el = $(info.el);
-        //FIXME: does not work :(
-        var tooltip = _el.tooltip({
-          content: function() {
-            return info.event.extendedProps.description;
-          }
+        _el.popup({
+          html: info.event.extendedProps.description
         });
         _events.push(info.event.extendedProps.id_event);
       }

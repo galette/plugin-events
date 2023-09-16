@@ -16,9 +16,6 @@
       today: { buttonText: '{{ _T("Today", "events")|e('js') }}' }
     }
     var _fullcalendar_locale = '{{ galette_lang }}';
-    $(function() {
-        {% include "elements/js/removal.js.twig" %}
-    });
 </script>
 <script type="text/javascript" src="{{ url_for("plugin_res", {"plugin": module_id, "path": "js/calendar.bundle.js"}) }}"></script>
 {% endblock %}

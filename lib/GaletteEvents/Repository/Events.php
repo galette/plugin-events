@@ -207,8 +207,8 @@ class Events
                     $row['end'] = $row['end_date'];
 
                     //extended description
-                    $row['end_date_fmt'] = $event->getBeginDate();
-                    $row['begin_date_fmt'] = $event->getEndDate();
+                    $row['begin_date_fmt'] = $event->getBeginDate();
+                    $row['end_date_fmt'] = $event->getEndDate();
                     $description = '<h4>';
                     if ($event->canEdit($this->login)) {
                         $description .= '<a href="" id="event_link">';
