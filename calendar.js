@@ -14,11 +14,11 @@ $(function() {
   var calendar = new Calendar(calendarEl, {
     plugins: [ interactionPlugin, dayGridPlugin, listPlugin ],
     views: _fullcalendar_views,
-    header: {
+    headerToolbar: {
       left: 'title',
       right: 'dayGridMonth,listDay,listWeek,listMonth prevYear,prev,today,next,nextYear'
     },
-    height: 'parent',
+    height: 'auto',
     locales: allLocales,
     locale: _fullcalendar_locale,
     weekNumbers: true,
@@ -36,14 +36,14 @@ $(function() {
         }
       }).modal('show');
     },
-    eventRender: function(info) {
-      if (_events.indexOf(info.event.extendedProps.id_event) == -1) {
-        var _el = $(info.el);
-        _el.popup({
-          html: info.event.extendedProps.description
-        });
-        _events.push(info.event.extendedProps.id_event);
-      }
+    eventMouseEnter: function(info) {
+      var _el = $(info.el);
+      _el.popup({
+        exclusive: true,
+        hoverable: true,
+        variation: 'basic',
+        html: info.event.extendedProps.description
+      }).popup('show');
     }
   });
 

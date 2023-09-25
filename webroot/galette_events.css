@@ -1,3 +1,10 @@
+a.fc-col-header-cell-cushion,
+a.fc-daygrid-day-number,
+a.fc-list-day-text,
+a.fc-list-day-side-text {
+    color: #636b70;
+}
+
 .event-notpaid {
     background-color: #FFDDDD!important;
     vertical-align: top;
