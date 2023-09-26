@@ -214,17 +214,14 @@
                 'label': _T("Bookings as CSV", "events"),
                 'title': _T("Export selected reservations as CSV", "events"),
                 'icon': 'file excel'
+            },
+            {
+                'name': 'labels__directdownload',
+                'label': _T("Generate labels"),
+                'icon': 'id badge outline'
             }
         ]) %}
     {% endif %}
-
-    {% set batch_actions = (batch_actions ?? [])|merge([
-        {
-            'name': 'labels__directdownload',
-            'label': _T("Generate labels"),
-            'icon': 'id badge outline'
-        }
-    ]) %}
 {% endif %}
 
 {% block batch_selection %}
