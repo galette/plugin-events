@@ -181,22 +181,21 @@
 {% endblock %}
 
 {% if nb > 0 %}
-    {#% set batch = {
+    {% set batch = {
         'route': {
-            'name': 'batch-bookinglist'
+            'name': 'batch-eventslist'
         },
         'modal': {
             'title': _T("No booking selected", "events"),
             'content': _T("Please make sure to select at least one booking from the list to perform this action.", "events")
         }
-    } %#}
+    } %}
 
     {% if login.isAdmin() or login.isStaff() %}
         {% if preferences.pref_mail_method != constant('Galette\\Core\\GaletteMail::METHOD_DISABLED') %}
             {%  set batch_actions = [
                 {
-                    'name': 'mailing',
-                    'id': 'sendmail',
+                    'name': 'sendmail',
                     'label': _T("Mail"),
                     'icon': 'mail bulk'
                 }
@@ -205,13 +204,13 @@
 
         {%  set batch_actions = (batch_actions ?? [])|merge([
             {
-                'name': 'csv',
+                'name': 'csv__directdownload',
                 'label': _T("Members as CSV", "events"),
                 'title': _T("Export selected reservation members as CSV", "events"),
                 'icon': 'file excel'
             },
             {
-                'name': 'csvbooking',
+                'name': 'csvbooking__directdownload',
                 'label': _T("Bookings as CSV", "events"),
                 'title': _T("Export selected reservations as CSV", "events"),
                 'icon': 'file excel'
@@ -221,9 +220,56 @@
 
     {% set batch_actions = (batch_actions ?? [])|merge([
         {
-            'name': 'labels',
+            'name': 'labels__directdownload',
             'label': _T("Generate labels"),
             'icon': 'id badge outline'
         }
     ]) %}
 {% endif %}
+
+{% block batch_selection %}
+                    else if (value == 'sendmail') {
+    {% if existing_mailing == true %}
+                        _sendmail(true);
+    {% else %}
+                        _sendmail();
+    {% endif %}
+                    }
+{% endblock %}
+
+{% block javascripts %}
+    {% set batch_selection = ['sendmail'] %}
+    {{ parent() }}
+    <script type="text/javascript">
+{% if nb > 0 %}
+        var _sendmail = function(existing){
+            console.log(existing);
+            var _form = $('#listform');
+                _form.append($('<input type="hidden" name="sendmail" value="true"/>'));
+                _form.append($('<input type="hidden" name="mailing_new" value="true"/>'));
+                _form.append($('<input type="hidden" name="mailing" value="true"/>'));
+            var _redirect = '{{ url_for('mailing') }}';
+
+            if (existing) {
+                {% include "elements/js/modal.js.twig" with {
+                    modal_title_twig: _T("Existing mailing")|e("js"),
+                    modal_content_twig: _T("A mailing already exists. Do you want to create a new one or resume the existing?")|e("js"),
+                    modal_class: "tiny",
+                    modal_onapprove: "_form.submit();",
+                    modal_approve_text: _T("New")|e("js"),
+                    modal_approve_icon: "plus",
+                    modal_approve_color: "green",
+                    modal_additional_button: {
+                        text: _T("Resume")|e("js"),
+                        icon: "edit",
+                        class: "blue",
+                        click: "function() { location.href = _redirect; }"
+                    }
+                } %}
+            } else {
+                _form.submit();
+            }
+        }
+{% endif %}
+    </script>
+{% endblock %}

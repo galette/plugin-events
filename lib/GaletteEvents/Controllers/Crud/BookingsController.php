@@ -313,7 +313,7 @@ class BookingsController extends AbstractPluginController
                 );
                 return $response
                     ->withStatus(301)
-                    ->withHeader('Location', $this->routeparser->urlFor('mailing') . '?new=new');
+                    ->withHeader('Location', $this->routeparser->urlFor('mailing') . '?mailing_new=true');
             }
 
             if (isset($post['csv'])) {
