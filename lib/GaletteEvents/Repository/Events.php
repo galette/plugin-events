@@ -210,15 +210,9 @@ class Events
                     $row['begin_date_fmt'] = $event->getBeginDate();
                     $row['end_date_fmt'] = $event->getEndDate();
                     $description = '<h4>';
-                    if ($event->canEdit($this->login)) {
-                        $description .= '<a href="" id="event_link">';
-                    }
                     $description .= _T('Event information', 'events');
-                    if ($event->canEdit($this->login)) {
-                        $description .= '&nbsp;<i class="fas fa-eye"></i></a>';
-                    }
                     $description .= '</h4>';
-                    $description .= '<ul>';
+                    $description .= '<ul class="ui bulleted list">';
                     $pattern = '<li><strong>%1$s</strong> %2$s</li>';
                     $description .= sprintf($pattern, _T("Start date:", "events"), $event->getBeginDate());
                     $description .= sprintf($pattern, _T("End date:", "events"), $event->getEndDate());
@@ -253,7 +247,7 @@ class Events
                     $activities = $event->getActivities();
                     if (count($activities)) {
                         $description .= '<h4>' . _T('Activities', 'events')  . '</h4>';
-                        $description .= '<ul>';
+                        $description .= '<ul class="ui bulleted list">';
                         foreach ($activities as $activity) {
                             $description .= '<li>' . $activity['activity']->getName()  . '</li>';
                         }

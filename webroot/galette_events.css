@@ -5,6 +5,10 @@ a.fc-list-day-side-text {
     color: #636b70;
 }
 
+.fc-event-title-container {
+    cursor: pointer;
+}
+
 .event-notpaid {
     background-color: #FFDDDD!important;
     vertical-align: top;
