@@ -87,6 +87,7 @@ class CsvController extends \Galette\Controllers\CsvController
         $bookings_list = $bookings->getList(true);
 
         $labels = [
+            _T('Event', 'events'),
             _T('Name'),
             _T('First name'),
             _T('Address'),
@@ -136,6 +137,7 @@ class CsvController extends \Galette\Controllers\CsvController
         foreach ($bookings_list as $booking) {
             $member = $booking->getMember();
             $entry = [
+                $booking->getEvent()->getName(),
                 $member->name,
                 $member->surname,
                 $member->address,
