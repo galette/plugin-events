@@ -181,46 +181,52 @@
 {% endblock %}
 
 {% if nb > 0 %}
-    {% set batch = {
-        'route': {
-            'name': 'batch-eventslist'
-        },
-        'modal': {
-            'title': _T("No booking selected", "events"),
-            'content': _T("Please make sure to select at least one booking from the list to perform this action.", "events")
-        }
-    } %}
+    {% if login.isAdmin() or login.isStaff() or login.isGroupManager() %}
+        {% set batch = {
+            'route': {
+                'name': 'batch-eventslist'
+            },
+            'modal': {
+                'title': _T("No booking selected", "events"),
+                'content': _T("Please make sure to select at least one booking from the list to perform this action.", "events")
+            }
+        } %}
+    {% endif %}
 
-    {% if login.isAdmin() or login.isStaff() %}
-        {% if preferences.pref_mail_method != constant('Galette\\Core\\GaletteMail::METHOD_DISABLED') %}
-            {%  set batch_actions = [
-                {
-                    'name': 'sendmail',
-                    'label': _T("Mail"),
-                    'icon': 'mail bulk'
-                }
-            ] %}
+    {% if login.isAdmin() or login.isStaff() or login.isGroupManager() and (preferences.pref_bool_groupsmanagers_exports or preferences.pref_bool_groupsmanagers_mailings) %}
+        {% if login.isAdmin() or login.isStaff() or (login.isGroupManager() and preferences.pref_bool_groupsmanagers_mailings) %}
+            {% if preferences.pref_mail_method != constant('Galette\\Core\\GaletteMail::METHOD_DISABLED') %}
+                {%  set batch_actions = [
+                    {
+                        'name': 'sendmail',
+                        'label': _T("Mail"),
+                        'icon': 'mail bulk'
+                    }
+                ] %}
+            {% endif %}
         {% endif %}
 
-        {%  set batch_actions = (batch_actions ?? [])|merge([
-            {
-                'name': 'csv__directdownload',
-                'label': _T("Members as CSV", "events"),
-                'title': _T("Export selected reservation members as CSV", "events"),
-                'icon': 'file excel'
-            },
-            {
-                'name': 'csvbooking__directdownload',
-                'label': _T("Bookings as CSV", "events"),
-                'title': _T("Export selected reservations as CSV", "events"),
-                'icon': 'file excel'
-            },
-            {
-                'name': 'labels__directdownload',
-                'label': _T("Generate labels"),
-                'icon': 'id badge outline'
-            }
-        ]) %}
+        {% if login.isAdmin() or login.isStaff() or login.isGroupManager() and preferences.pref_bool_groupsmanagers_exports %}
+            {%  set batch_actions = (batch_actions ?? [])|merge([
+                {
+                    'name': 'csv__directdownload',
+                    'label': _T("Members as CSV", "events"),
+                    'title': _T("Export selected reservation members as CSV", "events"),
+                    'icon': 'file excel'
+                },
+                {
+                    'name': 'csvbooking__directdownload',
+                    'label': _T("Bookings as CSV", "events"),
+                    'title': _T("Export selected reservations as CSV", "events"),
+                    'icon': 'file excel'
+                },
+                {
+                    'name': 'labels__directdownload',
+                    'label': _T("Generate labels"),
+                    'icon': 'id badge outline'
+                }
+            ]) %}
+        {% endif %}
     {% endif %}
 {% endif %}
 
