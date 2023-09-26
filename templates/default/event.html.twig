@@ -19,6 +19,7 @@
                     id: 'name',
                     value: event.getName(),
                     label: _T("Name", "events"),
+                    required: true,
                 } %}
 
                 {% include "components/forms/date.html.twig" with {
@@ -44,7 +45,6 @@
                     values: group_list_values,
                     label: _T("Limit to group", "events"),
                     title: _T("Restrict event to selected group (and its subgroups).", "events"),
-                    required: true,
                     raw_labels: true
                 } %}
 
@@ -133,6 +133,7 @@
                     id: 'town',
                     value: event.getTown(),
                     label: _T("Town", "events"),
+                    required: true,
                 } %}
 
                 {% include "components/forms/text.html.twig" with {
