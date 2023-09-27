@@ -70,8 +70,9 @@
             </span>
         </td>
         <td class="center nowrap actions_row">
+            {% set actions = [] %}
             {% if login.isAdmin() or login.isStaff() or (login.isGroupManager() and event.getGroup() in login.managed_groups) %}
-                {% set actions = [
+                {% set actions = (actions ?? [])|merge([
                     {
                         'label': _T("%eventname: export bookings as CSV", "events")|replace({"%eventname": event.getName()}),
                         'route': {
@@ -81,7 +82,7 @@
                         'icon': 'file excel grey'
                     },
 
-                ] %}
+                ]) %}
             {% endif %}
 
             {% set actions = (actions ?? [])|merge([
