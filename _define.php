@@ -67,8 +67,8 @@ $this->register(
         'events_storeactivity_edit' => 'staff',
         'events_remove_activity'    => 'staff',
         'events_do_remove_activity' => 'staff',
-        'event_bookings_export'     => 'staff',
-        'events_bookings_export'    => 'staff',
+        'event_bookings_export'     => 'groupmanager',
+        'events_bookings_export'    => 'groupmanager',
         'events_calendar'           => 'member',
         'ajax-events_calendar'      => 'member'
     ]
