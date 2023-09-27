@@ -76,14 +76,15 @@ class BookingsController extends AbstractPluginController
     /**
      * Add page
      *
-     * @param Request  $request  PSR Request
-     * @param Response $response PSR Response
+     * @param Request      $request  PSR Request
+     * @param Response     $response PSR Response
+     * @param integer|null $id_adh   Member id
      *
      * @return Response
      */
-    public function add(Request $request, Response $response): Response
+    public function add(Request $request, Response $response, int $id_adh = null): Response
     {
-        return $this->edit($request, $response, null, 'add');
+        return $this->edit($request, $response, null, 'add', $id_adh);
     }
 
     /**
