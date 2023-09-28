@@ -144,7 +144,23 @@ class PluginGaletteEvents extends GalettePlugin
      */
     public static function getDashboardsContents(): array
     {
-        return [];
+        /** @var Login $login */
+        global $login;
+
+        if ($login->isSuperAdmin()) {
+            return [];
+        }
+
+        return [
+            [
+                'label' => _T("Calendar", "events"),
+                'title' => _T("Events calendar", "events"),
+                'route' => [
+                    'name' => 'events_calendar'
+                ],
+                'icon' => 'calendar_spiral'
+            ]
+        ];
     }
 
     /**
