@@ -148,7 +148,10 @@
 
 {% block javascripts %}
     <script type="text/javascript">
-        {% include "elements/js/choose_adh.js.twig" with {"js_chosen_id": "#member"} %}
+        {% include "elements/js/choose_adh.js.twig" with {
+            "js_chosen_id": "#member",
+            "js_chosen_cache": false
+        } %}
 
         $('#event').on('change', function() {
             var _this = $(this);
