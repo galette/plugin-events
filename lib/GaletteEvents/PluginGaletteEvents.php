@@ -144,13 +144,6 @@ class PluginGaletteEvents extends GalettePlugin
      */
     public static function getDashboardsContents(): array
     {
-        /** @var Login $login */
-        global $login;
-
-        if ($login->isSuperAdmin()) {
-            return [];
-        }
-
         return [
             [
                 'label' => _T("Calendar", "events"),
