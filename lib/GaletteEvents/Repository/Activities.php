@@ -80,21 +80,6 @@ class Activities extends Repository
         $this->zdb = $zdb;
         $this->login = $login;
 
-        $this->defaults = [
-            'noon_meal' => [
-                Activity::PK    => '1',
-                'name'          => _T('Noon meal', 'events')
-            ],
-            'even_meal' => [
-                Activity::PK    => '2',
-                'name'          => _T('Even meal', 'events')
-            ],
-            'lodging'   => [
-                Activity::PK    => '3',
-                'name'          => _T('Lodging', 'events')
-            ]
-        ];
-
         parent::__construct($zdb, $preferences, $login, 'Activity', 'GaletteEvents', EVENTS_PREFIX);
 
         if ($filters === null) {
@@ -232,56 +217,14 @@ class Activities extends Repository
     /**
      * Add default activities in database
      *
-     * @param boolean $check_first Check first if it seem initialized
+     * @param boolean $check_first Check first if it seems initialized
      *
      * @return boolean
      */
     public function installInit($check_first = true)
     {
-        try {
-            $ent = $this->entity;
-            //first of all, let's check if data seem to have already
-            //been initialized
-            $proceed = false;
-            if ($check_first === true) {
-                $select = $this->zdb->select(EVENTS_PREFIX . $ent::TABLE);
-                $select->columns(
-                    array(
-                        'counter' => new Expression('COUNT(' . $ent::PK . ')')
-                    )
-                );
-
-                $results = $this->zdb->execute($select);
-                $result = $results->current();
-                $count = $result->counter;
-                if ($count == 0) {
-                    //if we got no values in texts table, let's proceed
-                    $proceed = true;
-                } else {
-                    if ($count < count($this->defaults)) {
-                        return $this->checkUpdate();
-                    }
-                    return false;
-                }
-            } else {
-                $proceed = true;
-            }
-
-            if ($proceed === true) {
-                $this->zdb->connection->beginTransaction();
-
-                //first, we drop all values
-                $delete = $this->zdb->delete(EVENTS_PREFIX . $ent::TABLE);
-                $this->zdb->execute($delete);
-                $this->insert($ent::TABLE, $this->defaults);
-
-                $this->zdb->connection->commit();
-                return true;
-            }
-        } catch (\Exception $e) {
-            $this->zdb->connection->rollBack();
-            throw $e;
-        }
+        //to satisfy inheritance
+        return true;
     }
 
     /**
@@ -308,59 +251,5 @@ class Activities extends Repository
         foreach ($values as $name) {
             $stmt->execute([':name' => $name['name']]);
         }
-    }
-
-    /**
-     * Checks for missing activities in the database
-     *
-     * @return bool
-     */
-    protected function checkUpdate()
-    {
-        try {
-            $ent = $this->entity;
-            $select = $this->zdb->select(EVENTS_PREFIX . $ent::TABLE);
-            $dblist = $this->zdb->execute($select);
-
-            $list = [];
-            foreach ($dblist as $dbentry) {
-                $list[] = $dbentry;
-            }
-
-            $missing = array();
-            foreach ($this->defaults as $default) {
-                $exists = false;
-                foreach ($list as $activity) {
-                    if (
-                        $activity->name == $default['name']
-                    ) {
-                        $exists = true;
-                        continue;
-                    }
-                }
-
-                if ($exists === false) {
-                    //text does not exists in database, insert it.
-                    $missing[] = $default;
-                }
-            }
-
-            if (count($missing) > 0) {
-                $this->insert($ent::TABLE, $missing);
-
-                Analog::log(
-                    'Missing activities were successfully stored into database.',
-                    Analog::INFO
-                );
-                return true;
-            }
-        } catch (Throwable $e) {
-            Analog::log(
-                'An error occurred checking missing activities.' . $e->getMessage(),
-                Analog::WARNING
-            );
-            throw $e;
-        }
-        return false;
     }
 }
