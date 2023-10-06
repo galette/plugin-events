@@ -59,61 +59,6 @@
         <div class="ui styled fluid accordion field">
             <div class="active title">
                 <i class="icon dropdown"></i>
-                {{ _T("Activities", "events") }}
-            </div>
-            <div class="active content">
-                <div>
-                    <p class="right">
-    {% set availables = event.availableActivities() %}
-    {% set activities = event.getActivities() %}
-
-    {% if availables|length %}
-                        <select name="attach_activity" id="attach_activity">
-                            <option value="">{{ _T("Choose an activity to add", "events") }}</option>
-        {% for activity in availables %}
-                            <option value="{{ activity.id_activity }}">{{ activity.name }}</option>
-        {% endfor %}
-                        </select>
-                        <button type="submit" name="add_activity" id="add_activity" class="action ui icon button tooltip">
-                            <i class="add icon"></i>
-                            <span class="displaynone">{{ _T("Add selected activity to event", "events") }}"</span>
-                        </button>
-    {% endif %}
-    {% if activities|length %}
-                        <select name="detach_activity" id="detach_activity">
-                            <option value="">{{ _T("Choose an activity to remove", "events") }}</option>
-        {% for item in activities %}
-            {% set activity = item.activity %}
-                            <option value="{{ activity.getId() }}">{{ activity.getName() }}</option>
-        {% endfor %}
-                        </select>
-                        <button type="submit" name="remove_activity" id="remove_activity" class="action ui icon button tooltip">
-                            <i class="delete red icon"></i>
-                            <span class="displaynone">{{ _T("Remove selected activity from event", "events") }}</span>
-                        </button>
-    {% endif %}
-                    </p>
-    {% if activities|length %}
-        {% for item in activities %}
-            {% set activity = item.activity %}
-                    <p>
-                        <input type="hidden" name="activities_ids[]" value="{{ activity.getId() }}"/>
-                        <label for="activities_status_{$activity->getId()}">{{ activity.getName() }}</label>
-                        <select name="activities_status[]" id="activities_status_{{ activity.getId() }}">
-                            <option value="{{ constant('GaletteEvents\\Activity::YES') }}"{% if item.status == constant('GaletteEvents\\Activity::YES') %} selected="selected"{% endif %}>{{ _T("Yes") }}</option>
-                            <option value="{{ constant('GaletteEvents\\Activity::NO') }}"{% if item.status == constant('GaletteEvents\\Activity::NO') %} selected="selected"{% endif %}>{{ _T("No") }}</option>
-                            <option value="{{ constant('GaletteEvents\\Activity::REQUIRED') }}"{% if item.status == constant('GaletteEvents\\Activity::REQUIRED') %} selected="selected"{% endif %}>{{ _T("Required", "events") }}</option>
-                        </select>
-                    </p>
-        {% endfor %}
-    {% endif %}
-                </div>
-            </div>
-        </div>
-
-        <div class="ui styled fluid accordion field">
-            <div class="active title">
-                <i class="icon dropdown"></i>
                 {{ _T("Location", "events") }}
             </div>
             <div class="active content">
@@ -141,6 +86,67 @@
                     value: event.getCountry(),
                     label: _T("Country", "events"),
                 } %}
+            </div>
+        </div>
+
+        <div class="ui styled fluid accordion field">
+            <div class="active title">
+                <i class="icon dropdown"></i>
+                {{ _T("Activities", "events") }}
+            </div>
+            <div class="active content">
+                <div>
+                    <p class="right">
+    {% set availables = event.availableActivities() %}
+    {% set activities = event.getActivities() %}
+
+    {% if availables|length or activities|length %}
+        {% if availables|length %}
+                            <select name="attach_activity" id="attach_activity">
+                                <option value="">{{ _T("Choose an activity to add", "events") }}</option>
+            {% for activity in availables %}
+                                <option value="{{ activity.id_activity }}">{{ activity.name }}</option>
+            {% endfor %}
+                            </select>
+                            <button type="submit" name="add_activity" id="add_activity" class="action ui icon button tooltip">
+                                <i class="add icon"></i>
+                                <span class="displaynone">{{ _T("Add selected activity to event", "events") }}"</span>
+                            </button>
+        {% endif %}
+        {% if activities|length %}
+                            <select name="detach_activity" id="detach_activity">
+                                <option value="">{{ _T("Choose an activity to remove", "events") }}</option>
+            {% for item in activities %}
+                {% set activity = item.activity %}
+                                <option value="{{ activity.getId() }}">{{ activity.getName() }}</option>
+            {% endfor %}
+                            </select>
+                            <button type="submit" name="remove_activity" id="remove_activity" class="action ui icon button tooltip">
+                                <i class="delete red icon"></i>
+                                <span class="displaynone">{{ _T("Remove selected activity from event", "events") }}</span>
+                            </button>
+        {% endif %}
+                        </p>
+        {% if activities|length %}
+            {% for item in activities %}
+                {% set activity = item.activity %}
+                        <p>
+                            <input type="hidden" name="activities_ids[]" value="{{ activity.getId() }}"/>
+                            <label for="activities_status_{$activity->getId()}">{{ activity.getName() }}</label>
+                            <select name="activities_status[]" id="activities_status_{{ activity.getId() }}">
+                                <option value="{{ constant('GaletteEvents\\Activity::YES') }}"{% if item.status == constant('GaletteEvents\\Activity::YES') %} selected="selected"{% endif %}>{{ _T("Yes") }}</option>
+                                <option value="{{ constant('GaletteEvents\\Activity::NO') }}"{% if item.status == constant('GaletteEvents\\Activity::NO') %} selected="selected"{% endif %}>{{ _T("No") }}</option>
+                                <option value="{{ constant('GaletteEvents\\Activity::REQUIRED') }}"{% if item.status == constant('GaletteEvents\\Activity::REQUIRED') %} selected="selected"{% endif %}>{{ _T("Required", "events") }}</option>
+                            </select>
+                        </p>
+            {% endfor %}
+        {% endif %}
+    {% else %}
+        {% if not availables|length %}
+                        <p>{{ _T("No activity available in the database", "events") }}</p>
+        {% endif %}
+    {% endif %}
+                </div>
             </div>
         </div>
 
