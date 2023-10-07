@@ -147,7 +147,7 @@
                         </a>
                     </td>
                     <td class="{{ rclass }}" data-title="{{ _T("Booking date", "events") }}">{{ booking.getDate() }}</td>
-                    <td class="{{ rclass }} tooltip center {% if not booking.isPaid() %}red{% endif %}" data-title="{{ _T("Paid", "events") }}">
+                    <td class="{{ rclass }} tooltip center {% if not booking.isPaid() %}red{% endif %}" data-title="{% if booking.isPaid() %}{{ _T("Paid", "events") }}{%  else %}{{ _T("Not paid", "events") }}{% endif %}">
                         <i class="money bill wave icon"></i>
                         <span class="displaynone">
                         {% if booking.isPaid() %}
