@@ -61,26 +61,25 @@ class CsvController extends \Galette\Controllers\CsvController
      *
      * @param Request  $request  PSR Request
      * @param Response $response PSR Response
-     * @param array    $args     Request arguments
+     * @param ?int     $id       Event ID, if any
      *
      * @return Response
      */
-    public function bookingsExport(Request $request, Response $response, array $args = []): Response
+    public function bookingsExport(Request $request, Response $response, int $id = null): Response
     {
         $post = $request->getParsedBody();
         $get = $request->getQueryParams();
         $csv = new CsvOut();
 
-
         $session_var = $post['session_var'] ?? $get['session_var'] ?? 'filter_bookings';
-        if (isset($this->session->$session_var)) {
+        if (isset($this->session->$session_var) && $id === null) {
             $filters = $this->session->$session_var;
         } else {
             $filters = new BookingsList();
         }
 
-        if (isset($args['id'])) {
-            $filters->event_filter = $args['id'];
+        if ($id !== null) {
+            $filters->event_filter = $id;
         }
 
         $bookings = new Bookings($this->zdb, $this->login, $filters);
