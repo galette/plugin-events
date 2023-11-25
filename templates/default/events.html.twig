@@ -61,7 +61,7 @@
         <td data-title="{{ _T("Group", "events") }}">{{ event.getGroupName() }}</td>
         <td class="center id_row tooltip {% if event.isOpen() %}use{% else %}delete{% endif %}" data-title="{{ _T("Open", "events") }}">
             <i class="lock{% if event.isOpen() %} open green{% else %} red{% endif %} icon"></i>
-            <span class="displaynone">
+            <span class="visually-hidden">
                 {% if event.isOpen() %}
                     {{ _T("Event is open", "events") }}
                 {% else %}
