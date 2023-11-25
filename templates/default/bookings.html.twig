@@ -149,7 +149,7 @@
                     <td class="{{ rclass }}" data-title="{{ _T("Booking date", "events") }}">{{ booking.getDate() }}</td>
                     <td class="{{ rclass }} tooltip center {% if not booking.isPaid() %}red{% endif %}" data-title="{% if booking.isPaid() %}{{ _T("Paid", "events") }}{%  else %}{{ _T("Not paid", "events") }}{% endif %}">
                         <i class="money bill wave icon"></i>
-                        <span class="displaynone">
+                        <span class="visually-hidden">
                         {% if booking.isPaid() %}
                             {{ _T("Paid", "events") }}
                         {% else %}
@@ -163,13 +163,13 @@
         {% if login.isAdmin() or login.isStaff() or (login.isGroupManager() and booking.getEvent().getGroup() in login.managed_groups )%}
                         <a href="{{ url_for("events_booking_edit", {"id": bid}) }}" class="tooltip action">
                             <i class="edit icon"></i>
-                            <span class="displaynone">{{ _T("Edit booking", "events") }}</span>
+                            <span class="visually-hidden">{{ _T("Edit booking", "events") }}</span>
                         </a>
         {% endif %}
         {% if login.isAdmin() or login.isStaff()%}
                         <a class="delete tooltip" href="{{ url_for("events_remove_booking", {"id": bid}) }}">
                             <i class="trash red icon"></i>
-                            <span class="displaynone">{{ _T("Remove from database", "events") }}</span>
+                            <span class="visually-hidden">{{ _T("Remove from database", "events") }}</span>
                         </a>
         {% endif %}
                     </td>

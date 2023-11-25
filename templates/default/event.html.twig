@@ -110,7 +110,7 @@
                             </select>
                             <button type="submit" name="add_activity" id="add_activity" class="action ui icon button tooltip">
                                 <i class="add icon"></i>
-                                <span class="displaynone">{{ _T("Add selected activity to event", "events") }}"</span>
+                                <span class="visually-hidden">{{ _T("Add selected activity to event", "events") }}"</span>
                             </button>
         {% endif %}
         {% if activities|length %}
@@ -123,7 +123,7 @@
                             </select>
                             <button type="submit" name="remove_activity" id="remove_activity" class="action ui icon button tooltip">
                                 <i class="delete red icon"></i>
-                                <span class="displaynone">{{ _T("Remove selected activity from event", "events") }}</span>
+                                <span class="visually-hidden">{{ _T("Remove selected activity from event", "events") }}</span>
                             </button>
         {% endif %}
                         </p>
