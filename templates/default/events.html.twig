@@ -56,11 +56,11 @@
                 {{ event.getName() }}
             {% endif %}
         </td>
-        <td data-title="{{ _T("Date", "events") }}">{{ event.getBeginDate() }}</td>
-        <td data-title="{{ _T("Town", "events") }}">{{ event.getTown() }}</td>
-        <td data-title="{{ _T("Group", "events") }}">{{ event.getGroupName() }}</td>
-        <td class="center id_row tooltip {% if event.isOpen() %}use{% else %}delete{% endif %}" data-title="{{ _T("Open", "events") }}">
-            <i class="lock{% if event.isOpen() %} open green{% else %} red{% endif %} icon"></i>
+        <td data-col-label="{{ _T("Date", "events") }}">{{ event.getBeginDate() }}</td>
+        <td data-col-label="{{ _T("Town", "events") }}">{{ event.getTown() }}</td>
+        <td data-col-label="{{ _T("Group", "events") }}">{{ event.getGroupName() }}</td>
+        <td class="center id_row" data-col-label="{{ _T("Open", "events") }}">
+            <i class="lock{% if event.isOpen() %} open green{% else %} red{% endif %} icon tooltip" data-html="{% if event.isOpen() %}{{ _T("Event is open", "events") }}{% else %}{{ _T("Event is closed", "events") }}{% endif %}"></i>
             <span class="visually-hidden">
                 {% if event.isOpen() %}
                     {{ _T("Event is open", "events") }}

@@ -47,10 +47,10 @@
                 {% set aid = activity.getId() %}
                 <a href="{{ url_for("events_activity_edit", {"id": aid}) }}">{{ activity.getName() }}</a>
             </td>
-            <td data-title="{{ _T("Creation date", "events") }}">{{ activity.getCreationDate() }}</td>
-            <td data-title="{{ _T("Events", "events") }}">{{ activity.countEvents() }}</td>
-            <td class="center id_row {% if activity.isActive() %}use{% else %}delete{% endif %}" data-title="{{ _T("Is active", "events") }}">
-                <i class="toggle {% if activity.isActive() %}on{% else %}off{% endif %} icon"></i>
+            <td data-col-label="{{ _T("Creation date", "events") }}">{{ activity.getCreationDate() }}</td>
+            <td data-col-label="{{ _T("Events", "events") }}">{{ activity.countEvents() }}</td>
+            <td class="center id_row" data-col-label="{{ _T("Is active", "events") }}">
+                <i class="toggle {% if activity.isActive() %}on{% else %}off{% endif %} icon tooltip" data-html="{% if activity.isActive() %}{{ _T("Active", "events") }}{% else %}{{ _T("Inactive", "events") }}{% endif %}"></i>
                 <span class="visually-hidden">
                 {% if activity.isActive() %}
                     {{ _T("Active", "events") }}
