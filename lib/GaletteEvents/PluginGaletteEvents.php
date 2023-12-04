@@ -74,7 +74,6 @@ class PluginGaletteEvents extends GalettePlugin
                 'items' => [
                     [
                         'label' => _T('Events', 'events'),
-                        'title' => _T('Events', 'events'),
                         'route' => [
                             'name' => 'events_events',
                             'aliases' => ['events_event_add', 'events_event_edit']
@@ -82,7 +81,6 @@ class PluginGaletteEvents extends GalettePlugin
                     ],
                     [
                         'label' => _T('Calendar', 'events'),
-                        'title' => _T('Calendar', 'events'),
                         'route' => [
                             'name' => 'events_calendar',
                         ]
@@ -96,7 +94,6 @@ class PluginGaletteEvents extends GalettePlugin
             [
                 [
                     'label' => _T('Bookings', 'events'),
-                    'title' => _T('Bookings', 'events'),
                     'route' => [
                         'name' => 'events_bookings',
                         'args' => [
@@ -114,7 +111,6 @@ class PluginGaletteEvents extends GalettePlugin
                 [
                     [
                         'label' => _T('Activities', 'events'),
-                        'title' => _T('Activities', 'events'),
                         'route' => [
                             'name' => 'events_activities',
                             'aliases' => ['events_activity_add', 'events_activity_edit']
@@ -168,7 +164,6 @@ class PluginGaletteEvents extends GalettePlugin
         return [
             [
                 'label' => _T("New event booking", "events"),
-                'title' => _T("New event booking", "events"),
                 'route' => [
                     'name' => 'events_booking_add',
                     'args' => ['id_adh' => $member->id]
