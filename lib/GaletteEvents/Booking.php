@@ -204,7 +204,7 @@ class Booking
         $this->errors = array();
 
         //event and activities
-        if (!isset($values['event']) || empty($values['event'])) {
+        if (!isset($values['event']) || empty($values['event']) || $values['event'] == -1) {
             $this->errors[] = _T('Event is mandatory', 'events');
         } else {
             $this->event = $values['event'];
