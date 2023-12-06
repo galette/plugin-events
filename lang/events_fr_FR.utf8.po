@@ -3,12 +3,12 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Galette Events plugin\n"
-"Report-Msgid-Bugs-To: translations@galette.eu\n"
-"POT-Creation-Date: 2023-10-07 09:38+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-06 08:15+0100\n"
 "PO-Revision-Date: 2023-10-07 07:40+0000\n"
 "Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
-"Language-Team: French <https://hosted.weblate.org/projects/galette/"
-"events-plugin/fr/>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/galette/events-"
+"plugin/fr/>\n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -132,7 +132,7 @@ msgid "Javascript libraries has not been built!"
 msgstr "Les bibliothèques Javascript n'ont pas été construites !"
 
 #: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:202
-#: ../lib/GaletteEvents/PluginGaletteEvents.php:150
+#: ../lib/GaletteEvents/PluginGaletteEvents.php:146
 msgid "Events calendar"
 msgstr "Calendrier des évènements"
 
@@ -233,8 +233,7 @@ msgid "Attendees:"
 msgstr "Participants :"
 
 #: ../lib/GaletteEvents/Repository/Events.php:249
-#: ../lib/GaletteEvents/PluginGaletteEvents.php:116
-#: ../lib/GaletteEvents/PluginGaletteEvents.php:117
+#: ../lib/GaletteEvents/PluginGaletteEvents.php:113
 #: ../tempcache/event.html.twig:166 ../tempcache/booking.html.twig:213
 msgid "Activities"
 msgstr "Activités"
@@ -281,24 +280,20 @@ msgstr "Évènement mis à jour"
 
 #: ../lib/GaletteEvents/PluginGaletteEvents.php:72
 #: ../lib/GaletteEvents/PluginGaletteEvents.php:76
-#: ../lib/GaletteEvents/PluginGaletteEvents.php:77
 #: ../tempcache/activities.html.twig:101 ../tempcache/activities.html.twig:159
 msgid "Events"
 msgstr "Évènements"
 
-#: ../lib/GaletteEvents/PluginGaletteEvents.php:84
-#: ../lib/GaletteEvents/PluginGaletteEvents.php:85
-#: ../lib/GaletteEvents/PluginGaletteEvents.php:149
+#: ../lib/GaletteEvents/PluginGaletteEvents.php:83
+#: ../lib/GaletteEvents/PluginGaletteEvents.php:145
 msgid "Calendar"
 msgstr "Calendrier"
 
-#: ../lib/GaletteEvents/PluginGaletteEvents.php:98
-#: ../lib/GaletteEvents/PluginGaletteEvents.php:99
+#: ../lib/GaletteEvents/PluginGaletteEvents.php:96
 msgid "Bookings"
 msgstr "Réservations"
 
-#: ../lib/GaletteEvents/PluginGaletteEvents.php:170
-#: ../lib/GaletteEvents/PluginGaletteEvents.php:171
+#: ../lib/GaletteEvents/PluginGaletteEvents.php:166
 msgid "New event booking"
 msgstr "Nouvelle réservation d'évènement"
 
@@ -411,8 +406,8 @@ msgid "Financial informations"
 msgstr "Informations financières"
 
 #: ../tempcache/booking.html.twig:287 ../tempcache/bookings.html.twig:138
-#: ../tempcache/bookings.html.twig:268 ../tempcache/bookings.html.twig:426
-#: ../tempcache/bookings.html.twig:435
+#: ../tempcache/bookings.html.twig:268 ../tempcache/bookings.html.twig:423
+#: ../tempcache/bookings.html.twig:435 ../tempcache/bookings.html.twig:446
 msgid "Paid"
 msgstr "Payée"
 
@@ -459,7 +454,7 @@ msgstr "Nouvelle réservation"
 msgid "current event"
 msgstr "évènement courant"
 
-#: ../tempcache/bookings.html.twig:138 ../tempcache/bookings.html.twig:452
+#: ../tempcache/bookings.html.twig:138 ../tempcache/bookings.html.twig:463
 msgid "Attendees"
 msgstr "Participants"
 
@@ -480,7 +475,8 @@ msgstr "Groupe"
 msgid "Paid bookings:"
 msgstr "Réservations payées :"
 
-#: ../tempcache/bookings.html.twig:284 ../tempcache/bookings.html.twig:441
+#: ../tempcache/bookings.html.twig:284 ../tempcache/bookings.html.twig:425
+#: ../tempcache/bookings.html.twig:437 ../tempcache/bookings.html.twig:452
 msgid "Not paid"
 msgstr "Non payée"
 
@@ -489,15 +485,15 @@ msgstr "Non payée"
 msgid "Found bookings total %f"
 msgstr "Total des réservations trouvées : %f"
 
-#: ../tempcache/bookings.html.twig:473
+#: ../tempcache/bookings.html.twig:482
 msgid "Edit booking"
 msgstr "Modifier la réservation"
 
-#: ../tempcache/bookings.html.twig:488
+#: ../tempcache/bookings.html.twig:494
 msgid "Remove from database"
 msgstr "Supprimer de la base de données"
 
-#: ../tempcache/bookings.html.twig:505
+#: ../tempcache/bookings.html.twig:527
 msgid "No booking has been found"
 msgstr "Aucune réservation trouvée"
 
@@ -516,16 +512,16 @@ msgstr "Nouvelle activité"
 msgid "Creation date"
 msgstr "Date de création"
 
-#: ../tempcache/activities.html.twig:101 ../tempcache/activities.html.twig:171
+#: ../tempcache/activities.html.twig:101 ../tempcache/activities.html.twig:165
 #: ../tempcache/activity.html.twig:70
 msgid "Is active"
 msgstr "Est active"
 
-#: ../tempcache/activities.html.twig:187
+#: ../tempcache/activities.html.twig:176 ../tempcache/activities.html.twig:187
 msgid "Active"
 msgstr "Active"
 
-#: ../tempcache/activities.html.twig:193
+#: ../tempcache/activities.html.twig:178 ../tempcache/activities.html.twig:193
 msgid "Inactive"
 msgstr "Inactif"
 
@@ -556,15 +552,15 @@ msgstr "Nouvel évènement"
 msgid "Date"
 msgstr "Date"
 
-#: ../tempcache/events.html.twig:101 ../tempcache/events.html.twig:195
+#: ../tempcache/events.html.twig:101 ../tempcache/events.html.twig:189
 msgid "Open"
 msgstr "Ouvert"
 
-#: ../tempcache/events.html.twig:211
+#: ../tempcache/events.html.twig:200 ../tempcache/events.html.twig:211
 msgid "Event is open"
 msgstr "L'évènement est ouvert"
 
-#: ../tempcache/events.html.twig:217
+#: ../tempcache/events.html.twig:202 ../tempcache/events.html.twig:217
 msgid "Event is closed"
 msgstr "L'évènement est fermé"
 
