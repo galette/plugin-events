@@ -1,1 +1,0 @@
-            <a href="{path_for name="events_booking_add"}?id_adh={$member->id}" class="tooltip action" title="{_T string="New event booking" domain="events"}"><i class="fas fa-calendar-plus fa-fw"></i><span class="sr-only">{_T string="New event booking" domain="events"}</span></a>

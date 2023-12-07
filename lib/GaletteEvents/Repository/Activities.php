@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2018 The Galette Team
+ * Copyright © 2018-2023 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package   GaletteEvents
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018 The Galette Team
+ * @copyright 2018-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  */
@@ -46,6 +46,8 @@ use Galette\Entity\Group;
 use Galette\Repository\Groups;
 use GaletteEvents\Event;
 use GaletteEvents\Filters\EventsList;
+use Laminas\Db\Sql\Select;
+use Throwable;
 
 /**
  * Events
@@ -54,7 +56,7 @@ use GaletteEvents\Filters\EventsList;
  * @name      Events
  * @package   GaletteEvents
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018 The Galette Team
+ * @copyright 2018-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  */
@@ -78,21 +80,6 @@ class Activities extends Repository
         $this->zdb = $zdb;
         $this->login = $login;
 
-        $this->defaults = [
-            'noon_meal' => [
-                Activity::PK    => '1',
-                'name'          => _T('Noon meal', 'events')
-            ],
-            'even_meal' => [
-                Activity::PK    => '2',
-                'name'          => _T('Even meal', 'events')
-            ],
-            'lodging'   => [
-                Activity::PK    => '3',
-                'name'          => _T('Lodging', 'events')
-            ]
-        ];
-
         parent::__construct($zdb, $preferences, $login, 'Activity', 'GaletteEvents', EVENTS_PREFIX);
 
         if ($filters === null) {
@@ -105,7 +92,7 @@ class Activities extends Repository
     /**
      * Get activities list
      *
-     * @return GaletteEvents\Event[]
+     * @return array
      */
     public function getList()
     {
@@ -139,9 +126,9 @@ class Activities extends Repository
      * Builds the order clause
      *
      * @param array $fields Fields list to ensure ORDER clause
-     *                      references selected fields. Optionnal.
+     *                      references selected fields. Optional.
      *
-     * @return string SQL ORDER clause
+     * @return array SQL ORDER clauses
      */
     private function buildOrderClause($fields = null)
     {
@@ -213,7 +200,7 @@ class Activities extends Repository
                 'Cannot count activities | ' . $e->getMessage(),
                 Analog::WARNING
             );
-            return false;
+            throw $e;
         }
     }
 
@@ -230,56 +217,14 @@ class Activities extends Repository
     /**
      * Add default activities in database
      *
-     * @param boolean $check_first Check first if it seem initialized
+     * @param boolean $check_first Check first if it seems initialized
      *
      * @return boolean
      */
     public function installInit($check_first = true)
     {
-        try {
-            $ent = $this->entity;
-            //first of all, let's check if data seem to have already
-            //been initialized
-            $proceed = false;
-            if ($check_first === true) {
-                $select = $this->zdb->select(EVENTS_PREFIX . $ent::TABLE);
-                $select->columns(
-                    array(
-                        'counter' => new Expression('COUNT(' . $ent::PK . ')')
-                    )
-                );
-
-                $results = $this->zdb->execute($select);
-                $result = $results->current();
-                $count = $result->counter;
-                if ($count == 0) {
-                    //if we got no values in texts table, let's proceed
-                    $proceed = true;
-                } else {
-                    if ($count < count($this->defaults)) {
-                        return $this->checkUpdate();
-                    }
-                    return false;
-                }
-            } else {
-                $proceed = true;
-            }
-
-            if ($proceed === true) {
-                $this->zdb->connection->beginTransaction();
-
-                //first, we drop all values
-                $delete = $this->zdb->delete(EVENTS_PREFIX . $ent::TABLE);
-                $this->zdb->execute($delete);
-                $this->insert($ent::TABLE, $this->defaults);
-
-                $this->zdb->connection->commit();
-                return true;
-            }
-        } catch (\Exception $e) {
-            $this->zdb->connection->rollBack();
-            return $e;
-        }
+        //to satisfy inheritance
+        return true;
     }
 
     /**
@@ -304,7 +249,7 @@ class Activities extends Repository
         $stmt = $this->zdb->sql->prepareStatementForSqlObject($insert);
 
         foreach ($values as $name) {
-            $stmt->execute([':name' => $name]);
+            $stmt->execute([':name' => $name['name']]);
         }
     }
 }

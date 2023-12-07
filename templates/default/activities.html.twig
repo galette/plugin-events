@@ -1,0 +1,92 @@
+{% extends 'elements/list.html.twig' %}
+{% import "macros.twig" as macros %}
+
+{% set nb = nb_activities %}
+
+{% set form = {
+    'order': {
+        'name': 'events_activities'
+    }
+} %}
+
+{% block infoline %}
+    {% set infoline = {
+        'label': _Tn("%count activity", "%count activities", nb, "events")|replace({"%count": nb}),
+    } %}
+    {{ parent() }}
+{% endblock %}
+
+{% block infoline_actions %}
+    {% if login.isAdmin() or login.isStaff() %}
+    <a
+            class="ui tiny labeled icon button"
+            href="{{ url_for("events_activity_add") }}"
+    >
+        <i class="plus circle green icon" aria-hidden="true"></i>
+        {{ _T('New activity', 'events') }}
+    </a>
+    {% endif %}
+{% endblock %}
+
+{% block header %}
+    {% set columns = [
+        {'label': '#'},
+        {'label': _T("Name", "events"), order: constant('GaletteEvents\\Repository\\Activities::ORDERBY_NAME')},
+        {'label': _T("Creation date", "events"), order: constant('GaletteEvents\\Repository\\Activities::ORDERBY_DATE')},
+        {'label': _T("Events", "events")},
+        {'label': _T("Is active", "events")},
+    ] %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    {% for ordre, activity in activities %}
+        <tr class="{{ loop.index is odd ? 'odd' : 'even' }}">
+            <td class="right" data-scope="id">{{ ordre + 1 + (filters.current_page - 1) * numrows }}</td>
+            <td class="nowrap username_row" data-scope="row">
+                {% set aid = activity.getId() %}
+                <a href="{{ url_for("events_activity_edit", {"id": aid}) }}">{{ activity.getName() }}</a>
+            </td>
+            <td data-col-label="{{ _T("Creation date", "events") }}">{{ activity.getCreationDate() }}</td>
+            <td data-col-label="{{ _T("Events", "events") }}">{{ activity.countEvents() }}</td>
+            <td class="center id_row" data-col-label="{{ _T("Is active", "events") }}">
+                <i class="toggle {% if activity.isActive() %}on{% else %}off{% endif %} icon tooltip" data-html="{% if activity.isActive() %}{{ _T("Active", "events") }}{% else %}{{ _T("Inactive", "events") }}{% endif %}"></i>
+                <span class="visually-hidden">
+                {% if activity.isActive() %}
+                    {{ _T("Active", "events") }}
+                {% else %}
+                    {{ _T("Inactive", "events") }}
+                {% endif %}
+                </span>
+            </td>
+            <td class="center nowrap actions_row">
+                {% set actions = [
+                    {
+                        'label': _T("%activity: edit informations", "events")|replace({"%activity": activity.getName()}),
+                        'route': {
+                        'name': 'events_activity_edit',
+                            'args': {'id': aid}
+                        },
+                        'icon': 'edit'
+                    },
+                    {
+                        'label': _T("%activity: remove from database", "events")|replace({"%activity": activity.getName()}),
+                        'route': {
+                        'name': 'events_remove_activity',
+                            'args': {'id': aid}
+                        },
+                        'icon': 'trash red',
+                        'extra_class': 'delete'
+                    }
+
+                ] %}
+
+                {% for action in actions %}
+                    {{ macros.drawListAction(action.label, action.route, action.icon, action.extra_class|default('')) }}
+                {% endfor %}
+            </td>
+        </tr>
+    {% else %}
+        <tr><td colspan="6" class="emptylist">{{ _T("No activity has been found", "events") }}</td></tr>
+    {% endfor %}
+{% endblock %}

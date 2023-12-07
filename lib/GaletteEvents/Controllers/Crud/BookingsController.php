@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2021 The Galette Team
+ * Copyright © 2021-2023 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package   GaletteEvents
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2021 The Galette Team
+ * @copyright 2021-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     2021-05-09
@@ -46,8 +46,9 @@ use GaletteEvents\Booking;
 use GaletteEvents\Event;
 use GaletteEvents\Repository\Bookings;
 use GaletteEvents\Repository\Events;
-use Slim\Http\Request;
-use Slim\Http\Response;
+use Slim\Psr7\Request;
+use Slim\Psr7\Response;
+use DI\Attribute\Inject;
 
 /**
  * Bookings controller
@@ -56,7 +57,7 @@ use Slim\Http\Response;
  * @name      BookingsController
  * @package   GaletteEvents
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2021 The Galette Team
+ * @copyright 2021-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     2021-05-09
@@ -65,9 +66,9 @@ use Slim\Http\Response;
 class BookingsController extends AbstractPluginController
 {
     /**
-     * @Inject("Plugin Galette Events")
-     * @var integer
+     * @var array
      */
+    #[Inject("Plugin Galette Events")]
     protected $module_info;
 
     // CRUD - Create
@@ -75,14 +76,15 @@ class BookingsController extends AbstractPluginController
     /**
      * Add page
      *
-     * @param Request  $request  PSR Request
-     * @param Response $response PSR Response
+     * @param Request      $request  PSR Request
+     * @param Response     $response PSR Response
+     * @param integer|null $id_adh   Member id
      *
      * @return Response
      */
-    public function add(Request $request, Response $response): Response
+    public function add(Request $request, Response $response, int $id_adh = null): Response
     {
-        return $this->edit($request, $response, null, 'add');
+        return $this->edit($request, $response, null, 'add', $id_adh);
     }
 
     /**
@@ -114,6 +116,7 @@ class BookingsController extends AbstractPluginController
     public function list(Request $request, Response $response, $option = null, $value = null): Response
     {
         //just for inheritance. see listBookings which signature changes.
+        return $response;
     }
 
     /**
@@ -164,7 +167,7 @@ class BookingsController extends AbstractPluginController
         $bookings = new Bookings($this->zdb, $this->login, $filters);
 
         //assign pagination variables to the template and add pagination links
-        $filters->setSmartyPagination($this->router, $this->view->getSmarty(), false);
+        $filters->setViewPagination($this->routeparser, $this->view, false);
 
         $this->session->filter_bookings = $filters;
 
@@ -174,7 +177,7 @@ class BookingsController extends AbstractPluginController
         // display page
         $this->view->render(
             $response,
-            'file:[' . $this->getModuleRoute() . ']bookings.tpl',
+            $this->getTemplate('bookings'),
             [
                 'page_title'        => _T("Bookings management", "events"),
                 'bookings'          => $bookings,
@@ -202,6 +205,7 @@ class BookingsController extends AbstractPluginController
     public function filter(Request $request, Response $response): Response
     {
         //just for inheritance. see filterBookings which signature changes.
+        return $response;
     }
 
     /**
@@ -263,7 +267,7 @@ class BookingsController extends AbstractPluginController
             ->withStatus(301)
             ->withHeader(
                 'Location',
-                $this->router->pathFor('events_bookings', ['event' => $event])
+                $this->routeparser->urlFor('events_bookings', ['event' => $event])
             );
     }
 
@@ -279,7 +283,7 @@ class BookingsController extends AbstractPluginController
     {
         $post = $request->getParsedBody();
 
-        if (isset($post['event_sel'])) {
+        if (isset($post['entries_sel'])) {
             if (isset($this->session->filter_bookings)) {
                 $filters = clone $this->session->filter_bookings;
             } else {
@@ -287,7 +291,7 @@ class BookingsController extends AbstractPluginController
             }
 
             //$this->session->filter_bookings = $filters;
-            $filters->selected = $post['event_sel'];
+            $filters->selected = $post['entries_sel'];
 
             $bookings = new Bookings($this->zdb, $this->login, $filters);
             $members = [];
@@ -298,8 +302,8 @@ class BookingsController extends AbstractPluginController
             $mfilter->selected = $members;
 
             if (isset($post['mailing'])) {
-                $this->session->filter_members = $mfilter;
-                $this->session->redirect_mailing = $this->router->pathFor(
+                $this->session->filter_members_sendmail = $mfilter;
+                $this->session->redirect_mailing = $this->routeparser->urlFor(
                     'events_bookings',
                     [
                         'event' => $filters->event_filter == null ?
@@ -309,7 +313,7 @@ class BookingsController extends AbstractPluginController
                 );
                 return $response
                     ->withStatus(301)
-                    ->withHeader('Location', $this->router->pathFor('mailing') . '?new=new');
+                    ->withHeader('Location', $this->routeparser->urlFor('mailing') . '?mailing_new=true');
             }
 
             if (isset($post['csv'])) {
@@ -319,7 +323,7 @@ class BookingsController extends AbstractPluginController
                     ->withStatus(307)
                     ->withHeader(
                         'Location',
-                        $this->router->pathFor('csv-memberslist') . '?session_var=' . $session_var
+                        $this->routeparser->urlFor('csv-memberslist') . '?session_var=' . $session_var
                     );
             }
 
@@ -330,7 +334,7 @@ class BookingsController extends AbstractPluginController
                     ->withStatus(307)
                     ->withHeader(
                         'Location',
-                        $this->router->pathFor('events_bookings_export') . '?session_var=' . $session_var
+                        $this->routeparser->urlFor('events_bookings_export') . '?session_var=' . $session_var
                     );
             }
 
@@ -341,19 +345,24 @@ class BookingsController extends AbstractPluginController
                     ->withStatus(307)
                     ->withHeader(
                         'Location',
-                        $this->router->pathFor('pdf-members-labels') . '?session_var=' . $session_var
+                        $this->routeparser->urlFor('pdf-members-labels') . '?session_var=' . $session_var
                     );
             }
+
+            $this->flash->addMessage(
+                'error_detected',
+                _T("No action was matching.", "events")
+            );
         } else {
             $this->flash->addMessage(
                 'error_detected',
                 _T("No booking was selected, please check at least one.", "events")
             );
-
-            return $response
-                ->withStatus(301)
-                ->withHeader('Location', $this->router->pathFor('members'));
         }
+
+        return $response
+            ->withStatus(301)
+            ->withHeader('Location', $this->routeparser->urlFor('events_events'));
     }
 
     // /CRUD - Read
@@ -366,10 +375,11 @@ class BookingsController extends AbstractPluginController
      * @param Response $response PSR Response
      * @param int|null $id       Model id
      * @param string   $action   Action
+     * @param int|null $id_adh   Member ID (for add)
      *
      * @return Response
      */
-    public function edit(Request $request, Response $response, int $id = null, $action = 'edit'): Response
+    public function edit(Request $request, Response $response, int $id = null, $action = 'edit', int $id_adh = null): Response
     {
         $get = $request->getQueryParams();
         $route_params = [];
@@ -400,10 +410,10 @@ class BookingsController extends AbstractPluginController
                 $booking->setEvent((int)$get['event']);
             }
             if (
-                isset($_GET[Adherent::PK]) &&
+                $id_adh !== null &&
                 ($this->login->isAdmin() || $this->login->isStaff() || $this->login->isGroupManager())
             ) {
-                $booking->setMember((int)$_GET[Adherent::PK]);
+                $booking->setMember($id_adh);
             } elseif (
                 !$this->login->isSuperAdmin()
                 && !$this->login->isAdmin()
@@ -421,7 +431,7 @@ class BookingsController extends AbstractPluginController
         ) {
             // members
             $m = new Members();
-            $members = $m->getSelectizedMembers($this->zdb, $this->login);
+            $members = $m->getDropdownMembers($this->zdb, $this->login);
 
             $route_params['members'] = [
                 'filters'   => $m->getFilters(),
@@ -448,7 +458,7 @@ class BookingsController extends AbstractPluginController
         // display page
         $this->view->render(
             $response,
-            'file:[' . $this->getModuleRoute() . ']booking.tpl',
+            $this->getTemplate('booking'),
             array_merge(
                 $route_params,
                 array(
@@ -485,7 +495,7 @@ class BookingsController extends AbstractPluginController
         }
 
         if (isset($post['cancel'])) {
-            $redirect_url = $this->router->pathFor(
+            $redirect_url = $this->routeparser->urlFor(
                 'events_bookings',
                 ['event' => 'guess']
             );
@@ -562,7 +572,7 @@ class BookingsController extends AbstractPluginController
         }
 
         if (count($error_detected) == 0 && $goto_list) {
-            $redirect_url = $this->router->pathFor(
+            $redirect_url = $this->routeparser->urlFor(
                 'events_bookings',
                 ['event' => $booking->getEventId()]
             );
@@ -580,7 +590,7 @@ class BookingsController extends AbstractPluginController
                 $route = 'events_booking_add';
                 $rparams = ['action' => 'add'];
             }
-            $redirect_url = $this->router->pathFor(
+            $redirect_url = $this->routeparser->urlFor(
                 $route,
                 $rparams
             );
@@ -603,7 +613,7 @@ class BookingsController extends AbstractPluginController
      */
     public function redirectUri(array $args): string
     {
-        return $this->router->pathFor('events_bookings', ['event' => 'all'] + $args);
+        return $this->routeparser->urlFor('events_bookings', ['event' => 'all'] + $args);
     }
 
     /**
@@ -615,7 +625,7 @@ class BookingsController extends AbstractPluginController
      */
     public function formUri(array $args): string
     {
-        return $this->router->pathFor(
+        return $this->routeparser->urlFor(
             'events_do_remove_booking',
             $args
         );

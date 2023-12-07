@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2021 The Galette Team
+ * Copyright © 2021-2023 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package   GaletteEvents
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2021 The Galette Team
+ * @copyright 2021-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     2021-05-09
@@ -42,8 +42,9 @@ use Galette\Controllers\Crud\AbstractPluginController;
 use GaletteEvents\Filters\EventsList;
 use GaletteEvents\Event;
 use GaletteEvents\Repository\Events;
-use Slim\Http\Request;
-use Slim\Http\Response;
+use Slim\Psr7\Request;
+use Slim\Psr7\Response;
+use DI\Attribute\Inject;
 
 /**
  * Events controller
@@ -52,7 +53,7 @@ use Slim\Http\Response;
  * @name      EventsController
  * @package   GaletteEvents
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2021 The Galette Team
+ * @copyright 2021-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     2021-05-09
@@ -61,9 +62,9 @@ use Slim\Http\Response;
 class EventsController extends AbstractPluginController
 {
     /**
-     * @Inject("Plugin Galette Events")
-     * @var integer
+     * @var array
      */
+    #[Inject("Plugin Galette Events")]
     protected $module_info;
 
     // CRUD - Create
@@ -129,14 +130,14 @@ class EventsController extends AbstractPluginController
         $events = new Events($this->zdb, $this->login, $filters);
 
         //assign pagination variables to the template and add pagination links
-        $filters->setSmartyPagination($this->router, $this->view->getSmarty(), false);
+        $filters->setViewPagination($this->routeparser, $this->view, false);
 
         $this->session->filter_events = $filters;
 
         // display page
         $this->view->render(
             $response,
-            'file:[' . $this->getModuleRoute() . ']events.tpl',
+            $this->getTemplate('events'),
             array(
                 'page_title'            => _T("Events management", "events"),
                 'require_dialog'        => true,
@@ -160,15 +161,6 @@ class EventsController extends AbstractPluginController
      */
     public function calendar(Request $request, Response $response, $option = null, $value = null): Response
     {
-        $option = null;
-        if (isset($args['option'])) {
-            $option = $args['option'];
-        }
-        $value = null;
-        if (isset($args['value'])) {
-            $value = $args['value'];
-        }
-
         if (isset($this->session->filter_events_calendar)) {
             $filters = $this->session->filter_events_calendar;
         } else {
@@ -190,7 +182,7 @@ class EventsController extends AbstractPluginController
         $events = new Events($this->zdb, $this->login, $filters);
 
         //assign pagination variables to the template and add pagination links
-        $filters->setSmartyPagination($this->router, $this->view->getSmarty(), false);
+        $filters->setViewPagination($this->routeparser, $this->view, false);
 
         $this->session->filter_events_calendar = $filters;
 
@@ -205,7 +197,7 @@ class EventsController extends AbstractPluginController
         // display page
         $this->view->render(
             $response,
-            'file:[' . $this->getModuleRoute() . ']calendar.tpl',
+            $this->getTemplate('calendar'),
             array(
                 'page_title'            => _T("Events calendar", "events"),
                 'require_dialog'        => true,
@@ -238,7 +230,7 @@ class EventsController extends AbstractPluginController
 
         $events = new Events($this->zdb, $this->login, $filters);
 
-        return $response->withJson($events->getList());
+        return $this->withJson($response, $events->getList());
     }
 
     /**
@@ -272,7 +264,7 @@ class EventsController extends AbstractPluginController
 
         return $response
             ->withStatus(301)
-            ->withHeader('Location', $this->router->pathFor('events_events'));
+            ->withHeader('Location', $this->routeparser->urlFor('events_events'));
     }
 
     // /CRUD - Read
@@ -305,7 +297,7 @@ class EventsController extends AbstractPluginController
 
         //check if logged-in user can edit event
         if (!$can) {
-            $redirect_url = $this->router->pathFor('events_events');
+            $redirect_url = $this->routeparser->urlFor('events_events');
             Analog::log(
                 sprintf(
                     'Member %1$s cannot edit event %2$s',
@@ -332,7 +324,7 @@ class EventsController extends AbstractPluginController
         // display page
         $this->view->render(
             $response,
-            'file:[' . $this->getModuleRoute() . ']event.tpl',
+            $this->getTemplate('event'),
             array(
                 'autocomplete'      => true,
                 'page_title'        => $title,
@@ -368,7 +360,7 @@ class EventsController extends AbstractPluginController
 
         //check if logged-in user can edit event
         if (!$can) {
-            $redirect_url = $this->router->pathFor('events_events');
+            $redirect_url = $this->routeparser->urlFor('events_events');
             Analog::log(
                 sprintf(
                     'Member %1$s cannot edit event %2$s',
@@ -457,18 +449,18 @@ class EventsController extends AbstractPluginController
         }
 
         if (count($error_detected) == 0 && $goto_list) {
-            $redirect_url = $this->router->pathFor('events_events');
+            $redirect_url = $this->routeparser->urlFor('events_events');
         } else {
             //store entity in session
             $this->session->event = $event;
 
             if ($event->getId()) {
-                $redirect_url = $this->router->pathFor(
+                $redirect_url = $this->routeparser->urlFor(
                     'events_event_edit',
                     ['id' => $event->getId()]
                 );
             } else {
-                $redirect_url = $this->router->pathFor('events_event_add');
+                $redirect_url = $this->routeparser->urlFor('events_event_add');
             }
         }
 
@@ -489,7 +481,7 @@ class EventsController extends AbstractPluginController
      */
     public function redirectUri(array $args): string
     {
-        return $this->router->pathFor('events_events');
+        return $this->routeparser->urlFor('events_events');
     }
 
     /**
@@ -501,7 +493,7 @@ class EventsController extends AbstractPluginController
      */
     public function formUri(array $args): string
     {
-        return $this->router->pathFor(
+        return $this->routeparser->urlFor(
             'events_do_remove_event',
             $args
         );

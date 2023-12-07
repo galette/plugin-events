@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2021 The Galette Team
+ * Copyright © 2021-2023 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package   GaletteEvents
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2021 The Galette Team
+ * @copyright 2021-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     2021-05-09
@@ -40,8 +40,9 @@ use Galette\Controllers\Crud\AbstractPluginController;
 use GaletteEvents\Filters\ActivitiesList;
 use GaletteEvents\Activity;
 use GaletteEvents\Repository\Activities;
-use Slim\Http\Request;
-use Slim\Http\Response;
+use Slim\Psr7\Request;
+use Slim\Psr7\Response;
+use DI\Attribute\Inject;
 
 /**
  * Activities controller
@@ -50,7 +51,7 @@ use Slim\Http\Response;
  * @name      EventsController
  * @package   GaletteEvents
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2021 The Galette Team
+ * @copyright 2021-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     2021-05-09
@@ -59,9 +60,9 @@ use Slim\Http\Response;
 class ActivitiesController extends AbstractPluginController
 {
     /**
-     * @Inject("Plugin Galette Events")
-     * @var integer
+     * @var array
      */
+    #[Inject("Plugin Galette Events")]
     protected $module_info;
 
     // CRUD - Create
@@ -132,14 +133,14 @@ class ActivitiesController extends AbstractPluginController
         }
 
         //assign pagination variables to the template and add pagination links
-        $filters->setSmartyPagination($this->router, $this->view->getSmarty(), false);
+        $filters->setViewPagination($this->routeparser, $this->view, false);
 
         $this->session->filter_activities = $filters;
 
         // display page
         $this->view->render(
             $response,
-            'file:[' . $this->getModuleRoute() . ']activities.tpl',
+            $this->getTemplate('activities'),
             array(
                 'page_title'            => _T("Activities management", "events"),
                 'require_dialog'        => true,
@@ -162,6 +163,7 @@ class ActivitiesController extends AbstractPluginController
     public function filter(Request $request, Response $response): Response
     {
         //no filter
+        return $response;
     }
 
     // /CRUD - Read
@@ -180,7 +182,7 @@ class ActivitiesController extends AbstractPluginController
     public function edit(Request $request, Response $response, int $id = null, $action = 'edit'): Response
     {
         if ($this->session->activity !== null) {
-            $event = $this->session->activity;
+            $activity = $this->session->activity;
             $this->session->activity = null;
         } else {
             $activity = new Activity($this->zdb, $this->login);
@@ -201,7 +203,7 @@ class ActivitiesController extends AbstractPluginController
         // display page
         $this->view->render(
             $response,
-            'file:[' . $this->getModuleRoute() . ']activity.tpl',
+            $this->getTemplate('activity'),
             array(
                 'autocomplete'  => true,
                 'page_title'    => $title,
@@ -289,18 +291,18 @@ class ActivitiesController extends AbstractPluginController
         }
 
         if (count($error_detected) == 0) {
-            $redirect_url = $this->router->pathFor('events_activities');
+            $redirect_url = $this->routeparser->urlFor('events_activities');
         } else {
             //store entity in session
             $this->session->activity = $activity;
 
             if ($activity->getId()) {
-                $redirect_url = $this->router->pathFor(
+                $redirect_url = $this->routeparser->urlFor(
                     'events_activity_edit',
                     ['id' => $activity->getId()]
                 );
             } else {
-                $redirect_url = $this->router->pathFor('events_activity_add');
+                $redirect_url = $this->routeparser->urlFor('events_activity_add');
             }
         }
 
@@ -321,7 +323,7 @@ class ActivitiesController extends AbstractPluginController
      */
     public function redirectUri(array $args): string
     {
-        return $this->router->pathFor('events_activities');
+        return $this->routeparser->urlFor('events_activities');
     }
 
     /**
@@ -333,7 +335,7 @@ class ActivitiesController extends AbstractPluginController
      */
     public function formUri(array $args): string
     {
-        return $this->router->pathFor(
+        return $this->routeparser->urlFor(
             'events_do_remove_activity',
             $args
         );

@@ -35,6 +35,7 @@
 
 namespace GaletteEvents;
 
+use ArrayObject;
 use Galette\Core\Db;
 use Galette\Core\Login;
 use Galette\Entity\Group;
@@ -84,11 +85,11 @@ class Event
     /**
      * Default constructor
      *
-     * @param Db                 $zdb   Database instance
-     * @param Login              $login Login instance
-     * @param null|int|ResultSet $args  Either a ResultSet row or its id for to load
-     *                                  a specific event, or null to just
-     *                                  instanciate object
+     * @param Db                   $zdb   Database instance
+     * @param Login                $login Login instance
+     * @param null|int|ArrayObject $args  Either a ResultSet row or its id for to load
+     *                                    a specific event, or null to just
+     *                                    instanciate object
      */
     public function __construct(Db $zdb, Login $login, $args = null)
     {
@@ -142,7 +143,7 @@ class Event
     /**
      * Populate object from a resultset row
      *
-     * @param ResultSet $r the resultset row
+     * @param ArrayObject $r the resultset row
      *
      * @return void
      */
@@ -453,6 +454,7 @@ class Event
             $void   = [];
             $update = [];
             $insert = [];
+            $key_values = [];
             $delete = $this->activities_removed;
 
             foreach ($this->activities as $aid => $data) {
@@ -821,7 +823,7 @@ class Event
     /**
      * Count atendees per event
      *
-     * @return integer
+     * @return ArrayObject
      */
     public function countAttendees()
     {

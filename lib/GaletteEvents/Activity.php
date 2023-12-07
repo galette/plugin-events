@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2018-2021 The Galette Team
+ * Copyright © 2018-2023 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,13 +28,14 @@
  * @package   GaletteEvents
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018-2021 The Galette Team
+ * @copyright 2018-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  */
 
 namespace GaletteEvents;
 
+use ArrayObject;
 use Galette\Core\Db;
 use Galette\Core\Login;
 use Galette\Entity\Group;
@@ -49,7 +50,7 @@ use Laminas\Db\Sql\Expression;
  * @name      Activity
  * @package   GaletteEvents
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018-2021 The Galette Team
+ * @copyright 2018-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  */
@@ -75,25 +76,19 @@ class Activity
     /**
      * Default constructor
      *
-     * @param Db                 $zdb   Database instance
-     * @param Login              $login Login instance
-     * @param null|int|ResultSet $args  Either a ResultSet row or its id for to load
-     *                                  a specific event, or null to just
-     *                                  instanciate object
+     * @param Db                   $zdb   Database instance
+     * @param Login                $login Login instance
+     * @param null|int|ArrayObject $args  Either a ResultSet row or its id for to load
+     *                                    a specific event, or null to just
+     *                                    instanciate object
      */
     public function __construct(Db $zdb, Login $login, $args = null)
     {
         $this->zdb = $zdb;
         $this->login = $login;
 
-        if ($args == null || is_int($args)) {
-            if (is_int($args) && $args > 0) {
-                $this->load($args);
-            } else {
-                $now = date('Y-m-d');
-                $this->begin_date = $now;
-                $this->end_date = $now;
-            }
+        if (is_int($args) && $args > 0) {
+            $this->load($args);
         } elseif (is_object($args)) {
             $this->loadFromRS($args);
         }
@@ -132,7 +127,7 @@ class Activity
     /**
      * Populate object from a resultset row
      *
-     * @param ResultSet $r the resultset row
+     * @param ArrayObject $r the resultset row
      *
      * @return void
      */

@@ -7,9 +7,9 @@
  *
  * PHP version 5
  *
- * Copyright © 2017-2021 The Galette Team
+ * Copyright © 2017-2023 The Galette Team
  *
- * This file is part of Galette (http://galette.tuxfamily.org).
+ * This file is part of Galette (https://galette.eu).
  *
  * Galette is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,20 +28,20 @@
  * @package   GaletteEvents
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2017-2021 The Galette Team
+ * @copyright 2017-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @version   SVN: $Id$
- * @link      http://galette.tuxfamily.org
+ * @link      https://galette.eu
  */
 
 $this->register(
     'Galette Events',       //Name
     'Events management',    //Short description
     'Johan Cwiklinski',     //Author
-    '1.5.0',                //Version
-    '0.9.6',                //Galette compatible version
+    '2.0.0',                //Version
+    '1.0.0',                //Galette compatible version
     'events',               //routing name and translation domain
-    '2021-11-29',           //Release date
+    '2023-12-07',           //Release date
     [   //Permissions needed
         'events_events'             => 'member',
         'events_bookings'           => 'member',
@@ -67,8 +67,8 @@ $this->register(
         'events_storeactivity_edit' => 'staff',
         'events_remove_activity'    => 'staff',
         'events_do_remove_activity' => 'staff',
-        'event_bookings_export'     => 'staff',
-        'events_bookings_export'    => 'staff',
+        'event_bookings_export'     => 'groupmanager',
+        'events_bookings_export'    => 'groupmanager',
         'events_calendar'           => 'member',
         'ajax-events_calendar'      => 'member'
     ]

@@ -1,0 +1,179 @@
+{% extends "page.html.twig" %}
+
+{% block content %}
+    <form action="{% if event.getId() %}{{ url_for("events_storeevent_edit", {"id": event.getId()}) }}{% else %}{{ url_for("events_storeevent_add") }}{% endif %}" method="post" class="ui form">
+        <div class="ui styled fluid accordion field">
+            <div class="active title">
+                <i class="icon dropdown"></i>
+                {{ _T("General informations", "events") }}
+            </div>
+            <div class="active content">
+                {% include "components/forms/checkbox.html.twig" with {
+                    id: 'open',
+                    value: event.isOpen(),
+                    label: _T("Is open", "events"),
+                    checked: event.IsOpen()
+                } %}
+
+                {% include "components/forms/text.html.twig" with {
+                    id: 'name',
+                    value: event.getName(),
+                    label: _T("Name", "events"),
+                    required: true,
+                } %}
+
+                {% include "components/forms/date.html.twig" with {
+                    id: 'begin_date',
+                    value: event.getBeginDate(),
+                    label: _T("Begin date", "events"),
+                } %}
+
+                {% include "components/forms/date.html.twig" with {
+                    id: 'end_date',
+                    value: event.getEndDate(),
+                    label: _T("End date", "events"),
+                } %}
+
+                {% set group_list_values = {(0): _T("Select a group")} %}
+                {% for group in groups %}
+                    {% set group_list_values = group_list_values + {(group.getId()): group.getIndentName()} %}
+                {% endfor %}
+
+                {% include "components/forms/select.html.twig" with {
+                    id: 'group',
+                    value: event.getGroup(),
+                    values: group_list_values,
+                    label: _T("Limit to group", "events"),
+                    title: _T("Restrict event to selected group (and its subgroups).", "events"),
+                    raw_labels: true
+                } %}
+
+                {% include "components/forms/textarea.html.twig" with {
+                    id: 'comment',
+                    value: event.getComment(),
+                    label: _T("Comment", "events"),
+                } %}
+            </div>
+        </div>
+
+        <div class="ui styled fluid accordion field">
+            <div class="active title">
+                <i class="icon dropdown"></i>
+                {{ _T("Location", "events") }}
+            </div>
+            <div class="active content">
+                {% include "components/forms/text.html.twig" with {
+                    id: 'address',
+                    value: event.getAddress(),
+                    label: _T("Address", "events"),
+                } %}
+
+                {% include "components/forms/text.html.twig" with {
+                    id: 'zip',
+                    value: event.getZip(),
+                    label: _T("Zip code", "events"),
+                } %}
+
+                {% include "components/forms/text.html.twig" with {
+                    id: 'town',
+                    value: event.getTown(),
+                    label: _T("Town", "events"),
+                    required: true,
+                } %}
+
+                {% include "components/forms/text.html.twig" with {
+                    id: 'country',
+                    value: event.getCountry(),
+                    label: _T("Country", "events"),
+                } %}
+            </div>
+        </div>
+
+        <div class="ui styled fluid accordion field">
+            <div class="active title">
+                <i class="icon dropdown"></i>
+                {{ _T("Activities", "events") }}
+            </div>
+            <div class="active content">
+                <div>
+                    <p class="right">
+    {% set availables = event.availableActivities() %}
+    {% set activities = event.getActivities() %}
+
+    {% if availables|length or activities|length %}
+        {% if availables|length %}
+                            <select name="attach_activity" id="attach_activity">
+                                <option value="">{{ _T("Choose an activity to add", "events") }}</option>
+            {% for activity in availables %}
+                                <option value="{{ activity.id_activity }}">{{ activity.name }}</option>
+            {% endfor %}
+                            </select>
+                            <button type="submit" name="add_activity" id="add_activity" class="action ui icon button tooltip">
+                                <i class="add icon"></i>
+                                <span class="visually-hidden">{{ _T("Add selected activity to event", "events") }}"</span>
+                            </button>
+        {% endif %}
+        {% if activities|length %}
+                            <select name="detach_activity" id="detach_activity">
+                                <option value="">{{ _T("Choose an activity to remove", "events") }}</option>
+            {% for item in activities %}
+                {% set activity = item.activity %}
+                                <option value="{{ activity.getId() }}">{{ activity.getName() }}</option>
+            {% endfor %}
+                            </select>
+                            <button type="submit" name="remove_activity" id="remove_activity" class="action ui icon button tooltip">
+                                <i class="delete red icon"></i>
+                                <span class="visually-hidden">{{ _T("Remove selected activity from event", "events") }}</span>
+                            </button>
+        {% endif %}
+                        </p>
+        {% if activities|length %}
+            {% for item in activities %}
+                {% set activity = item.activity %}
+                        <p>
+                            <input type="hidden" name="activities_ids[]" value="{{ activity.getId() }}"/>
+                            <label for="activities_status_{$activity->getId()}">{{ activity.getName() }}</label>
+                            <select name="activities_status[]" id="activities_status_{{ activity.getId() }}">
+                                <option value="{{ constant('GaletteEvents\\Activity::YES') }}"{% if item.status == constant('GaletteEvents\\Activity::YES') %} selected="selected"{% endif %}>{{ _T("Yes") }}</option>
+                                <option value="{{ constant('GaletteEvents\\Activity::NO') }}"{% if item.status == constant('GaletteEvents\\Activity::NO') %} selected="selected"{% endif %}>{{ _T("No") }}</option>
+                                <option value="{{ constant('GaletteEvents\\Activity::REQUIRED') }}"{% if item.status == constant('GaletteEvents\\Activity::REQUIRED') %} selected="selected"{% endif %}>{{ _T("Required", "events") }}</option>
+                            </select>
+                        </p>
+            {% endfor %}
+        {% endif %}
+    {% else %}
+                        <p>{{ _T("No activity available in the database.", "events") }}</p>
+    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="ui basic center aligned fitted segment">
+            <button type="submit" name="save" class="action ui labeled icon primary button">
+                <i class="save icon"></i> {{ _T("Save") }}
+            </button>
+            <input type="hidden" name="id" id="id" value="{{ event.getId() }}"/>
+            {% include "components/forms/csrf.html.twig" %}
+        </div>
+     </form>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        $(function() {
+            $('#add_activity').on('click', function (event) {
+                if ($('#attach_activity').val() == '') {
+                    event.preventDefault();
+                    alert('{{ _T("Please choose an activity to add", "events")|e('js') }}');
+                }
+            });
+
+            $('#remove_activity').on('click', function (event) {
+                if ($('#detach_activity').val() == '') {
+                    event.preventDefault();
+                    alert('{{ _T("Please choose an activity to remove", "events")|e('js') }}');
+                }
+            });
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends "page.html.twig" %}
+
+{% block content %}
+    <div id='calendar'></div>
+{% endblock %}
+
+{% block javascripts %}
+<script type="text/javascript">
+    var _calendar_dataurl = '{{ url_for("ajax-events_calendar") }}';
+    var _calendar_event_url = '{{ url_for("events_event_edit", {"id": "PLACEBO"}) }}';
+    var _calendar_booking_url = '{{ url_for("events_booking_add") }}?event=PLACEBO';
+    var _fullcalendar_views = {
+      listDay: { buttonText: '{{ _T("Daily list", "events")|e('js') }}' },
+      listWeek: { buttonText: '{{ _T("Weekly list", "events")|e('js') }}' },
+      listMonth: { buttonText: '{{ _T("Monthly list", "events")|e('js') }}' },
+      dayGridMonth: { buttonText: '{{ _T("Month calendar", "events")|e('js') }}' },
+      today: { buttonText: '{{ _T("Today", "events")|e('js') }}' }
+    }
+    var _fullcalendar_locale = '{{ galette_lang }}';
+    var _modal_actions = [];
+    {% if login.isAdmin() or login.isStaff() or login.isGroupManager() %}
+      var _edit_action = {
+        text    : '{{ _T("Edit")|e('js') }}',
+        icon    : 'edit',
+        class   : 'icon labeled blue approve'
+      };
+      _modal_actions.push(_edit_action);
+    {% endif %}
+    var _booking_action = {
+      text    : '{{ _T("New booking", "events")|e('js') }}',
+      icon    : 'plus circle',
+      class   : 'icon labeled green'
+    };
+    var _close_action = {
+      text    : '{{ _T("Close")|e('js') }}',
+      icon    : 'times',
+      class   : 'icon labeled cancel'
+    };
+    _modal_actions.push(_booking_action);
+    _modal_actions.push(_close_action);
+</script>
+<script type="text/javascript" src="{{ url_for("plugin_res", {"plugin": module_id, "path": "js/calendar.bundle.js"}) }}"></script>
+{% endblock %}

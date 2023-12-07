@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2018 The Galette Team
+ * Copyright © 2018-2023 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package   GaletteEvents
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018 The Galette Team
+ * @copyright 2018-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  */
@@ -48,6 +48,7 @@ use Galette\Entity\Group;
 use Galette\Repository\Groups;
 use GaletteEvents\Event;
 use GaletteEvents\Filters\EventsList;
+use Laminas\Db\Sql\Select;
 
 /**
  * Events
@@ -56,14 +57,14 @@ use GaletteEvents\Filters\EventsList;
  * @name      Events
  * @package   GaletteEvents
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018 The Galette Team
+ * @copyright 2018-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  */
 class Events
 {
-    private $zdb;
-    private $login;
+    private Db $zdb;
+    private Login $login;
     private $filters = false;
     private $count;
 
@@ -95,7 +96,7 @@ class Events
      *
      * @param bool $onlyevents get events member has booking on
      *
-     * @return GaletteEvents\Event[]
+     * @return array
      */
     public function getList($onlyevents = false)
     {
@@ -206,18 +207,12 @@ class Events
                     $row['end'] = $row['end_date'];
 
                     //extended description
-                    $row['end_date_fmt'] = $event->getBeginDate();
-                    $row['begin_date_fmt'] = $event->getEndDate();
+                    $row['begin_date_fmt'] = $event->getBeginDate();
+                    $row['end_date_fmt'] = $event->getEndDate();
                     $description = '<h4>';
-                    if ($event->canEdit($this->login)) {
-                        $description .= '<a href="" id="event_link">';
-                    }
                     $description .= _T('Event information', 'events');
-                    if ($event->canEdit($this->login)) {
-                        $description .= '&nbsp;<i class="fas fa-eye"></i></a>';
-                    }
                     $description .= '</h4>';
-                    $description .= '<ul>';
+                    $description .= '<ul class="ui bulleted list">';
                     $pattern = '<li><strong>%1$s</strong> %2$s</li>';
                     $description .= sprintf($pattern, _T("Start date:", "events"), $event->getBeginDate());
                     $description .= sprintf($pattern, _T("End date:", "events"), $event->getEndDate());
@@ -252,7 +247,7 @@ class Events
                     $activities = $event->getActivities();
                     if (count($activities)) {
                         $description .= '<h4>' . _T('Activities', 'events')  . '</h4>';
-                        $description .= '<ul>';
+                        $description .= '<ul class="ui bulleted list">';
                         foreach ($activities as $activity) {
                             $description .= '<li>' . $activity['activity']->getName()  . '</li>';
                         }
@@ -306,7 +301,7 @@ class Events
      * @param array $fields Fields list to ensure ORDER clause
      *                      references selected fields. Optionnal.
      *
-     * @return string SQL ORDER clause
+     * @return array SQL ORDER clauses
      */
     private function buildOrderClause($fields = null)
     {
@@ -374,16 +369,19 @@ class Events
 
             $results = $this->zdb->execute($countSelect);
 
-            $this->count = $results->current()->count;
-            if (isset($this->filters) && $this->count > 0) {
-                $this->filters->setCounter($this->count);
+            if ($result = $results->current()) {
+                //@phpstan-ignore-next-line
+                $this->count = $result->count;
+                if (isset($this->filters) && $this->count > 0) {
+                    $this->filters->setCounter($this->count);
+                }
             }
         } catch (\Exception $e) {
             Analog::log(
                 'Cannot count events | ' . $e->getMessage(),
                 Analog::WARNING
             );
-            return false;
+            throw $e;
         }
     }
 

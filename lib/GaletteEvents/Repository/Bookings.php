@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2018 The Galette Team
+ * Copyright © 2018-2023 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package   GaletteEvents
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018 The Galette Team
+ * @copyright 2018-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  */
@@ -48,6 +48,7 @@ use Galette\Repository\Groups;
 use GaletteEvents\Event;
 use GaletteEvents\Booking;
 use GaletteEvents\Filters\BookingsList;
+use Laminas\Db\Sql\Select;
 
 /**
  * Bookings
@@ -56,7 +57,7 @@ use GaletteEvents\Filters\BookingsList;
  * @name      Bookings
  * @package   GaletteEvents
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018 The Galette Team
+ * @copyright 2018-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  */
@@ -99,9 +100,9 @@ class Bookings
     /**
      * Get booking list
      *
-     * @param boolean $full Export full list (no pagination), defaults to false
+     * @param bool $full Export full list (no pagination), defaults to false
      *
-     * @return GaletteEvents\Booking[]
+     * @return array
      */
     public function getList($full = false)
     {
@@ -140,7 +141,7 @@ class Bookings
      * @param bool  $count  true if we want to count members
      *                      (not applicable from static calls), defaults to false
      *
-     * @return string SELECT statement
+     * @return Select SELECT statement
      */
     private function buildSelect($fields, $count = false)
     {
@@ -176,7 +177,7 @@ class Bookings
                 'Cannot build SELECT clause for contributions | ' . $e->getMessage(),
                 Analog::WARNING
             );
-            return false;
+            throw $e;
         }
     }
 
@@ -214,13 +215,13 @@ class Bookings
             $results = $this->zdb->execute($sumSelect);
             $result = $results->current();
 
-            $this->sum = round($result->sum, 2);
+            $this->sum = round($result->sum ?? 0, 2);
         } catch (\Exception $e) {
             Analog::log(
                 'Cannot calculate bookings sum | ' . $e->getMessage(),
                 Analog::WARNING
             );
-            return false;
+            throw $e;
         }
     }
 
@@ -229,7 +230,7 @@ class Bookings
      *
      * @param Select $select Original select
      *
-     * @return string SQL WHERE clause
+     * @return void
      */
     private function buildWhereClause($select)
     {
@@ -366,9 +367,9 @@ class Bookings
      * Builds the order clause
      *
      * @param array $fields Fields list to ensure ORDER clause
-     *                      references selected fields. Optionnal.
+     *                      references selected fields. Optional.
      *
-     * @return string SQL ORDER clause
+     * @return array SQL ORDER clauses
      */
     private function buildOrderClause($fields = null)
     {
@@ -451,7 +452,7 @@ class Bookings
                 'Cannot count bookings | ' . $e->getMessage(),
                 Analog::WARNING
             );
-            return false;
+            throw $e;
         }
     }
 

@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2018-2021 The Galette Team
+ * Copyright © 2018-2023 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,20 +28,19 @@
  * @package   GaletteEvents
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018-2021 The Galette Team
+ * @copyright 2018-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  */
 
 namespace GaletteEvents;
 
+use ArrayObject;
 use Galette\Core\Db;
 use Galette\Core\Login;
-use Galette\Entity\Group;
 use Galette\Entity\Adherent;
 use Galette\Entity\PaymentType;
 use Analog\Analog;
-use Laminas\Db\Sql\Expression;
 
 /**
  * Booking entity
@@ -50,7 +49,7 @@ use Laminas\Db\Sql\Expression;
  * @name      Event
  * @package   GaletteEvents
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018-2021 The Galette Team
+ * @copyright 2018-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  */
@@ -66,7 +65,7 @@ class Booking
     private $id;
     private $event;
     private $member;
-    private $date;
+    private $date = '';
     private $paid;
     private $amount;
     private $payment_method = PaymentType::OTHER;
@@ -77,15 +76,16 @@ class Booking
 
     private $activities = [];
     private $activities_removed = [];
+    private $creation_date;
 
     /**
      * Default constructor
      *
-     * @param Db                 $zdb   Database instance
-     * @param Login              $login Login instance
-     * @param null|int|ResultSet $args  Either a ResultSet row or its id for to load
-     *                                  a specific event, or null to just
-     *                                  instanciate object
+     * @param Db                   $zdb   Database instance
+     * @param Login                $login Login instance
+     * @param null|int|ArrayObject $args  Either a ResultSet row or its id for to load
+     *                                    a specific event, or null to just
+     *                                    instanciate object
      */
     public function __construct(Db $zdb, Login $login, $args = null)
     {
@@ -134,7 +134,7 @@ class Booking
     /**
      * Populate object from a resultset row
      *
-     * @param ResultSet $r the resultset row
+     * @param ArrayObject $r the resultset row
      *
      * @return void
      */
@@ -183,8 +183,8 @@ class Booking
                 $this->zdb->connection->rollBack();
             }
             Analog::log(
-                'Unable to delete booking ' . $this->name .
-                ' (' . $this->id  . ') |' . $e->getMessage(),
+                'Unable to delete booking ' .
+                ' (' . $this->id . ') |' . $e->getMessage(),
                 Analog::ERROR
             );
             return false;
@@ -204,7 +204,7 @@ class Booking
         $this->errors = array();
 
         //event and activities
-        if (!isset($values['event']) || empty($values['event'])) {
+        if (!isset($values['event']) || empty($values['event']) || $values['event'] == -1) {
             $this->errors[] = _T('Event is mandatory', 'events');
         } else {
             $this->event = $values['event'];
@@ -308,7 +308,7 @@ class Booking
                         throw new \Exception('Incorrect format');
                     }
                 }
-                $this->booking_date = $d->format('Y-m-d');
+                $this->date = $d->format('Y-m-d');
             } catch (\Exception $e) {
                 Analog::log(
                     'Wrong date format. field: booking_date' .
@@ -390,7 +390,7 @@ class Booking
                 self::PK            => $this->id,
                 Event::PK           => $this->event,
                 Adherent::PK        => $this->member,
-                'booking_date'      => $this->booking_date,
+                'booking_date'      => $this->date,
                 'is_paid'           => ($this->paid ? $this->paid :
                                             ($this->zdb->isPostgres() ? 'false' : 0)),
                 'payment_method'    => $this->payment_method,
@@ -496,13 +496,13 @@ class Booking
                 $prepare = $this->zdb->delete(EVENTS_PREFIX . 'activitiesbookings', 'acb');
                 $prepare->where([
                     self::PK        => $this->id,
-                    $activity::PK   => ':aid'
+                    Activity::PK    => ':aid'
                 ]);
                 $stmt = $this->zdb->sql->prepareStatementForSqlObject($prepare);
 
                 $count = 0;
                 foreach ($delete as $values) {
-                    $stmt->execute([':aid' => $value[$activity::PK]]);
+                    $stmt->execute([':aid' => $values[Activity::PK]]);
                     ++$count;
                 }
                 Analog::log(
@@ -517,7 +517,7 @@ class Booking
                     'checked'       => ':checked'
                 ])->where([
                     self::PK        => $this->id,
-                    $activity::PK   => ':aid'
+                    Activity::PK    => ':aid'
                 ]);
                 $stmt = $this->zdb->sql->prepareStatementForSqlObject($prepare);
                 $count = 0;
@@ -539,7 +539,7 @@ class Booking
                 $prepare = $this->zdb->insert(EVENTS_PREFIX . 'activitiesbookings', 'acb');
                 $prepare->values([
                     self::PK        => ':id',
-                    $activity::PK   => ':aid',
+                    Activity::PK    => ':aid',
                     'checked'       => ':checked'
                 ]);
                 $stmt = $this->zdb->sql->prepareStatementForSqlObject($prepare);
@@ -761,7 +761,7 @@ class Booking
      */
     protected function getTableName()
     {
-        return EVENTS_PREFIX  . self::TABLE;
+        return EVENTS_PREFIX . self::TABLE;
     }
 
     /**
