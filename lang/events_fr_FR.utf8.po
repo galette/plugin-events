@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Galette Events plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-06 08:15+0100\n"
+"POT-Creation-Date: 2023-12-09 11:57+0100\n"
 "PO-Revision-Date: 2023-10-07 07:40+0000\n"
 "Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/galette/events-"
@@ -16,47 +16,51 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
 "X-Generator: Weblate 5.1-dev\n"
 
-#: ../lib/GaletteEvents/Booking.php:208
+#: ../lib/GaletteEvents/Booking.php:207
 msgid "Event is mandatory"
 msgstr "L'évènement est requis"
 
-#: ../lib/GaletteEvents/Booking.php:221
+#. TRANS: %1$s is activity name
+#: ../lib/GaletteEvents/Booking.php:219
+#, php-format
 msgid "%1$s is mandatory for this event!"
 msgstr "%1$s est obligatoire pour cet évènement !"
 
-#: ../lib/GaletteEvents/Booking.php:255
+#: ../lib/GaletteEvents/Booking.php:254
 msgid "Please specify amount if booking has been paid ;)"
 msgstr "Veuillez spécifier un montant si la réservation a été payée ;)"
 
-#: ../lib/GaletteEvents/Booking.php:278
+#: ../lib/GaletteEvents/Booking.php:277
 msgid "Member is mandatory"
 msgstr "L'adhérent est requis"
 
-#: ../lib/GaletteEvents/Booking.php:290
+#: ../lib/GaletteEvents/Booking.php:289
 msgid "There must be at least one person"
 msgstr "Il doit y avoir au moins une personne"
 
-#: ../lib/GaletteEvents/Booking.php:299
+#: ../lib/GaletteEvents/Booking.php:298
 msgid "Booking date is mandatory!"
 msgstr "La date de réservation est requise !"
 
-#: ../lib/GaletteEvents/Booking.php:326
+#: ../lib/GaletteEvents/Booking.php:322
 msgid "booking date"
 msgstr "date de réservation"
 
-#: ../lib/GaletteEvents/Booking.php:357
+#. TRANS: first replacement is member name, second is event name
+#: ../lib/GaletteEvents/Booking.php:344
+#, php-format
 msgid "A booking already exists for %1$s in %2$s"
 msgstr "Une réservation existe déjà pour %1$s dans %2$s"
 
-#: ../lib/GaletteEvents/Booking.php:424
+#: ../lib/GaletteEvents/Booking.php:413
 msgid "Booking added"
 msgstr "Réservation ajoutée"
 
-#: ../lib/GaletteEvents/Booking.php:428
+#: ../lib/GaletteEvents/Booking.php:417
 msgid "Fail to add new booking."
 msgstr "Erreur à l'ajout de la nouvelle réservation."
 
-#: ../lib/GaletteEvents/Booking.php:446
+#: ../lib/GaletteEvents/Booking.php:435
 msgid "Booking updated"
 msgstr "Réservation mise à jour"
 
@@ -92,7 +96,7 @@ msgstr "Une erreur est survenue à l'enregistrement de la réservation."
 msgid "Do not forget to store the booking"
 msgstr "N'oubliez pas d'enregistrer la réservation"
 
-#. TRANS: first parameter is the member name, second the event name.
+#. TRANS: %1$s is the member name, %2$s the event name.
 #: ../lib/GaletteEvents/Controllers/Crud/BookingsController.php:648
 #, php-format
 msgid "Remove booking for %1$s on %2$s"
@@ -118,7 +122,8 @@ msgstr "L'activité a été modifiée."
 msgid "An error occurred while storing the activity."
 msgstr "Une erreur est survenue à l'enregistrement de l'activité."
 
-#: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:355
+#. TRANS %1$s is activity name
+#: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:348
 #, php-format
 msgid "Remove activity %1$s"
 msgstr "Supprimer l'activité %1$s"
@@ -167,7 +172,7 @@ msgstr "L'évènement a été modifié."
 msgid "An error occurred while storing the event."
 msgstr "Une erreur est survenue à l'enregistrement de l'évènement."
 
-#. TRANS: first parameter is the event name
+#. TRANS: %1$s is the event name
 #: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:514
 #, php-format
 msgid "Remove event '%1$s'\""
@@ -223,16 +228,17 @@ msgstr "Localisation :"
 msgid "Comment:"
 msgstr "Commentaire :"
 
-#: ../lib/GaletteEvents/Repository/Events.php:236
+#. TRANS: %1$s is the number of paid attendees
+#: ../lib/GaletteEvents/Repository/Events.php:237
 #, php-format
 msgid "%1$s paid"
 msgstr "%1$s payés"
 
-#: ../lib/GaletteEvents/Repository/Events.php:241
+#: ../lib/GaletteEvents/Repository/Events.php:242
 msgid "Attendees:"
 msgstr "Participants :"
 
-#: ../lib/GaletteEvents/Repository/Events.php:249
+#: ../lib/GaletteEvents/Repository/Events.php:250
 #: ../lib/GaletteEvents/PluginGaletteEvents.php:113
 #: ../tempcache/event.html.twig:166 ../tempcache/booking.html.twig:213
 msgid "Activities"
@@ -250,31 +256,31 @@ msgstr "Date de début"
 msgid "End date"
 msgstr "Date de fin"
 
-#: ../lib/GaletteEvents/Event.php:266
+#: ../lib/GaletteEvents/Event.php:261
 msgid "End date must be later or equal to begin date"
 msgstr "La date de fin doit être ultérieure ou égale à la date de début"
 
-#: ../lib/GaletteEvents/Event.php:272 ../lib/GaletteEvents/Activity.php:194
+#: ../lib/GaletteEvents/Event.php:267 ../lib/GaletteEvents/Activity.php:193
 msgid "Name is mandatory"
 msgstr "Le nom est requis"
 
-#: ../lib/GaletteEvents/Event.php:289
+#: ../lib/GaletteEvents/Event.php:284
 msgid "Please select a group you own!"
 msgstr "Veuillez sélectionner un groupe que vous gérez !"
 
-#: ../lib/GaletteEvents/Event.php:296
+#: ../lib/GaletteEvents/Event.php:291
 msgid "Town is mandatory"
 msgstr "La ville est requise"
 
-#: ../lib/GaletteEvents/Event.php:426
+#: ../lib/GaletteEvents/Event.php:421
 msgid "Event added"
 msgstr "Évènement ajouté"
 
-#: ../lib/GaletteEvents/Event.php:430
+#: ../lib/GaletteEvents/Event.php:425
 msgid "Fail to add new event."
 msgstr "Erreur à l'ajout du nouvel évènement."
 
-#: ../lib/GaletteEvents/Event.php:448
+#: ../lib/GaletteEvents/Event.php:443
 msgid "Event updated"
 msgstr "Évènement mis à jour"
 
@@ -297,15 +303,15 @@ msgstr "Réservations"
 msgid "New event booking"
 msgstr "Nouvelle réservation d'évènement"
 
-#: ../lib/GaletteEvents/Activity.php:263
+#: ../lib/GaletteEvents/Activity.php:262
 msgid "Activity added"
 msgstr "Activité ajoutée"
 
-#: ../lib/GaletteEvents/Activity.php:268
+#: ../lib/GaletteEvents/Activity.php:267
 msgid "Fail to add new activity."
 msgstr "Erreur à l'ajout de la nouvelle activité."
 
-#: ../lib/GaletteEvents/Activity.php:286
+#: ../lib/GaletteEvents/Activity.php:285
 msgid "Activity updated"
 msgstr "Activité mise à jour"
 
@@ -525,11 +531,13 @@ msgstr "Active"
 msgid "Inactive"
 msgstr "Inactif"
 
-#: ../tempcache/activities.html.twig:203
+#: ../tempcache/activities.html.twig:203 ../tempcache/events.html.twig:253
+#, php-format
 msgid "%1$s: edit information"
 msgstr "%1$s : modifier les informations"
 
-#: ../tempcache/activities.html.twig:205
+#: ../tempcache/activities.html.twig:205 ../tempcache/events.html.twig:266
+#, php-format
 msgid "%1$s: remove from database"
 msgstr "%1$s : supprimer de la base de données"
 

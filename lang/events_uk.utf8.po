@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-06 08:15+0100\n"
+"POT-Creation-Date: 2023-12-09 11:57+0100\n"
 "PO-Revision-Date: 2022-07-26 00:55+0000\n"
 "Last-Translator: Artem <artem@molotov.work>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/galette/events-"
@@ -18,47 +18,51 @@ msgstr ""
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 4.14-dev\n"
 
-#: ../lib/GaletteEvents/Booking.php:208
+#: ../lib/GaletteEvents/Booking.php:207
 msgid "Event is mandatory"
 msgstr "Подія є обов'язковою"
 
-#: ../lib/GaletteEvents/Booking.php:221
+#. TRANS: %1$s is activity name
+#: ../lib/GaletteEvents/Booking.php:219
+#, php-format
 msgid "%1$s is mandatory for this event!"
 msgstr "%1$s є обов'язковою для цієї події!"
 
-#: ../lib/GaletteEvents/Booking.php:255
+#: ../lib/GaletteEvents/Booking.php:254
 msgid "Please specify amount if booking has been paid ;)"
 msgstr "Будь ласка, вкажіть суму, якщо бронювання було оплачено ;)"
 
-#: ../lib/GaletteEvents/Booking.php:278
+#: ../lib/GaletteEvents/Booking.php:277
 msgid "Member is mandatory"
 msgstr "Член є обов'язковим"
 
-#: ../lib/GaletteEvents/Booking.php:290
+#: ../lib/GaletteEvents/Booking.php:289
 msgid "There must be at least one person"
 msgstr "Має бути принаймні одна особа"
 
-#: ../lib/GaletteEvents/Booking.php:299
+#: ../lib/GaletteEvents/Booking.php:298
 msgid "Booking date is mandatory!"
 msgstr "Дата бронювання обов'язкова!"
 
-#: ../lib/GaletteEvents/Booking.php:326
+#: ../lib/GaletteEvents/Booking.php:322
 msgid "booking date"
 msgstr "дата бронювання"
 
-#: ../lib/GaletteEvents/Booking.php:357
+#. TRANS: first replacement is member name, second is event name
+#: ../lib/GaletteEvents/Booking.php:344
+#, php-format
 msgid "A booking already exists for %1$s in %2$s"
 msgstr "Для %1$s у події %2$s вже існує бронювання"
 
-#: ../lib/GaletteEvents/Booking.php:424
+#: ../lib/GaletteEvents/Booking.php:413
 msgid "Booking added"
 msgstr "Бронювання додано"
 
-#: ../lib/GaletteEvents/Booking.php:428
+#: ../lib/GaletteEvents/Booking.php:417
 msgid "Fail to add new booking."
 msgstr "Не вдалося додати нове бронювання."
 
-#: ../lib/GaletteEvents/Booking.php:446
+#: ../lib/GaletteEvents/Booking.php:435
 msgid "Booking updated"
 msgstr "Бронювання оновлено"
 
@@ -94,7 +98,7 @@ msgstr "Під час зберігання бронювання сталася �
 msgid "Do not forget to store the booking"
 msgstr "Не забудьте зберегти бронювання"
 
-#. TRANS: first parameter is the member name, second the event name.
+#. TRANS: %1$s is the member name, %2$s the event name.
 #: ../lib/GaletteEvents/Controllers/Crud/BookingsController.php:648
 #, php-format
 msgid "Remove booking for %1$s on %2$s"
@@ -120,7 +124,8 @@ msgstr "Діяльність змінено."
 msgid "An error occurred while storing the activity."
 msgstr "Під час зберігання діяльності сталася помилка."
 
-#: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:355
+#. TRANS %1$s is activity name
+#: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:348
 #, php-format
 msgid "Remove activity %1$s"
 msgstr "Вилучити діяльність %1$s"
@@ -169,7 +174,7 @@ msgstr "Подія було змінено."
 msgid "An error occurred while storing the event."
 msgstr "Під час зберігання події сталася помилка."
 
-#. TRANS: first parameter is the event name
+#. TRANS: %1$s is the event name
 #: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:514
 #, php-format
 msgid "Remove event '%1$s'\""
@@ -225,16 +230,17 @@ msgstr "Місцеперебування:"
 msgid "Comment:"
 msgstr "Коментар:"
 
-#: ../lib/GaletteEvents/Repository/Events.php:236
+#. TRANS: %1$s is the number of paid attendees
+#: ../lib/GaletteEvents/Repository/Events.php:237
 #, php-format
 msgid "%1$s paid"
 msgstr "%1$s оплачено"
 
-#: ../lib/GaletteEvents/Repository/Events.php:241
+#: ../lib/GaletteEvents/Repository/Events.php:242
 msgid "Attendees:"
 msgstr "Присутні:"
 
-#: ../lib/GaletteEvents/Repository/Events.php:249
+#: ../lib/GaletteEvents/Repository/Events.php:250
 #: ../lib/GaletteEvents/PluginGaletteEvents.php:113
 #: ../tempcache/event.html.twig:166 ../tempcache/booking.html.twig:213
 msgid "Activities"
@@ -252,31 +258,31 @@ msgstr "Дата початку"
 msgid "End date"
 msgstr "Дата завершення"
 
-#: ../lib/GaletteEvents/Event.php:266
+#: ../lib/GaletteEvents/Event.php:261
 msgid "End date must be later or equal to begin date"
 msgstr "Дата завершення має бути пізнішою або дорівнювати даті початку"
 
-#: ../lib/GaletteEvents/Event.php:272 ../lib/GaletteEvents/Activity.php:194
+#: ../lib/GaletteEvents/Event.php:267 ../lib/GaletteEvents/Activity.php:193
 msgid "Name is mandatory"
 msgstr "Назва є обов’язковою"
 
-#: ../lib/GaletteEvents/Event.php:289
+#: ../lib/GaletteEvents/Event.php:284
 msgid "Please select a group you own!"
 msgstr "Виберіть групу, якою ви володієте!"
 
-#: ../lib/GaletteEvents/Event.php:296
+#: ../lib/GaletteEvents/Event.php:291
 msgid "Town is mandatory"
 msgstr "Місто є обов'язковим"
 
-#: ../lib/GaletteEvents/Event.php:426
+#: ../lib/GaletteEvents/Event.php:421
 msgid "Event added"
 msgstr "Подію додано"
 
-#: ../lib/GaletteEvents/Event.php:430
+#: ../lib/GaletteEvents/Event.php:425
 msgid "Fail to add new event."
 msgstr "Не вдалося додати нову подію."
 
-#: ../lib/GaletteEvents/Event.php:448
+#: ../lib/GaletteEvents/Event.php:443
 msgid "Event updated"
 msgstr "Подію оновлено"
 
@@ -299,15 +305,15 @@ msgstr "Бронювання"
 msgid "New event booking"
 msgstr "Нове бронювання події"
 
-#: ../lib/GaletteEvents/Activity.php:263
+#: ../lib/GaletteEvents/Activity.php:262
 msgid "Activity added"
 msgstr "Діяльність додано"
 
-#: ../lib/GaletteEvents/Activity.php:268
+#: ../lib/GaletteEvents/Activity.php:267
 msgid "Fail to add new activity."
 msgstr "Не вдалося додати нову діяльність."
 
-#: ../lib/GaletteEvents/Activity.php:286
+#: ../lib/GaletteEvents/Activity.php:285
 msgid "Activity updated"
 msgstr "Діяльність оновлено"
 
@@ -531,11 +537,13 @@ msgstr "Діяльний"
 msgid "Inactive"
 msgstr "Незадіяний"
 
-#: ../tempcache/activities.html.twig:203
+#: ../tempcache/activities.html.twig:203 ../tempcache/events.html.twig:253
+#, php-format
 msgid "%1$s: edit information"
 msgstr "%1$s: редагування відомостей"
 
-#: ../tempcache/activities.html.twig:205
+#: ../tempcache/activities.html.twig:205 ../tempcache/events.html.twig:266
+#, php-format
 msgid "%1$s: remove from database"
 msgstr "%1$s: вилучення з бази даних"
 
