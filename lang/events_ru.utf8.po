@@ -313,7 +313,7 @@ msgid "Activity updated"
 msgstr ""
 
 #: ../tempcache/event.html.twig:63 ../tempcache/activity.html.twig:63
-msgid "General informations"
+msgid "General information"
 msgstr ""
 
 #: ../tempcache/event.html.twig:70
@@ -388,7 +388,7 @@ msgid "Please choose an activity to remove"
 msgstr ""
 
 #: ../tempcache/booking.html.twig:63
-msgid "Booking informations"
+msgid "Booking information"
 msgstr ""
 
 #: ../tempcache/booking.html.twig:70 ../tempcache/bookings.html.twig:138
@@ -405,7 +405,7 @@ msgid "No activity for selected event"
 msgstr ""
 
 #: ../tempcache/booking.html.twig:280
-msgid "Financial informations"
+msgid "Financial information"
 msgstr ""
 
 #: ../tempcache/booking.html.twig:287 ../tempcache/bookings.html.twig:138
@@ -527,7 +527,7 @@ msgid "Inactive"
 msgstr ""
 
 #: ../tempcache/activities.html.twig:203
-msgid "%1$s: edit informations"
+msgid "%1$s: edit information"
 msgstr ""
 
 #: ../tempcache/activities.html.twig:205
@@ -573,11 +573,6 @@ msgstr ""
 #: ../tempcache/events.html.twig:243
 #, php-format
 msgid "%1$s: show bookings"
-msgstr ""
-
-#: ../tempcache/events.html.twig:253
-#, php-format
-msgid "%1$s: edit informations"
 msgstr ""
 
 #: ../tempcache/events.html.twig:266

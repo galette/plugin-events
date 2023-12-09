@@ -99,7 +99,7 @@
             {% if login.isAdmin() or login.isStaff() or (login.isGroupManager() and event.getGroup() in login.managed_groups) %}
                 {% set actions = actions|merge([
                     {
-                        'label': _T("%1$s: edit informations", "events")|replace({"%1$s": event.getName()}),
+                        'label': _T("%1$s: edit information", "events")|replace({"%1$s": event.getName()}),
                         'route': {
                         'name': 'events_event_edit',
                             'args': {'id': eid}

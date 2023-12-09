@@ -213,7 +213,7 @@ msgstr "listado de reservas"
 
 #: ../lib/GaletteEvents/Repository/Events.php:213
 msgid "Event information"
-msgstr "Información de evento"
+msgstr "Informaciones de evento"
 
 #: ../lib/GaletteEvents/Repository/Events.php:217
 msgid "Start date:"
@@ -318,8 +318,8 @@ msgid "Activity updated"
 msgstr "Actividad actualizada"
 
 #: ../tempcache/event.html.twig:63 ../tempcache/activity.html.twig:63
-msgid "General informations"
-msgstr "Información general"
+msgid "General information"
+msgstr "Informaciones general"
 
 #: ../tempcache/event.html.twig:70
 msgid "Is open"
@@ -393,8 +393,8 @@ msgid "Please choose an activity to remove"
 msgstr "Por favor, elija una actividad para eliminar"
 
 #: ../tempcache/booking.html.twig:63
-msgid "Booking informations"
-msgstr "Información de reserva"
+msgid "Booking information"
+msgstr "Informaciones de reserva"
 
 #: ../tempcache/booking.html.twig:70 ../tempcache/bookings.html.twig:138
 #: ../tempcache/bookings.html.twig:414
@@ -410,7 +410,7 @@ msgid "No activity for selected event"
 msgstr "Ninguna actividad para evento seleccionado"
 
 #: ../tempcache/booking.html.twig:280
-msgid "Financial informations"
+msgid "Financial information"
 msgstr "Informaciones financieras"
 
 #: ../tempcache/booking.html.twig:287 ../tempcache/bookings.html.twig:138
@@ -534,8 +534,8 @@ msgid "Inactive"
 msgstr "Inactiva"
 
 #: ../tempcache/activities.html.twig:203
-msgid "%1$s: edit informations"
-msgstr "%1$s: editar información"
+msgid "%1$s: edit information"
+msgstr "%1$s: editar informaciones"
 
 #: ../tempcache/activities.html.twig:205
 msgid "%1$s: remove from database"
@@ -581,11 +581,6 @@ msgstr "Evento %1$s: exportar reservas como *.cvs"
 #, php-format
 msgid "%1$s: show bookings"
 msgstr "evento %1$s: mostrar reservas"
-
-#: ../tempcache/events.html.twig:253
-#, php-format
-msgid "%1$s: edit informations"
-msgstr "evento %1$s: editar informaciones"
 
 #: ../tempcache/events.html.twig:266
 #, php-format

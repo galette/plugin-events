@@ -312,7 +312,7 @@ msgid "Activity updated"
 msgstr "Діяльність оновлено"
 
 #: ../tempcache/event.html.twig:63 ../tempcache/activity.html.twig:63
-msgid "General informations"
+msgid "General information"
 msgstr "Загальні відомості"
 
 #: ../tempcache/event.html.twig:70
@@ -389,7 +389,7 @@ msgid "Please choose an activity to remove"
 msgstr "Виберіть діяльність, яку потрібно вилучити"
 
 #: ../tempcache/booking.html.twig:63
-msgid "Booking informations"
+msgid "Booking information"
 msgstr "Відомості про бронювання"
 
 #: ../tempcache/booking.html.twig:70 ../tempcache/bookings.html.twig:138
@@ -406,7 +406,7 @@ msgid "No activity for selected event"
 msgstr "Немає діяльностей для вибраної події"
 
 #: ../tempcache/booking.html.twig:280
-msgid "Financial informations"
+msgid "Financial information"
 msgstr "Фінансові відомості"
 
 #: ../tempcache/booking.html.twig:287 ../tempcache/bookings.html.twig:138
@@ -532,7 +532,7 @@ msgid "Inactive"
 msgstr "Незадіяний"
 
 #: ../tempcache/activities.html.twig:203
-msgid "%1$s: edit informations"
+msgid "%1$s: edit information"
 msgstr "%1$s: редагування відомостей"
 
 #: ../tempcache/activities.html.twig:205
@@ -580,11 +580,6 @@ msgstr "%1$s: експорт бронювань у форматі CSV"
 #, php-format
 msgid "%1$s: show bookings"
 msgstr "%1$s: показ бронювань"
-
-#: ../tempcache/events.html.twig:253
-#, php-format
-msgid "%1$s: edit informations"
-msgstr "%1$s: редагування відомостей"
 
 #: ../tempcache/events.html.twig:266
 #, php-format
