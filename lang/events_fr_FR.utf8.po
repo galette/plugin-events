@@ -115,7 +115,7 @@ msgid "Activity has been modified."
 msgstr "L'activité a été modifiée."
 
 #: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:263
-msgid "An error occured while storing the activity."
+msgid "An error occurred while storing the activity."
 msgstr "Une erreur est survenue à l'enregistrement de l'activité."
 
 #: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:355
@@ -164,7 +164,7 @@ msgid "Event has been modified."
 msgstr "L'évènement a été modifié."
 
 #: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:414
-msgid "An error occured while storing the event."
+msgid "An error occurred while storing the event."
 msgstr "Une erreur est survenue à l'enregistrement de l'évènement."
 
 #. TRANS: first parameter is the event name
@@ -651,7 +651,7 @@ msgstr "Aujourd'hui"
 #~ msgstr ""
 #~ "L'identifiant de l'évènement ne peut être vide pour la route d'édition !"
 
-#~ msgid "An error occured trying to remove event %name :/"
+#~ msgid "An error occurred trying to remove event %name :/"
 #~ msgstr "Une erreur est survenue à la suppression de l'évènement %name :/"
 
 #~ msgid "Event %name has been successfully deleted."
@@ -662,7 +662,7 @@ msgstr "Aujourd'hui"
 #~ "L'identifiant de la réservation ne peut être vide pour la route "
 #~ "d'édition !"
 
-#~ msgid "An error occured trying to remove booking :/"
+#~ msgid "An error occurred trying to remove booking :/"
 #~ msgstr "Une erreur est survenue à la suppression de la réservation :/"
 
 #~ msgid "Booking has been successfully deleted."
@@ -677,7 +677,7 @@ msgstr "Aujourd'hui"
 #~ "L'activité %name est référencée dans %1$s évènements, elle ne peut être "
 #~ "supprimée."
 
-#~ msgid "An error occured trying to remove activity %name :/"
+#~ msgid "An error occurred trying to remove activity %name :/"
 #~ msgstr "Une erreur est survenue à la suppression de l'activité %name :/"
 
 #~ msgid "Activity %name has been successfully deleted."

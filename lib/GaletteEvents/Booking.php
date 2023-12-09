@@ -416,7 +416,7 @@ class Booking
                 } else {
                     $hist->add(_T("Fail to add new booking.", "events"));
                     throw new \Exception(
-                        'An error occured inserting new booking!'
+                        'An error occurred inserting new booking!'
                     );
                 }
             } else {

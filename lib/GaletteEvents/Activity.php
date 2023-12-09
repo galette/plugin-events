@@ -266,7 +266,7 @@ class Activity
                 } else {
                     $hist->add(_T("Fail to add new activity.", "events"));
                     throw new \Exception(
-                        'An error occured inserting new activity!'
+                        'An error occurred inserting new activity!'
                     );
                 }
             } else {

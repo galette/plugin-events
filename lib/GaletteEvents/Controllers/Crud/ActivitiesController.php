@@ -260,7 +260,7 @@ class ActivitiesController extends AbstractPluginController
                 }
             } else {
                 //something went wrong :'(
-                $error_detected[] = _T("An error occured while storing the activity.", "events");
+                $error_detected[] = _T("An error occurred while storing the activity.", "events");
             }
         }
 

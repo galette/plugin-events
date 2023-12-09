@@ -115,7 +115,7 @@ msgid "Activity has been modified."
 msgstr ""
 
 #: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:263
-msgid "An error occured while storing the activity."
+msgid "An error occurred while storing the activity."
 msgstr ""
 
 #: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:355
@@ -164,7 +164,7 @@ msgid "Event has been modified."
 msgstr ""
 
 #: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:414
-msgid "An error occured while storing the event."
+msgid "An error occurred while storing the event."
 msgstr ""
 
 #. TRANS: first parameter is the event name

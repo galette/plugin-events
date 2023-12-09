@@ -411,7 +411,7 @@ class EventsController extends AbstractPluginController
                     }
                 } else {
                     //something went wrong :'(
-                    $error_detected[] = _T("An error occured while storing the event.", "events");
+                    $error_detected[] = _T("An error occurred while storing the event.", "events");
                 }
             }
         }

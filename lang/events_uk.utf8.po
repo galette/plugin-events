@@ -117,7 +117,7 @@ msgid "Activity has been modified."
 msgstr "Діяльність змінено."
 
 #: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:263
-msgid "An error occured while storing the activity."
+msgid "An error occurred while storing the activity."
 msgstr "Під час зберігання діяльності сталася помилка."
 
 #: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:355
@@ -166,7 +166,7 @@ msgid "Event has been modified."
 msgstr "Подія було змінено."
 
 #: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:414
-msgid "An error occured while storing the event."
+msgid "An error occurred while storing the event."
 msgstr "Під час зберігання події сталася помилка."
 
 #. TRANS: first parameter is the event name
@@ -656,7 +656,7 @@ msgstr "Сьогодні"
 #~ msgstr ""
 #~ "ID події не може призвести до нульового виклику редагування маршруту!"
 
-#~ msgid "An error occured trying to remove event %name :/"
+#~ msgid "An error occurred trying to remove event %name :/"
 #~ msgstr "Сталася помилка під час спроби вилучити подію %name :/"
 
 #~ msgid "Event %name has been successfully deleted."
@@ -667,7 +667,7 @@ msgstr "Сьогодні"
 #~ "ID бронювання не може дорівнювати нулю під час виклику маршруту "
 #~ "редагування!"
 
-#~ msgid "An error occured trying to remove booking :/"
+#~ msgid "An error occurred trying to remove booking :/"
 #~ msgstr "Сталася помилка при спробі вилучити бронювання :/"
 
 #~ msgid "Booking has been successfully deleted."
@@ -681,7 +681,7 @@ msgstr "Сьогодні"
 #~ msgid "Activity %name is referenced in %1$s events, it cannot be removed."
 #~ msgstr "Діяльність %name посилається на %1$s подій, її не можна вилучити."
 
-#~ msgid "An error occured trying to remove activity %name :/"
+#~ msgid "An error occurred trying to remove activity %name :/"
 #~ msgstr "Сталася помилка під час спроби вилучити діяльність %name :/"
 
 #~ msgid "Activity %name has been successfully deleted."

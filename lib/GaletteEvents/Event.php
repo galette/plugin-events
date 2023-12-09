@@ -424,7 +424,7 @@ class Event
                 } else {
                     $hist->add(_T("Fail to add new event.", "events"));
                     throw new \Exception(
-                        'An error occured inserting new event!'
+                        'An error occurred inserting new event!'
                     );
                 }
             } else {
