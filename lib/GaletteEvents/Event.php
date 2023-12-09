@@ -242,16 +242,11 @@ class Event
                         } else {
                             $label = _T('End date', 'events');
                         }
-                        $this->errors[] = str_replace(
-                            array(
-                                '%date_format',
-                                '%field'
-                            ),
-                            array(
-                                __("Y-m-d"),
-                                $label
-                            ),
-                            _T("- Wrong date format (%date_format) for %field!")
+                        $this->errors[] = sprintf(
+                            //TRANS %1$s is the expected date format, %2$s is the field label
+                            _T('- Wrong date format (%1$s) for %2$s!'),
+                            __("Y-m-d"),
+                            $label
                         );
                     }
                 }
@@ -502,7 +497,7 @@ class Event
                     ++$count;
                 }
                 Analog::log(
-                    str_replace('%count', $count, '%count activities removed'),
+                    sprintf('%1$s activities removed', $count),
                     Analog::INFO
                 );
             }
@@ -518,7 +513,7 @@ class Event
                     ++$count;
                 }
                 Analog::log(
-                    str_replace('%count', $count, '%count activities updated'),
+                    sprintf('%1$s activities updated', $count),
                     Analog::INFO
                 );
             }
@@ -532,7 +527,7 @@ class Event
                     ++$count;
                 }
                 Analog::log(
-                    str_replace('%count', $count, '%count activities added'),
+                    sprintf('%1$s activities added', $count),
                     Analog::INFO
                 );
             }

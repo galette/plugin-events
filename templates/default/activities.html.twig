@@ -11,7 +11,7 @@
 
 {% block infoline %}
     {% set infoline = {
-        'label': _Tn("%count activity", "%count activities", nb, "events")|replace({"%count": nb}),
+        'label': _Tn("%1$s activity", "%1$s activities", nb, "events")|replace({"%1$s": nb}),
     } %}
     {{ parent() }}
 {% endblock %}
@@ -62,7 +62,7 @@
             <td class="center nowrap actions_row">
                 {% set actions = [
                     {
-                        'label': _T("%activity: edit informations", "events")|replace({"%activity": activity.getName()}),
+                        'label': _T("%1$s: edit informations", "events")|replace({"%1$s": activity.getName()}),
                         'route': {
                         'name': 'events_activity_edit',
                             'args': {'id': aid}
@@ -70,7 +70,7 @@
                         'icon': 'edit'
                     },
                     {
-                        'label': _T("%activity: remove from database", "events")|replace({"%activity": activity.getName()}),
+                        'label': _T("%1$s: remove from database", "events")|replace({"%1$s": activity.getName()}),
                         'route': {
                         'name': 'events_remove_activity',
                             'args': {'id': aid}

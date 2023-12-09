@@ -11,7 +11,7 @@
 
 {% block infoline %}
     {% set infoline = {
-        'label': _Tn("%count event", "%count events", nb, "events")|replace({"%count": nb}),
+        'label': _Tn("%1$s event", "%1$s events", nb, "events")|replace({"%1$s": nb}),
     } %}
     {{ parent() }}
 {% endblock %}
@@ -74,7 +74,7 @@
             {% if login.isAdmin() or login.isStaff() or (login.isGroupManager() and event.getGroup() in login.managed_groups) %}
                 {% set actions = (actions ?? [])|merge([
                     {
-                        'label': _T("%eventname: export bookings as CSV", "events")|replace({"%eventname": event.getName()}),
+                        'label': _T("%1$s: export bookings as CSV", "events")|replace({"%1$s": event.getName()}),
                         'route': {
                         'name': 'event_bookings_export',
                             'args': {'id': eid}
@@ -87,7 +87,7 @@
 
             {% set actions = (actions ?? [])|merge([
                 {
-                    'label': _T("%eventname: show bookings", "events")|replace({"%eventname": event.getName()}),
+                    'label': _T("%1$s: show bookings", "events")|replace({"%1$s": event.getName()}),
                     'route': {
                     'name': 'events_bookings',
                         'args': {'event': eid}
@@ -99,7 +99,7 @@
             {% if login.isAdmin() or login.isStaff() or (login.isGroupManager() and event.getGroup() in login.managed_groups) %}
                 {% set actions = actions|merge([
                     {
-                        'label': _T("%eventname: edit informations", "events")|replace({"%eventname": event.getName()}),
+                        'label': _T("%1$s: edit informations", "events")|replace({"%1$s": event.getName()}),
                         'route': {
                         'name': 'events_event_edit',
                             'args': {'id': eid}
@@ -112,7 +112,7 @@
             {% if login.isAdmin() or login.isStaff() %}
                 {% set actions = actions|merge([
                     {
-                        'label': _T("%eventname: remove from database", "events")|replace({"%eventname": event.getName()}),
+                        'label': _T("%1$s: remove from database", "events")|replace({"%1$s": event.getName()}),
                         'route': {
                         'name': 'events_remove_event',
                         'args': {'id': eid}

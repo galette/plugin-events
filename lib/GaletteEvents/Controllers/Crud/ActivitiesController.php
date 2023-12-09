@@ -352,6 +352,7 @@ class ActivitiesController extends AbstractPluginController
     {
         $activity = new Activity($this->zdb, $this->login, (int)$args['id']);
         return sprintf(
+            //TRANS %1$s is activity name
             _T('Remove activity %1$s', 'events'),
             $activity->getName()
         );

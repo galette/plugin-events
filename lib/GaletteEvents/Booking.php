@@ -215,10 +215,10 @@ class Booking
                     $event->isActivityRequired($aid)
                     && (!isset($values['activities']) || !in_array($aid, $values['activities']))
                 ) {
-                    $this->errors[] = str_replace(
-                        '%activity',
-                        $entry['activity']->getName(),
-                        _T('%activity is mandatory for this event!', 'events')
+                    $this->errors[] = sprintf(
+                        //TRANS: %1$s is activity name
+                        _T('%1$s is mandatory for this event!', 'events'),
+                        $entry['activity']->getName()
                     );
                 } else {
                     $act = [
@@ -316,16 +316,11 @@ class Booking
                     __("Y-m-d") . ' | ' . $e->getMessage(),
                     Analog::INFO
                 );
-                $this->errors[] = str_replace(
-                    array(
-                        '%date_format',
-                        '%field'
-                    ),
-                    array(
-                        __("Y-m-d"),
-                        __('booking date', 'events')
-                    ),
-                    _T("- Wrong date format (%date_format) for %field!")
+                $this->errors[] = sprintf(
+                    //TRANS %1$s is the expected date format, %2$s is the field label
+                    _T('- Wrong date format (%1$s) for %2$s!'),
+                    __("Y-m-d"),
+                    __('booking date', 'events')
                 );
             }
         }
@@ -345,16 +340,11 @@ class Booking
             }
             $results = $this->zdb->execute($select);
             if ($results->count()) {
-                $this->errors[] = str_replace(
-                    [
-                        '%member',
-                        '%event'
-                    ],
-                    [
-                        $this->getMember()->sfullname,
-                        $this->getEvent()->getName()
-                    ],
-                    _T('A booking already exists for %member in %event', 'events')
+                $this->errors[] = sprintf(
+                    //TRANS: first replacement is member name, second is event name
+                    _T('A booking already exists for %1$s in %2$s', 'events'),
+                    $this->getMember()->sfullname,
+                    $this->getEvent()->getName()
                 );
             }
         }
@@ -506,7 +496,7 @@ class Booking
                     ++$count;
                 }
                 Analog::log(
-                    str_replace('%count', $count, '%count activities removed'),
+                    sprintf('%1$s activities removed', $count),
                     Analog::INFO
                 );
             }
@@ -530,7 +520,7 @@ class Booking
                     ++$count;
                 }
                 Analog::log(
-                    str_replace('%count', $count, '%count activities updated'),
+                    sprintf('%1$s activities updated', $count),
                     Analog::INFO
                 );
             }
@@ -554,7 +544,7 @@ class Booking
                     ++$count;
                 }
                 Analog::log(
-                    str_replace('%count', $count, '%count activities added'),
+                    sprintf('%1$s activities added', $count),
                     Analog::INFO
                 );
             }

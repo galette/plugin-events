@@ -17,7 +17,7 @@ msgid "Event is mandatory"
 msgstr ""
 
 #: ../lib/GaletteEvents/Booking.php:221
-msgid "%activity is mandatory for this event!"
+msgid "%1$s is mandatory for this event!"
 msgstr ""
 
 #: ../lib/GaletteEvents/Booking.php:255
@@ -41,7 +41,7 @@ msgid "booking date"
 msgstr ""
 
 #: ../lib/GaletteEvents/Booking.php:357
-msgid "A booking already exists for %member in %event"
+msgid "A booking already exists for %1$s in %2$s"
 msgstr ""
 
 #: ../lib/GaletteEvents/Booking.php:424
@@ -435,8 +435,8 @@ msgstr ""
 
 #: ../tempcache/bookings.html.twig:90
 #, php-format
-msgid "%count booking"
-msgid_plural "%count bookings"
+msgid "%1$s booking"
+msgid_plural "%1$s bookings"
 msgstr[0] ""
 msgstr[1] ""
 
@@ -493,8 +493,8 @@ msgstr ""
 
 #: ../tempcache/activities.html.twig:61
 #, php-format
-msgid "%count activity"
-msgid_plural "%count activities"
+msgid "%1$s activity"
+msgid_plural "%1$s activities"
 msgstr[0] ""
 msgstr[1] ""
 
@@ -520,11 +520,11 @@ msgid "Inactive"
 msgstr ""
 
 #: ../tempcache/activities.html.twig:203
-msgid "%activity: edit informations"
+msgid "%1$s: edit informations"
 msgstr ""
 
 #: ../tempcache/activities.html.twig:205
-msgid "%activity: remove from database"
+msgid "%1$s: remove from database"
 msgstr ""
 
 #: ../tempcache/activities.html.twig:241
@@ -533,8 +533,8 @@ msgstr ""
 
 #: ../tempcache/events.html.twig:61
 #, php-format
-msgid "%count event"
-msgid_plural "%count events"
+msgid "%1$s event"
+msgid_plural "%1$s events"
 msgstr[0] ""
 msgstr[1] ""
 
@@ -560,22 +560,22 @@ msgstr ""
 
 #: ../tempcache/events.html.twig:233
 #, php-format
-msgid "%eventname: export bookings as CSV"
+msgid "%1$s: export bookings as CSV"
 msgstr ""
 
 #: ../tempcache/events.html.twig:243
 #, php-format
-msgid "%eventname: show bookings"
+msgid "%1$s: show bookings"
 msgstr ""
 
 #: ../tempcache/events.html.twig:253
 #, php-format
-msgid "%eventname: edit informations"
+msgid "%1$s: edit informations"
 msgstr ""
 
 #: ../tempcache/events.html.twig:266
 #, php-format
-msgid "%eventname: remove from database"
+msgid "%1$s: remove from database"
 msgstr ""
 
 #: ../tempcache/events.html.twig:311

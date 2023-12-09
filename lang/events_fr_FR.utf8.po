@@ -21,8 +21,8 @@ msgid "Event is mandatory"
 msgstr "L'évènement est requis"
 
 #: ../lib/GaletteEvents/Booking.php:221
-msgid "%activity is mandatory for this event!"
-msgstr "%activity est obligatoire pour cet évènement !"
+msgid "%1$s is mandatory for this event!"
+msgstr "%1$s est obligatoire pour cet évènement !"
 
 #: ../lib/GaletteEvents/Booking.php:255
 msgid "Please specify amount if booking has been paid ;)"
@@ -45,8 +45,8 @@ msgid "booking date"
 msgstr "date de réservation"
 
 #: ../lib/GaletteEvents/Booking.php:357
-msgid "A booking already exists for %member in %event"
-msgstr "Une réservation existe déjà pour l'adhérent %member dans %event"
+msgid "A booking already exists for %1$s in %2$s"
+msgstr "Une réservation existe déjà pour %1$s dans %2$s"
 
 #: ../lib/GaletteEvents/Booking.php:424
 msgid "Booking added"
@@ -441,10 +441,10 @@ msgstr "Export des réservations sélectionnées en CSV"
 
 #: ../tempcache/bookings.html.twig:90
 #, php-format
-msgid "%count booking"
-msgid_plural "%count bookings"
-msgstr[0] "%count réservation"
-msgstr[1] "%count réservations"
+msgid "%1$s booking"
+msgid_plural "%1$s bookings"
+msgstr[0] "%1$s réservation"
+msgstr[1] "%1$s réservations"
 
 #: ../tempcache/bookings.html.twig:118 ../tempcache/calendar.html.twig:119
 msgid "New booking"
@@ -499,10 +499,10 @@ msgstr "Aucune réservation trouvée"
 
 #: ../tempcache/activities.html.twig:61
 #, php-format
-msgid "%count activity"
-msgid_plural "%count activities"
-msgstr[0] "%count activité"
-msgstr[1] "%count activités"
+msgid "%1$s activity"
+msgid_plural "%1$s activities"
+msgstr[0] "%1$s activité"
+msgstr[1] "%1$s activités"
 
 #: ../tempcache/activities.html.twig:88
 msgid "New activity"
@@ -526,12 +526,12 @@ msgid "Inactive"
 msgstr "Inactif"
 
 #: ../tempcache/activities.html.twig:203
-msgid "%activity: edit informations"
-msgstr "%activity : modifier les informations"
+msgid "%1$s: edit informations"
+msgstr "%1$s : modifier les informations"
 
 #: ../tempcache/activities.html.twig:205
-msgid "%activity: remove from database"
-msgstr "%activity : supprimer de la base de données"
+msgid "%1$s: remove from database"
+msgstr "%1$s : supprimer de la base de données"
 
 #: ../tempcache/activities.html.twig:241
 msgid "No activity has been found"
@@ -539,10 +539,10 @@ msgstr "Aucune activité trouvée"
 
 #: ../tempcache/events.html.twig:61
 #, php-format
-msgid "%count event"
-msgid_plural "%count events"
-msgstr[0] "%count évènement"
-msgstr[1] "%count évènements"
+msgid "%1$s event"
+msgid_plural "%1$s events"
+msgstr[0] "%1$s évènement"
+msgstr[1] "%1$s évènements"
 
 #: ../tempcache/events.html.twig:88
 msgid "New event"
@@ -566,23 +566,23 @@ msgstr "L'évènement est fermé"
 
 #: ../tempcache/events.html.twig:233
 #, php-format
-msgid "%eventname: export bookings as CSV"
-msgstr "%eventname : exporter les réservations en CSV"
+msgid "%1$s: export bookings as CSV"
+msgstr "%1$s : exporter les réservations en CSV"
 
 #: ../tempcache/events.html.twig:243
 #, php-format
-msgid "%eventname: show bookings"
-msgstr "%eventname : voir les réservations"
+msgid "%1$s: show bookings"
+msgstr "%1$s : voir les réservations"
 
 #: ../tempcache/events.html.twig:253
 #, php-format
-msgid "%eventname: edit informations"
-msgstr "%eventname : modifier les informations"
+msgid "%1$s: edit informations"
+msgstr "%1$s : modifier les informations"
 
 #: ../tempcache/events.html.twig:266
 #, php-format
-msgid "%eventname: remove from database"
-msgstr "%eventname : supprimer de la base de données"
+msgid "%1$s: remove from database"
+msgstr "%1$s : supprimer de la base de données"
 
 #: ../tempcache/events.html.twig:311
 msgid "No event has been found"
@@ -672,9 +672,9 @@ msgstr "Aujourd'hui"
 #~ msgstr ""
 #~ "L'identifiant de l'activité ne peut être vide pour la route d'édition !"
 
-#~ msgid "Activity %name is referenced in %count events, it cannot be removed."
+#~ msgid "Activity %name is referenced in %1$s events, it cannot be removed."
 #~ msgstr ""
-#~ "L'activité %name est référencée dans %count évènements, elle ne peut être "
+#~ "L'activité %name est référencée dans %1$s évènements, elle ne peut être "
 #~ "supprimée."
 
 #~ msgid "An error occured trying to remove activity %name :/"

@@ -644,7 +644,7 @@ class BookingsController extends AbstractPluginController
         $member = $booking->getMember();
         $event = $booking->getEvent();
         return sprintf(
-            //TRANS: first parameter is the member name, second the event name.
+            //TRANS: %1$s is the member name, %2$s the event name.
             _T('Remove booking for %1$s on %2$s', 'events'),
             $member->sname,
             $event->getName()

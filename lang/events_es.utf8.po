@@ -29,8 +29,8 @@ msgid "Event is mandatory"
 msgstr "Evento es obligatorio"
 
 #: ../lib/GaletteEvents/Booking.php:221
-msgid "%activity is mandatory for this event!"
-msgstr "¡ %activity es obligatorio para este evento !"
+msgid "%1$s is mandatory for this event!"
+msgstr "¡ %1$s es obligatorio para este evento !"
 
 #: ../lib/GaletteEvents/Booking.php:255
 msgid "Please specify amount if booking has been paid ;)"
@@ -53,8 +53,8 @@ msgid "booking date"
 msgstr "fecha de reserva"
 
 #: ../lib/GaletteEvents/Booking.php:357
-msgid "A booking already exists for %member in %event"
-msgstr "Ya existe una reserva para %member en %event"
+msgid "A booking already exists for %1$s in %2$s"
+msgstr "Ya existe una reserva para %1$s en %2$s"
 
 #: ../lib/GaletteEvents/Booking.php:424
 msgid "Booking added"
@@ -449,10 +449,10 @@ msgstr "Exportar reservas seleccionadas como CSV"
 
 #: ../tempcache/bookings.html.twig:90
 #, php-format
-msgid "%count booking"
-msgid_plural "%count bookings"
-msgstr[0] "%count reserva"
-msgstr[1] "%count reservas"
+msgid "%1$s booking"
+msgid_plural "%1$s bookings"
+msgstr[0] "%1$s reserva"
+msgstr[1] "%1$s reservas"
 
 #: ../tempcache/bookings.html.twig:118 ../tempcache/calendar.html.twig:119
 msgid "New booking"
@@ -507,10 +507,10 @@ msgstr "No se ha encontrado ninguna reserva"
 
 #: ../tempcache/activities.html.twig:61
 #, php-format
-msgid "%count activity"
-msgid_plural "%count activities"
-msgstr[0] "%count actividad"
-msgstr[1] "%count actividades"
+msgid "%1$s activity"
+msgid_plural "%1$s activities"
+msgstr[0] "%1$s actividad"
+msgstr[1] "%1$s actividades"
 
 #: ../tempcache/activities.html.twig:88
 msgid "New activity"
@@ -534,12 +534,12 @@ msgid "Inactive"
 msgstr "Inactiva"
 
 #: ../tempcache/activities.html.twig:203
-msgid "%activity: edit informations"
-msgstr "%activity: editar información"
+msgid "%1$s: edit informations"
+msgstr "%1$s: editar información"
 
 #: ../tempcache/activities.html.twig:205
-msgid "%activity: remove from database"
-msgstr "%activity: quitar desde BdD"
+msgid "%1$s: remove from database"
+msgstr "%1$s: quitar desde BdD"
 
 #: ../tempcache/activities.html.twig:241
 msgid "No activity has been found"
@@ -547,10 +547,10 @@ msgstr "No se ha encontrado ninguna actividad"
 
 #: ../tempcache/events.html.twig:61
 #, php-format
-msgid "%count event"
-msgid_plural "%count events"
-msgstr[0] "%count evento"
-msgstr[1] "%count eventos"
+msgid "%1$s event"
+msgid_plural "%1$s events"
+msgstr[0] "%1$s evento"
+msgstr[1] "%1$s eventos"
 
 #: ../tempcache/events.html.twig:88
 msgid "New event"
@@ -574,23 +574,23 @@ msgstr "Evento cerrado"
 
 #: ../tempcache/events.html.twig:233
 #, php-format
-msgid "%eventname: export bookings as CSV"
-msgstr "Evento %eventname: exportar reservas como *.cvs"
+msgid "%1$s: export bookings as CSV"
+msgstr "Evento %1$s: exportar reservas como *.cvs"
 
 #: ../tempcache/events.html.twig:243
 #, php-format
-msgid "%eventname: show bookings"
-msgstr "evento %eventname: mostrar reservas"
+msgid "%1$s: show bookings"
+msgstr "evento %1$s: mostrar reservas"
 
 #: ../tempcache/events.html.twig:253
 #, php-format
-msgid "%eventname: edit informations"
-msgstr "evento %eventname: editar informaciones"
+msgid "%1$s: edit informations"
+msgstr "evento %1$s: editar informaciones"
 
 #: ../tempcache/events.html.twig:266
 #, php-format
-msgid "%eventname: remove from database"
-msgstr "evento %eventname: eliminar de la base de datos"
+msgid "%1$s: remove from database"
+msgstr "evento %1$s: eliminar de la base de datos"
 
 #: ../tempcache/events.html.twig:311
 msgid "No event has been found"

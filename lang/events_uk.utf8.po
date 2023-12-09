@@ -23,8 +23,8 @@ msgid "Event is mandatory"
 msgstr "Подія є обов'язковою"
 
 #: ../lib/GaletteEvents/Booking.php:221
-msgid "%activity is mandatory for this event!"
-msgstr "%activity є обов'язковою для цієї події!"
+msgid "%1$s is mandatory for this event!"
+msgstr "%1$s є обов'язковою для цієї події!"
 
 #: ../lib/GaletteEvents/Booking.php:255
 msgid "Please specify amount if booking has been paid ;)"
@@ -47,8 +47,8 @@ msgid "booking date"
 msgstr "дата бронювання"
 
 #: ../lib/GaletteEvents/Booking.php:357
-msgid "A booking already exists for %member in %event"
-msgstr "Для %member у події %event вже існує бронювання"
+msgid "A booking already exists for %1$s in %2$s"
+msgstr "Для %1$s у події %2$s вже існує бронювання"
 
 #: ../lib/GaletteEvents/Booking.php:424
 msgid "Booking added"
@@ -376,9 +376,9 @@ msgstr "Потрібно"
 
 #: ../tempcache/event.html.twig:330
 #, fuzzy
-#| msgid "%activity: remove from database"
+#| msgid "%1$s: remove from database"
 msgid "No activity available in the database."
-msgstr "%activity: вилучення з бази даних"
+msgstr "%1$s: вилучення з бази даних"
 
 #: ../tempcache/event.html.twig:371
 msgid "Please choose an activity to add"
@@ -445,11 +445,11 @@ msgstr "Експортувати вибрані бронювання як CSV"
 
 #: ../tempcache/bookings.html.twig:90
 #, php-format
-msgid "%count booking"
-msgid_plural "%count bookings"
-msgstr[0] "%count бронювання"
-msgstr[1] "%count бронювання"
-msgstr[2] "%count бронювань"
+msgid "%1$s booking"
+msgid_plural "%1$s bookings"
+msgstr[0] "%1$s бронювання"
+msgstr[1] "%1$s бронювання"
+msgstr[2] "%1$s бронювань"
 
 #: ../tempcache/bookings.html.twig:118 ../tempcache/calendar.html.twig:119
 msgid "New booking"
@@ -504,11 +504,11 @@ msgstr "Бронювання не знайдено"
 
 #: ../tempcache/activities.html.twig:61
 #, php-format
-msgid "%count activity"
-msgid_plural "%count activities"
-msgstr[0] "%count діяльність"
-msgstr[1] "%count діяльности"
-msgstr[2] "%count діяльностей"
+msgid "%1$s activity"
+msgid_plural "%1$s activities"
+msgstr[0] "%1$s діяльність"
+msgstr[1] "%1$s діяльности"
+msgstr[2] "%1$s діяльностей"
 
 #: ../tempcache/activities.html.twig:88
 msgid "New activity"
@@ -532,12 +532,12 @@ msgid "Inactive"
 msgstr "Незадіяний"
 
 #: ../tempcache/activities.html.twig:203
-msgid "%activity: edit informations"
-msgstr "%activity: редагування відомостей"
+msgid "%1$s: edit informations"
+msgstr "%1$s: редагування відомостей"
 
 #: ../tempcache/activities.html.twig:205
-msgid "%activity: remove from database"
-msgstr "%activity: вилучення з бази даних"
+msgid "%1$s: remove from database"
+msgstr "%1$s: вилучення з бази даних"
 
 #: ../tempcache/activities.html.twig:241
 msgid "No activity has been found"
@@ -545,11 +545,11 @@ msgstr "Жодної діяльності не знайдено"
 
 #: ../tempcache/events.html.twig:61
 #, php-format
-msgid "%count event"
-msgid_plural "%count events"
-msgstr[0] "%count подія"
-msgstr[1] "%count події"
-msgstr[2] "%count подій"
+msgid "%1$s event"
+msgid_plural "%1$s events"
+msgstr[0] "%1$s подія"
+msgstr[1] "%1$s події"
+msgstr[2] "%1$s подій"
 
 #: ../tempcache/events.html.twig:88
 msgid "New event"
@@ -573,23 +573,23 @@ msgstr "Подія закрита"
 
 #: ../tempcache/events.html.twig:233
 #, php-format
-msgid "%eventname: export bookings as CSV"
-msgstr "%eventname: експорт бронювань у форматі CSV"
+msgid "%1$s: export bookings as CSV"
+msgstr "%1$s: експорт бронювань у форматі CSV"
 
 #: ../tempcache/events.html.twig:243
 #, php-format
-msgid "%eventname: show bookings"
-msgstr "%eventname: показ бронювань"
+msgid "%1$s: show bookings"
+msgstr "%1$s: показ бронювань"
 
 #: ../tempcache/events.html.twig:253
 #, php-format
-msgid "%eventname: edit informations"
-msgstr "%eventname: редагування відомостей"
+msgid "%1$s: edit informations"
+msgstr "%1$s: редагування відомостей"
 
 #: ../tempcache/events.html.twig:266
 #, php-format
-msgid "%eventname: remove from database"
-msgstr "%eventname: вилучення з бази даних"
+msgid "%1$s: remove from database"
+msgstr "%1$s: вилучення з бази даних"
 
 #: ../tempcache/events.html.twig:311
 msgid "No event has been found"
@@ -678,8 +678,8 @@ msgstr "Сьогодні"
 #~ "ID діяльності не може дорівнювати нулю під час виклику маршруту "
 #~ "редагування!"
 
-#~ msgid "Activity %name is referenced in %count events, it cannot be removed."
-#~ msgstr "Діяльність %name посилається на %count подій, її не можна вилучити."
+#~ msgid "Activity %name is referenced in %1$s events, it cannot be removed."
+#~ msgstr "Діяльність %name посилається на %1$s подій, її не можна вилучити."
 
 #~ msgid "An error occured trying to remove activity %name :/"
 #~ msgstr "Сталася помилка під час спроби вилучити діяльність %name :/"

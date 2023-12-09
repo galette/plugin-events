@@ -233,6 +233,7 @@ class Events
 
                     $attendees_str = $total_attendees;
                     if ($total_attendees) {
+                        //TRANS: %1$s is the number of paid attendees
                         $attendees_str .= ' (' . sprintf(_T('%1$s paid', 'events'), $paid_attendees) . ')';
                     }
 
