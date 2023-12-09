@@ -147,10 +147,8 @@ class EventsList extends Pagination
                 switch ($name) {
                     case 'raw_start_date_filter':
                         return $this->start_date_filter;
-                        break;
                     case 'raw_end_date_filter':
                         return $this->end_date_filter;
-                        break;
                     case 'start_date_filter':
                     case 'end_date_filter':
                         try {
@@ -184,7 +182,7 @@ class EventsList extends Pagination
      * Global setter method
      *
      * @param string $name  name of the property we want to assign a value to
-     * @param object $value a relevant value for the property
+     * @param mixed  $value a relevant value for the property
      *
      * @return void
      */

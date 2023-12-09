@@ -120,7 +120,6 @@ class Activity
                 Analog::WARNING
             );
             throw $e;
-            return false;
         }
     }
 
@@ -296,7 +295,6 @@ class Activity
                 Analog::ERROR
             );
             throw $e;
-            return false;
         }
     }
 

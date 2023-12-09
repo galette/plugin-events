@@ -273,14 +273,6 @@ class ActivitiesController extends AbstractPluginController
             }
         }
 
-        if (count($warning_detected) > 0) {
-            foreach ($warning_detected as $warning) {
-                $this->flash->addMessage(
-                    'warning_detected',
-                    $warning
-                );
-            }
-        }
         if (count($success_detected) > 0) {
             foreach ($success_detected as $success) {
                 $this->flash->addMessage(

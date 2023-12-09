@@ -127,7 +127,6 @@ class Booking
                 Analog::WARNING
             );
             throw $e;
-            return false;
         }
     }
 
@@ -559,7 +558,6 @@ class Booking
                 Analog::ERROR
             );
             throw $e;
-            return false;
         }
     }
 
