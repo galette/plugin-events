@@ -568,11 +568,6 @@ msgstr ""
 msgid "%1$s: show bookings"
 msgstr ""
 
-#: ../tempcache/events.html.twig:266
-#, php-format
-msgid "%1$s: remove from database"
-msgstr ""
-
 #: ../tempcache/events.html.twig:311
 msgid "No event has been found"
 msgstr ""

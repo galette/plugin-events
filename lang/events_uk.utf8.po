@@ -581,11 +581,6 @@ msgstr "%1$s: експорт бронювань у форматі CSV"
 msgid "%1$s: show bookings"
 msgstr "%1$s: показ бронювань"
 
-#: ../tempcache/events.html.twig:266
-#, php-format
-msgid "%1$s: remove from database"
-msgstr "%1$s: вилучення з бази даних"
-
 #: ../tempcache/events.html.twig:311
 msgid "No event has been found"
 msgstr "Жодної події не знайдено"
