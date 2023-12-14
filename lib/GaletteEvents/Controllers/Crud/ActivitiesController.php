@@ -162,8 +162,28 @@ class ActivitiesController extends AbstractPluginController
      */
     public function filter(Request $request, Response $response): Response
     {
-        //no filter
-        return $response;
+        $post = $request->getParsedBody();
+        if (isset($this->session->filter_activities)) {
+            $filters = $this->session->filter_activities;
+        } else {
+            $filters = new ActivitiesList();
+        }
+
+        //reinitialize filters
+        if (isset($post['clear_filter'])) {
+            $filters->reinit();
+        } else {
+            //number of rows to show
+            if (isset($post['nbshow'])) {
+                $filters->show = $post['nbshow'];
+            }
+        }
+
+        $this->session->filter_activities = $filters;
+
+        return $response
+            ->withStatus(301)
+            ->withHeader('Location', $this->routeparser->urlFor('events_activities'));
     }
 
     // /CRUD - Read

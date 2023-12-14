@@ -161,6 +161,11 @@ $app->get(
     [ActivitiesController::class, 'list']
 )->setName('events_activities')->add($authenticate);
 
+$app->post(
+    '/activities/filter',
+    [ActivitiesController::class, 'filter']
+)->setName('filter-activitieslist')->add($authenticate);
+
 $app->get(
     '/activity/add',
     [ActivitiesController::class, 'add']

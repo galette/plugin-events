@@ -61,6 +61,7 @@ $this->register(
         'filter-bookingslist'       => 'member',
         'batch-eventslist'          => 'groupmanager',
         'events_activities'         => 'staff',
+        'filter-activitieslist'     => 'staff',
         'events_activity_add'       => 'staff',
         'events_activity_edit'      => 'staff',
         'events_storeactivity_add'  => 'staff',

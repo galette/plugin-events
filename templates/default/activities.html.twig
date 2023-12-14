@@ -12,6 +12,9 @@
 {% block infoline %}
     {% set infoline = {
         'label': _Tn("%1$s activity", "%1$s activities", nb, "events")|replace({"%1$s": nb}),
+        'route': {
+            'name': 'filter-activitieslist'
+        }
     } %}
     {{ parent() }}
 {% endblock %}
