@@ -343,6 +343,7 @@ class Events
             $countSelect->reset($countSelect::COLUMNS);
             $countSelect->reset($countSelect::ORDER);
             $countSelect->reset($countSelect::HAVING);
+            $countSelect->reset($countSelect::GROUP);
             $joins = $countSelect->joins;
             $countSelect->reset($countSelect::JOINS);
             foreach ($joins as $join) {
