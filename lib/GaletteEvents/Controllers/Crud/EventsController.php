@@ -128,6 +128,7 @@ class EventsController extends AbstractPluginController
         }
 
         $events = new Events($this->zdb, $this->login, $filters);
+        $events_list = $events->getList();
 
         //assign pagination variables to the template and add pagination links
         $filters->setViewPagination($this->routeparser, $this->view, false);
@@ -141,7 +142,7 @@ class EventsController extends AbstractPluginController
             array(
                 'page_title'            => _T("Events management", "events"),
                 'require_dialog'        => true,
-                'events'                => $events->getList(),
+                'events'                => $events_list,
                 'nb_events'             => $events->getCount(),
                 'filters'               => $filters
             )

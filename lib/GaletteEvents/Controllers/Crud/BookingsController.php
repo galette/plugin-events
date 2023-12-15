@@ -166,14 +166,15 @@ class BookingsController extends AbstractPluginController
 
         $bookings = new Bookings($this->zdb, $this->login, $filters);
 
+        $events = new Events($this->zdb, $this->login);
+        $list = $bookings->getList();
+        $count = $bookings->getCount();
+
         //assign pagination variables to the template and add pagination links
         $filters->setViewPagination($this->routeparser, $this->view, false);
 
         $this->session->filter_bookings = $filters;
 
-        $events = new Events($this->zdb, $this->login);
-        $list = $bookings->getList();
-        $count = $bookings->getCount();
         // display page
         $this->view->render(
             $response,
