@@ -41,7 +41,6 @@ use GaletteEvents\Booking;
 use Laminas\Db\Sql\Expression;
 use Laminas\Db\Sql\Predicate;
 use Laminas\Db\Sql\Predicate\PredicateSet;
-use Laminas\Db\Sql\Predicate\Operator;
 use Galette\Core\Login;
 use Galette\Core\Db;
 use Galette\Entity\Group;
@@ -153,7 +152,11 @@ class Events
                         )
                     );
                 } else {
-                    $select->where('is_open', true);
+                    $select->where(
+                        'is_open',
+                        //@phpstan-ignore-next-line
+                        new Expression('true')
+                    );
                     $select->where->greaterThanOrEqualTo('begin_date', date('Y-m-d'));
 
                     $set = [new Predicate\IsNull(Group::PK)];

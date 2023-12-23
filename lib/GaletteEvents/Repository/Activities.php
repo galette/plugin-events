@@ -42,12 +42,8 @@ use Galette\Core\Preferences;
 use Laminas\Db\Sql\Expression;
 use Galette\Core\Login;
 use Galette\Core\Db;
-use Galette\Entity\Group;
-use Galette\Repository\Groups;
-use GaletteEvents\Event;
 use GaletteEvents\Filters\EventsList;
 use Laminas\Db\Sql\Select;
-use Throwable;
 
 /**
  * Events
@@ -73,9 +69,9 @@ class Activities extends Repository
      * @param Db          $zdb         Database instance
      * @param Login       $login       Login instance
      * @param Preferences $preferences Preferences instance
-     * @param EventsList  $filters     Filtering
+     * @param ?EventsList $filters     Filtering
      */
-    public function __construct(Db $zdb, Login $login, Preferences $preferences, $filters = null)
+    public function __construct(Db $zdb, Login $login, Preferences $preferences, EventsList $filters = null)
     {
         $this->zdb = $zdb;
         $this->login = $login;
@@ -94,7 +90,7 @@ class Activities extends Repository
      *
      * @return array
      */
-    public function getList()
+    public function getList(): array
     {
         try {
             $select = $this->zdb->select(EVENTS_PREFIX . Activity::TABLE, 'ac');
@@ -104,6 +100,7 @@ class Activities extends Repository
 
             $this->filters->setLimits($select);
             $results = $this->zdb->execute($select);
+            //@phpstan-ignore-next-line
             $this->filters->query = $this->zdb->query_string;
 
             $activities = [];
@@ -191,6 +188,7 @@ class Activities extends Repository
 
             $results = $this->zdb->execute($countSelect);
 
+            //@phpstan-ignore-next-line
             $this->count = $results->current()->count;
             if (isset($this->filters) && $this->count > 0) {
                 $this->filters->setCounter($this->count);
@@ -221,7 +219,7 @@ class Activities extends Repository
      *
      * @return boolean
      */
-    public function installInit($check_first = true)
+    public function installInit(bool $check_first = true): bool
     {
         //to satisfy inheritance
         return true;

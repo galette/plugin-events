@@ -210,7 +210,7 @@ class EventsList extends Pagination
                                     $day = 31;
                                 }
                                 $y->setDate(
-                                    $y->format('Y'),
+                                    (int)$y->format('Y'),
                                     $month,
                                     $day
                                 );
@@ -224,8 +224,8 @@ class EventsList extends Pagination
                                     $day = $ym->format('t');
                                 }
                                 $ym->setDate(
-                                    $ym->format('Y'),
-                                    $ym->format('m'),
+                                    (int)$ym->format('Y'),
+                                    (int)$ym->format('m'),
                                     $day
                                 );
                                 $this->$name = $ym->format('Y-m-d');

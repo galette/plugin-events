@@ -575,7 +575,7 @@ class BookingsController extends AbstractPluginController
         if (count($error_detected) == 0 && $goto_list) {
             $redirect_url = $this->routeparser->urlFor(
                 'events_bookings',
-                ['event' => $booking->getEventId()]
+                ['event' => (string)$booking->getEventId()]
             );
         } else {
             //store entity in session

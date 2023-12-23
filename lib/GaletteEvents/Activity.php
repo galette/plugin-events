@@ -38,8 +38,6 @@ namespace GaletteEvents;
 use ArrayObject;
 use Galette\Core\Db;
 use Galette\Core\Login;
-use Galette\Entity\Group;
-use Galette\Repository\Groups;
 use Analog\Analog;
 use Laminas\Db\Sql\Expression;
 

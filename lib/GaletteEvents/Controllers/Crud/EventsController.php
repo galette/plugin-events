@@ -458,7 +458,7 @@ class EventsController extends AbstractPluginController
             if ($event->getId()) {
                 $redirect_url = $this->routeparser->urlFor(
                     'events_event_edit',
-                    ['id' => $event->getId()]
+                    ['id' => (string)$event->getId()]
                 );
             } else {
                 $redirect_url = $this->routeparser->urlFor('events_event_add');

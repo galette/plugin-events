@@ -311,7 +311,7 @@ class ActivitiesController extends AbstractPluginController
             if ($activity->getId()) {
                 $redirect_url = $this->routeparser->urlFor(
                     'events_activity_edit',
-                    ['id' => $activity->getId()]
+                    ['id' => (string)$activity->getId()]
                 );
             } else {
                 $redirect_url = $this->routeparser->urlFor('events_activity_add');
