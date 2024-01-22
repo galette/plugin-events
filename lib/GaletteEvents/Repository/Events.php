@@ -38,6 +38,7 @@ namespace GaletteEvents\Repository;
 use Analog\Analog;
 use Galette\Entity\Adherent;
 use GaletteEvents\Booking;
+use Laminas\Db\ResultSet\ResultSet;
 use Laminas\Db\Sql\Expression;
 use Laminas\Db\Sql\Predicate;
 use Laminas\Db\Sql\Predicate\PredicateSet;
@@ -64,7 +65,7 @@ class Events
 {
     private Db $zdb;
     private Login $login;
-    private $filters = false;
+    private EventsList $filters;
     private $count;
 
     public const ORDERBY_DATE = 0;
@@ -74,11 +75,11 @@ class Events
     /**
      * Constructor
      *
-     * @param Db         $zdb     Database instance
-     * @param Login      $login   Login instance
-     * @param EventsList $filters Filtering
+     * @param Db          $zdb     Database instance
+     * @param Login       $login   Login instance
+     * @param ?EventsList $filters Filtering
      */
-    public function __construct(Db $zdb, Login $login, $filters = null)
+    public function __construct(Db $zdb, Login $login, EventsList $filters = null)
     {
         $this->zdb = $zdb;
         $this->login = $login;
@@ -95,9 +96,9 @@ class Events
      *
      * @param bool $onlyevents get events member has booking on
      *
-     * @return array
+     * @return array<int|string, Event|array<string, mixed>>
      */
-    public function getList($onlyevents = false)
+    public function getList(bool $onlyevents = false): array
     {
         try {
             $select = $this->zdb->select(EVENTS_PREFIX . Event::TABLE, 'e');
@@ -224,13 +225,14 @@ class Events
                         $description .= sprintf($pattern, _T("Comment:", "events"), $comment);
                     }
 
+                    /** @var ResultSet $attendees */
                     $attendees = $event->countAttendees();
                     $total_attendees = 0;
                     $paid_attendees = 0;
                     foreach ($attendees as $attendee) {
-                        $total_attendees += $attendee->count;
+                        $total_attendees += $attendee['count'];
                         if ($attendee['is_paid']) {
-                            $paid_attendees += $attendee->count;
+                            $paid_attendees += $attendee['count'];
                         }
                     }
 
@@ -278,12 +280,12 @@ class Events
      * Is field allowed to order? it should be present in
      * provided fields list (those that are SELECT'ed).
      *
-     * @param string $field_name Field name to order by
-     * @param array  $fields     SELECTE'ed fields
+     * @param string         $field_name Field name to order by
+     * @param ?array<string> $fields     SELECTE'ed fields
      *
      * @return boolean
      */
-    private function canOrderBy($field_name, $fields)
+    private function canOrderBy(string $field_name, array $fields = null): bool
     {
         if (!is_array($fields)) {
             return true;
@@ -302,12 +304,12 @@ class Events
     /**
      * Builds the order clause
      *
-     * @param array $fields Fields list to ensure ORDER clause
-     *                      references selected fields. Optionnal.
+     * @param array<string> $fields Fields list to ensure ORDER clause
+     *                              references selected fields. Optional.
      *
-     * @return array SQL ORDER clauses
+     * @return array<string> SQL ORDER clauses
      */
-    private function buildOrderClause($fields = null)
+    private function buildOrderClause($fields = null): array
     {
         $order = array();
 
@@ -339,7 +341,7 @@ class Events
      *
      * @return void
      */
-    private function proceedCount($select)
+    private function proceedCount(Select $select): void
     {
         try {
             $countSelect = clone $select;
@@ -375,7 +377,6 @@ class Events
             $results = $this->zdb->execute($countSelect);
 
             if ($result = $results->current()) {
-                //@phpstan-ignore-next-line
                 $this->count = $result->count;
                 if (isset($this->filters) && $this->count > 0) {
                     $this->filters->setCounter($this->count);
@@ -395,7 +396,7 @@ class Events
      *
      * @return int
      */
-    public function getCount()
+    public function getCount(): int
     {
         return $this->count;
     }

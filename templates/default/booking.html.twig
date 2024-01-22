@@ -80,6 +80,7 @@
                 {{ _T("Activities", "events") }}
             </div>
             <div class="active content">
+                {% if booking.getEvent() %}
                 {% for aid, item in booking.getEvent().getActivities() %}
                     {% include "components/forms/checkbox.html.twig" with {
                         id: 'activity_' ~ aid,
@@ -93,6 +94,7 @@
                 {% else %}
                     <p>{{ _T("No activity for selected event", "events") }}</p>
                 {% endfor %}
+                {% endif %}
             </div>
         </div>
 

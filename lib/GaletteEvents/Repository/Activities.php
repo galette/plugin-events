@@ -39,11 +39,14 @@ use Analog\Analog;
 use Galette\Repository\Repository;
 use GaletteEvents\Activity;
 use Galette\Core\Preferences;
+use GaletteEvents\Filters\ActivitiesList;
+use Laminas\Db\ResultSet\ResultSet;
 use Laminas\Db\Sql\Expression;
 use Galette\Core\Login;
 use Galette\Core\Db;
 use GaletteEvents\Filters\EventsList;
 use Laminas\Db\Sql\Select;
+use stdClass;
 
 /**
  * Events
@@ -58,7 +61,7 @@ use Laminas\Db\Sql\Select;
  */
 class Activities extends Repository
 {
-    private $count;
+    private int $count;
 
     public const ORDERBY_DATE = 0;
     public const ORDERBY_NAME = 1;
@@ -66,12 +69,12 @@ class Activities extends Repository
     /**
      * Constructor
      *
-     * @param Db          $zdb         Database instance
-     * @param Login       $login       Login instance
-     * @param Preferences $preferences Preferences instance
-     * @param ?EventsList $filters     Filtering
+     * @param Db              $zdb         Database instance
+     * @param Login           $login       Login instance
+     * @param Preferences     $preferences Preferences instance
+     * @param ?ActivitiesList $filters     Filtering
      */
-    public function __construct(Db $zdb, Login $login, Preferences $preferences, EventsList $filters = null)
+    public function __construct(Db $zdb, Login $login, Preferences $preferences, ActivitiesList $filters = null)
     {
         $this->zdb = $zdb;
         $this->login = $login;
@@ -88,9 +91,9 @@ class Activities extends Repository
     /**
      * Get activities list
      *
-     * @return array
+     * @return array<int, Activity>|ResultSet
      */
-    public function getList(): array
+    public function getList(): array|ResultSet
     {
         try {
             $select = $this->zdb->select(EVENTS_PREFIX . Activity::TABLE, 'ac');
@@ -122,12 +125,12 @@ class Activities extends Repository
     /**
      * Builds the order clause
      *
-     * @param array $fields Fields list to ensure ORDER clause
-     *                      references selected fields. Optional.
+     * @param ?array $fields Fields list to ensure ORDER clause
+     *                       references selected fields. Optional.
      *
-     * @return array SQL ORDER clauses
+     * @return array<string> SQL ORDER clauses
      */
-    private function buildOrderClause($fields = null)
+    private function buildOrderClause(array $fields = null): array
     {
         $order = array();
 
@@ -154,7 +157,7 @@ class Activities extends Repository
      *
      * @return void
      */
-    private function proceedCount($select)
+    private function proceedCount(Select $select): void
     {
         try {
             $countSelect = clone $select;
@@ -188,7 +191,6 @@ class Activities extends Repository
 
             $results = $this->zdb->execute($countSelect);
 
-            //@phpstan-ignore-next-line
             $this->count = $results->current()->count;
             if (isset($this->filters) && $this->count > 0) {
                 $this->filters->setCounter($this->count);
@@ -207,7 +209,7 @@ class Activities extends Repository
      *
      * @return int
      */
-    public function getCount()
+    public function getCount(): int
     {
         return $this->count;
     }
@@ -228,12 +230,12 @@ class Activities extends Repository
     /**
      * Insert values in database
      *
-     * @param string $table  Table name
-     * @param array  $values Values to insert
+     * @param string               $table  Table name
+     * @param array<string, mixed> $values Values to insert
      *
      * @return void
      */
-    protected function insert($table, $values)
+    protected function insert(string $table, array $values): void
     {
         $insert = $this->zdb->insert(EVENTS_PREFIX . $table);
         $insert->values(

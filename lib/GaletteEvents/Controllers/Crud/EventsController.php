@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2021-2023 The Galette Team
+ * Copyright © 2021-2024 The Galette Team
  *
  * This file is part of Galette (https://galette.eu).
  *
@@ -28,7 +28,7 @@
  * @package   GaletteEvents
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2021-2023 The Galette Team
+ * @copyright 2021-2024 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      https://galette.eu
  * @since     2021-05-09
@@ -53,7 +53,7 @@ use DI\Attribute\Inject;
  * @name      EventsController
  * @package   GaletteEvents
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2021-2023 The Galette Team
+ * @copyright 2021-2024 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      https://galette.eu
  * @since     2021-05-09
@@ -62,10 +62,10 @@ use DI\Attribute\Inject;
 class EventsController extends AbstractPluginController
 {
     /**
-     * @var array
+     * @var array<string, mixed>
      */
     #[Inject("Plugin Galette Events")]
-    protected $module_info;
+    protected array $module_info;
 
     // CRUD - Create
 
@@ -101,14 +101,14 @@ class EventsController extends AbstractPluginController
     /**
      * List page
      *
-     * @param Request        $request  PSR Request
-     * @param Response       $response PSR Response
-     * @param string         $option   One of 'page' or 'order'
-     * @param string|integer $value    Value of the option
+     * @param Request             $request  PSR Request
+     * @param Response            $response PSR Response
+     * @param string|null         $option   One of 'page' or 'order'
+     * @param string|integer|null $value    Value of the option
      *
      * @return Response
      */
-    public function list(Request $request, Response $response, $option = null, $value = null): Response
+    public function list(Request $request, Response $response, string $option = null, string|int $value = null): Response
     {
         if (isset($this->session->filter_events)) {
             $filters = $this->session->filter_events;
@@ -153,15 +153,19 @@ class EventsController extends AbstractPluginController
     /**
      * Calendar view
      *
-     * @param Request        $request  PSR Request
-     * @param Response       $response PSR Response
-     * @param string         $option   One of 'page' or 'order'
-     * @param string|integer $value    Value of the option
+     * @param Request             $request  PSR Request
+     * @param Response            $response PSR Response
+     * @param string|null         $option   One of 'page' or 'order'
+     * @param string|integer|null $value    Value of the option
      *
      * @return Response
      */
-    public function calendar(Request $request, Response $response, $option = null, $value = null): Response
-    {
+    public function calendar(
+        Request $request,
+        Response $response,
+        string $option = null,
+        string|int $value = null
+    ): Response {
         if (isset($this->session->filter_events_calendar)) {
             $filters = $this->session->filter_events_calendar;
         } else {
@@ -214,14 +218,12 @@ class EventsController extends AbstractPluginController
     /**
      * Calendar view
      *
-     * @param Request        $request  PSR Request
-     * @param Response       $response PSR Response
-     * @param string         $option   One of 'page' or 'order'
-     * @param string|integer $value    Value of the option
+     * @param Request  $request  PSR Request
+     * @param Response $response PSR Response
      *
      * @return Response
      */
-    public function ajaxCalendar(Request $request, Response $response, $option = null, $value = null): Response
+    public function ajaxCalendar(Request $request, Response $response): Response
     {
         $get = $request->getQueryParams();
         $filters = $this->session->filter_events_calendar ?? new EventsList();
@@ -281,7 +283,7 @@ class EventsController extends AbstractPluginController
      *
      * @return Response
      */
-    public function edit(Request $request, Response $response, int $id = null, $action = 'edit'): Response
+    public function edit(Request $request, Response $response, int $id = null, string $action = 'edit'): Response
     {
         if ($this->session->event !== null) {
             $event = $this->session->event;
@@ -349,7 +351,7 @@ class EventsController extends AbstractPluginController
      *
      * @return Response
      */
-    public function doEdit(Request $request, Response $response, int $id = null, $action = 'edit'): Response
+    public function doEdit(Request $request, Response $response, int $id = null, string $action = 'edit'): Response
     {
         $post = $request->getParsedBody();
         $event = new Event($this->zdb, $this->login);

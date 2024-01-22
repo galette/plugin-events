@@ -59,7 +59,7 @@ class PluginGaletteEvents extends GalettePlugin
     /**
      * Extra menus entries
      *
-     * @return array|array[]
+     * @return array<string, string|array<string, mixed>>
      */
     public static function getMenusContents(): array
     {
@@ -126,7 +126,7 @@ class PluginGaletteEvents extends GalettePlugin
     /**
      * Extra public menus entries
      *
-     * @return array|array[]
+     * @return array<int, string|array<string, mixed>>
      */
     public static function getPublicMenusItemsList(): array
     {
@@ -136,7 +136,7 @@ class PluginGaletteEvents extends GalettePlugin
     /**
      * Get dashboards contents
      *
-     * @return array|array[]
+     * @return array<int, string|array<string, mixed>>
      */
     public static function getDashboardsContents(): array
     {
@@ -157,7 +157,7 @@ class PluginGaletteEvents extends GalettePlugin
      *
      * @param Adherent $member Member instance
      *
-     * @return array|array[]
+     * @return array<int, string|array<string, mixed>>
      */
     public static function getListActionsContents(Adherent $member): array
     {
@@ -178,7 +178,7 @@ class PluginGaletteEvents extends GalettePlugin
      *
      * @param Adherent $member Member instance
      *
-     * @return array|array[]
+     * @return array<int, string|array<string, mixed>>
      */
     public static function getDetailedActionsContents(Adherent $member): array
     {
@@ -188,7 +188,7 @@ class PluginGaletteEvents extends GalettePlugin
     /**
      * Get batch actions contents
      *
-     * @return array|array[]
+     * @return array<int, string|array<string, mixed>>
      */
     public static function getBatchActionsContents(): array
     {

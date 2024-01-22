@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2018-2023 The Galette Team
+ * Copyright © 2018-2024 The Galette Team
  *
  * This file is part of Galette (https://galette.eu).
  *
@@ -28,7 +28,7 @@
  * @package   GaletteEvents
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018-2023 The Galette Team
+ * @copyright 2018-2024 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      https://galette.eu
  */
@@ -47,7 +47,7 @@ use GaletteEvents\Repository\Activities;
  * @package   GaletteEvents
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018-2023 The Galette Team
+ * @copyright 2018-2024 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      https://galette.eu
  *
@@ -57,11 +57,12 @@ use GaletteEvents\Repository\Activities;
 class ActivitiesList extends Pagination
 {
     //filters
-    private $name_filter = null;
-    private $active_filter = null;
+    private ?string $name_filter = null;
+    private ?bool $active_filter = null;
     private string $query;
 
-    protected $list_fields = array(
+    /** @var array<string> */
+    protected array $list_fields = array(
         'name_filter',
         'active_filter'
     );
@@ -79,7 +80,7 @@ class ActivitiesList extends Pagination
      *
      * @return int|string field name
      */
-    protected function getDefaultOrder()
+    protected function getDefaultOrder(): int|string
     {
         return Activities::ORDERBY_DATE;
     }
@@ -89,7 +90,7 @@ class ActivitiesList extends Pagination
      *
      * @return string ASC or DESC
      */
-    protected function getDefaultDirection()
+    protected function getDefaultDirection(): string
     {
         return self::ORDER_DESC;
     }
@@ -99,7 +100,7 @@ class ActivitiesList extends Pagination
      *
      * @return void
      */
-    public function reinit()
+    public function reinit(): void
     {
         parent::reinit();
         $this->name_filter = null;
@@ -113,7 +114,7 @@ class ActivitiesList extends Pagination
      *
      * @return mixed the called property
      */
-    public function __get($name)
+    public function __get(string $name)
     {
         Analog::log(
             '[ActivitiesList] Getting property `' . $name . '`',
@@ -142,7 +143,7 @@ class ActivitiesList extends Pagination
      *
      * @return void
      */
-    public function __set($name, $value)
+    public function __set(string $name, $value): void
     {
         if (in_array($name, $this->pagination_fields)) {
             parent::__set($name, $value);

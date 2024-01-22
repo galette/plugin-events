@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2021-2023 The Galette Team
+ * Copyright © 2021-2024 The Galette Team
  *
  * This file is part of Galette (https://galette.eu).
  *
@@ -28,7 +28,7 @@
  * @package   GaletteEvents
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2021-2023 The Galette Team
+ * @copyright 2021-2024 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      https://galette.eu
  * @since     2021-05-09
@@ -57,7 +57,7 @@ use DI\Attribute\Inject;
  * @name      BookingsController
  * @package   GaletteEvents
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2021-2023 The Galette Team
+ * @copyright 2021-2024 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      https://galette.eu
  * @since     2021-05-09
@@ -66,10 +66,10 @@ use DI\Attribute\Inject;
 class BookingsController extends AbstractPluginController
 {
     /**
-     * @var array
+     * @var array<string, mixed>
      */
     #[Inject("Plugin Galette Events")]
-    protected $module_info;
+    protected array $module_info;
 
     // CRUD - Create
 
@@ -106,14 +106,14 @@ class BookingsController extends AbstractPluginController
     /**
      * List page
      *
-     * @param Request        $request  PSR Request
-     * @param Response       $response PSR Response
-     * @param string         $option   One of 'page' or 'order'
-     * @param string|integer $value    Value of the option
+     * @param Request             $request  PSR Request
+     * @param Response            $response PSR Response
+     * @param string|null         $option   One of 'page' or 'order'
+     * @param string|integer|null $value    Value of the option
      *
      * @return Response
      */
-    public function list(Request $request, Response $response, $option = null, $value = null): Response
+    public function list(Request $request, Response $response, string $option = null, string|int $value = null): Response
     {
         //just for inheritance. see listBookings which signature changes.
         return $response;
@@ -122,15 +122,15 @@ class BookingsController extends AbstractPluginController
     /**
      * List page
      *
-     * @param Request        $request  PSR Request
-     * @param Response       $response PSR Response
-     * @param mixed          $event    Linked event. May be an event ID, 'all' or 'guess'.
-     * @param string         $option   One of 'page' or 'order'
-     * @param string|integer $value    Value of the option
+     * @param Request             $request  PSR Request
+     * @param Response            $response PSR Response
+     * @param string|integer      $event    Linked event. May be an event ID, 'all' or 'guess'.
+     * @param string|null         $option   One of 'page' or 'order'
+     * @param string|integer|null $value    Value of the option
      *
      * @return Response
      */
-    public function listBookings(Request $request, Response $response, $event, $option = null, $value = null): Response
+    public function listBookings(Request $request, Response $response, string|int $event, string $option = null, string|int $value = null): Response
     {
         $filters = $this->session->filter_bookings ?? new BookingsList();
 
@@ -212,13 +212,13 @@ class BookingsController extends AbstractPluginController
     /**
      * Filtering
      *
-     * @param Request  $request  PSR Request
-     * @param Response $response PSR Response
-     * @param mixed    $event    Linked event. May be an event ID, 'all' or 'guess'.
+     * @param Request        $request  PSR Request
+     * @param Response       $response PSR Response
+     * @param string|integer $event    Linked event. May be an event ID, 'all' or 'guess'.
      *
      * @return Response
      */
-    public function filterBookings(Request $request, Response $response, $event): Response
+    public function filterBookings(Request $request, Response $response, string|int $event): Response
     {
         $post = $request->getParsedBody();
         if (isset($this->session->filter_bookings)) {
@@ -380,7 +380,7 @@ class BookingsController extends AbstractPluginController
      *
      * @return Response
      */
-    public function edit(Request $request, Response $response, int $id = null, $action = 'edit', int $id_adh = null): Response
+    public function edit(Request $request, Response $response, int $id = null, string $action = 'edit', int $id_adh = null): Response
     {
         $get = $request->getQueryParams();
         $route_params = [];
@@ -487,7 +487,7 @@ class BookingsController extends AbstractPluginController
      *
      * @return Response
      */
-    public function doEdit(Request $request, Response $response, int $id = null, $action = 'edit'): Response
+    public function doEdit(Request $request, Response $response, int $id = null, string $action = 'edit'): Response
     {
         $post = $request->getParsedBody();
         $booking = new Booking($this->zdb, $this->login);

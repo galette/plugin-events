@@ -52,22 +52,24 @@ use GaletteEvents\Repository\Events;
  * @link      https://galette.eu
  *
  * @property string $query
+ * @property bool $calendar_filter
  */
 
 class EventsList extends Pagination
 {
     //filters
-    private $name_filter = null;
-    private $start_date_filter = null;
-    private $end_date_filter = null;
-    private $group_filter = 0;
-    private $meal_filter = null;
-    private $lodging_filter = null;
-    private $open_filter = null;
-    private $calendar_filter = false;
+    private ?string $name_filter = null;
+    private ?string $start_date_filter = null;
+    private ?string $end_date_filter = null;
+    private int $group_filter = 0;
+    private ?string $meal_filter = null;
+    private ?string $lodging_filter = null;
+    private ?string $open_filter = null;
+    private bool $calendar_filter = false;
     private string $query;
 
-    protected $list_fields = array(
+    /** @var array<string> */
+    protected array $list_fields = array(
         'name_filter',
         'start_date_filter',
         'raw_start_date_filter',
@@ -93,7 +95,7 @@ class EventsList extends Pagination
      *
      * @return int|string field name
      */
-    protected function getDefaultOrder()
+    protected function getDefaultOrder(): int|string
     {
         return Events::ORDERBY_DATE;
     }
@@ -103,7 +105,7 @@ class EventsList extends Pagination
      *
      * @return string ASC or DESC
      */
-    protected function getDefaultDirection()
+    protected function getDefaultDirection(): string
     {
         return self::ORDER_DESC;
     }
@@ -113,7 +115,7 @@ class EventsList extends Pagination
      *
      * @return void
      */
-    public function reinit()
+    public function reinit(): void
     {
         parent::reinit();
         $this->name_filter = null;
@@ -133,7 +135,7 @@ class EventsList extends Pagination
      *
      * @return mixed the called property
      */
-    public function __get($name)
+    public function __get(string $name)
     {
         Analog::log(
             '[EventsList] Getting property `' . $name . '`',
@@ -186,7 +188,7 @@ class EventsList extends Pagination
      *
      * @return void
      */
-    public function __set($name, $value)
+    public function __set(string $name, $value): void
     {
         if (in_array($name, $this->pagination_fields)) {
             parent::__set($name, $value);

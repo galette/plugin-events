@@ -61,26 +61,27 @@ class Activity
     public const YES = 1;
     public const REQUIRED = 2;
 
-    private $zdb;
-    private $login;
-    private $errors;
+    private Db $zdb;
+    private Login $login;
+    /** @var array<string> */
+    private array $errors;
 
-    private $id;
-    private $name;
-    private $active = true;
-    private $creation_date;
-    private $comment;
+    private int $id;
+    private string $name;
+    private bool $active = true;
+    private string $creation_date;
+    private string $comment;
 
     /**
      * Default constructor
      *
-     * @param Db                   $zdb   Database instance
-     * @param Login                $login Login instance
-     * @param null|int|ArrayObject $args  Either a ResultSet row or its id for to load
-     *                                    a specific event, or null to just
-     *                                    instanciate object
+     * @param Db                                      $zdb   Database instance
+     * @param Login                                   $login Login instance
+     * @param null|int|ArrayObject<string,int|string> $args  Either a ResultSet row or its id for to load
+     *                                                       a specific event, or null to just
+     *                                                       instanciate object
      */
-    public function __construct(Db $zdb, Login $login, $args = null)
+    public function __construct(Db $zdb, Login $login, int|ArrayObject $args = null)
     {
         $this->zdb = $zdb;
         $this->login = $login;
@@ -99,7 +100,7 @@ class Activity
      *
      * @return bool true if query succeed, false otherwise
      */
-    public function load($id)
+    public function load(int $id): bool
     {
         try {
             $select = $this->zdb->select($this->getTableName());
@@ -124,11 +125,11 @@ class Activity
     /**
      * Populate object from a resultset row
      *
-     * @param ArrayObject $r the resultset row
+     * @param ArrayObject<string, string|int> $r the resultset row
      *
      * @return void
      */
-    private function loadFromRS($r)
+    private function loadFromRS(ArrayObject $r): void
     {
         $this->id = $r->id_activity;
         $this->name = $r->name;
@@ -142,7 +143,7 @@ class Activity
      *
      * @return boolean
      */
-    public function remove()
+    public function remove(): bool
     {
         $transaction = false;
 
@@ -178,16 +179,16 @@ class Activity
     /**
      * Check posted values validity
      *
-     * @param array $values All values to check, basically the $_POST array
-     *                      after sending the form
+     * @param array<string, mixed> $values All values to check, basically the $_POST array
+     *                                     after sending the form
      *
-     * @return true|array
+     * @return true|array<string>
      */
-    public function check($values)
+    public function check($values): bool|array
     {
         $this->errors = array();
 
-        if (!isset($values['name']) || empty($values['name'])) {
+        if (empty($values['name'])) {
             $this->errors[] = _T('Name is mandatory', 'events');
         } else {
             $this->name = $values['name'];
@@ -220,11 +221,11 @@ class Activity
     }
 
     /**
-     * Store the grouevent
+     * Store the activity
      *
      * @return boolean
      */
-    public function store()
+    public function store(): bool
     {
         global $hist;
 
@@ -248,6 +249,7 @@ class Activity
                 $add = $this->zdb->execute($insert);
                 if ($add->count() > 0) {
                     if ($this->zdb->isPostgres()) {
+                        /** @phpstan-ignore-next-line */
                         $this->id = $this->zdb->driver->getLastGeneratedValue(
                             PREFIX_DB . $this->getTableName() . '_id_seq'
                         );
@@ -299,11 +301,11 @@ class Activity
     /**
      * Get event id
      *
-     * @return integer
+     * @return ?integer
      */
-    public function getId()
+    public function getId(): ?int
     {
-        return $this->id;
+        return $this->id ?? null;
     }
 
     /**
@@ -311,7 +313,7 @@ class Activity
      *
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -324,7 +326,7 @@ class Activity
      *
      * @return string
      */
-    private function getDate($prop, $formatted = true)
+    private function getDate(string $prop, bool $formatted = true): string
     {
         if ($formatted === true) {
             $date = new \DateTime($this->$prop);
@@ -341,7 +343,7 @@ class Activity
      *
      * @return string
      */
-    public function getCreationDate($formatted = true)
+    public function getCreationDate(bool $formatted = true): string
     {
         return $this->getDate('creation_date', $formatted);
     }
@@ -351,7 +353,7 @@ class Activity
      *
      * @return boolean
      */
-    public function isActive()
+    public function isActive(): bool
     {
         return $this->active;
     }
@@ -363,7 +365,7 @@ class Activity
      *
      * @return void
      */
-    public function setName($name)
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
@@ -373,7 +375,7 @@ class Activity
      *
      * @return string
      */
-    protected function getTableName()
+    protected function getTableName(): string
     {
         return EVENTS_PREFIX  . self::TABLE;
     }
@@ -383,7 +385,7 @@ class Activity
      *
      * @return string
      */
-    public function getComment()
+    public function getComment(): string
     {
         return $this->comment;
     }
@@ -393,7 +395,7 @@ class Activity
      *
      * @return integer
      */
-    public function countEvents()
+    public function countEvents(): int
     {
         $select = $this->zdb->select(EVENTS_PREFIX . 'activitiesevents');
 
