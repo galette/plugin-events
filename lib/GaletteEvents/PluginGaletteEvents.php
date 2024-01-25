@@ -1,13 +1,7 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
-
 /**
- * Galette Events plugin
- *
- * PHP version 5
- *
- * Copyright © 2022-2023 The Galette Team
+ * Copyright © 2003-2024 The Galette Team
  *
  * This file is part of Galette (https://galette.eu).
  *
@@ -23,16 +17,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
- *
- * @category  Plugins
- * @package   GaletteEvents
- *
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2022-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @version   SVN: $Id$
- * @link      https://galette.eu
- * @since     Available since 0.7.4dev - 2012-10-04
  */
 
 namespace GaletteEvents;
@@ -44,14 +28,7 @@ use Galette\Core\GalettePlugin;
 /**
  * Galette Events plugin
  *
- * @category  Plugins
- * @name      PluginGaletteEvents
- * @package   GaletteEvents
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2022-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      https://galette.eu
- * @since     Available since 0.7.4dev - 2012-10-04
+ * @author Johan Cwiklinski <johan@x-tnd.be>
  */
 
 class PluginGaletteEvents extends GalettePlugin
