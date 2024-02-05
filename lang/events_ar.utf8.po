@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2023-12-09 11:57+0100\n"
-"PO-Revision-Date: 2024-01-17 14:06+0000\n"
+"PO-Revision-Date: 2024-02-06 17:01+0000\n"
 "Last-Translator: ButterflyOfFire <boffire@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/galette/"
 "events-plugin/ar/>\n"
@@ -354,7 +354,7 @@ msgstr "العنوان"
 #: ../tempcache/event.html.twig:150 ../tempcache/events.html.twig:101
 #: ../tempcache/events.html.twig:177
 msgid "Town"
-msgstr ""
+msgstr "المدينة"
 
 #: ../tempcache/event.html.twig:156
 msgid "Country"
@@ -616,4 +616,4 @@ msgstr "التقويم الشهري"
 
 #: ../tempcache/calendar.html.twig:92
 msgid "Today"
-msgstr ""
+msgstr "اليوم"
