@@ -1,13 +1,14 @@
 # Weblate <noreply@weblate.org>, 2020.
 # Quentin PAGÈS <quentinantonin@free.fr>, 2020.
 # Pèire Bréchet <charrar@free.fr>, 2022, 2024.
+# Pèire Bréchet <oxytanistzero@tutanota.com>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-02-08 22:13+0100\n"
-"PO-Revision-Date: 2024-02-22 21:18+0000\n"
-"Last-Translator: Pèire Bréchet <charrar@free.fr>\n"
+"PO-Revision-Date: 2024-03-20 16:21+0000\n"
+"Last-Translator: Pèire Bréchet <oxytanistzero@tutanota.com>\n"
 "Language-Team: Occitan <https://hosted.weblate.org/projects/galette/"
 "events-plugin/oc/>\n"
 "Language: oc\n"
@@ -332,7 +333,7 @@ msgstr ""
 #: ../tempcache/booking.html.twig:203 ../tempcache/activity.html.twig:83
 #: ../tempcache/event.html.twig:121
 msgid "Comment"
-msgstr ""
+msgstr "Comentari"
 
 #: ../tempcache/booking.html.twig:263
 msgid "No activity for selected event"
@@ -395,7 +396,7 @@ msgstr "Data"
 #: ../tempcache/events.html.twig:101 ../tempcache/events.html.twig:177
 #: ../tempcache/event.html.twig:150
 msgid "Town"
-msgstr ""
+msgstr "Vila"
 
 #: ../tempcache/events.html.twig:101 ../tempcache/events.html.twig:183
 #: ../tempcache/bookings.html.twig:200 ../tempcache/bookings.html.twig:202
