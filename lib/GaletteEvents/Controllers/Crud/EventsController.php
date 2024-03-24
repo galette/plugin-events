@@ -218,7 +218,7 @@ class EventsController extends AbstractPluginController
 
         $events = new Events($this->zdb, $this->login, $filters);
 
-        return $this->withJson($response, $events->getList());
+        return $this->withJson($response, $events->getList(false, true));
     }
 
     /**

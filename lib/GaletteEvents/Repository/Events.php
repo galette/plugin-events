@@ -74,11 +74,12 @@ class Events
     /**
      * Get events list
      *
-     * @param bool $onlyevents get events member has booking on
+     * @param bool $onlyevents   get events member has booking on
+     * @param bool $fullcalendar get events for fullcalendar display (ie. end date +1 day)
      *
      * @return array<int|string, Event|array<string, mixed>>
      */
-    public function getList(bool $onlyevents = false): array
+    public function getList(bool $onlyevents = false, $fullcalendar = false): array
     {
         try {
             $select = $this->zdb->select(EVENTS_PREFIX . Event::TABLE, 'e');
@@ -188,7 +189,11 @@ class Events
                     //required entries for fullcalendar
                     $row['title'] = $row['name'];
                     $row['start'] = $row['begin_date'];
-                    $row['end'] = $row['end_date'];
+                    $end_date = new \DateTime($event->getEndDate(false));
+                    if ($fullcalendar === true) {
+                        $end_date = $end_date->modify('+1 day');
+                    }
+                    $row['end'] = $end_date->format('Y-m-d');
 
                     //extended description
                     $row['begin_date_fmt'] = $event->getBeginDate();
