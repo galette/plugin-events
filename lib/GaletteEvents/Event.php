@@ -365,7 +365,6 @@ class Event
         try {
             $this->zdb->connection->beginTransaction();
             $values = array(
-                self::PK                => $this->id,
                 'name'                  => $this->name,
                 'address'               => $this->address,
                 'zip'                   => $this->zip,
@@ -381,7 +380,6 @@ class Event
 
             if (!isset($this->id) || $this->id == '') {
                 //we're inserting a new event
-                unset($values[self::PK]);
                 $this->creation_date = date("Y-m-d H:i:s");
                 $values['creation_date'] = $this->creation_date;
 
@@ -410,6 +408,7 @@ class Event
                     );
                 }
             } else {
+                $values['id_event'] = $this->id;
                 //we're editing an existing event
                 $update = $this->zdb->update($this->getTableName());
                 $update
