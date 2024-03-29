@@ -295,7 +295,7 @@ class Activity
      */
     public function getName(): string
     {
-        return $this->name;
+        return $this->name ?? '';
     }
 
     /**
@@ -367,7 +367,7 @@ class Activity
      */
     public function getComment(): string
     {
-        return $this->comment;
+        return $this->comment ?? '';
     }
 
     /**
