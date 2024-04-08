@@ -42,6 +42,13 @@
                     required: true,
                 } %}
 
+                {% include "components/forms/input.html.twig" with {
+                    id: 'color',
+                    value: event.getColor(),
+                    label: _T("Color", "events"),
+                    type: 'color'
+                } %}
+
                 {% include "components/forms/date.html.twig" with {
                     id: 'begin_date',
                     value: event.getBeginDate(),

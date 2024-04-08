@@ -192,6 +192,7 @@ class Events
                     $end_date = new \DateTime($event->getEndDate(false));
                     if ($fullcalendar === true) {
                         $end_date = $end_date->modify('+1 day');
+                        $row['textColor'] = $event->getForegoundColor();
                     }
                     $row['end'] = $end_date->format('Y-m-d');
 

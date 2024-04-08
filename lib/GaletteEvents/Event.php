@@ -60,6 +60,7 @@ class Event
     private bool $open = true;
     private ?int $group;
     private string $comment = '';
+    private ?string $color;
 
     /** @var array<int, array<string, mixed>> */
     private array $activities = [];
@@ -145,6 +146,7 @@ class Event
         $this->open = $r->is_open;
         $this->group = $r->id_group;
         $this->comment = $r->comment;
+        $this->color = $r->color;
     }
 
     /**
@@ -280,7 +282,8 @@ class Event
             'address',
             'zip',
             'country',
-            'comment'
+            'comment',
+            'color'
         ];
         foreach ($otherfields as $otherfield) {
             if (isset($values[$otherfield])) {
@@ -369,13 +372,14 @@ class Event
                 'address'               => $this->address,
                 'zip'                   => $this->zip,
                 'town'                  => $this->town,
-                'country'               => ($this->country ? $this->country : new Expression('NULL')),
+                'country'               => ($this->country ?: new Expression('NULL')),
                 'begin_date'            => $this->begin_date,
                 'end_date'              => $this->end_date,
-                'is_open'               => ($this->open ? $this->open :
+                'is_open'               => ($this->open ?:
                                                 ($this->zdb->isPostgres() ? 'false' : 0)),
-                Group::PK               => ($this->group ? $this->group : new Expression('NULL')),
-                'comment'               => $this->comment
+                Group::PK               => ($this->group ?: new Expression('NULL')),
+                'comment'               => $this->comment,
+                'color'                 => $this->color
             );
 
             if (!isset($this->id) || $this->id == '') {
@@ -797,6 +801,16 @@ class Event
     }
 
     /**
+     * Get color
+     *
+     * @return string
+     */
+    public function getColor(): string
+    {
+        return $this->color ?? '';
+    }
+
+    /**
      * Count attendees per event
      *
      * @return ResultSet
@@ -856,5 +870,20 @@ class Event
     public function canCreate(Login $login): bool
     {
         return ($login->isAdmin() || $login->isStaff() || $login->isGroupManager());
+    }
+
+    /**
+     * Get foreground contrasted color for current background color
+     *
+     * @return string
+     */
+    public function getForegoundColor(): string
+    {
+        $bgcolor = trim($this->color ?? '#ffffff', '#');
+        $r = hexdec(substr($bgcolor, 0, 2));
+        $g = hexdec(substr($bgcolor, 2, 2));
+        $b = hexdec(substr($bgcolor, 4, 2));
+        $yiq = (($r * 299) + ($g * 587) + ($b * 114)) / 1000;
+        return ($yiq >= 128) ? 'black' : 'white';
     }
 }
