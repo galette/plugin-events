@@ -46,7 +46,7 @@ class Events
     private Db $zdb;
     private Login $login;
     private EventsList $filters;
-    private $count;
+    private int $count = 0;
 
     public const ORDERBY_DATE = 0;
     public const ORDERBY_NAME = 1;
@@ -79,7 +79,7 @@ class Events
      *
      * @return array<int|string, Event|array<string, mixed>>
      */
-    public function getList(bool $onlyevents = false, $fullcalendar = false): array
+    public function getList(bool $onlyevents = false, bool $fullcalendar = false): array
     {
         try {
             $select = $this->zdb->select(EVENTS_PREFIX . Event::TABLE, 'e');
@@ -294,7 +294,7 @@ class Events
      *
      * @return array<string> SQL ORDER clauses
      */
-    private function buildOrderClause($fields = null): array
+    private function buildOrderClause(array $fields = null): array
     {
         $order = array();
 

@@ -351,7 +351,7 @@ class Bookings
      *
      * @return array<string> SQL ORDER clauses
      */
-    private function buildOrderClause($fields = null): array
+    private function buildOrderClause(array $fields = null): array
     {
         $order = array();
 

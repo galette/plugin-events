@@ -164,7 +164,7 @@ class Activity
      *
      * @return true|array<string>
      */
-    public function check($values): bool|array
+    public function check(array $values): bool|array
     {
         $this->errors = array();
 
