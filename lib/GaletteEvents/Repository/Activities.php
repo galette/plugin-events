@@ -208,30 +208,4 @@ class Activities extends Repository
         //to satisfy inheritance
         return true;
     }
-
-    /**
-     * Insert values in database
-     *
-     * @param string               $table  Table name
-     * @param array<string, mixed> $values Values to insert
-     *
-     * @return void
-     */
-    protected function insert(string $table, array $values): void
-    {
-        $insert = $this->zdb->insert(EVENTS_PREFIX . $table);
-        $insert->values(
-            array(
-                'name'          => ':name',
-                'creation_date' => date('Y-m-d'),
-                'is_active'     => '1',
-                'comment'       => ''
-            )
-        );
-        $stmt = $this->zdb->sql->prepareStatementForSqlObject($insert);
-
-        foreach ($values as $name) {
-            $stmt->execute([':name' => $name['name']]);
-        }
-    }
 }

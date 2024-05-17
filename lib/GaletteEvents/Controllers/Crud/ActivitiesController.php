@@ -240,7 +240,7 @@ class ActivitiesController extends AbstractPluginController
         // Validation
         $valid = $activity->check($post);
         if ($valid !== true) {
-            $error_detected = array_merge($error_detected, $valid);
+            $error_detected = array_merge($error_detected, $activity->getErrors());
         }
 
         if (count($error_detected) == 0) {

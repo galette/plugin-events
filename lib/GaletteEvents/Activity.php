@@ -46,11 +46,11 @@ class Activity
     private Db $zdb;
     private Login $login;
     /** @var array<string> */
-    private array $errors;
+    private array $errors = [];
 
     private int $id;
     private string $name;
-    private bool $active = true;
+    private bool $active = false;
     private string $creation_date;
     private string $comment;
 
@@ -115,7 +115,7 @@ class Activity
     {
         $this->id = $r->id_activity;
         $this->name = $r->name;
-        $this->active = $r->is_active;
+        $this->active = (bool)$r->is_active;
         $this->creation_date = $r->creation_date;
         $this->comment = $r->comment;
     }
@@ -164,9 +164,9 @@ class Activity
      * @param array<string, mixed> $values All values to check, basically the $_POST array
      *                                     after sending the form
      *
-     * @return true|array<string>
+     * @return boolean
      */
-    public function check(array $values): bool|array
+    public function check(array $values): bool
     {
         $this->errors = array();
 
@@ -188,11 +188,11 @@ class Activity
 
         if (count($this->errors) > 0) {
             Analog::log(
-                'Some errors has been throwed attempting to edit/store an activity' . "\n" .
+                'Some errors has been thrown attempting to edit/store an activity' . "\n" .
                 print_r($this->errors, true),
                 Analog::ERROR
             );
-            return $this->errors;
+            return false;
         } else {
             Analog::log(
                 'Activity checked successfully.',
@@ -309,6 +309,10 @@ class Activity
      */
     private function getDate(string $prop, bool $formatted = true): string
     {
+        if (!isset($this->$prop)) {
+            return '';
+        }
+
         if ($formatted === true) {
             $date = new \DateTime($this->$prop);
             return $date->format(__("Y-m-d"));
@@ -340,18 +344,6 @@ class Activity
     }
 
     /**
-     * Set name
-     *
-     * @param string $name Activity name
-     *
-     * @return void
-     */
-    public function setName(string $name): void
-    {
-        $this->name = $name;
-    }
-
-    /**
      * Get table's name
      *
      * @return string
@@ -378,6 +370,10 @@ class Activity
      */
     public function countEvents(): int
     {
+        if (!isset($this->id) || $this->id == '') {
+            return 0;
+        }
+
         $select = $this->zdb->select(EVENTS_PREFIX . 'activitiesevents');
 
         $select->columns(
@@ -389,5 +385,15 @@ class Activity
         $result = $results->current();
         $count = $result->counter;
         return $count;
+    }
+
+    /**
+     * Get errors
+     *
+     * @return array<string>
+     */
+    public function getErrors(): array
+    {
+        return $this->errors;
     }
 }
