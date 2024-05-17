@@ -19,6 +19,8 @@
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
  */
 
+declare(strict_types=1);
+
 namespace GaletteEvents\Repository;
 
 use Analog\Analog;
@@ -195,7 +197,7 @@ class Bookings
             $results = $this->zdb->execute($sumSelect);
             $result = $results->current();
 
-            $this->sum = round($result->sum ?? 0, 2);
+            $this->sum = round((float)$result->sum, 2);
         } catch (\Exception $e) {
             Analog::log(
                 'Cannot calculate bookings sum | ' . $e->getMessage(),

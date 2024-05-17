@@ -19,6 +19,8 @@
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
  */
 
+declare(strict_types=1);
+
 namespace GaletteEvents;
 
 use ArrayObject;
@@ -211,7 +213,6 @@ class Activity
 
         try {
             $values = array(
-                self::PK                => $this->id,
                 'name'                  => $this->name,
                 'is_active'             => ($this->active ? $this->active :
                                                 ($this->zdb->isPostgres() ? 'false' : 0)),
@@ -220,7 +221,6 @@ class Activity
 
             if (!isset($this->id) || $this->id == '') {
                 //we're inserting a new event
-                unset($values[self::PK]);
                 $this->creation_date = date("Y-m-d H:i:s");
                 $values['creation_date'] = $this->creation_date;
 
@@ -230,11 +230,11 @@ class Activity
                 if ($add->count() > 0) {
                     if ($this->zdb->isPostgres()) {
                         /** @phpstan-ignore-next-line */
-                        $this->id = $this->zdb->driver->getLastGeneratedValue(
+                        $this->id = (int)$this->zdb->driver->getLastGeneratedValue(
                             PREFIX_DB . $this->getTableName() . '_id_seq'
                         );
                     } else {
-                        $this->id = $this->zdb->driver->getLastGeneratedValue();
+                        $this->id = (int)$this->zdb->driver->getLastGeneratedValue();
                     }
 
                     // logging
@@ -251,6 +251,7 @@ class Activity
                 }
             } else {
                 //we're editing an existing event
+                $values[self::PK] = $this->id;
                 $update = $this->zdb->update($this->getTableName());
                 $update
                     ->set($values)

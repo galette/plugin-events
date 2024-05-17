@@ -19,6 +19,8 @@
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
  */
 
+declare(strict_types=1);
+
 namespace GaletteEvents;
 
 use ArrayObject;
@@ -127,7 +129,7 @@ class Booking
         $this->member = $r->id_adh;
         $this->date = $r->booking_date;
         $this->paid = $r->is_paid;
-        $this->amount = $r->payment_amount;
+        $this->amount = (float)$r->payment_amount;
         $this->payment_method = $r->payment_method;
         $this->bank_name = $r->bank_name;
         $this->check_number = $r->check_number;
@@ -189,7 +191,7 @@ class Booking
         if (!isset($values['event']) || empty($values['event']) || $values['event'] == -1) {
             $this->errors[] = _T('Event is mandatory', 'events');
         } else {
-            $this->event = $values['event'];
+            $this->event = (int)$values['event'];
             $event = $this->getEvent();
             $activities = $event->getActivities();
             foreach ($activities as $aid => $entry) {
@@ -230,7 +232,7 @@ class Booking
             }
 
             if (isset($values['amount']) && !empty($values['amount'])) {
-                $this->amount = $values['amount'];
+                $this->amount = (float)$values['amount'];
             }
 
             if ($this->paid && !$this->amount) {
@@ -238,7 +240,7 @@ class Booking
             }
 
             if (isset($values['payment_method'])) {
-                $this->payment_method = $values['payment_method'];
+                $this->payment_method = (int)$values['payment_method'];
             }
 
             if (isset($values['bank_name'])) {
@@ -262,12 +264,12 @@ class Booking
                 $this->member = $this->login->id;
             }
         } else {
-            $this->member = $values['member'];
+            $this->member = (int)$values['member'];
         }
 
         if (isset($values['number_people'])) {
             if ((int)$values['number_people'] > 0) {
-                $this->number_people = $values['number_people'];
+                $this->number_people = (int)$values['number_people'];
             } else {
                 $this->errors[] = _T('There must be at least one person', 'events');
             }
@@ -383,11 +385,11 @@ class Booking
                 if ($add->count() > 0) {
                     if ($this->zdb->isPostgres()) {
                         /** @phpstan-ignore-next-line */
-                        $this->id = $this->zdb->driver->getLastGeneratedValue(
+                        $this->id = (int)$this->zdb->driver->getLastGeneratedValue(
                             PREFIX_DB . EVENTS_PREFIX . Booking::TABLE . '_id_seq'
                         );
                     } else {
-                        $this->id = $this->zdb->driver->getLastGeneratedValue();
+                        $this->id = (int)$this->zdb->driver->getLastGeneratedValue();
                     }
 
                     // logging

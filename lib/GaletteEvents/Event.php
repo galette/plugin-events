@@ -19,6 +19,8 @@
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
  */
 
+declare(strict_types=1);
+
 namespace GaletteEvents;
 
 use ArrayObject;
@@ -393,11 +395,11 @@ class Event
                 if ($add->count() > 0) {
                     if ($this->zdb->isPostgres()) {
                         /** @phpstan-ignore-next-line */
-                        $this->id = $this->zdb->driver->getLastGeneratedValue(
+                        $this->id = (int)$this->zdb->driver->getLastGeneratedValue(
                             PREFIX_DB . EVENTS_PREFIX . Event::TABLE . '_id_seq'
                         );
                     } else {
-                        $this->id = $this->zdb->driver->getLastGeneratedValue();
+                        $this->id = (int)$this->zdb->driver->getLastGeneratedValue();
                     }
 
                     // logging

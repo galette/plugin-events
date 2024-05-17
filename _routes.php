@@ -19,6 +19,8 @@
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
  */
 
+declare(strict_types=1);
+
 use Galette\Repository\Groups;
 use GaletteEvents\Filters\BookingsList;
 use GaletteEvents\Filters\ActivitiesList;
