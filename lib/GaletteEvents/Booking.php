@@ -124,13 +124,13 @@ class Booking
      */
     private function loadFromRS(ArrayObject $r): void
     {
-        $this->id = $r->id_booking;
+        $this->id = (int)$r->id_booking;
         $this->event = $r->id_event;
-        $this->member = $r->id_adh;
+        $this->member = (int)$r->id_adh;
         $this->date = $r->booking_date;
-        $this->paid = $r->is_paid;
+        $this->paid = (bool)$r->is_paid;
         $this->amount = (float)$r->payment_amount;
-        $this->payment_method = $r->payment_method;
+        $this->payment_method = (int)$r->payment_method;
         $this->bank_name = $r->bank_name;
         $this->check_number = $r->check_number;
         $this->number_people = $r->number_people;

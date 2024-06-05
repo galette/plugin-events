@@ -365,7 +365,7 @@ class Events
             $results = $this->zdb->execute($countSelect);
 
             if ($result = $results->current()) {
-                $this->count = $result->count;
+                $this->count = (int)$result->count;
                 if (isset($this->filters) && $this->count > 0) {
                     $this->filters->setCounter($this->count);
                 }

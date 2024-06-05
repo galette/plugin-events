@@ -136,7 +136,7 @@ class Event
      */
     private function loadFromRS(ArrayObject $r): void
     {
-        $this->id = $r->id_event;
+        $this->id = (int)$r->id_event;
         $this->name = $r->name;
         $this->address = $r->address;
         $this->zip = $r->zip;
@@ -145,7 +145,7 @@ class Event
         $this->begin_date = $r->begin_date;
         $this->end_date = $r->end_date;
         $this->creation_date = $r->creation_date;
-        $this->open = $r->is_open;
+        $this->open = (bool)$r->is_open;
         $this->group = $r->id_group;
         $this->comment = $r->comment;
         $this->color = $r->color;

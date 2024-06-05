@@ -113,7 +113,7 @@ class Activity
      */
     private function loadFromRS(ArrayObject $r): void
     {
-        $this->id = $r->id_activity;
+        $this->id = (int)$r->id_activity;
         $this->name = $r->name;
         $this->active = (bool)$r->is_active;
         $this->creation_date = $r->creation_date;
@@ -384,7 +384,7 @@ class Activity
         $results = $this->zdb->execute($select);
         $result = $results->current();
         $count = $result->counter;
-        return $count;
+        return (int)$count;
     }
 
     /**
