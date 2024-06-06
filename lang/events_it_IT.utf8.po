@@ -1,20 +1,21 @@
 # Johan Cwiklinski <trasher@x-tnd.be>, 2020.
 # Alessandro Mandelli <mandelli.alessandro@ngi.it>, 2021.
+# Marco Ciampa <ciampix@posteo.net>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-02-08 22:13+0100\n"
-"PO-Revision-Date: 2021-03-13 13:02+0000\n"
-"Last-Translator: Alessandro Mandelli <mandelli.alessandro@ngi.it>\n"
-"Language-Team: Italian <https://hosted.weblate.org/projects/galette/events-"
-"plugin/it/>\n"
+"PO-Revision-Date: 2024-06-07 07:09+0000\n"
+"Last-Translator: Marco Ciampa <ciampix@posteo.net>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/galette/"
+"events-plugin/it/>\n"
 "Language: it_IT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.5.2-dev\n"
+"X-Generator: Weblate 5.6-dev\n"
 
 #: ../lib/GaletteEvents/Event.php:201
 msgid "Begin date is mandatory"
@@ -22,11 +23,11 @@ msgstr ""
 
 #: ../lib/GaletteEvents/Event.php:225 ../tempcache/event.html.twig:83
 msgid "Begin date"
-msgstr ""
+msgstr "Data di inizio"
 
 #: ../lib/GaletteEvents/Event.php:227 ../tempcache/event.html.twig:89
 msgid "End date"
-msgstr ""
+msgstr "Data di fine"
 
 #: ../lib/GaletteEvents/Event.php:245
 msgid "End date must be later or equal to begin date"
@@ -76,7 +77,7 @@ msgstr ""
 #: ../lib/GaletteEvents/Controllers/CsvController.php:94
 #: ../tempcache/booking.html.twig:300
 msgid "Amount"
-msgstr ""
+msgstr "Importo"
 
 #: ../lib/GaletteEvents/Controllers/CsvController.php:96
 #: ../tempcache/booking.html.twig:312
@@ -331,7 +332,7 @@ msgstr ""
 #: ../tempcache/booking.html.twig:203 ../tempcache/activity.html.twig:83
 #: ../tempcache/event.html.twig:121
 msgid "Comment"
-msgstr ""
+msgstr "Commento"
 
 #: ../tempcache/booking.html.twig:263
 msgid "No activity for selected event"
@@ -389,12 +390,12 @@ msgstr "Nome"
 
 #: ../tempcache/events.html.twig:101 ../tempcache/events.html.twig:171
 msgid "Date"
-msgstr ""
+msgstr "Data"
 
 #: ../tempcache/events.html.twig:101 ../tempcache/events.html.twig:177
 #: ../tempcache/event.html.twig:150
 msgid "Town"
-msgstr ""
+msgstr "Città"
 
 #: ../tempcache/events.html.twig:101 ../tempcache/events.html.twig:183
 #: ../tempcache/bookings.html.twig:200 ../tempcache/bookings.html.twig:202
@@ -566,11 +567,11 @@ msgstr ""
 
 #: ../tempcache/event.html.twig:138
 msgid "Address"
-msgstr ""
+msgstr "Indirizzo"
 
 #: ../tempcache/event.html.twig:156
 msgid "Country"
-msgstr ""
+msgstr "Paese"
 
 #: ../tempcache/event.html.twig:190
 msgid "Choose an activity to add"
