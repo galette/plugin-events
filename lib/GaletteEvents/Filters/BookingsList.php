@@ -1,15 +1,9 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
-
 /**
- * Bookings lists filters and paginator
+ * Copyright © 2003-2024 The Galette Team
  *
- * PHP version 5
- *
- * Copyright © 2018-2023 The Galette Team
- *
- * This file is part of Galette (http://galette.tuxfamily.org).
+ * This file is part of Galette (https://galette.eu).
  *
  * Galette is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,15 +17,9 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
- *
- * @category  Filters
- * @package   GaletteEvents
- *
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
  */
+
+declare(strict_types=1);
 
 namespace GaletteEvents\Filters;
 
@@ -42,30 +30,30 @@ use GaletteEvents\Repository\Bookings;
 /**
  * Bookings lists filters and paginator
  *
- * @name      BookingsList
- * @category  Filters
- * @package   GaletteEvents
- *
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
+ * @author Johan Cwiklinski <johan@x-tnd.be>
  *
  * @property string $query
+ * @property string|int|null $event_filter
+ * @property int|string $paid_filter
+ * @property int $payment_type_filter
+ * @property array<string> $selected
+ * @property string|int|null $group_filter
  */
 
 class BookingsList extends Pagination
 {
     //filters
-    private $event_filter;
-    private $paid_filter;
-    private $payment_type_filter;
-    private $group_filter;
+    private string|int|null $event_filter;
+    private int|string $paid_filter;
+    private int $payment_type_filter;
+    private string|int|null $group_filter;
 
-    private $selected;
+    /** @var array<int> */
+    private array $selected;
     private string $query;
 
-    protected $list_fields = array(
+    /** @var array<string> */
+    protected array $list_fields = array(
         'event_filter',
         'paid_filter',
         'payment_type_filter',
@@ -86,7 +74,7 @@ class BookingsList extends Pagination
      *
      * @return int|string field name
      */
-    protected function getDefaultOrder()
+    protected function getDefaultOrder(): int|string
     {
         return Bookings::ORDERBY_BOOKDATE;
     }
@@ -96,7 +84,7 @@ class BookingsList extends Pagination
      *
      * @return string ASC or DESC
      */
-    protected function getDefaultDirection()
+    protected function getDefaultDirection(): string
     {
         return self::ORDER_DESC;
     }
@@ -106,7 +94,7 @@ class BookingsList extends Pagination
      *
      * @return void
      */
-    public function reinit()
+    public function reinit(): void
     {
         parent::reinit();
         $this->event_filter = 'all';
@@ -123,36 +111,34 @@ class BookingsList extends Pagination
      *
      * @return mixed the called property
      */
-    public function __get($name)
+    public function __get(string $name): mixed
     {
-        Analog::log(
-            '[BookingsList] Getting property `' . $name . '`',
-            Analog::DEBUG
-        );
-
         if (in_array($name, $this->pagination_fields)) {
             return parent::__get($name);
         } else {
             if (in_array($name, $this->list_fields)) {
                 return $this->$name;
-            } else {
-                Analog::log(
-                    '[BookingsList] Unable to get proprety `' . $name . '`',
-                    Analog::WARNING
-                );
             }
         }
+
+        throw new \RuntimeException(
+            sprintf(
+                'Unable to get property "%s::%s"!',
+                __CLASS__,
+                $name
+            )
+        );
     }
 
     /**
      * Global setter method
      *
      * @param string $name  name of the property we want to assign a value to
-     * @param object $value a relevant value for the property
+     * @param mixed  $value a relevant value for the property
      *
      * @return void
      */
-    public function __set($name, $value)
+    public function __set(string $name, mixed $value): void
     {
         if (in_array($name, $this->pagination_fields)) {
             parent::__set($name, $value);
@@ -183,13 +169,13 @@ class BookingsList extends Pagination
 
     /**
      * Build href
-     * Overrided to add "event" parameter
+     * Override to add "event" parameter
      *
      * @param int $page Page
      *
      * @return string
      */
-    protected function getHref($page)
+    protected function getHref(int $page): string
     {
         $args = [
             'option'    => 'page',

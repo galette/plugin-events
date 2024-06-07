@@ -1,15 +1,9 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
-
 /**
- * Events controller
+ * Copyright © 2003-2024 The Galette Team
  *
- * PHP version 5
- *
- * Copyright © 2021-2023 The Galette Team
- *
- * This file is part of Galette (http://galette.tuxfamily.org).
+ * This file is part of Galette (https://galette.eu).
  *
  * Galette is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,16 +17,9 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
- *
- * @category  Controllers
- * @package   GaletteEvents
- *
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2021-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
- * @since     2021-05-09
  */
+
+declare(strict_types=1);
 
 namespace GaletteEvents\Controllers\Crud;
 
@@ -53,19 +40,19 @@ use DI\Attribute\Inject;
  * @name      EventsController
  * @package   GaletteEvents
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2021-2023 The Galette Team
+ * @copyright 2021-2024 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
+ * @link      https://galette.eu
  * @since     2021-05-09
  */
 
 class EventsController extends AbstractPluginController
 {
     /**
-     * @var array
+     * @var array<string, mixed>
      */
     #[Inject("Plugin Galette Events")]
-    protected $module_info;
+    protected array $module_info;
 
     // CRUD - Create
 
@@ -101,14 +88,14 @@ class EventsController extends AbstractPluginController
     /**
      * List page
      *
-     * @param Request        $request  PSR Request
-     * @param Response       $response PSR Response
-     * @param string         $option   One of 'page' or 'order'
-     * @param string|integer $value    Value of the option
+     * @param Request             $request  PSR Request
+     * @param Response            $response PSR Response
+     * @param string|null         $option   One of 'page' or 'order'
+     * @param string|integer|null $value    Value of the option
      *
      * @return Response
      */
-    public function list(Request $request, Response $response, $option = null, $value = null): Response
+    public function list(Request $request, Response $response, string $option = null, string|int $value = null): Response
     {
         if (isset($this->session->filter_events)) {
             $filters = $this->session->filter_events;
@@ -128,6 +115,7 @@ class EventsController extends AbstractPluginController
         }
 
         $events = new Events($this->zdb, $this->login, $filters);
+        $events_list = $events->getList();
 
         //assign pagination variables to the template and add pagination links
         $filters->setViewPagination($this->routeparser, $this->view, false);
@@ -141,7 +129,7 @@ class EventsController extends AbstractPluginController
             array(
                 'page_title'            => _T("Events management", "events"),
                 'require_dialog'        => true,
-                'events'                => $events->getList(),
+                'events'                => $events_list,
                 'nb_events'             => $events->getCount(),
                 'filters'               => $filters
             )
@@ -152,15 +140,19 @@ class EventsController extends AbstractPluginController
     /**
      * Calendar view
      *
-     * @param Request        $request  PSR Request
-     * @param Response       $response PSR Response
-     * @param string         $option   One of 'page' or 'order'
-     * @param string|integer $value    Value of the option
+     * @param Request             $request  PSR Request
+     * @param Response            $response PSR Response
+     * @param string|null         $option   One of 'page' or 'order'
+     * @param string|integer|null $value    Value of the option
      *
      * @return Response
      */
-    public function calendar(Request $request, Response $response, $option = null, $value = null): Response
-    {
+    public function calendar(
+        Request $request,
+        Response $response,
+        string $option = null,
+        string|int $value = null
+    ): Response {
         if (isset($this->session->filter_events_calendar)) {
             $filters = $this->session->filter_events_calendar;
         } else {
@@ -213,14 +205,12 @@ class EventsController extends AbstractPluginController
     /**
      * Calendar view
      *
-     * @param Request        $request  PSR Request
-     * @param Response       $response PSR Response
-     * @param string         $option   One of 'page' or 'order'
-     * @param string|integer $value    Value of the option
+     * @param Request  $request  PSR Request
+     * @param Response $response PSR Response
      *
      * @return Response
      */
-    public function ajaxCalendar(Request $request, Response $response, $option = null, $value = null): Response
+    public function ajaxCalendar(Request $request, Response $response): Response
     {
         $get = $request->getQueryParams();
         $filters = $this->session->filter_events_calendar ?? new EventsList();
@@ -230,7 +220,7 @@ class EventsController extends AbstractPluginController
 
         $events = new Events($this->zdb, $this->login, $filters);
 
-        return $this->withJson($response, $events->getList());
+        return $this->withJson($response, $events->getList(false, true));
     }
 
     /**
@@ -280,7 +270,7 @@ class EventsController extends AbstractPluginController
      *
      * @return Response
      */
-    public function edit(Request $request, Response $response, int $id = null, $action = 'edit'): Response
+    public function edit(Request $request, Response $response, int $id = null, string $action = 'edit'): Response
     {
         if ($this->session->event !== null) {
             $event = $this->session->event;
@@ -348,7 +338,7 @@ class EventsController extends AbstractPluginController
      *
      * @return Response
      */
-    public function doEdit(Request $request, Response $response, int $id = null, $action = 'edit'): Response
+    public function doEdit(Request $request, Response $response, int $id = null, string $action = 'edit'): Response
     {
         $post = $request->getParsedBody();
         $event = new Event($this->zdb, $this->login);
@@ -411,7 +401,7 @@ class EventsController extends AbstractPluginController
                     }
                 } else {
                     //something went wrong :'(
-                    $error_detected[] = _T("An error occured while storing the event.", "events");
+                    $error_detected[] = _T("An error occurred while storing the event.", "events");
                 }
             }
         }
@@ -457,7 +447,7 @@ class EventsController extends AbstractPluginController
             if ($event->getId()) {
                 $redirect_url = $this->routeparser->urlFor(
                     'events_event_edit',
-                    ['id' => $event->getId()]
+                    ['id' => (string)$event->getId()]
                 );
             } else {
                 $redirect_url = $this->routeparser->urlFor('events_event_add');
@@ -510,7 +500,7 @@ class EventsController extends AbstractPluginController
     {
         $event = new Event($this->zdb, $this->login, (int)$args['id']);
         return sprintf(
-            //TRANS: first parameter is the event name
+            //TRANS: %1$s is the event name
             _T('Remove event \'%1$s\'"', 'events'),
             $event->getName()
         );

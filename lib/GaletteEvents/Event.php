@@ -1,15 +1,9 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
-
 /**
- * Event entity
+ * Copyright © 2003-2024 The Galette Team
  *
- * PHP version 5
- *
- * Copyright © 2018-2021 The Galette Team
- *
- * This file is part of Galette (http://galette.tuxfamily.org).
+ * This file is part of Galette (https://galette.eu).
  *
  * Galette is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,15 +17,9 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
- *
- * @category  Entity
- * @package   GaletteEvents
- *
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018-2021 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
  */
+
+declare(strict_types=1);
 
 namespace GaletteEvents;
 
@@ -40,18 +28,13 @@ use Galette\Core\Db;
 use Galette\Core\Login;
 use Galette\Entity\Group;
 use Analog\Analog;
+use Laminas\Db\ResultSet\ResultSet;
 use Laminas\Db\Sql\Expression;
 
 /**
  * Event entity
  *
- * @category  Entity
- * @name      Event
- * @package   GaletteEvents
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018-2021 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
+ * @author Johan Cwiklinski <johan@x-tnd.be>
  */
 class Event
 {
@@ -62,36 +45,40 @@ class Event
     public const ACTIVITY_YES = 1;
     public const ACTIVITY_REQUIRED = 2;
 
-    private $zdb;
-    private $login;
-    private $errors;
+    private Db $zdb;
+    private Login $login;
+    /** @var array<string> */
+    private array $errors;
 
-    private $id;
-    private $name;
-    private $address;
-    private $zip;
-    private $town;
-    private $country;
-    private $begin_date;
-    private $end_date;
-    private $creation_date;
-    private $open = true;
-    private $group;
-    private $comment = '';
+    private int $id;
+    private string $name;
+    private string $address;
+    private string $zip;
+    private string $town;
+    private ?string $country;
+    private string $begin_date;
+    private string $end_date;
+    private string $creation_date;
+    private bool $open = true;
+    private ?int $group;
+    private string $comment = '';
+    private ?string $color;
 
-    private $activities = [];
-    private $activities_removed = [];
+    /** @var array<int, array<string, mixed>> */
+    private array $activities = [];
+    /** @var array<int, array<string, mixed>> */
+    private array $activities_removed = [];
 
     /**
      * Default constructor
      *
-     * @param Db                   $zdb   Database instance
-     * @param Login                $login Login instance
-     * @param null|int|ArrayObject $args  Either a ResultSet row or its id for to load
-     *                                    a specific event, or null to just
-     *                                    instanciate object
+     * @param Db                                      $zdb   Database instance
+     * @param Login                                   $login Login instance
+     * @param null|int|ArrayObject<string,int|string> $args  Either a ResultSet row or its id for to load
+     *                                                       a specific event, or null to just
+     *                                                       instanciate object
      */
-    public function __construct(Db $zdb, Login $login, $args = null)
+    public function __construct(Db $zdb, Login $login, int|ArrayObject $args = null)
     {
         $this->zdb = $zdb;
         $this->login = $login;
@@ -116,7 +103,7 @@ class Event
      *
      * @return bool true if query succeed, false otherwise
      */
-    public function load($id)
+    public function load(int $id): bool
     {
         try {
             $select = $this->zdb->select($this->getTableName());
@@ -143,13 +130,13 @@ class Event
     /**
      * Populate object from a resultset row
      *
-     * @param ArrayObject $r the resultset row
+     * @param ArrayObject<string, int|string> $r the resultset row
      *
      * @return void
      */
-    private function loadFromRS($r)
+    private function loadFromRS(ArrayObject $r): void
     {
-        $this->id = $r->id_event;
+        $this->id = (int)$r->id_event;
         $this->name = $r->name;
         $this->address = $r->address;
         $this->zip = $r->zip;
@@ -158,9 +145,10 @@ class Event
         $this->begin_date = $r->begin_date;
         $this->end_date = $r->end_date;
         $this->creation_date = $r->creation_date;
-        $this->open = $r->is_open;
+        $this->open = (bool)$r->is_open;
         $this->group = $r->id_group;
         $this->comment = $r->comment;
+        $this->color = $r->color;
     }
 
     /**
@@ -168,7 +156,7 @@ class Event
      *
      * @return boolean
      */
-    public function remove()
+    public function remove(): bool
     {
         $transaction = false;
 
@@ -204,16 +192,16 @@ class Event
     /**
      * Check posted values validity
      *
-     * @param array $values All values to check, basically the $_POST array
-     *                      after sending the form
+     * @param array<string, mixed> $values All values to check, basically the $_POST array
+     *                                     after sending the form
      *
-     * @return true|array
+     * @return true|array<string>
      */
-    public function check($values)
+    public function check(array $values): bool|array
     {
         $this->errors = array();
 
-        if (!isset($values['begin_date']) || empty($values['begin_date'])) {
+        if (empty($values['begin_date'])) {
             $this->errors[] = _T('Begin date is mandatory', 'events');
         } else {
             //handle dates
@@ -242,16 +230,11 @@ class Event
                         } else {
                             $label = _T('End date', 'events');
                         }
-                        $this->errors[] = str_replace(
-                            array(
-                                '%date_format',
-                                '%field'
-                            ),
-                            array(
-                                __("Y-m-d"),
-                                $label
-                            ),
-                            _T("- Wrong date format (%date_format) for %field!")
+                        $this->errors[] = sprintf(
+                            //TRANS %1$s is the expected date format, %2$s is the field label
+                            _T('- Wrong date format (%1$s) for %2$s!'),
+                            __("Y-m-d"),
+                            $label
                         );
                     }
                 }
@@ -268,7 +251,7 @@ class Event
             }
         }
 
-        if (!isset($values['name']) || empty($values['name'])) {
+        if (empty($values['name'])) {
             $this->errors[] = _T('Name is mandatory', 'events');
         } else {
             $this->name = $values['name'];
@@ -282,8 +265,7 @@ class Event
             }
         } else {
             if (
-                !isset($values['group'])
-                || empty($values['group'])
+                empty($values['group'])
                 || !in_array($values['group'], $this->login->managed_groups)
             ) {
                 $this->errors[] = _T('Please select a group you own!', 'events');
@@ -292,7 +274,7 @@ class Event
             }
         }
 
-        if (!isset($values['town']) || empty($values['town'])) {
+        if (empty($values['town'])) {
             $this->errors[] = _T('Town is mandatory', 'events');
         } else {
             $this->town = $values['town'];
@@ -302,7 +284,8 @@ class Event
             'address',
             'zip',
             'country',
-            'comment'
+            'comment',
+            'color'
         ];
         foreach ($otherfields as $otherfield) {
             if (isset($values[$otherfield])) {
@@ -312,7 +295,6 @@ class Event
 
         if (
             isset($values['add_activity'])
-            && isset($values['attach_activity'])
             && !empty($values['attach_activity'])
         ) {
             $this->activities[$values['attach_activity']] = [
@@ -327,7 +309,6 @@ class Event
 
         if (
             isset($values['remove_activity'])
-            && isset($values['detach_activity'])
             && !empty($values['detach_activity'])
         ) {
             unset($this->activities[$values['detach_activity']]);
@@ -363,7 +344,7 @@ class Event
 
         if (count($this->errors) > 0) {
             Analog::log(
-                'Some errors has been throwed attempting to edit/store an event' . "\n" .
+                'Some errors has been threw attempting to edit/store an event' . "\n" .
                 print_r($this->errors, true),
                 Analog::ERROR
             );
@@ -378,34 +359,33 @@ class Event
     }
 
     /**
-     * Store the grouevent
+     * Store the event
      *
      * @return boolean
      */
-    public function store()
+    public function store(): bool
     {
         global $hist;
 
         try {
             $this->zdb->connection->beginTransaction();
             $values = array(
-                self::PK                => $this->id,
                 'name'                  => $this->name,
                 'address'               => $this->address,
                 'zip'                   => $this->zip,
                 'town'                  => $this->town,
-                'country'               => ($this->country ? $this->country : new Expression('NULL')),
+                'country'               => ($this->country ?: new Expression('NULL')),
                 'begin_date'            => $this->begin_date,
                 'end_date'              => $this->end_date,
-                'is_open'               => ($this->open ? $this->open :
+                'is_open'               => ($this->open ?:
                                                 ($this->zdb->isPostgres() ? 'false' : 0)),
-                Group::PK               => ($this->group ? $this->group : new Expression('NULL')),
-                'comment'               => $this->comment
+                Group::PK               => ($this->group ?: new Expression('NULL')),
+                'comment'               => $this->comment,
+                'color'                 => $this->color
             );
 
             if (!isset($this->id) || $this->id == '') {
                 //we're inserting a new event
-                unset($values[self::PK]);
                 $this->creation_date = date("Y-m-d H:i:s");
                 $values['creation_date'] = $this->creation_date;
 
@@ -414,11 +394,12 @@ class Event
                 $add = $this->zdb->execute($insert);
                 if ($add->count() > 0) {
                     if ($this->zdb->isPostgres()) {
-                        $this->id = $this->zdb->driver->getLastGeneratedValue(
+                        /** @phpstan-ignore-next-line */
+                        $this->id = (int)$this->zdb->driver->getLastGeneratedValue(
                             PREFIX_DB . EVENTS_PREFIX . Event::TABLE . '_id_seq'
                         );
                     } else {
-                        $this->id = $this->zdb->driver->getLastGeneratedValue();
+                        $this->id = (int)$this->zdb->driver->getLastGeneratedValue();
                     }
 
                     // logging
@@ -429,10 +410,11 @@ class Event
                 } else {
                     $hist->add(_T("Fail to add new event.", "events"));
                     throw new \Exception(
-                        'An error occured inserting new event!'
+                        'An error occurred inserting new event!'
                     );
                 }
             } else {
+                $values['id_event'] = $this->id;
                 //we're editing an existing event
                 $update = $this->zdb->update($this->getTableName());
                 $update
@@ -494,7 +476,7 @@ class Event
             }
 
             if (count($delete)) {
-                $stmt = $this->zdb->delete(EVENTS_PREFIX . 'activitiesevents', 'ace');
+                $stmt = $this->zdb->delete(EVENTS_PREFIX . 'activitiesevents');
                 $count = 0;
                 foreach ($delete as $values) {
                     $stmt->where($values);
@@ -502,13 +484,13 @@ class Event
                     ++$count;
                 }
                 Analog::log(
-                    str_replace('%count', $count, '%count activities removed'),
+                    sprintf('%1$s activities removed', $count),
                     Analog::INFO
                 );
             }
 
             if (count($update)) {
-                $stmt = $this->zdb->update(EVENTS_PREFIX . 'activitiesevents', 'ace');
+                $stmt = $this->zdb->update(EVENTS_PREFIX . 'activitiesevents');
                 $count = 0;
                 foreach ($update as $values) {
                     $stmt
@@ -518,13 +500,13 @@ class Event
                     ++$count;
                 }
                 Analog::log(
-                    str_replace('%count', $count, '%count activities updated'),
+                    sprintf('%1$s activities updated', $count),
                     Analog::INFO
                 );
             }
 
             if (count($insert)) {
-                $stmt = $this->zdb->insert(EVENTS_PREFIX . 'activitiesevents', 'ace');
+                $stmt = $this->zdb->insert(EVENTS_PREFIX . 'activitiesevents');
                 $count = 0;
                 foreach ($insert as $values) {
                     $stmt->values(array_merge($key_values, $values));
@@ -532,7 +514,7 @@ class Event
                     ++$count;
                 }
                 Analog::log(
-                    str_replace('%count', $count, '%count activities added'),
+                    sprintf('%1$s activities added', $count),
                     Analog::INFO
                 );
             }
@@ -553,71 +535,71 @@ class Event
     /**
      * Get event id
      *
-     * @return integer
+     * @return ?integer
      */
-    public function getId()
+    public function getId(): ?int
     {
-        return $this->id;
+        return $this->id ?? null;
     }
 
     /**
      * Get event name
      *
-     * @return string
+     * @return ?string
      */
-    public function getName()
+    public function getName(): ?string
     {
-        return $this->name;
+        return $this->name ?? null;
     }
 
     /**
      * Get event address
      *
-     * @return string
+     * @return ?string
      */
-    public function getAddress()
+    public function getAddress(): ?string
     {
-        return $this->address;
+        return $this->address ?? null;
     }
 
     /**
      * Get event zip
      *
-     * @return string
+     * @return ?string
      */
-    public function getZip()
+    public function getZip(): ?string
     {
-        return $this->zip;
+        return $this->zip ?? null;
     }
 
     /**
      * Get event town
      *
-     * @return string
+     * @return ?string
      */
-    public function getTown()
+    public function getTown(): ?string
     {
-        return $this->town;
+        return $this->town ?? null;
     }
 
     /**
      * Get event country
      *
-     * @return string
+     * @return ?string
      */
-    public function getCountry()
+    public function getCountry(): ?string
     {
-        return $this->country;
+        return $this->country ?? null;
     }
 
     /**
      * Get event group
      *
-     * @return integer
+     * @return ?integer
      */
-    public function getGroup()
+    public function getGroup(): ?int
     {
-        return $this->group;
+        return $this->group ?? null;
     }
 
     /**
@@ -625,11 +607,11 @@ class Event
      *
      * @return string
      */
-    public function getGroupName()
+    public function getGroupName(): string
     {
         $name = '-';
         if ($this->group) {
-            $group = new Group((int)$this->group);
+            $group = new Group($this->group);
             $name = $group->getFullName();
         }
         return $name;
@@ -643,7 +625,7 @@ class Event
      *
      * @return string
      */
-    private function getDate($prop, $formatted = true)
+    private function getDate(string $prop, bool $formatted = true): string
     {
         if ($formatted === true) {
             $date = new \DateTime($this->$prop);
@@ -660,7 +642,7 @@ class Event
      *
      * @return string
      */
-    public function getCreationDate($formatted = true)
+    public function getCreationDate(bool $formatted = true): string
     {
         return $this->getDate('creation_date', $formatted);
     }
@@ -672,7 +654,7 @@ class Event
      *
      * @return string
      */
-    public function getBeginDate($formatted = true)
+    public function getBeginDate(bool $formatted = true): string
     {
         return $this->getDate('begin_date', $formatted);
     }
@@ -684,7 +666,7 @@ class Event
      *
      * @return string
      */
-    public function getEndDate($formatted = true)
+    public function getEndDate(bool $formatted = true): string
     {
         return $this->getDate('end_date', $formatted);
     }
@@ -696,7 +678,7 @@ class Event
      *
      * @return boolean
      */
-    public function isActivityRequired($activity)
+    public function isActivityRequired(int $activity): bool
     {
         return $this->activities[$activity]['status'] == Activity::REQUIRED;
     }
@@ -708,7 +690,7 @@ class Event
      *
      * @return boolean
      */
-    public function hasActivity($activity)
+    public function hasActivity(int $activity): bool
     {
         return $this->activities[$activity]['status'] != Activity::NO;
     }
@@ -719,7 +701,7 @@ class Event
      *
      * @return boolean
      */
-    public function isOpen()
+    public function isOpen(): bool
     {
         if ($this->open) {
             try {
@@ -742,7 +724,7 @@ class Event
      *
      * @return void
      */
-    public function setName($name)
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
@@ -752,7 +734,7 @@ class Event
      *
      * @return string
      */
-    protected function getTableName()
+    protected function getTableName(): string
     {
         return EVENTS_PREFIX  . self::TABLE;
     }
@@ -760,9 +742,9 @@ class Event
     /**
      * Get activities list
      *
-     * @return array
+     * @return array<int, array<string, mixed>>
      */
-    public function availableActivities()
+    public function availableActivities(): array
     {
         $select = $this->zdb->select(EVENTS_PREFIX . Activity::TABLE, 'ac');
         $results = $this->zdb->execute($select);
@@ -782,7 +764,7 @@ class Event
      *
      * @return void
      */
-    public function loadActivities()
+    public function loadActivities(): void
     {
         $select = $this->zdb->select(EVENTS_PREFIX . 'activitiesevents', 'ace');
         $select->where([self::PK => $this->id]);
@@ -803,9 +785,9 @@ class Event
     /**
      * Get linked activities
      *
-     * @return array
+     * @return array<int, array<string, mixed>>
      */
-    public function getActivities()
+    public function getActivities(): array
     {
         return $this->activities;
     }
@@ -815,17 +797,27 @@ class Event
      *
      * @return string
      */
-    public function getComment()
+    public function getComment(): string
     {
         return $this->comment;
     }
 
     /**
-     * Count atendees per event
+     * Get color
      *
-     * @return ArrayObject
+     * @return string
      */
-    public function countAttendees()
+    public function getColor(): string
+    {
+        return $this->color ?? '';
+    }
+
+    /**
+     * Count attendees per event
+     *
+     * @return ResultSet
+     */
+    public function countAttendees(): ResultSet
     {
         $select = $this->zdb->select(EVENTS_PREFIX . Booking::TABLE, 'b');
         $select->columns(
@@ -880,5 +872,20 @@ class Event
     public function canCreate(Login $login): bool
     {
         return ($login->isAdmin() || $login->isStaff() || $login->isGroupManager());
+    }
+
+    /**
+     * Get foreground contrasted color for current background color
+     *
+     * @return string
+     */
+    public function getForegoundColor(): string
+    {
+        $bgcolor = trim($this->color ?? '#ffffff', '#');
+        $r = hexdec(substr($bgcolor, 0, 2));
+        $g = hexdec(substr($bgcolor, 2, 2));
+        $b = hexdec(substr($bgcolor, 4, 2));
+        $yiq = (($r * 299) + ($g * 587) + ($b * 114)) / 1000;
+        return ($yiq >= 128) ? 'black' : 'white';
     }
 }

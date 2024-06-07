@@ -1,15 +1,9 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
-
 /**
- * Events
+ * Copyright © 2003-2024 The Galette Team
  *
- * PHP version 5
- *
- * Copyright © 2018-2023 The Galette Team
- *
- * This file is part of Galette (http://galette.tuxfamily.org).
+ * This file is part of Galette (https://galette.eu).
  *
  * Galette is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,25 +17,19 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
- *
- * @category  Repository
- * @package   GaletteEvents
- *
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
  */
+
+declare(strict_types=1);
 
 namespace GaletteEvents\Repository;
 
 use Analog\Analog;
 use Galette\Entity\Adherent;
 use GaletteEvents\Booking;
+use Laminas\Db\ResultSet\ResultSet;
 use Laminas\Db\Sql\Expression;
 use Laminas\Db\Sql\Predicate;
 use Laminas\Db\Sql\Predicate\PredicateSet;
-use Laminas\Db\Sql\Predicate\Operator;
 use Galette\Core\Login;
 use Galette\Core\Db;
 use Galette\Entity\Group;
@@ -53,20 +41,14 @@ use Laminas\Db\Sql\Select;
 /**
  * Events
  *
- * @category  Repository
- * @name      Events
- * @package   GaletteEvents
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
+ * @author Johan Cwiklinski <johan@x-tnd.be>
  */
 class Events
 {
     private Db $zdb;
     private Login $login;
-    private $filters = false;
-    private $count;
+    private EventsList $filters;
+    private int $count = 0;
 
     public const ORDERBY_DATE = 0;
     public const ORDERBY_NAME = 1;
@@ -75,11 +57,11 @@ class Events
     /**
      * Constructor
      *
-     * @param Db         $zdb     Database instance
-     * @param Login      $login   Login instance
-     * @param EventsList $filters Filtering
+     * @param Db          $zdb     Database instance
+     * @param Login       $login   Login instance
+     * @param ?EventsList $filters Filtering
      */
-    public function __construct(Db $zdb, Login $login, $filters = null)
+    public function __construct(Db $zdb, Login $login, EventsList $filters = null)
     {
         $this->zdb = $zdb;
         $this->login = $login;
@@ -94,11 +76,12 @@ class Events
     /**
      * Get events list
      *
-     * @param bool $onlyevents get events member has booking on
+     * @param bool $onlyevents   get events member has booking on
+     * @param bool $fullcalendar get events for fullcalendar display (ie. end date +1 day)
      *
-     * @return array
+     * @return array<int|string, Event|array<string, mixed>>
      */
-    public function getList($onlyevents = false)
+    public function getList(bool $onlyevents = false, bool $fullcalendar = false): array
     {
         try {
             $select = $this->zdb->select(EVENTS_PREFIX . Event::TABLE, 'e');
@@ -153,7 +136,11 @@ class Events
                         )
                     );
                 } else {
-                    $select->where('is_open', true);
+                    $select->where(
+                        'is_open',
+                        //@phpstan-ignore-next-line
+                        new Expression('true')
+                    );
                     $select->where->greaterThanOrEqualTo('begin_date', date('Y-m-d'));
 
                     $set = [new Predicate\IsNull(Group::PK)];
@@ -204,7 +191,12 @@ class Events
                     //required entries for fullcalendar
                     $row['title'] = $row['name'];
                     $row['start'] = $row['begin_date'];
-                    $row['end'] = $row['end_date'];
+                    $end_date = new \DateTime($event->getEndDate(false));
+                    if ($fullcalendar === true) {
+                        $end_date = $end_date->modify('+1 day');
+                        $row['textColor'] = $event->getForegoundColor();
+                    }
+                    $row['end'] = $end_date->format('Y-m-d');
 
                     //extended description
                     $row['begin_date_fmt'] = $event->getBeginDate();
@@ -221,18 +213,20 @@ class Events
                         $description .= sprintf($pattern, _T("Comment:", "events"), $comment);
                     }
 
+                    /** @var ResultSet $attendees */
                     $attendees = $event->countAttendees();
                     $total_attendees = 0;
                     $paid_attendees = 0;
                     foreach ($attendees as $attendee) {
-                        $total_attendees += $attendee->count;
+                        $total_attendees += $attendee['count'];
                         if ($attendee['is_paid']) {
-                            $paid_attendees += $attendee->count;
+                            $paid_attendees += $attendee['count'];
                         }
                     }
 
                     $attendees_str = $total_attendees;
                     if ($total_attendees) {
+                        //TRANS: %1$s is the number of paid attendees
                         $attendees_str .= ' (' . sprintf(_T('%1$s paid', 'events'), $paid_attendees) . ')';
                     }
 
@@ -274,12 +268,12 @@ class Events
      * Is field allowed to order? it should be present in
      * provided fields list (those that are SELECT'ed).
      *
-     * @param string $field_name Field name to order by
-     * @param array  $fields     SELECTE'ed fields
+     * @param string         $field_name Field name to order by
+     * @param ?array<string> $fields     SELECTE'ed fields
      *
      * @return boolean
      */
-    private function canOrderBy($field_name, $fields)
+    private function canOrderBy(string $field_name, array $fields = null): bool
     {
         if (!is_array($fields)) {
             return true;
@@ -298,12 +292,12 @@ class Events
     /**
      * Builds the order clause
      *
-     * @param array $fields Fields list to ensure ORDER clause
-     *                      references selected fields. Optionnal.
+     * @param array<string> $fields Fields list to ensure ORDER clause
+     *                              references selected fields. Optional.
      *
-     * @return array SQL ORDER clauses
+     * @return array<string> SQL ORDER clauses
      */
-    private function buildOrderClause($fields = null)
+    private function buildOrderClause(array $fields = null): array
     {
         $order = array();
 
@@ -335,13 +329,14 @@ class Events
      *
      * @return void
      */
-    private function proceedCount($select)
+    private function proceedCount(Select $select): void
     {
         try {
             $countSelect = clone $select;
             $countSelect->reset($countSelect::COLUMNS);
             $countSelect->reset($countSelect::ORDER);
             $countSelect->reset($countSelect::HAVING);
+            $countSelect->reset($countSelect::GROUP);
             $joins = $countSelect->joins;
             $countSelect->reset($countSelect::JOINS);
             foreach ($joins as $join) {
@@ -370,8 +365,7 @@ class Events
             $results = $this->zdb->execute($countSelect);
 
             if ($result = $results->current()) {
-                //@phpstan-ignore-next-line
-                $this->count = $result->count;
+                $this->count = (int)$result->count;
                 if (isset($this->filters) && $this->count > 0) {
                     $this->filters->setCounter($this->count);
                 }
@@ -390,7 +384,7 @@ class Events
      *
      * @return int
      */
-    public function getCount()
+    public function getCount(): int
     {
         return $this->count;
     }

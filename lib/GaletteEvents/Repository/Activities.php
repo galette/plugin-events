@@ -1,15 +1,9 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
-
 /**
- * Events
+ * Copyright © 2003-2024 The Galette Team
  *
- * PHP version 5
- *
- * Copyright © 2018-2023 The Galette Team
- *
- * This file is part of Galette (http://galette.tuxfamily.org).
+ * This file is part of Galette (https://galette.eu).
  *
  * Galette is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,15 +17,9 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
- *
- * @category  Repository
- * @package   GaletteEvents
- *
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
  */
+
+declare(strict_types=1);
 
 namespace GaletteEvents\Repository;
 
@@ -39,30 +27,23 @@ use Analog\Analog;
 use Galette\Repository\Repository;
 use GaletteEvents\Activity;
 use Galette\Core\Preferences;
+use GaletteEvents\Filters\ActivitiesList;
+use Laminas\Db\ResultSet\ResultSet;
 use Laminas\Db\Sql\Expression;
 use Galette\Core\Login;
 use Galette\Core\Db;
-use Galette\Entity\Group;
-use Galette\Repository\Groups;
-use GaletteEvents\Event;
 use GaletteEvents\Filters\EventsList;
 use Laminas\Db\Sql\Select;
-use Throwable;
+use stdClass;
 
 /**
  * Events
  *
- * @category  Repository
- * @name      Events
- * @package   GaletteEvents
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
+ * @author Johan Cwiklinski <johan@x-tnd.be>
  */
 class Activities extends Repository
 {
-    private $count;
+    private int $count;
 
     public const ORDERBY_DATE = 0;
     public const ORDERBY_NAME = 1;
@@ -70,12 +51,12 @@ class Activities extends Repository
     /**
      * Constructor
      *
-     * @param Db          $zdb         Database instance
-     * @param Login       $login       Login instance
-     * @param Preferences $preferences Preferences instance
-     * @param EventsList  $filters     Filtering
+     * @param Db              $zdb         Database instance
+     * @param Login           $login       Login instance
+     * @param Preferences     $preferences Preferences instance
+     * @param ?ActivitiesList $filters     Filtering
      */
-    public function __construct(Db $zdb, Login $login, Preferences $preferences, $filters = null)
+    public function __construct(Db $zdb, Login $login, Preferences $preferences, ActivitiesList $filters = null)
     {
         $this->zdb = $zdb;
         $this->login = $login;
@@ -92,9 +73,9 @@ class Activities extends Repository
     /**
      * Get activities list
      *
-     * @return array
+     * @return array<int, Activity>|ResultSet
      */
-    public function getList()
+    public function getList(): array|ResultSet
     {
         try {
             $select = $this->zdb->select(EVENTS_PREFIX . Activity::TABLE, 'ac');
@@ -104,6 +85,7 @@ class Activities extends Repository
 
             $this->filters->setLimits($select);
             $results = $this->zdb->execute($select);
+            //@phpstan-ignore-next-line
             $this->filters->query = $this->zdb->query_string;
 
             $activities = [];
@@ -125,12 +107,12 @@ class Activities extends Repository
     /**
      * Builds the order clause
      *
-     * @param array $fields Fields list to ensure ORDER clause
-     *                      references selected fields. Optional.
+     * @param ?array $fields Fields list to ensure ORDER clause
+     *                       references selected fields. Optional.
      *
-     * @return array SQL ORDER clauses
+     * @return array<string> SQL ORDER clauses
      */
-    private function buildOrderClause($fields = null)
+    private function buildOrderClause(array $fields = null): array
     {
         $order = array();
 
@@ -157,7 +139,7 @@ class Activities extends Repository
      *
      * @return void
      */
-    private function proceedCount($select)
+    private function proceedCount(Select $select): void
     {
         try {
             $countSelect = clone $select;
@@ -191,7 +173,7 @@ class Activities extends Repository
 
             $results = $this->zdb->execute($countSelect);
 
-            $this->count = $results->current()->count;
+            $this->count = (int)$results->current()->count;
             if (isset($this->filters) && $this->count > 0) {
                 $this->filters->setCounter($this->count);
             }
@@ -209,7 +191,7 @@ class Activities extends Repository
      *
      * @return int
      */
-    public function getCount()
+    public function getCount(): int
     {
         return $this->count;
     }
@@ -221,35 +203,9 @@ class Activities extends Repository
      *
      * @return boolean
      */
-    public function installInit($check_first = true)
+    public function installInit(bool $check_first = true): bool
     {
         //to satisfy inheritance
         return true;
-    }
-
-    /**
-     * Insert values in database
-     *
-     * @param string $table  Table name
-     * @param array  $values Values to insert
-     *
-     * @return void
-     */
-    protected function insert($table, $values)
-    {
-        $insert = $this->zdb->insert(EVENTS_PREFIX . $table);
-        $insert->values(
-            array(
-                'name'          => ':name',
-                'creation_date' => date('Y-m-d'),
-                'is_active'     => '1',
-                'comment'       => ''
-            )
-        );
-        $stmt = $this->zdb->sql->prepareStatementForSqlObject($insert);
-
-        foreach ($values as $name) {
-            $stmt->execute([':name' => $name['name']]);
-        }
     }
 }

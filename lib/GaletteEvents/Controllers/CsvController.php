@@ -1,15 +1,9 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
-
 /**
- * CSV controller for events plugins
+ * Copyright © 2003-2024 The Galette Team
  *
- * PHP version 5
- *
- * Copyright © 2020-2023 The Galette Team
- *
- * This file is part of Galette (http://galette.tuxfamily.org).
+ * This file is part of Galette (https://galette.eu).
  *
  * Galette is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,15 +17,9 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
- *
- * @category  Controllers
- * @package   GaletteEvents
- *
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2020-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
  */
+
+declare(strict_types=1);
 
 namespace GaletteEvents\Controllers;
 
@@ -46,13 +34,7 @@ use GaletteEvents\Repository\Bookings;
 /**
  * CSV controller for events plugin
  *
- * @category  Controllers
- * @name      CsvController
- * @package   GaletteEvents
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2020-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
+ * @author Johan Cwiklinski <johan@x-tnd.be>
  */
 class CsvController extends \Galette\Controllers\CsvController
 {
@@ -90,7 +72,6 @@ class CsvController extends \Galette\Controllers\CsvController
             _T('Name'),
             _T('First name'),
             _T('Address'),
-            _T('Address (continuation)'),
             _T('Zip code', 'events'),
             _T('City'),
             _T('Phone'),
@@ -140,7 +121,6 @@ class CsvController extends \Galette\Controllers\CsvController
                 $member->name,
                 $member->surname,
                 $member->address,
-                $member->address_continuation,
                 $member->zipcode,
                 $member->town,
                 $member->phone,

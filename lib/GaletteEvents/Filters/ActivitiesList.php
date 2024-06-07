@@ -1,15 +1,9 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
-
 /**
- * Activities lists filters and paginator
+ * Copyright © 2003-2024 The Galette Team
  *
- * PHP version 5
- *
- * Copyright © 2018-2023 The Galette Team
- *
- * This file is part of Galette (http://galette.tuxfamily.org).
+ * This file is part of Galette (https://galette.eu).
  *
  * Galette is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,15 +17,9 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
- *
- * @category  Filters
- * @package   GaletteEvents
- *
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
  */
+
+declare(strict_types=1);
 
 namespace GaletteEvents\Filters;
 
@@ -42,14 +30,7 @@ use GaletteEvents\Repository\Activities;
 /**
  * Events lists filters and paginator
  *
- * @name      ActivitiesList
- * @category  Filters
- * @package   GaletteEvents
- *
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
+ * @author sJohan Cwiklinski <johan@x-tnd.be>
  *
  * @property string $query
  */
@@ -57,11 +38,12 @@ use GaletteEvents\Repository\Activities;
 class ActivitiesList extends Pagination
 {
     //filters
-    private $name_filter = null;
-    private $active_filter = null;
+    private ?string $name_filter = null;
+    private ?bool $active_filter = null;
     private string $query;
 
-    protected $list_fields = array(
+    /** @var array<string> */
+    protected array $list_fields = array(
         'name_filter',
         'active_filter'
     );
@@ -79,7 +61,7 @@ class ActivitiesList extends Pagination
      *
      * @return int|string field name
      */
-    protected function getDefaultOrder()
+    protected function getDefaultOrder(): int|string
     {
         return Activities::ORDERBY_DATE;
     }
@@ -89,7 +71,7 @@ class ActivitiesList extends Pagination
      *
      * @return string ASC or DESC
      */
-    protected function getDefaultDirection()
+    protected function getDefaultDirection(): string
     {
         return self::ORDER_DESC;
     }
@@ -99,7 +81,7 @@ class ActivitiesList extends Pagination
      *
      * @return void
      */
-    public function reinit()
+    public function reinit(): void
     {
         parent::reinit();
         $this->name_filter = null;
@@ -113,36 +95,34 @@ class ActivitiesList extends Pagination
      *
      * @return mixed the called property
      */
-    public function __get($name)
+    public function __get(string $name): mixed
     {
-        Analog::log(
-            '[ActivitiesList] Getting property `' . $name . '`',
-            Analog::DEBUG
-        );
-
         if (in_array($name, $this->pagination_fields)) {
             return parent::__get($name);
         } else {
             if (in_array($name, $this->list_fields)) {
                 return $this->$name;
-            } else {
-                Analog::log(
-                    '[ActivitiesList] Unable to get proprety `' . $name . '`',
-                    Analog::WARNING
-                );
             }
         }
+
+        throw new \RuntimeException(
+            sprintf(
+                'Unable to get property "%s::%s"!',
+                __CLASS__,
+                $name
+            )
+        );
     }
 
     /**
      * Global setter method
      *
      * @param string $name  name of the property we want to assign a value to
-     * @param object $value a relevant value for the property
+     * @param mixed  $value a relevant value for the property
      *
      * @return void
      */
-    public function __set($name, $value)
+    public function __set(string $name, mixed $value): void
     {
         if (in_array($name, $this->pagination_fields)) {
             parent::__set($name, $value);

@@ -1,15 +1,9 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
-
 /**
- * Activity entity
+ * Copyright © 2003-2024 The Galette Team
  *
- * PHP version 5
- *
- * Copyright © 2018-2023 The Galette Team
- *
- * This file is part of Galette (http://galette.tuxfamily.org).
+ * This file is part of Galette (https://galette.eu).
  *
  * Galette is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,36 +17,22 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
- *
- * @category  Entity
- * @package   GaletteEvents
- *
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
  */
+
+declare(strict_types=1);
 
 namespace GaletteEvents;
 
 use ArrayObject;
 use Galette\Core\Db;
 use Galette\Core\Login;
-use Galette\Entity\Group;
-use Galette\Repository\Groups;
 use Analog\Analog;
 use Laminas\Db\Sql\Expression;
 
 /**
  * Activity entity
  *
- * @category  Entity
- * @name      Activity
- * @package   GaletteEvents
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
+ * @author Johan Cwiklinski <johan@x-tnd.be>
  */
 class Activity
 {
@@ -63,26 +43,27 @@ class Activity
     public const YES = 1;
     public const REQUIRED = 2;
 
-    private $zdb;
-    private $login;
-    private $errors;
+    private Db $zdb;
+    private Login $login;
+    /** @var array<string> */
+    private array $errors = [];
 
-    private $id;
-    private $name;
-    private $active = true;
-    private $creation_date;
-    private $comment;
+    private int $id;
+    private string $name;
+    private bool $active = false;
+    private string $creation_date;
+    private string $comment;
 
     /**
      * Default constructor
      *
-     * @param Db                   $zdb   Database instance
-     * @param Login                $login Login instance
-     * @param null|int|ArrayObject $args  Either a ResultSet row or its id for to load
-     *                                    a specific event, or null to just
-     *                                    instanciate object
+     * @param Db                                      $zdb   Database instance
+     * @param Login                                   $login Login instance
+     * @param null|int|ArrayObject<string,int|string> $args  Either a ResultSet row or its id for to load
+     *                                                       a specific event, or null to just
+     *                                                       instanciate object
      */
-    public function __construct(Db $zdb, Login $login, $args = null)
+    public function __construct(Db $zdb, Login $login, int|ArrayObject $args = null)
     {
         $this->zdb = $zdb;
         $this->login = $login;
@@ -101,7 +82,7 @@ class Activity
      *
      * @return bool true if query succeed, false otherwise
      */
-    public function load($id)
+    public function load(int $id): bool
     {
         try {
             $select = $this->zdb->select($this->getTableName());
@@ -120,22 +101,21 @@ class Activity
                 Analog::WARNING
             );
             throw $e;
-            return false;
         }
     }
 
     /**
      * Populate object from a resultset row
      *
-     * @param ArrayObject $r the resultset row
+     * @param ArrayObject<string, string|int> $r the resultset row
      *
      * @return void
      */
-    private function loadFromRS($r)
+    private function loadFromRS(ArrayObject $r): void
     {
-        $this->id = $r->id_activity;
+        $this->id = (int)$r->id_activity;
         $this->name = $r->name;
-        $this->active = $r->is_active;
+        $this->active = (bool)$r->is_active;
         $this->creation_date = $r->creation_date;
         $this->comment = $r->comment;
     }
@@ -145,7 +125,7 @@ class Activity
      *
      * @return boolean
      */
-    public function remove()
+    public function remove(): bool
     {
         $transaction = false;
 
@@ -181,16 +161,16 @@ class Activity
     /**
      * Check posted values validity
      *
-     * @param array $values All values to check, basically the $_POST array
-     *                      after sending the form
+     * @param array<string, mixed> $values All values to check, basically the $_POST array
+     *                                     after sending the form
      *
-     * @return true|array
+     * @return boolean
      */
-    public function check($values)
+    public function check(array $values): bool
     {
         $this->errors = array();
 
-        if (!isset($values['name']) || empty($values['name'])) {
+        if (empty($values['name'])) {
             $this->errors[] = _T('Name is mandatory', 'events');
         } else {
             $this->name = $values['name'];
@@ -208,11 +188,11 @@ class Activity
 
         if (count($this->errors) > 0) {
             Analog::log(
-                'Some errors has been throwed attempting to edit/store an activity' . "\n" .
+                'Some errors has been thrown attempting to edit/store an activity' . "\n" .
                 print_r($this->errors, true),
                 Analog::ERROR
             );
-            return $this->errors;
+            return false;
         } else {
             Analog::log(
                 'Activity checked successfully.',
@@ -223,17 +203,16 @@ class Activity
     }
 
     /**
-     * Store the grouevent
+     * Store the activity
      *
      * @return boolean
      */
-    public function store()
+    public function store(): bool
     {
         global $hist;
 
         try {
             $values = array(
-                self::PK                => $this->id,
                 'name'                  => $this->name,
                 'is_active'             => ($this->active ? $this->active :
                                                 ($this->zdb->isPostgres() ? 'false' : 0)),
@@ -242,7 +221,6 @@ class Activity
 
             if (!isset($this->id) || $this->id == '') {
                 //we're inserting a new event
-                unset($values[self::PK]);
                 $this->creation_date = date("Y-m-d H:i:s");
                 $values['creation_date'] = $this->creation_date;
 
@@ -251,11 +229,12 @@ class Activity
                 $add = $this->zdb->execute($insert);
                 if ($add->count() > 0) {
                     if ($this->zdb->isPostgres()) {
-                        $this->id = $this->zdb->driver->getLastGeneratedValue(
+                        /** @phpstan-ignore-next-line */
+                        $this->id = (int)$this->zdb->driver->getLastGeneratedValue(
                             PREFIX_DB . $this->getTableName() . '_id_seq'
                         );
                     } else {
-                        $this->id = $this->zdb->driver->getLastGeneratedValue();
+                        $this->id = (int)$this->zdb->driver->getLastGeneratedValue();
                     }
 
                     // logging
@@ -267,11 +246,12 @@ class Activity
                 } else {
                     $hist->add(_T("Fail to add new activity.", "events"));
                     throw new \Exception(
-                        'An error occured inserting new activity!'
+                        'An error occurred inserting new activity!'
                     );
                 }
             } else {
                 //we're editing an existing event
+                $values[self::PK] = $this->id;
                 $update = $this->zdb->update($this->getTableName());
                 $update
                     ->set($values)
@@ -296,18 +276,17 @@ class Activity
                 Analog::ERROR
             );
             throw $e;
-            return false;
         }
     }
 
     /**
      * Get event id
      *
-     * @return integer
+     * @return ?integer
      */
-    public function getId()
+    public function getId(): ?int
     {
-        return $this->id;
+        return $this->id ?? null;
     }
 
     /**
@@ -315,9 +294,9 @@ class Activity
      *
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
-        return $this->name;
+        return $this->name ?? '';
     }
 
     /**
@@ -328,8 +307,12 @@ class Activity
      *
      * @return string
      */
-    private function getDate($prop, $formatted = true)
+    private function getDate(string $prop, bool $formatted = true): string
     {
+        if (!isset($this->$prop)) {
+            return '';
+        }
+
         if ($formatted === true) {
             $date = new \DateTime($this->$prop);
             return $date->format(__("Y-m-d"));
@@ -345,7 +328,7 @@ class Activity
      *
      * @return string
      */
-    public function getCreationDate($formatted = true)
+    public function getCreationDate(bool $formatted = true): string
     {
         return $this->getDate('creation_date', $formatted);
     }
@@ -355,21 +338,9 @@ class Activity
      *
      * @return boolean
      */
-    public function isActive()
+    public function isActive(): bool
     {
         return $this->active;
-    }
-
-    /**
-     * Set name
-     *
-     * @param string $name Activity name
-     *
-     * @return void
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
     }
 
     /**
@@ -377,7 +348,7 @@ class Activity
      *
      * @return string
      */
-    protected function getTableName()
+    protected function getTableName(): string
     {
         return EVENTS_PREFIX  . self::TABLE;
     }
@@ -387,9 +358,9 @@ class Activity
      *
      * @return string
      */
-    public function getComment()
+    public function getComment(): string
     {
-        return $this->comment;
+        return $this->comment ?? '';
     }
 
     /**
@@ -397,8 +368,12 @@ class Activity
      *
      * @return integer
      */
-    public function countEvents()
+    public function countEvents(): int
     {
+        if (!isset($this->id) || $this->id == '') {
+            return 0;
+        }
+
         $select = $this->zdb->select(EVENTS_PREFIX . 'activitiesevents');
 
         $select->columns(
@@ -409,6 +384,16 @@ class Activity
         $results = $this->zdb->execute($select);
         $result = $results->current();
         $count = $result->counter;
-        return $count;
+        return (int)$count;
+    }
+
+    /**
+     * Get errors
+     *
+     * @return array<string>
+     */
+    public function getErrors(): array
+    {
+        return $this->errors;
     }
 }

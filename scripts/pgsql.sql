@@ -24,6 +24,7 @@ CREATE TABLE galette_events_events (
   is_open boolean default TRUE,
   id_group integer REFERENCES galette_groups(id_group) ON DELETE RESTRICT ON UPDATE CASCADE default NULL,
   comment text,
+  color character varying(7),
   PRIMARY KEY (id_event)
 );
 

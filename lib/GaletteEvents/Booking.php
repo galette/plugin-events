@@ -1,15 +1,9 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
-
 /**
- * Booking entity
+ * Copyright © 2003-2024 The Galette Team
  *
- * PHP version 5
- *
- * Copyright © 2018-2023 The Galette Team
- *
- * This file is part of Galette (http://galette.tuxfamily.org).
+ * This file is part of Galette (https://galette.eu).
  *
  * Galette is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,15 +17,9 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
- *
- * @category  Entity
- * @package   GaletteEvents
- *
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
  */
+
+declare(strict_types=1);
 
 namespace GaletteEvents;
 
@@ -45,53 +33,50 @@ use Analog\Analog;
 /**
  * Booking entity
  *
- * @category  Entity
- * @name      Event
- * @package   GaletteEvents
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
+ * @author Johan Cwiklinski <johan@x-tnd.be>
  */
 class Booking
 {
     public const TABLE = 'bookings';
     public const PK = 'id_booking';
 
-    private $zdb;
-    private $login;
-    private $errors;
+    private Db $zdb;
+    private Login $login;
+    /** @var array<string> */
+    private array $errors;
 
-    private $id;
-    private $event;
-    private $member;
-    private $date = '';
-    private $paid;
-    private $amount;
-    private $payment_method = PaymentType::OTHER;
-    private $bank_name;
-    private $check_number;
-    private $number_people = 1;
-    private $comment = '';
+    private int $id;
+    private int $event;
+    private int $member;
+    private string $date = '';
+    private bool $paid = false;
+    private ?float $amount = null;
+    private int $payment_method = PaymentType::OTHER;
+    private ?string $bank_name = null;
+    private ?string $check_number = null;
+    private int $number_people = 1;
+    private string $comment = '';
 
-    private $activities = [];
-    private $activities_removed = [];
-    private $creation_date;
+    /** @var array<int, array<string,mixed>> */
+    private array $activities = [];
+    /** @var array<int, array<string,mixed>> */
+    private array $activities_removed = [];
+    private string $creation_date;
 
     /**
      * Default constructor
      *
-     * @param Db                   $zdb   Database instance
-     * @param Login                $login Login instance
-     * @param null|int|ArrayObject $args  Either a ResultSet row or its id for to load
-     *                                    a specific event, or null to just
-     *                                    instanciate object
+     * @param Db                                      $zdb   Database instance
+     * @param Login                                   $login Login instance
+     * @param null|int|ArrayObject<string,int|string> $args  Either a ResultSet row or its id for to load
+     *                                                       a specific event, or null to just
+     *                                                       instanciate object
      */
-    public function __construct(Db $zdb, Login $login, $args = null)
+    public function __construct(Db $zdb, Login $login, int|ArrayObject $args = null)
     {
         $this->zdb = $zdb;
         $this->login = $login;
-        if ($args == null || is_int($args)) {
+        if (is_int($args)) {
             $this->load($args);
         } elseif (is_object($args)) {
             $this->loadFromRS($args);
@@ -106,7 +91,7 @@ class Booking
      *
      * @return bool true if query succeed, false otherwise
      */
-    public function load($id)
+    public function load(int $id): bool
     {
         try {
             $select = $this->zdb->select($this->getTableName());
@@ -127,26 +112,25 @@ class Booking
                 Analog::WARNING
             );
             throw $e;
-            return false;
         }
     }
 
     /**
      * Populate object from a resultset row
      *
-     * @param ArrayObject $r the resultset row
+     * @param ArrayObject<string, int|string> $r the resultset row
      *
      * @return void
      */
-    private function loadFromRS($r)
+    private function loadFromRS(ArrayObject $r): void
     {
-        $this->id = $r->id_booking;
+        $this->id = (int)$r->id_booking;
         $this->event = $r->id_event;
-        $this->member = $r->id_adh;
+        $this->member = (int)$r->id_adh;
         $this->date = $r->booking_date;
-        $this->paid = $r->is_paid;
-        $this->amount = $r->payment_amount;
-        $this->payment_method = $r->payment_method;
+        $this->paid = (bool)$r->is_paid;
+        $this->amount = (float)$r->payment_amount;
+        $this->payment_method = (int)$r->payment_method;
         $this->bank_name = $r->bank_name;
         $this->check_number = $r->check_number;
         $this->number_people = $r->number_people;
@@ -158,7 +142,7 @@ class Booking
      *
      * @return boolean
      */
-    public function remove()
+    public function remove(): bool
     {
         $transaction = false;
 
@@ -194,12 +178,12 @@ class Booking
     /**
      * Check posted values validity
      *
-     * @param array $values All values to check, basically the $_POST array
-     *                      after sending the form
+     * @param array<string,mixed> $values All values to check, basically the $_POST array
+     *                                    after sending the form
      *
-     * @return true|array
+     * @return true|array<string>
      */
-    public function check($values)
+    public function check(array $values): array|bool
     {
         $this->errors = array();
 
@@ -207,7 +191,7 @@ class Booking
         if (!isset($values['event']) || empty($values['event']) || $values['event'] == -1) {
             $this->errors[] = _T('Event is mandatory', 'events');
         } else {
-            $this->event = $values['event'];
+            $this->event = (int)$values['event'];
             $event = $this->getEvent();
             $activities = $event->getActivities();
             foreach ($activities as $aid => $entry) {
@@ -215,10 +199,10 @@ class Booking
                     $event->isActivityRequired($aid)
                     && (!isset($values['activities']) || !in_array($aid, $values['activities']))
                 ) {
-                    $this->errors[] = str_replace(
-                        '%activity',
-                        $entry['activity']->getName(),
-                        _T('%activity is mandatory for this event!', 'events')
+                    $this->errors[] = sprintf(
+                        //TRANS: %1$s is activity name
+                        _T('%1$s is mandatory for this event!', 'events'),
+                        $entry['activity']->getName()
                     );
                 } else {
                     $act = [
@@ -248,7 +232,7 @@ class Booking
             }
 
             if (isset($values['amount']) && !empty($values['amount'])) {
-                $this->amount = $values['amount'];
+                $this->amount = (float)$values['amount'];
             }
 
             if ($this->paid && !$this->amount) {
@@ -256,7 +240,7 @@ class Booking
             }
 
             if (isset($values['payment_method'])) {
-                $this->payment_method = $values['payment_method'];
+                $this->payment_method = (int)$values['payment_method'];
             }
 
             if (isset($values['bank_name'])) {
@@ -280,12 +264,12 @@ class Booking
                 $this->member = $this->login->id;
             }
         } else {
-            $this->member = $values['member'];
+            $this->member = (int)$values['member'];
         }
 
         if (isset($values['number_people'])) {
             if ((int)$values['number_people'] > 0) {
-                $this->number_people = $values['number_people'];
+                $this->number_people = (int)$values['number_people'];
             } else {
                 $this->errors[] = _T('There must be at least one person', 'events');
             }
@@ -316,16 +300,11 @@ class Booking
                     __("Y-m-d") . ' | ' . $e->getMessage(),
                     Analog::INFO
                 );
-                $this->errors[] = str_replace(
-                    array(
-                        '%date_format',
-                        '%field'
-                    ),
-                    array(
-                        __("Y-m-d"),
-                        __('booking date', 'events')
-                    ),
-                    _T("- Wrong date format (%date_format) for %field!")
+                $this->errors[] = sprintf(
+                    //TRANS %1$s is the expected date format, %2$s is the field label
+                    _T('- Wrong date format (%1$s) for %2$s!'),
+                    __("Y-m-d"),
+                    __('booking date', 'events')
                 );
             }
         }
@@ -337,7 +316,7 @@ class Booking
                 Event::PK       => $this->event,
                 Adherent::PK    => $this->member
             ]);
-            if ($this->id) {
+            if (isset($this->id)) {
                 $select->where->notEqualTo(
                     self::PK,
                     $this->id
@@ -345,16 +324,11 @@ class Booking
             }
             $results = $this->zdb->execute($select);
             if ($results->count()) {
-                $this->errors[] = str_replace(
-                    [
-                        '%member',
-                        '%event'
-                    ],
-                    [
-                        $this->getMember()->sfullname,
-                        $this->getEvent()->getName()
-                    ],
-                    _T('A booking already exists for %member in %event', 'events')
+                $this->errors[] = sprintf(
+                    //TRANS: first replacement is member name, second is event name
+                    _T('A booking already exists for %1$s in %2$s', 'events'),
+                    $this->getMember()->sfullname,
+                    $this->getEvent()->getName()
                 );
             }
         }
@@ -376,18 +350,17 @@ class Booking
     }
 
     /**
-     * Store the groupevent
+     * Store the booking
      *
      * @return boolean
      */
-    public function store()
+    public function store(): bool
     {
         global $hist;
 
         try {
             $this->zdb->connection->beginTransaction();
             $values = array(
-                self::PK            => $this->id,
                 Event::PK           => $this->event,
                 Adherent::PK        => $this->member,
                 'booking_date'      => $this->date,
@@ -403,7 +376,6 @@ class Booking
 
             if (!isset($this->id) || $this->id == '') {
                 //we're inserting a new event
-                unset($values[self::PK]);
                 $this->creation_date = date("Y-m-d H:i:s");
                 $values['creation_date'] = $this->creation_date;
 
@@ -412,11 +384,12 @@ class Booking
                 $add = $this->zdb->execute($insert);
                 if ($add->count() > 0) {
                     if ($this->zdb->isPostgres()) {
-                        $this->id = $this->zdb->driver->getLastGeneratedValue(
+                        /** @phpstan-ignore-next-line */
+                        $this->id = (int)$this->zdb->driver->getLastGeneratedValue(
                             PREFIX_DB . EVENTS_PREFIX . Booking::TABLE . '_id_seq'
                         );
                     } else {
-                        $this->id = $this->zdb->driver->getLastGeneratedValue();
+                        $this->id = (int)$this->zdb->driver->getLastGeneratedValue();
                     }
 
                     // logging
@@ -427,11 +400,12 @@ class Booking
                 } else {
                     $hist->add(_T("Fail to add new booking.", "events"));
                     throw new \Exception(
-                        'An error occured inserting new booking!'
+                        'An error occurred inserting new booking!'
                     );
                 }
             } else {
                 //we're editing an existing booking
+                $values[self::PK] = $this->id;
                 $update = $this->zdb->update($this->getTableName());
                 $update
                     ->set($values)
@@ -493,7 +467,7 @@ class Booking
             }
 
             if (count($delete)) {
-                $prepare = $this->zdb->delete(EVENTS_PREFIX . 'activitiesbookings', 'acb');
+                $prepare = $this->zdb->delete(EVENTS_PREFIX . 'activitiesbookings');
                 $prepare->where([
                     self::PK        => $this->id,
                     Activity::PK    => ':aid'
@@ -506,13 +480,13 @@ class Booking
                     ++$count;
                 }
                 Analog::log(
-                    str_replace('%count', $count, '%count activities removed'),
+                    sprintf('%1$s activities removed', $count),
                     Analog::INFO
                 );
             }
 
             if (count($update)) {
-                $prepare = $this->zdb->update(EVENTS_PREFIX . 'activitiesbookings', 'acb');
+                $prepare = $this->zdb->update(EVENTS_PREFIX . 'activitiesbookings');
                 $prepare->set([
                     'checked'       => ':checked'
                 ])->where([
@@ -530,13 +504,13 @@ class Booking
                     ++$count;
                 }
                 Analog::log(
-                    str_replace('%count', $count, '%count activities updated'),
+                    sprintf('%1$s activities updated', $count),
                     Analog::INFO
                 );
             }
 
             if (count($insert)) {
-                $prepare = $this->zdb->insert(EVENTS_PREFIX . 'activitiesbookings', 'acb');
+                $prepare = $this->zdb->insert(EVENTS_PREFIX . 'activitiesbookings');
                 $prepare->values([
                     self::PK        => ':id',
                     Activity::PK    => ':aid',
@@ -554,7 +528,7 @@ class Booking
                     ++$count;
                 }
                 Analog::log(
-                    str_replace('%count', $count, '%count activities added'),
+                    sprintf('%1$s activities added', $count),
                     Analog::INFO
                 );
             }
@@ -569,48 +543,50 @@ class Booking
                 Analog::ERROR
             );
             throw $e;
-            return false;
         }
     }
 
     /**
      * Get event id
      *
-     * @return integer
+     * @return ?integer
      */
-    public function getId()
+    public function getId(): ?int
     {
-        return $this->id;
+        return $this->id ?? null;
     }
 
     /**
      * Get event id
      *
-     * @return integer
+     * @return ?integer
      */
-    public function getEventId()
+    public function getEventId(): ?int
     {
-        return $this->event;
+        return $this->event ?? null;
     }
 
     /**
      * Get event
      *
-     * @return Event
+     * @return ?Event
      */
-    public function getEvent()
+    public function getEvent(): ?Event
     {
-        return new Event($this->zdb, $this->login, (int)$this->event);
+        if (isset($this->event)) {
+            return new Event($this->zdb, $this->login, $this->event);
+        }
+        return null;
     }
 
     /**
      * Get member id
      *
-     * @return integer
+     * @return ?integer
      */
-    public function getMemberId()
+    public function getMemberId(): ?int
     {
-        return $this->member;
+        return $this->member ?? null;
     }
 
     /**
@@ -618,9 +594,9 @@ class Booking
      *
      * @return Adherent
      */
-    public function getMember()
+    public function getMember(): Adherent
     {
-        return new Adherent($this->zdb, (int)$this->member);
+        return new Adherent($this->zdb, $this->member);
     }
 
     /**
@@ -630,7 +606,7 @@ class Booking
      *
      * @return string
      */
-    public function getDate($formatted = true)
+    public function getDate(bool $formatted = true): string
     {
         if ($formatted === true) {
             $date = new \DateTime($this->date);
@@ -645,7 +621,7 @@ class Booking
      *
      * @return boolean
      */
-    public function isPaid()
+    public function isPaid(): bool
     {
         return $this->paid;
     }
@@ -653,9 +629,9 @@ class Booking
     /**
      * Get amount
      *
-     * @return float
+     * @return ?float
      */
-    public function getAmount()
+    public function getAmount(): ?float
     {
         return $this->amount;
     }
@@ -665,7 +641,7 @@ class Booking
      *
      * @return integer
      */
-    public function getPaymentMethod()
+    public function getPaymentMethod(): int
     {
         return $this->payment_method;
     }
@@ -675,7 +651,7 @@ class Booking
      *
      * @return string
      */
-    public function getPaymentMethodName()
+    public function getPaymentMethodName(): string
     {
         $pt = new PaymentType($this->zdb, (int)$this->payment_method);
         return $pt->getname();
@@ -684,9 +660,9 @@ class Booking
     /**
      * Get bank name
      *
-     * @return string
+     * @return ?string
      */
-    public function getBankName()
+    public function getBankName(): ?string
     {
         return $this->bank_name;
     }
@@ -694,9 +670,9 @@ class Booking
     /**
      * Get check number
      *
-     * @return string
+     * @return ?string
      */
-    public function getCheckNumber()
+    public function getCheckNumber(): ?string
     {
         return $this->check_number;
     }
@@ -706,7 +682,7 @@ class Booking
      *
      * @return integer
      */
-    public function getNumberPeople()
+    public function getNumberPeople(): int
     {
         return $this->number_people;
     }
@@ -718,7 +694,7 @@ class Booking
      *
      * @return string
      */
-    public function getCreationDate($formatted = true)
+    public function getCreationDate(bool $formatted = true): string
     {
         if ($formatted === true) {
             $date = new \DateTime($this->creation_date);
@@ -733,9 +709,9 @@ class Booking
      *
      * @param integer $event Event id
      *
-     * @return Booking
+     * @return self
      */
-    public function setEvent($event)
+    public function setEvent(int $event): self
     {
         $this->event = $event;
         return $this;
@@ -746,9 +722,9 @@ class Booking
      *
      * @param integer $member Member id
      *
-     * @return Booking
+     * @return self
      */
-    public function setMember($member)
+    public function setMember(int $member): self
     {
         $this->member = $member;
         return $this;
@@ -759,7 +735,7 @@ class Booking
      *
      * @return string
      */
-    protected function getTableName()
+    protected function getTableName(): string
     {
         return EVENTS_PREFIX . self::TABLE;
     }
@@ -769,7 +745,7 @@ class Booking
      *
      * @return string
      */
-    public function getComment()
+    public function getComment(): string
     {
         return $this->comment;
     }
@@ -777,11 +753,11 @@ class Booking
     /**
      * Has Activity
      *
-     * @param string $activity Activity
+     * @param int $activity Activity
      *
      * @return boolean
      */
-    public function has($activity)
+    public function has(int $activity): bool
     {
         return isset($this->activities[$activity]) && $this->activities[$activity]['checked'];
     }
@@ -791,7 +767,7 @@ class Booking
      *
      * @return void
      */
-    public function loadActivities()
+    public function loadActivities(): void
     {
         $select = $this->zdb->select(EVENTS_PREFIX . 'activitiesbookings', 'acb');
         $select->where([self::PK => $this->id]);
@@ -811,9 +787,9 @@ class Booking
     /**
      * Get activities
      *
-     * @return array
+     * @return array<int, array<string,mixed>>
      */
-    public function getActivities()
+    public function getActivities(): array
     {
         return $this->activities;
     }
@@ -825,7 +801,7 @@ class Booking
      *
      * @return string the class to apply
      */
-    public function getRowClass($public = false)
+    public function getRowClass(bool $public = false): string
     {
         $strclass = 'event-' .
             ($this->isPaid() ? 'paid' : 'notpaid');

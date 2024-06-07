@@ -4,3 +4,4 @@ webroot/js/libs/
 webroot/js/*bundle*
 dist/
 tempcache/
+tests/coverage/

@@ -1,3 +1,23 @@
+{#
+/**
+ * Copyright © 2003-2024 The Galette Team
+ *
+ * This file is part of Galette (https://galette.eu).
+ *
+ * Galette is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Galette is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Galette. If not, see <http://www.gnu.org/licenses/>.
+ */
+#}
 {% extends 'elements/list.html.twig' %}
 {% import "macros.twig" as macros %}
 
@@ -11,7 +31,10 @@
 
 {% block infoline %}
     {% set infoline = {
-        'label': _Tn("%count activity", "%count activities", nb, "events")|replace({"%count": nb}),
+        'label': _Tn("%1$s activity", "%1$s activities", nb, "events")|replace({"%1$s": nb}),
+        'route': {
+            'name': 'filter-activitieslist'
+        }
     } %}
     {{ parent() }}
 {% endblock %}
@@ -62,7 +85,7 @@
             <td class="center nowrap actions_row">
                 {% set actions = [
                     {
-                        'label': _T("%activity: edit informations", "events")|replace({"%activity": activity.getName()}),
+                        'label': _T("%1$s: edit information", "events")|replace({"%1$s": activity.getName()}),
                         'route': {
                         'name': 'events_activity_edit',
                             'args': {'id': aid}
@@ -70,7 +93,7 @@
                         'icon': 'edit'
                     },
                     {
-                        'label': _T("%activity: remove from database", "events")|replace({"%activity": activity.getName()}),
+                        'label': _T("%1$s: remove from database", "events")|replace({"%1$s": activity.getName()}),
                         'route': {
                         'name': 'events_remove_activity',
                             'args': {'id': aid}

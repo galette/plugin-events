@@ -1,3 +1,23 @@
+{#
+/**
+ * Copyright © 2003-2024 The Galette Team
+ *
+ * This file is part of Galette (https://galette.eu).
+ *
+ * Galette is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Galette is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Galette. If not, see <http://www.gnu.org/licenses/>.
+ */
+#}
 {% extends "page.html.twig" %}
 
 {% block content %}
@@ -5,7 +25,7 @@
         <div class="ui styled fluid accordion field">
             <div class="active title">
                 <i class="icon dropdown"></i>
-                {{ _T("Booking informations", "events") }}
+                {{ _T("Booking information", "events") }}
             </div>
             <div class="active content">
                 {% include "components/forms/date.html.twig" with {
@@ -80,6 +100,7 @@
                 {{ _T("Activities", "events") }}
             </div>
             <div class="active content">
+                {% if booking.getEvent() %}
                 {% for aid, item in booking.getEvent().getActivities() %}
                     {% include "components/forms/checkbox.html.twig" with {
                         id: 'activity_' ~ aid,
@@ -93,6 +114,7 @@
                 {% else %}
                     <p>{{ _T("No activity for selected event", "events") }}</p>
                 {% endfor %}
+                {% endif %}
             </div>
         </div>
 
@@ -100,7 +122,7 @@
         <div class="ui styled fluid accordion field">
             <div class="active title">
                 <i class="icon dropdown"></i>
-                {{ _T("Financial informations", "events") }}
+                {{ _T("Financial information", "events") }}
             </div>
             <div class="active content">
                 {% include "components/forms/checkbox.html.twig" with {

@@ -1,3 +1,23 @@
+{#
+/**
+ * Copyright © 2003-2024 The Galette Team
+ *
+ * This file is part of Galette (https://galette.eu).
+ *
+ * Galette is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Galette is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Galette. If not, see <http://www.gnu.org/licenses/>.
+ */
+#}
 {% extends 'elements/list.html.twig' %}
 {% import "macros.twig" as macros %}
 
@@ -17,7 +37,13 @@
 
 {% block infoline %}
     {% set infoline = {
-        'label': _Tn("%count booking", "%count bookings", nb, "events")|replace({"%count": nb}),
+        'label': _Tn("%1$s booking", "%1$s bookings", nb, "events")|replace({"%1$s": nb}),
+        'route': {
+            'name': 'filter-bookingslist',
+            'args': {
+                "event": "all"
+            }
+        }
     } %}
     {{ parent() }}
 {% endblock %}
@@ -82,7 +108,7 @@
                     <label for="email_filter">{{ _T("Paid bookings:", "events") }}</label>
                     <div class="field inline">
                         <div class="ui radio checkbox">
-                            <input type="radio" name="paid_filter" id="filter_dc_paid" value="{{ constant('GaletteEvents\\Repository\\Bookings::FILTER_DC_PAID')}}"{% if filters.paid_filter == constant('GaletteEvents\\Repository\\Bookings::FILTER_DC_PAID') %} checked="checked"{% endif %}>
+                            <input type="radio" name="paid_filter" id="filter_dc_paid" value="{{ constant('GaletteEvents\\Repository\\Bookings::FILTER_DC_PAID') }}"{% if filters.paid_filter == constant('GaletteEvents\\Repository\\Bookings::FILTER_DC_PAID') %} checked="checked"{% endif %}>
                             <label for="filter_dc_paid" >{{ _T("Don't care") }}</label>
                         </div>
                     </div>
@@ -136,7 +162,7 @@
                         {% set bid = booking.getId() %}
         {% if login.isAdmin() or login.isStaff() or (login.isGroupManager() and booking.getEvent().getGroup() in login.managed_groups) %}
                         <input type="checkbox" name="entries_sel[]" value="{{ bid }}"/>
-                        <a href="{{ url_for("events_event_edit", {"id": booking.getEventId()}) }}">{{ booking.getEvent().getName()}}</a>
+                        <a href="{{ url_for("events_event_edit", {"id": booking.getEventId()}) }}">{{ booking.getEvent().getName() }}</a>
         {% else %}
                         {{ booking.getEvent().getName() }}
         {% endif %}
@@ -147,8 +173,8 @@
                         </a>
                     </td>
                     <td class="{{ rclass }}" data-col-label="{{ _T("Booking date", "events") }}">{{ booking.getDate() }}</td>
-                    <td class="{{ rclass }} center" data-col-label="{% if booking.isPaid() %}{{ _T("Paid", "events") }}{%  else %}{{ _T("Not paid", "events") }}{% endif %}">
-                        <i class="money bill wave{% if not booking.isPaid() %} red{% endif %} icon tooltip" data-html="{% if booking.isPaid() %}{{ _T("Paid", "events") }}{%  else %}{{ _T("Not paid", "events") }}{% endif %}"></i>
+                    <td class="{{ rclass }} center" data-col-label="{% if booking.isPaid() %}{{ _T("Paid", "events") }}{% else %}{{ _T("Not paid", "events") }}{% endif %}">
+                        <i class="money bill wave{% if not booking.isPaid() %} red{% endif %} icon tooltip" data-html="{% if booking.isPaid() %}{{ _T("Paid", "events") }}{% else %}{{ _T("Not paid", "events") }}{% endif %}"></i>
                         <span class="visually-hidden">
                         {% if booking.isPaid() %}
                             {{ _T("Paid", "events") }}
@@ -161,7 +187,7 @@
     {% if login.isAdmin() or login.isStaff() or login.isGroupManager() %}
                     <td class="{{ rclass }} center nowrap actions_row">
             {% set actions = [] %}
-            {% if login.isAdmin() or login.isStaff() or (login.isGroupManager() and booking.getEvent().getGroup() in login.managed_groups ) %}
+            {% if login.isAdmin() or login.isStaff() or (login.isGroupManager() and booking.getEvent().getGroup() in login.managed_groups) %}
                 {% set actions = (actions ?? [])|merge([
                     {
                         'label': _T("Edit booking", "events"),
@@ -216,7 +242,7 @@
     {% if login.isAdmin() or login.isStaff() or login.isGroupManager() and (preferences.pref_bool_groupsmanagers_exports or preferences.pref_bool_groupsmanagers_mailings) %}
         {% if login.isAdmin() or login.isStaff() or (login.isGroupManager() and preferences.pref_bool_groupsmanagers_mailings) %}
             {% if preferences.pref_mail_method != constant('Galette\\Core\\GaletteMail::METHOD_DISABLED') %}
-                {%  set batch_actions = [
+                {% set batch_actions = [
                     {
                         'name': 'sendmail',
                         'label': _T("Mail"),
@@ -227,7 +253,7 @@
         {% endif %}
 
         {% if login.isAdmin() or login.isStaff() or login.isGroupManager() and preferences.pref_bool_groupsmanagers_exports %}
-            {%  set batch_actions = (batch_actions ?? [])|merge([
+            {% set batch_actions = (batch_actions ?? [])|merge([
                 {
                     'name': 'csv__directdownload',
                     'label': _T("Members as CSV", "events"),

@@ -1,15 +1,9 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
-
 /**
- * Events lists filters and paginator
+ * Copyright © 2003-2024 The Galette Team
  *
- * PHP version 5
- *
- * Copyright © 2018-2023 The Galette Team
- *
- * This file is part of Galette (http://galette.tuxfamily.org).
+ * This file is part of Galette (https://galette.eu).
  *
  * Galette is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,15 +17,9 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
- *
- * @category  Filters
- * @package   GaletteEvents
- *
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
  */
+
+declare(strict_types=1);
 
 namespace GaletteEvents\Filters;
 
@@ -42,32 +30,27 @@ use GaletteEvents\Repository\Events;
 /**
  * Events lists filters and paginator
  *
- * @name      EventsList
- * @category  Filters
- * @package   GaletteEvents
- *
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
+ * @author Johan Cwiklinski <johan@x-tnd.be>
  *
  * @property string $query
+ * @property bool $calendar_filter
  */
 
 class EventsList extends Pagination
 {
     //filters
-    private $name_filter = null;
-    private $start_date_filter = null;
-    private $end_date_filter = null;
-    private $group_filter = 0;
-    private $meal_filter = null;
-    private $lodging_filter = null;
-    private $open_filter = null;
-    private $calendar_filter = false;
+    private ?string $name_filter = null;
+    private ?string $start_date_filter = null;
+    private ?string $end_date_filter = null;
+    private int $group_filter = 0;
+    private ?string $meal_filter = null;
+    private ?string $lodging_filter = null;
+    private ?string $open_filter = null;
+    private bool $calendar_filter = false;
     private string $query;
 
-    protected $list_fields = array(
+    /** @var array<string> */
+    protected array $list_fields = array(
         'name_filter',
         'start_date_filter',
         'raw_start_date_filter',
@@ -93,7 +76,7 @@ class EventsList extends Pagination
      *
      * @return int|string field name
      */
-    protected function getDefaultOrder()
+    protected function getDefaultOrder(): int|string
     {
         return Events::ORDERBY_DATE;
     }
@@ -103,7 +86,7 @@ class EventsList extends Pagination
      *
      * @return string ASC or DESC
      */
-    protected function getDefaultDirection()
+    protected function getDefaultDirection(): string
     {
         return self::ORDER_DESC;
     }
@@ -113,7 +96,7 @@ class EventsList extends Pagination
      *
      * @return void
      */
-    public function reinit()
+    public function reinit(): void
     {
         parent::reinit();
         $this->name_filter = null;
@@ -133,13 +116,8 @@ class EventsList extends Pagination
      *
      * @return mixed the called property
      */
-    public function __get($name)
+    public function __get(string $name): mixed
     {
-        Analog::log(
-            '[EventsList] Getting property `' . $name . '`',
-            Analog::DEBUG
-        );
-
         if (in_array($name, $this->pagination_fields)) {
             return parent::__get($name);
         } else {
@@ -147,10 +125,8 @@ class EventsList extends Pagination
                 switch ($name) {
                     case 'raw_start_date_filter':
                         return $this->start_date_filter;
-                        break;
                     case 'raw_end_date_filter':
                         return $this->end_date_filter;
-                        break;
                     case 'start_date_filter':
                     case 'end_date_filter':
                         try {
@@ -171,24 +147,27 @@ class EventsList extends Pagination
                     default:
                         return $this->$name;
                 }
-            } else {
-                Analog::log(
-                    '[EventsList] Unable to get proprety `' . $name . '`',
-                    Analog::WARNING
-                );
             }
         }
+
+        throw new \RuntimeException(
+            sprintf(
+                'Unable to get property "%s::%s"!',
+                __CLASS__,
+                $name
+            )
+        );
     }
 
     /**
      * Global setter method
      *
      * @param string $name  name of the property we want to assign a value to
-     * @param object $value a relevant value for the property
+     * @param mixed  $value a relevant value for the property
      *
      * @return void
      */
-    public function __set($name, $value)
+    public function __set(string $name, mixed $value): void
     {
         if (in_array($name, $this->pagination_fields)) {
             parent::__set($name, $value);
@@ -212,7 +191,7 @@ class EventsList extends Pagination
                                     $day = 31;
                                 }
                                 $y->setDate(
-                                    $y->format('Y'),
+                                    (int)$y->format('Y'),
                                     $month,
                                     $day
                                 );
@@ -226,8 +205,8 @@ class EventsList extends Pagination
                                     $day = $ym->format('t');
                                 }
                                 $ym->setDate(
-                                    $ym->format('Y'),
-                                    $ym->format('m'),
+                                    (int)$ym->format('Y'),
+                                    (int)$ym->format('m'),
                                     $day
                                 );
                                 $this->$name = $ym->format('Y-m-d');
@@ -254,13 +233,9 @@ class EventsList extends Pagination
                                 }
 
                                 throw new \Exception(
-                                    str_replace(
-                                        array('%field', '%format'),
-                                        array(
-                                            $field,
-                                            implode(', ', $formats)
-                                        ),
-                                        _T("Unknown date format for %field.<br/>Know formats are: %formats")
+                                    sprintf(
+                                        //TRANS: %1$s is field label, %2$s is list of known date formats
+                                        _T('Unknown date format for %1$s.<br/>Know formats are: %2$s')
                                     )
                                 );
                             }

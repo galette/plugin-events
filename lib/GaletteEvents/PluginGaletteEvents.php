@@ -1,15 +1,9 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
-
 /**
- * Galette Events plugin
+ * Copyright © 2003-2024 The Galette Team
  *
- * PHP version 5
- *
- * Copyright © 2022-2023 The Galette Team
- *
- * This file is part of Galette (http://galette.tuxfamily.org).
+ * This file is part of Galette (https://galette.eu).
  *
  * Galette is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,17 +17,9 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
- *
- * @category  Plugins
- * @package   GaletteEvents
- *
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2022-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @version   SVN: $Id$
- * @link      http://galette.tuxfamily.org
- * @since     Available since 0.7.4dev - 2012-10-04
  */
+
+declare(strict_types=1);
 
 namespace GaletteEvents;
 
@@ -44,14 +30,7 @@ use Galette\Core\GalettePlugin;
 /**
  * Galette Events plugin
  *
- * @category  Plugins
- * @name      PluginGaletteEvents
- * @package   GaletteEvents
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2022-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
- * @since     Available since 0.7.4dev - 2012-10-04
+ * @author Johan Cwiklinski <johan@x-tnd.be>
  */
 
 class PluginGaletteEvents extends GalettePlugin
@@ -59,7 +38,7 @@ class PluginGaletteEvents extends GalettePlugin
     /**
      * Extra menus entries
      *
-     * @return array|array[]
+     * @return array<string, string|array<string, mixed>>
      */
     public static function getMenusContents(): array
     {
@@ -126,7 +105,7 @@ class PluginGaletteEvents extends GalettePlugin
     /**
      * Extra public menus entries
      *
-     * @return array|array[]
+     * @return array<int, string|array<string, mixed>>
      */
     public static function getPublicMenusItemsList(): array
     {
@@ -136,7 +115,7 @@ class PluginGaletteEvents extends GalettePlugin
     /**
      * Get dashboards contents
      *
-     * @return array|array[]
+     * @return array<int, string|array<string, mixed>>
      */
     public static function getDashboardsContents(): array
     {
@@ -157,7 +136,7 @@ class PluginGaletteEvents extends GalettePlugin
      *
      * @param Adherent $member Member instance
      *
-     * @return array|array[]
+     * @return array<int, string|array<string, mixed>>
      */
     public static function getListActionsContents(Adherent $member): array
     {
@@ -178,7 +157,7 @@ class PluginGaletteEvents extends GalettePlugin
      *
      * @param Adherent $member Member instance
      *
-     * @return array|array[]
+     * @return array<int, string|array<string, mixed>>
      */
     public static function getDetailedActionsContents(Adherent $member): array
     {
@@ -188,7 +167,7 @@ class PluginGaletteEvents extends GalettePlugin
     /**
      * Get batch actions contents
      *
-     * @return array|array[]
+     * @return array<int, string|array<string, mixed>>
      */
     public static function getBatchActionsContents(): array
     {

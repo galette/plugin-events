@@ -1,15 +1,9 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
-
 /**
- * Bookings
+ * Copyright © 2003-2024 The Galette Team
  *
- * PHP version 5
- *
- * Copyright © 2018-2023 The Galette Team
- *
- * This file is part of Galette (http://galette.tuxfamily.org).
+ * This file is part of Galette (https://galette.eu).
  *
  * Galette is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,15 +17,9 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
- *
- * @category  Repository
- * @package   GaletteEvents
- *
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
  */
+
+declare(strict_types=1);
 
 namespace GaletteEvents\Repository;
 
@@ -39,7 +27,6 @@ use Analog\Analog;
 use Laminas\Db\Sql\Expression;
 use Laminas\Db\Sql\Predicate;
 use Laminas\Db\Sql\Predicate\PredicateSet;
-use Laminas\Db\Sql\Predicate\Operator;
 use Galette\Core\Login;
 use Galette\Core\Db;
 use Galette\Entity\Adherent;
@@ -53,21 +40,15 @@ use Laminas\Db\Sql\Select;
 /**
  * Bookings
  *
- * @category  Repository
- * @name      Bookings
- * @package   GaletteEvents
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
+ * @author Johan Cwiklinski <johan@x-tnd.be>
  */
 class Bookings
 {
-    private $zdb;
-    private $login;
-    private $filters = false;
-    private $count;
-    private $sum;
+    private Db $zdb;
+    private Login $login;
+    private BookingsList $filters;
+    private int $count;
+    private float $sum;
 
     public const ORDERBY_EVENT = 0;
     public const ORDERBY_MEMBER = 1;
@@ -81,11 +62,11 @@ class Bookings
     /**
      * Constructor
      *
-     * @param Db           $zdb     Database instance
-     * @param Login        $login   Login instance
-     * @param BookingsList $filters Filtering
+     * @param Db            $zdb     Database instance
+     * @param Login         $login   Login instance
+     * @param ?BookingsList $filters Filtering
      */
-    public function __construct(Db $zdb, Login $login, $filters = null)
+    public function __construct(Db $zdb, Login $login, BookingsList $filters = null)
     {
         $this->zdb = $zdb;
         $this->login = $login;
@@ -102,9 +83,9 @@ class Bookings
      *
      * @param bool $full Export full list (no pagination), defaults to false
      *
-     * @return array
+     * @return array<Booking>
      */
-    public function getList($full = false)
+    public function getList(bool $full = false): array
     {
         try {
             $select = $this->buildSelect(null);
@@ -137,18 +118,19 @@ class Bookings
     /**
      * Builds the SELECT statement
      *
-     * @param array $fields fields list to retrieve
-     * @param bool  $count  true if we want to count members
-     *                      (not applicable from static calls), defaults to false
+     * @param ?array<string> $fields fields list to retrieve
+     * @param bool           $count  true if we want to count members
+     *                               (not applicable from static calls), defaults to false
      *
      * @return Select SELECT statement
      */
-    private function buildSelect($fields, $count = false)
+    private function buildSelect(?array $fields, bool $count = false): Select
     {
         try {
-            $fieldsList = ( $fields != null )
-                            ? (( !is_array($fields) || count($fields) < 1 ) ? (array)'*'
-                            : implode(', ', $fields)) : (array)'*';
+            $fieldsList = ['*'];
+            if (is_array($fields) && count($fields)) {
+                $fieldsList = $fields;
+            }
 
             $select = $this->zdb->select(EVENTS_PREFIX . Booking::TABLE, 'b');
             $select->columns($fieldsList);
@@ -188,7 +170,7 @@ class Bookings
      *
      * @return void
      */
-    private function calculateSum($select)
+    private function calculateSum(Select $select): void
     {
         try {
             $sumSelect = clone $select;
@@ -215,7 +197,7 @@ class Bookings
             $results = $this->zdb->execute($sumSelect);
             $result = $results->current();
 
-            $this->sum = round($result->sum ?? 0, 2);
+            $this->sum = round((float)$result->sum, 2);
         } catch (\Exception $e) {
             Analog::log(
                 'Cannot calculate bookings sum | ' . $e->getMessage(),
@@ -232,7 +214,7 @@ class Bookings
      *
      * @return void
      */
-    private function buildWhereClause($select)
+    private function buildWhereClause(Select $select): void
     {
         try {
             switch ($this->filters->paid_filter) {
@@ -342,12 +324,12 @@ class Bookings
      * Is field allowed to order? it shoulsd be present in
      * provided fields list (those that are SELECT'ed).
      *
-     * @param string $field_name Field name to order by
-     * @param array  $fields     SELECTE'ed fields
+     * @param string         $field_name Field name to order by
+     * @param ?array<string> $fields     SELECTE'ed fields
      *
      * @return boolean
      */
-    private function canOrderBy($field_name, $fields)
+    private function canOrderBy(string $field_name, ?array $fields): bool
     {
         if (!is_array($fields)) {
             return true;
@@ -366,12 +348,12 @@ class Bookings
     /**
      * Builds the order clause
      *
-     * @param array $fields Fields list to ensure ORDER clause
-     *                      references selected fields. Optional.
+     * @param array<string> $fields Fields list to ensure ORDER clause
+     *                              references selected fields. Optional.
      *
-     * @return array SQL ORDER clauses
+     * @return array<string> SQL ORDER clauses
      */
-    private function buildOrderClause($fields = null)
+    private function buildOrderClause(array $fields = null): array
     {
         $order = array();
 
@@ -409,7 +391,7 @@ class Bookings
      *
      * @return void
      */
-    private function proceedCount($select)
+    private function proceedCount(Select $select): void
     {
         try {
             $countSelect = clone $select;
@@ -443,7 +425,7 @@ class Bookings
 
             $results = $this->zdb->execute($countSelect);
 
-            $this->count = $results->current()->count;
+            $this->count = (int)$results->current()->count;
             if (isset($this->filters) && $this->count > 0) {
                 $this->filters->setCounter($this->count);
             }
@@ -461,7 +443,7 @@ class Bookings
      *
      * @return int
      */
-    public function getCount()
+    public function getCount(): int
     {
         return $this->count;
     }
@@ -471,7 +453,7 @@ class Bookings
      *
      * @return double
      */
-    public function getSum()
+    public function getSum(): float
     {
         return $this->sum;
     }

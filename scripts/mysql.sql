@@ -18,6 +18,7 @@ CREATE TABLE galette_events_events (
   is_open tinyint(1) NOT NULL default 1,
   id_group int(10) default NULL,
   comment text,
+  color varchar(7),
   PRIMARY KEY (id_event),
   FOREIGN KEY (id_group) REFERENCES galette_groups (id_group) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

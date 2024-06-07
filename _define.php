@@ -1,13 +1,7 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
-
 /**
- * Configuration file for Paypal plugin
- *
- * PHP version 5
- *
- * Copyright © 2017-2023 The Galette Team
+ * Copyright © 2003-2024 The Galette Team
  *
  * This file is part of Galette (https://galette.eu).
  *
@@ -23,25 +17,18 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
- *
- * @category  Plugins
- * @package   GaletteEvents
- *
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2017-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @version   SVN: $Id$
- * @link      https://galette.eu
  */
+
+declare(strict_types=1);
 
 $this->register(
     'Galette Events',       //Name
     'Events management',    //Short description
     'Johan Cwiklinski',     //Author
-    '2.0.0',                //Version
-    '1.0.0',                //Galette compatible version
+    '2.1.0',                //Version
+    '1.1.0',                //Galette compatible version
     'events',               //routing name and translation domain
-    '2023-12-07',           //Release date
+    '2024-06-08',           //Release date
     [   //Permissions needed
         'events_events'             => 'member',
         'events_bookings'           => 'member',
@@ -61,6 +48,7 @@ $this->register(
         'filter-bookingslist'       => 'member',
         'batch-eventslist'          => 'groupmanager',
         'events_activities'         => 'staff',
+        'filter-activitieslist'     => 'staff',
         'events_activity_add'       => 'staff',
         'events_activity_edit'      => 'staff',
         'events_storeactivity_add'  => 'staff',
