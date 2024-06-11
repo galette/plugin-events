@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-02-08 22:13+0100\n"
-"PO-Revision-Date: 2024-06-07 07:09+0000\n"
+"PO-Revision-Date: 2024-06-11 19:30+0000\n"
 "Last-Translator: Marco Ciampa <ciampix@posteo.net>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/galette/"
 "events-plugin/it/>\n"
@@ -346,7 +346,7 @@ msgstr ""
 #: ../tempcache/bookings.html.twig:268 ../tempcache/bookings.html.twig:423
 #: ../tempcache/bookings.html.twig:435 ../tempcache/bookings.html.twig:446
 msgid "Paid"
-msgstr ""
+msgstr "Pagato"
 
 #: ../tempcache/calendar.html.twig:76
 msgid "Daily list"
