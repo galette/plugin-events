@@ -1,13 +1,14 @@
 # Johan Cwiklinski <trasher@x-tnd.be>, 2020.
 # Alessandro Mandelli <mandelli.alessandro@ngi.it>, 2021.
 # Marco Ciampa <ciampix@posteo.net>, 2024.
+# Ilario Quinson <ilario.quinson@e.email>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-02-08 22:13+0100\n"
-"PO-Revision-Date: 2024-06-11 19:30+0000\n"
-"Last-Translator: Marco Ciampa <ciampix@posteo.net>\n"
+"PO-Revision-Date: 2024-06-18 05:58+0000\n"
+"Last-Translator: Ilario Quinson <ilario.quinson@e.email>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/galette/"
 "events-plugin/it/>\n"
 "Language: it_IT\n"
@@ -366,7 +367,7 @@ msgstr ""
 
 #: ../tempcache/calendar.html.twig:92
 msgid "Today"
-msgstr ""
+msgstr "Oggi"
 
 #: ../tempcache/calendar.html.twig:119 ../tempcache/bookings.html.twig:118
 msgid "New booking"
