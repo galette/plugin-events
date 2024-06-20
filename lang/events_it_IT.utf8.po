@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-02-08 22:13+0100\n"
-"PO-Revision-Date: 2024-06-18 05:58+0000\n"
+"PO-Revision-Date: 2024-06-21 23:09+0000\n"
 "Last-Translator: Ilario Quinson <ilario.quinson@e.email>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/galette/"
 "events-plugin/it/>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6-dev\n"
+"X-Generator: Weblate 5.6-rc\n"
 
 #: ../lib/GaletteEvents/Event.php:201
 msgid "Begin date is mandatory"
@@ -592,7 +592,7 @@ msgstr ""
 
 #: ../tempcache/event.html.twig:313
 msgid "Required"
-msgstr "Richiesta"
+msgstr "Richiesto"
 
 #: ../tempcache/event.html.twig:330
 msgid "No activity available in the database."
