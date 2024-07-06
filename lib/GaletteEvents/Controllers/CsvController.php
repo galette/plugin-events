@@ -96,6 +96,7 @@ class CsvController extends \Galette\Controllers\CsvController
                 _T('Amount', 'events'),
                 _T('Payment type'),
                 _T('Bank name', 'events'),
+                //TRANS: Bank check number
                 _T('Check number', 'events'),
             ]
         );
