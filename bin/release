@@ -650,7 +650,7 @@ def main():
             build = True
         else:
             build = ask_user_confirm(
-                'Do you want to build Galette Auto Plugin version %s? [Yes/no] ' % buildver
+                'Do you want to build Galette Events Plugin version %s? [Yes/no] ' % buildver
             )
 
     if build:
