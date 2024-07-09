@@ -157,7 +157,13 @@
     {% for ordre, booking in bookings_list %}
         {% set rclass = booking.getRowClass() %}
                 <tr>
-                    <td class="{{ rclass }} right" data-scope="id">{{ ordre + 1 + (filters.current_page - 1) * numrows }}</td>
+                    <td class="{{ rclass }} right" data-scope="id">
+                        {% if preferences.pref_show_id %}
+                            {{ booking.getId() }}
+                        {% else %}
+                            {{ ordre + 1 + (filters.current_page - 1) * numrows }}
+                        {% endif %}
+                    </td>
                     <td class="{{ rclass }} nowrap username_row" data-scope="row">
                         {% set bid = booking.getId() %}
         {% if login.isAdmin() or login.isStaff() or (login.isGroupManager() and booking.getEvent().getGroup() in login.managed_groups) %}

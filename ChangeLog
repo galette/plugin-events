@@ -1,6 +1,16 @@
-* 2021-101-29 - 1.5.0
-* Galette 0.9.6 compatible
-* Few fixes
+* 2024-07-09 - 2.1.2
+- Fix bookings filtering
+- Fix adding group on event
+- Fix editing events with an ID > 9
+
+* 2024-06-07 - 2.1.0
+- Galette 1.1.0 compatible
+
+* 2023-12-07 - 2.0.0
+
+* 2021-11-29 - 1.5.0
+- Galette 0.9.6 compatible
+- Few fixes
 
 * 2021-10-23 - 1.4.1
 - Translations

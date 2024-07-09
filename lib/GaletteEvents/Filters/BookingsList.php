@@ -160,6 +160,9 @@ class BookingsList extends Pagination
                         );
                     }
                     break;
+                case 'payment_type_filter':
+                    $this->$name = (int)$value;
+                    break;
                 default:
                     $this->$name = $value;
                     break;

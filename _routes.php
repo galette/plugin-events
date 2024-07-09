@@ -70,7 +70,7 @@ $app->post(
 )->setName('events_storeevent_add')->add($authenticate);
 
 $app->post(
-    '/event/edit/{id:\d}',
+    '/event/edit/{id:\d+}',
     [EventsController::class, 'doEdit']
 )->setName('events_storeevent_edit')->add($authenticate);
 
