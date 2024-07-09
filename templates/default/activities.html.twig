@@ -65,7 +65,13 @@
 {% block body %}
     {% for ordre, activity in activities %}
         <tr class="{{ loop.index is odd ? 'odd' : 'even' }}">
-            <td class="right" data-scope="id">{{ ordre + 1 + (filters.current_page - 1) * numrows }}</td>
+            <td class="right" data-scope="id">
+                {% if preferences.pref_show_id %}
+                    {{ activity.getId() }}
+                {% else %}
+                    {{ ordre + 1 + (filters.current_page - 1) * numrows }}
+                {% endif %}
+            </td>
             <td class="nowrap username_row" data-scope="row">
                 {% set aid = activity.getId() %}
                 <a href="{{ url_for("events_activity_edit", {"id": aid}) }}">{{ activity.getName() }}</a>
