@@ -365,8 +365,8 @@ class Bookings
                 break;
             case self::ORDERBY_MEMBER:
                 if ($this->canOrderBy(Adherent::PK, $fields)) {
-                    $order[] = 'a.nom_adh ' . $this->filters->getDirection() .
-                                ', a.prenom_adh ' . $this->filters->getDirection();
+                    $order[] = 'a.nom_adh ' . $this->filters->getDirection();
+                    $order[] = 'a.prenom_adh ' . $this->filters->getDirection();
                 }
                 break;
             case self::ORDERBY_BOOKDATE:
