@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: Galette Events plugin\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-07-02 21:38+0200\n"
-"PO-Revision-Date: 2024-07-02 19:43+0000\n"
+"PO-Revision-Date: 2024-09-15 07:51+0000\n"
 "Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/galette/"
 "events-plugin/fr/>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.7-dev\n"
+"X-Generator: Weblate 5.8-dev\n"
 
 #: ../lib/GaletteEvents/Booking.php:192
 msgid "Event is mandatory"
@@ -331,7 +331,7 @@ msgstr "Nom"
 
 #: ../tempcache/event.html.twig:84
 msgid "Color"
-msgstr "Coleur"
+msgstr "Couleur"
 
 #: ../tempcache/event.html.twig:122
 msgid "Limit to group"
