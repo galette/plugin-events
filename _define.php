@@ -26,7 +26,7 @@ $this->register(
     'Events management',    //Short description
     'Johan Cwiklinski',     //Author
     '2.1.2',                //Version
-    '1.1.0',                //Galette compatible version
+    '1.1.4',                //Galette compatible version
     'events',               //routing name and translation domain
     '2024-07-09',           //Release date
     [   //Permissions needed
