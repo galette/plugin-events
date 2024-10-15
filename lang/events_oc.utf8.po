@@ -5,18 +5,18 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-07-02 21:38+0200\n"
-"PO-Revision-Date: 2024-03-20 16:21+0000\n"
+"PO-Revision-Date: 2024-10-15 19:28+0000\n"
 "Last-Translator: Pèire Bréchet <oxytanistzero@tutanota.com>\n"
-"Language-Team: Occitan <https://hosted.weblate.org/projects/galette/events-"
-"plugin/oc/>\n"
+"Language-Team: Occitan <https://hosted.weblate.org/projects/galette/"
+"events-plugin/oc/>\n"
 "Language: oc\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.8-rc\n"
 
 #: ../lib/GaletteEvents/Booking.php:192
 msgid "Event is mandatory"
@@ -193,7 +193,7 @@ msgstr ""
 #: ../lib/GaletteEvents/Controllers/CsvController.php:96
 #: ../tempcache/booking.html.twig:301
 msgid "Amount"
-msgstr "Montant"
+msgstr "Soma"
 
 #: ../lib/GaletteEvents/Controllers/CsvController.php:98
 #: ../tempcache/booking.html.twig:313
@@ -422,7 +422,7 @@ msgstr ""
 #: ../tempcache/bookings.html.twig:272 ../tempcache/bookings.html.twig:429
 #: ../tempcache/bookings.html.twig:441 ../tempcache/bookings.html.twig:452
 msgid "Paid"
-msgstr ""
+msgstr "Pagat"
 
 #: ../tempcache/bookings.html.twig:61
 msgid "No booking selected"
@@ -609,4 +609,4 @@ msgstr ""
 
 #: ../tempcache/calendar.html.twig:93
 msgid "Today"
-msgstr ""
+msgstr "Uei"
