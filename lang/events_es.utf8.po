@@ -8,13 +8,14 @@
 # Javier <javier.fserrador@gmail.com>, 2022.
 # gallegonovato <fran-carro@hotmail.es>, 2022, 2023, 2024.
 # ventura vicenta memba moule <vevi.memba@gmail.com>, 2023.
+# Kamborio <Kamborio15@users.noreply.hosted.weblate.org>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-07-02 21:38+0200\n"
-"PO-Revision-Date: 2024-10-15 12:15+0000\n"
-"Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
+"PO-Revision-Date: 2024-10-17 11:16+0000\n"
+"Last-Translator: Kamborio <Kamborio15@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/galette/"
 "events-plugin/es/>\n"
 "Language: es\n"
@@ -40,7 +41,7 @@ msgstr "Especifique la cantidad si la reserva ha sido abonada ;)"
 
 #: ../lib/GaletteEvents/Booking.php:262
 msgid "Member is mandatory"
-msgstr "Miembro es obligatorio"
+msgstr "El miembro es obligatorio"
 
 #: ../lib/GaletteEvents/Booking.php:274
 msgid "There must be at least one person"
@@ -120,15 +121,15 @@ msgstr "Actividad"
 
 #: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:257
 msgid "New activity has been successfully added."
-msgstr "Ha sido agregada correctamente una actividad nueva."
+msgstr "La nueva actividad se ha añadido con éxito."
 
 #: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:259
 msgid "Activity has been modified."
-msgstr "Ha sido modificada la actividad."
+msgstr "La actividad ha sido modificada."
 
 #: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:263
 msgid "An error occurred while storing the activity."
-msgstr "Ha ocurrido un error mientras almacenaba la actividad."
+msgstr "Ha ocurrido un error mientras guardaba la actividad."
 
 #. TRANS %1$s is activity name
 #: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:348
@@ -199,7 +200,7 @@ msgstr "Número de personas"
 #: ../lib/GaletteEvents/Controllers/CsvController.php:96
 #: ../tempcache/booking.html.twig:301
 msgid "Amount"
-msgstr "Monto"
+msgstr "Cantidad"
 
 #: ../lib/GaletteEvents/Controllers/CsvController.php:98
 #: ../tempcache/booking.html.twig:313
@@ -271,7 +272,7 @@ msgstr "La fecha debe ser posterior o igual a la fecha de inicio"
 
 #: ../lib/GaletteEvents/Event.php:255 ../lib/GaletteEvents/Activity.php:174
 msgid "Name is mandatory"
-msgstr "Nombre es obligatorio"
+msgstr "El nombre es obligatorio"
 
 #: ../lib/GaletteEvents/Event.php:271
 msgid "Please select a group you own!"
@@ -314,11 +315,11 @@ msgstr "Crear reserva de evento"
 
 #: ../lib/GaletteEvents/Activity.php:242
 msgid "Activity added"
-msgstr "Actividad agregada"
+msgstr "Actividad aañadida"
 
 #: ../lib/GaletteEvents/Activity.php:247
 msgid "Fail to add new activity."
-msgstr "Error al agregar actividad nueva."
+msgstr "Error al añadir la nueva actividad."
 
 #: ../lib/GaletteEvents/Activity.php:266
 msgid "Activity updated"
@@ -422,7 +423,7 @@ msgstr "Ninguna actividad para evento seleccionado"
 
 #: ../tempcache/booking.html.twig:287
 msgid "Financial information"
-msgstr "Informaciones financieras"
+msgstr "Información financiera"
 
 #: ../tempcache/booking.html.twig:294 ../tempcache/bookings.html.twig:141
 #: ../tempcache/bookings.html.twig:272 ../tempcache/bookings.html.twig:429
@@ -483,7 +484,7 @@ msgstr "Selección..."
 
 #: ../tempcache/bookings.html.twig:198
 msgid "All payment types"
-msgstr "Todos los tipos de abonación"
+msgstr "Todos los tipos de pago"
 
 #: ../tempcache/bookings.html.twig:204 ../tempcache/bookings.html.twig:206
 #: ../tempcache/events.html.twig:104 ../tempcache/events.html.twig:187
@@ -497,7 +498,7 @@ msgstr "Reserva abonada:"
 #: ../tempcache/bookings.html.twig:288 ../tempcache/bookings.html.twig:431
 #: ../tempcache/bookings.html.twig:443 ../tempcache/bookings.html.twig:458
 msgid "Not paid"
-msgstr "No renumerado"
+msgstr "No pagado"
 
 #: ../tempcache/bookings.html.twig:340
 #, php-format
@@ -525,7 +526,7 @@ msgstr[1] "%1$s actividades"
 
 #: ../tempcache/activities.html.twig:90
 msgid "New activity"
-msgstr "Crear actividad"
+msgstr "Nueva actividad"
 
 #: ../tempcache/activities.html.twig:104 ../tempcache/activities.html.twig:157
 msgid "Creation date"
@@ -547,12 +548,12 @@ msgstr "Inactiva"
 #: ../tempcache/activities.html.twig:207 ../tempcache/events.html.twig:257
 #, php-format
 msgid "%1$s: edit information"
-msgstr "%1$s: editar informaciones"
+msgstr "%1$s: editar información"
 
 #: ../tempcache/activities.html.twig:209 ../tempcache/events.html.twig:270
 #, php-format
 msgid "%1$s: remove from database"
-msgstr "%1$s: quitar desde BdD"
+msgstr "%1$s: borrar de la base de datos"
 
 #: ../tempcache/activities.html.twig:245
 msgid "No activity has been found"
