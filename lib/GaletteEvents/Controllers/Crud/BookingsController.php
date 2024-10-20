@@ -283,7 +283,7 @@ class BookingsController extends AbstractPluginController
             $mfilter->selected = $members;
 
             if (isset($post['mailing'])) {
-                $this->session->filter_members_sendmail = $mfilter;
+                $this->session->members_sendmail_filter = $mfilter;
                 $this->session->redirect_mailing = $this->routeparser->urlFor(
                     'events_bookings',
                     [

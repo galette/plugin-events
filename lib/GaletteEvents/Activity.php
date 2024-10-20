@@ -60,7 +60,7 @@ class Activity
      * @param Db                                      $zdb   Database instance
      * @param Login                                   $login Login instance
      * @param null|int|ArrayObject<string,int|string> $args  Either a ResultSet row or its id for to load
-     *                                                       a specific event, or null to just
+     *                                                       a specific activity, or null to just
      *                                                       instanciate object
      */
     public function __construct(Db $zdb, Login $login, int|ArrayObject $args = null)
@@ -76,9 +76,9 @@ class Activity
     }
 
     /**
-     * Loads an event from its id
+     * Loads an activity from its id
      *
-     * @param int $id the identifiant for the event to load
+     * @param int $id the identifiant for the activity to load
      *
      * @return bool true if query succeed, false otherwise
      */
