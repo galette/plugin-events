@@ -39,13 +39,13 @@ use GaletteEvents\Repository\Events;
 class EventsList extends Pagination
 {
     //filters
-    private ?string $name_filter = null;
+    private ?string $name_filter = null; //@phpstan-ignore-line
     private ?string $start_date_filter = null;
     private ?string $end_date_filter = null;
     private int $group_filter = 0;
-    private ?string $meal_filter = null;
-    private ?string $lodging_filter = null;
-    private ?string $open_filter = null;
+    private ?string $meal_filter = null; //@phpstan-ignore-line
+    private ?string $lodging_filter = null; //@phpstan-ignore-line
+    private ?string $open_filter = null; //@phpstan-ignore-line
     private bool $calendar_filter = false;
     private string $query;
 

@@ -95,7 +95,7 @@ class EventsController extends AbstractPluginController
      *
      * @return Response
      */
-    public function list(Request $request, Response $response, string $option = null, string|int $value = null): Response
+    public function list(Request $request, Response $response, ?string $option = null, string|int|null $value = null): Response
     {
         if (isset($this->session->filter_events)) {
             $filters = $this->session->filter_events;
@@ -150,8 +150,8 @@ class EventsController extends AbstractPluginController
     public function calendar(
         Request $request,
         Response $response,
-        string $option = null,
-        string|int $value = null
+        ?string $option = null,
+        string|int|null $value = null
     ): Response {
         if (isset($this->session->filter_events_calendar)) {
             $filters = $this->session->filter_events_calendar;
@@ -270,7 +270,7 @@ class EventsController extends AbstractPluginController
      *
      * @return Response
      */
-    public function edit(Request $request, Response $response, int $id = null, string $action = 'edit'): Response
+    public function edit(Request $request, Response $response, ?int $id = null, string $action = 'edit'): Response
     {
         if ($this->session->event !== null) {
             $event = $this->session->event;
@@ -338,7 +338,7 @@ class EventsController extends AbstractPluginController
      *
      * @return Response
      */
-    public function doEdit(Request $request, Response $response, int $id = null, string $action = 'edit'): Response
+    public function doEdit(Request $request, Response $response, ?int $id = null, string $action = 'edit'): Response
     {
         $post = $request->getParsedBody();
         $event = new Event($this->zdb, $this->login);

@@ -66,7 +66,7 @@ class Bookings
      * @param Login         $login   Login instance
      * @param ?BookingsList $filters Filtering
      */
-    public function __construct(Db $zdb, Login $login, BookingsList $filters = null)
+    public function __construct(Db $zdb, Login $login, ?BookingsList $filters = null)
     {
         $this->zdb = $zdb;
         $this->login = $login;
@@ -353,7 +353,7 @@ class Bookings
      *
      * @return array<string> SQL ORDER clauses
      */
-    private function buildOrderClause(array $fields = null): array
+    private function buildOrderClause(?array $fields = null): array
     {
         $order = array();
 

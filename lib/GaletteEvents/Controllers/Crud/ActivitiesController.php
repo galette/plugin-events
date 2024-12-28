@@ -86,7 +86,7 @@ class ActivitiesController extends AbstractPluginController
      *
      * @return Response
      */
-    public function list(Request $request, Response $response, string $option = null, string|int $value = null): Response
+    public function list(Request $request, Response $response, ?string $option = null, string|int|null $value = null): Response
     {
         if (isset($this->session->filter_activities)) {
             $filters = $this->session->filter_activities;
@@ -179,7 +179,7 @@ class ActivitiesController extends AbstractPluginController
      *
      * @return Response
      */
-    public function edit(Request $request, Response $response, int $id = null, string $action = 'edit'): Response
+    public function edit(Request $request, Response $response, ?int $id = null, string $action = 'edit'): Response
     {
         if ($this->session->activity !== null) {
             $activity = $this->session->activity;
@@ -225,7 +225,7 @@ class ActivitiesController extends AbstractPluginController
      *
      * @return Response
      */
-    public function doEdit(Request $request, Response $response, int $id = null, string $action = 'edit'): Response
+    public function doEdit(Request $request, Response $response, ?int $id = null, string $action = 'edit'): Response
     {
         $post = $request->getParsedBody();
         $activity = new Activity($this->zdb, $this->login);

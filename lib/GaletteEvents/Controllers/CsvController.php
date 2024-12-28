@@ -47,7 +47,7 @@ class CsvController extends \Galette\Controllers\CsvController
      *
      * @return Response
      */
-    public function bookingsExport(Request $request, Response $response, int $id = null): Response
+    public function bookingsExport(Request $request, Response $response, ?int $id = null): Response
     {
         $post = $request->getParsedBody();
         $get = $request->getQueryParams();

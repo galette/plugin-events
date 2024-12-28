@@ -56,7 +56,7 @@ class Activities extends Repository
      * @param Preferences     $preferences Preferences instance
      * @param ?ActivitiesList $filters     Filtering
      */
-    public function __construct(Db $zdb, Login $login, Preferences $preferences, ActivitiesList $filters = null)
+    public function __construct(Db $zdb, Login $login, Preferences $preferences, ?ActivitiesList $filters = null)
     {
         $this->zdb = $zdb;
         $this->login = $login;
@@ -112,7 +112,7 @@ class Activities extends Repository
      *
      * @return array<string> SQL ORDER clauses
      */
-    private function buildOrderClause(array $fields = null): array
+    private function buildOrderClause(?array $fields = null): array
     {
         $order = array();
 

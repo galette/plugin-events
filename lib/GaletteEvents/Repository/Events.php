@@ -61,7 +61,7 @@ class Events
      * @param Login       $login   Login instance
      * @param ?EventsList $filters Filtering
      */
-    public function __construct(Db $zdb, Login $login, EventsList $filters = null)
+    public function __construct(Db $zdb, Login $login, ?EventsList $filters = null)
     {
         $this->zdb = $zdb;
         $this->login = $login;
@@ -273,7 +273,7 @@ class Events
      *
      * @return boolean
      */
-    private function canOrderBy(string $field_name, array $fields = null): bool
+    private function canOrderBy(string $field_name, ?array $fields = null): bool
     {
         if (!is_array($fields)) {
             return true;
@@ -297,7 +297,7 @@ class Events
      *
      * @return array<string> SQL ORDER clauses
      */
-    private function buildOrderClause(array $fields = null): array
+    private function buildOrderClause(?array $fields = null): array
     {
         $order = array();
 
