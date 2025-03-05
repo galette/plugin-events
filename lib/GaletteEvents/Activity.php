@@ -219,7 +219,7 @@ class Activity
                 'comment'               => $this->comment
             );
 
-            if (!isset($this->id) || $this->id == '') {
+            if (empty($this->id)) {
                 //we're inserting a new event
                 $this->creation_date = date("Y-m-d H:i:s");
                 $values['creation_date'] = $this->creation_date;
@@ -370,7 +370,7 @@ class Activity
      */
     public function countEvents(): int
     {
-        if (!isset($this->id) || $this->id == '') {
+        if (empty($this->id)) {
             return 0;
         }
 
