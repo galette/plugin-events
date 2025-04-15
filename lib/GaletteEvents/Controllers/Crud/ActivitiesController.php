@@ -107,10 +107,6 @@ class ActivitiesController extends AbstractPluginController
 
         $activities = new Activities($this->zdb, $this->login, $this->preferences, $filters);
         $list = $activities->getList();
-        if (!count($list)) {
-            $activities->installInit();
-            $list = $activities->getList();
-        }
 
         //assign pagination variables to the template and add pagination links
         $filters->setViewPagination($this->routeparser, $this->view, false);
