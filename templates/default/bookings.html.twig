@@ -167,7 +167,9 @@
                     <td class="{{ rclass }} nowrap username_row" data-scope="row">
                         {% set bid = booking.getId() %}
         {% if login.isAdmin() or login.isStaff() or (login.isGroupManager() and booking.getEvent().getGroup() in login.managed_groups) %}
-                        <input type="checkbox" name="entries_sel[]" value="{{ bid }}"/>
+                        <span class="ui checkbox">
+                            <input type="checkbox" name="entries_sel[]" value="{{ bid }}"/>
+                        </span>
                         <a href="{{ url_for("events_event_edit", {"id": booking.getEventId()}) }}">{{ booking.getEvent().getName() }}</a>
         {% else %}
                         {{ booking.getEvent().getName() }}
