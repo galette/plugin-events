@@ -53,12 +53,21 @@
 
 {% block header %}
     {% set columns = [
-        {'label': '#'},
+        {
+            'label': '#',
+            'collapse': true
+        },
         {'label': _T("Name", "events"), order: constant('GaletteEvents\\Repository\\Events::ORDERBY_NAME')},
-        {'label': _T("Date", "events"), order: constant('GaletteEvents\\Repository\\Events::ORDERBY_DATE')},
+        {
+            'label': _T("Date", "events"), order: constant('GaletteEvents\\Repository\\Events::ORDERBY_DATE'),
+            'collapse': true
+        },
         {'label': _T("Town", "events"), order: constant('GaletteEvents\\Repository\\Events::ORDERBY_TOWN')},
         {'label': _T("Group", "events")},
-        {'label': _T("Open", "events")},
+        {
+            'label': _T("Open", "events"),
+            'collapse': true
+        },
     ] %}
     {{ parent() }}
 {% endblock %}
@@ -67,14 +76,14 @@
     {% if events|length %}
         {% for ordre, event in events %}
     <tr class="{{ loop.index is odd ? 'odd' : 'even' }}">
-        <td class="right" data-scope="id">
+        <td class="right collapsing" data-scope="id">
             {% if preferences.pref_show_id %}
                 {{ event.getId() }}
             {% else %}
                 {{ ordre + 1 + (filters.current_page - 1) * numrows }}
             {% endif %}
         </td>
-        <td class="nowrap username_row" data-scope="row">
+        <td class="username_row" data-scope="row">
             {% set eid = event.getId() %}
             {% if login.isAdmin() or login.isStaff() or (login.isGroupManager() and event.getGroup() in login.managed_groups) %}
                 {#<input type="checkbox" name="entries_sel[]" value="{$id}"/>#}
@@ -83,10 +92,10 @@
                 {{ event.getName() }}
             {% endif %}
         </td>
-        <td data-col-label="{{ _T("Date", "events") }}">{{ event.getBeginDate() }}</td>
+        <td class="collapsing" data-col-label="{{ _T("Date", "events") }}">{{ event.getBeginDate() }}</td>
         <td data-col-label="{{ _T("Town", "events") }}">{{ event.getTown() }}</td>
         <td data-col-label="{{ _T("Group", "events") }}">{{ event.getGroupName() }}</td>
-        <td class="center id_row" data-col-label="{{ _T("Open", "events") }}">
+        <td class="center id_row collapsing" data-col-label="{{ _T("Open", "events") }}">
             <i class="lock{% if event.isOpen() %} open green{% else %} red{% endif %} icon tooltip" data-html="{% if event.isOpen() %}{{ _T("Event is open", "events") }}{% else %}{{ _T("Event is closed", "events") }}{% endif %}"></i>
             <span class="visually-hidden">
                 {% if event.isOpen() %}
@@ -96,7 +105,7 @@
                 {% endif %}
             </span>
         </td>
-        <td class="center nowrap actions_row">
+        <td class="center actions_row collapsing">
             {% set actions = [] %}
             {% if login.isAdmin() or login.isStaff() or (login.isGroupManager() and event.getGroup() in login.managed_groups) %}
                 {% set actions = (actions ?? [])|merge([

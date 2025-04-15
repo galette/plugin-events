@@ -61,12 +61,24 @@
 
 {% block header %}
     {% set columns = [
-        {'label': '#'},
+        {
+            'label': '#',
+            'collapse': true
+        },
         {'label': _T("Event", "events"), order: constant('GaletteEvents\\Repository\\Bookings::ORDERBY_EVENT')},
         {'label': _T("Member"), order: constant('GaletteEvents\\Repository\\Bookings::ORDERBY_MEMBER')},
-        {'label': _T("Booking date", "events"), order: constant('GaletteEvents\\Repository\\Bookings::ORDERBY_BOOKDATE')},
-        {'label': _T("Paid", "events"), order: constant('GaletteEvents\\Repository\\Bookings::ORDERBY_PAID')},
-        {'label': _T("Attendees", "events")},
+        {
+            'label': _T("Booking date", "events"), order: constant('GaletteEvents\\Repository\\Bookings::ORDERBY_BOOKDATE'),
+            'collapse': true
+        },
+        {
+            'label': _T("Paid", "events"), order: constant('GaletteEvents\\Repository\\Bookings::ORDERBY_PAID'),
+            'collapse': true
+        },
+        {
+            'label': _T("Attendees", "events"),
+            'collapse': true
+        },
     ] %}
     {{ parent() }}
 {% endblock %}
@@ -157,14 +169,14 @@
     {% for ordre, booking in bookings_list %}
         {% set rclass = booking.getRowClass() %}
                 <tr>
-                    <td class="{{ rclass }} right" data-scope="id">
+                    <td class="{{ rclass }} right collapsing" data-scope="id">
                         {% if preferences.pref_show_id %}
                             {{ booking.getId() }}
                         {% else %}
                             {{ ordre + 1 + (filters.current_page - 1) * numrows }}
                         {% endif %}
                     </td>
-                    <td class="{{ rclass }} nowrap username_row" data-scope="row">
+                    <td class="{{ rclass }} username_row" data-scope="row">
                         {% set bid = booking.getId() %}
         {% if login.isAdmin() or login.isStaff() or (login.isGroupManager() and booking.getEvent().getGroup() in login.managed_groups) %}
                         <span class="ui checkbox">
@@ -180,8 +192,8 @@
                             {{ booking.getMember().sfullname }}
                         </a>
                     </td>
-                    <td class="{{ rclass }}" data-col-label="{{ _T("Booking date", "events") }}">{{ booking.getDate() }}</td>
-                    <td class="{{ rclass }} center" data-col-label="{% if booking.isPaid() %}{{ _T("Paid", "events") }}{% else %}{{ _T("Not paid", "events") }}{% endif %}">
+                    <td class="{{ rclass }} collapsing" data-col-label="{{ _T("Booking date", "events") }}">{{ booking.getDate() }}</td>
+                    <td class="{{ rclass }} center collapsing" data-col-label="{% if booking.isPaid() %}{{ _T("Paid", "events") }}{% else %}{{ _T("Not paid", "events") }}{% endif %}">
                         <i class="money bill wave{% if not booking.isPaid() %} red{% endif %} icon tooltip" data-html="{% if booking.isPaid() %}{{ _T("Paid", "events") }}{% else %}{{ _T("Not paid", "events") }}{% endif %}"></i>
                         <span class="visually-hidden">
                         {% if booking.isPaid() %}
@@ -191,9 +203,9 @@
                         {% endif %}
                         </span>
                     </td>
-                    <td class="{{ rclass }}" data-col-label="{{ _T("Attendees", "events") }}">{{ booking.getNumberPeople() }}</td>
+                    <td class="{{ rclass }} collapsing" data-col-label="{{ _T("Attendees", "events") }}">{{ booking.getNumberPeople() }}</td>
     {% if login.isAdmin() or login.isStaff() or login.isGroupManager() %}
-                    <td class="{{ rclass }} center nowrap actions_row">
+                    <td class="{{ rclass }} center actions_row collapsing">
             {% set actions = [] %}
             {% if login.isAdmin() or login.isStaff() or (login.isGroupManager() and booking.getEvent().getGroup() in login.managed_groups) %}
                 {% set actions = (actions ?? [])|merge([
