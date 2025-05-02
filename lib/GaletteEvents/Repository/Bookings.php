@@ -136,11 +136,11 @@ class Bookings
             $select->columns($fieldsList);
 
             $select->join(
-                array('a' => PREFIX_DB . Adherent::TABLE),
+                ['a' => PREFIX_DB . Adherent::TABLE],
                 'b.' . Adherent::PK . '= a.' . Adherent::PK
             );
             $select->join(
-                array('e' => PREFIX_DB . EVENTS_PREFIX . Event::TABLE),
+                ['e' => PREFIX_DB . EVENTS_PREFIX . Event::TABLE],
                 'b.' . Event::PK . '= e.' . Event::PK
             );
 
@@ -189,9 +189,9 @@ class Bookings
 
             $sumSelect->reset($sumSelect::ORDER);
             $sumSelect->columns(
-                array(
+                [
                     'sum' => new Expression('SUM(payment_amount)')
-                )
+                ]
             );
 
             $results = $this->zdb->execute($sumSelect);
@@ -266,7 +266,7 @@ class Bookings
                 }
 
                 $set = [new PredicateSet(
-                    array(
+                    [
                         new Predicate\IsNull(Group::PK),
                         new Predicate\Operator(
                             'is_open',
@@ -278,7 +278,7 @@ class Bookings
                             '>=',
                             date('Y-m-d')
                         )
-                    )
+                    ]
                 )];
 
                 if (count($groups)) {
@@ -337,7 +337,7 @@ class Bookings
             return true;
         } else {
             Analog::log(
-                'Trying to order by ' . $field_name  . ' while it is not in ' .
+                'Trying to order by ' . $field_name . ' while it is not in ' .
                 'selected fields.',
                 Analog::WARNING
             );
@@ -355,7 +355,7 @@ class Bookings
      */
     private function buildOrderClause(?array $fields = null): array
     {
-        $order = array();
+        $order = [];
 
         switch ($this->filters->orderby) {
             case self::ORDERBY_EVENT:
@@ -411,9 +411,9 @@ class Bookings
             }
 
             $countSelect->columns(
-                array(
+                [
                     'count' => new Expression('count(DISTINCT b.' . Booking::PK . ')')
-                )
+                ]
             );
 
             $have = $select->having;

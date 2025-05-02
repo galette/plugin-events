@@ -54,13 +54,13 @@ class BookingsList extends Pagination
     private string $query;
 
     /** @var array<string> */
-    protected array $list_fields = array(
+    protected array $list_fields = [
         'event_filter',
         'paid_filter',
         'payment_type_filter',
         'selected',
         'group_filter'
-    );
+    ];
 
     /**
      * Default constructor

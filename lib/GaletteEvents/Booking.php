@@ -95,7 +95,7 @@ class Booking
     {
         try {
             $select = $this->zdb->select($this->getTableName());
-            $select->where(array(self::PK => $id));
+            $select->where([self::PK => $id]);
 
             $results = $this->zdb->execute($select);
 
@@ -185,7 +185,7 @@ class Booking
      */
     public function check(array $values): array|bool
     {
-        $this->errors = array();
+        $this->errors = [];
 
         //event and activities
         if (!isset($values['event']) || empty($values['event']) || $values['event'] == -1) {
@@ -360,7 +360,7 @@ class Booking
 
         try {
             $this->zdb->connection->beginTransaction();
-            $values = array(
+            $values = [
                 Event::PK           => $this->event,
                 Adherent::PK        => $this->member,
                 'booking_date'      => $this->date,
@@ -372,7 +372,7 @@ class Booking
                 'check_number'      => $this->check_number,
                 'number_people'     => $this->number_people,
                 'comment'           => $this->comment
-            );
+            ];
 
             if (empty($this->id)) {
                 //we're inserting a new event
