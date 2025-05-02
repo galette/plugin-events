@@ -366,7 +366,7 @@ class Events
 
             if ($result = $results->current()) {
                 $this->count = (int)$result->count;
-                if (isset($this->filters) && $this->count > 0) {
+                if ($this->count > 0) {
                     $this->filters->setCounter($this->count);
                 }
             }

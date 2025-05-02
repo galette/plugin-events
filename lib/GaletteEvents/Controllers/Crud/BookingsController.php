@@ -422,8 +422,7 @@ class BookingsController extends AbstractPluginController
 
             //check if current attached member is part of the list
             if (
-                isset($booking)
-                && $booking->getMemberId() > 0
+                $booking->getMemberId() > 0
                 && !isset($members[$booking->getMemberId()])
             ) {
                 $members[$booking->getMemberId()] = Adherent::getSName($this->zdb, $booking->getMemberId(), true);
