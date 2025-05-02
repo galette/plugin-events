@@ -107,7 +107,7 @@ class Event
     {
         try {
             $select = $this->zdb->select($this->getTableName());
-            $select->where(array(self::PK => $id));
+            $select->where([self::PK => $id]);
 
             $results = $this->zdb->execute($select);
 
@@ -182,7 +182,7 @@ class Event
             }
             Analog::log(
                 'Unable to delete event ' . $this->name .
-                ' (' . $this->id  . ') |' . $e->getMessage(),
+                ' (' . $this->id . ') |' . $e->getMessage(),
                 Analog::ERROR
             );
             return false;
@@ -199,7 +199,7 @@ class Event
      */
     public function check(array $values): bool|array
     {
-        $this->errors = array();
+        $this->errors = [];
 
         if (empty($values['begin_date'])) {
             $this->errors[] = _T('Begin date is mandatory', 'events');
@@ -369,7 +369,7 @@ class Event
 
         try {
             $this->zdb->connection->beginTransaction();
-            $values = array(
+            $values = [
                 'name'                  => $this->name,
                 'address'               => $this->address,
                 'zip'                   => $this->zip,
@@ -382,7 +382,7 @@ class Event
                 Group::PK               => ($this->group ?: new Expression('NULL')),
                 'comment'               => $this->comment,
                 'color'                 => $this->color
-            );
+            ];
 
             if (empty($this->id)) {
                 //we're inserting a new event
@@ -736,7 +736,7 @@ class Event
      */
     protected function getTableName(): string
     {
-        return EVENTS_PREFIX  . self::TABLE;
+        return EVENTS_PREFIX . self::TABLE;
     }
 
     /**
@@ -821,10 +821,10 @@ class Event
     {
         $select = $this->zdb->select(EVENTS_PREFIX . Booking::TABLE, 'b');
         $select->columns(
-            array(
+            [
                 'count' => new Expression('SUM(b.number_people)'),
                 'is_paid'
-            )
+            ]
         );
         $select->where([
             self::PK    => $this->id,

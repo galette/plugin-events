@@ -51,7 +51,7 @@ class EventsList extends Pagination
     private string $query;
 
     /** @var array<string> */
-    protected array $list_fields = array(
+    protected array $list_fields = [
         'name_filter',
         'start_date_filter',
         'raw_start_date_filter',
@@ -62,7 +62,7 @@ class EventsList extends Pagination
         'lodging_filter',
         'open_filter',
         'calendar_filter'
-    );
+    ];
 
     /**
      * Default constructor
@@ -219,11 +219,11 @@ class EventsList extends Pagination
                             }
 
                             if ($y === false && $ym === false && $d === false) {
-                                $formats = array(
+                                $formats = [
                                     __("Y"),
                                     __("Y-m"),
                                     __("Y-m-d"),
-                                );
+                                ];
 
                                 $field = null;
                                 if ($name === 'start_date_filter') {

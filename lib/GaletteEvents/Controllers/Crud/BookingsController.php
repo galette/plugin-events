@@ -441,7 +441,7 @@ class BookingsController extends AbstractPluginController
             $this->getTemplate('booking'),
             array_merge(
                 $route_params,
-                array(
+                [
                     'autocomplete'      => true,
                     'page_title'        => $title,
                     'booking'           => $booking,
@@ -450,7 +450,7 @@ class BookingsController extends AbstractPluginController
                     'require_calendar'  => true,
                     // pseudo random int
                     'time'              => time()
-                )
+                ]
             )
         );
         return $response;

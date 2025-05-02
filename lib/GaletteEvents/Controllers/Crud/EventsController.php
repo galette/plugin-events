@@ -126,13 +126,13 @@ class EventsController extends AbstractPluginController
         $this->view->render(
             $response,
             $this->getTemplate('events'),
-            array(
+            [
                 'page_title'            => _T("Events management", "events"),
                 'require_dialog'        => true,
                 'events'                => $events_list,
                 'nb_events'             => $events->getCount(),
                 'filters'               => $filters
-            )
+            ]
         );
         return $response;
     }
@@ -190,14 +190,14 @@ class EventsController extends AbstractPluginController
         $this->view->render(
             $response,
             $this->getTemplate('calendar'),
-            array(
+            [
                 'page_title'            => _T("Events calendar", "events"),
                 'require_dialog'        => true,
                 'events'                => $events->getList(),
                 'nb_events'             => $events->getCount(),
                 'filters'               => $filters,
                 'module_id'             => $this->getModuleId()
-            )
+            ]
         );
         return $response;
     }
@@ -315,7 +315,7 @@ class EventsController extends AbstractPluginController
         $this->view->render(
             $response,
             $this->getTemplate('event'),
-            array(
+            [
                 'autocomplete'      => true,
                 'page_title'        => $title,
                 'event'             => $event,
@@ -323,7 +323,7 @@ class EventsController extends AbstractPluginController
                 // pseudo random int
                 'time'              => time(),
                 'groups'            => $groups_list,
-            )
+            ]
         );
         return $response;
     }

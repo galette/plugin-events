@@ -24,6 +24,7 @@ declare(strict_types=1);
 namespace GaletteEvents\tests\units;
 
 use Galette\GaletteTestCase;
+
 use function PHPUnit\Framework\assertSame;
 
 /**
@@ -57,8 +58,8 @@ class Activity extends GaletteTestCase
         $activity = new \GaletteEvents\Activity($this->zdb, $this->login);
 
         $this->assertNull($activity->getId());
-        $this->assertSame('',$activity->getName());
-        $this->assertSame('',$activity->getCreationDate());
+        $this->assertSame('', $activity->getName());
+        $this->assertSame('', $activity->getCreationDate());
         $this->assertFalse($activity->isActive());
         $this->assertSame('', $activity->getComment());
         $this->assertSame(0, $activity->countEvents());

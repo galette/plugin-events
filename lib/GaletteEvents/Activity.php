@@ -86,7 +86,7 @@ class Activity
     {
         try {
             $select = $this->zdb->select($this->getTableName());
-            $select->where(array(self::PK => $id));
+            $select->where([self::PK => $id]);
             $results = $this->zdb->execute($select);
 
             if ($results->count() > 0) {
@@ -151,7 +151,7 @@ class Activity
             }
             Analog::log(
                 'Unable to delete activity ' . $this->name .
-                ' (' . $this->id  . ') |' . $e->getMessage(),
+                ' (' . $this->id . ') |' . $e->getMessage(),
                 Analog::ERROR
             );
             return false;
@@ -168,7 +168,7 @@ class Activity
      */
     public function check(array $values): bool
     {
-        $this->errors = array();
+        $this->errors = [];
 
         if (empty($values['name'])) {
             $this->errors[] = _T('Name is mandatory', 'events');
@@ -212,12 +212,12 @@ class Activity
         global $hist;
 
         try {
-            $values = array(
+            $values = [
                 'name'                  => $this->name,
                 'is_active'             => ($this->active ? $this->active :
                                                 ($this->zdb->isPostgres() ? 'false' : 0)),
                 'comment'               => $this->comment
-            );
+            ];
 
             if (empty($this->id)) {
                 //we're inserting a new event
@@ -350,7 +350,7 @@ class Activity
      */
     protected function getTableName(): string
     {
-        return EVENTS_PREFIX  . self::TABLE;
+        return EVENTS_PREFIX . self::TABLE;
     }
 
     /**
@@ -377,9 +377,9 @@ class Activity
         $select = $this->zdb->select(EVENTS_PREFIX . 'activitiesevents');
 
         $select->columns(
-            array(
+            [
                 'counter' => new Expression('COUNT(' . Event::PK . ')')
-            )
+            ]
         )->where([self::PK => $this->id]);
         $results = $this->zdb->execute($select);
         $result = $results->current();

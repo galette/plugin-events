@@ -164,10 +164,10 @@ class CsvController extends \Galette\Controllers\CsvController
                 $fp
             );
             fclose($fp);
-            $written[] = array(
+            $written[] = [
                 'name' => $filename,
                 'file' => $filepath
-            );
+            ];
         }
 
         $filepath = CsvOut::DEFAULT_DIRECTORY . $filename;

@@ -87,9 +87,9 @@ class Events
             $select = $this->zdb->select(EVENTS_PREFIX . Event::TABLE, 'e');
 
             $select->join(
-                array('b' => PREFIX_DB . EVENTS_PREFIX . Booking::TABLE),
+                ['b' => PREFIX_DB . EVENTS_PREFIX . Booking::TABLE],
                 'e.' . Event::PK . '=b.' . Event::PK,
-                array(),
+                [],
                 $select::JOIN_LEFT
             );
 
@@ -98,7 +98,7 @@ class Events
                 if ($this->login->isGroupManager()) {
                     $groups = $this->login->managed_groups;
                     $set = [new PredicateSet(
-                        array(
+                        [
                             new Predicate\IsNull(Group::PK),
                             new Predicate\Operator(
                                 'is_open',
@@ -110,7 +110,7 @@ class Events
                                 '>=',
                                 date('Y-m-d')
                             )
-                        )
+                        ]
                     )];
 
                     if (count($groups)) {
@@ -240,10 +240,10 @@ class Events
 
                     $activities = $event->getActivities();
                     if (count($activities)) {
-                        $description .= '<h4>' . _T('Activities', 'events')  . '</h4>';
+                        $description .= '<h4>' . _T('Activities', 'events') . '</h4>';
                         $description .= '<ul class="ui bulleted list">';
                         foreach ($activities as $activity) {
-                            $description .= '<li>' . $activity['activity']->getName()  . '</li>';
+                            $description .= '<li>' . $activity['activity']->getName() . '</li>';
                         }
                         $description .= '</ul>';
                     }
@@ -281,7 +281,7 @@ class Events
             return true;
         } else {
             Analog::log(
-                'Trying to order by ' . $field_name  . ' while it is not in ' .
+                'Trying to order by ' . $field_name . ' while it is not in ' .
                 'selected fields.',
                 Analog::WARNING
             );
@@ -299,7 +299,7 @@ class Events
      */
     private function buildOrderClause(?array $fields = null): array
     {
-        $order = array();
+        $order = [];
 
         switch ($this->filters->orderby) {
             case self::ORDERBY_DATE:
@@ -350,9 +350,9 @@ class Events
             }
 
             $countSelect->columns(
-                array(
+                [
                     'count' => new Expression('count(DISTINCT e.' . Event::PK . ')')
-                )
+                ]
             );
 
             $have = $select->having;

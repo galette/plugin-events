@@ -44,10 +44,10 @@ class ActivitiesList extends Pagination
     private string $query;
 
     /** @var array<string> */
-    protected array $list_fields = array(
+    protected array $list_fields = [
         'name_filter',
         'active_filter'
-    );
+    ];
 
     /**
      * Default constructor
