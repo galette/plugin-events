@@ -25,6 +25,7 @@ namespace GaletteEvents\Filters;
 
 use Analog\Analog;
 use Galette\Core\Pagination;
+use Galette\Enums\SQLOrder;
 use GaletteEvents\Repository\Activities;
 
 /**
@@ -69,11 +70,11 @@ class ActivitiesList extends Pagination
     /**
      * Return the default direction for ordering
      *
-     * @return string ASC or DESC
+     * @return SQLOrder
      */
-    protected function getDefaultDirection(): string
+    protected function getDefaultDirection(): SQLOrder
     {
-        return self::ORDER_DESC;
+        return SQLOrder::DESC;
     }
 
     /**
