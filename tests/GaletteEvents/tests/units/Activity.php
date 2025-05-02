@@ -83,6 +83,10 @@ class Activity extends GaletteTestCase
         ];
         $this->assertFalse($activity->check($data));
         $this->assertSame(['Name is mandatory'], $activity->getErrors());
+        $this->expectLogEntry(
+            \Analog::ERROR,
+            'Name is mandatory',
+        );
 
         //add new activity
         $data = [
