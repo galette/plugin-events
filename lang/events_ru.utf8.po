@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Evgeniy Khramov <thejenjagamertjg@gmail.com>, 2022.
 # Evgeniy Khramov <65224669+thejenja@users.noreply.github.com>, 2025.
+# Maksim_220 Кабанов <law820314@gmail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-07-02 21:38+0200\n"
-"PO-Revision-Date: 2025-04-28 14:40+0000\n"
-"Last-Translator: Evgeniy Khramov <65224669+thejenja@users.noreply.github.com>"
-"\n"
+"PO-Revision-Date: 2025-06-03 20:04+0000\n"
+"Last-Translator: Maksim_220 Кабанов <law820314@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/galette/"
 "events-plugin/ru/>\n"
 "Language: ru\n"
@@ -37,7 +37,7 @@ msgstr ""
 
 #: ../lib/GaletteEvents/Booking.php:262
 msgid "Member is mandatory"
-msgstr ""
+msgstr "Членство (обязательно)"
 
 #: ../lib/GaletteEvents/Booking.php:274
 msgid "There must be at least one person"
@@ -109,29 +109,29 @@ msgstr ""
 
 #: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:125
 msgid "Activities management"
-msgstr ""
+msgstr "Управление деятельностью"
 
 #: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:196
 msgid "Activity"
-msgstr ""
+msgstr "Деятельность"
 
 #: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:257
 msgid "New activity has been successfully added."
-msgstr ""
+msgstr "Новая активность успешно добавлена."
 
 #: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:259
 msgid "Activity has been modified."
-msgstr ""
+msgstr "Активность была изменена."
 
 #: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:263
 msgid "An error occurred while storing the activity."
-msgstr ""
+msgstr "При сохранении активности произошла ошибка."
 
 #. TRANS %1$s is activity name
 #: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:348
 #, php-format
 msgid "Remove activity %1$s"
-msgstr ""
+msgstr "Удалить активность %1$s"
 
 #: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:130
 msgid "Events management"
@@ -248,7 +248,7 @@ msgstr ""
 #: ../lib/GaletteEvents/PluginGaletteEvents.php:92
 #: ../tempcache/event.html.twig:173 ../tempcache/booking.html.twig:214
 msgid "Activities"
-msgstr ""
+msgstr "Активность"
 
 #: ../lib/GaletteEvents/Event.php:205
 msgid "Begin date is mandatory"
@@ -256,11 +256,11 @@ msgstr ""
 
 #: ../lib/GaletteEvents/Event.php:229 ../tempcache/event.html.twig:90
 msgid "Begin date"
-msgstr ""
+msgstr "Дата начала"
 
 #: ../lib/GaletteEvents/Event.php:231 ../tempcache/event.html.twig:96
 msgid "End date"
-msgstr ""
+msgstr "Дата окончания"
 
 #: ../lib/GaletteEvents/Event.php:249
 msgid "End date must be later or equal to begin date"
@@ -268,7 +268,7 @@ msgstr ""
 
 #: ../lib/GaletteEvents/Event.php:255 ../lib/GaletteEvents/Activity.php:174
 msgid "Name is mandatory"
-msgstr ""
+msgstr "Имя (обязательно)"
 
 #: ../lib/GaletteEvents/Event.php:271
 msgid "Please select a group you own!"
@@ -311,19 +311,19 @@ msgstr ""
 
 #: ../lib/GaletteEvents/Activity.php:242
 msgid "Activity added"
-msgstr ""
+msgstr "Активность добавлена"
 
 #: ../lib/GaletteEvents/Activity.php:247
 msgid "Fail to add new activity."
-msgstr ""
+msgstr "Не удается добавить новую активность."
 
 #: ../lib/GaletteEvents/Activity.php:266
 msgid "Activity updated"
-msgstr ""
+msgstr "Активность обновлена"
 
 #: ../tempcache/event.html.twig:64 ../tempcache/activity.html.twig:64
 msgid "General information"
-msgstr ""
+msgstr "Общая информация"
 
 #: ../tempcache/event.html.twig:71
 msgid "Is open"
@@ -353,7 +353,7 @@ msgstr "Комментарий"
 
 #: ../tempcache/event.html.twig:138
 msgid "Location"
-msgstr ""
+msgstr "Расположение"
 
 #: ../tempcache/event.html.twig:145
 msgid "Address"
@@ -419,13 +419,13 @@ msgstr ""
 
 #: ../tempcache/booking.html.twig:287
 msgid "Financial information"
-msgstr ""
+msgstr "Финансовая информация"
 
 #: ../tempcache/booking.html.twig:294 ../tempcache/bookings.html.twig:141
 #: ../tempcache/bookings.html.twig:272 ../tempcache/bookings.html.twig:429
 #: ../tempcache/bookings.html.twig:441 ../tempcache/bookings.html.twig:452
 msgid "Paid"
-msgstr ""
+msgstr "Оплачивается"
 
 #: ../tempcache/bookings.html.twig:61
 msgid "No booking selected"
@@ -478,12 +478,12 @@ msgstr ""
 
 #: ../tempcache/bookings.html.twig:198
 msgid "All payment types"
-msgstr ""
+msgstr "Все типы платежей"
 
 #: ../tempcache/bookings.html.twig:204 ../tempcache/bookings.html.twig:206
 #: ../tempcache/events.html.twig:104 ../tempcache/events.html.twig:187
 msgid "Group"
-msgstr ""
+msgstr "Группа"
 
 #: ../tempcache/bookings.html.twig:242
 msgid "Paid bookings:"
@@ -492,7 +492,7 @@ msgstr ""
 #: ../tempcache/bookings.html.twig:288 ../tempcache/bookings.html.twig:431
 #: ../tempcache/bookings.html.twig:443 ../tempcache/bookings.html.twig:458
 msgid "Not paid"
-msgstr ""
+msgstr "Не оплачено"
 
 #: ../tempcache/bookings.html.twig:340
 #, php-format
@@ -505,7 +505,7 @@ msgstr ""
 
 #: ../tempcache/bookings.html.twig:500
 msgid "Remove from database"
-msgstr ""
+msgstr "Удалить из БД"
 
 #: ../tempcache/bookings.html.twig:533
 msgid "No booking has been found"
@@ -515,21 +515,22 @@ msgstr ""
 #, php-format
 msgid "%1$s activity"
 msgid_plural "%1$s activities"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$s активность"
+msgstr[1] "%1$s активности"
+msgstr[2] "%1$s активностей"
 
 #: ../tempcache/activities.html.twig:90
 msgid "New activity"
-msgstr ""
+msgstr "Новая активность"
 
 #: ../tempcache/activities.html.twig:104 ../tempcache/activities.html.twig:157
 msgid "Creation date"
-msgstr ""
+msgstr "Дата создания"
 
 #: ../tempcache/activities.html.twig:104 ../tempcache/activities.html.twig:169
 #: ../tempcache/activity.html.twig:71
 msgid "Is active"
-msgstr ""
+msgstr "Активен"
 
 #: ../tempcache/activities.html.twig:180 ../tempcache/activities.html.twig:191
 msgid "Active"
@@ -542,16 +543,16 @@ msgstr "Неактивен"
 #: ../tempcache/activities.html.twig:207 ../tempcache/events.html.twig:257
 #, php-format
 msgid "%1$s: edit information"
-msgstr ""
+msgstr "%1$s: редактировать информацию"
 
 #: ../tempcache/activities.html.twig:209 ../tempcache/events.html.twig:270
 #, php-format
 msgid "%1$s: remove from database"
-msgstr ""
+msgstr "%1$s: удалить из БД"
 
 #: ../tempcache/activities.html.twig:245
 msgid "No activity has been found"
-msgstr ""
+msgstr "Активность не обнаружена"
 
 #: ../tempcache/events.html.twig:62
 #, php-format
