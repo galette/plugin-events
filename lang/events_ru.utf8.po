@@ -4,13 +4,14 @@
 # Evgeniy Khramov <thejenjagamertjg@gmail.com>, 2022.
 # Evgeniy Khramov <65224669+thejenja@users.noreply.github.com>, 2025.
 # Maksim_220 Кабанов <law820314@gmail.com>, 2025.
+# da070116 <da070116@gmail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-07-02 21:38+0200\n"
-"PO-Revision-Date: 2025-06-03 20:04+0000\n"
-"Last-Translator: Maksim_220 Кабанов <law820314@gmail.com>\n"
+"PO-Revision-Date: 2025-06-17 13:01+0000\n"
+"Last-Translator: da070116 <da070116@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/galette/"
 "events-plugin/ru/>\n"
 "Language: ru\n"
@@ -19,21 +20,21 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.12-dev\n"
+"X-Generator: Weblate 5.12.1\n"
 
 #: ../lib/GaletteEvents/Booking.php:192
 msgid "Event is mandatory"
-msgstr ""
+msgstr "Событие обязательно"
 
 #. TRANS: %1$s is activity name
 #: ../lib/GaletteEvents/Booking.php:204
 #, php-format
 msgid "%1$s is mandatory for this event!"
-msgstr ""
+msgstr "%1$s обязательно для этого события!"
 
 #: ../lib/GaletteEvents/Booking.php:239
 msgid "Please specify amount if booking has been paid ;)"
-msgstr ""
+msgstr "Пожалуйста, укажите количество, если бронирование было оплачено ;)"
 
 #: ../lib/GaletteEvents/Booking.php:262
 msgid "Member is mandatory"
@@ -41,71 +42,71 @@ msgstr "Членство (обязательно)"
 
 #: ../lib/GaletteEvents/Booking.php:274
 msgid "There must be at least one person"
-msgstr ""
+msgstr "Должна быть хотя бы одна персона"
 
 #: ../lib/GaletteEvents/Booking.php:283
 msgid "Booking date is mandatory!"
-msgstr ""
+msgstr "Дата бронирования обязательна!"
 
 #: ../lib/GaletteEvents/Booking.php:307
 msgid "booking date"
-msgstr ""
+msgstr "дата бронирования"
 
 #. TRANS: first replacement is member name, second is event name
 #: ../lib/GaletteEvents/Booking.php:329
 #, php-format
 msgid "A booking already exists for %1$s in %2$s"
-msgstr ""
+msgstr "Бронирование уже существует для %1$s на %2$s"
 
 #: ../lib/GaletteEvents/Booking.php:397
 msgid "Booking added"
-msgstr ""
+msgstr "Бронирование добавлено"
 
 #: ../lib/GaletteEvents/Booking.php:401
 msgid "Fail to add new booking."
-msgstr ""
+msgstr "Не удалось добавить новое бронирование."
 
 #: ../lib/GaletteEvents/Booking.php:420
 msgid "Booking updated"
-msgstr ""
+msgstr "Бронирование обновлено"
 
 #: ../lib/GaletteEvents/Controllers/Crud/BookingsController.php:163
 msgid "Bookings management"
-msgstr ""
+msgstr "Управление бронированием"
 
 #: ../lib/GaletteEvents/Controllers/Crud/BookingsController.php:335
 msgid "No action was matching."
-msgstr ""
+msgstr "Нет совпадающих действий."
 
 #: ../lib/GaletteEvents/Controllers/Crud/BookingsController.php:340
 msgid "No booking was selected, please check at least one."
-msgstr ""
+msgstr "Бронирование не выбрано, отметьте хотя бы одно."
 
 #: ../lib/GaletteEvents/Controllers/Crud/BookingsController.php:380
 msgid "Booking"
-msgstr ""
+msgstr "Бронирование"
 
 #: ../lib/GaletteEvents/Controllers/Crud/BookingsController.php:510
 msgid "New booking has been successfully added."
-msgstr ""
+msgstr "Новое бронирование успешно добавлено."
 
 #: ../lib/GaletteEvents/Controllers/Crud/BookingsController.php:512
 msgid "Booking has been modified."
-msgstr ""
+msgstr "Бронирование изменено."
 
 #: ../lib/GaletteEvents/Controllers/Crud/BookingsController.php:516
 msgid "An error occurred while storing the booking."
-msgstr ""
+msgstr "Произошла ошибка при сохранении бронирования."
 
 #: ../lib/GaletteEvents/Controllers/Crud/BookingsController.php:526
 msgid "Do not forget to store the booking"
-msgstr ""
+msgstr "Не забудьте сохранить бронирование"
 
 #. TRANS: %1$s is the member name, %2$s the event name.
 #: ../lib/GaletteEvents/Controllers/Crud/BookingsController.php:629
 #, php-format
 msgid "Remove booking for %1$s on %2$s"
-msgstr ""
+msgstr "Удалить бронирование для %1$s на %2$s"
 
 #: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:125
 msgid "Activities management"
@@ -135,27 +136,27 @@ msgstr "Удалить активность %1$s"
 
 #: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:130
 msgid "Events management"
-msgstr ""
+msgstr "Управление событиями"
 
 #: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:185
 msgid "Javascript libraries has not been built!"
-msgstr ""
+msgstr "Javascript-библиотеки не скомпилировались!"
 
 #: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:194
 #: ../lib/GaletteEvents/PluginGaletteEvents.php:125
 msgid "Events calendar"
-msgstr ""
+msgstr "Календарь событий"
 
 #: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:303
 #: ../lib/GaletteEvents/Controllers/CsvController.php:71
 #: ../tempcache/booking.html.twig:100 ../tempcache/booking.html.twig:108
 #: ../tempcache/bookings.html.twig:141 ../tempcache/bookings.html.twig:163
 msgid "Event"
-msgstr ""
+msgstr "Событие"
 
 #: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:386
 msgid "Activity has been attached to event."
-msgstr ""
+msgstr "Деятельность была привязана к событию."
 
 #: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:387
 msgid "Do not forget to store the event"
