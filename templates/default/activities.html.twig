@@ -78,11 +78,7 @@
     {% for ordre, activity in activities %}
         <tr class="{{ loop.index is odd ? 'odd' : 'even' }}">
             <td class="right collapsing" data-scope="id">
-                {% if preferences.pref_show_id %}
-                    {{ activity.getId() }}
-                {% else %}
-                    {{ ordre + 1 + (filters.current_page - 1) * numrows }}
-                {% endif %}
+                {{ activity.getId() }}
             </td>
             <td class="username_row" data-scope="row">
                 {% set aid = activity.getId() %}

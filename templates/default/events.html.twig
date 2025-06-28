@@ -77,11 +77,7 @@
         {% for ordre, event in events %}
     <tr class="{{ loop.index is odd ? 'odd' : 'even' }}">
         <td class="right collapsing" data-scope="id">
-            {% if preferences.pref_show_id %}
-                {{ event.getId() }}
-            {% else %}
-                {{ ordre + 1 + (filters.current_page - 1) * numrows }}
-            {% endif %}
+            {{ event.getId() }}
         </td>
         <td class="username_row" data-scope="row">
             {% set eid = event.getId() %}

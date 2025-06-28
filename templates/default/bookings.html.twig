@@ -170,11 +170,7 @@
         {% set rclass = booking.getRowClass() %}
                 <tr>
                     <td class="{{ rclass }} right collapsing" data-scope="id">
-                        {% if preferences.pref_show_id %}
-                            {{ booking.getId() }}
-                        {% else %}
-                            {{ ordre + 1 + (filters.current_page - 1) * numrows }}
-                        {% endif %}
+                        {{ booking.getId() }}
                     </td>
                     <td class="{{ rclass }} username_row" data-scope="row">
                         {% set bid = booking.getId() %}
