@@ -2,13 +2,13 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # Languages add-on <noreply-addon-languages@weblate.org>, 2024.
-# தமிழ்நேரம் <anishprabu.t@gmail.com>, 2024.
+# தமிழ்நேரம் <anishprabu.t@gmail.com>, 2024, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-07-02 21:38+0200\n"
-"PO-Revision-Date: 2024-12-28 06:40+0000\n"
+"PO-Revision-Date: 2025-07-02 02:01+0000\n"
 "Last-Translator: தமிழ்நேரம் <anishprabu.t@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/galette/"
 "events-plugin/ta/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10-dev\n"
+"X-Generator: Weblate 5.13-dev\n"
 
 #: ../lib/GaletteEvents/Booking.php:192
 msgid "Event is mandatory"
@@ -440,7 +440,7 @@ msgstr ""
 
 #: ../tempcache/bookings.html.twig:76
 msgid "Members as CSV"
-msgstr "சி.எச்.வி."
+msgstr "காபிம ஆக உறுப்பினர்கள்"
 
 #: ../tempcache/bookings.html.twig:76
 msgid "Export selected reservation members as CSV"
@@ -460,7 +460,7 @@ msgstr "தேர்ந்தெடுக்கப்பட்ட முன்�
 msgid "%1$s booking"
 msgid_plural "%1$s bookings"
 msgstr[0] "%1$s முன்பதிவு"
-msgstr[1] "%1$s முன்பதிவு"
+msgstr[1] "%1$s முன்பதிவுகள்"
 
 #: ../tempcache/bookings.html.twig:120 ../tempcache/calendar.html.twig:120
 msgid "New booking"
