@@ -1,11 +1,11 @@
-# Johan Cwiklinski <trasher@x-tnd.be>, 2020, 2021, 2022, 2023, 2024.
+# Johan Cwiklinski <trasher@x-tnd.be>, 2020, 2021, 2022, 2023, 2024, 2025.
 # Fredericos Tezorc <fredericos.tezorc@gmail.com>, 2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: Galette Events plugin\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-07-02 21:38+0200\n"
-"PO-Revision-Date: 2024-09-15 07:51+0000\n"
+"PO-Revision-Date: 2025-07-04 05:37+0000\n"
 "Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/galette/"
 "events-plugin/fr/>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.8-dev\n"
+"X-Generator: Weblate 5.13-dev\n"
 
 #: ../lib/GaletteEvents/Booking.php:192
 msgid "Event is mandatory"
@@ -489,7 +489,7 @@ msgstr "Réservations payées :"
 #: ../tempcache/bookings.html.twig:288 ../tempcache/bookings.html.twig:431
 #: ../tempcache/bookings.html.twig:443 ../tempcache/bookings.html.twig:458
 msgid "Not paid"
-msgstr "Non payée"
+msgstr "Non payé"
 
 #: ../tempcache/bookings.html.twig:340
 #, php-format
