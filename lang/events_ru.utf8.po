@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-07-02 21:38+0200\n"
-"PO-Revision-Date: 2025-06-17 13:01+0000\n"
-"Last-Translator: da070116 <da070116@gmail.com>\n"
+"PO-Revision-Date: 2025-07-28 23:38+0000\n"
+"Last-Translator: Maksim_220 Кабанов <law820314@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/galette/"
 "events-plugin/ru/>\n"
 "Language: ru\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.12.1\n"
+"X-Generator: Weblate 5.13-dev\n"
 
 #: ../lib/GaletteEvents/Booking.php:192
 msgid "Event is mandatory"
@@ -160,39 +160,39 @@ msgstr "Деятельность была привязана к событию."
 
 #: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:387
 msgid "Do not forget to store the event"
-msgstr ""
+msgstr "Не забудьте сохранить событие"
 
 #: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:389
 msgid "Activity has been detached from event."
-msgstr ""
+msgstr "Деятельность была отделена от события."
 
 #: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:398
 msgid "New event has been successfully added."
-msgstr ""
+msgstr "Новое событие успешно добавлено."
 
 #: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:400
 msgid "Event has been modified."
-msgstr ""
+msgstr "Событие было изменено."
 
 #: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:404
 msgid "An error occurred while storing the event."
-msgstr ""
+msgstr "При сохранении события произошла ошибка."
 
 #. TRANS: %1$s is the event name
 #: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:504
 #, php-format
 msgid "Remove event '%1$s'\""
-msgstr ""
+msgstr "Удалите событие '%1$s'\""
 
 #: ../lib/GaletteEvents/Controllers/CsvController.php:75
 #: ../tempcache/event.html.twig:151
 msgid "Zip code"
-msgstr ""
+msgstr "Индекс"
 
 #: ../lib/GaletteEvents/Controllers/CsvController.php:81
 #: ../tempcache/booking.html.twig:198
 msgid "Number of persons"
-msgstr ""
+msgstr "Кол-во человек"
 
 #: ../lib/GaletteEvents/Controllers/CsvController.php:96
 #: ../tempcache/booking.html.twig:301
@@ -202,48 +202,48 @@ msgstr "Сумма"
 #: ../lib/GaletteEvents/Controllers/CsvController.php:98
 #: ../tempcache/booking.html.twig:313
 msgid "Bank name"
-msgstr ""
+msgstr "Название банка"
 
 #. TRANS: Bank check number
 #: ../lib/GaletteEvents/Controllers/CsvController.php:100
 #: ../tempcache/booking.html.twig:319
 msgid "Check number"
-msgstr ""
+msgstr "Номер чека"
 
 #. TRANS: this is a filename: all lowercase, no special character, no space.
 #: ../lib/GaletteEvents/Controllers/CsvController.php:155
 msgid "bookingslist"
-msgstr ""
+msgstr "список заказов"
 
 #: ../lib/GaletteEvents/Repository/Events.php:205
 msgid "Event information"
-msgstr ""
+msgstr "Информация о событии"
 
 #: ../lib/GaletteEvents/Repository/Events.php:209
 msgid "Start date:"
-msgstr ""
+msgstr "Дата начала:"
 
 #: ../lib/GaletteEvents/Repository/Events.php:210
 msgid "End date:"
-msgstr ""
+msgstr "Дата окончания:"
 
 #: ../lib/GaletteEvents/Repository/Events.php:211
 msgid "Location:"
-msgstr ""
+msgstr "Расположение:"
 
 #: ../lib/GaletteEvents/Repository/Events.php:213
 msgid "Comment:"
-msgstr ""
+msgstr "Комментарий:"
 
 #. TRANS: %1$s is the number of paid attendees
 #: ../lib/GaletteEvents/Repository/Events.php:230
 #, php-format
 msgid "%1$s paid"
-msgstr ""
+msgstr "%1$s оплачено"
 
 #: ../lib/GaletteEvents/Repository/Events.php:235
 msgid "Attendees:"
-msgstr ""
+msgstr "Участники:"
 
 #: ../lib/GaletteEvents/Repository/Events.php:243
 #: ../lib/GaletteEvents/PluginGaletteEvents.php:92
@@ -253,7 +253,7 @@ msgstr "Активность"
 
 #: ../lib/GaletteEvents/Event.php:205
 msgid "Begin date is mandatory"
-msgstr ""
+msgstr "Дата начала обязательна"
 
 #: ../lib/GaletteEvents/Event.php:229 ../tempcache/event.html.twig:90
 msgid "Begin date"
@@ -265,7 +265,7 @@ msgstr "Дата окончания"
 
 #: ../lib/GaletteEvents/Event.php:249
 msgid "End date must be later or equal to begin date"
-msgstr ""
+msgstr "Дата окончания должна быть позже или равна дате начала"
 
 #: ../lib/GaletteEvents/Event.php:255 ../lib/GaletteEvents/Activity.php:174
 msgid "Name is mandatory"
@@ -273,19 +273,19 @@ msgstr "Имя (обязательно)"
 
 #: ../lib/GaletteEvents/Event.php:271
 msgid "Please select a group you own!"
-msgstr ""
+msgstr "Пожалуйста, выберите группу, которой вы владеете!"
 
 #: ../lib/GaletteEvents/Event.php:278
 msgid "Town is mandatory"
-msgstr ""
+msgstr "Город обязателен"
 
 #: ../lib/GaletteEvents/Event.php:407
 msgid "Event added"
-msgstr ""
+msgstr "Событие добавлено"
 
 #: ../lib/GaletteEvents/Event.php:411
 msgid "Fail to add new event."
-msgstr ""
+msgstr "Не удается добавить новое событие."
 
 #: ../lib/GaletteEvents/Event.php:430
 msgid "Event updated"
