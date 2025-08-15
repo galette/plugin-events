@@ -169,6 +169,10 @@ class Events
                         )
                     );
                 }
+            } else {
+                if (isset($this->filters->start_date_filter)) {
+                    $select->where->greaterThanOrEqualTo('begin_date', $this->filters->raw_start_date_filter);
+                }
             }
 
             $select->group(['e.' . Event::PK]);
