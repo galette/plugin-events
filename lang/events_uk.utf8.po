@@ -7,12 +7,12 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: translations@galette.eu\n"
-"POT-Creation-Date: 2024-07-02 21:38+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-08-17 08:54+0200\n"
 "PO-Revision-Date: 2025-07-05 17:01+0000\n"
 "Last-Translator: Максим Горпиніч <gorpinicmaksim5@gmail.com>\n"
-"Language-Team: Ukrainian <https://hosted.weblate.org/projects/galette/"
-"events-plugin/uk/>\n"
+"Language-Team: Ukrainian <https://hosted.weblate.org/projects/galette/events-"
+"plugin/uk/>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -85,50 +85,50 @@ msgstr "Бронювання не вибрано, будь ласка, обер�
 msgid "Booking"
 msgstr "Бронювання"
 
-#: ../lib/GaletteEvents/Controllers/Crud/BookingsController.php:510
+#: ../lib/GaletteEvents/Controllers/Crud/BookingsController.php:509
 msgid "New booking has been successfully added."
 msgstr "Нове бронювання успішно додано."
 
-#: ../lib/GaletteEvents/Controllers/Crud/BookingsController.php:512
+#: ../lib/GaletteEvents/Controllers/Crud/BookingsController.php:511
 msgid "Booking has been modified."
 msgstr "Бронювання було змінено."
 
-#: ../lib/GaletteEvents/Controllers/Crud/BookingsController.php:516
+#: ../lib/GaletteEvents/Controllers/Crud/BookingsController.php:515
 msgid "An error occurred while storing the booking."
 msgstr "Під час зберігання бронювання сталася помилка."
 
-#: ../lib/GaletteEvents/Controllers/Crud/BookingsController.php:526
+#: ../lib/GaletteEvents/Controllers/Crud/BookingsController.php:523
 msgid "Do not forget to store the booking"
 msgstr "Не забудьте зберегти бронювання"
 
 #. TRANS: %1$s is the member name, %2$s the event name.
-#: ../lib/GaletteEvents/Controllers/Crud/BookingsController.php:629
+#: ../lib/GaletteEvents/Controllers/Crud/BookingsController.php:626
 #, php-format
 msgid "Remove booking for %1$s on %2$s"
 msgstr "Вилучити бронювання для %1$s на %2$s"
 
-#: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:125
+#: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:121
 msgid "Activities management"
 msgstr "Управління діяльностями"
 
-#: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:196
+#: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:192
 msgid "Activity"
 msgstr "Діяльність"
 
-#: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:257
+#: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:253
 msgid "New activity has been successfully added."
 msgstr "Нову діяльність успішно додано."
 
-#: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:259
+#: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:255
 msgid "Activity has been modified."
 msgstr "Діяльність змінено."
 
-#: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:263
+#: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:259
 msgid "An error occurred while storing the activity."
 msgstr "Під час зберігання діяльності сталася помилка."
 
 #. TRANS %1$s is activity name
-#: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:348
+#: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:344
 #, php-format
 msgid "Remove activity %1$s"
 msgstr "Вилучити діяльність %1$s"
@@ -142,14 +142,14 @@ msgid "Javascript libraries has not been built!"
 msgstr "Бібліотеки Javascript не створено!"
 
 #: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:194
-#: ../lib/GaletteEvents/PluginGaletteEvents.php:125
+#: ../lib/GaletteEvents/PluginGaletteEvents.php:137
 msgid "Events calendar"
 msgstr "Календар подій"
 
 #: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:303
 #: ../lib/GaletteEvents/Controllers/CsvController.php:71
-#: ../tempcache/booking.html.twig:100 ../tempcache/booking.html.twig:108
-#: ../tempcache/bookings.html.twig:141 ../tempcache/bookings.html.twig:163
+#: ../tempcache/booking.html.twig:107 ../tempcache/booking.html.twig:115
+#: ../tempcache/bookings.html.twig:154 ../tempcache/bookings.html.twig:179
 msgid "Event"
 msgstr "Подія"
 
@@ -184,28 +184,28 @@ msgid "Remove event '%1$s'\""
 msgstr "Вилучити подію '%1$s'"
 
 #: ../lib/GaletteEvents/Controllers/CsvController.php:75
-#: ../tempcache/event.html.twig:151
+#: ../tempcache/event.html.twig:158
 msgid "Zip code"
 msgstr "ZIP-код"
 
 #: ../lib/GaletteEvents/Controllers/CsvController.php:81
-#: ../tempcache/booking.html.twig:198
+#: ../tempcache/booking.html.twig:205
 msgid "Number of persons"
 msgstr "Кількість осіб"
 
 #: ../lib/GaletteEvents/Controllers/CsvController.php:96
-#: ../tempcache/booking.html.twig:301
+#: ../tempcache/booking.html.twig:308
 msgid "Amount"
 msgstr "Сума"
 
 #: ../lib/GaletteEvents/Controllers/CsvController.php:98
-#: ../tempcache/booking.html.twig:313
+#: ../tempcache/booking.html.twig:320
 msgid "Bank name"
 msgstr "Назва банку"
 
 #. TRANS: Bank check number
 #: ../lib/GaletteEvents/Controllers/CsvController.php:100
-#: ../tempcache/booking.html.twig:319
+#: ../tempcache/booking.html.twig:326
 msgid "Check number"
 msgstr "Номер чека"
 
@@ -214,39 +214,39 @@ msgstr "Номер чека"
 msgid "bookingslist"
 msgstr "список бронювань"
 
-#: ../lib/GaletteEvents/Repository/Events.php:205
+#: ../lib/GaletteEvents/Repository/Events.php:209
 msgid "Event information"
 msgstr "Відомості про подію"
 
-#: ../lib/GaletteEvents/Repository/Events.php:209
+#: ../lib/GaletteEvents/Repository/Events.php:213
 msgid "Start date:"
 msgstr "Дата початку:"
 
-#: ../lib/GaletteEvents/Repository/Events.php:210
+#: ../lib/GaletteEvents/Repository/Events.php:214
 msgid "End date:"
 msgstr "Дата завершення:"
 
-#: ../lib/GaletteEvents/Repository/Events.php:211
+#: ../lib/GaletteEvents/Repository/Events.php:215
 msgid "Location:"
 msgstr "Місцеперебування:"
 
-#: ../lib/GaletteEvents/Repository/Events.php:213
+#: ../lib/GaletteEvents/Repository/Events.php:217
 msgid "Comment:"
 msgstr "Коментар:"
 
 #. TRANS: %1$s is the number of paid attendees
-#: ../lib/GaletteEvents/Repository/Events.php:230
+#: ../lib/GaletteEvents/Repository/Events.php:234
 #, php-format
 msgid "%1$s paid"
 msgstr "%1$s оплачено"
 
-#: ../lib/GaletteEvents/Repository/Events.php:235
+#: ../lib/GaletteEvents/Repository/Events.php:239
 msgid "Attendees:"
 msgstr "Присутні:"
 
-#: ../lib/GaletteEvents/Repository/Events.php:243
-#: ../lib/GaletteEvents/PluginGaletteEvents.php:92
-#: ../tempcache/event.html.twig:173 ../tempcache/booking.html.twig:214
+#: ../lib/GaletteEvents/Repository/Events.php:247
+#: ../lib/GaletteEvents/PluginGaletteEvents.php:104
+#: ../tempcache/event.html.twig:180 ../tempcache/booking.html.twig:221
 msgid "Activities"
 msgstr "Діяльності"
 
@@ -254,11 +254,11 @@ msgstr "Діяльності"
 msgid "Begin date is mandatory"
 msgstr "Дата початку є обов’язковою"
 
-#: ../lib/GaletteEvents/Event.php:229 ../tempcache/event.html.twig:90
+#: ../lib/GaletteEvents/Event.php:229 ../tempcache/event.html.twig:97
 msgid "Begin date"
 msgstr "Дата початку"
 
-#: ../lib/GaletteEvents/Event.php:231 ../tempcache/event.html.twig:96
+#: ../lib/GaletteEvents/Event.php:231 ../tempcache/event.html.twig:103
 msgid "End date"
 msgstr "Дата завершення"
 
@@ -290,24 +290,28 @@ msgstr "Не вдалося додати нову подію."
 msgid "Event updated"
 msgstr "Подію оновлено"
 
-#: ../lib/GaletteEvents/PluginGaletteEvents.php:51
-#: ../lib/GaletteEvents/PluginGaletteEvents.php:55
-#: ../tempcache/activities.html.twig:104 ../tempcache/activities.html.twig:163
+#: ../lib/GaletteEvents/PluginGaletteEvents.php:63
+#: ../lib/GaletteEvents/PluginGaletteEvents.php:67
+#: ../tempcache/activities.html.twig:117 ../tempcache/activities.html.twig:181
 msgid "Events"
 msgstr "Події"
 
-#: ../lib/GaletteEvents/PluginGaletteEvents.php:62
-#: ../lib/GaletteEvents/PluginGaletteEvents.php:124
+#: ../lib/GaletteEvents/PluginGaletteEvents.php:74
+#: ../lib/GaletteEvents/PluginGaletteEvents.php:136
 msgid "Calendar"
 msgstr "Календар"
 
-#: ../lib/GaletteEvents/PluginGaletteEvents.php:75
+#: ../lib/GaletteEvents/PluginGaletteEvents.php:87
 msgid "Bookings"
 msgstr "Бронювання"
 
-#: ../lib/GaletteEvents/PluginGaletteEvents.php:145
+#: ../lib/GaletteEvents/PluginGaletteEvents.php:157
 msgid "New event booking"
 msgstr "Нове бронювання події"
+
+#: ../lib/GaletteEvents/PluginGaletteEvents.php:225
+msgid "Upcoming events"
+msgstr ""
 
 #: ../lib/GaletteEvents/Activity.php:242
 msgid "Activity added"
@@ -321,117 +325,117 @@ msgstr "Не вдалося додати нову діяльність."
 msgid "Activity updated"
 msgstr "Діяльність оновлено"
 
-#: ../tempcache/event.html.twig:64 ../tempcache/activity.html.twig:64
+#: ../tempcache/event.html.twig:71 ../tempcache/activity.html.twig:71
 msgid "General information"
 msgstr "Загальні відомості"
 
-#: ../tempcache/event.html.twig:71
+#: ../tempcache/event.html.twig:78
 msgid "Is open"
 msgstr "Відкрито"
 
-#: ../tempcache/event.html.twig:78 ../tempcache/activities.html.twig:104
-#: ../tempcache/events.html.twig:104 ../tempcache/activity.html.twig:78
+#: ../tempcache/event.html.twig:85 ../tempcache/activities.html.twig:117
+#: ../tempcache/events.html.twig:117 ../tempcache/activity.html.twig:85
 msgid "Name"
 msgstr "Ім'я"
 
-#: ../tempcache/event.html.twig:84
+#: ../tempcache/event.html.twig:91
 msgid "Color"
 msgstr "Колір"
 
-#: ../tempcache/event.html.twig:122
+#: ../tempcache/event.html.twig:129
 msgid "Limit to group"
 msgstr "Обмежити групою"
 
-#: ../tempcache/event.html.twig:122
+#: ../tempcache/event.html.twig:129
 msgid "Restrict event to selected group (and its subgroups)."
 msgstr "Обмежити подію вибраною групою (і її підгрупами)."
 
-#: ../tempcache/event.html.twig:128 ../tempcache/booking.html.twig:204
-#: ../tempcache/activity.html.twig:84
+#: ../tempcache/event.html.twig:135 ../tempcache/booking.html.twig:211
+#: ../tempcache/activity.html.twig:91
 msgid "Comment"
 msgstr "Коментар"
 
-#: ../tempcache/event.html.twig:138
+#: ../tempcache/event.html.twig:145
 msgid "Location"
 msgstr "Місцеперебування"
 
-#: ../tempcache/event.html.twig:145
+#: ../tempcache/event.html.twig:152
 msgid "Address"
 msgstr "Адреса"
 
-#: ../tempcache/event.html.twig:157 ../tempcache/events.html.twig:104
-#: ../tempcache/events.html.twig:181
+#: ../tempcache/event.html.twig:164 ../tempcache/events.html.twig:117
+#: ../tempcache/events.html.twig:197
 msgid "Town"
 msgstr "Місто"
 
-#: ../tempcache/event.html.twig:163
+#: ../tempcache/event.html.twig:170
 msgid "Country"
 msgstr "Країна"
 
-#: ../tempcache/event.html.twig:197
+#: ../tempcache/event.html.twig:204
 msgid "Choose an activity to add"
 msgstr "Виберіть діяльність, яку потрібно додати"
 
-#: ../tempcache/event.html.twig:221
+#: ../tempcache/event.html.twig:228
 msgid "Add selected activity to event"
 msgstr "Додайте вибрану діяльність до події"
 
-#: ../tempcache/event.html.twig:233
+#: ../tempcache/event.html.twig:240
 msgid "Choose an activity to remove"
 msgstr "Виберіть діяльність для вилучення"
 
-#: ../tempcache/event.html.twig:260
+#: ../tempcache/event.html.twig:267
 msgid "Remove selected activity from event"
 msgstr "Вилучити вибрану діяльність із події"
 
-#: ../tempcache/event.html.twig:320
+#: ../tempcache/event.html.twig:327
 msgid "Required"
 msgstr "Потрібно"
 
-#: ../tempcache/event.html.twig:337
+#: ../tempcache/event.html.twig:344
 msgid "No activity available in the database."
 msgstr "У базі даних немає активності."
 
-#: ../tempcache/event.html.twig:379
+#: ../tempcache/event.html.twig:389
 msgid "Please choose an activity to add"
 msgstr "Виберіть діяльність, яку потрібно додати"
 
-#: ../tempcache/event.html.twig:389
+#: ../tempcache/event.html.twig:399
 msgid "Please choose an activity to remove"
 msgstr "Виберіть діяльність, яку потрібно вилучити"
 
-#: ../tempcache/booking.html.twig:64
+#: ../tempcache/booking.html.twig:71
 msgid "Booking information"
 msgstr "Відомості про бронювання"
 
-#: ../tempcache/booking.html.twig:71 ../tempcache/bookings.html.twig:141
-#: ../tempcache/bookings.html.twig:420
+#: ../tempcache/booking.html.twig:78 ../tempcache/bookings.html.twig:154
+#: ../tempcache/bookings.html.twig:448
 msgid "Booking date"
 msgstr "Дата бронювання"
 
-#: ../tempcache/booking.html.twig:79
+#: ../tempcache/booking.html.twig:86
 msgid "Select an event"
 msgstr "Виберіть подію"
 
-#: ../tempcache/booking.html.twig:264
+#: ../tempcache/booking.html.twig:271
 msgid "No activity for selected event"
 msgstr "Немає діяльностей для вибраної події"
 
-#: ../tempcache/booking.html.twig:287
+#: ../tempcache/booking.html.twig:294
 msgid "Financial information"
 msgstr "Фінансові відомості"
 
-#: ../tempcache/booking.html.twig:294 ../tempcache/bookings.html.twig:141
-#: ../tempcache/bookings.html.twig:272 ../tempcache/bookings.html.twig:429
-#: ../tempcache/bookings.html.twig:441 ../tempcache/bookings.html.twig:452
+#: ../tempcache/booking.html.twig:301 ../tempcache/bookings.html.twig:154
+#: ../tempcache/bookings.html.twig:288 ../tempcache/bookings.html.twig:457
+#: ../tempcache/bookings.html.twig:469 ../tempcache/bookings.html.twig:480
 msgid "Paid"
 msgstr "Платний"
 
-#: ../tempcache/bookings.html.twig:61
+#: ../tempcache/bookings.html.twig:65
 msgid "No booking selected"
 msgstr "Бронювання не вибрано"
 
-#: ../tempcache/bookings.html.twig:61
+#: ../tempcache/bookings.html.twig:65
 msgid ""
 "Please make sure to select at least one booking from the list to perform "
 "this action."
@@ -439,23 +443,23 @@ msgstr ""
 "Будь ласка, не забудьте вибрати хоча б одне бронювання зі списку, щоб "
 "виконати цю дію."
 
-#: ../tempcache/bookings.html.twig:76
+#: ../tempcache/bookings.html.twig:80
 msgid "Members as CSV"
 msgstr "Члени як CSV"
 
-#: ../tempcache/bookings.html.twig:76
+#: ../tempcache/bookings.html.twig:80
 msgid "Export selected reservation members as CSV"
 msgstr "Експорт вибраних членів бронювання як CSV"
 
-#: ../tempcache/bookings.html.twig:76
+#: ../tempcache/bookings.html.twig:80
 msgid "Bookings as CSV"
 msgstr "Бронювання як CSV"
 
-#: ../tempcache/bookings.html.twig:76
+#: ../tempcache/bookings.html.twig:80
 msgid "Export selected reservations as CSV"
 msgstr "Експортувати вибрані бронювання як CSV"
 
-#: ../tempcache/bookings.html.twig:91
+#: ../tempcache/bookings.html.twig:98
 #, php-format
 msgid "%1$s booking"
 msgid_plural "%1$s bookings"
@@ -463,58 +467,58 @@ msgstr[0] "%1$s бронювання"
 msgstr[1] "%1$s бронювання"
 msgstr[2] "%1$s бронювань"
 
-#: ../tempcache/bookings.html.twig:120 ../tempcache/calendar.html.twig:120
+#: ../tempcache/bookings.html.twig:130 ../tempcache/calendar.html.twig:131
 msgid "New booking"
 msgstr "Нове бронювання"
 
-#: ../tempcache/bookings.html.twig:126
+#: ../tempcache/bookings.html.twig:136
 msgid "current event"
 msgstr "поточна подія"
 
-#: ../tempcache/bookings.html.twig:141 ../tempcache/bookings.html.twig:469
+#: ../tempcache/bookings.html.twig:154 ../tempcache/bookings.html.twig:497
 msgid "Attendees"
 msgstr "Присутні"
 
-#: ../tempcache/bookings.html.twig:168
+#: ../tempcache/bookings.html.twig:184
 msgid "Select..."
 msgstr "Вибір..."
 
-#: ../tempcache/bookings.html.twig:198
+#: ../tempcache/bookings.html.twig:214
 msgid "All payment types"
 msgstr "Усі типи платежів"
 
-#: ../tempcache/bookings.html.twig:204 ../tempcache/bookings.html.twig:206
-#: ../tempcache/events.html.twig:104 ../tempcache/events.html.twig:187
+#: ../tempcache/bookings.html.twig:220 ../tempcache/bookings.html.twig:222
+#: ../tempcache/events.html.twig:117 ../tempcache/events.html.twig:203
 msgid "Group"
 msgstr "Група"
 
-#: ../tempcache/bookings.html.twig:242
+#: ../tempcache/bookings.html.twig:258
 msgid "Paid bookings:"
 msgstr "Платні бронювання:"
 
-#: ../tempcache/bookings.html.twig:288 ../tempcache/bookings.html.twig:431
-#: ../tempcache/bookings.html.twig:443 ../tempcache/bookings.html.twig:458
+#: ../tempcache/bookings.html.twig:304 ../tempcache/bookings.html.twig:459
+#: ../tempcache/bookings.html.twig:471 ../tempcache/bookings.html.twig:486
 msgid "Not paid"
 msgstr "Не оплачено"
 
-#: ../tempcache/bookings.html.twig:340
+#: ../tempcache/bookings.html.twig:359
 #, php-format
 msgid "Found bookings total %f"
 msgstr "Загалом бронювань знайдено: %f"
 
-#: ../tempcache/bookings.html.twig:488
+#: ../tempcache/bookings.html.twig:516
 msgid "Edit booking"
 msgstr "Змінити бронювання"
 
-#: ../tempcache/bookings.html.twig:500
+#: ../tempcache/bookings.html.twig:528
 msgid "Remove from database"
 msgstr "Вилучити з бази даних"
 
-#: ../tempcache/bookings.html.twig:533
+#: ../tempcache/bookings.html.twig:562
 msgid "No booking has been found"
 msgstr "Бронювання не знайдено"
 
-#: ../tempcache/activities.html.twig:62
+#: ../tempcache/activities.html.twig:69
 #, php-format
 msgid "%1$s activity"
 msgid_plural "%1$s activities"
@@ -522,42 +526,42 @@ msgstr[0] "%1$s діяльність"
 msgstr[1] "%1$s діяльности"
 msgstr[2] "%1$s діяльностей"
 
-#: ../tempcache/activities.html.twig:90
+#: ../tempcache/activities.html.twig:100
 msgid "New activity"
 msgstr "Нова діяльність"
 
-#: ../tempcache/activities.html.twig:104 ../tempcache/activities.html.twig:157
+#: ../tempcache/activities.html.twig:117 ../tempcache/activities.html.twig:175
 msgid "Creation date"
 msgstr "Дата створення"
 
-#: ../tempcache/activities.html.twig:104 ../tempcache/activities.html.twig:169
-#: ../tempcache/activity.html.twig:71
+#: ../tempcache/activities.html.twig:117 ../tempcache/activities.html.twig:187
+#: ../tempcache/activity.html.twig:78
 msgid "Is active"
 msgstr "Діє"
 
-#: ../tempcache/activities.html.twig:180 ../tempcache/activities.html.twig:191
+#: ../tempcache/activities.html.twig:198 ../tempcache/activities.html.twig:209
 msgid "Active"
 msgstr "Діяльний"
 
-#: ../tempcache/activities.html.twig:182 ../tempcache/activities.html.twig:197
+#: ../tempcache/activities.html.twig:200 ../tempcache/activities.html.twig:215
 msgid "Inactive"
 msgstr "Незадіяний"
 
-#: ../tempcache/activities.html.twig:207 ../tempcache/events.html.twig:257
+#: ../tempcache/activities.html.twig:225 ../tempcache/events.html.twig:273
 #, php-format
 msgid "%1$s: edit information"
 msgstr "%1$s: редагування відомостей"
 
-#: ../tempcache/activities.html.twig:209 ../tempcache/events.html.twig:270
+#: ../tempcache/activities.html.twig:227 ../tempcache/events.html.twig:286
 #, php-format
 msgid "%1$s: remove from database"
 msgstr "%1$s: вилучення з бази даних"
 
-#: ../tempcache/activities.html.twig:245
+#: ../tempcache/activities.html.twig:264
 msgid "No activity has been found"
 msgstr "Жодної діяльності не знайдено"
 
-#: ../tempcache/events.html.twig:62
+#: ../tempcache/events.html.twig:69
 #, php-format
 msgid "%1$s event"
 msgid_plural "%1$s events"
@@ -565,57 +569,57 @@ msgstr[0] "%1$s подія"
 msgstr[1] "%1$s події"
 msgstr[2] "%1$s подій"
 
-#: ../tempcache/events.html.twig:90
+#: ../tempcache/events.html.twig:100
 msgid "New event"
 msgstr "Нова подія"
 
-#: ../tempcache/events.html.twig:104 ../tempcache/events.html.twig:175
+#: ../tempcache/events.html.twig:117 ../tempcache/events.html.twig:191
 msgid "Date"
 msgstr "Дата"
 
-#: ../tempcache/events.html.twig:104 ../tempcache/events.html.twig:193
+#: ../tempcache/events.html.twig:117 ../tempcache/events.html.twig:209
 msgid "Open"
 msgstr "Відкрити"
 
-#: ../tempcache/events.html.twig:204 ../tempcache/events.html.twig:215
+#: ../tempcache/events.html.twig:220 ../tempcache/events.html.twig:231
 msgid "Event is open"
 msgstr "Подія відкрита"
 
-#: ../tempcache/events.html.twig:206 ../tempcache/events.html.twig:221
+#: ../tempcache/events.html.twig:222 ../tempcache/events.html.twig:237
 msgid "Event is closed"
 msgstr "Подія закрита"
 
-#: ../tempcache/events.html.twig:237
+#: ../tempcache/events.html.twig:253
 #, php-format
 msgid "%1$s: export bookings as CSV"
 msgstr "%1$s: експорт бронювань у форматі CSV"
 
-#: ../tempcache/events.html.twig:247
+#: ../tempcache/events.html.twig:263
 #, php-format
 msgid "%1$s: show bookings"
 msgstr "%1$s: показ бронювань"
 
-#: ../tempcache/events.html.twig:315
+#: ../tempcache/events.html.twig:331
 msgid "No event has been found"
 msgstr "Жодної події не знайдено"
 
-#: ../tempcache/calendar.html.twig:77
+#: ../tempcache/calendar.html.twig:88
 msgid "Daily list"
 msgstr "Щоденний список"
 
-#: ../tempcache/calendar.html.twig:81
+#: ../tempcache/calendar.html.twig:92
 msgid "Weekly list"
 msgstr "Щотижневий список"
 
-#: ../tempcache/calendar.html.twig:85
+#: ../tempcache/calendar.html.twig:96
 msgid "Monthly list"
 msgstr "Щомісячний список"
 
-#: ../tempcache/calendar.html.twig:89
+#: ../tempcache/calendar.html.twig:100
 msgid "Month calendar"
 msgstr "Місячний календар"
 
-#: ../tempcache/calendar.html.twig:93
+#: ../tempcache/calendar.html.twig:104
 msgid "Today"
 msgstr "Сьогодні"
 
