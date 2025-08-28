@@ -226,4 +226,14 @@ class PluginGaletteEvents extends GalettePlugin
             $posts
         );
     }
+
+    /**
+     * Is the plugin fully installed (including database, extra configuration, etc)?
+     *
+     * @return bool
+     */
+    public function isInstalled(): bool
+    {
+        return $this->zdb->tableExists(EVENTS_PREFIX . 'events');
+    }
 }
