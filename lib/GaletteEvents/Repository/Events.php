@@ -170,7 +170,7 @@ class Events
                     );
                 }
             } else {
-                if (isset($this->filters->start_date_filter)) {
+                if (isset($this->filters->start_date_filter) && $this->filters->raw_start_date_filter !== null) {
                     $select->where->greaterThanOrEqualTo('begin_date', $this->filters->raw_start_date_filter);
                 }
             }
