@@ -146,7 +146,7 @@ class Event
         $this->end_date = $r->end_date;
         $this->creation_date = $r->creation_date;
         $this->open = (bool)$r->is_open;
-        $this->group = $r->id_group;
+        $this->group = (int)$r->id_group;
         $this->comment = $r->comment;
         $this->color = $r->color;
     }
