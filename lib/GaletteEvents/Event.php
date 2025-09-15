@@ -181,8 +181,8 @@ class Event
                 $this->zdb->connection->rollBack();
             }
             Analog::log(
-                'Unable to delete event ' . $this->name .
-                ' (' . $this->id . ') |' . $e->getMessage(),
+                'Unable to delete event ' . $this->name
+                . ' (' . $this->id . ') |' . $e->getMessage(),
                 Analog::ERROR
             );
             return false;
@@ -220,9 +220,9 @@ class Event
                         $this->$datefield = $d->format('Y-m-d');
                     } catch (\Exception $e) {
                         Analog::log(
-                            'Wrong date format. field: ' . $datefield .
-                            ', value: ' . $value . ', expected fmt: ' .
-                            __("Y-m-d") . ' | ' . $e->getMessage(),
+                            'Wrong date format. field: ' . $datefield
+                            . ', value: ' . $value . ', expected fmt: '
+                            . __("Y-m-d") . ' | ' . $e->getMessage(),
                             Analog::INFO
                         );
                         if ($datefield == 'begin_date') {
@@ -344,8 +344,8 @@ class Event
 
         if (count($this->errors) > 0) {
             Analog::log(
-                'Some errors has been threw attempting to edit/store an event' . "\n" .
-                print_r($this->errors, true),
+                'Some errors has been threw attempting to edit/store an event' . "\n"
+                . print_r($this->errors, true),
                 Analog::ERROR
             );
             return $this->errors;
@@ -377,8 +377,8 @@ class Event
                 'country'               => ($this->country ?: new Expression('NULL')),
                 'begin_date'            => $this->begin_date,
                 'end_date'              => $this->end_date,
-                'is_open'               => ($this->open ?:
-                                                ($this->zdb->isPostgres() ? 'false' : 0)),
+                'is_open'               => ($this->open
+                                                ?: ($this->zdb->isPostgres() ? 'false' : 0)),
                 Group::PK               => ($this->group ?: new Expression('NULL')),
                 'comment'               => $this->comment,
                 'color'                 => $this->color
@@ -524,8 +524,8 @@ class Event
         } catch (\Exception $e) {
             $this->zdb->connection->rollBack();
             Analog::log(
-                'Something went wrong :\'( | ' . $e->getMessage() . "\n" .
-                $e->getTraceAsString(),
+                'Something went wrong :\'( | ' . $e->getMessage() . "\n"
+                . $e->getTraceAsString(),
                 Analog::ERROR
             );
             throw $e;

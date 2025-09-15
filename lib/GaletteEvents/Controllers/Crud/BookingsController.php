@@ -287,9 +287,9 @@ class BookingsController extends AbstractPluginController
                 $this->session->redirect_mailing = $this->routeparser->urlFor(
                     'events_bookings',
                     [
-                        'event' => $filters->event_filter == null ?
-                            'all' :
-                            $filters->event_filter
+                        'event' => $filters->event_filter == null
+                            ? 'all'
+                            : $filters->event_filter
                     ]
                 );
                 return $response
@@ -391,8 +391,8 @@ class BookingsController extends AbstractPluginController
                 $booking->setEvent((int)$get['event']);
             }
             if (
-                $id_adh !== null &&
-                ($this->login->isAdmin() || $this->login->isStaff() || $this->login->isGroupManager())
+                $id_adh !== null
+                && ($this->login->isAdmin() || $this->login->isStaff() || $this->login->isGroupManager())
             ) {
                 $booking->setMember($id_adh);
             } elseif (

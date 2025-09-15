@@ -155,8 +155,8 @@ class BookingsList extends Pagination
                         $this->$name = $value;
                     } elseif ($value !== null) {
                         Analog::log(
-                            '[BookingsList] Value for property `' . $name .
-                            '` should be an array (' . gettype($value) . ' given)',
+                            '[BookingsList] Value for property `' . $name
+                            . '` should be an array (' . gettype($value) . ' given)',
                             Analog::WARNING
                         );
                     }

@@ -150,8 +150,8 @@ class Activity
                 $this->zdb->connection->rollBack();
             }
             Analog::log(
-                'Unable to delete activity ' . $this->name .
-                ' (' . $this->id . ') |' . $e->getMessage(),
+                'Unable to delete activity ' . $this->name
+                . ' (' . $this->id . ') |' . $e->getMessage(),
                 Analog::ERROR
             );
             return false;
@@ -188,8 +188,8 @@ class Activity
 
         if (count($this->errors) > 0) {
             Analog::log(
-                'Some errors has been thrown attempting to edit/store an activity' . "\n" .
-                print_r($this->errors, true),
+                'Some errors has been thrown attempting to edit/store an activity' . "\n"
+                . print_r($this->errors, true),
                 Analog::ERROR
             );
             return false;
@@ -214,8 +214,8 @@ class Activity
         try {
             $values = [
                 'name'                  => $this->name,
-                'is_active'             => ($this->active ? $this->active :
-                                                ($this->zdb->isPostgres() ? 'false' : 0)),
+                'is_active'             => ($this->active ? $this->active
+                                                : ($this->zdb->isPostgres() ? 'false' : 0)),
                 'comment'               => $this->comment
             ];
 
@@ -271,8 +271,8 @@ class Activity
             }
         } catch (\Exception $e) {
             Analog::log(
-                'Something went wrong :\'( | ' . $e->getMessage() . "\n" .
-                $e->getTraceAsString(),
+                'Something went wrong :\'( | ' . $e->getMessage() . "\n"
+                . $e->getTraceAsString(),
                 Analog::ERROR
             );
             throw $e;

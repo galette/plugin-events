@@ -167,8 +167,8 @@ class Booking
                 $this->zdb->connection->rollBack();
             }
             Analog::log(
-                'Unable to delete booking ' .
-                ' (' . $this->id . ') |' . $e->getMessage(),
+                'Unable to delete booking '
+                . ' (' . $this->id . ') |' . $e->getMessage(),
                 Analog::ERROR
             );
             return false;
@@ -295,9 +295,9 @@ class Booking
                 $this->date = $d->format('Y-m-d');
             } catch (\Exception $e) {
                 Analog::log(
-                    'Wrong date format. field: booking_date' .
-                    ', value: ' . $value . ', expected fmt: ' .
-                    __("Y-m-d") . ' | ' . $e->getMessage(),
+                    'Wrong date format. field: booking_date'
+                    . ', value: ' . $value . ', expected fmt: '
+                    . __("Y-m-d") . ' | ' . $e->getMessage(),
                     Analog::INFO
                 );
                 $this->errors[] = sprintf(
@@ -335,8 +335,8 @@ class Booking
 
         if (count($this->errors) > 0) {
             Analog::log(
-                'Some errors has been threw attempting to edit/store a booking' . "\n" .
-                print_r($this->errors, true),
+                'Some errors has been threw attempting to edit/store a booking' . "\n"
+                . print_r($this->errors, true),
                 Analog::ERROR
             );
             return $this->errors;
@@ -364,8 +364,8 @@ class Booking
                 Event::PK           => $this->event,
                 Adherent::PK        => $this->member,
                 'booking_date'      => $this->date,
-                'is_paid'           => ($this->paid ? $this->paid :
-                                            ($this->zdb->isPostgres() ? 'false' : 0)),
+                'is_paid'           => ($this->paid ? $this->paid
+                                            : ($this->zdb->isPostgres() ? 'false' : 0)),
                 'payment_method'    => $this->payment_method,
                 'payment_amount'    => $this->amount,
                 'bank_name'         => $this->bank_name,
@@ -448,8 +448,8 @@ class Booking
                         ];
                     } elseif ($result['checked'] != $this->activities[$result[Activity::PK]]['checked']) {
                         $update[$result[Activity::PK]] = [
-                            'checked'   => ($checked ? $checked :
-                                            ($this->zdb->isPostgres() ? 'false' : 0))
+                            'checked'   => ($checked ? $checked
+                                            : ($this->zdb->isPostgres() ? 'false' : 0))
                         ];
                     } else {
                         $void[$result[Activity::PK]] = true;
@@ -460,8 +460,8 @@ class Booking
                     $insert[$aid] = [
                         Activity::PK    => $aid,
                         self::PK        => $this->id,
-                        'checked'       => ($checked ? $checked :
-                                            ($this->zdb->isPostgres() ? 'false' : 0))
+                        'checked'       => ($checked ? $checked
+                                            : ($this->zdb->isPostgres() ? 'false' : 0))
                     ];
                 }
             }
@@ -538,8 +538,8 @@ class Booking
         } catch (\Exception $e) {
             $this->zdb->connection->rollBack();
             Analog::log(
-                'Something went wrong :\'( | ' . $e->getMessage() . "\n" .
-                $e->getTraceAsString(),
+                'Something went wrong :\'( | ' . $e->getMessage() . "\n"
+                . $e->getTraceAsString(),
                 Analog::ERROR
             );
             throw $e;
@@ -803,8 +803,8 @@ class Booking
      */
     public function getRowClass(bool $public = false): string
     {
-        $strclass = 'event-' .
-            ($this->isPaid() ? 'paid' : 'notpaid');
+        $strclass = 'event-'
+            . ($this->isPaid() ? 'paid' : 'notpaid');
         return $strclass;
     }
 }

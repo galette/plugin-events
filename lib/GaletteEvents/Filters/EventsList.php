@@ -140,8 +140,8 @@ class EventsList extends Pagination
                         } catch (\Exception $e) {
                             //oops, we've got a bad date :/
                             Analog::log(
-                                'Bad date (' . $this->$name . ') | ' .
-                                $e->getMessage(),
+                                'Bad date (' . $this->$name . ') | '
+                                . $e->getMessage(),
                                 Analog::INFO
                             );
                             return $this->$name;
@@ -249,9 +249,9 @@ class EventsList extends Pagination
                         }
                     } catch (\Exception $e) {
                         Analog::log(
-                            'Wrong date format. field: ' . $name .
-                            ', value: ' . $value . ', expected fmt: ' .
-                            __("Y-m-d") . ' | ' . $e->getMessage(),
+                            'Wrong date format. field: ' . $name
+                            . ', value: ' . $value . ', expected fmt: '
+                            . __("Y-m-d") . ' | ' . $e->getMessage(),
                             Analog::INFO
                         );
                         throw $e;

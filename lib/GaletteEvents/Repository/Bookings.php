@@ -237,8 +237,8 @@ class Bookings
             }
 
             if (
-                $this->filters->payment_type_filter !== null &&
-                (int)$this->filters->payment_type_filter != -1
+                $this->filters->payment_type_filter !== null
+                && (int)$this->filters->payment_type_filter != -1
             ) {
                 $select->where->equalTo(
                     'payment_method',
@@ -337,8 +337,8 @@ class Bookings
             return true;
         } else {
             Analog::log(
-                'Trying to order by ' . $field_name . ' while it is not in ' .
-                'selected fields.',
+                'Trying to order by ' . $field_name . ' while it is not in '
+                . 'selected fields.',
                 Analog::WARNING
             );
             return false;
