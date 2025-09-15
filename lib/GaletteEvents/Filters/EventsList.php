@@ -36,7 +36,7 @@ use GaletteEvents\Repository\Events;
  * @property string $query
  * @property bool $calendar_filter
  * @property ?string $start_date_filter
- * @property string $raw_start_date_filter
+ * @property ?string $raw_start_date_filter
  */
 
 class EventsList extends Pagination

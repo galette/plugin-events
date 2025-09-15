@@ -237,8 +237,8 @@ class Bookings
             }
 
             if (
-                $this->filters->payment_type_filter !== null
-                && (int)$this->filters->payment_type_filter != -1
+                isset($this->filters->payment_type_filter)
+                && $this->filters->payment_type_filter != -1
             ) {
                 $select->where->equalTo(
                     'payment_method',
