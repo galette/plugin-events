@@ -133,7 +133,7 @@ class Booking
         $this->payment_method = (int)$r->payment_method;
         $this->bank_name = $r->bank_name;
         $this->check_number = $r->check_number;
-        $this->number_people = $r->number_people;
+        $this->number_people = (int)$r->number_people;
         $this->comment = $r->comment;
     }
 
