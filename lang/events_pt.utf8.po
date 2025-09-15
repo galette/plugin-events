@@ -2,23 +2,26 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # Languages add-on <noreply-addon-languages@weblate.org>, 2024.
+# Nelson JESUS <jesus.nels@gmail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2025-08-17 08:54+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2025-09-15 15:52+0000\n"
+"Last-Translator: Nelson JESUS <jesus.nels@gmail.com>\n"
+"Language-Team: Portuguese <https://hosted.weblate.org/projects/galette/"
+"events-plugin/pt/>\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 5.14-dev\n"
 
 #: ../lib/GaletteEvents/Booking.php:192
 msgid "Event is mandatory"
-msgstr ""
+msgstr "Evento obrigatório"
 
 #. TRANS: %1$s is activity name
 #: ../lib/GaletteEvents/Booking.php:204
@@ -28,11 +31,11 @@ msgstr ""
 
 #: ../lib/GaletteEvents/Booking.php:239
 msgid "Please specify amount if booking has been paid ;)"
-msgstr ""
+msgstr "Por favor, indique o valor se a reserva já tiver sido paga ;)"
 
 #: ../lib/GaletteEvents/Booking.php:262
 msgid "Member is mandatory"
-msgstr ""
+msgstr "O membro é obrigatório"
 
 #: ../lib/GaletteEvents/Booking.php:274
 msgid "There must be at least one person"
@@ -104,15 +107,15 @@ msgstr ""
 
 #: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:121
 msgid "Activities management"
-msgstr ""
+msgstr "Gestão de atividades"
 
 #: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:192
 msgid "Activity"
-msgstr ""
+msgstr "Atividade"
 
 #: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:253
 msgid "New activity has been successfully added."
-msgstr ""
+msgstr "Nova atividade foi adicionada com sucesso."
 
 #: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:255
 msgid "Activity has been modified."
@@ -134,7 +137,7 @@ msgstr ""
 
 #: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:185
 msgid "Javascript libraries has not been built!"
-msgstr ""
+msgstr "As bibliotecas Javascript não foram compiladas!"
 
 #: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:194
 #: ../lib/GaletteEvents/PluginGaletteEvents.php:137
@@ -243,7 +246,7 @@ msgstr ""
 #: ../lib/GaletteEvents/PluginGaletteEvents.php:104
 #: ../tempcache/event.html.twig:180 ../tempcache/booking.html.twig:221
 msgid "Activities"
-msgstr ""
+msgstr "Atividades"
 
 #: ../lib/GaletteEvents/Event.php:205
 msgid "Begin date is mandatory"
@@ -289,7 +292,7 @@ msgstr ""
 #: ../lib/GaletteEvents/PluginGaletteEvents.php:67
 #: ../tempcache/activities.html.twig:117 ../tempcache/activities.html.twig:181
 msgid "Events"
-msgstr ""
+msgstr "Eventos"
 
 #: ../lib/GaletteEvents/PluginGaletteEvents.php:74
 #: ../lib/GaletteEvents/PluginGaletteEvents.php:136
@@ -331,7 +334,7 @@ msgstr ""
 #: ../tempcache/event.html.twig:85 ../tempcache/activities.html.twig:117
 #: ../tempcache/events.html.twig:117 ../tempcache/activity.html.twig:85
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
 #: ../tempcache/event.html.twig:91
 msgid "Color"
