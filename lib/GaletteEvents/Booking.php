@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright © 2003-2024 The Galette Team
+ * Copyright © 2003-2025 The Galette Team
  *
  * This file is part of Galette (https://galette.eu).
  *
@@ -72,7 +72,7 @@ class Booking
      *                                                       a specific event, or null to just
      *                                                       instanciate object
      */
-    public function __construct(Db $zdb, Login $login, int|ArrayObject $args = null)
+    public function __construct(Db $zdb, Login $login, int|ArrayObject|null $args = null)
     {
         $this->zdb = $zdb;
         $this->login = $login;
@@ -95,7 +95,7 @@ class Booking
     {
         try {
             $select = $this->zdb->select($this->getTableName());
-            $select->where(array(self::PK => $id));
+            $select->where([self::PK => $id]);
 
             $results = $this->zdb->execute($select);
 
@@ -125,7 +125,7 @@ class Booking
     private function loadFromRS(ArrayObject $r): void
     {
         $this->id = (int)$r->id_booking;
-        $this->event = $r->id_event;
+        $this->event = (int)$r->id_event;
         $this->member = (int)$r->id_adh;
         $this->date = $r->booking_date;
         $this->paid = (bool)$r->is_paid;
@@ -133,7 +133,7 @@ class Booking
         $this->payment_method = (int)$r->payment_method;
         $this->bank_name = $r->bank_name;
         $this->check_number = $r->check_number;
-        $this->number_people = $r->number_people;
+        $this->number_people = (int)$r->number_people;
         $this->comment = $r->comment;
     }
 
@@ -167,8 +167,8 @@ class Booking
                 $this->zdb->connection->rollBack();
             }
             Analog::log(
-                'Unable to delete booking ' .
-                ' (' . $this->id . ') |' . $e->getMessage(),
+                'Unable to delete booking '
+                . ' (' . $this->id . ') |' . $e->getMessage(),
                 Analog::ERROR
             );
             return false;
@@ -185,7 +185,7 @@ class Booking
      */
     public function check(array $values): array|bool
     {
-        $this->errors = array();
+        $this->errors = [];
 
         //event and activities
         if (!isset($values['event']) || empty($values['event']) || $values['event'] == -1) {
@@ -295,9 +295,9 @@ class Booking
                 $this->date = $d->format('Y-m-d');
             } catch (\Exception $e) {
                 Analog::log(
-                    'Wrong date format. field: booking_date' .
-                    ', value: ' . $value . ', expected fmt: ' .
-                    __("Y-m-d") . ' | ' . $e->getMessage(),
+                    'Wrong date format. field: booking_date'
+                    . ', value: ' . $value . ', expected fmt: '
+                    . __("Y-m-d") . ' | ' . $e->getMessage(),
                     Analog::INFO
                 );
                 $this->errors[] = sprintf(
@@ -335,8 +335,8 @@ class Booking
 
         if (count($this->errors) > 0) {
             Analog::log(
-                'Some errors has been threw attempting to edit/store a booking' . "\n" .
-                print_r($this->errors, true),
+                'Some errors has been threw attempting to edit/store a booking' . "\n"
+                . print_r($this->errors, true),
                 Analog::ERROR
             );
             return $this->errors;
@@ -360,21 +360,21 @@ class Booking
 
         try {
             $this->zdb->connection->beginTransaction();
-            $values = array(
+            $values = [
                 Event::PK           => $this->event,
                 Adherent::PK        => $this->member,
                 'booking_date'      => $this->date,
-                'is_paid'           => ($this->paid ? $this->paid :
-                                            ($this->zdb->isPostgres() ? 'false' : 0)),
+                'is_paid'           => ($this->paid ? $this->paid
+                                            : ($this->zdb->isPostgres() ? 'false' : 0)),
                 'payment_method'    => $this->payment_method,
                 'payment_amount'    => $this->amount,
                 'bank_name'         => $this->bank_name,
                 'check_number'      => $this->check_number,
                 'number_people'     => $this->number_people,
                 'comment'           => $this->comment
-            );
+            ];
 
-            if (!isset($this->id) || $this->id == '') {
+            if (empty($this->id)) {
                 //we're inserting a new event
                 $this->creation_date = date("Y-m-d H:i:s");
                 $values['creation_date'] = $this->creation_date;
@@ -448,8 +448,8 @@ class Booking
                         ];
                     } elseif ($result['checked'] != $this->activities[$result[Activity::PK]]['checked']) {
                         $update[$result[Activity::PK]] = [
-                            'checked'   => ($checked ? $checked :
-                                            ($this->zdb->isPostgres() ? 'false' : 0))
+                            'checked'   => ($checked ? $checked
+                                            : ($this->zdb->isPostgres() ? 'false' : 0))
                         ];
                     } else {
                         $void[$result[Activity::PK]] = true;
@@ -460,8 +460,8 @@ class Booking
                     $insert[$aid] = [
                         Activity::PK    => $aid,
                         self::PK        => $this->id,
-                        'checked'       => ($checked ? $checked :
-                                            ($this->zdb->isPostgres() ? 'false' : 0))
+                        'checked'       => ($checked ? $checked
+                                            : ($this->zdb->isPostgres() ? 'false' : 0))
                     ];
                 }
             }
@@ -538,8 +538,8 @@ class Booking
         } catch (\Exception $e) {
             $this->zdb->connection->rollBack();
             Analog::log(
-                'Something went wrong :\'( | ' . $e->getMessage() . "\n" .
-                $e->getTraceAsString(),
+                'Something went wrong :\'( | ' . $e->getMessage() . "\n"
+                . $e->getTraceAsString(),
                 Analog::ERROR
             );
             throw $e;
@@ -803,8 +803,8 @@ class Booking
      */
     public function getRowClass(bool $public = false): string
     {
-        $strclass = 'event-' .
-            ($this->isPaid() ? 'paid' : 'notpaid');
+        $strclass = 'event-'
+            . ($this->isPaid() ? 'paid' : 'notpaid');
         return $strclass;
     }
 }

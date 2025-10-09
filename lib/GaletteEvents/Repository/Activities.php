@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright © 2003-2024 The Galette Team
+ * Copyright © 2003-2025 The Galette Team
  *
  * This file is part of Galette (https://galette.eu).
  *
@@ -34,7 +34,6 @@ use Galette\Core\Login;
 use Galette\Core\Db;
 use GaletteEvents\Filters\EventsList;
 use Laminas\Db\Sql\Select;
-use stdClass;
 
 /**
  * Events
@@ -56,7 +55,7 @@ class Activities extends Repository
      * @param Preferences     $preferences Preferences instance
      * @param ?ActivitiesList $filters     Filtering
      */
-    public function __construct(Db $zdb, Login $login, Preferences $preferences, ActivitiesList $filters = null)
+    public function __construct(Db $zdb, Login $login, Preferences $preferences, ?ActivitiesList $filters = null)
     {
         $this->zdb = $zdb;
         $this->login = $login;
@@ -112,9 +111,9 @@ class Activities extends Repository
      *
      * @return array<string> SQL ORDER clauses
      */
-    private function buildOrderClause(array $fields = null): array
+    private function buildOrderClause(?array $fields = null): array
     {
-        $order = array();
+        $order = [];
 
         switch ($this->filters->orderby) {
             case self::ORDERBY_DATE:
@@ -159,9 +158,9 @@ class Activities extends Repository
             }
 
             $countSelect->columns(
-                array(
+                [
                     'count' => new Expression('count(DISTINCT ac.' . Activity::PK . ')')
-                )
+                ]
             );
 
             $have = $select->having;

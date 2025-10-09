@@ -53,11 +53,23 @@
 
 {% block header %}
     {% set columns = [
-        {'label': '#'},
+        {
+            'label': '#',
+            'collapse': true
+        },
         {'label': _T("Name", "events"), order: constant('GaletteEvents\\Repository\\Activities::ORDERBY_NAME')},
-        {'label': _T("Creation date", "events"), order: constant('GaletteEvents\\Repository\\Activities::ORDERBY_DATE')},
-        {'label': _T("Events", "events")},
-        {'label': _T("Is active", "events")},
+        {
+            'label': _T("Creation date", "events"), order: constant('GaletteEvents\\Repository\\Activities::ORDERBY_DATE'),
+            'collapse': true
+        },
+        {
+            'label': _T("Events", "events"),
+            'collapse': true
+        },
+        {
+            'label': _T("Is active", "events"),
+            'collapse': true
+        },
     ] %}
     {{ parent() }}
 {% endblock %}
@@ -65,20 +77,16 @@
 {% block body %}
     {% for ordre, activity in activities %}
         <tr class="{{ loop.index is odd ? 'odd' : 'even' }}">
-            <td class="right" data-scope="id">
-                {% if preferences.pref_show_id %}
-                    {{ activity.getId() }}
-                {% else %}
-                    {{ ordre + 1 + (filters.current_page - 1) * numrows }}
-                {% endif %}
+            <td class="right collapsing" data-scope="id">
+                {{ activity.getId() }}
             </td>
-            <td class="nowrap username_row" data-scope="row">
+            <td class="username_row" data-scope="row">
                 {% set aid = activity.getId() %}
                 <a href="{{ url_for("events_activity_edit", {"id": aid}) }}">{{ activity.getName() }}</a>
             </td>
-            <td data-col-label="{{ _T("Creation date", "events") }}">{{ activity.getCreationDate() }}</td>
-            <td data-col-label="{{ _T("Events", "events") }}">{{ activity.countEvents() }}</td>
-            <td class="center id_row" data-col-label="{{ _T("Is active", "events") }}">
+            <td class="collapsing" data-col-label="{{ _T("Creation date", "events") }}">{{ activity.getCreationDate() }}</td>
+            <td class="collapsing" data-col-label="{{ _T("Events", "events") }}">{{ activity.countEvents() }}</td>
+            <td class="center id_row collapsing" data-col-label="{{ _T("Is active", "events") }}">
                 <i class="toggle {% if activity.isActive() %}on{% else %}off{% endif %} icon tooltip" data-html="{% if activity.isActive() %}{{ _T("Active", "events") }}{% else %}{{ _T("Inactive", "events") }}{% endif %}"></i>
                 <span class="visually-hidden">
                 {% if activity.isActive() %}
@@ -88,7 +96,7 @@
                 {% endif %}
                 </span>
             </td>
-            <td class="center nowrap actions_row">
+            <td class="center actions_row collapsing">
                 {% set actions = [
                     {
                         'label': _T("%1$s: edit information", "events")|replace({"%1$s": activity.getName()}),

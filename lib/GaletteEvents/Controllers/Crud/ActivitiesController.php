@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright © 2003-2024 The Galette Team
+ * Copyright © 2003-2025 The Galette Team
  *
  * This file is part of Galette (https://galette.eu).
  *
@@ -86,7 +86,7 @@ class ActivitiesController extends AbstractPluginController
      *
      * @return Response
      */
-    public function list(Request $request, Response $response, string $option = null, string|int $value = null): Response
+    public function list(Request $request, Response $response, ?string $option = null, string|int|null $value = null): Response
     {
         if (isset($this->session->filter_activities)) {
             $filters = $this->session->filter_activities;
@@ -107,10 +107,6 @@ class ActivitiesController extends AbstractPluginController
 
         $activities = new Activities($this->zdb, $this->login, $this->preferences, $filters);
         $list = $activities->getList();
-        if (!count($list)) {
-            $activities->installInit();
-            $list = $activities->getList();
-        }
 
         //assign pagination variables to the template and add pagination links
         $filters->setViewPagination($this->routeparser, $this->view, false);
@@ -121,13 +117,13 @@ class ActivitiesController extends AbstractPluginController
         $this->view->render(
             $response,
             $this->getTemplate('activities'),
-            array(
+            [
                 'page_title'            => _T("Activities management", "events"),
                 'require_dialog'        => true,
                 'activities'            => $list,
                 'nb_activities'         => $activities->getCount(),
                 'filters'               => $filters
-            )
+            ]
         );
         return $response;
     }
@@ -179,7 +175,7 @@ class ActivitiesController extends AbstractPluginController
      *
      * @return Response
      */
-    public function edit(Request $request, Response $response, int $id = null, string $action = 'edit'): Response
+    public function edit(Request $request, Response $response, ?int $id = null, string $action = 'edit'): Response
     {
         if ($this->session->activity !== null) {
             $activity = $this->session->activity;
@@ -204,13 +200,13 @@ class ActivitiesController extends AbstractPluginController
         $this->view->render(
             $response,
             $this->getTemplate('activity'),
-            array(
+            [
                 'autocomplete'  => true,
                 'page_title'    => $title,
                 'activity'      => $activity,
                 // pseudo random int
                 'time'          => time()
-            )
+            ]
         );
         return $response;
     }
@@ -225,7 +221,7 @@ class ActivitiesController extends AbstractPluginController
      *
      * @return Response
      */
-    public function doEdit(Request $request, Response $response, int $id = null, string $action = 'edit'): Response
+    public function doEdit(Request $request, Response $response, ?int $id = null, string $action = 'edit'): Response
     {
         $post = $request->getParsedBody();
         $activity = new Activity($this->zdb, $this->login);

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright © 2003-2024 The Galette Team
+ * Copyright © 2003-2025 The Galette Team
  *
  * This file is part of Galette (https://galette.eu).
  *
@@ -62,7 +62,7 @@ class BookingsController extends AbstractPluginController
      *
      * @return Response
      */
-    public function add(Request $request, Response $response, int $id_adh = null): Response
+    public function add(Request $request, Response $response, ?int $id_adh = null): Response
     {
         return $this->edit($request, $response, null, 'add', $id_adh);
     }
@@ -93,7 +93,7 @@ class BookingsController extends AbstractPluginController
      *
      * @return Response
      */
-    public function list(Request $request, Response $response, string $option = null, string|int $value = null): Response
+    public function list(Request $request, Response $response, ?string $option = null, string|int|null $value = null): Response
     {
         //just for inheritance. see listBookings which signature changes.
         return $response;
@@ -110,7 +110,7 @@ class BookingsController extends AbstractPluginController
      *
      * @return Response
      */
-    public function listBookings(Request $request, Response $response, string|int $event, string $option = null, string|int $value = null): Response
+    public function listBookings(Request $request, Response $response, string|int $event, ?string $option = null, string|int|null $value = null): Response
     {
         $filters = $this->session->filter_bookings ?? new BookingsList();
 
@@ -287,9 +287,9 @@ class BookingsController extends AbstractPluginController
                 $this->session->redirect_mailing = $this->routeparser->urlFor(
                     'events_bookings',
                     [
-                        'event' => $filters->event_filter == null ?
-                            'all' :
-                            $filters->event_filter
+                        'event' => $filters->event_filter == null
+                            ? 'all'
+                            : $filters->event_filter
                     ]
                 );
                 return $response
@@ -360,7 +360,7 @@ class BookingsController extends AbstractPluginController
      *
      * @return Response
      */
-    public function edit(Request $request, Response $response, int $id = null, string $action = 'edit', int $id_adh = null): Response
+    public function edit(Request $request, Response $response, ?int $id = null, string $action = 'edit', ?int $id_adh = null): Response
     {
         $get = $request->getQueryParams();
         $route_params = [];
@@ -391,8 +391,8 @@ class BookingsController extends AbstractPluginController
                 $booking->setEvent((int)$get['event']);
             }
             if (
-                $id_adh !== null &&
-                ($this->login->isAdmin() || $this->login->isStaff() || $this->login->isGroupManager())
+                $id_adh !== null
+                && ($this->login->isAdmin() || $this->login->isStaff() || $this->login->isGroupManager())
             ) {
                 $booking->setMember($id_adh);
             } elseif (
@@ -422,8 +422,7 @@ class BookingsController extends AbstractPluginController
 
             //check if current attached member is part of the list
             if (
-                isset($booking)
-                && $booking->getMemberId() > 0
+                $booking->getMemberId() > 0
                 && !isset($members[$booking->getMemberId()])
             ) {
                 $members[$booking->getMemberId()] = Adherent::getSName($this->zdb, $booking->getMemberId(), true);
@@ -442,7 +441,7 @@ class BookingsController extends AbstractPluginController
             $this->getTemplate('booking'),
             array_merge(
                 $route_params,
-                array(
+                [
                     'autocomplete'      => true,
                     'page_title'        => $title,
                     'booking'           => $booking,
@@ -451,7 +450,7 @@ class BookingsController extends AbstractPluginController
                     'require_calendar'  => true,
                     // pseudo random int
                     'time'              => time()
-                )
+                ]
             )
         );
         return $response;
@@ -467,7 +466,7 @@ class BookingsController extends AbstractPluginController
      *
      * @return Response
      */
-    public function doEdit(Request $request, Response $response, int $id = null, string $action = 'edit'): Response
+    public function doEdit(Request $request, Response $response, ?int $id = null, string $action = 'edit'): Response
     {
         $post = $request->getParsedBody();
         $booking = new Booking($this->zdb, $this->login);
@@ -511,11 +510,9 @@ class BookingsController extends AbstractPluginController
                 } else {
                     $success_detected[] = _T("Booking has been modified.", "events");
                 }
-            } elseif ($store === false) {
+            } else {
                 //something went wrong :'(
                 $error_detected[] = _T("An error occurred while storing the booking.", "events");
-            } else {
-                $error_detected[] = $store;
             }
         }
 

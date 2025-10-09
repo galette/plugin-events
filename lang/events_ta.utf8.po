@@ -1,626 +1,620 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Evgeniy Khramov <thejenjagamertjg@gmail.com>, 2022.
-# Evgeniy Khramov <65224669+thejenja@users.noreply.github.com>, 2025.
-# Maksim_220 Кабанов <law820314@gmail.com>, 2025.
-# da070116 <da070116@gmail.com>, 2025.
-# MrSliv69 <mrsliv6969@gmail.com>, 2025.
+# Languages add-on <noreply-addon-languages@weblate.org>, 2024.
+# தமிழ்நேரம் <anishprabu.t@gmail.com>, 2024, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: translations@galette.eu\n"
+"Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-17 08:54+0200\n"
-"PO-Revision-Date: 2025-09-03 01:01+0000\n"
-"Last-Translator: MrSliv69 <mrsliv6969@gmail.com>\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/galette/"
-"events-plugin/ru/>\n"
-"Language: ru\n"
+"PO-Revision-Date: 2025-07-02 02:01+0000\n"
+"Last-Translator: தமிழ்நேரம் <anishprabu.t@gmail.com>\n"
+"Language-Team: Tamil <https://hosted.weblate.org/projects/galette/events-"
+"plugin/ta/>\n"
+"Language: ta\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.13.1-dev\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.13-dev\n"
 
 #: ../lib/GaletteEvents/Booking.php:192
 msgid "Event is mandatory"
-msgstr "Мероприятие обязательно"
+msgstr "நிகழ்வு கட்டாயமாகும்"
 
 #. TRANS: %1$s is activity name
 #: ../lib/GaletteEvents/Booking.php:204
 #, php-format
 msgid "%1$s is mandatory for this event!"
-msgstr "%1$s обязательно для этого мероприятия!"
+msgstr "இந்த நிகழ்வுக்கு %1$s கட்டாயமாகும்!"
 
 #: ../lib/GaletteEvents/Booking.php:239
 msgid "Please specify amount if booking has been paid ;)"
-msgstr "Пожалуйста, укажите количество, если бронирование было оплачено ;)"
+msgstr "முன்பதிவு செய்யப்பட்டிருந்தால் தொகையை குறிப்பிடவும்;)"
 
 #: ../lib/GaletteEvents/Booking.php:262
 msgid "Member is mandatory"
-msgstr "Членство (обязательно)"
+msgstr "உறுப்பினர் கட்டாயமாகும்"
 
 #: ../lib/GaletteEvents/Booking.php:274
 msgid "There must be at least one person"
-msgstr "Должна быть хотя бы одна персона"
+msgstr "குறைந்தது ஒரு நபராவது இருக்க வேண்டும்"
 
 #: ../lib/GaletteEvents/Booking.php:283
 msgid "Booking date is mandatory!"
-msgstr "Дата бронирования обязательна!"
+msgstr "முன்பதிவு தேதி கட்டாயமாகும்!"
 
 #: ../lib/GaletteEvents/Booking.php:307
 msgid "booking date"
-msgstr "дата бронирования"
+msgstr "முன்பதிவு தேதி"
 
 #. TRANS: first replacement is member name, second is event name
 #: ../lib/GaletteEvents/Booking.php:329
 #, php-format
 msgid "A booking already exists for %1$s in %2$s"
-msgstr "Бронирование уже существует для %1$s на %2$s"
+msgstr "%2$s இல் %1$s க்கு ஏற்கனவே ஒரு முன்பதிவு உள்ளது"
 
 #: ../lib/GaletteEvents/Booking.php:397
 msgid "Booking added"
-msgstr "Бронирование добавлено"
+msgstr "முன்பதிவு சேர்க்கப்பட்டது"
 
 #: ../lib/GaletteEvents/Booking.php:401
 msgid "Fail to add new booking."
-msgstr "Не удалось добавить новое бронирование."
+msgstr "புதிய முன்பதிவைச் சேர்க்கத் தவறிவிட்டது."
 
 #: ../lib/GaletteEvents/Booking.php:420
 msgid "Booking updated"
-msgstr "Бронирование обновлено"
+msgstr "முன்பதிவு புதுப்பிக்கப்பட்டது"
 
 #: ../lib/GaletteEvents/Controllers/Crud/BookingsController.php:163
 msgid "Bookings management"
-msgstr "Управление бронированием"
+msgstr "முன்பதிவு மேலாண்மை"
 
 #: ../lib/GaletteEvents/Controllers/Crud/BookingsController.php:335
 msgid "No action was matching."
-msgstr "Нет совпадающих действий."
+msgstr "எந்த நடவடிக்கையும் பொருந்தவில்லை."
 
 #: ../lib/GaletteEvents/Controllers/Crud/BookingsController.php:340
 msgid "No booking was selected, please check at least one."
-msgstr "Бронирование не выбрано, отметьте хотя бы одно."
+msgstr ""
+"முன்பதிவு எதுவும் தேர்ந்தெடுக்கப்படவில்லை, தயவுசெய்து குறைந்தபட்சம் ஒன்றைச் சரிபார்க்கவும்."
 
 #: ../lib/GaletteEvents/Controllers/Crud/BookingsController.php:380
 msgid "Booking"
-msgstr "Бронирование"
+msgstr "முன்பதிவு"
 
 #: ../lib/GaletteEvents/Controllers/Crud/BookingsController.php:509
 msgid "New booking has been successfully added."
-msgstr "Новое бронирование успешно добавлено."
+msgstr "புதிய முன்பதிவு வெற்றிகரமாக சேர்க்கப்பட்டுள்ளது."
 
 #: ../lib/GaletteEvents/Controllers/Crud/BookingsController.php:511
 msgid "Booking has been modified."
-msgstr "Бронирование изменено."
+msgstr "முன்பதிவு மாற்றப்பட்டுள்ளது."
 
 #: ../lib/GaletteEvents/Controllers/Crud/BookingsController.php:515
 msgid "An error occurred while storing the booking."
-msgstr "Произошла ошибка при сохранении бронирования."
+msgstr "முன்பதிவை சேமிக்கும் போது பிழை ஏற்பட்டது."
 
 #: ../lib/GaletteEvents/Controllers/Crud/BookingsController.php:523
 msgid "Do not forget to store the booking"
-msgstr "Не забудьте сохранить бронирование"
+msgstr "முன்பதிவை சேமிக்க மறக்காதீர்கள்"
 
 #. TRANS: %1$s is the member name, %2$s the event name.
 #: ../lib/GaletteEvents/Controllers/Crud/BookingsController.php:626
 #, php-format
 msgid "Remove booking for %1$s on %2$s"
-msgstr "Удалить бронирование для %1$s на %2$s"
+msgstr "%2$s இல் %1$s க்கான முன்பதிவை அகற்று"
 
 #: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:121
 msgid "Activities management"
-msgstr "Управление деятельностью"
+msgstr "செயல்பாடுகள் மேலாண்மை"
 
 #: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:192
 msgid "Activity"
-msgstr "Деятельность"
+msgstr "செய்கைப்பாடு"
 
 #: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:253
 msgid "New activity has been successfully added."
-msgstr "Новая активность успешно добавлена."
+msgstr "புதிய செயல்பாடு வெற்றிகரமாக சேர்க்கப்பட்டுள்ளது."
 
 #: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:255
 msgid "Activity has been modified."
-msgstr "Активность была изменена."
+msgstr "செயல்பாடு மாற்றியமைக்கப்பட்டுள்ளது."
 
 #: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:259
 msgid "An error occurred while storing the activity."
-msgstr "При сохранении активности произошла ошибка."
+msgstr "செயல்பாட்டை சேமிக்கும் போது பிழை ஏற்பட்டது."
 
 #. TRANS %1$s is activity name
 #: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:344
 #, php-format
 msgid "Remove activity %1$s"
-msgstr "Удалить активность %1$s"
+msgstr "செயல்பாட்டை அகற்று %1$s"
 
 #: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:130
 msgid "Events management"
-msgstr "Управление мероприятиями"
+msgstr "நிகழ்வுகள் மேலாண்மை"
 
 #: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:185
 msgid "Javascript libraries has not been built!"
-msgstr "Javascript-библиотеки не скомпилировались!"
+msgstr "சாவாச்கிரிப்ட் நூலகங்கள் கட்டப்படவில்லை!"
 
 #: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:194
 #: ../lib/GaletteEvents/PluginGaletteEvents.php:137
 msgid "Events calendar"
-msgstr "Календарь мероприятий"
+msgstr "நிகழ்வுகள் நாட்காட்டி"
 
 #: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:303
 #: ../lib/GaletteEvents/Controllers/CsvController.php:71
 #: ../tempcache/booking.html.twig:107 ../tempcache/booking.html.twig:115
 #: ../tempcache/bookings.html.twig:154 ../tempcache/bookings.html.twig:179
 msgid "Event"
-msgstr "Мероприятие"
+msgstr "நிகழ்வு"
 
 #: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:386
 msgid "Activity has been attached to event."
-msgstr "Деятельность была привязана к мероприятию."
+msgstr "நிகழ்வில் செயல்பாடு இணைக்கப்பட்டுள்ளது."
 
 #: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:387
 msgid "Do not forget to store the event"
-msgstr "Не забудьте сохранить мероприятие"
+msgstr "நிகழ்வை சேமிக்க மறக்காதீர்கள்"
 
 #: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:389
 msgid "Activity has been detached from event."
-msgstr "Деятельность была отделена от мероприятия."
+msgstr "நிகழ்விலிருந்து செயல்பாடு பிரிக்கப்பட்டுள்ளது."
 
 #: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:398
 msgid "New event has been successfully added."
-msgstr "Новое мероприятие успешно добавлено."
+msgstr "புதிய நிகழ்வு வெற்றிகரமாக சேர்க்கப்பட்டுள்ளது."
 
 #: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:400
 msgid "Event has been modified."
-msgstr "Мероприятие было изменено."
+msgstr "நிகழ்வு மாற்றியமைக்கப்பட்டுள்ளது."
 
 #: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:404
 msgid "An error occurred while storing the event."
-msgstr "При сохранении мероприятия произошла ошибка."
+msgstr "நிகழ்வை சேமிக்கும் போது பிழை ஏற்பட்டது."
 
 #. TRANS: %1$s is the event name
 #: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:504
 #, php-format
 msgid "Remove event '%1$s'\""
-msgstr "Удалите мероприятие '%1$s'\""
+msgstr "நிகழ்வை '%1$s' '"
 
 #: ../lib/GaletteEvents/Controllers/CsvController.php:75
 #: ../tempcache/event.html.twig:158
 msgid "Zip code"
-msgstr "Индекс"
+msgstr "சிப் குறியீடு"
 
 #: ../lib/GaletteEvents/Controllers/CsvController.php:81
 #: ../tempcache/booking.html.twig:205
 msgid "Number of persons"
-msgstr "Кол-во человек"
+msgstr "நபர்களின் எண்ணிக்கை"
 
 #: ../lib/GaletteEvents/Controllers/CsvController.php:96
 #: ../tempcache/booking.html.twig:308
 msgid "Amount"
-msgstr "Сумма"
+msgstr "தொகை"
 
 #: ../lib/GaletteEvents/Controllers/CsvController.php:98
 #: ../tempcache/booking.html.twig:320
 msgid "Bank name"
-msgstr "Название банка"
+msgstr "வங்கி பெயர்"
 
 #. TRANS: Bank check number
 #: ../lib/GaletteEvents/Controllers/CsvController.php:100
 #: ../tempcache/booking.html.twig:326
 msgid "Check number"
-msgstr "Номер чека"
+msgstr "காசோலை எண்"
 
 #. TRANS: this is a filename: all lowercase, no special character, no space.
 #: ../lib/GaletteEvents/Controllers/CsvController.php:155
 msgid "bookingslist"
-msgstr "список заказов"
+msgstr "முன்பதிவு பட்டியல்"
 
 #: ../lib/GaletteEvents/Repository/Events.php:209
 msgid "Event information"
-msgstr "Информация о мероприятии"
+msgstr "நிகழ்வு செய்தி"
 
 #: ../lib/GaletteEvents/Repository/Events.php:213
 msgid "Start date:"
-msgstr "Дата начала:"
+msgstr "தொடக்க தேதி:"
 
 #: ../lib/GaletteEvents/Repository/Events.php:214
 msgid "End date:"
-msgstr "Дата окончания:"
+msgstr "இறுதி தேதி:"
 
 #: ../lib/GaletteEvents/Repository/Events.php:215
 msgid "Location:"
-msgstr "Расположение:"
+msgstr "இடம்:"
 
 #: ../lib/GaletteEvents/Repository/Events.php:217
 msgid "Comment:"
-msgstr "Комментарий:"
+msgstr "கருத்து:"
 
 #. TRANS: %1$s is the number of paid attendees
 #: ../lib/GaletteEvents/Repository/Events.php:234
 #, php-format
 msgid "%1$s paid"
-msgstr "%1$s оплачено"
+msgstr "%1$s செலுத்தப்பட்டது"
 
 #: ../lib/GaletteEvents/Repository/Events.php:239
 msgid "Attendees:"
-msgstr "Участники:"
+msgstr "பங்கேற்பாளர்கள்:"
 
 #: ../lib/GaletteEvents/Repository/Events.php:247
 #: ../lib/GaletteEvents/PluginGaletteEvents.php:104
 #: ../tempcache/event.html.twig:180 ../tempcache/booking.html.twig:221
 msgid "Activities"
-msgstr "Активность"
+msgstr ""
 
 #: ../lib/GaletteEvents/Event.php:205
 msgid "Begin date is mandatory"
-msgstr "Дата начала обязательна"
+msgstr "தொடக்க தேதி கட்டாயமாகும்"
 
 #: ../lib/GaletteEvents/Event.php:229 ../tempcache/event.html.twig:97
 msgid "Begin date"
-msgstr "Дата начала"
+msgstr ""
 
 #: ../lib/GaletteEvents/Event.php:231 ../tempcache/event.html.twig:103
 msgid "End date"
-msgstr "Дата окончания"
+msgstr ""
 
 #: ../lib/GaletteEvents/Event.php:249
 msgid "End date must be later or equal to begin date"
-msgstr "Дата окончания должна быть позже или равна дате начала"
+msgstr "இறுதி தேதி பின்னர் அல்லது தொடக்க தேதிக்கு சமமாக இருக்க வேண்டும்"
 
 #: ../lib/GaletteEvents/Event.php:255 ../lib/GaletteEvents/Activity.php:174
 msgid "Name is mandatory"
-msgstr "Имя (обязательно)"
+msgstr "பெயர் கட்டாயமாகும்"
 
 #: ../lib/GaletteEvents/Event.php:271
 msgid "Please select a group you own!"
-msgstr "Пожалуйста, выберите группу, которой вы владеете!"
+msgstr "உங்களுக்குச் சொந்தமான குழுவைத் தேர்ந்தெடுக்கவும்!"
 
 #: ../lib/GaletteEvents/Event.php:278
 msgid "Town is mandatory"
-msgstr "Город обязателен"
+msgstr "நகரம் கட்டாயமாகும்"
 
 #: ../lib/GaletteEvents/Event.php:407
 msgid "Event added"
-msgstr "Мероприятие добавлено"
+msgstr "நிகழ்வு சேர்க்கப்பட்டது"
 
 #: ../lib/GaletteEvents/Event.php:411
 msgid "Fail to add new event."
-msgstr "Не удается добавить новое мероприятие."
+msgstr "புதிய நிகழ்வைச் சேர்க்கத் தவறியது."
 
 #: ../lib/GaletteEvents/Event.php:430
 msgid "Event updated"
-msgstr "Мероприятие обновлено"
+msgstr "நிகழ்வு புதுப்பிக்கப்பட்டது"
 
 #: ../lib/GaletteEvents/PluginGaletteEvents.php:63
 #: ../lib/GaletteEvents/PluginGaletteEvents.php:67
 #: ../tempcache/activities.html.twig:117 ../tempcache/activities.html.twig:181
 msgid "Events"
-msgstr "Мероприятия"
+msgstr ""
 
 #: ../lib/GaletteEvents/PluginGaletteEvents.php:74
 #: ../lib/GaletteEvents/PluginGaletteEvents.php:136
 msgid "Calendar"
-msgstr "Календарь"
+msgstr "நாட்காட்டி"
 
 #: ../lib/GaletteEvents/PluginGaletteEvents.php:87
 msgid "Bookings"
-msgstr "Брони"
+msgstr ""
 
 #: ../lib/GaletteEvents/PluginGaletteEvents.php:157
 msgid "New event booking"
-msgstr "Бронь для нового мероприятия"
+msgstr "புதிய நிகழ்வு முன்பதிவு"
 
 #: ../lib/GaletteEvents/PluginGaletteEvents.php:225
 msgid "Upcoming events"
-msgstr "Предстоящие мероприятия"
+msgstr ""
 
 #: ../lib/GaletteEvents/Activity.php:242
 msgid "Activity added"
-msgstr "Активность добавлена"
+msgstr "செயல்பாடு சேர்க்கப்பட்டது"
 
 #: ../lib/GaletteEvents/Activity.php:247
 msgid "Fail to add new activity."
-msgstr "Не удается добавить новую активность."
+msgstr "புதிய செயல்பாட்டைச் சேர்க்கத் தவறியது."
 
 #: ../lib/GaletteEvents/Activity.php:266
 msgid "Activity updated"
-msgstr "Активность обновлена"
+msgstr "செயல்பாடு புதுப்பிக்கப்பட்டது"
 
 #: ../tempcache/event.html.twig:71 ../tempcache/activity.html.twig:71
 msgid "General information"
-msgstr "Общая информация"
+msgstr "பொது செய்தி"
 
 #: ../tempcache/event.html.twig:78
 msgid "Is open"
-msgstr "Открыто"
+msgstr "திறந்திருக்கும்"
 
 #: ../tempcache/event.html.twig:85 ../tempcache/activities.html.twig:117
 #: ../tempcache/events.html.twig:117 ../tempcache/activity.html.twig:85
 msgid "Name"
-msgstr "Имя"
+msgstr ""
 
 #: ../tempcache/event.html.twig:91
 msgid "Color"
-msgstr "Цвет"
+msgstr ""
 
 #: ../tempcache/event.html.twig:129
 msgid "Limit to group"
-msgstr "Ограничить на группу"
+msgstr "குழுவிற்கு வரம்பு"
 
 #: ../tempcache/event.html.twig:129
 msgid "Restrict event to selected group (and its subgroups)."
-msgstr "Ограничить мероприятие на выбранную группу (и её подгруппы)."
+msgstr ""
+"தேர்ந்தெடுக்கப்பட்ட குழுவிற்கு (மற்றும் அதன் துணைக்குழுக்கள்) நிகழ்வைக் கட்டுப்படுத்துங்கள்."
 
 #: ../tempcache/event.html.twig:135 ../tempcache/booking.html.twig:211
 #: ../tempcache/activity.html.twig:91
 msgid "Comment"
-msgstr "Комментарий"
+msgstr ""
 
 #: ../tempcache/event.html.twig:145
 msgid "Location"
-msgstr "Расположение"
+msgstr ""
 
 #: ../tempcache/event.html.twig:152
 msgid "Address"
-msgstr "Адрес"
+msgstr "முகவரி"
 
 #: ../tempcache/event.html.twig:164 ../tempcache/events.html.twig:117
 #: ../tempcache/events.html.twig:197
 msgid "Town"
-msgstr "Город"
+msgstr "நகரம்"
 
 #: ../tempcache/event.html.twig:170
 msgid "Country"
-msgstr "Страна"
+msgstr "நாடு"
 
 #: ../tempcache/event.html.twig:204
 msgid "Choose an activity to add"
-msgstr "Выберите активность чтобы добавить"
+msgstr "சேர்க்க ஒரு செயல்பாட்டைத் தேர்வுசெய்க"
 
 #: ../tempcache/event.html.twig:228
 msgid "Add selected activity to event"
-msgstr "Добавить выбранную активность к мероприятию"
+msgstr "நிகழ்வில் தேர்ந்தெடுக்கப்பட்ட செயல்பாட்டைச் சேர்க்கவும்"
 
 #: ../tempcache/event.html.twig:240
 msgid "Choose an activity to remove"
-msgstr "Выберите активность чтобы удалить"
+msgstr "அகற்ற ஒரு செயல்பாட்டைத் தேர்வுசெய்க"
 
 #: ../tempcache/event.html.twig:267
 msgid "Remove selected activity from event"
-msgstr "Удалить выбранную активность из мероприятия"
+msgstr "நிகழ்விலிருந்து தேர்ந்தெடுக்கப்பட்ட செயல்பாட்டை அகற்று"
 
 #: ../tempcache/event.html.twig:327
 msgid "Required"
-msgstr "Требуется"
+msgstr "தேவை"
 
 #: ../tempcache/event.html.twig:344
 msgid "No activity available in the database."
-msgstr "В базе данных нет активности."
+msgstr "தரவுத்தளத்தில் எந்த செயல்பாடும் கிடைக்கவில்லை."
 
 #: ../tempcache/event.html.twig:389
 msgid "Please choose an activity to add"
-msgstr "Пожалуйста, выберите активность, чтобы добавить"
+msgstr "சேர்க்க ஒரு செயல்பாட்டைத் தேர்வுசெய்க"
 
 #: ../tempcache/event.html.twig:399
 msgid "Please choose an activity to remove"
-msgstr "Пожалуйста, выберите активность, чтобы удалить"
+msgstr "அகற்ற ஒரு செயல்பாட்டைத் தேர்வுசெய்க"
 
 #: ../tempcache/booking.html.twig:71
 msgid "Booking information"
-msgstr "Информация брони"
+msgstr "முன்பதிவு செய்தி"
 
 #: ../tempcache/booking.html.twig:78 ../tempcache/bookings.html.twig:154
 #: ../tempcache/bookings.html.twig:448
 msgid "Booking date"
-msgstr "Дата брони"
+msgstr "முன்பதிவு தேதி"
 
 #: ../tempcache/booking.html.twig:86
 msgid "Select an event"
-msgstr "Выберите мероприятие"
+msgstr "ஒரு நிகழ்வைத் தேர்ந்தெடுக்கவும்"
 
 #: ../tempcache/booking.html.twig:271
 msgid "No activity for selected event"
-msgstr "Активность не выбрана для мероприятия"
+msgstr "தேர்ந்தெடுக்கப்பட்ட நிகழ்வுக்கு எந்த நடவடிக்கையும் இல்லை"
 
 #: ../tempcache/booking.html.twig:294
 msgid "Financial information"
-msgstr "Финансовая информация"
+msgstr "பொருள் செய்தி"
 
 #: ../tempcache/booking.html.twig:301 ../tempcache/bookings.html.twig:154
 #: ../tempcache/bookings.html.twig:288 ../tempcache/bookings.html.twig:457
 #: ../tempcache/bookings.html.twig:469 ../tempcache/bookings.html.twig:480
 msgid "Paid"
-msgstr "Оплачивается"
+msgstr "பணம்"
 
 #: ../tempcache/bookings.html.twig:65
 msgid "No booking selected"
-msgstr "Бронь не выбрана"
+msgstr "முன்பதிவு எதுவும் தேர்ந்தெடுக்கப்படவில்லை"
 
 #: ../tempcache/bookings.html.twig:65
 msgid ""
 "Please make sure to select at least one booking from the list to perform "
 "this action."
 msgstr ""
-"Пожалуйста, выберите хотя бы одну бронь из списка чтобы выполнить это "
-"действие."
+"இந்த செயலைச் செய்ய பட்டியலிலிருந்து குறைந்தது ஒரு முன்பதிவையாவது தேர்ந்தெடுக்கவும்."
 
 #: ../tempcache/bookings.html.twig:80
 msgid "Members as CSV"
-msgstr "Участники как CSV"
+msgstr "காபிம ஆக உறுப்பினர்கள்"
 
 #: ../tempcache/bookings.html.twig:80
 msgid "Export selected reservation members as CSV"
-msgstr "Экспорт выбранных членов брони как CSV"
+msgstr "தேர்ந்தெடுக்கப்பட்ட இட ஒதுக்கீடு உறுப்பினர்களை காபிம ஆக ஏற்றுமதி செய்யுங்கள்"
 
 #: ../tempcache/bookings.html.twig:80
 msgid "Bookings as CSV"
-msgstr "Брони как CSV"
+msgstr "காபிம ஆக முன்பதிவு"
 
 #: ../tempcache/bookings.html.twig:80
 msgid "Export selected reservations as CSV"
-msgstr "Экспорт выбранных броней как CSV"
+msgstr "தேர்ந்தெடுக்கப்பட்ட முன்பதிவுகளை காபிம ஆக ஏற்றுமதி செய்யுங்கள்"
 
 #: ../tempcache/bookings.html.twig:98
 #, php-format
 msgid "%1$s booking"
 msgid_plural "%1$s bookings"
-msgstr[0] "%1$s бронь"
-msgstr[1] "%1$s брони"
-msgstr[2] "%1$s броней"
+msgstr[0] "%1$s முன்பதிவு"
+msgstr[1] "%1$s முன்பதிவுகள்"
 
 #: ../tempcache/bookings.html.twig:130 ../tempcache/calendar.html.twig:131
 msgid "New booking"
-msgstr "Новая бронь"
+msgstr "புதிய முன்பதிவு"
 
 #: ../tempcache/bookings.html.twig:136
 msgid "current event"
-msgstr "текущее мероприятие"
+msgstr "தற்போதைய நிகழ்வு"
 
 #: ../tempcache/bookings.html.twig:154 ../tempcache/bookings.html.twig:497
 msgid "Attendees"
-msgstr "Участники"
+msgstr "பங்கேற்பாளர்கள்"
 
 #: ../tempcache/bookings.html.twig:184
 msgid "Select..."
-msgstr "Выберите..."
+msgstr "தேர்ந்தெடுக்கவும் ..."
 
 #: ../tempcache/bookings.html.twig:214
 msgid "All payment types"
-msgstr "Все типы платежей"
+msgstr "அனைத்து கட்டண வகைகளும்"
 
 #: ../tempcache/bookings.html.twig:220 ../tempcache/bookings.html.twig:222
 #: ../tempcache/events.html.twig:117 ../tempcache/events.html.twig:203
 msgid "Group"
-msgstr "Группа"
+msgstr "குழு"
 
 #: ../tempcache/bookings.html.twig:258
 msgid "Paid bookings:"
-msgstr "Оплаченные брони:"
+msgstr "கட்டண முன்பதிவு:"
 
 #: ../tempcache/bookings.html.twig:304 ../tempcache/bookings.html.twig:459
 #: ../tempcache/bookings.html.twig:471 ../tempcache/bookings.html.twig:486
 msgid "Not paid"
-msgstr "Не оплачено"
+msgstr "செலுத்தப்படவில்லை"
 
 #: ../tempcache/bookings.html.twig:359
 #, php-format
 msgid "Found bookings total %f"
-msgstr "Всего найдено броней %f"
+msgstr "முன்பதிவு மொத்தம் %f"
 
 #: ../tempcache/bookings.html.twig:516
 msgid "Edit booking"
-msgstr "Редактировать бронь"
+msgstr "முன்பதிவைத் திருத்து"
 
 #: ../tempcache/bookings.html.twig:528
 msgid "Remove from database"
-msgstr "Удалить из БД"
+msgstr "தரவுத்தளத்திலிருந்து அகற்று"
 
 #: ../tempcache/bookings.html.twig:562
 msgid "No booking has been found"
-msgstr "Бронь не найдена"
+msgstr "முன்பதிவு எதுவும் கிடைக்கவில்லை"
 
 #: ../tempcache/activities.html.twig:69
 #, php-format
 msgid "%1$s activity"
 msgid_plural "%1$s activities"
-msgstr[0] "%1$s активность"
-msgstr[1] "%1$s активности"
-msgstr[2] "%1$s активностей"
+msgstr[0] "%1$s செயல்பாடு"
+msgstr[1] "%1$s செயல்பாடுகள்"
 
 #: ../tempcache/activities.html.twig:100
 msgid "New activity"
-msgstr "Новая активность"
+msgstr "புதிய செயல்பாடு"
 
 #: ../tempcache/activities.html.twig:117 ../tempcache/activities.html.twig:175
 msgid "Creation date"
-msgstr "Дата создания"
+msgstr "உருவாக்கும் தேதி"
 
 #: ../tempcache/activities.html.twig:117 ../tempcache/activities.html.twig:187
 #: ../tempcache/activity.html.twig:78
 msgid "Is active"
-msgstr "Активен"
+msgstr ""
 
 #: ../tempcache/activities.html.twig:198 ../tempcache/activities.html.twig:209
 msgid "Active"
-msgstr "Активный"
+msgstr ""
 
 #: ../tempcache/activities.html.twig:200 ../tempcache/activities.html.twig:215
 msgid "Inactive"
-msgstr "Неактивен"
+msgstr ""
 
 #: ../tempcache/activities.html.twig:225 ../tempcache/events.html.twig:273
 #, php-format
 msgid "%1$s: edit information"
-msgstr "%1$s: редактировать информацию"
+msgstr "%1$s: தகவலைத் திருத்தவும்"
 
 #: ../tempcache/activities.html.twig:227 ../tempcache/events.html.twig:286
 #, php-format
 msgid "%1$s: remove from database"
-msgstr "%1$s: удалить из БД"
+msgstr "%1$s: தரவுத்தளத்திலிருந்து அகற்று"
 
 #: ../tempcache/activities.html.twig:264
 msgid "No activity has been found"
-msgstr "Активность не обнаружена"
+msgstr "எந்த நடவடிக்கையும் கிடைக்கவில்லை"
 
 #: ../tempcache/events.html.twig:69
 #, php-format
 msgid "%1$s event"
 msgid_plural "%1$s events"
-msgstr[0] "%1$s мероприятие"
-msgstr[1] "%1$s мероприятия"
-msgstr[2] "%1$s мероприятий"
+msgstr[0] "%1$s நிகழ்வு"
+msgstr[1] "%1$s நிகழ்வுகள்"
 
 #: ../tempcache/events.html.twig:100
 msgid "New event"
-msgstr "Новое мероприятие"
+msgstr "புதிய நிகழ்வு"
 
 #: ../tempcache/events.html.twig:117 ../tempcache/events.html.twig:191
 msgid "Date"
-msgstr "Дата"
+msgstr "திகதி"
 
 #: ../tempcache/events.html.twig:117 ../tempcache/events.html.twig:209
 msgid "Open"
-msgstr "Открыто"
+msgstr "திற"
 
 #: ../tempcache/events.html.twig:220 ../tempcache/events.html.twig:231
 msgid "Event is open"
-msgstr "Мероприятие открыто"
+msgstr "நிகழ்வு திறந்திருக்கும்"
 
 #: ../tempcache/events.html.twig:222 ../tempcache/events.html.twig:237
 msgid "Event is closed"
-msgstr "Мероприятие закрыто"
+msgstr "நிகழ்வு மூடப்பட்டுள்ளது"
 
 #: ../tempcache/events.html.twig:253
 #, php-format
 msgid "%1$s: export bookings as CSV"
-msgstr "%1$s: Экспортировать брони как CSV"
+msgstr "%1$s: காபிம ஆக ஏற்றுமதி முன்பதிவு"
 
 #: ../tempcache/events.html.twig:263
 #, php-format
 msgid "%1$s: show bookings"
-msgstr "%1$s: показать брони"
+msgstr "%1$s: முன்பதிவுகளைக் காட்டு"
 
 #: ../tempcache/events.html.twig:331
 msgid "No event has been found"
-msgstr "Мероприятие не найдено"
+msgstr "எந்த நிகழ்வும் கிடைக்கவில்லை"
 
 #: ../tempcache/calendar.html.twig:88
 msgid "Daily list"
-msgstr "Ежедневный список"
+msgstr "நாள்தோறும் பட்டியல்"
 
 #: ../tempcache/calendar.html.twig:92
 msgid "Weekly list"
-msgstr "Еженедельный список"
+msgstr "வாராந்திர பட்டியல்"
 
 #: ../tempcache/calendar.html.twig:96
 msgid "Monthly list"
-msgstr "Ежемесячный список"
+msgstr "மாதாந்திர பட்டியல்"
 
 #: ../tempcache/calendar.html.twig:100
 msgid "Month calendar"
-msgstr "Месячный календарь"
+msgstr "மாத நாட்காட்டி"
 
 #: ../tempcache/calendar.html.twig:104
 msgid "Today"
-msgstr "Сегодня"
+msgstr "இன்று"

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright © 2003-2024 The Galette Team
+ * Copyright © 2003-2025 The Galette Team
  *
  * This file is part of Galette (https://galette.eu).
  *
@@ -23,9 +23,15 @@ declare(strict_types=1);
 
 namespace GaletteEvents;
 
+use DI\Attribute\Inject;
+use Galette\Core\Db;
 use Galette\Core\Login;
 use Galette\Entity\Adherent;
 use Galette\Core\GalettePlugin;
+use Galette\IO\News\Entry;
+use Galette\IO\News\Post;
+use GaletteEvents\Filters\EventsList;
+use GaletteEvents\Repository\Events;
 
 /**
  * Galette Events plugin
@@ -35,6 +41,12 @@ use Galette\Core\GalettePlugin;
 
 class PluginGaletteEvents extends GalettePlugin
 {
+    #[Inject]
+    protected Db $zdb;
+
+    #[Inject]
+    protected Login $login;
+
     /**
      * Extra menus entries
      *
@@ -172,5 +184,56 @@ class PluginGaletteEvents extends GalettePlugin
     public static function getBatchActionsContents(): array
     {
         return [];
+    }
+
+    /**
+     * Get current logged-in user dashboards contents
+     *
+     * @return array<int, string|array<string,mixed>>
+     */
+    public static function getMyDashboardsContents(): array
+    {
+        return [];
+    }
+
+    /**
+     * Get plugin upcoming events
+     *
+     * @return ?Entry
+     */
+    public function getNews(): ?Entry
+    {
+        $filters = new EventsList();
+        $now = new \DateTime();
+        $filters->start_date_filter = $now->format(_T('Y-m-d'));
+        $events = new Events($this->zdb, $this->login, $filters);
+
+        $posts = [];
+        $list = $events->getList();
+        if (!count($list)) {
+            return null;
+        }
+
+        foreach ($list as $event) {
+            $posts[] = new Post(
+                title: $event->getName(),
+                date: $event->getBeginDate()
+            );
+        }
+
+        return new Entry(
+            _T('Upcoming events', 'events'),
+            $posts
+        );
+    }
+
+    /**
+     * Is the plugin fully installed (including database, extra configuration, etc)?
+     *
+     * @return bool
+     */
+    public function isInstalled(): bool
+    {
+        return $this->zdb->tableExists(EVENTS_PREFIX . 'events');
     }
 }

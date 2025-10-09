@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright © 2003-2024 The Galette Team
+ * Copyright © 2003-2025 The Galette Team
  *
  * This file is part of Galette (https://galette.eu).
  *
@@ -25,6 +25,7 @@ namespace GaletteEvents\Filters;
 
 use Analog\Analog;
 use Galette\Core\Pagination;
+use Galette\Enums\SQLOrder;
 use GaletteEvents\Repository\Events;
 
 /**
@@ -34,23 +35,25 @@ use GaletteEvents\Repository\Events;
  *
  * @property string $query
  * @property bool $calendar_filter
+ * @property ?string $start_date_filter
+ * @property ?string $raw_start_date_filter
  */
 
 class EventsList extends Pagination
 {
     //filters
-    private ?string $name_filter = null;
+    private ?string $name_filter = null; //@phpstan-ignore-line
     private ?string $start_date_filter = null;
     private ?string $end_date_filter = null;
     private int $group_filter = 0;
-    private ?string $meal_filter = null;
-    private ?string $lodging_filter = null;
-    private ?string $open_filter = null;
+    private ?string $meal_filter = null; //@phpstan-ignore-line
+    private ?string $lodging_filter = null; //@phpstan-ignore-line
+    private ?string $open_filter = null; //@phpstan-ignore-line
     private bool $calendar_filter = false;
     private string $query;
 
     /** @var array<string> */
-    protected array $list_fields = array(
+    protected array $list_fields = [
         'name_filter',
         'start_date_filter',
         'raw_start_date_filter',
@@ -61,7 +64,7 @@ class EventsList extends Pagination
         'lodging_filter',
         'open_filter',
         'calendar_filter'
-    );
+    ];
 
     /**
      * Default constructor
@@ -84,11 +87,11 @@ class EventsList extends Pagination
     /**
      * Return the default direction for ordering
      *
-     * @return string ASC or DESC
+     * @return SQLOrder
      */
-    protected function getDefaultDirection(): string
+    protected function getDefaultDirection(): SQLOrder
     {
-        return self::ORDER_DESC;
+        return SQLOrder::DESC;
     }
 
     /**
@@ -137,8 +140,8 @@ class EventsList extends Pagination
                         } catch (\Exception $e) {
                             //oops, we've got a bad date :/
                             Analog::log(
-                                'Bad date (' . $this->$name . ') | ' .
-                                $e->getMessage(),
+                                'Bad date (' . $this->$name . ') | '
+                                . $e->getMessage(),
                                 Analog::INFO
                             );
                             return $this->$name;
@@ -218,11 +221,11 @@ class EventsList extends Pagination
                             }
 
                             if ($y === false && $ym === false && $d === false) {
-                                $formats = array(
+                                $formats = [
                                     __("Y"),
                                     __("Y-m"),
                                     __("Y-m-d"),
-                                );
+                                ];
 
                                 $field = null;
                                 if ($name === 'start_date_filter') {
@@ -246,9 +249,9 @@ class EventsList extends Pagination
                         }
                     } catch (\Exception $e) {
                         Analog::log(
-                            'Wrong date format. field: ' . $name .
-                            ', value: ' . $value . ', expected fmt: ' .
-                            __("Y-m-d") . ' | ' . $e->getMessage(),
+                            'Wrong date format. field: ' . $name
+                            . ', value: ' . $value . ', expected fmt: '
+                            . __("Y-m-d") . ' | ' . $e->getMessage(),
                             Analog::INFO
                         );
                         throw $e;

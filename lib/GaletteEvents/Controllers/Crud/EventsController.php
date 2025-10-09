@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright © 2003-2024 The Galette Team
+ * Copyright © 2003-2025 The Galette Team
  *
  * This file is part of Galette (https://galette.eu).
  *
@@ -40,7 +40,7 @@ use DI\Attribute\Inject;
  * @name      EventsController
  * @package   GaletteEvents
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2021-2024 The Galette Team
+ * @copyright 2021-2025 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      https://galette.eu
  * @since     2021-05-09
@@ -95,7 +95,7 @@ class EventsController extends AbstractPluginController
      *
      * @return Response
      */
-    public function list(Request $request, Response $response, string $option = null, string|int $value = null): Response
+    public function list(Request $request, Response $response, ?string $option = null, string|int|null $value = null): Response
     {
         if (isset($this->session->filter_events)) {
             $filters = $this->session->filter_events;
@@ -126,13 +126,13 @@ class EventsController extends AbstractPluginController
         $this->view->render(
             $response,
             $this->getTemplate('events'),
-            array(
+            [
                 'page_title'            => _T("Events management", "events"),
                 'require_dialog'        => true,
                 'events'                => $events_list,
                 'nb_events'             => $events->getCount(),
                 'filters'               => $filters
-            )
+            ]
         );
         return $response;
     }
@@ -150,8 +150,8 @@ class EventsController extends AbstractPluginController
     public function calendar(
         Request $request,
         Response $response,
-        string $option = null,
-        string|int $value = null
+        ?string $option = null,
+        string|int|null $value = null
     ): Response {
         if (isset($this->session->filter_events_calendar)) {
             $filters = $this->session->filter_events_calendar;
@@ -190,14 +190,14 @@ class EventsController extends AbstractPluginController
         $this->view->render(
             $response,
             $this->getTemplate('calendar'),
-            array(
+            [
                 'page_title'            => _T("Events calendar", "events"),
                 'require_dialog'        => true,
                 'events'                => $events->getList(),
                 'nb_events'             => $events->getCount(),
                 'filters'               => $filters,
                 'module_id'             => $this->getModuleId()
-            )
+            ]
         );
         return $response;
     }
@@ -270,7 +270,7 @@ class EventsController extends AbstractPluginController
      *
      * @return Response
      */
-    public function edit(Request $request, Response $response, int $id = null, string $action = 'edit'): Response
+    public function edit(Request $request, Response $response, ?int $id = null, string $action = 'edit'): Response
     {
         if ($this->session->event !== null) {
             $event = $this->session->event;
@@ -315,7 +315,7 @@ class EventsController extends AbstractPluginController
         $this->view->render(
             $response,
             $this->getTemplate('event'),
-            array(
+            [
                 'autocomplete'      => true,
                 'page_title'        => $title,
                 'event'             => $event,
@@ -323,7 +323,7 @@ class EventsController extends AbstractPluginController
                 // pseudo random int
                 'time'              => time(),
                 'groups'            => $groups_list,
-            )
+            ]
         );
         return $response;
     }
@@ -338,7 +338,7 @@ class EventsController extends AbstractPluginController
      *
      * @return Response
      */
-    public function doEdit(Request $request, Response $response, int $id = null, string $action = 'edit'): Response
+    public function doEdit(Request $request, Response $response, ?int $id = null, string $action = 'edit'): Response
     {
         $post = $request->getParsedBody();
         $event = new Event($this->zdb, $this->login);

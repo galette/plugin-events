@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright © 2003-2024 The Galette Team
+ * Copyright © 2003-2025 The Galette Team
  *
  * This file is part of Galette (https://galette.eu).
  *
@@ -24,6 +24,7 @@ declare(strict_types=1);
 namespace GaletteEvents\tests\units;
 
 use Galette\GaletteTestCase;
+
 use function PHPUnit\Framework\assertSame;
 
 /**
@@ -57,8 +58,8 @@ class Activity extends GaletteTestCase
         $activity = new \GaletteEvents\Activity($this->zdb, $this->login);
 
         $this->assertNull($activity->getId());
-        $this->assertSame('',$activity->getName());
-        $this->assertSame('',$activity->getCreationDate());
+        $this->assertSame('', $activity->getName());
+        $this->assertSame('', $activity->getCreationDate());
         $this->assertFalse($activity->isActive());
         $this->assertSame('', $activity->getComment());
         $this->assertSame(0, $activity->countEvents());
@@ -83,6 +84,10 @@ class Activity extends GaletteTestCase
         ];
         $this->assertFalse($activity->check($data));
         $this->assertSame(['Name is mandatory'], $activity->getErrors());
+        $this->expectLogEntry(
+            \Analog::ERROR,
+            'Name is mandatory',
+        );
 
         //add new activity
         $data = [

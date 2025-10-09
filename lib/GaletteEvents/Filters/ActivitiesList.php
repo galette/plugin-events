@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright © 2003-2024 The Galette Team
+ * Copyright © 2003-2025 The Galette Team
  *
  * This file is part of Galette (https://galette.eu).
  *
@@ -25,6 +25,7 @@ namespace GaletteEvents\Filters;
 
 use Analog\Analog;
 use Galette\Core\Pagination;
+use Galette\Enums\SQLOrder;
 use GaletteEvents\Repository\Activities;
 
 /**
@@ -38,15 +39,15 @@ use GaletteEvents\Repository\Activities;
 class ActivitiesList extends Pagination
 {
     //filters
-    private ?string $name_filter = null;
-    private ?bool $active_filter = null;
+    private ?string $name_filter = null; //@phpstan-ignore-line
+    private ?bool $active_filter = null; //@phpstan-ignore-line
     private string $query;
 
     /** @var array<string> */
-    protected array $list_fields = array(
+    protected array $list_fields = [
         'name_filter',
         'active_filter'
-    );
+    ];
 
     /**
      * Default constructor
@@ -69,11 +70,11 @@ class ActivitiesList extends Pagination
     /**
      * Return the default direction for ordering
      *
-     * @return string ASC or DESC
+     * @return SQLOrder
      */
-    protected function getDefaultDirection(): string
+    protected function getDefaultDirection(): SQLOrder
     {
-        return self::ORDER_DESC;
+        return SQLOrder::DESC;
     }
 
     /**

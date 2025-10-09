@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright © 2003-2024 The Galette Team
+ * Copyright © 2003-2025 The Galette Team
  *
  * This file is part of Galette (https://galette.eu).
  *
@@ -63,7 +63,7 @@ class Activity
      *                                                       a specific activity, or null to just
      *                                                       instanciate object
      */
-    public function __construct(Db $zdb, Login $login, int|ArrayObject $args = null)
+    public function __construct(Db $zdb, Login $login, int|ArrayObject|null $args = null)
     {
         $this->zdb = $zdb;
         $this->login = $login;
@@ -86,7 +86,7 @@ class Activity
     {
         try {
             $select = $this->zdb->select($this->getTableName());
-            $select->where(array(self::PK => $id));
+            $select->where([self::PK => $id]);
             $results = $this->zdb->execute($select);
 
             if ($results->count() > 0) {
@@ -150,8 +150,8 @@ class Activity
                 $this->zdb->connection->rollBack();
             }
             Analog::log(
-                'Unable to delete activity ' . $this->name .
-                ' (' . $this->id  . ') |' . $e->getMessage(),
+                'Unable to delete activity ' . $this->name
+                . ' (' . $this->id . ') |' . $e->getMessage(),
                 Analog::ERROR
             );
             return false;
@@ -168,7 +168,7 @@ class Activity
      */
     public function check(array $values): bool
     {
-        $this->errors = array();
+        $this->errors = [];
 
         if (empty($values['name'])) {
             $this->errors[] = _T('Name is mandatory', 'events');
@@ -188,8 +188,8 @@ class Activity
 
         if (count($this->errors) > 0) {
             Analog::log(
-                'Some errors has been thrown attempting to edit/store an activity' . "\n" .
-                print_r($this->errors, true),
+                'Some errors has been thrown attempting to edit/store an activity' . "\n"
+                . print_r($this->errors, true),
                 Analog::ERROR
             );
             return false;
@@ -212,14 +212,14 @@ class Activity
         global $hist;
 
         try {
-            $values = array(
+            $values = [
                 'name'                  => $this->name,
-                'is_active'             => ($this->active ? $this->active :
-                                                ($this->zdb->isPostgres() ? 'false' : 0)),
+                'is_active'             => ($this->active ? $this->active
+                                                : ($this->zdb->isPostgres() ? 'false' : 0)),
                 'comment'               => $this->comment
-            );
+            ];
 
-            if (!isset($this->id) || $this->id == '') {
+            if (empty($this->id)) {
                 //we're inserting a new event
                 $this->creation_date = date("Y-m-d H:i:s");
                 $values['creation_date'] = $this->creation_date;
@@ -271,8 +271,8 @@ class Activity
             }
         } catch (\Exception $e) {
             Analog::log(
-                'Something went wrong :\'( | ' . $e->getMessage() . "\n" .
-                $e->getTraceAsString(),
+                'Something went wrong :\'( | ' . $e->getMessage() . "\n"
+                . $e->getTraceAsString(),
                 Analog::ERROR
             );
             throw $e;
@@ -350,7 +350,7 @@ class Activity
      */
     protected function getTableName(): string
     {
-        return EVENTS_PREFIX  . self::TABLE;
+        return EVENTS_PREFIX . self::TABLE;
     }
 
     /**
@@ -370,16 +370,16 @@ class Activity
      */
     public function countEvents(): int
     {
-        if (!isset($this->id) || $this->id == '') {
+        if (empty($this->id)) {
             return 0;
         }
 
         $select = $this->zdb->select(EVENTS_PREFIX . 'activitiesevents');
 
         $select->columns(
-            array(
+            [
                 'counter' => new Expression('COUNT(' . Event::PK . ')')
-            )
+            ]
         )->where([self::PK => $this->id]);
         $results = $this->zdb->execute($select);
         $result = $results->current();

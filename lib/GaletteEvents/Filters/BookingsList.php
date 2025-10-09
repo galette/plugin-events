@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright © 2003-2024 The Galette Team
+ * Copyright © 2003-2025 The Galette Team
  *
  * This file is part of Galette (https://galette.eu).
  *
@@ -25,6 +25,7 @@ namespace GaletteEvents\Filters;
 
 use Analog\Analog;
 use Galette\Core\Pagination;
+use Galette\Enums\SQLOrder;
 use GaletteEvents\Repository\Bookings;
 
 /**
@@ -43,23 +44,23 @@ use GaletteEvents\Repository\Bookings;
 class BookingsList extends Pagination
 {
     //filters
-    private string|int|null $event_filter;
-    private int|string $paid_filter;
+    private string|int|null $event_filter; //@phpstan-ignore-line
+    private int|string $paid_filter; //@phpstan-ignore-line
     private int $payment_type_filter;
-    private string|int|null $group_filter;
+    private string|int|null $group_filter; //@phpstan-ignore-line
 
     /** @var array<int> */
     private array $selected;
     private string $query;
 
     /** @var array<string> */
-    protected array $list_fields = array(
+    protected array $list_fields = [
         'event_filter',
         'paid_filter',
         'payment_type_filter',
         'selected',
         'group_filter'
-    );
+    ];
 
     /**
      * Default constructor
@@ -82,11 +83,11 @@ class BookingsList extends Pagination
     /**
      * Return the default direction for ordering
      *
-     * @return string ASC or DESC
+     * @return SQLOrder
      */
-    protected function getDefaultDirection(): string
+    protected function getDefaultDirection(): SQLOrder
     {
-        return self::ORDER_DESC;
+        return SQLOrder::DESC;
     }
 
     /**
@@ -154,8 +155,8 @@ class BookingsList extends Pagination
                         $this->$name = $value;
                     } elseif ($value !== null) {
                         Analog::log(
-                            '[BookingsList] Value for property `' . $name .
-                            '` should be an array (' . gettype($value) . ' given)',
+                            '[BookingsList] Value for property `' . $name
+                            . '` should be an array (' . gettype($value) . ' given)',
                             Analog::WARNING
                         );
                     }
@@ -182,7 +183,7 @@ class BookingsList extends Pagination
     {
         $args = [
             'option'    => 'page',
-            'value'     => $page,
+            'value'     => (string)$page,
             'event'     => 'all'
         ];
 

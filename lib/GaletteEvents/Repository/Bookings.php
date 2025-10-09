@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright © 2003-2024 The Galette Team
+ * Copyright © 2003-2025 The Galette Team
  *
  * This file is part of Galette (https://galette.eu).
  *
@@ -66,7 +66,7 @@ class Bookings
      * @param Login         $login   Login instance
      * @param ?BookingsList $filters Filtering
      */
-    public function __construct(Db $zdb, Login $login, BookingsList $filters = null)
+    public function __construct(Db $zdb, Login $login, ?BookingsList $filters = null)
     {
         $this->zdb = $zdb;
         $this->login = $login;
@@ -136,11 +136,11 @@ class Bookings
             $select->columns($fieldsList);
 
             $select->join(
-                array('a' => PREFIX_DB . Adherent::TABLE),
+                ['a' => PREFIX_DB . Adherent::TABLE],
                 'b.' . Adherent::PK . '= a.' . Adherent::PK
             );
             $select->join(
-                array('e' => PREFIX_DB . EVENTS_PREFIX . Event::TABLE),
+                ['e' => PREFIX_DB . EVENTS_PREFIX . Event::TABLE],
                 'b.' . Event::PK . '= e.' . Event::PK
             );
 
@@ -189,9 +189,9 @@ class Bookings
 
             $sumSelect->reset($sumSelect::ORDER);
             $sumSelect->columns(
-                array(
+                [
                     'sum' => new Expression('SUM(payment_amount)')
-                )
+                ]
             );
 
             $results = $this->zdb->execute($sumSelect);
@@ -237,8 +237,8 @@ class Bookings
             }
 
             if (
-                $this->filters->payment_type_filter !== null &&
-                (int)$this->filters->payment_type_filter != -1
+                isset($this->filters->payment_type_filter)
+                && $this->filters->payment_type_filter != -1
             ) {
                 $select->where->equalTo(
                     'payment_method',
@@ -266,7 +266,7 @@ class Bookings
                 }
 
                 $set = [new PredicateSet(
-                    array(
+                    [
                         new Predicate\IsNull(Group::PK),
                         new Predicate\Operator(
                             'is_open',
@@ -278,7 +278,7 @@ class Bookings
                             '>=',
                             date('Y-m-d')
                         )
-                    )
+                    ]
                 )];
 
                 if (count($groups)) {
@@ -337,8 +337,8 @@ class Bookings
             return true;
         } else {
             Analog::log(
-                'Trying to order by ' . $field_name  . ' while it is not in ' .
-                'selected fields.',
+                'Trying to order by ' . $field_name . ' while it is not in '
+                . 'selected fields.',
                 Analog::WARNING
             );
             return false;
@@ -353,9 +353,9 @@ class Bookings
      *
      * @return array<string> SQL ORDER clauses
      */
-    private function buildOrderClause(array $fields = null): array
+    private function buildOrderClause(?array $fields = null): array
     {
-        $order = array();
+        $order = [];
 
         switch ($this->filters->orderby) {
             case self::ORDERBY_EVENT:
@@ -411,9 +411,9 @@ class Bookings
             }
 
             $countSelect->columns(
-                array(
+                [
                     'count' => new Expression('count(DISTINCT b.' . Booking::PK . ')')
-                )
+                ]
             );
 
             $have = $select->having;
@@ -426,7 +426,7 @@ class Bookings
             $results = $this->zdb->execute($countSelect);
 
             $this->count = (int)$results->current()->count;
-            if (isset($this->filters) && $this->count > 0) {
+            if ($this->count > 0) {
                 $this->filters->setCounter($this->count);
             }
         } catch (\Exception $e) {

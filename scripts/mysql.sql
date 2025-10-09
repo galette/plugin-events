@@ -16,7 +16,7 @@ CREATE TABLE galette_events_events (
   end_date date NOT NULL default '1901-01-01',
   creation_date date NOT NULL default '1901-01-01',
   is_open tinyint(1) NOT NULL default 1,
-  id_group int(10) default NULL,
+  id_group int unsigned default NULL,
   comment text,
   color varchar(7),
   PRIMARY KEY (id_event),

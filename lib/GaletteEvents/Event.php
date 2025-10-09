@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright © 2003-2024 The Galette Team
+ * Copyright © 2003-2025 The Galette Team
  *
  * This file is part of Galette (https://galette.eu).
  *
@@ -78,7 +78,7 @@ class Event
      *                                                       a specific event, or null to just
      *                                                       instanciate object
      */
-    public function __construct(Db $zdb, Login $login, int|ArrayObject $args = null)
+    public function __construct(Db $zdb, Login $login, int|ArrayObject|null $args = null)
     {
         $this->zdb = $zdb;
         $this->login = $login;
@@ -107,7 +107,7 @@ class Event
     {
         try {
             $select = $this->zdb->select($this->getTableName());
-            $select->where(array(self::PK => $id));
+            $select->where([self::PK => $id]);
 
             $results = $this->zdb->execute($select);
 
@@ -146,7 +146,7 @@ class Event
         $this->end_date = $r->end_date;
         $this->creation_date = $r->creation_date;
         $this->open = (bool)$r->is_open;
-        $this->group = $r->id_group;
+        $this->group = (int)$r->id_group;
         $this->comment = $r->comment;
         $this->color = $r->color;
     }
@@ -181,8 +181,8 @@ class Event
                 $this->zdb->connection->rollBack();
             }
             Analog::log(
-                'Unable to delete event ' . $this->name .
-                ' (' . $this->id  . ') |' . $e->getMessage(),
+                'Unable to delete event ' . $this->name
+                . ' (' . $this->id . ') |' . $e->getMessage(),
                 Analog::ERROR
             );
             return false;
@@ -199,7 +199,7 @@ class Event
      */
     public function check(array $values): bool|array
     {
-        $this->errors = array();
+        $this->errors = [];
 
         if (empty($values['begin_date'])) {
             $this->errors[] = _T('Begin date is mandatory', 'events');
@@ -220,9 +220,9 @@ class Event
                         $this->$datefield = $d->format('Y-m-d');
                     } catch (\Exception $e) {
                         Analog::log(
-                            'Wrong date format. field: ' . $datefield .
-                            ', value: ' . $value . ', expected fmt: ' .
-                            __("Y-m-d") . ' | ' . $e->getMessage(),
+                            'Wrong date format. field: ' . $datefield
+                            . ', value: ' . $value . ', expected fmt: '
+                            . __("Y-m-d") . ' | ' . $e->getMessage(),
                             Analog::INFO
                         );
                         if ($datefield == 'begin_date') {
@@ -344,8 +344,8 @@ class Event
 
         if (count($this->errors) > 0) {
             Analog::log(
-                'Some errors has been threw attempting to edit/store an event' . "\n" .
-                print_r($this->errors, true),
+                'Some errors has been threw attempting to edit/store an event' . "\n"
+                . print_r($this->errors, true),
                 Analog::ERROR
             );
             return $this->errors;
@@ -369,7 +369,7 @@ class Event
 
         try {
             $this->zdb->connection->beginTransaction();
-            $values = array(
+            $values = [
                 'name'                  => $this->name,
                 'address'               => $this->address,
                 'zip'                   => $this->zip,
@@ -377,14 +377,14 @@ class Event
                 'country'               => ($this->country ?: new Expression('NULL')),
                 'begin_date'            => $this->begin_date,
                 'end_date'              => $this->end_date,
-                'is_open'               => ($this->open ?:
-                                                ($this->zdb->isPostgres() ? 'false' : 0)),
+                'is_open'               => ($this->open
+                                                ?: ($this->zdb->isPostgres() ? 'false' : 0)),
                 Group::PK               => ($this->group ?: new Expression('NULL')),
                 'comment'               => $this->comment,
                 'color'                 => $this->color
-            );
+            ];
 
-            if (!isset($this->id) || $this->id == '') {
+            if (empty($this->id)) {
                 //we're inserting a new event
                 $this->creation_date = date("Y-m-d H:i:s");
                 $values['creation_date'] = $this->creation_date;
@@ -524,8 +524,8 @@ class Event
         } catch (\Exception $e) {
             $this->zdb->connection->rollBack();
             Analog::log(
-                'Something went wrong :\'( | ' . $e->getMessage() . "\n" .
-                $e->getTraceAsString(),
+                'Something went wrong :\'( | ' . $e->getMessage() . "\n"
+                . $e->getTraceAsString(),
                 Analog::ERROR
             );
             throw $e;
@@ -736,7 +736,7 @@ class Event
      */
     protected function getTableName(): string
     {
-        return EVENTS_PREFIX  . self::TABLE;
+        return EVENTS_PREFIX . self::TABLE;
     }
 
     /**
@@ -821,10 +821,10 @@ class Event
     {
         $select = $this->zdb->select(EVENTS_PREFIX . Booking::TABLE, 'b');
         $select->columns(
-            array(
+            [
                 'count' => new Expression('SUM(b.number_people)'),
                 'is_paid'
-            )
+            ]
         );
         $select->where([
             self::PK    => $this->id,

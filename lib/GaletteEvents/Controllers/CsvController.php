@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright © 2003-2024 The Galette Team
+ * Copyright © 2003-2025 The Galette Team
  *
  * This file is part of Galette (https://galette.eu).
  *
@@ -47,7 +47,7 @@ class CsvController extends \Galette\Controllers\CsvController
      *
      * @return Response
      */
-    public function bookingsExport(Request $request, Response $response, int $id = null): Response
+    public function bookingsExport(Request $request, Response $response, ?int $id = null): Response
     {
         $post = $request->getParsedBody();
         $get = $request->getQueryParams();
@@ -164,10 +164,10 @@ class CsvController extends \Galette\Controllers\CsvController
                 $fp
             );
             fclose($fp);
-            $written[] = array(
+            $written[] = [
                 'name' => $filename,
                 'file' => $filepath
-            );
+            ];
         }
 
         $filepath = CsvOut::DEFAULT_DIRECTORY . $filename;
