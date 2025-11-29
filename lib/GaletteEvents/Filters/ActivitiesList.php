@@ -41,6 +41,7 @@ class ActivitiesList extends Pagination
     //filters
     private ?string $name_filter = null;
     private ?bool $active_filter = null;
+    private string $query;
 
     /** @var array<string> */
     protected array $list_fields = [

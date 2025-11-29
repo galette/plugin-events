@@ -50,6 +50,7 @@ class EventsList extends Pagination
     private ?string $lodging_filter = null;
     private ?string $open_filter = null;
     private bool $calendar_filter = false;
+    private string $query;
 
     /** @var array<string> */
     protected array $list_fields = [

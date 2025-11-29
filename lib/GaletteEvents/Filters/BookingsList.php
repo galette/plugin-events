@@ -51,6 +51,7 @@ class BookingsList extends Pagination
 
     /** @var array<int> */
     private array $selected;
+    private string $query;
 
     /** @var array<string> */
     protected array $list_fields = [
