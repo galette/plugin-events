@@ -236,10 +236,7 @@ class Bookings
                 $select->where(['b.' . Event::PK => $this->filters->event_filter]);
             }
 
-            if (
-                isset($this->filters->payment_type_filter)
-                && $this->filters->payment_type_filter != -1
-            ) {
+            if ($this->filters->payment_type_filter != -1) {
                 $select->where->equalTo(
                     'payment_method',
                     $this->filters->payment_type_filter
