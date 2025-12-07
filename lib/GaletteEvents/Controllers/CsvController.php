@@ -156,7 +156,7 @@ class CsvController extends \Galette\Controllers\CsvController
         $filepath = CsvOut::DEFAULT_DIRECTORY . $filename;
         $fp = fopen($filepath, 'w');
         if ($fp) {
-            $res = $csv->export(
+            $csv->export(
                 $list,
                 Csv::DEFAULT_SEPARATOR,
                 Csv::DEFAULT_QUOTE,
