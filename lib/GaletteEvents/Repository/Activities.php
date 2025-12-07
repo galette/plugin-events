@@ -198,9 +198,9 @@ class Activities extends Repository
     /**
      * Add default activities in database
      *
-     * @param boolean $check_first Check first if it seems initialized
+     * @param bool $check_first Check first if it seems initialized
      *
-     * @return boolean
+     * @return bool
      */
     public function installInit(bool $check_first = true): bool
     {

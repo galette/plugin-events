@@ -123,7 +123,7 @@ class Activity
     /**
      * Remove specified event
      *
-     * @return boolean
+     * @return bool
      */
     public function remove(): bool
     {
@@ -164,7 +164,7 @@ class Activity
      * @param array<string, mixed> $values All values to check, basically the $_POST array
      *                                     after sending the form
      *
-     * @return boolean
+     * @return bool
      */
     public function check(array $values): bool
     {
@@ -205,7 +205,7 @@ class Activity
     /**
      * Store the activity
      *
-     * @return boolean
+     * @return bool
      */
     public function store(): bool
     {
@@ -282,7 +282,7 @@ class Activity
     /**
      * Get event id
      *
-     * @return ?integer
+     * @return ?int
      */
     public function getId(): ?int
     {
@@ -302,8 +302,8 @@ class Activity
     /**
      * Get date
      *
-     * @param string  $prop      Property to use
-     * @param boolean $formatted Return date formatted, raw if false
+     * @param string $prop      Property to use
+     * @param bool   $formatted Return date formatted, raw if false
      *
      * @return string
      */
@@ -324,7 +324,7 @@ class Activity
     /**
      * Get creation date
      *
-     * @param boolean $formatted Return date formatted, raw if false
+     * @param bool $formatted Return date formatted, raw if false
      *
      * @return string
      */
@@ -336,7 +336,7 @@ class Activity
     /**
      * Is actvity active?
      *
-     * @return boolean
+     * @return bool
      */
     public function isActive(): bool
     {
@@ -366,7 +366,7 @@ class Activity
     /**
      * Count number of events using this Activity
      *
-     * @return integer
+     * @return int
      */
     public function countEvents(): int
     {
