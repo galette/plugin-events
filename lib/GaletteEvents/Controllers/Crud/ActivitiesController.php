@@ -79,10 +79,10 @@ class ActivitiesController extends AbstractPluginController
     /**
      * List page
      *
-     * @param Request             $request  PSR Request
-     * @param Response            $response PSR Response
-     * @param string|null         $option   One of 'page' or 'order'
-     * @param string|integer|null $value    Value of the option
+     * @param Request         $request  PSR Request
+     * @param Response        $response PSR Response
+     * @param string|null     $option   One of 'page' or 'order'
+     * @param string|int|null $value    Value of the option
      *
      * @return Response
      */
@@ -230,7 +230,6 @@ class ActivitiesController extends AbstractPluginController
         }
 
         $success_detected = [];
-        $warning_detected = [];
         $error_detected = [];
 
         // Validation
@@ -352,7 +351,7 @@ class ActivitiesController extends AbstractPluginController
      * @param array $args Route arguments
      * @param array $post POST values
      *
-     * @return boolean
+     * @return bool
      */
     protected function doDelete(array $args, array $post): bool
     {

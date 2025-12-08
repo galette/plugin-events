@@ -154,7 +154,7 @@ class Event
     /**
      * Remove specified event
      *
-     * @return boolean
+     * @return bool
      */
     public function remove(): bool
     {
@@ -361,7 +361,7 @@ class Event
     /**
      * Store the event
      *
-     * @return boolean
+     * @return bool
      */
     public function store(): bool
     {
@@ -535,7 +535,7 @@ class Event
     /**
      * Get event id
      *
-     * @return ?integer
+     * @return ?int
      */
     public function getId(): ?int
     {
@@ -595,7 +595,7 @@ class Event
     /**
      * Get event group
      *
-     * @return ?integer
+     * @return ?int
      */
     public function getGroup(): ?int
     {
@@ -620,8 +620,8 @@ class Event
     /**
      * Get date
      *
-     * @param string  $prop      Property to use
-     * @param boolean $formatted Return date formatted, raw if false
+     * @param string $prop      Property to use
+     * @param bool   $formatted Return date formatted, raw if false
      *
      * @return string
      */
@@ -638,7 +638,7 @@ class Event
     /**
      * Get creation date
      *
-     * @param boolean $formatted Return date formatted, raw if false
+     * @param bool $formatted Return date formatted, raw if false
      *
      * @return string
      */
@@ -650,7 +650,7 @@ class Event
     /**
      * Get begin date
      *
-     * @param boolean $formatted Return date formatted, raw if false
+     * @param bool $formatted Return date formatted, raw if false
      *
      * @return string
      */
@@ -662,7 +662,7 @@ class Event
     /**
      * Get end date
      *
-     * @param boolean $formatted Return date formatted, raw if false
+     * @param bool $formatted Return date formatted, raw if false
      *
      * @return string
      */
@@ -674,9 +674,9 @@ class Event
     /**
      * Is activity required
      *
-     * @param integer $activity Activity ID
+     * @param int $activity Activity ID
      *
-     * @return boolean
+     * @return bool
      */
     public function isActivityRequired(int $activity): bool
     {
@@ -686,9 +686,9 @@ class Event
     /**
      * Does current event propose activity
      *
-     * @param integer $activity Activity ID
+     * @param int $activity Activity ID
      *
-     * @return boolean
+     * @return bool
      */
     public function hasActivity(int $activity): bool
     {
@@ -699,7 +699,7 @@ class Event
      * Is event open?
      * Will return false once the begin date has been exceeded
      *
-     * @return boolean
+     * @return bool
      */
     public function isOpen(): bool
     {

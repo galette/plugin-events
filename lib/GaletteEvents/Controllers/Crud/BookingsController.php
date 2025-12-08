@@ -56,9 +56,9 @@ class BookingsController extends AbstractPluginController
     /**
      * Add page
      *
-     * @param Request      $request  PSR Request
-     * @param Response     $response PSR Response
-     * @param integer|null $id_adh   Member id
+     * @param Request  $request  PSR Request
+     * @param Response $response PSR Response
+     * @param int|null $id_adh   Member id
      *
      * @return Response
      */
@@ -86,10 +86,10 @@ class BookingsController extends AbstractPluginController
     /**
      * List page
      *
-     * @param Request             $request  PSR Request
-     * @param Response            $response PSR Response
-     * @param string|null         $option   One of 'page' or 'order'
-     * @param string|integer|null $value    Value of the option
+     * @param Request         $request  PSR Request
+     * @param Response        $response PSR Response
+     * @param string|null     $option   One of 'page' or 'order'
+     * @param string|int|null $value    Value of the option
      *
      * @return Response
      */
@@ -102,11 +102,11 @@ class BookingsController extends AbstractPluginController
     /**
      * List page
      *
-     * @param Request             $request  PSR Request
-     * @param Response            $response PSR Response
-     * @param string|integer      $event    Linked event. May be an event ID, 'all' or 'guess'.
-     * @param string|null         $option   One of 'page' or 'order'
-     * @param string|integer|null $value    Value of the option
+     * @param Request         $request  PSR Request
+     * @param Response        $response PSR Response
+     * @param string|int      $event    Linked event. May be an event ID, 'all' or 'guess'.
+     * @param string|null     $option   One of 'page' or 'order'
+     * @param string|int|null $value    Value of the option
      *
      * @return Response
      */
@@ -192,9 +192,9 @@ class BookingsController extends AbstractPluginController
     /**
      * Filtering
      *
-     * @param Request        $request  PSR Request
-     * @param Response       $response PSR Response
-     * @param string|integer $event    Linked event. May be an event ID, 'all' or 'guess'.
+     * @param Request    $request  PSR Request
+     * @param Response   $response PSR Response
+     * @param string|int $event    Linked event. May be an event ID, 'all' or 'guess'.
      *
      * @return Response
      */
@@ -635,7 +635,7 @@ class BookingsController extends AbstractPluginController
      * @param array $args Route arguments
      * @param array $post POST values
      *
-     * @return boolean
+     * @return bool
      */
     protected function doDelete(array $args, array $post): bool
     {

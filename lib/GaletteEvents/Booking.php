@@ -140,7 +140,7 @@ class Booking
     /**
      * Remove specified event
      *
-     * @return boolean
+     * @return bool
      */
     public function remove(): bool
     {
@@ -352,7 +352,7 @@ class Booking
     /**
      * Store the booking
      *
-     * @return boolean
+     * @return bool
      */
     public function store(): bool
     {
@@ -549,7 +549,7 @@ class Booking
     /**
      * Get event id
      *
-     * @return ?integer
+     * @return ?int
      */
     public function getId(): ?int
     {
@@ -559,7 +559,7 @@ class Booking
     /**
      * Get event id
      *
-     * @return ?integer
+     * @return ?int
      */
     public function getEventId(): ?int
     {
@@ -582,7 +582,7 @@ class Booking
     /**
      * Get member id
      *
-     * @return ?integer
+     * @return ?int
      */
     public function getMemberId(): ?int
     {
@@ -602,7 +602,7 @@ class Booking
     /**
      * Get date
      *
-     * @param boolean $formatted Return date formatted, raw if false
+     * @param bool $formatted Return date formatted, raw if false
      *
      * @return string
      */
@@ -619,7 +619,7 @@ class Booking
     /**
      * Is booking paid?
      *
-     * @return boolean
+     * @return bool
      */
     public function isPaid(): bool
     {
@@ -639,7 +639,7 @@ class Booking
     /**
      * Get payment method
      *
-     * @return integer
+     * @return int
      */
     public function getPaymentMethod(): int
     {
@@ -680,7 +680,7 @@ class Booking
     /**
      * Get number of persons
      *
-     * @return integer
+     * @return int
      */
     public function getNumberPeople(): int
     {
@@ -690,7 +690,7 @@ class Booking
     /**
      * Get creation date
      *
-     * @param boolean $formatted Return date formatted, raw if false
+     * @param bool $formatted Return date formatted, raw if false
      *
      * @return string
      */
@@ -707,7 +707,7 @@ class Booking
     /**
      * Set event
      *
-     * @param integer $event Event id
+     * @param int $event Event id
      *
      * @return self
      */
@@ -720,7 +720,7 @@ class Booking
     /**
      * Set member
      *
-     * @param integer $member Member id
+     * @param int $member Member id
      *
      * @return self
      */
@@ -755,7 +755,7 @@ class Booking
      *
      * @param int $activity Activity
      *
-     * @return boolean
+     * @return bool
      */
     public function has(int $activity): bool
     {
@@ -797,7 +797,7 @@ class Booking
     /**
      * Get row class related to current fee status
      *
-     * @param boolean $public we want the class for public pages
+     * @param bool $public we want the class for public pages
      *
      * @return string the class to apply
      */

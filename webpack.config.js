@@ -19,5 +19,10 @@ module.exports = {
   devtool: 'source-map',
   resolve: {
     extensions: [ '.js' ],
+  },
+   performance: {
+    hints: false,
+    maxEntrypointSize: 512000,
+    maxAssetSize: 512000
   }
 }

@@ -44,10 +44,10 @@ use GaletteEvents\Repository\Bookings;
 class BookingsList extends Pagination
 {
     //filters
-    private string|int|null $event_filter; //@phpstan-ignore-line
-    private int|string $paid_filter; //@phpstan-ignore-line
+    private string|int|null $event_filter;
+    private int|string $paid_filter;
     private int $payment_type_filter;
-    private string|int|null $group_filter; //@phpstan-ignore-line
+    private string|int|null $group_filter;
 
     /** @var array<int> */
     private array $selected;

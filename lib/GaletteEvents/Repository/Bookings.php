@@ -236,10 +236,7 @@ class Bookings
                 $select->where(['b.' . Event::PK => $this->filters->event_filter]);
             }
 
-            if (
-                isset($this->filters->payment_type_filter)
-                && $this->filters->payment_type_filter != -1
-            ) {
+            if ($this->filters->payment_type_filter != -1) {
                 $select->where->equalTo(
                     'payment_method',
                     $this->filters->payment_type_filter
@@ -327,7 +324,7 @@ class Bookings
      * @param string         $field_name Field name to order by
      * @param ?array<string> $fields     SELECTE'ed fields
      *
-     * @return boolean
+     * @return bool
      */
     private function canOrderBy(string $field_name, ?array $fields): bool
     {

@@ -39,8 +39,8 @@ use GaletteEvents\Repository\Activities;
 class ActivitiesList extends Pagination
 {
     //filters
-    private ?string $name_filter = null; //@phpstan-ignore-line
-    private ?bool $active_filter = null; //@phpstan-ignore-line
+    private ?string $name_filter = null;
+    private ?bool $active_filter = null;
     private string $query;
 
     /** @var array<string> */
