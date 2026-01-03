@@ -56,9 +56,7 @@ class BookingsController extends AbstractPluginController
     /**
      * Add page
      *
-     * @param Request  $request  PSR Request
-     * @param Response $response PSR Response
-     * @param int|null $id_adh   Member id
+     * @param int|null $id_adh Booking id
      */
     public function add(Request $request, Response $response, ?int $id_adh = null): Response
     {
@@ -67,9 +65,6 @@ class BookingsController extends AbstractPluginController
 
     /**
      * Add action
-     *
-     * @param Request  $request  PSR Request
-     * @param Response $response PSR Response
      */
     public function doAdd(Request $request, Response $response): Response
     {
@@ -82,10 +77,8 @@ class BookingsController extends AbstractPluginController
     /**
      * List page
      *
-     * @param Request         $request  PSR Request
-     * @param Response        $response PSR Response
-     * @param string|null     $option   One of 'page' or 'order'
-     * @param string|int|null $value    Value of the option
+     * @param string|null     $option One of 'page' or 'order'
+     * @param string|int|null $value  Value of the option
      */
     public function list(Request $request, Response $response, ?string $option = null, string|int|null $value = null): Response
     {
@@ -96,13 +89,11 @@ class BookingsController extends AbstractPluginController
     /**
      * List page
      *
-     * @param Request         $request  PSR Request
-     * @param Response        $response PSR Response
-     * @param string|int      $event    Linked event. May be an event ID, 'all' or 'guess'.
-     * @param string|null     $option   One of 'page' or 'order'
-     * @param string|int|null $value    Value of the option
+     * @param string|int      $event  Linked event. May be an event ID, 'all' or 'guess'.
+     * @param string|null     $option One of 'page' or 'order'
+     * @param string|int|null $value  Value of the option
      */
-    public function listBookings(Request $request, Response $response, string|int $event, ?string $option = null, string|int|null $value = null): Response
+    public function listBookings(Response $response, string|int $event, ?string $option = null, string|int|null $value = null): Response
     {
         $filters = $this->session->filter_bookings ?? new BookingsList();
 
@@ -169,9 +160,6 @@ class BookingsController extends AbstractPluginController
 
     /**
      * Filtering
-     *
-     * @param Request  $request  PSR Request
-     * @param Response $response PSR Response
      */
     public function filter(Request $request, Response $response): Response
     {
@@ -182,9 +170,7 @@ class BookingsController extends AbstractPluginController
     /**
      * Filtering
      *
-     * @param Request    $request  PSR Request
-     * @param Response   $response PSR Response
-     * @param string|int $event    Linked event. May be an event ID, 'all' or 'guess'.
+     * @param string|int $event Linked event. May be an event ID, 'all' or 'guess'.
      */
     public function filterBookings(Request $request, Response $response, string|int $event): Response
     {
@@ -242,9 +228,6 @@ class BookingsController extends AbstractPluginController
 
     /**
      * Batch actions handler
-     *
-     * @param Request  $request  PSR Request
-     * @param Response $response PSR Response
      */
     public function handleBatch(Request $request, Response $response): Response
     {
@@ -338,11 +321,9 @@ class BookingsController extends AbstractPluginController
     /**
      * Edit page
      *
-     * @param Request  $request  PSR Request
-     * @param Response $response PSR Response
-     * @param int|null $id       Model id
-     * @param string   $action   Action
-     * @param int|null $id_adh   Member ID (for add)
+     * @param int|null $id     Model id
+     * @param string   $action Action
+     * @param int|null $id_adh Member ID (for add)
      */
     public function edit(Request $request, Response $response, ?int $id = null, string $action = 'edit', ?int $id_adh = null): Response
     {
@@ -443,10 +424,8 @@ class BookingsController extends AbstractPluginController
     /**
      * Edit action
      *
-     * @param Request  $request  PSR Request
-     * @param Response $response PSR Response
-     * @param null|int $id       Model id for edit
-     * @param string   $action   Either add or edit
+     * @param null|int $id     Model id for edit
+     * @param string   $action Either add or edit
      */
     public function doEdit(Request $request, Response $response, ?int $id = null, string $action = 'edit'): Response
     {
@@ -567,7 +546,7 @@ class BookingsController extends AbstractPluginController
     /**
      * Get redirection URI
      *
-     * @param array $args Route arguments
+     * @param array<string,mixed> $args Route arguments
      */
     public function redirectUri(array $args): string
     {
@@ -577,7 +556,7 @@ class BookingsController extends AbstractPluginController
     /**
      * Get form URI
      *
-     * @param array $args Route arguments
+     * @param array<string,mixed> $args Route arguments
      */
     public function formUri(array $args): string
     {
@@ -590,7 +569,7 @@ class BookingsController extends AbstractPluginController
     /**
      * Get confirmation removal page title
      *
-     * @param array $args Route arguments
+     * @param array<string,mixed> $args Route arguments
      */
     public function confirmRemoveTitle(array $args): string
     {
@@ -608,8 +587,8 @@ class BookingsController extends AbstractPluginController
     /**
      * Remove object
      *
-     * @param array $args Route arguments
-     * @param array $post POST values
+     * @param array<string,mixed> $args Route arguments
+     * @param array<string,mixed> $post POST values
      */
     protected function doDelete(array $args, array $post): bool
     {

@@ -49,9 +49,6 @@ class ActivitiesController extends AbstractPluginController
 
     /**
      * Add page
-     *
-     * @param Request  $request  PSR Request
-     * @param Response $response PSR Response
      */
     public function add(Request $request, Response $response): Response
     {
@@ -60,9 +57,6 @@ class ActivitiesController extends AbstractPluginController
 
     /**
      * Add action
-     *
-     * @param Request  $request  PSR Request
-     * @param Response $response PSR Response
      */
     public function doAdd(Request $request, Response $response): Response
     {
@@ -75,10 +69,8 @@ class ActivitiesController extends AbstractPluginController
     /**
      * List page
      *
-     * @param Request         $request  PSR Request
-     * @param Response        $response PSR Response
-     * @param string|null     $option   One of 'page' or 'order'
-     * @param string|int|null $value    Value of the option
+     * @param string|null     $option One of 'page' or 'order'
+     * @param string|int|null $value  Value of the option
      */
     public function list(Request $request, Response $response, ?string $option = null, string|int|null $value = null): Response
     {
@@ -124,9 +116,6 @@ class ActivitiesController extends AbstractPluginController
 
     /**
      * Filtering
-     *
-     * @param Request  $request  PSR Request
-     * @param Response $response PSR Response
      */
     public function filter(Request $request, Response $response): Response
     {
@@ -160,10 +149,8 @@ class ActivitiesController extends AbstractPluginController
     /**
      * Edit page
      *
-     * @param Request  $request  PSR Request
-     * @param Response $response PSR Response
-     * @param int|null $id       Model id
-     * @param string   $action   Action
+     * @param int|null $id     Model id
+     * @param string   $action Action
      */
     public function edit(Request $request, Response $response, ?int $id = null, string $action = 'edit'): Response
     {
@@ -204,10 +191,8 @@ class ActivitiesController extends AbstractPluginController
     /**
      * Edit action
      *
-     * @param Request  $request  PSR Request
-     * @param Response $response PSR Response
-     * @param null|int $id       Model id for edit
-     * @param string   $action   Either add or edit
+     * @param null|int $id     Model id for edit
+     * @param string   $action Either add or edit
      */
     public function doEdit(Request $request, Response $response, ?int $id = null, string $action = 'edit'): Response
     {
@@ -292,7 +277,7 @@ class ActivitiesController extends AbstractPluginController
     /**
      * Get redirection URI
      *
-     * @param array $args Route arguments
+     * @param array<string,mixed> $args Route arguments
      */
     public function redirectUri(array $args): string
     {
@@ -302,7 +287,7 @@ class ActivitiesController extends AbstractPluginController
     /**
      * Get form URI
      *
-     * @param array $args Route arguments
+     * @param array<string,mixed> $args Route arguments
      */
     public function formUri(array $args): string
     {
@@ -315,7 +300,7 @@ class ActivitiesController extends AbstractPluginController
     /**
      * Get confirmation removal page title
      *
-     * @param array $args Route arguments
+     * @param array<string,mixed> $args Route arguments
      */
     public function confirmRemoveTitle(array $args): string
     {
@@ -330,8 +315,8 @@ class ActivitiesController extends AbstractPluginController
     /**
      * Remove object
      *
-     * @param array $args Route arguments
-     * @param array $post POST values
+     * @param array<string,mixed> $args Route arguments
+     * @param array<string,mixed> $post POST values
      */
     protected function doDelete(array $args, array $post): bool
     {

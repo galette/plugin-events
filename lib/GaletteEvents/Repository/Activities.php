@@ -106,8 +106,8 @@ class Activities extends Repository
     /**
      * Builds the order clause
      *
-     * @param ?array $fields Fields list to ensure ORDER clause
-     *                       references selected fields. Optional.
+     * @param ?array<string> $fields Fields list to ensure ORDER clause
+     *                               references selected fields. Optional.
      *
      * @return array<string> SQL ORDER clauses
      */

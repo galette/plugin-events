@@ -41,9 +41,7 @@ class CsvController extends \Galette\Controllers\CsvController
     /**
      * Bookings CSV exports
      *
-     * @param Request  $request  PSR Request
-     * @param Response $response PSR Response
-     * @param ?int     $id       Event ID, if any
+     * @param ?int $id Event ID, if any
      */
     public function bookingsExport(Request $request, Response $response, ?int $id = null): Response
     {
