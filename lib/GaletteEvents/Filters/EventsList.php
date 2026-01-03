@@ -33,8 +33,8 @@ use GaletteEvents\Repository\Events;
  *
  * @author Johan Cwiklinski <johan@x-tnd.be>
  *
- * @property string $query
- * @property bool $calendar_filter
+ * @property string  $query
+ * @property bool    $calendar_filter
  * @property ?string $start_date_filter
  * @property ?string $raw_start_date_filter
  */
@@ -86,8 +86,6 @@ class EventsList extends Pagination
 
     /**
      * Return the default direction for ordering
-     *
-     * @return SQLOrder
      */
     protected function getDefaultDirection(): SQLOrder
     {
@@ -96,8 +94,6 @@ class EventsList extends Pagination
 
     /**
      * Reinit default parameters
-     *
-     * @return void
      */
     public function reinit(): void
     {
@@ -167,8 +163,6 @@ class EventsList extends Pagination
      *
      * @param string $name  name of the property we want to assign a value to
      * @param mixed  $value a relevant value for the property
-     *
-     * @return void
      */
     public function __set(string $name, mixed $value): void
     {

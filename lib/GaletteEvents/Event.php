@@ -131,8 +131,6 @@ class Event
      * Populate object from a resultset row
      *
      * @param ArrayObject<string, int|string> $r the resultset row
-     *
-     * @return void
      */
     private function loadFromRS(ArrayObject $r): void
     {
@@ -153,8 +151,6 @@ class Event
 
     /**
      * Remove specified event
-     *
-     * @return bool
      */
     public function remove(): bool
     {
@@ -360,8 +356,6 @@ class Event
 
     /**
      * Store the event
-     *
-     * @return bool
      */
     public function store(): bool
     {
@@ -534,8 +528,6 @@ class Event
 
     /**
      * Get event id
-     *
-     * @return ?int
      */
     public function getId(): ?int
     {
@@ -544,8 +536,6 @@ class Event
 
     /**
      * Get event name
-     *
-     * @return ?string
      */
     public function getName(): ?string
     {
@@ -554,8 +544,6 @@ class Event
 
     /**
      * Get event address
-     *
-     * @return ?string
      */
     public function getAddress(): ?string
     {
@@ -564,8 +552,6 @@ class Event
 
     /**
      * Get event zip
-     *
-     * @return ?string
      */
     public function getZip(): ?string
     {
@@ -574,8 +560,6 @@ class Event
 
     /**
      * Get event town
-     *
-     * @return ?string
      */
     public function getTown(): ?string
     {
@@ -584,8 +568,6 @@ class Event
 
     /**
      * Get event country
-     *
-     * @return ?string
      */
     public function getCountry(): ?string
     {
@@ -594,8 +576,6 @@ class Event
 
     /**
      * Get event group
-     *
-     * @return ?int
      */
     public function getGroup(): ?int
     {
@@ -604,8 +584,6 @@ class Event
 
     /**
      * Get group name
-     *
-     * @return string
      */
     public function getGroupName(): string
     {
@@ -622,8 +600,6 @@ class Event
      *
      * @param string $prop      Property to use
      * @param bool   $formatted Return date formatted, raw if false
-     *
-     * @return string
      */
     private function getDate(string $prop, bool $formatted = true): string
     {
@@ -639,8 +615,6 @@ class Event
      * Get creation date
      *
      * @param bool $formatted Return date formatted, raw if false
-     *
-     * @return string
      */
     public function getCreationDate(bool $formatted = true): string
     {
@@ -651,8 +625,6 @@ class Event
      * Get begin date
      *
      * @param bool $formatted Return date formatted, raw if false
-     *
-     * @return string
      */
     public function getBeginDate(bool $formatted = true): string
     {
@@ -663,8 +635,6 @@ class Event
      * Get end date
      *
      * @param bool $formatted Return date formatted, raw if false
-     *
-     * @return string
      */
     public function getEndDate(bool $formatted = true): string
     {
@@ -675,8 +645,6 @@ class Event
      * Is activity required
      *
      * @param int $activity Activity ID
-     *
-     * @return bool
      */
     public function isActivityRequired(int $activity): bool
     {
@@ -687,8 +655,6 @@ class Event
      * Does current event propose activity
      *
      * @param int $activity Activity ID
-     *
-     * @return bool
      */
     public function hasActivity(int $activity): bool
     {
@@ -698,8 +664,6 @@ class Event
     /**
      * Is event open?
      * Will return false once the begin date has been exceeded
-     *
-     * @return bool
      */
     public function isOpen(): bool
     {
@@ -721,8 +685,6 @@ class Event
      * Set name
      *
      * @param string $name Event name
-     *
-     * @return void
      */
     public function setName(string $name): void
     {
@@ -731,8 +693,6 @@ class Event
 
     /**
      * Get table's name
-     *
-     * @return string
      */
     protected function getTableName(): string
     {
@@ -761,8 +721,6 @@ class Event
 
     /**
      * Load linked activities
-     *
-     * @return void
      */
     public function loadActivities(): void
     {
@@ -794,8 +752,6 @@ class Event
 
     /**
      * Get comment
-     *
-     * @return string
      */
     public function getComment(): string
     {
@@ -804,8 +760,6 @@ class Event
 
     /**
      * Get color
-     *
-     * @return string
      */
     public function getColor(): string
     {
@@ -814,8 +768,6 @@ class Event
 
     /**
      * Count attendees per event
-     *
-     * @return ResultSet
      */
     public function countAttendees(): ResultSet
     {
@@ -841,8 +793,6 @@ class Event
      * Can member edit event
      *
      * @param Login $login Login instance
-     *
-     * @return bool
      */
     public function canEdit(Login $login): bool
     {
@@ -866,8 +816,6 @@ class Event
      * Can memebr create an event
      *
      * @param Login $login Login instance
-     *
-     * @return bool
      */
     public function canCreate(Login $login): bool
     {
@@ -876,8 +824,6 @@ class Event
 
     /**
      * Get foreground contrasted color for current background color
-     *
-     * @return string
      */
     public function getForegoundColor(): string
     {

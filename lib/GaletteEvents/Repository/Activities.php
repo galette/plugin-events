@@ -135,8 +135,6 @@ class Activities extends Repository
      * Count events from the query
      *
      * @param Select $select Original select
-     *
-     * @return void
      */
     private function proceedCount(Select $select): void
     {
@@ -187,8 +185,6 @@ class Activities extends Repository
 
     /**
      * Get count for current query
-     *
-     * @return int
      */
     public function getCount(): int
     {
@@ -199,8 +195,6 @@ class Activities extends Repository
      * Add default activities in database
      *
      * @param bool $check_first Check first if it seems initialized
-     *
-     * @return bool
      */
     public function installInit(bool $check_first = true): bool
     {

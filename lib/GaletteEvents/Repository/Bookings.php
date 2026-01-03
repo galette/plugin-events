@@ -167,8 +167,6 @@ class Bookings
      * Calculate sum of all selected contributions
      *
      * @param Select $select Original select
-     *
-     * @return void
      */
     private function calculateSum(Select $select): void
     {
@@ -211,8 +209,6 @@ class Bookings
      * Builds where clause, for filtering on simple list mode
      *
      * @param Select $select Original select
-     *
-     * @return void
      */
     private function buildWhereClause(Select $select): void
     {
@@ -323,8 +319,6 @@ class Bookings
      *
      * @param string         $field_name Field name to order by
      * @param ?array<string> $fields     SELECTE'ed fields
-     *
-     * @return bool
      */
     private function canOrderBy(string $field_name, ?array $fields): bool
     {
@@ -385,8 +379,6 @@ class Bookings
      * Count events from the query
      *
      * @param Select $select Original select
-     *
-     * @return void
      */
     private function proceedCount(Select $select): void
     {
@@ -437,8 +429,6 @@ class Bookings
 
     /**
      * Get count for current query
-     *
-     * @return int
      */
     public function getCount(): int
     {
@@ -447,8 +437,6 @@ class Bookings
 
     /**
      * Get sum
-     *
-     * @return double
      */
     public function getSum(): float
     {

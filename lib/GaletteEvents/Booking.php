@@ -119,8 +119,6 @@ class Booking
      * Populate object from a resultset row
      *
      * @param ArrayObject<string, int|string> $r the resultset row
-     *
-     * @return void
      */
     private function loadFromRS(ArrayObject $r): void
     {
@@ -139,8 +137,6 @@ class Booking
 
     /**
      * Remove specified event
-     *
-     * @return bool
      */
     public function remove(): bool
     {
@@ -351,8 +347,6 @@ class Booking
 
     /**
      * Store the booking
-     *
-     * @return bool
      */
     public function store(): bool
     {
@@ -548,8 +542,6 @@ class Booking
 
     /**
      * Get event id
-     *
-     * @return ?int
      */
     public function getId(): ?int
     {
@@ -558,8 +550,6 @@ class Booking
 
     /**
      * Get event id
-     *
-     * @return ?int
      */
     public function getEventId(): ?int
     {
@@ -568,8 +558,6 @@ class Booking
 
     /**
      * Get event
-     *
-     * @return ?Event
      */
     public function getEvent(): ?Event
     {
@@ -581,8 +569,6 @@ class Booking
 
     /**
      * Get member id
-     *
-     * @return ?int
      */
     public function getMemberId(): ?int
     {
@@ -591,8 +577,6 @@ class Booking
 
     /**
      * Get member
-     *
-     * @return Adherent
      */
     public function getMember(): Adherent
     {
@@ -603,8 +587,6 @@ class Booking
      * Get date
      *
      * @param bool $formatted Return date formatted, raw if false
-     *
-     * @return string
      */
     public function getDate(bool $formatted = true): string
     {
@@ -618,8 +600,6 @@ class Booking
 
     /**
      * Is booking paid?
-     *
-     * @return bool
      */
     public function isPaid(): bool
     {
@@ -628,8 +608,6 @@ class Booking
 
     /**
      * Get amount
-     *
-     * @return ?float
      */
     public function getAmount(): ?float
     {
@@ -638,8 +616,6 @@ class Booking
 
     /**
      * Get payment method
-     *
-     * @return int
      */
     public function getPaymentMethod(): int
     {
@@ -648,8 +624,6 @@ class Booking
 
     /**
      * Get payment method name
-     *
-     * @return string
      */
     public function getPaymentMethodName(): string
     {
@@ -659,8 +633,6 @@ class Booking
 
     /**
      * Get bank name
-     *
-     * @return ?string
      */
     public function getBankName(): ?string
     {
@@ -669,8 +641,6 @@ class Booking
 
     /**
      * Get check number
-     *
-     * @return ?string
      */
     public function getCheckNumber(): ?string
     {
@@ -679,8 +649,6 @@ class Booking
 
     /**
      * Get number of persons
-     *
-     * @return int
      */
     public function getNumberPeople(): int
     {
@@ -691,8 +659,6 @@ class Booking
      * Get creation date
      *
      * @param bool $formatted Return date formatted, raw if false
-     *
-     * @return string
      */
     public function getCreationDate(bool $formatted = true): string
     {
@@ -708,8 +674,6 @@ class Booking
      * Set event
      *
      * @param int $event Event id
-     *
-     * @return self
      */
     public function setEvent(int $event): self
     {
@@ -721,8 +685,6 @@ class Booking
      * Set member
      *
      * @param int $member Member id
-     *
-     * @return self
      */
     public function setMember(int $member): self
     {
@@ -732,8 +694,6 @@ class Booking
 
     /**
      * Get table's name
-     *
-     * @return string
      */
     protected function getTableName(): string
     {
@@ -742,8 +702,6 @@ class Booking
 
     /**
      * Get comment
-     *
-     * @return string
      */
     public function getComment(): string
     {
@@ -754,8 +712,6 @@ class Booking
      * Has Activity
      *
      * @param int $activity Activity
-     *
-     * @return bool
      */
     public function has(int $activity): bool
     {
@@ -764,8 +720,6 @@ class Booking
 
     /**
      * Load linked activities
-     *
-     * @return void
      */
     public function loadActivities(): void
     {

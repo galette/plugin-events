@@ -33,11 +33,11 @@ use GaletteEvents\Repository\Bookings;
  *
  * @author Johan Cwiklinski <johan@x-tnd.be>
  *
- * @property string $query
+ * @property string          $query
  * @property string|int|null $event_filter
- * @property int|string $paid_filter
- * @property int $payment_type_filter
- * @property array<string> $selected
+ * @property int|string      $paid_filter
+ * @property int             $payment_type_filter
+ * @property array<string>   $selected
  * @property string|int|null $group_filter
  */
 
@@ -82,8 +82,6 @@ class BookingsList extends Pagination
 
     /**
      * Return the default direction for ordering
-     *
-     * @return SQLOrder
      */
     protected function getDefaultDirection(): SQLOrder
     {
@@ -92,8 +90,6 @@ class BookingsList extends Pagination
 
     /**
      * Reinit default parameters
-     *
-     * @return void
      */
     public function reinit(): void
     {
@@ -136,8 +132,6 @@ class BookingsList extends Pagination
      *
      * @param string $name  name of the property we want to assign a value to
      * @param mixed  $value a relevant value for the property
-     *
-     * @return void
      */
     public function __set(string $name, mixed $value): void
     {
@@ -176,8 +170,6 @@ class BookingsList extends Pagination
      * Override to add "event" parameter
      *
      * @param int $page Page
-     *
-     * @return string
      */
     protected function getHref(int $page): string
     {

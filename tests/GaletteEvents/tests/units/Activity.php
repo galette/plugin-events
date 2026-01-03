@@ -23,7 +23,7 @@ declare(strict_types=1);
 
 namespace GaletteEvents\tests\units;
 
-use Galette\GaletteTestCase;
+use Galette\Tests\GaletteTestCase;
 
 use function PHPUnit\Framework\assertSame;
 
@@ -38,8 +38,6 @@ class Activity extends GaletteTestCase
 
     /**
      * Cleanup after each test method
-     *
-     * @return void
      */
     public function tearDown(): void
     {
@@ -50,8 +48,6 @@ class Activity extends GaletteTestCase
 
     /**
      * Test empty
-     *
-     * @return void
      */
     public function testEmpty(): void
     {
@@ -67,8 +63,6 @@ class Activity extends GaletteTestCase
 
     /**
      * Test add and update
-     *
-     * @return void
      */
     public function testCrud(): void
     {
@@ -161,8 +155,6 @@ class Activity extends GaletteTestCase
 
     /**
      * Test load error
-     *
-     * @return void
      */
     public function testLoadError(): void
     {

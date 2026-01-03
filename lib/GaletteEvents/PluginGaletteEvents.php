@@ -198,8 +198,6 @@ class PluginGaletteEvents extends GalettePlugin
 
     /**
      * Get plugin upcoming events
-     *
-     * @return ?Entry
      */
     public function getNews(): ?Entry
     {
@@ -229,8 +227,6 @@ class PluginGaletteEvents extends GalettePlugin
 
     /**
      * Is the plugin fully installed (including database, extra configuration, etc)?
-     *
-     * @return bool
      */
     public function isInstalled(): bool
     {

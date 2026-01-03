@@ -274,8 +274,6 @@ class Events
      *
      * @param string         $field_name Field name to order by
      * @param ?array<string> $fields     SELECTE'ed fields
-     *
-     * @return bool
      */
     private function canOrderBy(string $field_name, ?array $fields = null): bool
     {
@@ -330,8 +328,6 @@ class Events
      * Count events from the query
      *
      * @param Select $select Original select
-     *
-     * @return void
      */
     private function proceedCount(Select $select): void
     {
@@ -385,8 +381,6 @@ class Events
 
     /**
      * Get count for current query
-     *
-     * @return int
      */
     public function getCount(): int
     {

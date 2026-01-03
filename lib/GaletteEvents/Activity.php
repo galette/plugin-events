@@ -108,8 +108,6 @@ class Activity
      * Populate object from a resultset row
      *
      * @param ArrayObject<string, string|int> $r the resultset row
-     *
-     * @return void
      */
     private function loadFromRS(ArrayObject $r): void
     {
@@ -122,8 +120,6 @@ class Activity
 
     /**
      * Remove specified event
-     *
-     * @return bool
      */
     public function remove(): bool
     {
@@ -163,8 +159,6 @@ class Activity
      *
      * @param array<string, mixed> $values All values to check, basically the $_POST array
      *                                     after sending the form
-     *
-     * @return bool
      */
     public function check(array $values): bool
     {
@@ -204,8 +198,6 @@ class Activity
 
     /**
      * Store the activity
-     *
-     * @return bool
      */
     public function store(): bool
     {
@@ -281,8 +273,6 @@ class Activity
 
     /**
      * Get event id
-     *
-     * @return ?int
      */
     public function getId(): ?int
     {
@@ -291,8 +281,6 @@ class Activity
 
     /**
      * Get event name
-     *
-     * @return string
      */
     public function getName(): string
     {
@@ -304,8 +292,6 @@ class Activity
      *
      * @param string $prop      Property to use
      * @param bool   $formatted Return date formatted, raw if false
-     *
-     * @return string
      */
     private function getDate(string $prop, bool $formatted = true): string
     {
@@ -325,8 +311,6 @@ class Activity
      * Get creation date
      *
      * @param bool $formatted Return date formatted, raw if false
-     *
-     * @return string
      */
     public function getCreationDate(bool $formatted = true): string
     {
@@ -335,8 +319,6 @@ class Activity
 
     /**
      * Is actvity active?
-     *
-     * @return bool
      */
     public function isActive(): bool
     {
@@ -345,8 +327,6 @@ class Activity
 
     /**
      * Get table's name
-     *
-     * @return string
      */
     protected function getTableName(): string
     {
@@ -355,8 +335,6 @@ class Activity
 
     /**
      * Get comment
-     *
-     * @return string
      */
     public function getComment(): string
     {
@@ -365,8 +343,6 @@ class Activity
 
     /**
      * Count number of events using this Activity
-     *
-     * @return int
      */
     public function countEvents(): int
     {

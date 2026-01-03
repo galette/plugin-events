@@ -38,7 +38,6 @@ use DI\Attribute\Inject;
  *
  * @category  Controllers
  * @name      EventsController
- * @package   GaletteEvents
  * @author    Johan Cwiklinski <johan@x-tnd.be>
  * @copyright 2021-2025 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
@@ -61,8 +60,6 @@ class EventsController extends AbstractPluginController
      *
      * @param Request  $request  PSR Request
      * @param Response $response PSR Response
-     *
-     * @return Response
      */
     public function add(Request $request, Response $response): Response
     {
@@ -74,8 +71,6 @@ class EventsController extends AbstractPluginController
      *
      * @param Request  $request  PSR Request
      * @param Response $response PSR Response
-     *
-     * @return Response
      */
     public function doAdd(Request $request, Response $response): Response
     {
@@ -92,8 +87,6 @@ class EventsController extends AbstractPluginController
      * @param Response        $response PSR Response
      * @param string|null     $option   One of 'page' or 'order'
      * @param string|int|null $value    Value of the option
-     *
-     * @return Response
      */
     public function list(Request $request, Response $response, ?string $option = null, string|int|null $value = null): Response
     {
@@ -144,8 +137,6 @@ class EventsController extends AbstractPluginController
      * @param Response        $response PSR Response
      * @param string|null     $option   One of 'page' or 'order'
      * @param string|int|null $value    Value of the option
-     *
-     * @return Response
      */
     public function calendar(
         Request $request,
@@ -207,8 +198,6 @@ class EventsController extends AbstractPluginController
      *
      * @param Request  $request  PSR Request
      * @param Response $response PSR Response
-     *
-     * @return Response
      */
     public function ajaxCalendar(Request $request, Response $response): Response
     {
@@ -228,8 +217,6 @@ class EventsController extends AbstractPluginController
      *
      * @param Request  $request  PSR Request
      * @param Response $response PSR Response
-     *
-     * @return Response
      */
     public function filter(Request $request, Response $response): Response
     {
@@ -267,8 +254,6 @@ class EventsController extends AbstractPluginController
      * @param Response $response PSR Response
      * @param int|null $id       Model id
      * @param string   $action   Action
-     *
-     * @return Response
      */
     public function edit(Request $request, Response $response, ?int $id = null, string $action = 'edit'): Response
     {
@@ -335,8 +320,6 @@ class EventsController extends AbstractPluginController
      * @param Response $response PSR Response
      * @param null|int $id       Model id for edit
      * @param string   $action   Either add or edit
-     *
-     * @return Response
      */
     public function doEdit(Request $request, Response $response, ?int $id = null, string $action = 'edit'): Response
     {
@@ -466,8 +449,6 @@ class EventsController extends AbstractPluginController
      * Get redirection URI
      *
      * @param array $args Route arguments
-     *
-     * @return string
      */
     public function redirectUri(array $args): string
     {
@@ -478,8 +459,6 @@ class EventsController extends AbstractPluginController
      * Get form URI
      *
      * @param array $args Route arguments
-     *
-     * @return string
      */
     public function formUri(array $args): string
     {
@@ -493,8 +472,6 @@ class EventsController extends AbstractPluginController
      * Get confirmation removal page title
      *
      * @param array $args Route arguments
-     *
-     * @return string
      */
     public function confirmRemoveTitle(array $args): string
     {
@@ -511,8 +488,6 @@ class EventsController extends AbstractPluginController
      *
      * @param array $args Route arguments
      * @param array $post POST values
-     *
-     * @return bool
      */
     protected function doDelete(array $args, array $post): bool
     {
