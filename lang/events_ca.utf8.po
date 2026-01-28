@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2025-08-17 08:54+0200\n"
-"PO-Revision-Date: 2026-01-28 11:22+0000\n"
+"PO-Revision-Date: 2026-01-28 11:39+0000\n"
 "Last-Translator: Laura Quintana Marín <2001lauraquintana@gmail.com>\n"
 "Language-Team: Catalan <https://hosted.weblate.org/projects/galette/events-"
 "plugin/ca/>\n"
@@ -332,7 +332,7 @@ msgstr ""
 #: ../tempcache/event.html.twig:85 ../tempcache/activities.html.twig:117
 #: ../tempcache/events.html.twig:117 ../tempcache/activity.html.twig:85
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #: ../tempcache/event.html.twig:91
 msgid "Color"
@@ -524,7 +524,7 @@ msgstr ""
 
 #: ../tempcache/activities.html.twig:117 ../tempcache/activities.html.twig:175
 msgid "Creation date"
-msgstr ""
+msgstr "Data de creació"
 
 #: ../tempcache/activities.html.twig:117 ../tempcache/activities.html.twig:187
 #: ../tempcache/activity.html.twig:78
