@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2025-08-17 08:54+0200\n"
-"PO-Revision-Date: 2026-01-28 11:39+0000\n"
+"PO-Revision-Date: 2026-01-28 15:00+0000\n"
 "Last-Translator: Laura Quintana Marín <2001lauraquintana@gmail.com>\n"
 "Language-Team: Catalan <https://hosted.weblate.org/projects/galette/events-"
 "plugin/ca/>\n"
@@ -192,7 +192,7 @@ msgstr ""
 #: ../lib/GaletteEvents/Controllers/CsvController.php:96
 #: ../tempcache/booking.html.twig:308
 msgid "Amount"
-msgstr ""
+msgstr "Quantitat"
 
 #: ../lib/GaletteEvents/Controllers/CsvController.php:98
 #: ../tempcache/booking.html.twig:320
@@ -256,7 +256,7 @@ msgstr ""
 
 #: ../lib/GaletteEvents/Event.php:231 ../tempcache/event.html.twig:103
 msgid "End date"
-msgstr ""
+msgstr "Data de finalització"
 
 #: ../lib/GaletteEvents/Event.php:249
 msgid "End date must be later or equal to begin date"
@@ -357,16 +357,16 @@ msgstr ""
 
 #: ../tempcache/event.html.twig:152
 msgid "Address"
-msgstr ""
+msgstr "Direcció"
 
 #: ../tempcache/event.html.twig:164 ../tempcache/events.html.twig:117
 #: ../tempcache/events.html.twig:197
 msgid "Town"
-msgstr ""
+msgstr "Ciutat"
 
 #: ../tempcache/event.html.twig:170
 msgid "Country"
-msgstr ""
+msgstr "País"
 
 #: ../tempcache/event.html.twig:204
 msgid "Choose an activity to add"
@@ -386,7 +386,7 @@ msgstr ""
 
 #: ../tempcache/event.html.twig:327
 msgid "Required"
-msgstr ""
+msgstr "Obligatori"
 
 #: ../tempcache/event.html.twig:344
 msgid "No activity available in the database."
@@ -537,7 +537,7 @@ msgstr ""
 
 #: ../tempcache/activities.html.twig:200 ../tempcache/activities.html.twig:215
 msgid "Inactive"
-msgstr ""
+msgstr "Inactiu"
 
 #: ../tempcache/activities.html.twig:225 ../tempcache/events.html.twig:273
 #, php-format
