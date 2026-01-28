@@ -1,12 +1,13 @@
 # Pol Casares Civit <pol.casares@e-campus.uab.cat>, 2020.
 # Queralt Garrigos <garrigosqueralt@gmail.com>, 2022.
+# Laura Quintana Marín <2001lauraquintana@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2025-08-17 08:54+0200\n"
-"PO-Revision-Date: 2022-01-13 09:53+0000\n"
-"Last-Translator: Queralt Garrigos <garrigosqueralt@gmail.com>\n"
+"PO-Revision-Date: 2026-01-28 11:22+0000\n"
+"Last-Translator: Laura Quintana Marín <2001lauraquintana@gmail.com>\n"
 "Language-Team: Catalan <https://hosted.weblate.org/projects/galette/events-"
 "plugin/ca/>\n"
 "Language: ca\n"
@@ -14,21 +15,21 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.10.1\n"
+"X-Generator: Weblate 5.16-dev\n"
 
 #: ../lib/GaletteEvents/Booking.php:192
 msgid "Event is mandatory"
-msgstr ""
+msgstr "L'esdeveniment és obligatori"
 
 #. TRANS: %1$s is activity name
 #: ../lib/GaletteEvents/Booking.php:204
 #, php-format
 msgid "%1$s is mandatory for this event!"
-msgstr ""
+msgstr "%1$s és obligatori per a aquest esdeveniment!"
 
 #: ../lib/GaletteEvents/Booking.php:239
 msgid "Please specify amount if booking has been paid ;)"
-msgstr ""
+msgstr "Indiqueu l'import si la reserva ja s'ha pagat ;)"
 
 #: ../lib/GaletteEvents/Booking.php:262
 msgid "Member is mandatory"
@@ -108,7 +109,7 @@ msgstr ""
 
 #: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:192
 msgid "Activity"
-msgstr ""
+msgstr "Activitat"
 
 #: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:253
 msgid "New activity has been successfully added."
@@ -134,7 +135,7 @@ msgstr ""
 
 #: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:185
 msgid "Javascript libraries has not been built!"
-msgstr ""
+msgstr "Les biblioteques de JavaScript no s'han construït!"
 
 #: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:194
 #: ../lib/GaletteEvents/PluginGaletteEvents.php:137
@@ -289,7 +290,7 @@ msgstr ""
 #: ../lib/GaletteEvents/PluginGaletteEvents.php:67
 #: ../tempcache/activities.html.twig:117 ../tempcache/activities.html.twig:181
 msgid "Events"
-msgstr ""
+msgstr "Esdeveniments"
 
 #: ../lib/GaletteEvents/PluginGaletteEvents.php:74
 #: ../lib/GaletteEvents/PluginGaletteEvents.php:136
