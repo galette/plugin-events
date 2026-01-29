@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2025-08-17 08:54+0200\n"
-"PO-Revision-Date: 2026-01-28 15:00+0000\n"
+"PO-Revision-Date: 2026-01-30 09:01+0000\n"
 "Last-Translator: Laura Quintana Marín <2001lauraquintana@gmail.com>\n"
 "Language-Team: Catalan <https://hosted.weblate.org/projects/galette/events-"
 "plugin/ca/>\n"
@@ -252,7 +252,7 @@ msgstr ""
 
 #: ../lib/GaletteEvents/Event.php:229 ../tempcache/event.html.twig:97
 msgid "Begin date"
-msgstr ""
+msgstr "Data d'inici"
 
 #: ../lib/GaletteEvents/Event.php:231 ../tempcache/event.html.twig:103
 msgid "End date"
@@ -492,7 +492,7 @@ msgstr ""
 #: ../tempcache/bookings.html.twig:304 ../tempcache/bookings.html.twig:459
 #: ../tempcache/bookings.html.twig:471 ../tempcache/bookings.html.twig:486
 msgid "Not paid"
-msgstr ""
+msgstr "No pagat"
 
 #: ../tempcache/bookings.html.twig:359
 #, php-format
@@ -566,7 +566,7 @@ msgstr ""
 
 #: ../tempcache/events.html.twig:117 ../tempcache/events.html.twig:191
 msgid "Date"
-msgstr ""
+msgstr "Data"
 
 #: ../tempcache/events.html.twig:117 ../tempcache/events.html.twig:209
 msgid "Open"
