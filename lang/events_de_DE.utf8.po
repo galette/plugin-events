@@ -2,7 +2,7 @@
 # Peter Waldert <peter@waldert.at>, 2020.
 # Manuel Zeschko <moebyus@pm.me>, 2021.
 # Gjelbrim Haskaj <ghaskaj@aol.com>, 2021.
-# TwoB00m <qwertze@gmx.at>, 2021.
+# TwoB00m <qwertze@gmx.at>, 2021, 2026.
 # Der_Unterhaendler <Lukas.Engelschalk@gmx.de>, 2022.
 # klausellus-wallace <muetze.polka0e@icloud.com>, 2023.
 # Academion <m.holzhausen@tutamail.com>, 2026.
@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2025-08-17 08:54+0200\n"
-"PO-Revision-Date: 2026-02-09 23:09+0000\n"
-"Last-Translator: Academion <m.holzhausen@tutamail.com>\n"
+"PO-Revision-Date: 2026-02-12 07:08+0000\n"
+"Last-Translator: TwoB00m <qwertze@gmx.at>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/galette/events-"
 "plugin/de/>\n"
 "Language: de_DE\n"
@@ -168,7 +168,7 @@ msgstr "Vergessen Sie nicht, das Ereignis zu speichern"
 
 #: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:389
 msgid "Activity has been detached from event."
-msgstr "Tätigkeit wurde vom Event entfernt."
+msgstr "Die Aktivität wurde vom Ereignis getrennt."
 
 #: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:398
 #, fuzzy
