@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Languages add-on <noreply-addon-languages@weblate.org>, 2024.
 # தமிழ்நேரம் <anishprabu.t@gmail.com>, 2024, 2025.
+# தமிழ்நேரம் <tamilneram247@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2025-08-17 08:54+0200\n"
-"PO-Revision-Date: 2025-07-02 02:01+0000\n"
-"Last-Translator: தமிழ்நேரம் <anishprabu.t@gmail.com>\n"
+"PO-Revision-Date: 2026-03-02 20:00+0000\n"
+"Last-Translator: தமிழ்நேரம் <tamilneram247@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/galette/events-"
 "plugin/ta/>\n"
 "Language: ta\n"
@@ -17,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.13-dev\n"
+"X-Generator: Weblate 5.17-dev\n"
 
 #: ../lib/GaletteEvents/Booking.php:192
 msgid "Event is mandatory"
@@ -247,7 +248,7 @@ msgstr "பங்கேற்பாளர்கள்:"
 #: ../lib/GaletteEvents/PluginGaletteEvents.php:104
 #: ../tempcache/event.html.twig:180 ../tempcache/booking.html.twig:221
 msgid "Activities"
-msgstr ""
+msgstr "செயல்பாடுகள்"
 
 #: ../lib/GaletteEvents/Event.php:205
 msgid "Begin date is mandatory"
@@ -255,11 +256,11 @@ msgstr "தொடக்க தேதி கட்டாயமாகும்"
 
 #: ../lib/GaletteEvents/Event.php:229 ../tempcache/event.html.twig:97
 msgid "Begin date"
-msgstr ""
+msgstr "தொடக்க தேதி"
 
 #: ../lib/GaletteEvents/Event.php:231 ../tempcache/event.html.twig:103
 msgid "End date"
-msgstr ""
+msgstr "முடிவு தேதி"
 
 #: ../lib/GaletteEvents/Event.php:249
 msgid "End date must be later or equal to begin date"
@@ -293,7 +294,7 @@ msgstr "நிகழ்வு புதுப்பிக்கப்பட்�
 #: ../lib/GaletteEvents/PluginGaletteEvents.php:67
 #: ../tempcache/activities.html.twig:117 ../tempcache/activities.html.twig:181
 msgid "Events"
-msgstr ""
+msgstr "நிகழ்வுகள்"
 
 #: ../lib/GaletteEvents/PluginGaletteEvents.php:74
 #: ../lib/GaletteEvents/PluginGaletteEvents.php:136
@@ -302,7 +303,7 @@ msgstr "நாட்காட்டி"
 
 #: ../lib/GaletteEvents/PluginGaletteEvents.php:87
 msgid "Bookings"
-msgstr ""
+msgstr "முன்பதிவுகள்"
 
 #: ../lib/GaletteEvents/PluginGaletteEvents.php:157
 msgid "New event booking"
@@ -310,7 +311,7 @@ msgstr "புதிய நிகழ்வு முன்பதிவு"
 
 #: ../lib/GaletteEvents/PluginGaletteEvents.php:225
 msgid "Upcoming events"
-msgstr ""
+msgstr "வரவிருக்கும் நிகழ்வுகள்"
 
 #: ../lib/GaletteEvents/Activity.php:242
 msgid "Activity added"
@@ -335,11 +336,11 @@ msgstr "திறந்திருக்கும்"
 #: ../tempcache/event.html.twig:85 ../tempcache/activities.html.twig:117
 #: ../tempcache/events.html.twig:117 ../tempcache/activity.html.twig:85
 msgid "Name"
-msgstr ""
+msgstr "பெயர்"
 
 #: ../tempcache/event.html.twig:91
 msgid "Color"
-msgstr ""
+msgstr "நிறம்"
 
 #: ../tempcache/event.html.twig:129
 msgid "Limit to group"
@@ -353,11 +354,11 @@ msgstr ""
 #: ../tempcache/event.html.twig:135 ../tempcache/booking.html.twig:211
 #: ../tempcache/activity.html.twig:91
 msgid "Comment"
-msgstr ""
+msgstr "கருத்து"
 
 #: ../tempcache/event.html.twig:145
 msgid "Location"
-msgstr ""
+msgstr "இடம்"
 
 #: ../tempcache/event.html.twig:152
 msgid "Address"
@@ -534,15 +535,15 @@ msgstr "உருவாக்கும் தேதி"
 #: ../tempcache/activities.html.twig:117 ../tempcache/activities.html.twig:187
 #: ../tempcache/activity.html.twig:78
 msgid "Is active"
-msgstr ""
+msgstr "செயலில் உள்ளது"
 
 #: ../tempcache/activities.html.twig:198 ../tempcache/activities.html.twig:209
 msgid "Active"
-msgstr ""
+msgstr "செயலில்"
 
 #: ../tempcache/activities.html.twig:200 ../tempcache/activities.html.twig:215
 msgid "Inactive"
-msgstr ""
+msgstr "செயலற்றது"
 
 #: ../tempcache/activities.html.twig:225 ../tempcache/events.html.twig:273
 #, php-format
