@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2025-08-17 08:54+0200\n"
-"PO-Revision-Date: 2026-03-02 20:00+0000\n"
+"PO-Revision-Date: 2026-03-05 00:09+0000\n"
 "Last-Translator: தமிழ்நேரம் <tamilneram247@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/galette/events-"
 "plugin/ta/>\n"
@@ -139,7 +139,7 @@ msgstr "நிகழ்வுகள் மேலாண்மை"
 
 #: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:185
 msgid "Javascript libraries has not been built!"
-msgstr "சாவாச்கிரிப்ட் நூலகங்கள் கட்டப்படவில்லை!"
+msgstr "சாவாகைஉரை நூலகங்கள் கட்டப்படவில்லை!"
 
 #: ../lib/GaletteEvents/Controllers/Crud/EventsController.php:194
 #: ../lib/GaletteEvents/PluginGaletteEvents.php:137
