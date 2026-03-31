@@ -4,13 +4,14 @@
 # Languages add-on <noreply-addon-languages@weblate.org>, 2024.
 # Nelson JESUS <jesus.nels@gmail.com>, 2025.
 # Edson Wolf <edsonwolf@vivaldi.net>, 2026.
+# ramon0504 <ramon-sousa@hotmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2025-08-17 08:54+0200\n"
-"PO-Revision-Date: 2026-03-30 19:09+0000\n"
-"Last-Translator: Edson Wolf <edsonwolf@vivaldi.net>\n"
+"PO-Revision-Date: 2026-04-01 04:11+0000\n"
+"Last-Translator: ramon0504 <ramon-sousa@hotmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/galette/"
 "events-plugin/pt/>\n"
 "Language: pt\n"
@@ -40,7 +41,7 @@ msgstr "O membro é obrigatório"
 
 #: ../lib/GaletteEvents/Booking.php:274
 msgid "There must be at least one person"
-msgstr ""
+msgstr "Deve haver pelo menos uma pessoa"
 
 #: ../lib/GaletteEvents/Booking.php:283
 msgid "Booking date is mandatory!"
@@ -124,7 +125,7 @@ msgstr "A atividade foi modificada."
 
 #: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:259
 msgid "An error occurred while storing the activity."
-msgstr ""
+msgstr "Ocorreu um erro ao salvar a atividade."
 
 #. TRANS %1$s is activity name
 #: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:344
