@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2025-08-17 08:54+0200\n"
-"PO-Revision-Date: 2026-04-01 04:11+0000\n"
-"Last-Translator: ramon0504 <ramon-sousa@hotmail.com>\n"
+"PO-Revision-Date: 2026-04-05 02:09+0000\n"
+"Last-Translator: Edson Wolf <edsonwolf@vivaldi.net>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/galette/"
 "events-plugin/pt/>\n"
 "Language: pt\n"
@@ -303,7 +303,7 @@ msgstr ""
 
 #: ../lib/GaletteEvents/PluginGaletteEvents.php:87
 msgid "Bookings"
-msgstr ""
+msgstr "Reservas"
 
 #: ../lib/GaletteEvents/PluginGaletteEvents.php:157
 msgid "New event booking"
