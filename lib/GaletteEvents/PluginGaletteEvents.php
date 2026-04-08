@@ -39,7 +39,7 @@ use GaletteEvents\Repository\Events;
  * @author Johan Cwiklinski <johan@x-tnd.be>
  */
 
-class PluginGaletteEvents extends GalettePlugin
+class PluginGaletteEvents extends GalettePlugin implements \Galette\Core\Plugins\NewsProviderInterface
 {
     #[Inject]
     protected Db $zdb;
