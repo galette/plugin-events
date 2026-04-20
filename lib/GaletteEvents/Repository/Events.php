@@ -50,9 +50,9 @@ class Events
     private EventsList $filters;
     private int $count = 0;
 
-    public const ORDERBY_DATE = 0;
-    public const ORDERBY_NAME = 1;
-    public const ORDERBY_TOWN = 2;
+    public const int ORDERBY_DATE = 0;
+    public const int ORDERBY_NAME = 1;
+    public const int ORDERBY_TOWN = 2;
 
     /**
      * Constructor

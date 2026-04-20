@@ -37,8 +37,8 @@ use Analog\Analog;
  */
 class Booking
 {
-    public const TABLE = 'bookings';
-    public const PK = 'id_booking';
+    public const string TABLE = 'bookings';
+    public const string PK = 'id_booking';
 
     private Db $zdb;
     private Login $login;

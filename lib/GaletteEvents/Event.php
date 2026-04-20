@@ -38,12 +38,12 @@ use Laminas\Db\Sql\Expression;
  */
 class Event
 {
-    public const TABLE = 'events';
-    public const PK = 'id_event';
+    public const string TABLE = 'events';
+    public const string PK = 'id_event';
 
-    public const ACTIVITY_NO = 0;
-    public const ACTIVITY_YES = 1;
-    public const ACTIVITY_REQUIRED = 2;
+    public const int ACTIVITY_NO = 0;
+    public const int ACTIVITY_YES = 1;
+    public const int ACTIVITY_REQUIRED = 2;
 
     private Db $zdb;
     private Login $login;

@@ -36,12 +36,12 @@ use Laminas\Db\Sql\Expression;
  */
 class Activity
 {
-    public const TABLE = 'activities';
-    public const PK = 'id_activity';
+    public const string TABLE = 'activities';
+    public const string PK = 'id_activity';
 
-    public const NO = 0;
-    public const YES = 1;
-    public const REQUIRED = 2;
+    public const int NO = 0;
+    public const int YES = 1;
+    public const int REQUIRED = 2;
 
     private Db $zdb;
     private Login $login;

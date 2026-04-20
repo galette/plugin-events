@@ -44,8 +44,8 @@ class Activities extends Repository
 {
     private int $count;
 
-    public const ORDERBY_DATE = 0;
-    public const ORDERBY_NAME = 1;
+    public const int ORDERBY_DATE = 0;
+    public const int ORDERBY_NAME = 1;
 
     /**
      * Constructor
