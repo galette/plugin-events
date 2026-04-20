@@ -26,6 +26,11 @@ namespace GaletteEvents;
 use DI\Attribute\Inject;
 use Galette\Core\Db;
 use Galette\Core\Login;
+use Galette\Core\Plugins\DashboardProviderInterface;
+use Galette\Core\Plugins\InstallableInterface;
+use Galette\Core\Plugins\MemberActionProviderInterface;
+use Galette\Core\Plugins\MenuProviderInterface;
+use Galette\Core\Plugins\NewsProviderInterface;
 use Galette\Entity\Adherent;
 use Galette\Core\GalettePlugin;
 use Galette\IO\News\Entry;
@@ -39,7 +44,7 @@ use GaletteEvents\Repository\Events;
  * @author Johan Cwiklinski <johan@x-tnd.be>
  */
 
-class PluginGaletteEvents extends GalettePlugin implements \Galette\Core\Plugins\NewsProviderInterface
+class PluginGaletteEvents extends GalettePlugin implements InstallableInterface, NewsProviderInterface, MenuProviderInterface, DashboardProviderInterface, MemberActionProviderInterface
 {
     #[Inject]
     protected Db $zdb;
@@ -52,7 +57,7 @@ class PluginGaletteEvents extends GalettePlugin implements \Galette\Core\Plugins
      *
      * @return array<string, string|array<string, mixed>>
      */
-    public static function getMenusContents(): array
+    public function getMenus(): array
     {
         /** @var Login $login */
         global $login;
@@ -119,7 +124,17 @@ class PluginGaletteEvents extends GalettePlugin implements \Galette\Core\Plugins
      *
      * @return array<int, string|array<string, mixed>>
      */
-    public static function getPublicMenusItemsList(): array
+    public function getPublicMenus(): array
+    {
+        return [];
+    }
+
+    /**
+     * Get current logged-in user dashboards contents
+     *
+     * @return array<int, string|array<string,mixed>>
+     */
+    public function getMyDashboards(): array
     {
         return [];
     }
@@ -129,7 +144,7 @@ class PluginGaletteEvents extends GalettePlugin implements \Galette\Core\Plugins
      *
      * @return array<int, string|array<string, mixed>>
      */
-    public static function getDashboardsContents(): array
+    public function getDashboards(): array
     {
         return [
             [
@@ -150,7 +165,7 @@ class PluginGaletteEvents extends GalettePlugin implements \Galette\Core\Plugins
      *
      * @return array<int, string|array<string, mixed>>
      */
-    public static function getListActionsContents(Adherent $member): array
+    public function getListActions(Adherent $member): array
     {
         return [
             [
@@ -171,9 +186,9 @@ class PluginGaletteEvents extends GalettePlugin implements \Galette\Core\Plugins
      *
      * @return array<int, string|array<string, mixed>>
      */
-    public static function getDetailedActionsContents(Adherent $member): array
+    public function getDetailedActions(Adherent $member): array
     {
-        return static::getListActionsContents($member);
+        return $this->getListActions($member);
     }
 
     /**
@@ -181,17 +196,7 @@ class PluginGaletteEvents extends GalettePlugin implements \Galette\Core\Plugins
      *
      * @return array<int, string|array<string, mixed>>
      */
-    public static function getBatchActionsContents(): array
-    {
-        return [];
-    }
-
-    /**
-     * Get current logged-in user dashboards contents
-     *
-     * @return array<int, string|array<string,mixed>>
-     */
-    public static function getMyDashboardsContents(): array
+    public function getBatchActions(): array
     {
         return [];
     }
@@ -230,6 +235,6 @@ class PluginGaletteEvents extends GalettePlugin implements \Galette\Core\Plugins
      */
     public function isInstalled(): bool
     {
-        return $this->zdb->tableExists(EVENTS_PREFIX . 'events');
+        return $this->zdb->tableExists(EVENTS_PREFIX . Event::TABLE);
     }
 }
