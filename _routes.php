@@ -21,6 +21,7 @@
 
 declare(strict_types=1);
 
+use Galette\Middleware\Authenticate;
 use Galette\Repository\Groups;
 use GaletteEvents\Filters\BookingsList;
 use GaletteEvents\Filters\ActivitiesList;
@@ -42,47 +43,47 @@ require_once $module['root'] . '/_config.inc.php';
 $app->get(
     '/events[/{option:page|order}/{value:\d+}]',
     [EventsController::class, 'list']
-)->setName('events_events')->add($authenticate);
+)->setName('events_events')->add(Authenticate::class);
 
 //events list filtering
 $app->post(
     '/events/filter',
     [EventsController::class, 'filter']
-)->setName('filter-eventslist')->add($authenticate);
+)->setName('filter-eventslist')->add(Authenticate::class);
 
 $app->get(
     '/event/add',
     [EventsController::class, 'add']
 )->setName(
     'events_event_add'
-)->add($authenticate);
+)->add(Authenticate::class);
 
 $app->get(
     '/event/edit/{id:\d+}',
     [EventsController::class, 'edit']
 )->setName(
     'events_event_edit'
-)->add($authenticate);
+)->add(Authenticate::class);
 
 $app->post(
     '/event/add',
     [EventsController::class, 'doAdd']
-)->setName('events_storeevent_add')->add($authenticate);
+)->setName('events_storeevent_add')->add(Authenticate::class);
 
 $app->post(
     '/event/edit/{id:\d+}',
     [EventsController::class, 'doEdit']
-)->setName('events_storeevent_edit')->add($authenticate);
+)->setName('events_storeevent_edit')->add(Authenticate::class);
 
 $app->get(
     '/event/remove/{id:\d+}',
     [EventsController::class, 'confirmDelete']
-)->setName('events_remove_event')->add($authenticate);
+)->setName('events_remove_event')->add(Authenticate::class);
 
 $app->post(
     '/event/remove[/{id:\d+}]',
     [EventsController::class, 'delete']
-)->setName('events_do_remove_event')->add($authenticate);
+)->setName('events_do_remove_event')->add(Authenticate::class);
 
 $app->get(
     '/bookings/{event:guess|all|\d+}[/{option:page|order|clear_filter}/{value:\d+}]',
@@ -93,79 +94,79 @@ $app->get(
 $app->post(
     '/bookings/filter/{event:guess|all|\d+}',
     [BookingsController::class, 'filterBookings']
-)->setName('filter-bookingslist')->add($authenticate);
+)->setName('filter-bookingslist')->add(Authenticate::class);
 
 $app->get(
     '/booking/add[/{id_adh:\d+}]',
     [BookingsController::class, 'add']
-)->setName('events_booking_add')->add($authenticate);
+)->setName('events_booking_add')->add(Authenticate::class);
 
 $app->get(
     '/booking/edit/{id:\d+}',
     [BookingsController::class, 'edit']
-)->setName('events_booking_edit')->add($authenticate);
+)->setName('events_booking_edit')->add(Authenticate::class);
 
 $app->post(
     '/booking/add',
     [BookingsController::class, 'doAdd']
-)->setName('events_storebooking_add')->add($authenticate);
+)->setName('events_storebooking_add')->add(Authenticate::class);
 
 $app->post(
     '/booking/edit/{id:\d+}',
     [BookingsController::class, 'doEdit']
-)->setName('events_storebooking_edit')->add($authenticate);
+)->setName('events_storebooking_edit')->add(Authenticate::class);
 
 $app->get(
     '/booking/remove/{id:\d+}',
     [BookingsController::class, 'confirmDelete']
-)->setName('events_remove_booking')->add($authenticate);
+)->setName('events_remove_booking')->add(Authenticate::class);
 
 $app->post(
     '/booking/remove[/{id:\d+}]',
     [BookingsController::class, 'delete']
-)->setName('events_do_remove_booking')->add($authenticate);
+)->setName('events_do_remove_booking')->add(Authenticate::class);
 
 //booking CSV export
 $app->map(
     ['GET', 'POST'],
     '/events/{id:\d+}/export/bookings',
     [GaletteEvents\Controllers\CsvController::class, 'bookingsExport']
-)->setName('event_bookings_export')->add($authenticate);
+)->setName('event_bookings_export')->add(Authenticate::class);
 
 $app->post(
     '/events/export/bookings',
     [GaletteEvents\Controllers\CsvController::class, 'bookingsExport']
-)->setName('events_bookings_export')->add($authenticate);
+)->setName('events_bookings_export')->add(Authenticate::class);
 
 //Batch actions on bookings list
 $app->post(
     '/bookings/batch',
     [BookingsController::class, 'handleBatch']
-)->setName('batch-eventslist')->add($authenticate);
+)->setName('batch-eventslist')->add(Authenticate::class);
 
 $app->get(
     '/activities[/{option:page|order}/{value:\d+}]',
     [ActivitiesController::class, 'list']
-)->setName('events_activities')->add($authenticate);
+)->setName('events_activities')->add(Authenticate::class);
 
 $app->post(
     '/activities/filter',
     [ActivitiesController::class, 'filter']
-)->setName('filter-activitieslist')->add($authenticate);
+)->setName('filter-activitieslist')->add(Authenticate::class);
 
 $app->get(
     '/activity/add',
     [ActivitiesController::class, 'add']
 )->setName(
     'events_activity_add'
-)->add($authenticate);
+)->add(Authenticate::class);
 
 $app->get(
     '/activity/edit/{id:\d+}',
     [ActivitiesController::class, 'edit']
 )->setName(
     'events_activity_edit'
-)->add($authenticate);
+)->add(Authenticate::class);
 
 $app->post(
     '/activity/add',
@@ -175,24 +176,24 @@ $app->post(
 $app->post(
     '/activity/store',
     [ActivitiesController::class, 'doEdit']
-)->setName('events_storeactivity_edit')->add($authenticate);
+)->setName('events_storeactivity_edit')->add(Authenticate::class);
 
 $app->get(
     '/activity/remove/{id:\d+}',
     [ActivitiesController::class, 'confirmDelete']
-)->setName('events_remove_activity')->add($authenticate);
+)->setName('events_remove_activity')->add(Authenticate::class);
 
 $app->post(
     '/activity/remove[/{id:\d+}]',
     [ActivitiesController::class, 'delete']
-)->setName('events_do_remove_activity')->add($authenticate);
+)->setName('events_do_remove_activity')->add(Authenticate::class);
 
 $app->get(
     '/events/calendar[/{option:page|order}/{value:\d+}]',
     [EventsController::class, 'calendar']
-)->setName('events_calendar')->add($authenticate);
+)->setName('events_calendar')->add(Authenticate::class);
 
 $app->get(
     '/ajax/events/calendar',
     [EventsController::class, 'ajaxCalendar']
-)->setName('ajax-events_calendar')->add($authenticate);
+)->setName('ajax-events_calendar')->add(Authenticate::class);
