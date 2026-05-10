@@ -1,5 +1,7 @@
 --
--- Table structure for table `galette_events_events`
+-- This file is part of Galette Auto plugin (https://galette.eu).
+-- SPDX-FileCopyrightText: Copyright © 2018-2026 The Galette Team
+-- SPDX-License-Identifier: GPL-3.0-or-later
 --
 
 DROP SEQUENCE IF EXISTS galette_events_events_id_seq;

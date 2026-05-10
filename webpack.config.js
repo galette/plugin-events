@@ -1,3 +1,9 @@
+/**
+ * This file is part of Galette Auto plugin (https://galette.eu).
+ * SPDX-FileCopyrightText: Copyright © 2018-2026 The Galette Team
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 const path = require('path')
 const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
