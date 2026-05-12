@@ -2,13 +2,14 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # Edson Wolf <edsonwolf@vivaldi.net>, 2026.
+# n-qber <nmkbertozzo@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2025-08-17 08:54+0200\n"
 "PO-Revision-Date: 2026-05-12 22:11+0000\n"
-"Last-Translator: Edson Wolf <edsonwolf@vivaldi.net>\n"
+"Last-Translator: n-qber <nmkbertozzo@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "galette/events-plugin/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -265,7 +266,7 @@ msgstr ""
 
 #: ../lib/GaletteEvents/Event.php:255 ../lib/GaletteEvents/Activity.php:174
 msgid "Name is mandatory"
-msgstr ""
+msgstr "Nome é obrigatório"
 
 #: ../lib/GaletteEvents/Event.php:271
 msgid "Please select a group you own!"
@@ -312,7 +313,7 @@ msgstr ""
 
 #: ../lib/GaletteEvents/Activity.php:242
 msgid "Activity added"
-msgstr ""
+msgstr "Atividade adicionada"
 
 #: ../lib/GaletteEvents/Activity.php:247
 msgid "Fail to add new activity."
