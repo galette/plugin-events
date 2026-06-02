@@ -14,7 +14,7 @@ $this->register(
     desc: 'Events management',  //Short description
     author: 'Johan Cwiklinski', //Author
     version: '2.2.1',           //Version
-    compver: '1.2.0',           //Galette compatible version
+    compver: '1.3.0',           //Galette compatible version
     route: 'events',            //routing name and translation domain
     date: '2025-12-08',         //Release date
     acls: [                     //Permissions needed
@@ -47,5 +47,6 @@ $this->register(
         'events_bookings_export'    => 'groupmanager',
         'events_calendar'           => 'member',
         'ajax-events_calendar'      => 'member'
-    ]
+    ],
+    dbver: 1.00
 );
