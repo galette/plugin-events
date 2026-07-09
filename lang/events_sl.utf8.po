@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2025-08-17 08:54+0200\n"
-"PO-Revision-Date: 2026-07-08 05:15+0000\n"
+"PO-Revision-Date: 2026-07-09 08:51+0000\n"
 "Last-Translator: Jože Felicijan <joze@felicijan.com>\n"
 "Language-Team: Slovenian <https://hosted.weblate.org/projects/galette/events-"
 "plugin/sl/>\n"
@@ -427,7 +427,7 @@ msgstr ""
 #: ../tempcache/bookings.html.twig:288 ../tempcache/bookings.html.twig:457
 #: ../tempcache/bookings.html.twig:469 ../tempcache/bookings.html.twig:480
 msgid "Paid"
-msgstr ""
+msgstr "Plačano"
 
 #: ../tempcache/bookings.html.twig:65
 msgid "No booking selected"
@@ -568,7 +568,7 @@ msgstr ""
 
 #: ../tempcache/events.html.twig:117 ../tempcache/events.html.twig:191
 msgid "Date"
-msgstr ""
+msgstr "Datum"
 
 #: ../tempcache/events.html.twig:117 ../tempcache/events.html.twig:209
 msgid "Open"
