@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2025-08-17 08:54+0200\n"
-"PO-Revision-Date: 2026-07-09 08:51+0000\n"
+"PO-Revision-Date: 2026-07-09 09:31+0000\n"
 "Last-Translator: Jože Felicijan <joze@felicijan.com>\n"
 "Language-Team: Slovenian <https://hosted.weblate.org/projects/galette/events-"
 "plugin/sl/>\n"
@@ -535,11 +535,11 @@ msgstr ""
 
 #: ../tempcache/activities.html.twig:198 ../tempcache/activities.html.twig:209
 msgid "Active"
-msgstr ""
+msgstr "Aktivno"
 
 #: ../tempcache/activities.html.twig:200 ../tempcache/activities.html.twig:215
 msgid "Inactive"
-msgstr ""
+msgstr "Neaktivno"
 
 #: ../tempcache/activities.html.twig:225 ../tempcache/events.html.twig:273
 #, php-format
