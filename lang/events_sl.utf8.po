@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2025-08-17 08:54+0200\n"
-"PO-Revision-Date: 2026-07-09 11:24+0000\n"
+"PO-Revision-Date: 2026-07-11 10:38+0000\n"
 "Last-Translator: Jože Felicijan <joze@felicijan.com>\n"
 "Language-Team: Slovenian <https://hosted.weblate.org/projects/galette/events-"
 "plugin/sl/>\n"
@@ -194,7 +194,7 @@ msgstr ""
 #: ../lib/GaletteEvents/Controllers/CsvController.php:96
 #: ../tempcache/booking.html.twig:308
 msgid "Amount"
-msgstr ""
+msgstr "Znesek"
 
 #: ../lib/GaletteEvents/Controllers/CsvController.php:98
 #: ../tempcache/booking.html.twig:320
@@ -254,11 +254,11 @@ msgstr ""
 
 #: ../lib/GaletteEvents/Event.php:229 ../tempcache/event.html.twig:97
 msgid "Begin date"
-msgstr ""
+msgstr "Začetni datum"
 
 #: ../lib/GaletteEvents/Event.php:231 ../tempcache/event.html.twig:103
 msgid "End date"
-msgstr ""
+msgstr "Končni datum"
 
 #: ../lib/GaletteEvents/Event.php:249
 msgid "End date must be later or equal to begin date"
@@ -351,7 +351,7 @@ msgstr ""
 #: ../tempcache/event.html.twig:135 ../tempcache/booking.html.twig:211
 #: ../tempcache/activity.html.twig:91
 msgid "Comment"
-msgstr ""
+msgstr "Komentar"
 
 #: ../tempcache/event.html.twig:145
 msgid "Location"
@@ -359,16 +359,16 @@ msgstr ""
 
 #: ../tempcache/event.html.twig:152
 msgid "Address"
-msgstr ""
+msgstr "Naslov"
 
 #: ../tempcache/event.html.twig:164 ../tempcache/events.html.twig:117
 #: ../tempcache/events.html.twig:197
 msgid "Town"
-msgstr ""
+msgstr "Mesto"
 
 #: ../tempcache/event.html.twig:170
 msgid "Country"
-msgstr ""
+msgstr "Država"
 
 #: ../tempcache/event.html.twig:204
 msgid "Choose an activity to add"
@@ -485,7 +485,7 @@ msgstr ""
 #: ../tempcache/bookings.html.twig:220 ../tempcache/bookings.html.twig:222
 #: ../tempcache/events.html.twig:117 ../tempcache/events.html.twig:203
 msgid "Group"
-msgstr ""
+msgstr "Skupina"
 
 #: ../tempcache/bookings.html.twig:258
 msgid "Paid bookings:"
@@ -526,7 +526,7 @@ msgstr ""
 
 #: ../tempcache/activities.html.twig:117 ../tempcache/activities.html.twig:175
 msgid "Creation date"
-msgstr ""
+msgstr "Datum nastanka"
 
 #: ../tempcache/activities.html.twig:117 ../tempcache/activities.html.twig:187
 #: ../tempcache/activity.html.twig:78
