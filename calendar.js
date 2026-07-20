@@ -16,8 +16,6 @@ import 'fullcalendar/themes/classic/theme.css';
 import 'fullcalendar/themes/classic/palette.css';
 
 $(function() {
-  var initialLocaleCode = 'fr';
-  var localeSelectorEl = document.getElementById('locale-selector');
   var calendarEl = document.getElementById('calendar');
 
   var calendar = new Calendar(calendarEl, {
