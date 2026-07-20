@@ -23,6 +23,14 @@ module.exports = {
     moment: 'moment'
   },
   devtool: 'source-map',
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: [ 'style-loader', 'css-loader' ]
+      }
+    ]
+  },
   resolve: {
     extensions: [ '.js' ],
   },

@@ -5,11 +5,15 @@
  */
 
 import $ from 'jquery';
-import { Calendar } from '@fullcalendar/core';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import interactionPlugin from '@fullcalendar/interaction';
-import listPlugin from '@fullcalendar/list';
-import allLocales from '@fullcalendar/core/locales-all';
+import { Calendar } from 'fullcalendar';
+import dayGridPlugin from 'fullcalendar/daygrid';
+import interactionPlugin from 'fullcalendar/interaction';
+import listPlugin from 'fullcalendar/list';
+import themePlugin from 'fullcalendar/themes/classic';
+import allLocales from 'fullcalendar/locales-all';
+import 'fullcalendar/skeleton.css';
+import 'fullcalendar/themes/classic/theme.css';
+import 'fullcalendar/themes/classic/palette.css';
 
 $(function() {
   var initialLocaleCode = 'fr';
@@ -17,7 +21,7 @@ $(function() {
   var calendarEl = document.getElementById('calendar');
 
   var calendar = new Calendar(calendarEl, {
-    plugins: [ interactionPlugin, dayGridPlugin, listPlugin ],
+    plugins: [ themePlugin, interactionPlugin, dayGridPlugin, listPlugin ],
     views: _fullcalendar_views,
     headerToolbar: {
       left: 'title',
