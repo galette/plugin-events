@@ -153,7 +153,11 @@ class CsvController extends \Galette\Controllers\CsvController
             ];
         }
 
-        $filepath = CsvOut::DEFAULT_DIRECTORY . $filename;
-        return $this->sendResponse($response, $filepath, $filename);
+        return $this->sendResponse(
+            request: $request,
+            response: $response,
+            filepath: $filepath,
+            filename: $filename
+        );
     }
 }
