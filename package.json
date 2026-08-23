@@ -20,7 +20,7 @@
   "license": "GPL-3.0-or-later",
   "dependencies": {
     "fullcalendar": "^7.0.2",
-    "temporal-polyfill": "^1.0.3"
+    "temporal-polyfill": "^1.0.4"
   },
   "devDependencies": {
     "css-loader": "^7.1.4",
