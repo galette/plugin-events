@@ -22,7 +22,7 @@
       dayGridMonth: { buttonText: '{{ _T("Month calendar", "events")|e('js') }}' },
       today: { buttonText: '{{ _T("Today", "events")|e('js') }}' }
     }
-    var _fullcalendar_locale = '{{ galette_lang }}';
+    var _fullcalendar_locale = '{{ i18n.getWebID() }}';
     var _modal_actions = [];
     {% if login.isAdmin() or login.isStaff() or login.isGroupManager() %}
       var _edit_action = {
