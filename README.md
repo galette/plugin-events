@@ -1,16 +1,16 @@
 # Galette Events plugin
 
-[![GitHub license](https://img.shields.io/github/license/galette/galette.svg)](https://github.com/galette/plugin-events/blob/master/COPYING)
+[![GitHub license](https://img.shields.io/github/license/galette/plugin-events)](https://github.com/galette/plugin-events/blob/master/COPYING)
 
 ### English
 
 A [Galette](https://galette.eu) plugin to manage events and bookings.
 
 * website: https://galette.eu - https://doc.galette.eu/en/master/plugins/events.html
-* bugs and features: http://bugs.galette.eu/projects/evenements
+* bugs and features: https://bugs.galette.eu/projects/evenements
 * mailing lists:
-  * users: https://listengine.tuxfamily.org/lists.galette.eu/users/
-  * developpers: https://listengine.tuxfamily.org/lists.galette.eu/devel/
+  * users: https://lists.mailman3.com/postorius/lists/galette-users.mailman3.com/
+  * developpers: https://lists.mailman3.com/postorius/lists/galette-devel.mailman3.com/
 * documentation: https://doc.galette.eu/en/master/plugins/events.html
 
 To use Galette Events plugin, you'll need a reliable Galette version, and of course the plugin itself by either:
@@ -23,10 +23,10 @@ To use Galette Events plugin, you'll need a reliable Galette version, and of cou
 Un plugin [Galette](https://galette.eu) pour gérer évènements et réservations.
 
 * site web : https://galette.eu - https://doc.galette.eu/fr/master/plugins/events.html
-* bogues et fonctionnalités : http://bugs.galette.eu/projects/evenements
+* bogues et fonctionnalités : https://bugs.galette.eu/projects/evenements
 * liste de diffusion :
-  * utilisateurs : https://listengine.tuxfamily.org/lists.galette.eu/users/
-  * développeurs : https://listengine.tuxfamily.org/lists.galette.eu/devel/
+  * utilisateurs : https://lists.mailman3.com/postorius/lists/galette-users.mailman3.com/
+  * développeurs : https://lists.mailman3.com/postorius/lists/galette-devel.mailman3.com/
 * documentation : https://doc.galette.eu/fr/master/plugins/events.html
 
 Pour utiliser le plugin Évènements pour Galette, vous aurez besoin d'une version adéquate de Galette, ainsi que du plugin lui même :
