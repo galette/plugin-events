@@ -7,13 +7,14 @@
 # klausellus-wallace <muetze.polka0e@icloud.com>, 2023, 2026.
 # Academion <m.holzhausen@tutamail.com>, 2026.
 # Poly <robloxlucak@gmail.com>, 2026.
+# Poly <poly@users.noreply.hosted.weblate.org>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2025-08-17 08:54+0200\n"
 "PO-Revision-Date: 2026-09-03 10:58+0000\n"
-"Last-Translator: Peter Waldert <peter@waldert.at>\n"
+"Last-Translator: Poly <poly@users.noreply.hosted.weblate.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/galette/events-"
 "plugin/de/>\n"
 "Language: de_DE\n"
