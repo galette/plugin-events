@@ -6,11 +6,11 @@ description: Event and booking management
 A [Galette](https://galette.eu) plugin to manage events, the activities attached
 to them, and the bookings members make.
 
-This plugin provides:
+Questo componente aggiuntivo fornisce:
 
-* events management,
-* associate activities with events,
-* booking management.
+* gestione eventi,
+* attività associate agli eventi,
+* gestione prenotazioni.
 
 * [documentation](documentation.html)
 * [bugs and features](https://bugs.galette.eu/projects/evenements)
