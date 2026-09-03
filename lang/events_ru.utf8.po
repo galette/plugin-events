@@ -2,7 +2,7 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # Evgeniy Khramov <thejenjagamertjg@gmail.com>, 2022.
-# Evgeniy Khramov <65224669+thejenja@users.noreply.github.com>, 2025.
+# Evgeniy Khramov <65224669+thejenja@users.noreply.github.com>, 2025, 2026.
 # Maksim_220 Кабанов <law820314@gmail.com>, 2025.
 # da070116 <da070116@gmail.com>, 2025, 2026.
 # MrSliv69 <mrsliv6969@gmail.com>, 2025, 2026.
@@ -14,7 +14,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2025-08-17 08:54+0200\n"
 "PO-Revision-Date: 2026-09-03 10:59+0000\n"
-"Last-Translator: MrSliv69 <mrsliv6969@gmail.com>\n"
+"Last-Translator: Evgeniy Khramov <65224669+thejenja@users.noreply.github.com>"
+"\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/galette/events-"
 "plugin/ru/>\n"
 "Language: ru\n"
