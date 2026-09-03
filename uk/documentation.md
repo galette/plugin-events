@@ -1,25 +1,25 @@
 ---
-title: Documentation
+title: Документація
 description: Event and booking management
 ---
 
-This plugin provides:
+Це розширення надає:
 
-* events management,
-* associate activities with events,
-* booking management.
+* управління подіями,
+* сполучення діяльності з подіями,
+* управління бронюванням.
 
-## Installation
+## Встановлення
 
-First of all, download the plugin:
+Перш за все, завантажте розширення:
 
 * [Get latest Events
   plugin!](https://github.com/galette-plugins/plugin-events/releases/latest)
 * [Get Events plugin nightly
   build!](https://github.com/galette-plugins/plugin-events/releases/tag/nightly)
 
-Extract the downloaded archive in Galette `plugins` directory. For example,
-under linux (replacing `{url}` and `{version}` with correct values):
+Витягніть завантажений архів у каталог Galette `plugins`. Наприклад, ось
+вказівки під Linux (замініть `{url}` та `{version}` правильними значеннями):
 
 ```bash
 $ cd /var/www/html/galette/plugins
@@ -27,64 +27,66 @@ $ wget {url}
 $ tar xjvf galette-plugin-events-{version}.tar.bz2
 ```
 
-## Database initialisation
+## Започаткування бази даних
 
-In order to work, this plugin requires several tables in the database. See
-[Galette plugins management
-interface](https://doc.galette.eu/en/master/plugins/index.html#plugins-managment).
+Для роботи цього розширення потрібно кілька таблиць у базі даних. Див [Інтерфейс
+управління розширеннями
+Galette](https://doc.galette.eu/en/master/plugins/index.html#plugins-managment).
 
-And this is finished; Events plugin is installed :)
+Усе завершено. Розширення "Events" установлено :)
 
-## Plugin usage
+## Використання розширення
 
-When the plugin is installed, an `Events` group is added to Galette menu when a
-user is logged in. There are various possibilities that change depending on user
-profile (simple member, group manager, administrator, ...).
+Коли розширення встановлено, під час входу користувача в систему в меню Galette
+додається група `Events`. Існують різні можливості, які змінюються в залежності
+від профілю користувача (простий користувач, менеджер групи, адміністратор,
+...).
 
-### Activities
+### Діяльності
 
-You can define as much activities as you want, and associate them to an event.
-An activity may be an organized trip, a meal, a housing, ...
+Ви можете визначити стільки діяльностей, скільки хочете, і асоціювати їх з
+якою-небудь подією. Діяльністю може бути організована поїздка, харчування,
+проживання тощо.
 
 ![The list of activities](images/list_activities.png)
 
-An activity is composed with a name, a status and an optional comment.
+Діяльність складається з назви, стану та коментаря за бажанням.
 
-To add a new activity, just click on "New activity" link:
+Щоб додати нову діяльність, просто натисніть на посилання "Нова діяльність":
 
 ![The form of a new activity](images/new_activity.png)
 
-### Events
+### Події
 
-Events are the main goal of the plugin. You can define several information, like
-a name, begin and ending dates, location, ...
+Події є основною ціллю розширення. Ви можете визначити кілька відомостей, таких
+як назва, дати початку і закінчення, місцеперебування тощо.
 
 ![The form of a new event](images/new_event.png)
 
-Name, begin date and town are mandatory. All other information are entirely
-optional.
+Назва, дата початку та місто є обов'язковими. Всі інші відомості є цілком
+необов'язковими.
 
-Events that are not linked to a group will be available for all members. If a
-group is set, only members and managers of this group will have access.
+Події, які пов'язані з групою, будуть доступні для всіх учасників. Якщо група
+встановлена, то доступ до неї матимуть лише її члени та менеджери.
 
 > **Note**
 > 
-> When a group manager creates a new event, he must choose one of the groups he
-> owns!
+> Коли менеджер групи створює нову подію, він повинен вибрати одну з груп, якими
+> він володіє!
 
-You can attach one or several activities to each event, and for each one set if
-it is available, not available or even mandatory. Choose the activity to add,
-and click the button.
+До кожної події можна прикріпити одну або кілька діяльностей, а також для
+кожного набору, якщо він доступний, недоступний або навіть обов'язковий.
+Виберіть подію для додавання та натисніть на кнопку.
 
 ![The activities attached to an event](images/event_activities.png)
 
 > **Warning**
 > 
-> Adding or removing activity from an event will reload the page and ask you to
-> fill mandatory information. Nonetheless (and this is specified each time), the
-> event **will not be stored** during this operation.
+> Додавання або видалення діяльності з події перезавантажить сторінку і
+> попросить Вас заповнити обов'язкові відомості. Проте, (і це вказується кожен
+> раз), подія **не зберігатиметься** під час цієї операції.
 > 
-> Ensure you save the event :)
+> Обов’язково збережіть подію :)
 
 From Events list, you can edit or remove entries, access to booking list or
 export bookings as CSV.
