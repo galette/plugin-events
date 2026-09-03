@@ -7,13 +7,14 @@
 # da070116 <da070116@gmail.com>, 2025.
 # MrSliv69 <mrsliv6969@gmail.com>, 2025.
 # Johan Cwiklinski <trasher@x-tnd.be>, 2026.
+# vanapro1 <law820314@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2025-08-17 08:54+0200\n"
-"PO-Revision-Date: 2026-09-03 10:56+0000\n"
-"Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
+"PO-Revision-Date: 2026-09-03 10:59+0000\n"
+"Last-Translator: vanapro1 <law820314@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/galette/events-"
 "plugin/ru/>\n"
 "Language: ru\n"
