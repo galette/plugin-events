@@ -11,16 +11,15 @@ This plugin provides:
 
 ## Installation
 
-Laden Sie zunächst das Plugin herunter:
+Als erstes, Lade das Plugin herunter:
 
 * [Get latest Events
   plugin!](https://github.com/galette-plugins/plugin-events/releases/latest)
 * [Get Events plugin nightly
   build!](https://github.com/galette-plugins/plugin-events/releases/tag/nightly)
 
-Extrahieren Sie das heruntergeladene Archiv im Verzeichnis Galette `plugins`.
-Zum Beispiel unter Linux (Ersetzen Sie `{url}` und `{version}` durch korrekte
-Werte):
+Extract the downloaded archive in Galette `plugins` directory. For example,
+under linux (replacing `{url}` and `{version}` with correct values):
 
 ```bash
 $ cd /var/www/html/galette/plugins
@@ -30,9 +29,9 @@ $ tar xjvf galette-plugin-events-{version}.tar.bz2
 
 ## Datenbank Initialisierung
 
-Um zu funktionieren, benötigt dieses Plugin mehrere Tabellen in der Datenbank.
-Siehe [Galette Plugins
-Management-Schnittstelle](https://doc.galette.eu/en/master/plugins/index.html#plugins-managment).
+Damit es Funktioniert, benötigt dieses Plugin verschiedene Tabellen in der
+Datenbank. Weiteres sehen sie hier [Galette plugins management
+interface](https://doc.galette.eu/en/master/plugins/index.html#plugins-managment).
 
 And this is finished; Events plugin is installed :)
 
