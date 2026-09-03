@@ -1,14 +1,14 @@
 # Weblate <noreply@weblate.org>, 2020.
 # Quentin PAGÈS <quentinantonin@free.fr>, 2020, 2026.
 # Pèire Bréchet <charrar@free.fr>, 2022, 2024.
-# Pèire Bréchet <oxytanistzero@tutanota.com>, 2024.
+# Pèire Bréchet <oxytanistzero@tutanota.com>, 2024, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2025-08-17 08:54+0200\n"
 "PO-Revision-Date: 2026-09-03 10:59+0000\n"
-"Last-Translator: Quentin PAGÈS <quentinantonin@free.fr>\n"
+"Last-Translator: Pèire Bréchet <oxytanistzero@tutanota.com>\n"
 "Language-Team: Occitan <https://hosted.weblate.org/projects/galette/events-"
 "plugin/oc/>\n"
 "Language: oc\n"
