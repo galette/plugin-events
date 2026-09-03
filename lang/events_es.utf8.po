@@ -8,15 +8,15 @@
 # Javier <javier.fserrador@gmail.com>, 2022.
 # gallegonovato <fran-carro@hotmail.es>, 2022, 2023, 2024.
 # ventura vicenta memba moule <vevi.memba@gmail.com>, 2023.
-# Kamborio <Kamborio15@users.noreply.hosted.weblate.org>, 2024.
+# Kamborio <Kamborio15@users.noreply.hosted.weblate.org>, 2024, 2026.
 # Francisco Serrador <fserrador@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2025-08-17 08:54+0200\n"
-"PO-Revision-Date: 2026-09-03 10:56+0000\n"
-"Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
+"PO-Revision-Date: 2026-09-03 10:59+0000\n"
+"Last-Translator: Kamborio <Kamborio15@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/galette/events-"
 "plugin/es/>\n"
 "Language: es\n"
