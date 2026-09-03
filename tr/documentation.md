@@ -3,23 +3,23 @@ title: Documentation
 description: Event and booking management
 ---
 
-This plugin provides:
+Bu eklenti şunları sağlar:
 
 * events management,
 * associate activities with events,
 * booking management.
 
-## Installation
+## Kurulum
 
-First of all, download the plugin:
+Öncelikle, eklentiyi indirin:
 
 * [Get latest Events
   plugin!](https://github.com/galette-plugins/plugin-events/releases/latest)
 * [Get Events plugin nightly
   build!](https://github.com/galette-plugins/plugin-events/releases/tag/nightly)
 
-Extract the downloaded archive in Galette `plugins` directory. For example,
-under linux (replacing `{url}` and `{version}` with correct values):
+İndirilen arşivi Galette `plugins` dizinine çıkarın. Örneğin, Linux altında
+(`{url}` ve `{version}` değerlerini doğru değerlerle değiştirerek):
 
 ```bash
 $ cd /var/www/html/galette/plugins
@@ -27,15 +27,15 @@ $ wget {url}
 $ tar xjvf galette-plugin-events-{version}.tar.bz2
 ```
 
-## Database initialisation
+## Veritabanı başlatma
 
-In order to work, this plugin requires several tables in the database. See
-[Galette plugins management
-interface](https://doc.galette.eu/en/master/plugins/index.html#plugins-managment).
+Çalışabilmesi için, bu eklenti veritabanında birkaç tablo gerektirir. Bkz.
+[Galette eklenti yönetim
+arayüzü](https://doc.galette.eu/en/master/plugins/index.html#plugins-managment).
 
 And this is finished; Events plugin is installed :)
 
-## Plugin usage
+## Eklenti kullanımı
 
 When the plugin is installed, an `Events` group is added to Galette menu when a
 user is logged in. There are various possibilities that change depending on user
@@ -54,7 +54,7 @@ To add a new activity, just click on "New activity" link:
 
 ![The form of a new activity](images/new_activity.png)
 
-### Events
+### Etkinlikler
 
 Events are the main goal of the plugin. You can define several information, like
 a name, begin and ending dates, location, ...
