@@ -11,15 +11,15 @@ description: Event and booking management
 
 ## Встановлення
 
-Перш за все, завантажте розширення:
+Перш за все, завантажте плагін:
 
 * [Get latest Events
   plugin!](https://github.com/galette-plugins/plugin-events/releases/latest)
 * [Get Events plugin nightly
   build!](https://github.com/galette-plugins/plugin-events/releases/tag/nightly)
 
-Витягніть завантажений архів у каталог Galette `plugins`. Наприклад, ось
-вказівки під Linux (замініть `{url}` та `{version}` правильними значеннями):
+Розпакуйте завантажений архів у каталог Galette `plugins`. Наприклад, під Linux
+(замінивши `{url}` і `{version}` на правильні значення):
 
 ```bash
 $ cd /var/www/html/galette/plugins
@@ -27,10 +27,10 @@ $ wget {url}
 $ tar xjvf galette-plugin-events-{version}.tar.bz2
 ```
 
-## Започаткування бази даних
+## Ініціалізація бази даних
 
-Для роботи цього розширення потрібно кілька таблиць у базі даних. Див [Інтерфейс
-управління розширеннями
+Для роботи цього плагіна потрібно кілька таблиць у базі даних. Перегляньте
+[Інтерфейс керування плагінами
 Galette](https://doc.galette.eu/en/master/plugins/index.html#plugins-managment).
 
 Усе завершено. Розширення "Events" установлено :)
