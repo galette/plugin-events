@@ -18,8 +18,8 @@ Prima di tutto, scaricare il plugin:
 * [Get Events plugin nightly
   build!](https://github.com/galette-plugins/plugin-events/releases/tag/nightly)
 
-Estrai l'archivio scaricato nella cartella `plugins` di Galette. Per esempio, su
-Linux (sostituendo `{url}` e `{version}` con i rispettivi valori):
+Estrarre l'archivio scaricato nella directory `plugins` di Galette. Ad esempio,
+su Linux (sostituendo `{url}` e `{version}` con i valori corretti):
 
 ```bash
 $ cd /var/www/html/galette/plugins
@@ -27,10 +27,10 @@ $ wget {url}
 $ tar xjvf galette-plugin-events-{version}.tar.bz2
 ```
 
-## Inizializzazione del database
+## Inizializzazione database
 
-Per poter funzionare, questo componente aggiuntivo richiede diverse nuove
-tabelle nel database. Vedi [Interfaccia di gestione dei componenti aggiuntivi di
+Per funzionare, questo plugin richiede diverse tabelle nel database. Vedere
+[Interfaccia di gestione dei plugin
 Galette](https://doc.galette.eu/en/master/plugins/index.html#plugins-managment).
 
 E questo è finito; il plugin Eventi è stato installato :)
