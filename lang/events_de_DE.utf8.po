@@ -3,7 +3,7 @@
 # Manuel Zeschko <moebyus@pm.me>, 2021.
 # Gjelbrim Haskaj <ghaskaj@aol.com>, 2021, 2026.
 # TwoB00m <qwertze@gmx.at>, 2021, 2026.
-# Der_Unterhaendler <Lukas.Engelschalk@gmx.de>, 2022.
+# Der_Unterhaendler <Lukas.Engelschalk@gmx.de>, 2022, 2026.
 # klausellus-wallace <muetze.polka0e@icloud.com>, 2023, 2026.
 # Academion <m.holzhausen@tutamail.com>, 2026.
 # Poly <robloxlucak@gmail.com>, 2026.
@@ -14,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2025-08-17 08:54+0200\n"
 "PO-Revision-Date: 2026-09-03 10:58+0000\n"
-"Last-Translator: Gjelbrim Haskaj <ghaskaj@aol.com>\n"
+"Last-Translator: Der_Unterhaendler <Lukas.Engelschalk@gmx.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/galette/events-"
 "plugin/de/>\n"
 "Language: de_DE\n"
