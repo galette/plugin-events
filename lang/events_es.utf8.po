@@ -3,7 +3,7 @@
 # Berto Te <Bertote@3fpj.com>, 2021, 2026.
 # Toni Martínez <yagstyle@gmail.com>, 2021, 2026.
 # felipe <felipecandia@live.com>, 2021, 2026.
-# Germe the fur star <FOSSgerme.deb@tuta.io>, 2021.
+# Germe the fur star <FOSSgerme.deb@tuta.io>, 2021, 2026.
 # Cow <javier.fserrador@gmail.com>, 2022.
 # Javier <javier.fserrador@gmail.com>, 2022, 2026.
 # gallegonovato <fran-carro@hotmail.es>, 2022, 2023, 2024.
@@ -18,7 +18,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2025-08-17 08:54+0200\n"
 "PO-Revision-Date: 2026-09-03 10:59+0000\n"
-"Last-Translator: Deleted User <noreply+36847@weblate.org>\n"
+"Last-Translator: Germe the fur star <FOSSgerme.deb@tuta.io>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/galette/events-"
 "plugin/es/>\n"
 "Language: es\n"
