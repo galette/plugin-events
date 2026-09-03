@@ -1,6 +1,6 @@
 # Johan Cwiklinski <trasher@x-tnd.be>, 2020, 2021, 2022, 2026.
 # Tymofij Lytvynenko <till.svit@gmail.com>, 2021.
-# Artem <artem@molotov.work>, 2022.
+# Artem <artem@molotov.work>, 2022, 2026.
 # Максим Горпиніч <mgorpinic2005@gmail.com>, 2024.
 # Максим Горпиніч <maksimgorpinic4@gmail.com>, 2025.
 # Максим Горпиніч <gorpinicmaksim5@gmail.com>, 2025.
@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2025-08-17 08:54+0200\n"
 "PO-Revision-Date: 2026-09-03 10:58+0000\n"
-"Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
+"Last-Translator: Artem <artem@molotov.work>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/galette/events-"
 "plugin/uk/>\n"
 "Language: uk\n"
