@@ -1,4 +1,4 @@
-# Pol Casares Civit <pol.casares@e-campus.uab.cat>, 2020.
+# Pol Casares Civit <pol.casares@e-campus.uab.cat>, 2020, 2026.
 # Queralt Garrigos <garrigosqueralt@gmail.com>, 2022.
 # Laura Quintana Marín <2001lauraquintana@gmail.com>, 2026.
 msgid ""
@@ -7,7 +7,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2025-08-17 08:54+0200\n"
 "PO-Revision-Date: 2026-09-03 10:59+0000\n"
-"Last-Translator: Laura Quintana Marín <2001lauraquintana@gmail.com>\n"
+"Last-Translator: Pol Casares Civit <pol.casares@e-campus.uab.cat>\n"
 "Language-Team: Catalan <https://hosted.weblate.org/projects/galette/events-"
 "plugin/ca/>\n"
 "Language: ca\n"
