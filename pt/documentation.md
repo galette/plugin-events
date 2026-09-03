@@ -67,8 +67,10 @@ optional.
 Events that are not linked to a group will be available for all members. If a
 group is set, only members and managers of this group will have access.
 
-> **Note** — When a group manager creates a new event, he must choose one of the
-> groups he owns!
+> **Note**
+> 
+> When a group manager creates a new event, he must choose one of the groups he
+> owns!
 
 You can attach one or several activities to each event, and for each one set if
 it is available, not available or even mandatory. Choose the activity to add,
@@ -76,9 +78,11 @@ and click the button.
 
 ![The activities attached to an event](images/event_activities.png)
 
-> **Warning** — Adding or removing activity from an event will reload the page
-> and ask you to fill mandatory information. Nonetheless (and this is specified
-> each time), the event **will not be stored** during this operation.
+> **Warning**
+> 
+> Adding or removing activity from an event will reload the page and ask you to
+> fill mandatory information. Nonetheless (and this is specified each time), the
+> event **will not be stored** during this operation.
 > 
 > Ensure you save the event :)
 
