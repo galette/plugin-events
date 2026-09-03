@@ -1,13 +1,13 @@
 # Johan Cwiklinski <trasher@x-tnd.be>, 2020, 2026.
 # ButterflyOfFire <ButterflyOfFire@protonmail.com>, 2020, 2021, 2022.
-# ButterflyOfFire <boffire@users.noreply.hosted.weblate.org>, 2024.
+# ButterflyOfFire <boffire@users.noreply.hosted.weblate.org>, 2024, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2025-08-17 08:54+0200\n"
-"PO-Revision-Date: 2026-09-03 10:56+0000\n"
-"Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
+"PO-Revision-Date: 2026-09-03 10:59+0000\n"
+"Last-Translator: ButterflyOfFire <boffire@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/galette/events-"
 "plugin/ar/>\n"
 "Language: ar\n"
