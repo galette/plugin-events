@@ -2,7 +2,7 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # Languages add-on <noreply-addon-languages@weblate.org>, 2024.
-# Nelson JESUS <jesus.nels@gmail.com>, 2025.
+# Nelson JESUS <jesus.nels@gmail.com>, 2025, 2026.
 # Edson Wolf <edsonwolf@vivaldi.net>, 2026.
 # ramon0504 <ramon-sousa@hotmail.com>, 2026.
 # ssantos <ssantos@web.de>, 2026.
@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2025-08-17 08:54+0200\n"
-"PO-Revision-Date: 2026-09-03 10:56+0000\n"
-"Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
+"PO-Revision-Date: 2026-09-03 11:00+0000\n"
+"Last-Translator: Nelson JESUS <jesus.nels@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/galette/"
 "events-plugin/pt/>\n"
 "Language: pt\n"
