@@ -1,5 +1,5 @@
 ---
-title: Documentation
+title: Dokumentation
 description: Event and booking management
 ---
 
@@ -11,15 +11,16 @@ This plugin provides:
 
 ## Installation
 
-First of all, download the plugin:
+Laden Sie zunächst das Plugin herunter:
 
 * [Get latest Events
   plugin!](https://github.com/galette-plugins/plugin-events/releases/latest)
 * [Get Events plugin nightly
   build!](https://github.com/galette-plugins/plugin-events/releases/tag/nightly)
 
-Extract the downloaded archive in Galette `plugins` directory. For example,
-under linux (replacing `{url}` and `{version}` with correct values):
+Extrahieren Sie das heruntergeladene Archiv im Verzeichnis Galette `plugins`.
+Zum Beispiel unter Linux (Ersetzen Sie `{url}` und `{version}` durch korrekte
+Werte):
 
 ```bash
 $ cd /var/www/html/galette/plugins
@@ -27,11 +28,11 @@ $ wget {url}
 $ tar xjvf galette-plugin-events-{version}.tar.bz2
 ```
 
-## Database initialisation
+## Datenbank Initialisierung
 
-In order to work, this plugin requires several tables in the database. See
-[Galette plugins management
-interface](https://doc.galette.eu/en/master/plugins/index.html#plugins-managment).
+Um zu funktionieren, benötigt dieses Plugin mehrere Tabellen in der Datenbank.
+Siehe [Galette Plugins
+Management-Schnittstelle](https://doc.galette.eu/en/master/plugins/index.html#plugins-managment).
 
 And this is finished; Events plugin is installed :)
 
@@ -41,7 +42,7 @@ When the plugin is installed, an `Events` group is added to Galette menu when a
 user is logged in. There are various possibilities that change depending on user
 profile (simple member, group manager, administrator, ...).
 
-### Activities
+### Aktivitäten
 
 You can define as much activities as you want, and associate them to an event.
 An activity may be an organized trip, a meal, a housing, ...
@@ -91,7 +92,7 @@ export bookings as CSV.
 
 ![The list of events](images/events_list.png)
 
-### Bookings
+### Buchungen
 
 Bookings can be registered for each event. As we said before, simple members and
 groups managers will be limited to their groups events, or to the events that
