@@ -1,6 +1,6 @@
 # Johan Cwiklinski <trasher@x-tnd.be>, 2020, 2021, 2022, 2023, 2024, 2025, 2026.
 # Fredericos Tezorc <fredericos.tezorc@gmail.com>, 2020.
-# frederic-crozet <f.crozet@cholton.fr>, 2025.
+# frederic-crozet <f.crozet@cholton.fr>, 2025, 2026.
 # Sven Kislig <seven7kislig@gmail.com>, 2026.
 # "J. Lavoie" <j.lavoie@net-c.ca>, 2026.
 msgid ""
@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2025-08-17 08:54+0200\n"
 "PO-Revision-Date: 2026-09-03 10:58+0000\n"
-"Last-Translator: \"J. Lavoie\" <j.lavoie@net-c.ca>\n"
+"Last-Translator: frederic-crozet <f.crozet@cholton.fr>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/galette/events-"
 "plugin/fr/>\n"
 "Language: fr_FR\n"
