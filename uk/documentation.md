@@ -88,30 +88,31 @@ Galette](https://doc.galette.eu/en/master/plugins/index.html#plugins-managment).
 > 
 > Обов’язково збережіть подію :)
 
-From Events list, you can edit or remove entries, access to booking list or
-export bookings as CSV.
+Зі списку подій ви можете редагувати або вилучати записи, отримати доступ до
+списку бронювання, який ви експортуєте у форматі CSV.
 
 ![The list of events](images/events_list.png)
 
-### Bookings
+### Бронювання
 
-Bookings can be registered for each event. As we said before, simple members and
-groups managers will be limited to their groups events, or to the events that
-are not restricted to a group.
+Бронювання може бути зареєстроване для кожної події. Як ми вже говорили раніше,
+прості члени та менеджери груп будуть обмежені подіями своїх груп, або ж
+подіями, які не обмежуються групою.
 
-Adding a new booking can be achieved from the menu "New booking" or from the
-event bookings list.
+Додати нове бронювання можна з меню "Нове бронювання" або зі списку бронювань
+подій.
 
 ![The form of a new booking](images/new_booking.png)
 
-Bookings are closed once the event is marked as close, or when the begin date is
-over. Administrators and staff members can always add new bookings.
+Бронювання закривається після того, як подію відзначено як закриту, або після
+завершення дати початку. Адміністратори та співробітники завжди можуть додати
+нові бронювання.
 
-Activities list is retrieved from the event; mandatory ones must of course be
-checked during booking.
+Список подій отримується з події; що обов'язково повинна бути перевірена під час
+бронювання.
 
 ![The list of bookings](images/bookings_list.png)
 
-You can filter bookings list per event, payment type or payment status. You can
-then send a mailing to booked members, using the standard Galette mailing
-mechanism.
+Ви можете зробити добірку списку бронювань за подією, типом платежу або станом
+платежу. Потім Ви можете надіслати лист заброньованим учасникам, використовуючи
+усталений механізм розсилання Galette.
