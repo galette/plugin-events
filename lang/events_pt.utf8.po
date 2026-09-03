@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2025-08-17 08:54+0200\n"
-"PO-Revision-Date: 2026-09-03 09:48+0000\n"
+"PO-Revision-Date: 2026-09-03 10:56+0000\n"
 "Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/galette/"
 "events-plugin/pt/>\n"
@@ -111,7 +111,7 @@ msgstr "Remover reserva para %1$s em %2$s"
 
 #: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:121
 msgid "Activities management"
-msgstr ""
+msgstr "Gestão de atividades"
 
 #: ../lib/GaletteEvents/Controllers/Crud/ActivitiesController.php:192
 msgid "Activity"
