@@ -1,25 +1,26 @@
 ---
-title: Documentation
+title: ஆவணமாக்கல்
 description: Event and booking management
 ---
 
-This plugin provides:
+இந்த சொருகி வழங்குகிறது:
 
-* events management,
-* associate activities with events,
-* booking management.
+* நிகழ்வுகள் மேலாண்மை,
+* நிகழ்வுகளுடன் தொடர்புடைய நடவடிக்கைகள்,
+* முன்பதிவு மேலாண்மை.
 
-## Installation
+## நிறுவல்
 
-First of all, download the plugin:
+முதலில், சொருகி பதிவிறக்கவும்:
 
 * [Get latest Events
   plugin!](https://github.com/galette-plugins/plugin-events/releases/latest)
 * [Get Events plugin nightly
   build!](https://github.com/galette-plugins/plugin-events/releases/tag/nightly)
 
-Extract the downloaded archive in Galette `plugins` directory. For example,
-under linux (replacing `{url}` and `{version}` with correct values):
+பதிவிறக்கம் செய்யப்பட்ட காப்பகத்தைக் கேலட் `செருகுநிரல்கள்` கோப்பகத்தில்
+பிரித்தெடுக்கவும். எடுத்துக்காட்டாக, லினக்சின் கீழ் (`{url}` மற்றும் `{version}`
+ஆகியவற்றை சரியான மதிப்புகளுடன் மாற்றுகிறது):
 
 ```bash
 $ cd /var/www/html/galette/plugins
@@ -27,89 +28,93 @@ $ wget {url}
 $ tar xjvf galette-plugin-events-{version}.tar.bz2
 ```
 
-## Database initialisation
+## தரவுத்தள துவக்கம்
 
-In order to work, this plugin requires several tables in the database. See
-[Galette plugins management
-interface](https://doc.galette.eu/en/master/plugins/index.html#plugins-managment).
+வேலை செய்ய, இந்தச் சொருகி தரவுத்தளத்தில் பல அட்டவணைகள் தேவை. காண்க [கேலட்
+செருகுநிரல்கள் மேலாண்மை
+இடைமுகம்](https://doc.galette.eu/en/master/plugins/index.html#plugins-managment).
 
-And this is finished; Events plugin is installed :)
+இது முடிந்தது; நிகழ்வுகள் சொருகி நிறுவப்பட்டுள்ளது :)
 
-## Plugin usage
+## சொருகி பயன்பாடு
 
-When the plugin is installed, an `Events` group is added to Galette menu when a
-user is logged in. There are various possibilities that change depending on user
-profile (simple member, group manager, administrator, ...).
+சொருகி நிறுவப்பட்டால், ஒரு பயனர் உள்நுழையும்போது `நிகழ்வுகள்` குழு கேலட்
+பட்டியலில் சேர்க்கப்படுகிறது. பயனர் சுயவிவரத்தைப் பொறுத்து மாறுபடும் பல்வேறு
+சாத்தியங்கள் உள்ளன (எளிய உறுப்பினர், குழு மேலாளர், நிர்வாகி, ...).
 
-### Activities
+### செயல்பாடுகள்
 
-You can define as much activities as you want, and associate them to an event.
-An activity may be an organized trip, a meal, a housing, ...
+நீங்கள் விரும்பும் அளவுக்கு செயல்பாடுகளை நீங்கள் வரையறுக்கலாம், மேலும் அவற்றை
+ஒரு நிகழ்வோடு தொடர்புபடுத்தலாம். ஒரு செயல்பாடு ஒரு ஒழுங்கமைக்கப்பட்ட பயணம்,
+உணவு, ஒரு வீட்டுவசதி, ...
 
 ![The list of activities](images/list_activities.png)
 
-An activity is composed with a name, a status and an optional comment.
+ஒரு செயல்பாடு ஒரு பெயர், நிலை மற்றும் விருப்பமான கருத்துடன் இயற்றப்பட்டுள்ளது.
 
-To add a new activity, just click on "New activity" link:
+புதிய செயல்பாட்டைச் சேர்க்க, "புதிய செயல்பாடு" இணைப்பைக் சொடுக்கு செய்க:
 
 ![The form of a new activity](images/new_activity.png)
 
-### Events
+### நிகழ்வுகள்
 
-Events are the main goal of the plugin. You can define several information, like
-a name, begin and ending dates, location, ...
+நிகழ்வுகள் சொருகி முக்கிய குறிக்கோள். ஒரு பெயர் போன்ற பல தகவல்களை நீங்கள்
+வரையறுக்கலாம், தேதிகள், இடம், இருப்பிடம், ...
 
 ![The form of a new event](images/new_event.png)
 
-Name, begin date and town are mandatory. All other information are entirely
-optional.
+பெயர், தொடக்க தேதி மற்றும் நகரம் கட்டாயமாகும். மற்ற எல்லா தகவல்களும் முற்றிலும்
+விருப்பமானவை.
 
-Events that are not linked to a group will be available for all members. If a
-group is set, only members and managers of this group will have access.
+ஒரு குழுவுடன் இணைக்கப்படாத நிகழ்வுகள் அனைத்து உறுப்பினர்களுக்கும் கிடைக்கும்.
+ஒரு குழு அமைக்கப்பட்டால், இந்த குழுவின் உறுப்பினர்கள் மற்றும் மேலாளர்களுக்கு
+மட்டுமே அணுகல் இருக்கும்.
 
 > **Note**
 > 
-> When a group manager creates a new event, he must choose one of the groups he
-> owns!
+> ஒரு குழு மேலாளர் ஒரு புதிய நிகழ்வை உருவாக்கும்போது, அவர் தனக்குச் சொந்தமான
+> குழுக்களில் ஒன்றைத் தேர்வு செய்ய வேண்டும்!
 
-You can attach one or several activities to each event, and for each one set if
-it is available, not available or even mandatory. Choose the activity to add,
-and click the button.
+ஒவ்வொரு நிகழ்விற்கும் நீங்கள் ஒன்று அல்லது பல செயல்பாடுகளை இணைக்கலாம், மேலும்
+ஒவ்வொன்றிற்கும் அது கிடைத்தால் அது கிடைக்கவில்லை அல்லது கட்டாயமாக இல்லை. சேர்க்க
+செயல்பாட்டைத் தேர்வுசெய்து, பொத்தானைக் சொடுக்கு செய்க.
 
 ![The activities attached to an event](images/event_activities.png)
 
 > **Warning**
 > 
-> Adding or removing activity from an event will reload the page and ask you to
-> fill mandatory information. Nonetheless (and this is specified each time), the
-> event **will not be stored** during this operation.
+> ஒரு நிகழ்விலிருந்து செயல்பாட்டைச் சேர்ப்பது அல்லது அகற்றுவது பக்கத்தை மீண்டும்
+> ஏற்றி, கட்டாய தகவல்களை நிரப்பும்படி கேட்கும். ஆயினும்கூட (இது ஒவ்வொரு முறையும்
+> குறிப்பிடப்பட்டுள்ளது), இந்தச் செயல்பாட்டின்போது நிகழ்வு **சேமிக்கப்படாது**.
 > 
-> Ensure you save the event :)
+> நிகழ்வை சேமிப்பதை உறுதிசெய்க :)
 
-From Events list, you can edit or remove entries, access to booking list or
-export bookings as CSV.
+நிகழ்வுகள் பட்டியலில் இருந்து, நீங்கள் உள்ளீடுகளைத் திருத்தலாம் அல்லது
+அகற்றலாம், முன்பதிவு பட்டியலுக்கான அணுகல் OU ஏற்றுமதி முன்பதிவுகளை காபிம ஆக.
 
 ![The list of events](images/events_list.png)
 
-### Bookings
+### முன்பதிவுகள்
 
-Bookings can be registered for each event. As we said before, simple members and
-groups managers will be limited to their groups events, or to the events that
-are not restricted to a group.
+ஒவ்வொரு நிகழ்விற்கும் முன்பதிவு பதிவு செய்யலாம். நாங்கள் முன்பு கூறியது போல்,
+எளிய உறுப்பினர்கள் மற்றும் குழுக்கள் மேலாளர்கள் தங்கள் குழுக்களின்
+நிகழ்வுகளுக்கு மட்டுப்படுத்தப்படுவார்கள், ஒரு குழுவிற்கு கட்டுப்படுத்தப்படாத
+நிகழ்வுகளுக்கு ஓயு.
 
-Adding a new booking can be achieved from the menu "New booking" or from the
-event bookings list.
+புதிய முன்பதிவைச் சேர்ப்பது மெனுவிலிருந்து "புதிய முன்பதிவு" அல்லது நிகழ்வு
+முன்பதிவு பட்டியலிலிருந்து அடையலாம்.
 
 ![The form of a new booking](images/new_booking.png)
 
-Bookings are closed once the event is marked as close, or when the begin date is
-over. Administrators and staff members can always add new bookings.
+நிகழ்வு நெருக்கமாக குறிக்கப்பட்டவுடன் அல்லது தொடக்க தேதி முடிந்ததும் முன்பதிவு
+மூடப்படும். நிர்வாகிகள் மற்றும் பணியாளர்கள் எப்போதும் புதிய முன்பதிவுகளைச்
+சேர்க்கலாம்.
 
-Activities list is retrieved from the event; mandatory ones must of course be
-checked during booking.
+செயல்பாடுகள் பட்டியல் நிகழ்விலிருந்து மீட்டெடுக்கப்படுகிறது; முன்பதிவின் போது
+கட்டாயமாக சரிபார்க்கப்பட வேண்டும்.
 
 ![The list of bookings](images/bookings_list.png)
 
-You can filter bookings list per event, payment type or payment status. You can
-then send a mailing to booked members, using the standard Galette mailing
-mechanism.
+ஒரு நிகழ்வுக்கு முன்பதிவு பட்டியலை வடிகட்டலாம், கட்டண வகை அல்லது கட்டண நிலை.
+நிலையான கேலட் அஞ்சல் பொறிமுறையைப் பயன்படுத்தி முன்பதிவு செய்யப்பட்ட
+உறுப்பினர்களுக்கு நீங்கள் ஒரு அஞ்சலை அனுப்பலாம்.
