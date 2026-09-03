@@ -3,23 +3,24 @@ title: Documentation
 description: Event and booking management
 ---
 
-This plugin provides:
+Ce plugin fournit :
 
-* events management,
-* associate activities with events,
-* booking management.
+* gestion d'évènements,
+* association d'activités avec des évènements,
+* gestion des réservations.
 
 ## Installation
 
-First of all, download the plugin:
+Tout d'abord, téléchargez le plugin :
 
 * [Get latest Events
   plugin!](https://github.com/galette-plugins/plugin-events/releases/latest)
 * [Get Events plugin nightly
   build!](https://github.com/galette-plugins/plugin-events/releases/tag/nightly)
 
-Extract the downloaded archive in Galette `plugins` directory. For example,
-under linux (replacing `{url}` and `{version}` with correct values):
+Extrayez l'archive téléchargée dans le dossier `plugins` de Galette. Par
+exemple, sous linux (en remplaçant `{url}` et `{version}` par les valeurs
+adéquates) :
 
 ```bash
 $ cd /var/www/html/galette/plugins
@@ -27,91 +28,96 @@ $ wget {url}
 $ tar xjvf galette-plugin-events-{version}.tar.bz2
 ```
 
-## Database initialisation
+## Initialisation de la base de données
 
-In order to work, this plugin requires several tables in the database. See
-[Galette plugins management
-interface](https://doc.galette.eu/en/master/plugins/index.html#plugins-managment).
+Pour fonctionner, ce plugin requiert des tables dans la base de données.
+Référez-vous [à l'interface de gestion des plugins de
+Galette](https://doc.galette.eu/en/master/plugins/index.html#plugins-managment).
 
-And this is finished; Events plugin is installed :)
+Et c'est terminé, le plugin Events est installé :)
 
-## Plugin usage
+## Utilisation du plugin
 
-When the plugin is installed, an `Events` group is added to Galette menu when a
-user is logged in. There are various possibilities that change depending on user
-profile (simple member, group manager, administrator, ...).
+Lorsque le plugin est installé, un groupe `Évènements` est ajouté au menu de
+Galette lorsqu'un utilisateur est connecté. Il y a plusieurs possibilités qui
+diffèrent en fonction du profil de l'utilisateur (simple adhérent, responsable
+de groupe, administrateur, ...).
 
-### Activities
+### Activités
 
-You can define as much activities as you want, and associate them to an event.
-An activity may be an organized trip, a meal, a housing, ...
+Vous pouvez définir autant d'activités que vous le souhaitez, et les associer à
+un évènement. Une activité peut être un voyage organisé, un repas, une sortie,
+un hébergement, ...
 
 ![The list of activities](images/list_activities.png)
 
-An activity is composed with a name, a status and an optional comment.
+Una activité se compose d'un nom, d'un statut et éventuellement d'un
+commentaire.
 
-To add a new activity, just click on "New activity" link:
+Pour ajouter une nouvelle activité, cliquez sur le lien « Nouvelle activité » :
 
 ![The form of a new activity](images/new_activity.png)
 
-### Events
+### Évènements
 
-Events are the main goal of the plugin. You can define several information, like
-a name, begin and ending dates, location, ...
+Les évènements sont le cœur du plugin. Vous pouvez définir diverses
+informations, comme un nom, des dates de début et de fin, un lieu, ...
 
 ![The form of a new event](images/new_event.png)
 
-Name, begin date and town are mandatory. All other information are entirely
-optional.
+Les nom, date de début et ville sont requis. Toutes les autres informations sont
+optionnelles.
 
-Events that are not linked to a group will be available for all members. If a
-group is set, only members and managers of this group will have access.
+Les évènements qui ne sont pas liés à un groupe seront accessible pour tous les
+adhérents ; Si un groupe est défini, seuls les membres et responsable de ce
+groupe y auront accès.
 
 > **Note**
 > 
-> When a group manager creates a new event, he must choose one of the groups he
-> owns!
+> Lorsqu'un responsable de groupe crée un nouvel évènement, il doit choisir l'un
+> des groupes qu'il gère !
 
-You can attach one or several activities to each event, and for each one set if
-it is available, not available or even mandatory. Choose the activity to add,
-and click the button.
+Vous pouvez attacher une ou plusieurs activités à chaque évènement, et pour
+chacune d'entre elles si elle est disponible, non disponible ou encore
+obligatoire. Choisissez l'activité à ajouter et cliquez sur le bouton.
 
 ![The activities attached to an event](images/event_activities.png)
 
 > **Warning**
 > 
-> Adding or removing activity from an event will reload the page and ask you to
-> fill mandatory information. Nonetheless (and this is specified each time), the
-> event **will not be stored** during this operation.
+> Ajouter ou supprimer une activité d'un évènement rechargera la page et vous
+> demandera d'enregistrer les informations requises. Néanmoins (et c'est précisé
+> à chaque fois), l'évènement **ne sera pas enregistré** pendant cette
+> opération.
 > 
-> Adding or removing activity from an event will reload the page and ask you to
-> fill mandatory information. Nonetheless (and this is specified each time), the
-> event **will not be stored** during this operation.
+> Assurez-vous de sauvegarder l'évènement :)
 
-From Events list, you can edit or remove entries, access to booking list or
-export bookings as CSV.
+Depuis la liste des évènements, vous pouvez modifier ou supprimer des entrées,
+accéder à la liste des réservations ou exporter ces dernières en CSV.
 
 ![The list of events](images/events_list.png)
 
-### Bookings
+### Réservations
 
-Bookings can be registered for each event. As we said before, simple members and
-groups managers will be limited to their groups events, or to the events that
-are not restricted to a group.
+Les réservations peuvent être enregistrées sur chaque évènement. Comme dit
+précédemment, les simples membres et responsables de groupes seront limités aux
+évènements liés aux groupes auxquels ils appartiennent, ou à ceux qui ne sont
+pas restreints à un groupe.
 
-Adding a new booking can be achieved from the menu "New booking" or from the
-event bookings list.
+Ajouter une nouvelle réservation se fait depuis l'entrée de menu « Nouvelle
+réservation » ou depuis la liste des réservations.
 
 ![The form of a new booking](images/new_booking.png)
 
-Bookings are closed once the event is marked as close, or when the begin date is
-over. Administrators and staff members can always add new bookings.
+Les réservations sont closes dès que l'évènement est marqué comme fermé, ou si
+la date de début est dépassée. Les administrateurs et membres du bureau peuvent
+toujours ajouter de nouvelles réservations.
 
-Activities list is retrieved from the event; mandatory ones must of course be
-checked during booking.
+La liste des activités est récupérée depuis l'évènement ; celles qui sont
+obligatoires doivent bien sur être cochées lors de la réservation.
 
 ![The list of bookings](images/bookings_list.png)
 
-You can filter bookings list per event, payment type or payment status. You can
-then send a mailing to booked members, using the standard Galette mailing
-mechanism.
+Vous pouvez filtrer la liste des évènements par évènement, type ou statut de
+paiement. Vous pouvez envoyer des mailings aux membres qui ont réservé, en
+utilisant le mécanisme de mailing de Galette.
