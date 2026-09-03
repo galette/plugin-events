@@ -1,4 +1,4 @@
-# Johan Cwiklinski <trasher@x-tnd.be>, 2020, 2021, 2022.
+# Johan Cwiklinski <trasher@x-tnd.be>, 2020, 2021, 2022, 2026.
 # Tymofij Lytvynenko <till.svit@gmail.com>, 2021.
 # Artem <artem@molotov.work>, 2022.
 # Максим Горпиніч <mgorpinic2005@gmail.com>, 2024.
@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2025-08-17 08:54+0200\n"
-"PO-Revision-Date: 2026-05-01 12:09+0000\n"
-"Last-Translator: Женя <prikhodkozheka2011@gmail.com>\n"
+"PO-Revision-Date: 2026-09-03 10:56+0000\n"
+"Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/galette/events-"
 "plugin/uk/>\n"
 "Language: uk\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.17.1\n"
+"X-Generator: Weblate 2026.9\n"
 
 #: ../lib/GaletteEvents/Booking.php:192
 msgid "Event is mandatory"
