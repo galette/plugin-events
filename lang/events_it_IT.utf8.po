@@ -1,14 +1,14 @@
 # Johan Cwiklinski <trasher@x-tnd.be>, 2020, 2026.
 # Alessandro Mandelli <mandelli.alessandro@ngi.it>, 2021.
-# Marco Ciampa <ciampix@posteo.net>, 2024, 2025.
+# Marco Ciampa <ciampix@posteo.net>, 2024, 2025, 2026.
 # Ilario Quinson <ilario.quinson@e.email>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2025-08-17 08:54+0200\n"
-"PO-Revision-Date: 2026-09-03 10:56+0000\n"
-"Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
+"PO-Revision-Date: 2026-09-03 10:59+0000\n"
+"Last-Translator: Marco Ciampa <ciampix@posteo.net>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/galette/events-"
 "plugin/it/>\n"
 "Language: it_IT\n"
@@ -92,8 +92,7 @@ msgstr "La prenotazione è stata modificata."
 
 #: ../lib/GaletteEvents/Controllers/Crud/BookingsController.php:515
 msgid "An error occurred while storing the booking."
-msgstr ""
-"Si è verificato un errore durante la memorizzazione della prenotazione."
+msgstr "Si è verificato un errore durante la memorizzazione della prenotazione."
 
 #: ../lib/GaletteEvents/Controllers/Crud/BookingsController.php:523
 msgid "Do not forget to store the booking"
